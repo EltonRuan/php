@@ -1151,9 +1151,70 @@
 
 <h2 id="security">SECURITY</h2>
 
-soon...
+<nav align="center"> 
+  <h3>NAVIGATION</h2> 
+  <p>
+    <a href="#database">Database</a>
+  </p> 
+</nav>
+
+<h4 id="database">Database</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#designing-databases">Designing Databases</a> |
+    <a href="#connecting-to-the-database">Connecting to the Database</a> |
+    <a href="#encrypted-storage-model">Encrypted Storage Model</a> |
+    <a href="#sql-injection">SQL Injection</a>
+  </p> 
+</nav>
+
+<h4 id="designing-databases">Designing Databases</h4>
+.
+
+<h4 id="connecting-to-the-database">Connecting to the Database</h4>
+.
+
+<h4 id="encrypted-storage-model">Encrypted Storage Model</h4>
+.
+
+<h4 id="sql-injection">SQL Injection</h4>
+.
+
 
 <h2 id="features">FEATURES</h2>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#http-authentication-with-php">HTTP Authentication with PHP</a> |
+    <a href="#cookies">Cookies</a> |
+    <a href="#sessions">Sessions</a> |
+    <a href="#using-remote-files">Using Remote Files</a> |
+    <a href="#connection-handling">Connection Handling</a> |
+    <a href="#persistent-database-connections">Persistent Database Connections</a>
+  </p> 
+</nav>
+
+<h4 id="http-authentication-with-php">HTTP Authentication with PHP</h4>
+.
+
+<h4 id="cookies">Cookies</h4>
+.
+
+<h4 id="sessions">Sessions</h4>
+.
+
+<h4 id="using-remote-files">Using Remote Files</h4>
+.
+
+<h4 id="connection-handling">Connection Handling</h4>
+.
+
+<h4 id="persistent-database-connections">Persistent Database Connections</h4>
+.
+
 
 <h2 id="function-reference">FUNCTION REFERENCE</h2>
 
