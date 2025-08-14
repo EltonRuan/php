@@ -3,7 +3,8 @@
 <nav align="center"> 
   <h2>NAVIGATION</h2> 
   <p>
-    <a href="#about-this-project">WHAT IS PHP?</a> | 
+    <a href="#about-this-project">ABOUT</a> | 
+    <a href="#what-is-php">WHAT IS PHP?</a> | 
     <a href="#installation">INSTALLATION</a> | 
     <a href="#language-reference">LANGUAGE REFERENCE</a> | 
     <a href="#security">SECURITY</a> | 
@@ -13,7 +14,11 @@
   </p> 
 </nav>
 
-<h2 id="about-this-project">WHAT IS PHP?</h2>
+<h2 id="about-this-project">ABOUT</h2>
+
+.
+
+<h2 id="what-is-php">WHAT IS PHP?</h2>
 
 .
 
