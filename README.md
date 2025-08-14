@@ -281,7 +281,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#operator-precedence">OPERATOR PRECEDENCE</a> | 
     <a href="#arithmetic-operators">ARITHMETIC</a> | 
@@ -340,7 +340,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#introduction">INTRODUCTION</a> | 
     <a href="#if">IF</a> | 
@@ -431,7 +431,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#user-defined-functions">USER-DEFINED FUNCTIONS</a> | 
     <a href="#function-parameters-arguments">FUNCTION PARAMETERS AND ARGUMENTS</a> | 
@@ -474,7 +474,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#basics">BASICS</a> | 
     <a href="#properties">PROPERTIES</a> | 
@@ -589,7 +589,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#overview">OVERVIEW</a> | 
     <a href="#namespaces">NAMESPACES</a> | 
@@ -644,7 +644,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#overview-enumerations">OVERVIEW OF ENUMERATIONS</a> | 
     <a href="#basic-enumerations">BASIC ENUMERATIONS</a> | 
@@ -711,7 +711,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#overview-generators">OVERVIEW</a> | 
     <a href="#generator-syntax">GENERATOR SYNTAX</a> | 
@@ -734,7 +734,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#overview-attributes">OVERVIEW</a> | 
     <a href="#syntax-attributes">SYNTAX</a> | 
@@ -761,7 +761,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#what-references-do">WHAT REFERENCES DO?</a> | 
     <a href="#passing-by-reference">PASSING BY REFERENCE</a> | 
@@ -792,7 +792,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#superglobals">SUPERGLOBALS</a> | 
     <a href="#globals">GLOBALS</a> | 
@@ -859,7 +859,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#exception">EXCEPTION</a> | 
     <a href="#errorexception">ERROREXCEPTION</a> | 
@@ -930,7 +930,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#traversable-interface">TRAVERSABLE INTERFACE</a> | 
     <a href="#iterator-interface">ITERATOR INTERFACE</a> | 
@@ -1017,7 +1017,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#attribute-attribute">ATTRIBUTE ATTRIBUTE</a> | 
     <a href="#attribute-allowdynamicproperties">ALLOWDYNAMICPROPERTIES ATTRIBUTE</a> | 
@@ -1052,7 +1052,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#socket-context-options">SOCKET CONTEXT OPTIONS</a> | 
     <a href="#http-context-options">HTTP CONTEXT OPTIONS</a> | 
@@ -1095,7 +1095,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#file-protocol">FILE://</a> | 
     <a href="#http-https-protocols">HTTP://  HTTPS://</a> | 
@@ -1150,6 +1150,8 @@
 .
 
 <h2 id="security">SECURITY</h2>
+
+soon...
 
 <h2 id="features">FEATURES</h2>
 
