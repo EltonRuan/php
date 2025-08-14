@@ -26,7 +26,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#general-considerations">GENERAL CONSIDERATIONS</a> | 
     <a href="#installation-linux">INSTALLATION ON LINUX</a> | 
@@ -74,7 +74,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#basic-syntax">BASIC SYNTAX</a> | 
     <a href="#types">TYPES</a> | 
@@ -105,7 +105,7 @@
 <h3 id="basic-syntax">BASIC SYNTAX</h3>
 
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#php-tags">PHP TAGS</a> | 
     <a href="#escaping-html">ESCAPING HTML</a> | 
@@ -131,7 +131,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#introduction">INTRODUCTION</a> | 
     <a href="#type-system">TYPE SYSTEM</a> | 
@@ -226,7 +226,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#basics">BASICS</a> | 
     <a href="#predefined-variables-superglobals">PREDEFINED VARIABLES (SUPERGLOBALS)</a> | 
@@ -254,7 +254,7 @@
 
 <!-- Navigation -->
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h2> 
   <p>
     <a href="#syntax">SYNTAX</a> | 
     <a href="#predefined-constants">PREDEFINED CONSTANTS</a> | 
