@@ -15,7 +15,47 @@
 
 <h2 id="about-this-project">WHAT IS PHP?</h2>
 
+.
+
 <h2 id="installation">INSTALLATION</h2>
+
+<nav align="center"> 
+  <h2>NAVIGATION</h2> 
+  <p>
+    <a href="#general-considerations">GENERAL CONSIDERATIONS</a> | 
+    <a href="#installation-linux">INSTALLATION ON LINUX</a> | 
+    <a href="#installation-macos">INSTALLATION ON MACOS</a> | 
+    <a href="#installation-windows">INSTALLATION ON WINDOWS</a> | 
+    <a href="#installation-cloud-computing">INSTALLATION ON CLOUD COMPUTING</a> | 
+    <a href="#installation-composer">INSTALLATION OF COMPOSER</a> 
+  </p> 
+</nav>
+
+<h3 id="general-considerations">GENERAL CONSIDERATIONS</h3>
+
+.
+
+<h3 id="installation-linux">INSTALLATION ON LINUX</h3>
+
+.
+
+<h3 id="installation-macos">INSTALLATION ON MACOS</h3>
+
+.
+
+<h3 id="installation-windows">INSTALLATION ON WINDOWS</h3>
+
+.
+
+<h3 id="installation-cloud-computing">INSTALLATION ON CLOUD COMPUTING</h3>
+
+.
+
+<h3 id="installation-composer">INSTALLATION OF COMPOSER</h3>
+
+.
+
+
 
 <h2 id="language-reference">LANGUAGE REFERENCE</h2>
 
