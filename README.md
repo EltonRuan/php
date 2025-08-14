@@ -13,17 +13,17 @@
   </p> 
 </nav>
 
-<h1 id="about-this-project">WHAT IS PHP?</h1>
+<h2 id="about-this-project">WHAT IS PHP?</h2>
 
-<h1 id="installation">INSTALLATION</h1>
+<h2 id="installation">INSTALLATION</h2>
 
-<h1 id="language-reference">LANGUAGE REFERENCE</h1>
+<h2 id="language-reference">LANGUAGE REFERENCE</h2>
 
-<h1 id="security">SECURITY</h1>
+<h2 id="security">SECURITY</h2>
 
-<h1 id="features">FEATURES</h1>
+<h2 id="features">FEATURES</h2>
 
-<h1 id="function-reference">FUNCTION REFERENCE</h1>
+<h2 id="function-reference">FUNCTION REFERENCE</h2>
 
 <h2 id="final-considerations">FINAL CONSIDERATIONS</h2>
 
