@@ -1218,6 +1218,118 @@
 
 <h2 id="function-reference">FUNCTION REFERENCE</h2>
 
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#affecting-php-behaviour">Affecting PHP Behaviour</a> |
+    <a href="#audio-format-manipulation">Audio Format Manipulation</a> |
+    <a href="#authentication-services">Authentication Services</a> |
+    <a href="#command-line-specific-extensions">Command Line Specific Extensions</a> |
+    <a href="#file-and-archive-compression-extensions">File and Archive Compression Extensions</a> |
+    <a href="#cryptography-extensions">Cryptography Extensions</a> |
+    <a href="#database-extensions">Database Extensions</a> |
+    <a href="#date-and-time-related-extensions">Date and Time Related Extensions</a> |
+    <a href="#filesystem-related-extensions">Filesystem Related Extensions</a> |
+    <a href="#human-language-and-character-encoding-support">Human Language and Character Encoding Support</a> |
+    <a href="#image-processing-and-generation">Image Processing and Generation</a> |
+    <a href="#mail-related-extensions">Mail Related Extensions</a> |
+    <a href="#mathematical-extensions">Mathematical Extensions</a> |
+    <a href="#non-text-mime-output">Non-Text MIME Output</a> |
+    <a href="#process-control-extensions">Process Control Extensions</a> |
+    <a href="#other-basic-extensions">Other Basic Extensions</a> |
+    <a href="#other-services">Other Services</a> |
+    <a href="#search-engine-extensions">Search Engine Extensions</a> |
+    <a href="#server-specific-extensions">Server Specific Extensions</a> |
+    <a href="#session-extensions">Session Extensions</a> |
+    <a href="#text-processing">Text Processing</a> |
+    <a href="#variable-and-type-related-extensions">Variable and Type Related Extensions</a> |
+    <a href="#web-services">Web Services</a> |
+    <a href="#windows-only-extensions">Windows Only Extensions</a> |
+    <a href="#xml-manipulation">XML Manipulation</a> |
+    <a href="#gui-extensions">GUI Extensions</a>
+  </p> 
+</nav>
+
+<h3 id="affecting-php-behaviour">Affecting PHP Behaviour</h4>
+.
+
+<h3 id="audio-format-manipulation">Audio Format Manipulation</h4>
+.
+
+<h3 id="authentication-services">Authentication Services</h4>
+.
+
+<h3 id="command-line-specific-extensions">Command Line Specific Extensions</h4>
+.
+
+<h3 id="file-and-archive-compression-extensions">File and Archive Compression Extensions</h4>
+.
+
+<h3 id="cryptography-extensions">Cryptography Extensions</h4>
+.
+
+<h3 id="database-extensions">Database Extensions</h4>
+.
+
+<h3 id="date-and-time-related-extensions">Date and Time Related Extensions</h4>
+.
+
+<h3 id="filesystem-related-extensions">Filesystem Related Extensions</h4>
+.
+
+<h3 id="human-language-and-character-encoding-support">Human Language and Character Encoding Support</h4>
+.
+
+<h3 id="image-processing-and-generation">Image Processing and Generation</h4>
+.
+
+<h3 id="mail-related-extensions">Mail Related Extensions</h4>
+.
+
+<h3 id="mathematical-extensions">Mathematical Extensions</h4>
+.
+
+<h3 id="non-text-mime-output">Non-Text MIME Output</h4>
+.
+
+<h3 id="process-control-extensions">Process Control Extensions</h4>
+.
+
+<h3 id="other-basic-extensions">Other Basic Extensions</h4>
+.
+
+<h3 id="other-services">Other Services</h4>
+.
+
+<h3 id="search-engine-extensions">Search Engine Extensions</h4>
+.
+
+<h3 id="server-specific-extensions">Server Specific Extensions</h4>
+.
+
+<h3 id="session-extensions">Session Extensions</h4>
+.
+
+<h3 id="text-processing">Text Processing</h4>
+.
+
+<h3 id="variable-and-type-related-extensions">Variable and Type Related Extensions</h4>
+.
+
+<h3 id="web-services">Web Services</h4>
+.
+
+<h3 id="windows-only-extensions">Windows Only Extensions</h4>
+.
+
+<h3 id="xml-manipulation">XML Manipulation</h4>
+.
+
+<h3 id="gui-extensions">GUI Extensions</h4>
+.
+
+
+
 <h2 id="final-considerations">FINAL CONSIDERATIONS</h2>
 
 <p>This documentation was created to summarize and present the purpose behind my approach to using the <strong>PHP</strong> documentation in a simplified and more practical way. Inspired by the official resources, it aims to make learning and consulting PHP easier and more intuitive for day-to-day development.</p>
