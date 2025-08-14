@@ -24,6 +24,7 @@
 
 <h2 id="installation">INSTALLATION</h2>
 
+<!-- Navigation -->
 <nav align="center"> 
   <h2>NAVIGATION</h2> 
   <p>
@@ -32,33 +33,40 @@
     <a href="#installation-macos">INSTALLATION ON MACOS</a> | 
     <a href="#installation-windows">INSTALLATION ON WINDOWS</a> | 
     <a href="#installation-cloud-computing">INSTALLATION ON CLOUD COMPUTING</a> | 
-    <a href="#installation-composer">INSTALLATION OF COMPOSER</a> 
+    <a href="#installation-composer">INSTALLATION OF COMPOSER</a> | 
+    <a href="#your-first-page">YOUR FIRST PAGE</a> | 
+    <a href="#mixing-php-html">MIXING PHP WITH HTML</a> | 
+    <a href="#first-simple-form">FIRST SIMPLE FORM WITH RETURN</a>
   </p> 
 </nav>
 
 <h3 id="general-considerations">GENERAL CONSIDERATIONS</h3>
-
 .
 
 <h3 id="installation-linux">INSTALLATION ON LINUX</h3>
-
 .
 
 <h3 id="installation-macos">INSTALLATION ON MACOS</h3>
-
 .
 
 <h3 id="installation-windows">INSTALLATION ON WINDOWS</h3>
-
 .
 
 <h3 id="installation-cloud-computing">INSTALLATION ON CLOUD COMPUTING</h3>
-
 .
 
 <h3 id="installation-composer">INSTALLATION OF COMPOSER</h3>
-
 .
+
+<h3 id="your-first-page">YOUR FIRST PAGE</h3>
+.
+
+<h3 id="mixing-php-html">MIXING PHP WITH HTML</h3>
+.
+
+<h3 id="first-simple-form">FIRST SIMPLE FORM WITH RETURN</h3>
+.
+
 
 
 
