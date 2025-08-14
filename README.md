@@ -103,6 +103,28 @@
 </nav>
 
 <h3 id="basic-syntax">BASIC SYNTAX</h3>
+
+<nav align="center"> 
+  <h2>NAVIGATION</h2> 
+  <p>
+    <a href="#php-tags">PHP TAGS</a> | 
+    <a href="#escaping-html">ESCAPING HTML</a> | 
+    <a href="#statement-separation">STATEMENT SEPARATION</a> | 
+    <a href="#comments">COMMENTS</a>
+  </p> 
+</nav>
+
+<!-- Sections -->
+<h4 id="php-tags">PHP TAGS</h4>
+.
+
+<h4 id="escaping-html">ESCAPING HTML</h4>
+.
+
+<h4 id="statement-separation">STATEMENT SEPARATION</h4>
+.
+
+<h4 id="comments">COMMENTS</h4>
 .
 
 <h3 id="types">TYPES</h3>
