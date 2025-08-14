@@ -35,8 +35,7 @@
 <a href="https://www.php.net/docs.php" target="_blank" rel="noopener noreferrer">https://www.php.net/docs.php</a>
 </p>
 
-
-<br><br>
+<br>
 
 <p><strong>© 2025 EltonRuan. All rights reserved.</strong></p>
 
