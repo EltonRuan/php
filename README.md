@@ -72,6 +72,106 @@
 
 <h2 id="language-reference">LANGUAGE REFERENCE</h2>
 
+<!-- Navigation -->
+<nav align="center"> 
+  <h2>NAVIGATION</h2> 
+  <p>
+    <a href="#basic-syntax">BASIC SYNTAX</a> | 
+    <a href="#types">TYPES</a> | 
+    <a href="#variables">VARIABLES</a> | 
+    <a href="#constants">CONSTANTS</a> | 
+    <a href="#expressions">EXPRESSIONS</a> | 
+    <a href="#operators">OPERATORS</a> | 
+    <a href="#control-structures">CONTROL STRUCTURES</a> | 
+    <a href="#functions">FUNCTIONS</a> | 
+    <a href="#classes-objects">CLASSES AND OBJECTS</a> | 
+    <a href="#namespaces">NAMESPACES</a> | 
+    <a href="#enumerations">ENUMERATIONS</a> | 
+    <a href="#errors">ERRORS</a> | 
+    <a href="#exceptions">EXCEPTIONS</a> | 
+    <a href="#fibers">FIBERS</a> | 
+    <a href="#generators">GENERATORS</a> | 
+    <a href="#attributes">ATTRIBUTES</a> | 
+    <a href="#references">REFERENCES</a> | 
+    <a href="#predefined-variables">PREDEFINED VARIABLES</a> | 
+    <a href="#predefined-exceptions">PREDEFINED EXCEPTIONS</a> | 
+    <a href="#predefined-interfaces-classes">PREDEFINED INTERFACES AND CLASSES</a> | 
+    <a href="#predefined-attributes">PREDEFINED ATTRIBUTES</a> | 
+    <a href="#context-options-parameters">CONTEXT OPTIONS AND PARAMETERS</a> | 
+    <a href="#supported-protocols-packagers">SUPPORTED PROTOCOLS AND PACKAGERS</a>
+  </p> 
+</nav>
+
+<h3 id="basic-syntax">BASIC SYNTAX</h3>
+.
+
+<h3 id="types">TYPES</h3>
+.
+
+<h3 id="variables">VARIABLES</h3>
+.
+
+<h3 id="constants">CONSTANTS</h3>
+.
+
+<h3 id="expressions">EXPRESSIONS</h3>
+.
+
+<h3 id="operators">OPERATORS</h3>
+.
+
+<h3 id="control-structures">CONTROL STRUCTURES</h3>
+.
+
+<h3 id="functions">FUNCTIONS</h3>
+.
+
+<h3 id="classes-objects">CLASSES AND OBJECTS</h3>
+.
+
+<h3 id="namespaces">NAMESPACES</h3>
+.
+
+<h3 id="enumerations">ENUMERATIONS</h3>
+.
+
+<h3 id="errors">ERRORS</h3>
+.
+
+<h3 id="exceptions">EXCEPTIONS</h3>
+.
+
+<h3 id="fibers">FIBERS</h3>
+.
+
+<h3 id="generators">GENERATORS</h3>
+.
+
+<h3 id="attributes">ATTRIBUTES</h3>
+.
+
+<h3 id="references">REFERENCES</h3>
+.
+
+<h3 id="predefined-variables">PREDEFINED VARIABLES</h3>
+.
+
+<h3 id="predefined-exceptions">PREDEFINED EXCEPTIONS</h3>
+.
+
+<h3 id="predefined-interfaces-classes">PREDEFINED INTERFACES AND CLASSES</h3>
+.
+
+<h3 id="predefined-attributes">PREDEFINED ATTRIBUTES</h3>
+.
+
+<h3 id="context-options-parameters">CONTEXT OPTIONS AND PARAMETERS</h3>
+.
+
+<h3 id="supported-protocols-packagers">SUPPORTED PROTOCOLS AND PACKAGERS</h3>
+.
+
+
 <h2 id="security">SECURITY</h2>
 
 <h2 id="features">FEATURES</h2>
