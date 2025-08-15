@@ -2207,10 +2207,859 @@
 
 
 <h3 id="file-and-archive-compression-extensions">FILE AND ARCHIVE COMPRESSION EXTENSIONS</h3>
-.
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Bzip2 -->
+    <a href="#bzip2">BZIP2</a> |
+    <!-- LZF -->
+    <a href="#lzf">LZF</a> |
+    <!-- Phar -->
+    <a href="#phar">PHAR</a> |
+    <!-- Rar -->
+    <a href="#rar">RAR</a> |
+    <!-- Zip -->
+    <a href="#zip">ZIP</a> |
+    <!-- Zlib -->
+    <a href="#zlib">ZLIB</a>
+  </p> 
+</nav>
+
+<!-- Bzip2 -->
+<h4 id="bzip2">BZIP2</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- bzclose -->
+    <a href="#bzclose">BZCLOSE</a> |
+    <!-- bzcompress -->
+    <a href="#bzcompress">BZCOMPRESS</a> |
+    <!-- bzdecompress -->
+    <a href="#bzdecompress">BZDECOMPRESS</a> |
+    <!-- bzerrno -->
+    <a href="#bzerrno">BZERRNO</a> |
+    <!-- bzerror -->
+    <a href="#bzerror">BZERROR</a> |
+    <!-- bzerrstr -->
+    <a href="#bzerrstr">BZERRSTR</a> |
+    <!-- bzflush -->
+    <a href="#bzflush">BZFLUSH</a> |
+    <!-- bzopen -->
+    <a href="#bzopen">BZOPEN</a> |
+    <!-- bzread -->
+    <a href="#bzread">BZREAD</a> |
+    <!-- bzwrite -->
+    <a href="#bzwrite">BZWRITE</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- bzclose -->
+<h4 id="bzclose">BZCLOSE</h4>
+
+<!-- bzcompress -->
+<h4 id="bzcompress">BZCOMPRESS</h4>
+
+<!-- bzdecompress -->
+<h4 id="bzdecompress">BZDECOMPRESS</h4>
+
+<!-- bzerrno -->
+<h4 id="bzerrno">BZERRNO</h4>
+
+<!-- bzerror -->
+<h4 id="bzerror">BZERROR</h4>
+
+<!-- bzerrstr -->
+<h4 id="bzerrstr">BZERRSTR</h4>
+
+<!-- bzflush -->
+<h4 id="bzflush">BZFLUSH</h4>
+
+<!-- bzopen -->
+<h4 id="bzopen">BZOPEN</h4>
+
+<!-- bzread -->
+<h4 id="bzread">BZREAD</h4>
+
+<!-- bzwrite -->
+<h4 id="bzwrite">BZWRITE</h4>
+
+
+<!-- LZF -->
+<h4 id="lzf">LZF</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- lzf_compress -->
+    <a href="#lzf_compress">LZF_COMPRESS</a> |
+    <!-- lzf_decompress -->
+    <a href="#lzf_decompress">LZF_DECOMPRESS</a> |
+    <!-- lzf_optimized_for -->
+    <a href="#lzf_optimized_for">LZF_OPTIMIZED_FOR</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- lzf_compress -->
+<h4 id="lzf_compress">LZF_COMPRESS</h4>
+
+<!-- lzf_decompress -->
+<h4 id="lzf_decompress">LZF_DECOMPRESS</h4>
+
+<!-- lzf_optimized_for -->
+<h4 id="lzf_optimized_for">LZF_OPTIMIZED_FOR</h4>
+
+
+<!-- Phar -->
+<h4 id="phar">PHAR</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- INTRODUCTION -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- PREDEFINED_CONSTANTS -->
+    <a href="#predefined_constants">PREDEFINED_CONSTANTS</a> |
+    <!-- USING_PHAR_FILES -->
+    <a href="#using_phar_files">USING_PHAR_FILES</a> |
+    <!-- CREATING_PHAR_FILES -->
+    <a href="#creating_phar_files">CREATING_PHAR_FILES</a> |
+    <!-- PHAR_DIFFERENCE -->
+    <a href="#phar_difference">PHAR_DIFFERENCE</a> |
+    <!-- PHAR_CLASS -->
+    <a href="#phar_class">PHAR_CLASS</a> |
+    <!-- PHAR METHODS -->
+    <a href="#phar_addEmptyDir">PHAR::ADD_EMPTY_DIR</a> |
+    <a href="#phar_addFile">PHAR::ADD_FILE</a> |
+    <a href="#phar_addFromString">PHAR::ADD_FROM_STRING</a> |
+    <a href="#phar_apiVersion">PHAR::API_VERSION</a> |
+    <a href="#phar_buildFromDirectory">PHAR::BUILD_FROM_DIRECTORY</a> |
+    <a href="#phar_buildFromIterator">PHAR::BUILD_FROM_ITERATOR</a> |
+    <a href="#phar_canCompress">PHAR::CAN_COMPRESS</a> |
+    <a href="#phar_canWrite">PHAR::CAN_WRITE</a> |
+    <a href="#phar_compress">PHAR::COMPRESS</a> |
+    <a href="#phar_compressFiles">PHAR::COMPRESS_FILES</a> |
+    <a href="#phar___construct">PHAR::__CONSTRUCT</a> |
+    <a href="#phar_convertToData">PHAR::CONVERT_TO_DATA</a> |
+    <a href="#phar_convertToExecutable">PHAR::CONVERT_TO_EXECUTABLE</a> |
+    <a href="#phar_copy">PHAR::COPY</a> |
+    <a href="#phar_count">PHAR::COUNT</a> |
+    <a href="#phar_createDefaultStub">PHAR::CREATE_DEFAULT_STUB</a> |
+    <a href="#phar_decompress">PHAR::DECOMPRESS</a> |
+    <a href="#phar_decompressFiles">PHAR::DECOMPRESS_FILES</a> |
+    <a href="#phar_delMetadata">PHAR::DEL_METADATA</a> |
+    <a href="#phar_delete">PHAR::DELETE</a> |
+    <a href="#phar___destruct">PHAR::__DESTRUCT</a> |
+    <a href="#phar_extractTo">PHAR::EXTRACT_TO</a> |
+    <a href="#phar_getAlias">PHAR::GET_ALIAS</a> |
+    <a href="#phar_getMetadata">PHAR::GET_METADATA</a> |
+    <a href="#phar_getModified">PHAR::GET_MODIFIED</a> |
+    <a href="#phar_getPath">PHAR::GET_PATH</a> |
+    <a href="#phar_getSignature">PHAR::GET_SIGNATURE</a> |
+    <a href="#phar_getStub">PHAR::GET_STUB</a> |
+    <a href="#phar_getSupportedCompression">PHAR::GET_SUPPORTED_COMPRESSION</a> |
+    <a href="#phar_getSupportedSignatures">PHAR::GET_SUPPORTED_SIGNATURES</a> |
+    <a href="#phar_getVersion">PHAR::GET_VERSION</a> |
+    <a href="#phar_hasMetadata">PHAR::HAS_METADATA</a> |
+    <a href="#phar_interceptFileFuncs">PHAR::INTERCEPT_FILE_FUNCS</a> |
+    <a href="#phar_isBuffering">PHAR::IS_BUFFERING</a> |
+    <a href="#phar_isCompressed">PHAR::IS_COMPRESSED</a> |
+    <a href="#phar_isFileFormat">PHAR::IS_FILE_FORMAT</a> |
+    <a href="#phar_isValidPharFilename">PHAR::IS_VALID_PHAR_FILENAME</a> |
+    <a href="#phar_isWritable">PHAR::IS_WRITABLE</a> |
+    <a href="#phar_loadPhar">PHAR::LOAD_PHAR</a> |
+    <a href="#phar_mapPhar">PHAR::MAP_PHAR</a> |
+    <a href="#phar_mount">PHAR::MOUNT</a> |
+    <a href="#phar_mungServer">PHAR::MUNG_SERVER</a> |
+    <a href="#phar_offsetExists">PHAR::OFFSET_EXISTS</a> |
+    <a href="#phar_offsetGet">PHAR::OFFSET_GET</a> |
+    <a href="#phar_offsetSet">PHAR::OFFSET_SET</a> |
+    <a href="#phar_offsetUnset">PHAR::OFFSET_UNSET</a> |
+    <a href="#phar_running">PHAR::RUNNING</a> |
+    <a href="#phar_setAlias">PHAR::SET_ALIAS</a> |
+    <a href="#phar_setDefaultStub">PHAR::SET_DEFAULT_STUB</a> |
+    <a href="#phar_setMetadata">PHAR::SET_METADATA</a> |
+    <a href="#phar_setSignatureAlgorithm">PHAR::SET_SIGNATURE_ALGORITHM</a> |
+    <a href="#phar_setStub">PHAR::SET_STUB</a> |
+    <a href="#phar_startBuffering">PHAR::START_BUFFERING</a> |
+    <a href="#phar_stopBuffering">PHAR::STOP_BUFFERING</a> |
+    <a href="#phar_unlinkArchive">PHAR::UNLINK_ARCHIVE</a> |
+    <a href="#phar_webPhar">PHAR::WEBPHAR</a> |
+    <!-- PHARDATA_CLASS -->
+    <a href="#phardata_class">PHARDATA_CLASS</a> |
+    <!-- PHARDATA METHODS -->
+    <a href="#phardata_addEmptyDir">PHARDATA::ADD_EMPTY_DIR</a> |
+    <a href="#phardata_addFile">PHARDATA::ADD_FILE</a> |
+    <a href="#phardata_addFromString">PHARDATA::ADD_FROM_STRING</a> |
+    <a href="#phardata_buildFromDirectory">PHARDATA::BUILD_FROM_DIRECTORY</a> |
+    <a href="#phardata_buildFromIterator">PHARDATA::BUILD_FROM_ITERATOR</a> |
+    <a href="#phardata_compress">PHARDATA::COMPRESS</a> |
+    <a href="#phardata_compressFiles">PHARDATA::COMPRESS_FILES</a> |
+    <a href="#phardata___construct">PHARDATA::__CONSTRUCT</a> |
+    <a href="#phardata_convertToData">PHARDATA::CONVERT_TO_DATA</a> |
+    <a href="#phardata_convertToExecutable">PHARDATA::CONVERT_TO_EXECUTABLE</a> |
+    <a href="#phardata_copy">PHARDATA::COPY</a> |
+    <a href="#phardata_decompress">PHARDATA::DECOMPRESS</a> |
+    <a href="#phardata_decompressFiles">PHARDATA::DECOMPRESS_FILES</a> |
+    <a href="#phardata_delMetadata">PHARDATA::DEL_METADATA</a> |
+    <a href="#phardata_delete">PHARDATA::DELETE</a> |
+    <a href="#phardata___destruct">PHARDATA::__DESTRUCT</a> |
+    <a href="#phardata_extractTo">PHARDATA::EXTRACT_TO</a> |
+    <a href="#phardata_isWritable">PHARDATA::IS_WRITABLE</a> |
+    <a href="#phardata_offsetSet">PHARDATA::OFFSET_SET</a> |
+    <a href="#phardata_offsetUnset">PHARDATA::OFFSET_UNSET</a> |
+    <a href="#phardata_setAlias">PHARDATA::SET_ALIAS</a> |
+    <a href="#phardata_setDefaultStub">PHARDATA::SET_DEFAULT_STUB</a> |
+    <a href="#phardata_setMetadata">PHARDATA::SET_METADATA</a> |
+    <a href="#phardata_setSignatureAlgorithm">PHARDATA::SET_SIGNATURE_ALGORITHM</a> |
+    <a href="#phardata_setStub">PHARDATA::SET_STUB</a> |
+    <!-- PHARFILEINFO_CLASS -->
+    <a href="#pharfileinfo_class">PHARFILEINFO_CLASS</a> |
+    <!-- PHARFILEINFO METHODS -->
+    <a href="#pharfileinfo_chmod">PHARFILEINFO::CHMOD</a> |
+    <a href="#pharfileinfo_compress">PHARFILEINFO::COMPRESS</a> |
+    <a href="#pharfileinfo___construct">PHARFILEINFO::__CONSTRUCT</a> |
+    <a href="#pharfileinfo_decompress">PHARFILEINFO::DECOMPRESS</a> |
+    <a href="#pharfileinfo_delMetadata">PHARFILEINFO::DEL_METADATA</a> |
+    <a href="#pharfileinfo___destruct">PHARFILEINFO::__DESTRUCT</a> |
+    <a href="#pharfileinfo_getCRC32">PHARFILEINFO::GET_CRC32</a> |
+    <a href="#pharfileinfo_getCompressedSize">PHARFILEINFO::GET_COMPRESSED_SIZE</a> |
+    <a href="#pharfileinfo_getContent">PHARFILEINFO::GET_CONTENT</a> |
+    <a href="#pharfileinfo_getMetadata">PHARFILEINFO::GET_METADATA</a> |
+    <a href="#pharfileinfo_getPharFlags">PHARFILEINFO::GET_PHAR_FLAGS</a> |
+    <a href="#pharfileinfo_hasMetadata">PHARFILEINFO::HAS_METADATA</a> |
+    <a href="#pharfileinfo_isCRCChecked">PHARFILEINFO::IS_CRC_CHECKED</a> |
+    <a href="#pharfileinfo_isCompressed">PHARFILEINFO::IS_COMPRESSED</a> |
+    <a href="#pharfileinfo_setMetadata">PHARFILEINFO::SET_METADATA</a> |
+    <!-- PHAREXCEPTION_CLASS -->
+    <a href="#pharexception_class">PHAREXCEPTION_CLASS</a>
+  </p> 
+</nav>
+
+<!-- INTRODUCTION -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- PREDEFINED_CONSTANTS -->
+<h4 id="predefined_constants">PREDEFINED_CONSTANTS</h4>
+
+<!-- USING_PHAR_FILES -->
+<h4 id="using_phar_files">USING_PHAR_FILES</h4>
+
+<!-- CREATING_PHAR_FILES -->
+<h4 id="creating_phar_files">CREATING_PHAR_FILES</h4>
+
+<!-- PHAR_DIFFERENCE -->
+<h4 id="phar_difference">PHAR_DIFFERENCE</h4>
+
+<!-- PHAR_CLASS -->
+<h4 id="phar_class">PHAR_CLASS</h4>
+
+<!-- PHAR METHODS -->
+<h4 id="phar_addEmptyDir">PHAR::ADD_EMPTY_DIR</h4>
+<h4 id="phar_addFile">PHAR::ADD_FILE</h4>
+<h4 id="phar_addFromString">PHAR::ADD_FROM_STRING</h4>
+<h4 id="phar_apiVersion">PHAR::API_VERSION</h4>
+<h4 id="phar_buildFromDirectory">PHAR::BUILD_FROM_DIRECTORY</h4>
+<h4 id="phar_buildFromIterator">PHAR::BUILD_FROM_ITERATOR</h4>
+<h4 id="phar_canCompress">PHAR::CAN_COMPRESS</h4>
+<h4 id="phar_canWrite">PHAR::CAN_WRITE</h4>
+<h4 id="phar_compress">PHAR::COMPRESS</h4>
+<h4 id="phar_compressFiles">PHAR::COMPRESS_FILES</h4>
+<h4 id="phar___construct">PHAR::__CONSTRUCT</h4>
+<h4 id="phar_convertToData">PHAR::CONVERT_TO_DATA</h4>
+<h4 id="phar_convertToExecutable">PHAR::CONVERT_TO_EXECUTABLE</h4>
+<h4 id="phar_copy">PHAR::COPY</h4>
+<h4 id="phar_count">PHAR::COUNT</h4>
+<h4 id="phar_createDefaultStub">PHAR::CREATE_DEFAULT_STUB</h4>
+<h4 id="phar_decompress">PHAR::DECOMPRESS</h4>
+<h4 id="phar_decompressFiles">PHAR::DECOMPRESS_FILES</h4>
+<h4 id="phar_delMetadata">PHAR::DEL_METADATA</h4>
+<h4 id="phar_delete">PHAR::DELETE</h4>
+<h4 id="phar___destruct">PHAR::__DESTRUCT</h4>
+<h4 id="phar_extractTo">PHAR::EXTRACT_TO</h4>
+<h4 id="phar_getAlias">PHAR::GET_ALIAS</h4>
+<h4 id="phar_getMetadata">PHAR::GET_METADATA</h4>
+<h4 id="phar_getModified">PHAR::GET_MODIFIED</h4>
+<h4 id="phar_getPath">PHAR::GET_PATH</h4>
+<h4 id="phar_getSignature">PHAR::GET_SIGNATURE</h4>
+<h4 id="phar_getStub">PHAR::GET_STUB</h4>
+<h4 id="phar_getSupportedCompression">PHAR::GET_SUPPORTED_COMPRESSION</h4>
+<h4 id="phar_getSupportedSignatures">PHAR::GET_SUPPORTED_SIGNATURES</h4>
+<h4 id="phar_getVersion">PHAR::GET_VERSION</h4>
+<h4 id="phar_hasMetadata">PHAR::HAS_METADATA</h4>
+<h4 id="phar_interceptFileFuncs">PHAR::INTERCEPT_FILE_FUNCS</h4>
+<h4 id="phar_isBuffering">PHAR::IS_BUFFERING</h4>
+<h4 id="phar_isCompressed">PHAR::IS_COMPRESSED</h4>
+<h4 id="phar_isFileFormat">PHAR::IS_FILE_FORMAT</h4>
+<h4 id="phar_isValidPharFilename">PHAR::IS_VALID_PHAR_FILENAME</h4>
+<h4 id="phar_isWritable">PHAR::IS_WRITABLE</h4>
+<h4 id="phar_loadPhar">PHAR::LOAD_PHAR</h4>
+<h4 id="phar_mapPhar">PHAR::MAP_PHAR</h4>
+<h4 id="phar_mount">PHAR::MOUNT</h4>
+<h4 id="phar_mungServer">PHAR::MUNG_SERVER</h4>
+<h4 id="phar_offsetExists">PHAR::OFFSET_EXISTS</h4>
+<h4 id="phar_offsetGet">PHAR::OFFSET_GET</h4>
+<h4 id="phar_offsetSet">PHAR::OFFSET_SET</h4>
+<h4 id="phar_offsetUnset">PHAR::OFFSET_UNSET</h4>
+<h4 id="phar_running">PHAR::RUNNING</h4>
+<h4 id="phar_setAlias">PHAR::SET_ALIAS</h4>
+<h4 id="phar_setDefaultStub">PHAR::SET_DEFAULT_STUB</h4>
+<h4 id="phar_setMetadata">PHAR::SET_METADATA</h4>
+<h4 id="phar_setSignatureAlgorithm">PHAR::SET_SIGNATURE_ALGORITHM</h4>
+<h4 id="phar_setStub">PHAR::SET_STUB</h4>
+<h4 id="phar_startBuffering">PHAR::START_BUFFERING</h4>
+<h4 id="phar_stopBuffering">PHAR::STOP_BUFFERING</h4>
+<h4 id="phar_unlinkArchive">PHAR::UNLINK_ARCHIVE</h4>
+<h4 id="phar_webPhar">PHAR::WEBPHAR</h4>
+
+<!-- PHARDATA_CLASS -->
+<h4 id="phardata_class">PHARDATA_CLASS</h4>
+
+<!-- PHARDATA METHODS -->
+<h4 id="phardata_addEmptyDir">PHARDATA::ADD_EMPTY_DIR</h4>
+<h4 id="phardata_addFile">PHARDATA::ADD_FILE</h4>
+<h4 id="phardata_addFromString">PHARDATA::ADD_FROM_STRING</h4>
+<h4 id="phardata_buildFromDirectory">PHARDATA::BUILD_FROM_DIRECTORY</h4>
+<h4 id="phardata_buildFromIterator">PHARDATA::BUILD_FROM_ITERATOR</h4>
+<h4 id="phardata_compress">PHARDATA::COMPRESS</h4>
+<h4 id="phardata_compressFiles">PHARDATA::COMPRESS_FILES</h4>
+<h4 id="phardata___construct">PHARDATA::__CONSTRUCT</h4>
+<h4 id="phardata_convertToData">PHARDATA::CONVERT_TO_DATA</h4>
+<h4 id="phardata_convertToExecutable">PHARDATA::CONVERT_TO_EXECUTABLE</h4>
+<h4 id="phardata_copy">PHARDATA::COPY</h4>
+<h4 id="phardata_decompress">PHARDATA::DECOMPRESS</h4>
+<h4 id="phardata_decompressFiles">PHARDATA::DECOMPRESS_FILES</h4>
+<h4 id="phardata_delMetadata">PHARDATA::DEL_METADATA</h4>
+<h4 id="phardata_delete">PHARDATA::DELETE</h4>
+<h4 id="phardata___destruct">PHARDATA::__DESTRUCT</h4>
+<h4 id="phardata_extractTo">PHARDATA::EXTRACT_TO</h4>
+<h4 id="phardata_isWritable">PHARDATA::IS_WRITABLE</h4>
+<h4 id="phardata_offsetSet">PHARDATA::OFFSET_SET</h4>
+<h4 id="phardata_offsetUnset">PHARDATA::OFFSET_UNSET</h4>
+<h4 id="phardata_setAlias">PHARDATA::SET_ALIAS</h4>
+<h4 id="phardata_setDefaultStub">PHARDATA::SET_DEFAULT_STUB</h4>
+<h4 id="phardata_setMetadata">PHARDATA::SET_METADATA</h4>
+<h4 id="phardata_setSignatureAlgorithm">PHARDATA::SET_SIGNATURE_ALGORITHM</h4>
+<h4 id="phardata_setStub">PHARDATA::SET_STUB</h4>
+
+<!-- PHARFILEINFO_CLASS -->
+<h4 id="pharfileinfo_class">PHARFILEINFO_CLASS</h4>
+
+<!-- PHARFILEINFO METHODS -->
+<h4 id="pharfileinfo_chmod">PHARFILEINFO::CHMOD</h4>
+<h4 id="pharfileinfo_compress">PHARFILEINFO::COMPRESS</h4>
+<h4 id="pharfileinfo___construct">PHARFILEINFO::__CONSTRUCT</h4>
+<h4 id="pharfileinfo_decompress">PHARFILEINFO::DECOMPRESS</h4>
+<h4 id="pharfileinfo_delMetadata">PHARFILEINFO::DEL_METADATA</h4>
+<h4 id="pharfileinfo___destruct">PHARFILEINFO::__DESTRUCT</h4>
+<h4 id="pharfileinfo_getCRC32">PHARFILEINFO::GET_CRC32</h4>
+<h4 id="pharfileinfo_getCompressedSize">PHARFILEINFO::GET_COMPRESSED_SIZE</h4>
+<h4 id="pharfileinfo_getContent">PHARFILEINFO::GET_CONTENT</h4>
+<h4 id="pharfileinfo_getMetadata">PHARFILEINFO::GET_METADATA</h4>
+<h4 id="pharfileinfo_getPharFlags">PHARFILEINFO::GET_PHAR_FLAGS</h4>
+<h4 id="pharfileinfo_hasMetadata">PHARFILEINFO::HAS_METADATA</h4>
+<h4 id="pharfileinfo_isCRCChecked">PHARFILEINFO::IS_CRC_CHECKED</h4>
+<h4 id="pharfileinfo_isCompressed">PHARFILEINFO::IS_COMPRESSED</h4>
+<h4 id="pharfileinfo_setMetadata">PHARFILEINFO::SET_METADATA</h4>
+
+<!-- PHAREXCEPTION_CLASS -->
+<h4 id="pharexception_class">PHAREXCEPTION_CLASS</h4>
+
+
+<!-- Rar -->
+<h4 id="rar">RAR</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- INSTALLATION/CONFIGURATION -->
+    <a href="#installation_configuration">INSTALLATION/CONFIGURATION</a> |
+    <!-- RAR_WRAPPER_CACHE_STATS -->
+    <a href="#rar_wrapper_cache_stats">RAR_WRAPPER_CACHE_STATS</a> |
+    <!-- RARARCHIVE_CLASS -->
+    <a href="#rararchive_class">RARARCHIVE_CLASS</a> |
+    <!-- RARARCHIVE_CLOSE -->
+    <a href="#rararchive_close">RARARCHIVE::CLOSE</a> |
+    <!-- RARARCHIVE_GETCOMMENT -->
+    <a href="#rararchive_getComment">RARARCHIVE::GETCOMMENT / RAR_COMMENT_GET</a> |
+    <!-- RARARCHIVE_GETENTRIES -->
+    <a href="#rararchive_getEntries">RARARCHIVE::GETENTRIES / RAR_LIST</a> |
+    <!-- RARARCHIVE_GETENTRY -->
+    <a href="#rararchive_getEntry">RARARCHIVE::GETENTRY / RAR_ENTRY_GET</a> |
+    <!-- RARARCHIVE_ISBROKEN -->
+    <a href="#rararchive_isBroken">RARARCHIVE::ISBROKEN / RAR_BROKEN_IS</a> |
+    <!-- RARARCHIVE_ISSOLID -->
+    <a href="#rararchive_isSolid">RARARCHIVE::ISSOLID / RAR_SOLID_IS</a> |
+    <!-- RARARCHIVE_OPEN -->
+    <a href="#rararchive_open">RARARCHIVE::OPEN / RAR_OPEN</a> |
+    <!-- RARARCHIVE_SETALLOWBROKEN -->
+    <a href="#rararchive_setAllowBroken">RARARCHIVE::SETALLOWBROKEN</a> |
+    <!-- RARARCHIVE_TOSTRING -->
+    <a href="#rararchive___toString">RARARCHIVE::__TOSTRING</a> |
+    <!-- RARENTRY_CLASS -->
+    <a href="#rarentry_class">RARENTRY_CLASS</a> |
+    <!-- RARENTRY_EXTRACT -->
+    <a href="#rarentry_extract">RARENTRY::EXTRACT</a> |
+    <!-- RARENTRY_GETATTR -->
+    <a href="#rarentry_getAttr">RARENTRY::GETATTR</a> |
+    <!-- RARENTRY_GETCRC -->
+    <a href="#rarentry_getCrc">RARENTRY::GETCRC</a> |
+    <!-- RARENTRY_GETFILETIME -->
+    <a href="#rarentry_getFileTime">RARENTRY::GETFILETIME</a> |
+    <!-- RARENTRY_GETHOSTOS -->
+    <a href="#rarentry_getHostOs">RARENTRY::GETHOSTOS</a> |
+    <!-- RARENTRY_GETMETHOD -->
+    <a href="#rarentry_getMethod">RARENTRY::GETMETHOD</a> |
+    <!-- RARENTRY_GETNAME -->
+    <a href="#rarentry_getName">RARENTRY::GETNAME</a> |
+    <!-- RARENTRY_GETPACKEDSIZE -->
+    <a href="#rarentry_getPackedSize">RARENTRY::GETPACKEDSIZE</a> |
+    <!-- RARENTRY_GETSTREAM -->
+    <a href="#rarentry_getStream">RARENTRY::GETSTREAM</a> |
+    <!-- RARENTRY_GETUNPACKEDSIZE -->
+    <a href="#rarentry_getUnpackedSize">RARENTRY::GETUNPACKEDSIZE</a> |
+    <!-- RARENTRY_GETVERSION -->
+    <a href="#rarentry_getVersion">RARENTRY::GETVERSION</a> |
+    <!-- RARENTRY_ISDIRECTORY -->
+    <a href="#rarentry_isDirectory">RARENTRY::ISDIRECTORY</a> |
+    <!-- RARENTRY_ISENCRYPTED -->
+    <a href="#rarentry_isEncrypted">RARENTRY::ISENCRYPTED</a> |
+    <!-- RARENTRY_TOSTRING -->
+    <a href="#rarentry___toString">RARENTRY::__TOSTRING</a> |
+    <!-- RAREXCEPTION_CLASS -->
+    <a href="#rarexception_class">RAREXCEPTION_CLASS</a> |
+    <!-- RAREXCEPTION_ISUSINGEXCEPTIONS -->
+    <a href="#rarexception_isUsingExceptions">RAREXCEPTION::ISUSINGEXCEPTIONS</a> |
+    <!-- RAREXCEPTION_SETUSINGEXCEPTIONS -->
+    <a href="#rarexception_setUsingExceptions">RAREXCEPTION::SETUSINGEXCEPTIONS</a>
+  </p> 
+</nav>
+
+<!-- INSTALLATION/CONFIGURATION -->
+<h4 id="installation_configuration">INSTALLATION/CONFIGURATION</h4>
+
+<!-- RAR_WRAPPER_CACHE_STATS -->
+<h4 id="rar_wrapper_cache_stats">RAR_WRAPPER_CACHE_STATS</h4>
+
+<!-- RARARCHIVE_CLASS -->
+<h4 id="rararchive_class">RARARCHIVE_CLASS</h4>
+
+<!-- RARARCHIVE_CLOSE -->
+<h4 id="rararchive_close">RARARCHIVE::CLOSE</h4>
+
+<!-- RARARCHIVE_GETCOMMENT -->
+<h4 id="rararchive_getComment">RARARCHIVE::GETCOMMENT / RAR_COMMENT_GET</h4>
+
+<!-- RARARCHIVE_GETENTRIES -->
+<h4 id="rararchive_getEntries">RARARCHIVE::GETENTRIES / RAR_LIST</h4>
+
+<!-- RARARCHIVE_GETENTRY -->
+<h4 id="rararchive_getEntry">RARARCHIVE::GETENTRY / RAR_ENTRY_GET</h4>
+
+<!-- RARARCHIVE_ISBROKEN -->
+<h4 id="rararchive_isBroken">RARARCHIVE::ISBROKEN / RAR_BROKEN_IS</h4>
+
+<!-- RARARCHIVE_ISSOLID -->
+<h4 id="rararchive_isSolid">RARARCHIVE::ISSOLID / RAR_SOLID_IS</h4>
+
+<!-- RARARCHIVE_OPEN -->
+<h4 id="rararchive_open">RARARCHIVE::OPEN / RAR_OPEN</h4>
+
+<!-- RARARCHIVE_SETALLOWBROKEN -->
+<h4 id="rararchive_setAllowBroken">RARARCHIVE::SETALLOWBROKEN</h4>
+
+<!-- RARARCHIVE_TOSTRING -->
+<h4 id="rararchive___toString">RARARCHIVE::__TOSTRING</h4>
+
+<!-- RARENTRY_CLASS -->
+<h4 id="rarentry_class">RARENTRY_CLASS</h4>
+
+<!-- RARENTRY_EXTRACT -->
+<h4 id="rarentry_extract">RARENTRY::EXTRACT</h4>
+
+<!-- RARENTRY_GETATTR -->
+<h4 id="rarentry_getAttr">RARENTRY::GETATTR</h4>
+
+<!-- RARENTRY_GETCRC -->
+<h4 id="rarentry_getCrc">RARENTRY::GETCRC</h4>
+
+<!-- RARENTRY_GETFILETIME -->
+<h4 id="rarentry_getFileTime">RARENTRY::GETFILETIME</h4>
+
+<!-- RARENTRY_GETHOSTOS -->
+<h4 id="rarentry_getHostOs">RARENTRY::GETHOSTOS</h4>
+
+<!-- RARENTRY_GETMETHOD -->
+<h4 id="rarentry_getMethod">RARENTRY::GETMETHOD</h4>
+
+<!-- RARENTRY_GETNAME -->
+<h4 id="rarentry_getName">RARENTRY::GETNAME</h4>
+
+<!-- RARENTRY_GETPACKEDSIZE -->
+<h4 id="rarentry_getPackedSize">RARENTRY::GETPACKEDSIZE</h4>
+
+<!-- RARENTRY_GETSTREAM -->
+<h4 id="rarentry_getStream">RARENTRY::GETSTREAM</h4>
+
+<!-- RARENTRY_GETUNPACKEDSIZE -->
+<h4 id="rarentry_getUnpackedSize">RARENTRY::GETUNPACKEDSIZE</h4>
+
+<!-- RARENTRY_GETVERSION -->
+<h4 id="rarentry_getVersion">RARENTRY::GETVERSION</h4>
+
+<!-- RARENTRY_ISDIRECTORY -->
+<h4 id="rarentry_isDirectory">RARENTRY::ISDIRECTORY</h4>
+
+<!-- RARENTRY_ISENCRYPTED -->
+<h4 id="rarentry_isEncrypted">RARENTRY::ISENCRYPTED</h4>
+
+<!-- RARENTRY_TOSTRING -->
+<h4 id="rarentry___toString">RARENTRY::__TOSTRING</h4>
+
+<!-- RAREXCEPTION_CLASS -->
+<h4 id="rarexception_class">RAREXCEPTION_CLASS</h4>
+
+<!-- RAREXCEPTION_ISUSINGEXCEPTIONS -->
+<h4 id="rarexception_isUsingExceptions">RAREXCEPTION::ISUSINGEXCEPTIONS</h4>
+
+<!-- RAREXCEPTION_SETUSINGEXCEPTIONS -->
+<h4 id="rarexception_setUsingExceptions">RAREXCEPTION::SETUSINGEXCEPTIONS</h4>
+
+
+<h4 id="zip">ZIP</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#ziparchive_class">ZIPARCHIVE_CLASS</a> |
+    <a href="#ziparchive_addEmptyDir">ZIPARCHIVE::ADDEMPTYDIR</a> |
+    <a href="#ziparchive_addFile">ZIPARCHIVE::ADDFILE</a> |
+    <a href="#ziparchive_addFromString">ZIPARCHIVE::ADDFROMSTRING</a> |
+    <a href="#ziparchive_addGlob">ZIPARCHIVE::ADDGLOB</a> |
+    <a href="#ziparchive_addPattern">ZIPARCHIVE::ADDPATTERN</a> |
+    <a href="#ziparchive_clearError">ZIPARCHIVE::CLEARERROR</a> |
+    <a href="#ziparchive_close">ZIPARCHIVE::CLOSE</a> |
+    <a href="#ziparchive_count">ZIPARCHIVE::COUNT</a> |
+    <a href="#ziparchive_deleteIndex">ZIPARCHIVE::DELETEINDEX</a> |
+    <a href="#ziparchive_deleteName">ZIPARCHIVE::DELETENAME</a> |
+    <a href="#ziparchive_extractTo">ZIPARCHIVE::EXTRACTTO</a> |
+    <a href="#ziparchive_getArchiveComment">ZIPARCHIVE::GETARCHIVECOMMENT</a> |
+    <a href="#ziparchive_getArchiveFlag">ZIPARCHIVE::GETARCHIVEFLAG</a> |
+    <a href="#ziparchive_getCommentIndex">ZIPARCHIVE::GETCOMMENTINDEX</a> |
+    <a href="#ziparchive_getCommentName">ZIPARCHIVE::GETCOMMENTNAME</a> |
+    <a href="#ziparchive_getExternalAttributesIndex">ZIPARCHIVE::GETEXTERNALATTRIBUTESINDEX</a> |
+    <a href="#ziparchive_getExternalAttributesName">ZIPARCHIVE::GETEXTERNALATTRIBUTESNAME</a> |
+    <a href="#ziparchive_getFromIndex">ZIPARCHIVE::GETFROMINDEX</a> |
+    <a href="#ziparchive_getFromName">ZIPARCHIVE::GETFROMNAME</a> |
+    <a href="#ziparchive_getNameIndex">ZIPARCHIVE::GETNAMEINDEX</a> |
+    <a href="#ziparchive_getStatusString">ZIPARCHIVE::GETSTATUSSTRING</a> |
+    <a href="#ziparchive_getStream">ZIPARCHIVE::GETSTREAM</a> |
+    <a href="#ziparchive_getStreamIndex">ZIPARCHIVE::GETSTREAMINDEX</a> |
+    <a href="#ziparchive_getStreamName">ZIPARCHIVE::GETSTREAMNAME</a> |
+    <a href="#ziparchive_isCompressionMethodSupported">ZIPARCHIVE::ISCOMPRESSIONMETHODSUPPORTED</a> |
+    <a href="#ziparchive_isEncryptionMethodSupported">ZIPARCHIVE::ISENCRYPTIONMETHODSUPPORTED</a> |
+    <a href="#ziparchive_locateName">ZIPARCHIVE::LOCATENAME</a> |
+    <a href="#ziparchive_registerCancelCallback">ZIPARCHIVE::REGISTERCANCELCALLBACK</a> |
+    <a href="#ziparchive_registerProgressCallback">ZIPARCHIVE::REGISTERPROGRESSCALLBACK</a> |
+    <a href="#ziparchive_renameIndex">ZIPARCHIVE::RENAMEINDEX</a> |
+    <a href="#ziparchive_renameName">ZIPARCHIVE::RENAMENAME</a> |
+    <a href="#ziparchive_replaceFile">ZIPARCHIVE::REPLACEFILE</a> |
+    <a href="#ziparchive_setArchiveComment">ZIPARCHIVE::SETARCHIVECOMMENT</a> |
+    <a href="#ziparchive_setArchiveFlag">ZIPARCHIVE::SETARCHIVEFLAG</a> |
+    <a href="#ziparchive_setCommentIndex">ZIPARCHIVE::SETCOMMENTINDEX</a> |
+    <a href="#ziparchive_setCommentName">ZIPARCHIVE::SETCOMMENTNAME</a> |
+    <a href="#ziparchive_setCompressionIndex">ZIPARCHIVE::SETCOMPRESSIONINDEX</a> |
+    <a href="#ziparchive_setCompressionName">ZIPARCHIVE::SETCOMPRESSIONNAME</a> |
+    <a href="#ziparchive_setEncryptionIndex">ZIPARCHIVE::SETENCRYPTIONINDEX</a> |
+    <a href="#ziparchive_setEncryptionName">ZIPARCHIVE::SETENCRYPTIONNAME</a> |
+    <a href="#ziparchive_setExternalAttributesIndex">ZIPARCHIVE::SETEXTERNALATTRIBUTESINDEX</a> |
+    <a href="#ziparchive_setExternalAttributesName">ZIPARCHIVE::SETEXTERNALATTRIBUTESNAME</a> |
+    <a href="#ziparchive_setMtimeIndex">ZIPARCHIVE::SETMTIMEINDEX</a> |
+    <a href="#ziparchive_setMtimeName">ZIPARCHIVE::SETMTIMENAME</a> |
+    <a href="#ziparchive_setPassword">ZIPARCHIVE::SETPASSWORD</a> |
+    <a href="#ziparchive_statIndex">ZIPARCHIVE::STATINDEX</a> |
+    <a href="#ziparchive_statName">ZIPARCHIVE::STATNAME</a> |
+    <a href="#ziparchive_unchangeAll">ZIPARCHIVE::UNCHANGEALL</a> |
+    <a href="#ziparchive_unchangeArchive">ZIPARCHIVE::UNCHANGEARCHIVE</a> |
+    <a href="#ziparchive_unchangeIndex">ZIPARCHIVE::UNCHANGEINDEX</a> |
+    <a href="#ziparchive_unchangeName">ZIPARCHIVE::UNCHANGENAME</a> |
+    <a href="#zip_close">ZIP_CLOSE</a> |
+    <a href="#zip_entry_close">ZIP_ENTRY_CLOSE</a> |
+    <a href="#zip_entry_compressedsize">ZIP_ENTRY_COMPRESSEDSIZE</a> |
+    <a href="#zip_entry_compressionmethod">ZIP_ENTRY_COMPRESSIONMETHOD</a> |
+    <a href="#zip_entry_filesize">ZIP_ENTRY_FILESIZE</a> |
+    <a href="#zip_entry_name">ZIP_ENTRY_NAME</a> |
+    <a href="#zip_entry_open">ZIP_ENTRY_OPEN</a> |
+    <a href="#zip_entry_read">ZIP_ENTRY_READ</a> |
+    <a href="#zip_open">ZIP_OPEN</a> |
+    <a href="#zip_read">ZIP_READ</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- ZipArchive Class -->
+<h4 id="ziparchive_class">ZIPARCHIVE_CLASS</h4>
+<h4 id="ziparchive_addEmptyDir">ZIPARCHIVE::ADDEMPTYDIR</h4>
+<h4 id="ziparchive_addFile">ZIPARCHIVE::ADDFILE</h4>
+<h4 id="ziparchive_addFromString">ZIPARCHIVE::ADDFROMSTRING</h4>
+<h4 id="ziparchive_addGlob">ZIPARCHIVE::ADDGLOB</h4>
+<h4 id="ziparchive_addPattern">ZIPARCHIVE::ADDPATTERN</h4>
+<h4 id="ziparchive_clearError">ZIPARCHIVE::CLEARERROR</h4>
+<h4 id="ziparchive_close">ZIPARCHIVE::CLOSE</h4>
+<h4 id="ziparchive_count">ZIPARCHIVE::COUNT</h4>
+<h4 id="ziparchive_deleteIndex">ZIPARCHIVE::DELETEINDEX</h4>
+<h4 id="ziparchive_deleteName">ZIPARCHIVE::DELETENAME</h4>
+<h4 id="ziparchive_extractTo">ZIPARCHIVE::EXTRACTTO</h4>
+<h4 id="ziparchive_getArchiveComment">ZIPARCHIVE::GETARCHIVECOMMENT</h4>
+<h4 id="ziparchive_getArchiveFlag">ZIPARCHIVE::GETARCHIVEFLAG</h4>
+<h4 id="ziparchive_getCommentIndex">ZIPARCHIVE::GETCOMMENTINDEX</h4>
+<h4 id="ziparchive_getCommentName">ZIPARCHIVE::GETCOMMENTNAME</h4>
+<h4 id="ziparchive_getExternalAttributesIndex">ZIPARCHIVE::GETEXTERNALATTRIBUTESINDEX</h4>
+<h4 id="ziparchive_getExternalAttributesName">ZIPARCHIVE::GETEXTERNALATTRIBUTESNAME</h4>
+<h4 id="ziparchive_getFromIndex">ZIPARCHIVE::GETFROMINDEX</h4>
+<h4 id="ziparchive_getFromName">ZIPARCHIVE::GETFROMNAME</h4>
+<h4 id="ziparchive_getNameIndex">ZIPARCHIVE::GETNAMEINDEX</h4>
+<h4 id="ziparchive_getStatusString">ZIPARCHIVE::GETSTATUSSTRING</h4>
+<h4 id="ziparchive_getStream">ZIPARCHIVE::GETSTREAM</h4>
+<h4 id="ziparchive_getStreamIndex">ZIPARCHIVE::GETSTREAMINDEX</h4>
+<h4 id="ziparchive_getStreamName">ZIPARCHIVE::GETSTREAMNAME</h4>
+<h4 id="ziparchive_isCompressionMethodSupported">ZIPARCHIVE::ISCOMPRESSIONMETHODSUPPORTED</h4>
+<h4 id="ziparchive_isEncryptionMethodSupported">ZIPARCHIVE::ISENCRYPTIONMETHODSUPPORTED</h4>
+<h4 id="ziparchive_locateName">ZIPARCHIVE::LOCATENAME</h4>
+<h4 id="ziparchive_registerCancelCallback">ZIPARCHIVE::REGISTERCANCELCALLBACK</h4>
+<h4 id="ziparchive_registerProgressCallback">ZIPARCHIVE::REGISTERPROGRESSCALLBACK</h4>
+<h4 id="ziparchive_renameIndex">ZIPARCHIVE::RENAMEINDEX</h4>
+<h4 id="ziparchive_renameName">ZIPARCHIVE::RENAMENAME</h4>
+<h4 id="ziparchive_replaceFile">ZIPARCHIVE::REPLACEFILE</h4>
+<h4 id="ziparchive_setArchiveComment">ZIPARCHIVE::SETARCHIVECOMMENT</h4>
+<h4 id="ziparchive_setArchiveFlag">ZIPARCHIVE::SETARCHIVEFLAG</h4>
+<h4 id="ziparchive_setCommentIndex">ZIPARCHIVE::SETCOMMENTINDEX</h4>
+<h4 id="ziparchive_setCommentName">ZIPARCHIVE::SETCOMMENTNAME</h4>
+<h4 id="ziparchive_setCompressionIndex">ZIPARCHIVE::SETCOMPRESSIONINDEX</h4>
+<h4 id="ziparchive_setCompressionName">ZIPARCHIVE::SETCOMPRESSIONNAME</h4>
+<h4 id="ziparchive_setEncryptionIndex">ZIPARCHIVE::SETENCRYPTIONINDEX</h4>
+<h4 id="ziparchive_setEncryptionName">ZIPARCHIVE::SETENCRYPTIONNAME</h4>
+<h4 id="ziparchive_setExternalAttributesIndex">ZIPARCHIVE::SETEXTERNALATTRIBUTESINDEX</h4>
+<h4 id="ziparchive_setExternalAttributesName">ZIPARCHIVE::SETEXTERNALATTRIBUTESNAME</h4>
+<h4 id="ziparchive_setMtimeIndex">ZIPARCHIVE::SETMTIMEINDEX</h4>
+<h4 id="ziparchive_setMtimeName">ZIPARCHIVE::SETMTIMENAME</h4>
+<h4 id="ziparchive_setPassword">ZIPARCHIVE::SETPASSWORD</h4>
+<h4 id="ziparchive_statIndex">ZIPARCHIVE::STATINDEX</h4>
+<h4 id="ziparchive_statName">ZIPARCHIVE::STATNAME</h4>
+<h4 id="ziparchive_unchangeAll">ZIPARCHIVE::UNCHANGEALL</h4>
+<h4 id="ziparchive_unchangeArchive">ZIPARCHIVE::UNCHANGEARCHIVE</h4>
+<h4 id="ziparchive_unchangeIndex">ZIPARCHIVE::UNCHANGEINDEX</h4>
+<h4 id="ziparchive_unchangeName">ZIPARCHIVE::UNCHANGENAME</h4>
+
+<!-- ZIP Functions -->
+<h4 id="zip_close">ZIP_CLOSE</h4>
+<h4 id="zip_entry_close">ZIP_ENTRY_CLOSE</h4>
+<h4 id="zip_entry_compressedsize">ZIP_ENTRY_COMPRESSEDSIZE</h4>
+<h4 id="zip_entry_compressionmethod">ZIP_ENTRY_COMPRESSIONMETHOD</h4>
+<h4 id="zip_entry_filesize">ZIP_ENTRY_FILESIZE</h4>
+<h4 id="zip_entry_name">ZIP_ENTRY_NAME</h4>
+<h4 id="zip_entry_open">ZIP_ENTRY_OPEN</h4>
+<h4 id="zip_entry_read">ZIP_ENTRY_READ</h4>
+<h4 id="zip_open">ZIP_OPEN</h4>
+<h4 id="zip_read">ZIP_READ</h4>
+
+<!-- Zlib -->
+<h4 id="zlib">ZLIB</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- deflate_add -->
+    <a href="#deflate_add">DEFLATE_ADD</a> |
+    <!-- deflate_init -->
+    <a href="#deflate_init">DEFLATE_INIT</a> |
+    <!-- gzclose -->
+    <a href="#gzclose">GZCLOSE</a> |
+    <!-- gzcompress -->
+    <a href="#gzcompress">GZCOMPRESS</a> |
+    <!-- gzdecode -->
+    <a href="#gzdecode">GZDECODE</a> |
+    <!-- gzdeflate -->
+    <a href="#gzdeflate">GZDEFLATE</a> |
+    <!-- gzencode -->
+    <a href="#gzencode">GZENCODE</a> |
+    <!-- gzeof -->
+    <a href="#gzeof">GZEOF</a> |
+    <!-- gzfile -->
+    <a href="#gzfile">GZFILE</a> |
+    <!-- gzgetc -->
+    <a href="#gzgetc">GZGETC</a> |
+    <!-- gzgets -->
+    <a href="#gzgets">ZGGETS</a> |
+    <!-- gzgetss -->
+    <a href="#gzgetss">GZGETSS</a> |
+    <!-- gzinflate -->
+    <a href="#gzinflate">GZINFLATE</a> |
+    <!-- gzopen -->
+    <a href="#gzopen">GZOPEN</a> |
+    <!-- gzpassthru -->
+    <a href="#gzpassthru">GZPASSTHRU</a> |
+    <!-- gzputs -->
+    <a href="#gzputs">GZPUTS</a> |
+    <!-- gzread -->
+    <a href="#gzread">GZREAD</a> |
+    <!-- gzrewind -->
+    <a href="#gzrewind">GZREWIND</a> |
+    <!-- gzseek -->
+    <a href="#gzseek">GZSEEK</a> |
+    <!-- gztell -->
+    <a href="#gztell">GZTELL</a> |
+    <!-- gzuncompress -->
+    <a href="#gzuncompress">GZUNCOMPRESS</a> |
+    <!-- gzwrite -->
+    <a href="#gzwrite">GZWRITE</a> |
+    <!-- inflate_add -->
+    <a href="#inflate_add">INFLATE_ADD</a> |
+    <!-- inflate_get_read_len -->
+    <a href="#inflate_get_read_len">INFLATE_GET_READ_LEN</a> |
+    <!-- inflate_get_status -->
+    <a href="#inflate_get_status">INFLATE_GET_STATUS</a> |
+    <!-- inflate_init -->
+    <a href="#inflate_init">INFLATE_INIT</a> |
+    <!-- ob_gzhandler -->
+    <a href="#ob_gzhandler">OB_GZHANDLER</a> |
+    <!-- readgzfile -->
+    <a href="#readgzfile">READGZFILE</a> |
+    <!-- zlib_decode -->
+    <a href="#zlib_decode">ZLIB_DECODE</a> |
+    <!-- zlib_encode -->
+    <a href="#zlib_encode">ZLIB_ENCODE</a> |
+    <!-- zlib_get_coding_type -->
+    <a href="#zlib_get_coding_type">ZLIB_GET_CODING_TYPE</a> |
+    <!-- DeflateContext -->
+    <a href="#deflatecontext">DEFLATECONTEXT</a> |
+    <!-- InflateContext -->
+    <a href="#inflatecontext">INFLATECONTEXT</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- deflate_add -->
+<h4 id="deflate_add">DEFLATE_ADD</h4>
+
+<!-- deflate_init -->
+<h4 id="deflate_init">DEFLATE_INIT</h4>
+
+<!-- gzclose -->
+<h4 id="gzclose">GZCLOSE</h4>
+
+<!-- gzcompress -->
+<h4 id="gzcompress">GZCOMPRESS</h4>
+
+<!-- gzdecode -->
+<h4 id="gzdecode">GZDECODE</h4>
+
+<!-- gzdeflate -->
+<h4 id="gzdeflate">GZDEFLATE</h4>
+
+<!-- gzencode -->
+<h4 id="gzencode">GZENCODE</h4>
+
+<!-- gzeof -->
+<h4 id="gzeof">GZEOF</h4>
+
+<!-- gzfile -->
+<h4 id="gzfile">GZFILE</h4>
+
+<!-- gzgetc -->
+<h4 id="gzgetc">GZGETC</h4>
+
+<!-- gzgets -->
+<h4 id="gzgets">GZGETS</h4>
+
+<!-- gzgetss -->
+<h4 id="gzgetss">GZGETSS</h4>
+
+<!-- gzinflate -->
+<h4 id="gzinflate">GZINFLATE</h4>
+
+<!-- gzopen -->
+<h4 id="gzopen">GZOPEN</h4>
+
+<!-- gzpassthru -->
+<h4 id="gzpassthru">GZPASSTHRU</h4>
+
+<!-- gzputs -->
+<h4 id="gzputs">GZPUTS</h4>
+
+<!-- gzread -->
+<h4 id="gzread">GZREAD</h4>
+
+<!-- gzrewind -->
+<h4 id="gzrewind">GZREWIND</h4>
+
+<!-- gzseek -->
+<h4 id="gzseek">GZSEEK</h4>
+
+<!-- gztell -->
+<h4 id="gztell">GZTELL</h4>
+
+<!-- gzuncompress -->
+<h4 id="gzuncompress">GZUNCOMPRESS</h4>
+
+<!-- gzwrite -->
+<h4 id="gzwrite">GZWRITE</h4>
+
+<!-- inflate_add -->
+<h4 id="inflate_add">INFLATE_ADD</h4>
+
+<!-- inflate_get_read_len -->
+<h4 id="inflate_get_read_len">INFLATE_GET_READ_LEN</h4>
+
+<!-- inflate_get_status -->
+<h4 id="inflate_get_status">INFLATE_GET_STATUS</h4>
+
+<!-- inflate_init -->
+<h4 id="inflate_init">INFLATE_INIT</h4>
+
+<!-- ob_gzhandler -->
+<h4 id="ob_gzhandler">OB_GZHANDLER</h4>
+
+<!-- readgzfile -->
+<h4 id="readgzfile">READGZFILE</h4>
+
+<!-- zlib_decode -->
+<h4 id="zlib_decode">ZLIB_DECODE</h4>
+
+<!-- zlib_encode -->
+<h4 id="zlib_encode">ZLIB_ENCODE</h4>
+
+<!-- zlib_get_coding_type -->
+<h4 id="zlib_get_coding_type">ZLIB_GET_CODING_TYPE</h4>
+
+<!-- DeflateContext -->
+<h4 id="deflatecontext">DEFLATECONTEXT</h4>
+
+<!-- InflateContext -->
+<h4 id="inflatecontext">INFLATECONTEXT</h4>
+  
 
 <h3 id="cryptography-extensions">CRYPTOGRAPHY EXTENSIONS</h3>
-.
+
+soon...
 
 <h3 id="database-extensions">DATABASE EXTENSIONS</h3>
 .
