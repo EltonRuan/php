@@ -1250,7 +1250,769 @@
 </nav>
 
 <h3 id="affecting-php-behaviour">AFFECTING PHP BEHAVIOUR</h3>
-.
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#apcu">APCU</a> |
+    <a href="#componere">COMPONERE</a> |
+    <a href="#error-handling-and-logging">ERROR HANDLING AND LOGGING</a> |
+    <a href="#ffi">FFI</a> |
+    <a href="#opcache">OPCACHE</a> |
+    <a href="#output-control">OUTPUT CONTROL</a> |
+    <a href="#php-information-and-options">PHP INFORMATION AND OPTIONS</a> |
+    <a href="#phpdbg">PHPDBG</a> |
+    <a href="#runkit7">RUNKIT7</a> |
+    <a href="#uopz">UOPZ</a> |
+    <a href="#wincache">WINCACHE</a> |
+    <a href="#xhprof">XHPROF</a> |
+    <a href="#yac">YAC</a>
+  </p> 
+</nav>
+
+<h4 id="apcu">APCU</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#apcu_add">APCU_ADD</a> |
+    <a href="#apcu_cache_info">APCU_CACHE_INFO</a> |
+    <a href="#apcu_cas">APCU_CAS</a> |
+    <a href="#apcu_clear_cache">APCU_CLEAR_CACHE</a> |
+    <a href="#apcu_dec">APCU_DEC</a> |
+    <a href="#apcu_delete">APCU_DELETE</a> |
+    <a href="#apcu_enabled">APCU_ENABLED</a> |
+    <a href="#apcu_entry">APCU_ENTRY</a> |
+    <a href="#apcu_exists">APCU_EXISTS</a> |
+    <a href="#apcu_fetch">APCU_FETCH</a> |
+    <a href="#apcu_inc">APCU_INC</a> |
+    <a href="#apcu_key_info">APCU_KEY_INFO</a> |
+    <a href="#apcu_sma_info">APCU_SMA_INFO</a> |
+    <a href="#apcu_store">APCU_STORE</a> |
+    <a href="#apcuiterator-class">APCUIterator CLASS</a> |
+    <a href="#apcuiterator-construct">APCUIterator::__CONSTRUCT</a> |
+    <a href="#apcuiterator-current">APCUIterator::CURRENT</a> |
+    <a href="#apcuiterator-gettotalcount">APCUIterator::GETTOTALCOUNT</a> |
+    <a href="#apcuiterator-gettotalhits">APCUIterator::GETTOTALHITS</a> |
+    <a href="#apcuiterator-gettotalsize">APCUIterator::GETTOTALSIZE</a> |
+    <a href="#apcuiterator-key">APCUIterator::KEY</a> |
+    <a href="#apcuiterator-next">APCUIterator::NEXT</a> |
+    <a href="#apcuiterator-rewind">APCUIterator::REWIND</a> |
+    <a href="#apcuiterator-valid">APCUIterator::VALID</a>
+  </p> 
+</nav>
+
+<h4 id="apcu_add">APCU_ADD</h4>
+<h4 id="apcu_cache_info">APCU_CACHE_INFO</h4>
+<h4 id="apcu_cas">APCU_CAS</h4>
+<h4 id="apcu_clear_cache">APCU_CLEAR_CACHE</h4>
+<h4 id="apcu_dec">APCU_DEC</h4>
+<h4 id="apcu_delete">APCU_DELETE</h4>
+<h4 id="apcu_enabled">APCU_ENABLED</h4>
+<h4 id="apcu_entry">APCU_ENTRY</h4>
+<h4 id="apcu_exists">APCU_EXISTS</h4>
+<h4 id="apcu_fetch">APCU_FETCH</h4>
+<h4 id="apcu_inc">APCU_INC</h4>
+<h4 id="apcu_key_info">APCU_KEY_INFO</h4>
+<h4 id="apcu_sma_info">APCU_SMA_INFO</h4>
+<h4 id="apcu_store">APCU_STORE</h4>
+
+<h4 id="apcuiterator-class">APCUIterator CLASS</h4>
+<h4 id="apcuiterator-construct">APCUIterator::__CONSTRUCT</h4>
+<h4 id="apcuiterator-current">APCUIterator::CURRENT</h4>
+<h4 id="apcuiterator-gettotalcount">APCUIterator::GETTOTALCOUNT</h4>
+<h4 id="apcuiterator-gettotalhits">APCUIterator::GETTOTALHITS</h4>
+<h4 id="apcuiterator-gettotalsize">APCUIterator::GETTOTALSIZE</h4>
+<h4 id="apcuiterator-key">APCUIterator::KEY</h4>
+<h4 id="apcuiterator-next">APCUIterator::NEXT</h4>
+<h4 id="apcuiterator-rewind">APCUIterator::REWIND</h4>
+<h4 id="apcuiterator-valid">APCUIterator::VALID</h4>
+
+
+<h4 id="componere">COMPONERE</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#componere-abstract-definition-class">COMPONERE\ABSTRACT\DEFINITION CLASS</a> |
+    <a href="#componere-abstract-definition-addinterface">COMPONERE\ABSTRACT\DEFINITION::ADDINTERFACE</a> |
+    <a href="#componere-abstract-definition-addmethod">COMPONERE\ABSTRACT\DEFINITION::ADDMETHOD</a> |
+    <a href="#componere-abstract-definition-addtrait">COMPONERE\ABSTRACT\DEFINITION::ADDTRAIT</a> |
+    <a href="#componere-abstract-definition-getreflector">COMPONERE\ABSTRACT\DEFINITION::GETREFLECTOR</a> |
+    <a href="#componere-definition-class">COMPONERE\DEFINITION CLASS</a> |
+    <a href="#componere-definition-construct">COMPONERE\DEFINITION::__CONSTRUCT</a> |
+    <a href="#componere-definition-addconstant">COMPONERE\DEFINITION::ADDCONSTANT</a> |
+    <a href="#componere-definition-addproperty">COMPONERE\DEFINITION::ADDPROPERTY</a> |
+    <a href="#componere-definition-register">COMPONERE\DEFINITION::REGISTER</a> |
+    <a href="#componere-definition-isregistered">COMPONERE\DEFINITION::ISREGISTERED</a> |
+    <a href="#componere-definition-getclosure">COMPONERE\DEFINITION::GETCLOSURE</a> |
+    <a href="#componere-definition-getclosures">COMPONERE\DEFINITION::GETCLOSURES</a> |
+    <a href="#componere-patch-class">COMPONERE\PATCH CLASS</a> |
+    <a href="#componere-patch-construct">COMPONERE\PATCH::__CONSTRUCT</a> |
+    <a href="#componere-patch-apply">COMPONERE\PATCH::APPLY</a> |
+    <a href="#componere-patch-revert">COMPONERE\PATCH::REVERT</a> |
+    <a href="#componere-patch-isapplied">COMPONERE\PATCH::ISAPPLIED</a> |
+    <a href="#componere-patch-derive">COMPONERE\PATCH::DERIVE</a> |
+    <a href="#componere-patch-getclosure">COMPONERE\PATCH::GETCLOSURE</a> |
+    <a href="#componere-patch-getclosures">COMPONERE\PATCH::GETCLOSURES</a> |
+    <a href="#componere-method-class">COMPONERE\METHOD CLASS</a> |
+    <a href="#componere-method-construct">COMPONERE\METHOD::__CONSTRUCT</a> |
+    <a href="#componere-method-setprivate">COMPONERE\METHOD::SETPRIVATE</a> |
+    <a href="#componere-method-setprotected">COMPONERE\METHOD::SETPROTECTED</a> |
+    <a href="#componere-method-setstatic">COMPONERE\METHOD::SETSTATIC</a> |
+    <a href="#componere-method-getreflector">COMPONERE\METHOD::GETREFLECTOR</a> |
+    <a href="#componere-value-class">COMPONERE\VALUE CLASS</a> |
+    <a href="#componere-value-construct">COMPONERE\VALUE::__CONSTRUCT</a> |
+    <a href="#componere-value-setprivate">COMPONERE\VALUE::SETPRIVATE</a> |
+    <a href="#componere-value-setprotected">COMPONERE\VALUE::SETPROTECTED</a> |
+    <a href="#componere-value-setstatic">COMPONERE\VALUE::SETSTATIC</a> |
+    <a href="#componere-value-isprivate">COMPONERE\VALUE::ISPRIVATE</a> |
+    <a href="#componere-value-isprotected">COMPONERE\VALUE::ISPROTECTED</a> |
+    <a href="#componere-value-isstatic">COMPONERE\VALUE::ISSTATIC</a> |
+    <a href="#componere-value-hasdefault">COMPONERE\VALUE::HASDEFAULT</a> |
+    <a href="#componere-functions">COMPONERE FUNCTIONS</a> |
+    <a href="#componere-cast">COMPONERE\CAST</a> |
+    <a href="#componere-cast-by-ref">COMPONERE\CAST_BY_REF</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation">INSTALLATION</h4>
+
+<h4 id="componere-abstract-definition-class">COMPONERE\ABSTRACT\DEFINITION CLASS</h4>
+<h4 id="componere-abstract-definition-addinterface">COMPONERE\ABSTRACT\DEFINITION::ADDINTERFACE</h4>
+<h4 id="componere-abstract-definition-addmethod">COMPONERE\ABSTRACT\DEFINITION::ADDMETHOD</h4>
+<h4 id="componere-abstract-definition-addtrait">COMPONERE\ABSTRACT\DEFINITION::ADDTRAIT</h4>
+<h4 id="componere-abstract-definition-getreflector">COMPONERE\ABSTRACT\DEFINITION::GETREFLECTOR</h4>
+
+<h4 id="componere-definition-class">COMPONERE\DEFINITION CLASS</h4>
+<h4 id="componere-definition-construct">COMPONERE\DEFINITION::__CONSTRUCT</h4>
+<h4 id="componere-definition-addconstant">COMPONERE\DEFINITION::ADDCONSTANT</h4>
+<h4 id="componere-definition-addproperty">COMPONERE\DEFINITION::ADDPROPERTY</h4>
+<h4 id="componere-definition-register">COMPONERE\DEFINITION::REGISTER</h4>
+<h4 id="componere-definition-isregistered">COMPONERE\DEFINITION::ISREGISTERED</h4>
+<h4 id="componere-definition-getclosure">COMPONERE\DEFINITION::GETCLOSURE</h4>
+<h4 id="componere-definition-getclosures">COMPONERE\DEFINITION::GETCLOSURES</h4>
+
+<h4 id="componere-patch-class">COMPONERE\PATCH CLASS</h4>
+<h4 id="componere-patch-construct">COMPONERE\PATCH::__CONSTRUCT</h4>
+<h4 id="componere-patch-apply">COMPONERE\PATCH::APPLY</h4>
+<h4 id="componere-patch-revert">COMPONERE\PATCH::REVERT</h4>
+<h4 id="componere-patch-isapplied">COMPONERE\PATCH::ISAPPLIED</h4>
+<h4 id="componere-patch-derive">COMPONERE\PATCH::DERIVE</h4>
+<h4 id="componere-patch-getclosure">COMPONERE\PATCH::GETCLOSURE</h4>
+<h4 id="componere-patch-getclosures">COMPONERE\PATCH::GETCLOSURES</h4>
+
+<h4 id="componere-method-class">COMPONERE\METHOD CLASS</h4>
+<h4 id="componere-method-construct">COMPONERE\METHOD::__CONSTRUCT</h4>
+<h4 id="componere-method-setprivate">COMPONERE\METHOD::SETPRIVATE</h4>
+<h4 id="componere-method-setprotected">COMPONERE\METHOD::SETPROTECTED</h4>
+<h4 id="componere-method-setstatic">COMPONERE\METHOD::SETSTATIC</h4>
+<h4 id="componere-method-getreflector">COMPONERE\METHOD::GETREFLECTOR</h4>
+
+<h4 id="componere-value-class">COMPONERE\VALUE CLASS</h4>
+<h4 id="componere-value-construct">COMPONERE\VALUE::__CONSTRUCT</h4>
+<h4 id="componere-value-setprivate">COMPONERE\VALUE::SETPRIVATE</h4>
+<h4 id="componere-value-setprotected">COMPONERE\VALUE::SETPROTECTED</h4>
+<h4 id="componere-value-setstatic">COMPONERE\VALUE::SETSTATIC</h4>
+<h4 id="componere-value-isprivate">COMPONERE\VALUE::ISPRIVATE</h4>
+<h4 id="componere-value-isprotected">COMPONERE\VALUE::ISPROTECTED</h4>
+<h4 id="componere-value-isstatic">COMPONERE\VALUE::ISSTATIC</h4>
+<h4 id="componere-value-hasdefault">COMPONERE\VALUE::HASDEFAULT</h4>
+
+<h4 id="componere-functions">COMPONERE FUNCTIONS</h4>
+<h4 id="componere-cast">COMPONERE\CAST</h4>
+<h4 id="componere-cast-by-ref">COMPONERE\CAST_BY_REF</h4>
+
+
+<h4 id="error-handling-and-logging">ERROR HANDLING AND LOGGING</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#installation-configuration">INSTALLATION/CONFIGURATION</a> |
+    <a href="#predefined-constants">PREDEFINED CONSTANTS</a> |
+    <a href="#error-handling-functions">ERROR HANDLING FUNCTIONS</a> |
+    <a href="#debug-backtrace">DEBUG_BACKTRACE</a> |
+    <a href="#debug-print-backtrace">DEBUG_PRINT_BACKTRACE</a> |
+    <a href="#error-clear-last">ERROR_CLEAR_LAST</a> |
+    <a href="#error-get-last">ERROR_GET_LAST</a> |
+    <a href="#error-log">ERROR_LOG</a> |
+    <a href="#error-reporting">ERROR_REPORTING</a> |
+    <a href="#get-error-handler">GET_ERROR_HANDLER</a> |
+    <a href="#get-exception-handler">GET_EXCEPTION_HANDLER</a> |
+    <a href="#restore-error-handler">RESTORE_ERROR_HANDLER</a> |
+    <a href="#restore-exception-handler">RESTORE_EXCEPTION_HANDLER</a> |
+    <a href="#set-error-handler">SET_ERROR_HANDLER</a> |
+    <a href="#set-exception-handler">SET_EXCEPTION_HANDLER</a> |
+    <a href="#trigger-error">TRIGGER_ERROR</a> |
+    <a href="#user-error">USER_ERROR</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+<h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
+
+<h4 id="error-handling-functions">ERROR HANDLING FUNCTIONS</h4>
+<h4 id="debug-backtrace">DEBUG_BACKTRACE</h4>
+<h4 id="debug-print-backtrace">DEBUG_PRINT_BACKTRACE</h4>
+<h4 id="error-clear-last">ERROR_CLEAR_LAST</h4>
+<h4 id="error-get-last">ERROR_GET_LAST</h4>
+<h4 id="error-log">ERROR_LOG</h4>
+<h4 id="error-reporting">ERROR_REPORTING</h4>
+<h4 id="get-error-handler">GET_ERROR_HANDLER</h4>
+<h4 id="get-exception-handler">GET_EXCEPTION_HANDLER</h4>
+<h4 id="restore-error-handler">RESTORE_ERROR_HANDLER</h4>
+<h4 id="restore-exception-handler">RESTORE_EXCEPTION_HANDLER</h4>
+<h4 id="set-error-handler">SET_ERROR_HANDLER</h4>
+<h4 id="set-exception-handler">SET_EXCEPTION_HANDLER</h4>
+<h4 id="trigger-error">TRIGGER_ERROR</h4>
+<h4 id="user-error">USER_ERROR</h4>
+
+
+
+<h4 id="ffi">FFI</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#runtime-configuration">RUNTIME CONFIGURATION</a> |
+    <a href="#ffi-cdata">FFI\CDATA</a> |
+    <a href="#ffi-ctype">FFI\CTYPE</a> |
+    <a href="#ffi-exception">FFI\EXCEPTION</a> |
+    <a href="#ffi-parserexception">FFI\PARSEREXCEPTION EXTENDS FFI\EXCEPTION</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
+
+<h4 id="ffi-cdata">FFI\CDATA</h4>
+<h4 id="ffi-ctype">FFI\CTYPE</h4>
+<h4 id="ffi-exception">FFI\EXCEPTION</h4>
+<h4 id="ffi-parserexception">FFI\PARSEREXCEPTION EXTENDS FFI\EXCEPTION</h4>
+
+
+
+<h4 id="opcache">OPCACHE</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#installation-configuration">INSTALLATION/CONFIGURATION</a> |
+    <a href="#preloading">PRELOADING</a> |
+    <a href="#opcache-functions">OPCACHE FUNCTIONS</a> |
+    <a href="#opcache-compile-file">OPCACHE_COMPILE_FILE</a> |
+    <a href="#opcache-get-configuration">OPCACHE_GET_CONFIGURATION</a> |
+    <a href="#opcache-get-status">OPCACHE_GET_STATUS</a> |
+    <a href="#opcache-invalidate">OPCACHE_INVALIDATE</a> |
+    <a href="#opcache-is-script-cached">OPCACHE_IS_SCRIPT_CACHED</a> |
+    <a href="#opcache-reset">OPCACHE_RESET</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+<h4 id="preloading">PRELOADING</h4>
+
+<h4 id="opcache-functions">OPCACHE FUNCTIONS</h4>
+<h4 id="opcache-compile-file">OPCACHE_COMPILE_FILE</h4>
+<h4 id="opcache-get-configuration">OPCACHE_GET_CONFIGURATION</h4>
+<h4 id="opcache-get-status">OPCACHE_GET_STATUS</h4>
+<h4 id="opcache-invalidate">OPCACHE_INVALIDATE</h4>
+<h4 id="opcache-is-script-cached">OPCACHE_IS_SCRIPT_CACHED</h4>
+<h4 id="opcache-reset">OPCACHE_RESET</h4>
+
+
+
+<h4 id="output-control">OUTPUT CONTROL</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#installation-configuration">INSTALLATION/CONFIGURATION</a> |
+    <a href="#predefined-constants">PREDEFINED CONSTANTS</a> |
+    <a href="#output-buffering">OUTPUT BUFFERING</a> |
+    <a href="#system-buffer-flushing">SYSTEM BUFFER FLUSHING</a> |
+    <a href="#user-level-output-buffers">USER-LEVEL OUTPUT BUFFERS</a> |
+    <a href="#what-output-is-buffered">WHAT OUTPUT IS BUFFERED?</a> |
+    <a href="#nesting-output-buffers">NESTING OUTPUT BUFFERS</a> |
+    <a href="#buffer-size">BUFFER SIZE</a> |
+    <a href="#allowed-buffer-operations">ALLOWED BUFFER OPERATIONS</a> |
+    <a href="#output-handlers">OUTPUT HANDLERS</a> |
+    <a href="#working-with-output-handlers">WORKING WITH OUTPUT HANDLERS</a> |
+    <a href="#options-for-output-handlers">OPTIONS FOR OUTPUT HANDLERS</a> |
+    <a href="#handler-return-values">HANDLER RETURN VALUES</a> |
+    <a href="#output-control-functions">OUTPUT CONTROL FUNCTIONS</a> |
+    <a href="#flush">FLUSH</a> |
+    <a href="#ob-clean">OB_CLEAN</a> |
+    <a href="#ob-end-clean">OB_END_CLEAN</a> |
+    <a href="#ob-end-flush">OB_END_FLUSH</a> |
+    <a href="#ob-flush">OB_FLUSH</a> |
+    <a href="#ob-get-clean">OB_GET_CLEAN</a> |
+    <a href="#ob-get-contents">OB_GET_CONTENTS</a> |
+    <a href="#ob-get-flush">OB_GET_FLUSH</a> |
+    <a href="#ob-get-length">OB_GET_LENGTH</a> |
+    <a href="#ob-get-level">OB_GET_LEVEL</a> |
+    <a href="#ob-get-status">OB_GET_STATUS</a> |
+    <a href="#ob-implicit-flush">OB_IMPLICIT_FLUSH</a> |
+    <a href="#ob-list-handlers">OB_LIST_HANDLERS</a> |
+    <a href="#ob-start">OB_START</a> |
+    <a href="#output-add-rewrite-var">OUTPUT_ADD_REWRITE_VAR</a> |
+    <a href="#output-reset-rewrite-vars">OUTPUT_RESET_REWRITE_VARS</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+<h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
+<h4 id="output-buffering">OUTPUT BUFFERING</h4>
+<h4 id="system-buffer-flushing">SYSTEM BUFFER FLUSHING</h4>
+
+<h4 id="user-level-output-buffers">USER-LEVEL OUTPUT BUFFERS</h4>
+<h4 id="what-output-is-buffered">WHAT OUTPUT IS BUFFERED?</h4>
+<h4 id="nesting-output-buffers">NESTING OUTPUT BUFFERS</h4>
+<h4 id="buffer-size">BUFFER SIZE</h4>
+<h4 id="allowed-buffer-operations">ALLOWED BUFFER OPERATIONS</h4>
+<h4 id="output-handlers">OUTPUT HANDLERS</h4>
+<h4 id="working-with-output-handlers">WORKING WITH OUTPUT HANDLERS</h4>
+<h4 id="options-for-output-handlers">OPTIONS FOR OUTPUT HANDLERS</h4>
+<h4 id="handler-return-values">HANDLER RETURN VALUES</h4>
+
+<h4 id="output-control-functions">OUTPUT CONTROL FUNCTIONS</h4>
+<h4 id="flush">FLUSH</h4>
+<h4 id="ob-clean">OB_CLEAN</h4>
+<h4 id="ob-end-clean">OB_END_CLEAN</h4>
+<h4 id="ob-end-flush">OB_END_FLUSH</h4>
+<h4 id="ob-flush">OB_FLUSH</h4>
+<h4 id="ob-get-clean">OB_GET_CLEAN</h4>
+<h4 id="ob-get-contents">OB_GET_CONTENTS</h4>
+<h4 id="ob-get-flush">OB_GET_FLUSH</h4>
+<h4 id="ob-get-length">OB_GET_LENGTH</h4>
+<h4 id="ob-get-level">OB_GET_LEVEL</h4>
+<h4 id="ob-get-status">OB_GET_STATUS</h4>
+<h4 id="ob-implicit-flush">OB_IMPLICIT_FLUSH</h4>
+<h4 id="ob-list-handlers">OB_LIST_HANDLERS</h4>
+<h4 id="ob-start">OB_START</h4>
+<h4 id="output-add-rewrite-var">OUTPUT_ADD_REWRITE_VAR</h4>
+<h4 id="output-reset-rewrite-vars">OUTPUT_RESET_REWRITE_VARS</h4>
+
+
+
+<h4 id="php-information-and-options">PHP INFORMATION AND OPTIONS</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#installation-configuration">INSTALLATION/CONFIGURATION</a> |
+    <a href="#predefined-constants">PREDEFINED CONSTANTS</a> |
+    <a href="#php-options-info-functions">PHP OPTIONS/INFO FUNCTIONS</a> |
+    <a href="#assert">ASSERT</a> |
+    <a href="#cli-get-process-title">CLI_GET_PROCESS_TITLE</a> |
+    <a href="#cli-set-process-title">CLI_SET_PROCESS_TITLE</a> |
+    <a href="#dl">DL</a> |
+    <a href="#extension-loaded">EXTENSION_LOADED</a> |
+    <a href="#gc-collect-cycles">GC_COLLECT_CYCLES</a> |
+    <a href="#gc-disable">GC_DISABLE</a> |
+    <a href="#gc-enable">GC_ENABLE</a> |
+    <a href="#gc-enabled">GC_ENABLED</a> |
+    <a href="#gc-mem-caches">GC_MEM_CACHES</a> |
+    <a href="#gc-status">GC_STATUS</a> |
+    <a href="#get-cfg-var">GET_CFG_VAR</a> |
+    <a href="#get-current-user">GET_CURRENT_USER</a> |
+    <a href="#get-defined-constants">GET_DEFINED_CONSTANTS</a> |
+    <a href="#get-extension-funcs">GET_EXTENSION_FUNCS</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+<h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
+
+<h4 id="php-options-info-functions">PHP OPTIONS/INFO FUNCTIONS</h4>
+<h4 id="assert">ASSERT</h4>
+<h4 id="cli-get-process-title">CLI_GET_PROCESS_TITLE</h4>
+<h4 id="cli-set-process-title">CLI_SET_PROCESS_TITLE</h4>
+<h4 id="dl">DL</h4>
+<h4 id="extension-loaded">EXTENSION_LOADED</h4>
+<h4 id="gc-collect-cycles">GC_COLLECT_CYCLES</h4>
+<h4 id="gc-disable">GC_DISABLE</h4>
+<h4 id="gc-enable">GC_ENABLE</h4>
+<h4 id="gc-enabled">GC_ENABLED</h4>
+<h4 id="gc-mem-caches">GC_MEM_CACHES</h4>
+<h4 id="gc-status">GC_STATUS</h4>
+<h4 id="get-cfg-var">GET_CFG_VAR</h4>
+<h4 id="get-current-user">GET_CURRENT_USER</h4>
+<h4 id="get-defined-constants">GET_DEFINED_CONSTANTS</h4>
+<h4 id="get-extension-funcs">GET_EXTENSION_FUNCS</h4>
+
+
+
+<h4 id="phpdbg">PHPDBG</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#get-include-path">GET_INCLUDE_PATH</a> |
+    <a href="#get-included-files">GET_INCLUDED_FILES</a> |
+    <a href="#get-loaded-extensions">GET_LOADED_EXTENSIONS</a> |
+    <a href="#get-required-files">GET_REQUIRED_FILES</a> |
+    <a href="#get-resources">GET_RESOURCES</a> |
+    <a href="#getenv">GETENV</a> |
+    <a href="#getlastmod">GETLASTMOD</a> |
+    <a href="#getmygid">GETMYGID</a> |
+    <a href="#getmyinode">GETMYINODE</a> |
+    <a href="#getmypid">GETMYPID</a> |
+    <a href="#getmyuid">GETMYUID</a> |
+    <a href="#getopt">GETOPT</a> |
+    <a href="#getrusage">GETRUSAGE</a> |
+    <a href="#ini-alter">INI_ALTER</a> |
+    <a href="#ini-get">INI_GET</a> |
+    <a href="#ini-get-all">INI_GET_ALL</a> |
+    <a href="#ini-parse-quantity">INI_PARSE_QUANTITY</a> |
+    <a href="#ini-restore">INI_RESTORE</a> |
+    <a href="#ini-set">INI_SET</a> |
+    <a href="#memory-get-peak-usage">MEMORY_GET_PEAK_USAGE</a> |
+    <a href="#memory-get-usage">MEMORY_GET_USAGE</a> |
+    <a href="#memory-reset-peak-usage">MEMORY_RESET_PEAK_USAGE</a> |
+    <a href="#php-ini-loaded-file">PHP_INI_LOADED_FILE</a> |
+    <a href="#php-ini-scanned-files">PHP_INI_SCANNED_FILES</a> |
+    <a href="#php-sapi-name">PHP_SAPI_NAME</a> |
+    <a href="#php-uname">PHP_UNAME</a> |
+    <a href="#phpcredits">PHPCREDITS</a> |
+    <a href="#phpinfo">PHPINFO</a> |
+    <a href="#phpversion">PHPVERSION</a> |
+    <a href="#putenv">PUTENV</a> |
+    <a href="#restore-include-path">RESTORE_INCLUDE_PATH</a> |
+    <a href="#set-include-path">SET_INCLUDE_PATH</a> |
+    <a href="#set-time-limit">SET_TIME_LIMIT</a> |
+    <a href="#sys-get-temp-dir">SYS_GET_TEMP_DIR</a> |
+    <a href="#version-compare">VERSION_COMPARE</a> |
+    <a href="#zend-thread-id">ZEND_THREAD_ID</a> |
+    <a href="#zend-version">ZEND_VERSION</a> |
+    <a href="#assert-options">ASSERT_OPTIONS</a> |
+    <a href="#get-magic-quotes-gpc">GET_MAGIC_QUOTES_GPC</a> |
+    <a href="#get-magic-quotes-runtime">GET_MAGIC_QUOTES_RUNTIME</a> |
+    <a href="#phpdbg-break-file">PHPDBG_BREAK_FILE</a> |
+    <a href="#phpdbg-break-function">PHPDBG_BREAK_FUNCTION</a> |
+    <a href="#phpdbg-break-method">PHPDBG_BREAK_METHOD</a> |
+    <a href="#phpdbg-break-next">PHPDBG_BREAK_NEXT</a> |
+    <a href="#phpdbg-clear">PHPDBG_CLEAR</a> |
+    <a href="#phpdbg-color">PHPDBG_COLOR</a> |
+    <a href="#phpdbg-end-oplog">PHPDBG_END_OPLOG</a> |
+    <a href="#phpdbg-exec">PHPDBG_EXEC</a> |
+    <a href="#phpdbg-get-executable">PHPDBG_GET_EXECUTABLE</a> |
+    <a href="#phpdbg-prompt">PHPDBG_PROMPT</a> |
+    <a href="#phpdbg-start-oplog">PHPDBG_START_OPLOG</a>
+  </p> 
+</nav>
+
+<h4 id="get-include-path">GET_INCLUDE_PATH</h4>
+<h4 id="get-included-files">GET_INCLUDED_FILES</h4>
+<h4 id="get-loaded-extensions">GET_LOADED_EXTENSIONS</h4>
+<h4 id="get-required-files">GET_REQUIRED_FILES</h4>
+<h4 id="get-resources">GET_RESOURCES</h4>
+<h4 id="getenv">GETENV</h4>
+<h4 id="getlastmod">GETLASTMOD</h4>
+<h4 id="getmygid">GETMYGID</h4>
+<h4 id="getmyinode">GETMYINODE</h4>
+<h4 id="getmypid">GETMYPID</h4>
+<h4 id="getmyuid">GETMYUID</h4>
+<h4 id="getopt">GETOPT</h4>
+<h4 id="getrusage">GETRUSAGE</h4>
+<h4 id="ini-alter">INI_ALTER</h4>
+<h4 id="ini-get">INI_GET</h4>
+<h4 id="ini-get-all">INI_GET_ALL</h4>
+<h4 id="ini-parse-quantity">INI_PARSE_QUANTITY</h4>
+<h4 id="ini-restore">INI_RESTORE</h4>
+<h4 id="ini-set">INI_SET</h4>
+<h4 id="memory-get-peak-usage">MEMORY_GET_PEAK_USAGE</h4>
+<h4 id="memory-get-usage">MEMORY_GET_USAGE</h4>
+<h4 id="memory-reset-peak-usage">MEMORY_RESET_PEAK_USAGE</h4>
+<h4 id="php-ini-loaded-file">PHP_INI_LOADED_FILE</h4>
+<h4 id="php-ini-scanned-files">PHP_INI_SCANNED_FILES</h4>
+<h4 id="php-sapi-name">PHP_SAPI_NAME</h4>
+<h4 id="php-uname">PHP_UNAME</h4>
+<h4 id="phpcredits">PHPCREDITS</h4>
+<h4 id="phpinfo">PHPINFO</h4>
+<h4 id="phpversion">PHPVERSION</h4>
+<h4 id="putenv">PUTENV</h4>
+<h4 id="restore-include-path">RESTORE_INCLUDE_PATH</h4>
+<h4 id="set-include-path">SET_INCLUDE_PATH</h4>
+<h4 id="set-time-limit">SET_TIME_LIMIT</h4>
+<h4 id="sys-get-temp-dir">SYS_GET_TEMP_DIR</h4>
+<h4 id="version-compare">VERSION_COMPARE</h4>
+<h4 id="zend-thread-id">ZEND_THREAD_ID</h4>
+<h4 id="zend-version">ZEND_VERSION</h4>
+<h4 id="assert-options">ASSERT_OPTIONS</h4>
+<h4 id="get-magic-quotes-gpc">GET_MAGIC_QUOTES_GPC</h4>
+<h4 id="get-magic-quotes-runtime">GET_MAGIC_QUOTES_RUNTIME</h4>
+<h4 id="phpdbg-break-file">PHPDBG_BREAK_FILE</h4>
+<h4 id="phpdbg-break-function">PHPDBG_BREAK_FUNCTION</h4>
+<h4 id="phpdbg-break-method">PHPDBG_BREAK_METHOD</h4>
+<h4 id="phpdbg-break-next">PHPDBG_BREAK_NEXT</h4>
+<h4 id="phpdbg-clear">PHPDBG_CLEAR</h4>
+<h4 id="phpdbg-color">PHPDBG_COLOR</h4>
+<h4 id="phpdbg-end-oplog">PHPDBG_END_OPLOG</h4>
+<h4 id="phpdbg-exec">PHPDBG_EXEC</h4>
+<h4 id="phpdbg-get-executable">PHPDBG_GET_EXECUTABLE</h4>
+<h4 id="phpdbg-prompt">PHPDBG_PROMPT</h4>
+<h4 id="phpdbg-start-oplog">PHPDBG_START_OPLOG</h4>
+
+
+
+<h4 id="runkit7">RUNKIT7</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#predefined-constants">PREDEFINED CONSTANTS</a> |
+    <a href="#runkit7-constant-add">RUNKIT7_CONSTANT_ADD</a> |
+    <a href="#runkit7-constant-redefine">RUNKIT7_CONSTANT_REDEFINE</a> |
+    <a href="#runkit7-constant-remove">RUNKIT7_CONSTANT_REMOVE</a> |
+    <a href="#runkit7-function-add">RUNKIT7_FUNCTION_ADD</a> |
+    <a href="#runkit7-function-copy">RUNKIT7_FUNCTION_COPY</a> |
+    <a href="#runkit7-function-redefine">RUNKIT7_FUNCTION_REDEFINE</a> |
+    <a href="#runkit7-function-remove">RUNKIT7_FUNCTION_REMOVE</a> |
+    <a href="#runkit7-function-rename">RUNKIT7_FUNCTION_RENAME</a> |
+    <a href="#runkit7-import">RUNKIT7_IMPORT</a> |
+    <a href="#runkit7-method-add">RUNKIT7_METHOD_ADD</a> |
+    <a href="#runkit7-method-copy">RUNKIT7_METHOD_COPY</a> |
+    <a href="#runkit7-method-redefine">RUNKIT7_METHOD_REDEFINE</a> |
+    <a href="#runkit7-method-remove">RUNKIT7_METHOD_REMOVE</a> |
+    <a href="#runkit7-method-rename">RUNKIT7_METHOD_RENAME</a> |
+    <a href="#runkit7-object-id">RUNKIT7_OBJECT_ID</a> |
+    <a href="#runkit7-superglobals">RUNKIT7_SUPERGLOBALS</a> |
+    <a href="#runkit7-zval-inspect">RUNKIT7_ZVAL_INSPECT</a>
+  </p> 
+</nav>
+
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
+<h4 id="runkit7-constant-add">RUNKIT7_CONSTANT_ADD</h4>
+<h4 id="runkit7-constant-redefine">RUNKIT7_CONSTANT_REDEFINE</h4>
+<h4 id="runkit7-constant-remove">RUNKIT7_CONSTANT_REMOVE</h4>
+<h4 id="runkit7-function-add">RUNKIT7_FUNCTION_ADD</h4>
+<h4 id="runkit7-function-copy">RUNKIT7_FUNCTION_COPY</h4>
+<h4 id="runkit7-function-redefine">RUNKIT7_FUNCTION_REDEFINE</h4>
+<h4 id="runkit7-function-remove">RUNKIT7_FUNCTION_REMOVE</h4>
+<h4 id="runkit7-function-rename">RUNKIT7_FUNCTION_RENAME</h4>
+<h4 id="runkit7-import">RUNKIT7_IMPORT</h4>
+<h4 id="runkit7-method-add">RUNKIT7_METHOD_ADD</h4>
+<h4 id="runkit7-method-copy">RUNKIT7_METHOD_COPY</h4>
+<h4 id="runkit7-method-redefine">RUNKIT7_METHOD_REDEFINE</h4>
+<h4 id="runkit7-method-remove">RUNKIT7_METHOD_REMOVE</h4>
+<h4 id="runkit7-method-rename">RUNKIT7_METHOD_RENAME</h4>
+<h4 id="runkit7-object-id">RUNKIT7_OBJECT_ID</h4>
+<h4 id="runkit7-superglobals">RUNKIT7_SUPERGLOBALS</h4>
+<h4 id="runkit7-zval-inspect">RUNKIT7_ZVAL_INSPECT</h4>
+
+
+
+<h4 id="uopz">UOPZ</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#predefined-constants">PREDEFINED CONSTANTS</a> |
+    <a href="#uopz-add-function">UOPZ_ADD_FUNCTION</a> |
+    <a href="#uopz-allow-exit">UOPZ_ALLOW_EXIT</a> |
+    <a href="#uopz-del-function">UOPZ_DEL_FUNCTION</a> |
+    <a href="#uopz-extend">UOPZ_EXTEND</a> |
+    <a href="#uopz-flags">UOPZ_FLAGS</a> |
+    <a href="#uopz-get-exit-status">UOPZ_GET_EXIT_STATUS</a> |
+    <a href="#uopz-get-hook">UOPZ_GET_HOOK</a> |
+    <a href="#uopz-get-mock">UOPZ_GET_MOCK</a> |
+    <a href="#uopz-get-property">UOPZ_GET_PROPERTY</a> |
+    <a href="#uopz-get-return">UOPZ_GET_RETURN</a> |
+    <a href="#uopz-get-static">UOPZ_GET_STATIC</a> |
+    <a href="#uopz-implement">UOPZ_IMPLEMENT</a> |
+    <a href="#uopz-redefine">UOPZ_REDEFINE</a> |
+    <a href="#uopz-set-hook">UOPZ_SET_HOOK</a> |
+    <a href="#uopz-set-mock">UOPZ_SET_MOCK</a> |
+    <a href="#uopz-set-property">UOPZ_SET_PROPERTY</a> |
+    <a href="#uopz-set-return">UOPZ_SET_RETURN</a> |
+    <a href="#uopz-set-static">UOPZ_SET_STATIC</a> |
+    <a href="#uopz-undefine">UOPZ_UNDEFINE</a> |
+    <a href="#uopz-unset-hook">UOPZ_UNSET_HOOK</a> |
+    <a href="#uopz-unset-mock">UOPZ_UNSET_MOCK</a> |
+    <a href="#uopz-unset-return">UOPZ_UNSET_RETURN</a> |
+    <a href="#uopz-backup">UOPZ_BACKUP</a> |
+    <a href="#uopz-compose">UOPZ_COMPOSE</a> |
+    <a href="#uopz-copy">UOPZ_COPY</a> |
+    <a href="#uopz-delete">UOPZ_DELETE</a> |
+    <a href="#uopz-function">UOPZ_FUNCTION</a> |
+    <a href="#uopz-overload">UOPZ_OVERLOAD</a> |
+    <a href="#uopz-rename">UOPZ_RENAME</a> |
+    <a href="#uopz-restore">UOPZ_RESTORE</a>
+  </p> 
+</nav>
+
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
+<h4 id="uopz-add-function">UOPZ_ADD_FUNCTION</h4>
+<h4 id="uopz-allow-exit">UOPZ_ALLOW_EXIT</h4>
+<h4 id="uopz-del-function">UOPZ_DEL_FUNCTION</h4>
+<h4 id="uopz-extend">UOPZ_EXTEND</h4>
+<h4 id="uopz-flags">UOPZ_FLAGS</h4>
+<h4 id="uopz-get-exit-status">UOPZ_GET_EXIT_STATUS</h4>
+<h4 id="uopz-get-hook">UOPZ_GET_HOOK</h4>
+<h4 id="uopz-get-mock">UOPZ_GET_MOCK</h4>
+<h4 id="uopz-get-property">UOPZ_GET_PROPERTY</h4>
+<h4 id="uopz-get-return">UOPZ_GET_RETURN</h4>
+<h4 id="uopz-get-static">UOPZ_GET_STATIC</h4>
+<h4 id="uopz-implement">UOPZ_IMPLEMENT</h4>
+<h4 id="uopz-redefine">UOPZ_REDEFINE</h4>
+<h4 id="uopz-set-hook">UOPZ_SET_HOOK</h4>
+<h4 id="uopz-set-mock">UOPZ_SET_MOCK</h4>
+<h4 id="uopz-set-property">UOPZ_SET_PROPERTY</h4>
+<h4 id="uopz-set-return">UOPZ_SET_RETURN</h4>
+<h4 id="uopz-set-static">UOPZ_SET_STATIC</h4>
+<h4 id="uopz-undefine">UOPZ_UNDEFINE</h4>
+<h4 id="uopz-unset-hook">UOPZ_UNSET_HOOK</h4>
+<h4 id="uopz-unset-mock">UOPZ_UNSET_MOCK</h4>
+<h4 id="uopz-unset-return">UOPZ_UNSET_RETURN</h4>
+<h4 id="uopz-backup">UOPZ_BACKUP</h4>
+<h4 id="uopz-compose">UOPZ_COMPOSE</h4>
+<h4 id="uopz-copy">UOPZ_COPY</h4>
+<h4 id="uopz-delete">UOPZ_DELETE</h4>
+<h4 id="uopz-function">UOPZ_FUNCTION</h4>
+<h4 id="uopz-overload">UOPZ_OVERLOAD</h4>
+<h4 id="uopz-rename">UOPZ_RENAME</h4>
+<h4 id="uopz-restore">UOPZ_RESTORE</h4>
+
+
+<h4 id="wincache">WINCACHE</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#wincache-fcache-fileinfo">WINCACHE_FCACHE_FILEINFO</a> |
+    <a href="#wincache-fcache-meminfo">WINCACHE_FCACHE_MEMINFO</a> |
+    <a href="#wincache-lock">WINCACHE_LOCK</a> |
+    <a href="#wincache-refresh-if-changed">WINCACHE_REFRESH_IF_CHANGED</a> |
+    <a href="#wincache-rplist-fileinfo">WINCACHE_RPLIST_FILEINFO</a> |
+    <a href="#wincache-rplist-meminfo">WINCACHE_RPLIST_MEMINFO</a> |
+    <a href="#wincache-scache-info">WINCACHE_SCACHE_INFO</a> |
+    <a href="#wincache-scache-meminfo">WINCACHE_SCACHE_MEMINFO</a> |
+    <a href="#wincache-ucache-add">WINCACHE_UCACHE_ADD</a> |
+    <a href="#wincache-ucache-cas">WINCACHE_UCACHE_CAS</a> |
+    <a href="#wincache-ucache-clear">WINCACHE_UCACHE_CLEAR</a> |
+    <a href="#wincache-ucache-dec">WINCACHE_UCACHE_DEC</a> |
+    <a href="#wincache-ucache-delete">WINCACHE_UCACHE_DELETE</a> |
+    <a href="#wincache-ucache-exists">WINCACHE_UCACHE_EXISTS</a> |
+    <a href="#wincache-ucache-get">WINCACHE_UCACHE_GET</a> |
+    <a href="#wincache-ucache-inc">WINCACHE_UCACHE_INC</a> |
+    <a href="#wincache-ucache-info">WINCACHE_UCACHE_INFO</a> |
+    <a href="#wincache-ucache-meminfo">WINCACHE_UCACHE_MEMINFO</a> |
+    <a href="#wincache-ucache-set">WINCACHE_UCACHE_SET</a> |
+    <a href="#wincache-unlock">WINCACHE_UNLOCK</a> |
+    <a href="#wincache-ocache-fileinfo">WINCACHE_OCACHE_FILEINFO</a> |
+    <a href="#wincache-ocache-meminfo">WINCACHE_OCACHE_MEMINFO</a> |
+    <a href="#creating-on-windows">Creating on Windows</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="wincache-fcache-fileinfo">WINCACHE_FCACHE_FILEINFO</h4>
+<h4 id="wincache-fcache-meminfo">WINCACHE_FCACHE_MEMINFO</h4>
+<h4 id="wincache-lock">WINCACHE_LOCK</h4>
+<h4 id="wincache-refresh-if-changed">WINCACHE_REFRESH_IF_CHANGED</h4>
+<h4 id="wincache-rplist-fileinfo">WINCACHE_RPLIST_FILEINFO</h4>
+<h4 id="wincache-rplist-meminfo">WINCACHE_RPLIST_MEMINFO</h4>
+<h4 id="wincache-scache-info">WINCACHE_SCACHE_INFO</h4>
+<h4 id="wincache-scache-meminfo">WINCACHE_SCACHE_MEMINFO</h4>
+<h4 id="wincache-ucache-add">WINCACHE_UCACHE_ADD</h4>
+<h4 id="wincache-ucache-cas">WINCACHE_UCACHE_CAS</h4>
+<h4 id="wincache-ucache-clear">WINCACHE_UCACHE_CLEAR</h4>
+<h4 id="wincache-ucache-dec">WINCACHE_UCACHE_DEC</h4>
+<h4 id="wincache-ucache-delete">WINCACHE_UCACHE_DELETE</h4>
+<h4 id="wincache-ucache-exists">WINCACHE_UCACHE_EXISTS</h4>
+<h4 id="wincache-ucache-get">WINCACHE_UCACHE_GET</h4>
+<h4 id="wincache-ucache-inc">WINCACHE_UCACHE_INC</h4>
+<h4 id="wincache-ucache-info">WINCACHE_UCACHE_INFO</h4>
+<h4 id="wincache-ucache-meminfo">WINCACHE_UCACHE_MEMINFO</h4>
+<h4 id="wincache-ucache-set">WINCACHE_UCACHE_SET</h4>
+<h4 id="wincache-unlock">WINCACHE_UNLOCK</h4>
+<h4 id="wincache-ocache-fileinfo">WINCACHE_OCACHE_FILEINFO</h4>
+<h4 id="wincache-ocache-meminfo">WINCACHE_OCACHE_MEMINFO</h4>
+<h4 id="creating-on-windows">Creating on Windows</h4>
+
+
+<h4 id="xhprof">XHPROF</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation-configuration">Installation/Configuration</a> |
+    <a href="#xhprof-disable">xhprof_disable</a> |
+    <a href="#xhprof-enable">xhprof_enable</a> |
+    <a href="#xhprof-sample-disable">xhprof_sample_disable</a> |
+    <a href="#xhprof-sample-enable">xhprof_sample_enable</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation-configuration">Installation/Configuration</h4>
+<h4 id="xhprof-disable">xhprof_disable</h4>
+<h4 id="xhprof-enable">xhprof_enable</h4>
+<h4 id="xhprof-sample-disable">xhprof_sample_disable</h4>
+<h4 id="xhprof-sample-enable">xhprof_sample_enable</h4>
+
+
+
+<h4 id="yac">YAC</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#yac-add">Yac::add</a> |
+    <a href="#yac-construct">Yac::__construct</a> |
+    <a href="#yac-delete">Yac::delete</a> |
+    <a href="#yac-dump">Yac::dump</a> |
+    <a href="#yac-flush">Yac::flush</a> |
+    <a href="#yac-get">Yac::get</a> |
+    <a href="#yac-get-magic">Yac::__get</a> |
+    <a href="#yac-info">Yac::info</a> |
+    <a href="#yac-set">Yac::set</a> |
+    <a href="#yac-set-magic">Yac::__set</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="yac-add">Yac::add</h4>
+<h4 id="yac-construct">Yac::__construct</h4>
+<h4 id="yac-delete">Yac::delete</h4>
+<h4 id="yac-dump">Yac::dump</h4>
+<h4 id="yac-flush">Yac::flush</h4>
+<h4 id="yac-get">Yac::get</h4>
+<h4 id="yac-get-magic">Yac::__get</h4>
+<h4 id="yac-info">Yac::info</h4>
+<h4 id="yac-set">Yac::set</h4>
+<h4 id="yac-set-magic">Yac::__set</h4>
+
+
 
 <h3 id="audio-format-manipulation">AUDIO FORMAT MANIPULATION</h3>
 .
