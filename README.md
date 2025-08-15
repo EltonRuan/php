@@ -1154,65 +1154,64 @@
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
-    <a href="#database">Database</a>
+    <a href="#database">DATABASE</a>
   </p> 
 </nav>
 
-<h4 id="database">Database</h4>
+<h4 id="database">DATABASE</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
-  <p>
-    <a href="#designing-databases">Designing Databases</a> |
-    <a href="#connecting-to-the-database">Connecting to the Database</a> |
-    <a href="#encrypted-storage-model">Encrypted Storage Model</a> |
-    <a href="#sql-injection">SQL Injection</a>
-  </p> 
+    <p>
+      <a href="#designing-databases">DESIGNING DATABASES</a> |
+      <a href="#connecting-to-the-database">CONNECTING TO THE DATABASE</a> |
+      <a href="#encrypted-storage-model">ENCRYPTED STORAGE MODEL</a> |
+      <a href="#sql-injection">SQL INJECTION</a>
+    </p>
 </nav>
 
-<h4 id="designing-databases">Designing Databases</h4>
+<h4 id="designing-databases">DESIGNING DATABASES</h4>
 .
 
-<h4 id="connecting-to-the-database">Connecting to the Database</h4>
+<h4 id="connecting-to-the-database">CONNECTING TO THE DATABASE</h4>
 .
 
-<h4 id="encrypted-storage-model">Encrypted Storage Model</h4>
+<h4 id="encrypted-storage-model">ENCRYPTED STORAGE MODEL</h4>
 .
 
-<h4 id="sql-injection">SQL Injection</h4>
+<h4 id="sql-injection">SQL INJECTION</h4>
 .
-
 
 <h2 id="features">FEATURES</h2>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <a href="#http-authentication-with-php">HTTP Authentication with PHP</a> |
-    <a href="#cookies">Cookies</a> |
-    <a href="#sessions">Sessions</a> |
-    <a href="#using-remote-files">Using Remote Files</a> |
-    <a href="#connection-handling">Connection Handling</a> |
-    <a href="#persistent-database-connections">Persistent Database Connections</a>
+    <a href="#http-authentication-with-php">HTTP AUTHENTICATION WITH PHP</a> |
+    <a href="#cookies">COOKIES</a> |
+    <a href="#sessions">SESSIONS</a> |
+    <a href="#using-remote-files">USING REMOTE FILES</a> |
+    <a href="#connection-handling">CONNECTION HANDLING</a> |
+    <a href="#persistent-database-connections">PERSISTENT DATABASE CONNECTIONS</a>
   </p> 
 </nav>
 
-<h4 id="http-authentication-with-php">HTTP Authentication with PHP</h4>
+<h4 id="http-authentication-with-php">HTTP AUTHENTICATION WITH PHP</h4>
 .
 
-<h4 id="cookies">Cookies</h4>
+<h4 id="cookies">COOKIES</h4>
 .
 
-<h4 id="sessions">Sessions</h4>
+<h4 id="sessions">SESSIONS</h4>
 .
 
-<h4 id="using-remote-files">Using Remote Files</h4>
+<h4 id="using-remote-files">USING REMOTE FILES</h4>
 .
 
-<h4 id="connection-handling">Connection Handling</h4>
+<h4 id="connection-handling">CONNECTION HANDLING</h4>
 .
 
-<h4 id="persistent-database-connections">Persistent Database Connections</h4>
+<h4 id="persistent-database-connections">PERSISTENT DATABASE CONNECTIONS</h4>
 .
 
 
@@ -1221,112 +1220,113 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <a href="#affecting-php-behaviour">Affecting PHP Behaviour</a> |
-    <a href="#audio-format-manipulation">Audio Format Manipulation</a> |
-    <a href="#authentication-services">Authentication Services</a> |
-    <a href="#command-line-specific-extensions">Command Line Specific Extensions</a> |
-    <a href="#file-and-archive-compression-extensions">File and Archive Compression Extensions</a> |
-    <a href="#cryptography-extensions">Cryptography Extensions</a> |
-    <a href="#database-extensions">Database Extensions</a> |
-    <a href="#date-and-time-related-extensions">Date and Time Related Extensions</a> |
-    <a href="#filesystem-related-extensions">Filesystem Related Extensions</a> |
-    <a href="#human-language-and-character-encoding-support">Human Language and Character Encoding Support</a> |
-    <a href="#image-processing-and-generation">Image Processing and Generation</a> |
-    <a href="#mail-related-extensions">Mail Related Extensions</a> |
-    <a href="#mathematical-extensions">Mathematical Extensions</a> |
-    <a href="#non-text-mime-output">Non-Text MIME Output</a> |
-    <a href="#process-control-extensions">Process Control Extensions</a> |
-    <a href="#other-basic-extensions">Other Basic Extensions</a> |
-    <a href="#other-services">Other Services</a> |
-    <a href="#search-engine-extensions">Search Engine Extensions</a> |
-    <a href="#server-specific-extensions">Server Specific Extensions</a> |
-    <a href="#session-extensions">Session Extensions</a> |
-    <a href="#text-processing">Text Processing</a> |
-    <a href="#variable-and-type-related-extensions">Variable and Type Related Extensions</a> |
-    <a href="#web-services">Web Services</a> |
-    <a href="#windows-only-extensions">Windows Only Extensions</a> |
-    <a href="#xml-manipulation">XML Manipulation</a> |
-    <a href="#gui-extensions">GUI Extensions</a>
+    <a href="#affecting-php-behaviour">AFFECTING PHP BEHAVIOUR</a> |
+    <a href="#audio-format-manipulation">AUDIO FORMAT MANIPULATION</a> |
+    <a href="#authentication-services">AUTHENTICATION SERVICES</a> |
+    <a href="#command-line-specific-extensions">COMMAND LINE SPECIFIC EXTENSIONS</a> |
+    <a href="#file-and-archive-compression-extensions">FILE AND ARCHIVE COMPRESSION EXTENSIONS</a> |
+    <a href="#cryptography-extensions">CRYPTOGRAPHY EXTENSIONS</a> |
+    <a href="#database-extensions">DATABASE EXTENSIONS</a> |
+    <a href="#date-and-time-related-extensions">DATE AND TIME RELATED EXTENSIONS</a> |
+    <a href="#filesystem-related-extensions">FILESYSTEM RELATED EXTENSIONS</a> |
+    <a href="#human-language-and-character-encoding-support">HUMAN LANGUAGE AND CHARACTER ENCODING SUPPORT</a> |
+    <a href="#image-processing-and-generation">IMAGE PROCESSING AND GENERATION</a> |
+    <a href="#mail-related-extensions">MAIL RELATED EXTENSIONS</a> |
+    <a href="#mathematical-extensions">MATHEMATICAL EXTENSIONS</a> |
+    <a href="#non-text-mime-output">NON-TEXT MIME OUTPUT</a> |
+    <a href="#process-control-extensions">PROCESS CONTROL EXTENSIONS</a> |
+    <a href="#other-basic-extensions">OTHER BASIC EXTENSIONS</a> |
+    <a href="#other-services">OTHER SERVICES</a> |
+    <a href="#search-engine-extensions">SEARCH ENGINE EXTENSIONS</a> |
+    <a href="#server-specific-extensions">SERVER SPECIFIC EXTENSIONS</a> |
+    <a href="#session-extensions">SESSION EXTENSIONS</a> |
+    <a href="#text-processing">TEXT PROCESSING</a> |
+    <a href="#variable-and-type-related-extensions">VARIABLE AND TYPE RELATED EXTENSIONS</a> |
+    <a href="#web-services">WEB SERVICES</a> |
+    <a href="#windows-only-extensions">WINDOWS ONLY EXTENSIONS</a> |
+    <a href="#xml-manipulation">XML MANIPULATION</a> |
+    <a href="#gui-extensions">GUI EXTENSIONS</a>
   </p> 
 </nav>
 
-<h3 id="affecting-php-behaviour">Affecting PHP Behaviour</h4>
+<h3 id="affecting-php-behaviour">AFFECTING PHP BEHAVIOUR</h3>
 .
 
-<h3 id="audio-format-manipulation">Audio Format Manipulation</h4>
+<h3 id="audio-format-manipulation">AUDIO FORMAT MANIPULATION</h3>
 .
 
-<h3 id="authentication-services">Authentication Services</h4>
+<h3 id="authentication-services">AUTHENTICATION SERVICES</h3>
 .
 
-<h3 id="command-line-specific-extensions">Command Line Specific Extensions</h4>
+<h3 id="command-line-specific-extensions">COMMAND LINE SPECIFIC EXTENSIONS</h3>
 .
 
-<h3 id="file-and-archive-compression-extensions">File and Archive Compression Extensions</h4>
+<h3 id="file-and-archive-compression-extensions">FILE AND ARCHIVE COMPRESSION EXTENSIONS</h3>
 .
 
-<h3 id="cryptography-extensions">Cryptography Extensions</h4>
+<h3 id="cryptography-extensions">CRYPTOGRAPHY EXTENSIONS</h3>
 .
 
-<h3 id="database-extensions">Database Extensions</h4>
+<h3 id="database-extensions">DATABASE EXTENSIONS</h3>
 .
 
-<h3 id="date-and-time-related-extensions">Date and Time Related Extensions</h4>
+<h3 id="date-and-time-related-extensions">DATE AND TIME RELATED EXTENSIONS</h3>
 .
 
-<h3 id="filesystem-related-extensions">Filesystem Related Extensions</h4>
+<h3 id="filesystem-related-extensions">FILESYSTEM RELATED EXTENSIONS</h3>
 .
 
-<h3 id="human-language-and-character-encoding-support">Human Language and Character Encoding Support</h4>
+<h3 id="human-language-and-character-encoding-support">HUMAN LANGUAGE AND CHARACTER ENCODING SUPPORT</h3>
 .
 
-<h3 id="image-processing-and-generation">Image Processing and Generation</h4>
+<h3 id="image-processing-and-generation">IMAGE PROCESSING AND GENERATION</h3>
 .
 
-<h3 id="mail-related-extensions">Mail Related Extensions</h4>
+<h3 id="mail-related-extensions">MAIL RELATED EXTENSIONS</h3>
 .
 
-<h3 id="mathematical-extensions">Mathematical Extensions</h4>
+<h3 id="mathematical-extensions">MATHEMATICAL EXTENSIONS</h3>
 .
 
-<h3 id="non-text-mime-output">Non-Text MIME Output</h4>
+<h3 id="non-text-mime-output">NON-TEXT MIME OUTPUT</h3>
 .
 
-<h3 id="process-control-extensions">Process Control Extensions</h4>
+<h3 id="process-control-extensions">PROCESS CONTROL EXTENSIONS</h3>
 .
 
-<h3 id="other-basic-extensions">Other Basic Extensions</h4>
+<h3 id="other-basic-extensions">OTHER BASIC EXTENSIONS</h3>
 .
 
-<h3 id="other-services">Other Services</h4>
+<h3 id="other-services">OTHER SERVICES</h3>
 .
 
-<h3 id="search-engine-extensions">Search Engine Extensions</h4>
+<h3 id="search-engine-extensions">SEARCH ENGINE EXTENSIONS</h3>
 .
 
-<h3 id="server-specific-extensions">Server Specific Extensions</h4>
+<h3 id="server-specific-extensions">SERVER SPECIFIC EXTENSIONS</h3>
 .
 
-<h3 id="session-extensions">Session Extensions</h4>
+<h3 id="session-extensions">SESSION EXTENSIONS</h3>
 .
 
-<h3 id="text-processing">Text Processing</h4>
+<h3 id="text-processing">TEXT PROCESSING</h3>
 .
 
-<h3 id="variable-and-type-related-extensions">Variable and Type Related Extensions</h4>
+<h3 id="variable-and-type-related-extensions">VARIABLE AND TYPE RELATED EXTENSIONS</h3>
 .
 
-<h3 id="web-services">Web Services</h4>
+<h3 id="web-services">WEB SERVICES</h3>
 .
 
-<h3 id="windows-only-extensions">Windows Only Extensions</h4>
+<h3 id="windows-only-extensions">WINDOWS ONLY EXTENSIONS</h3>
 .
 
-<h3 id="xml-manipulation">XML Manipulation</h4>
+<h3 id="xml-manipulation">XML MANIPULATION</h3>
 .
 
-<h3 id="gui-extensions">GUI Extensions</h4>
+<h3 id="gui-extensions">GUI EXTENSIONS</h3>
 .
+
 
 
 
