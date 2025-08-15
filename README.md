@@ -2015,13 +2015,196 @@
 
 
 <h3 id="audio-format-manipulation">AUDIO FORMAT MANIPULATION</h3>
-.
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#openal">OpenAL</a>
+  </p> 
+</nav>
+
+<h4 id="openal">OpenAL</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#installation-configuration">INSTALLATION/CONFIGURATION</a> |
+    <a href="#resource-types">RESOURCE TYPES</a> |
+    <a href="#openal_buffer_create">OPENAL_BUFFER_CREATE</a> |
+    <a href="#openal_buffer_data">OPENAL_BUFFER_DATA</a> |
+    <a href="#openal_buffer_destroy">OPENAL_BUFFER_DESTROY</a> |
+    <a href="#openal_buffer_get">OPENAL_BUFFER_GET</a> |
+    <a href="#openal_buffer_loadwav">OPENAL_BUFFER_LOADWAV</a> |
+    <a href="#openal_context_create">OPENAL_CONTEXT_CREATE</a> |
+    <a href="#openal_context_current">OPENAL_CONTEXT_CURRENT</a> |
+    <a href="#openal_context_destroy">OPENAL_CONTEXT_DESTROY</a> |
+    <a href="#openal_context_process">OPENAL_CONTEXT_PROCESS</a> |
+    <a href="#openal_context_suspend">OPENAL_CONTEXT_SUSPEND</a> |
+    <a href="#openal_device_close">OPENAL_DEVICE_CLOSE</a> |
+    <a href="#openal_device_open">OPENAL_DEVICE_OPEN</a> |
+    <a href="#openal_listener_get">OPENAL_LISTENER_GET</a> |
+    <a href="#openal_listener_set">OPENAL_LISTENER_SET</a> |
+    <a href="#openal_source_create">OPENAL_SOURCE_CREATE</a> |
+    <a href="#openal_source_destroy">OPENAL_SOURCE_DESTROY</a> |
+    <a href="#openal_source_get">OPENAL_SOURCE_GET</a> |
+    <a href="#openal_source_pause">OPENAL_SOURCE_PAUSE</a> |
+    <a href="#openal_source_play">OPENAL_SOURCE_PLAY</a> |
+    <a href="#openal_source_rewind">OPENAL_SOURCE_REWIND</a> |
+    <a href="#openal_source_set">OPENAL_SOURCE_SET</a> |
+    <a href="#openal_source_stop">OPENAL_SOURCE_STOP</a> |
+    <a href="#openal_stream">OPENAL_STREAM</a>
+  </p> 
+</nav>
+
+<h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+<h4 id="resource-types">RESOURCE TYPES</h4>
+<h4 id="openal_buffer_create">OPENAL_BUFFER_CREATE</h4>
+<h4 id="openal_buffer_data">OPENAL_BUFFER_DATA</h4>
+<h4 id="openal_buffer_destroy">OPENAL_BUFFER_DESTROY</h4>
+<h4 id="openal_buffer_get">OPENAL_BUFFER_GET</h4>
+<h4 id="openal_buffer_loadwav">OPENAL_BUFFER_LOADWAV</h4>
+<h4 id="openal_context_create">OPENAL_CONTEXT_CREATE</h4>
+<h4 id="openal_context_current">OPENAL_CONTEXT_CURRENT</h4>
+<h4 id="openal_context_destroy">OPENAL_CONTEXT_DESTROY</h4>
+<h4 id="openal_context_process">OPENAL_CONTEXT_PROCESS</h4>
+<h4 id="openal_context_suspend">OPENAL_CONTEXT_SUSPEND</h4>
+<h4 id="openal_device_close">OPENAL_DEVICE_CLOSE</h4>
+<h4 id="openal_device_open">OPENAL_DEVICE_OPEN</h4>
+<h4 id="openal_listener_get">OPENAL_LISTENER_GET</h4>
+<h4 id="openal_listener_set">OPENAL_LISTENER_SET</h4>
+<h4 id="openal_source_create">OPENAL_SOURCE_CREATE</h4>
+<h4 id="openal_source_destroy">OPENAL_SOURCE_DESTROY</h4>
+<h4 id="openal_source_get">OPENAL_SOURCE_GET</h4>
+<h4 id="openal_source_pause">OPENAL_SOURCE_PAUSE</h4>
+<h4 id="openal_source_play">OPENAL_SOURCE_PLAY</h4>
+<h4 id="openal_source_rewind">OPENAL_SOURCE_REWIND</h4>
+<h4 id="openal_source_set">OPENAL_SOURCE_SET</h4>
+<h4 id="openal_source_stop">OPENAL_SOURCE_STOP</h4>
+<h4 id="openal_stream">OPENAL_STREAM</h4>
 
 <h3 id="authentication-services">AUTHENTICATION SERVICES</h3>
-.
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#radius">RADIUS</a>
+  </p> 
+</nav>
+
+<h4 id="radius">RADIUS</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#radius_acct_open">RADIUS_ACCT_OPEN</a> |
+    <a href="#radius_add_server">RADIUS_ADD_SERVER</a> |
+    <a href="#radius_auth_open">RADIUS_AUTH_OPEN</a> |
+    <a href="#radius_close">RADIUS_CLOSE</a> |
+    <a href="#radius_config">RADIUS_CONFIG</a> |
+    <a href="#radius_create_request">RADIUS_CREATE_REQUEST</a> |
+    <a href="#radius_cvt_addr">RADIUS_CVT_ADDR</a> |
+    <a href="#radius_cvt_int">RADIUS_CVT_INT</a> |
+    <a href="#radius_cvt_string">RADIUS_CVT_STRING</a> |
+    <a href="#radius_demangle">RADIUS_DEMANGLE</a> |
+    <a href="#radius_demangle_mppe_key">RADIUS_DEMANGLE_MPPE_KEY</a> |
+    <a href="#radius_get_attr">RADIUS_GET_ATTR</a> |
+    <a href="#radius_get_tagged_attr_data">RADIUS_GET_TAGGED_ATTR_DATA</a> |
+    <a href="#radius_get_tagged_attr_tag">RADIUS_GET_TAGGED_ATTR_TAG</a> |
+    <a href="#radius_get_vendor_attr">RADIUS_GET_VENDOR_ATTR</a> |
+    <a href="#radius_put_addr">RADIUS_PUT_ADDR</a> |
+    <a href="#radius_put_attr">RADIUS_PUT_ATTR</a> |
+    <a href="#radius_put_int">RADIUS_PUT_INT</a> |
+    <a href="#radius_put_string">RADIUS_PUT_STRING</a> |
+    <a href="#radius_put_vendor_addr">RADIUS_PUT_VENDOR_ADDR</a> |
+    <a href="#radius_put_vendor_attr">RADIUS_PUT_VENDOR_ATTR</a> |
+    <a href="#radius_put_vendor_int">RADIUS_PUT_VENDOR_INT</a> |
+    <a href="#radius_put_vendor_string">RADIUS_PUT_VENDOR_STRING</a> |
+    <a href="#radius_request_authenticator">RADIUS_REQUEST_AUTHENTICATOR</a> |
+    <a href="#radius_salt_encrypt_attr">RADIUS_SALT_ENCRYPT_ATTR</a> |
+    <a href="#radius_send_request">RADIUS_SEND_REQUEST</a> |
+    <a href="#radius_server_secret">RADIUS_SERVER_SECRET</a> |
+    <a href="#radius_strerror">RADIUS_STRERROR</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="radius_acct_open">RADIUS_ACCT_OPEN</h4>
+<h4 id="radius_add_server">RADIUS_ADD_SERVER</h4>
+<h4 id="radius_auth_open">RADIUS_AUTH_OPEN</h4>
+<h4 id="radius_close">RADIUS_CLOSE</h4>
+<h4 id="radius_config">RADIUS_CONFIG</h4>
+<h4 id="radius_create_request">RADIUS_CREATE_REQUEST</h4>
+<h4 id="radius_cvt_addr">RADIUS_CVT_ADDR</h4>
+<h4 id="radius_cvt_int">RADIUS_CVT_INT</h4>
+<h4 id="radius_cvt_string">RADIUS_CVT_STRING</h4>
+<h4 id="radius_demangle">RADIUS_DEMANGLE</h4>
+<h4 id="radius_demangle_mppe_key">RADIUS_DEMANGLE_MPPE_KEY</h4>
+<h4 id="radius_get_attr">RADIUS_GET_ATTR</h4>
+<h4 id="radius_get_tagged_attr_data">RADIUS_GET_TAGGED_ATTR_DATA</h4>
+<h4 id="radius_get_tagged_attr_tag">RADIUS_GET_TAGGED_ATTR_TAG</h4>
+<h4 id="radius_get_vendor_attr">RADIUS_GET_VENDOR_ATTR</h4>
+<h4 id="radius_put_addr">RADIUS_PUT_ADDR</h4>
+<h4 id="radius_put_attr">RADIUS_PUT_ATTR</h4>
+<h4 id="radius_put_int">RADIUS_PUT_INT</h4>
+<h4 id="radius_put_string">RADIUS_PUT_STRING</h4>
+<h4 id="radius_put_vendor_addr">RADIUS_PUT_VENDOR_ADDR</h4>
+<h4 id="radius_put_vendor_attr">RADIUS_PUT_VENDOR_ATTR</h4>
+<h4 id="radius_put_vendor_int">RADIUS_PUT_VENDOR_INT</h4>
+<h4 id="radius_put_vendor_string">RADIUS_PUT_VENDOR_STRING</h4>
+<h4 id="radius_request_authenticator">RADIUS_REQUEST_AUTHENTICATOR</h4>
+<h4 id="radius_salt_encrypt_attr">RADIUS_SALT_ENCRYPT_ATTR</h4>
+<h4 id="radius_send_request">RADIUS_SEND_REQUEST</h4>
+<h4 id="radius_server_secret">RADIUS_SERVER_SECRET</h4>
+<h4 id="radius_strerror">RADIUS_STRERROR</h4>
+
 
 <h3 id="command-line-specific-extensions">COMMAND LINE SPECIFIC EXTENSIONS</h3>
-.
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#readline">READLINE</a>
+  </p> 
+</nav>
+
+<h4 id="readline">READLINE</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#readline">READLINE</a> |
+    <a href="#readline_add_history">READLINE_ADD_HISTORY</a> |
+    <a href="#readline_callback_handler_install">READLINE_CALLBACK_HANDLER_INSTALL</a> |
+    <a href="#readline_callback_handler_remove">READLINE_CALLBACK_HANDLER_REMOVE</a> |
+    <a href="#readline_callback_read_char">READLINE_CALLBACK_READ_CHAR</a> |
+    <a href="#readline_clear_history">READLINE_CLEAR_HISTORY</a> |
+    <a href="#readline_completion_function">READLINE_COMPLETION_FUNCTION</a> |
+    <a href="#readline_info">READLINE_INFO</a> |
+    <a href="#readline_list_history">READLINE_LIST_HISTORY</a> |
+    <a href="#readline_on_new_line">READLINE_ON_NEW_LINE</a> |
+    <a href="#readline_read_history">READLINE_READ_HISTORY</a> |
+    <a href="#readline_redisplay">READLINE_REDISPLAY</a> |
+    <a href="#readline_write_history">READLINE_WRITE_HISTORY</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="readline">READLINE</h4>
+<h4 id="readline_add_history">READLINE_ADD_HISTORY</h4>
+<h4 id="readline_callback_handler_install">READLINE_CALLBACK_HANDLER_INSTALL</h4>
+<h4 id="readline_callback_handler_remove">READLINE_CALLBACK_HANDLER_REMOVE</h4>
+<h4 id="readline_callback_read_char">READLINE_CALLBACK_READ_CHAR</h4>
+<h4 id="readline_clear_history">READLINE_CLEAR_HISTORY</h4>
+<h4 id="readline_completion_function">READLINE_COMPLETION_FUNCTION</h4>
+<h4 id="readline_info">READLINE_INFO</h4>
+<h4 id="readline_list_history">READLINE_LIST_HISTORY</h4>
+<h4 id="readline_on_new_line">READLINE_ON_NEW_LINE</h4>
+<h4 id="readline_read_history">READLINE_READ_HISTORY</h4>
+<h4 id="readline_redisplay">READLINE_REDISPLAY</h4>
+<h4 id="readline_write_history">READLINE_WRITE_HISTORY</h4>
+
 
 <h3 id="file-and-archive-compression-extensions">FILE AND ARCHIVE COMPRESSION EXTENSIONS</h3>
 .
