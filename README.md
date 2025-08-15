@@ -3059,10 +3059,1291 @@
 
 <h3 id="cryptography-extensions">CRYPTOGRAPHY EXTENSIONS</h3>
 
-soon...
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Hash -->
+    <a href="#hash">HASH</a> |
+    <!-- Mcrypt -->
+    <a href="#mcrypt">MCRYPT</a> |
+    <!-- Mhash -->
+    <a href="#mhash">MHASH</a> |
+    <!-- OpenSSL -->
+    <a href="#openssl">OPENSSL</a> |
+    <!-- Password Hash -->
+    <a href="#password_hash">PASSWORD_HASH</a> |
+    <!-- Rnp -->
+    <a href="#rnp">RNP</a> |
+    <!-- Sodium -->
+    <a href="#sodium">SODIUM</a> |
+    <!-- Xpass -->
+    <a href="#xpass">XPASS</a>
+  </p> 
+</nav>
+
+<!-- Hash -->
+<h4 id="hash">HASH</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- HashContext -->
+    <a href="#hashcontext">HASHCONTEXT — THE HASHCONTEXT CLASS</a> |
+    <!-- HashContext::__construct -->
+    <a href="#hashcontext___construct">HASHCONTEXT::__CONSTRUCT</a> |
+    <!-- HashContext::__serialize -->
+    <a href="#hashcontext___serialize">HASHCONTEXT::__SERIALIZE</a> |
+    <!-- HashContext::__unserialize -->
+    <a href="#hashcontext___unserialize">HASHCONTEXT::__UNSERIALIZE</a> |
+    <!-- hash -->
+    <a href="#hash">HASH</a> |
+    <!-- hash_algos -->
+    <a href="#hash_algos">HASH_ALGOS</a> |
+    <!-- hash_copy -->
+    <a href="#hash_copy">HASH_COPY</a> |
+    <!-- hash_equals -->
+    <a href="#hash_equals">HASH_EQUALS</a> |
+    <!-- hash_file -->
+    <a href="#hash_file">HASH_FILE</a> |
+    <!-- hash_final -->
+    <a href="#hash_final">HASH_FINAL</a> |
+    <!-- hash_hkdf -->
+    <a href="#hash_hkdf">HASH_HKDF</a> |
+    <!-- hash_hmac -->
+    <a href="#hash_hmac">HASH_HMAC</a> |
+    <!-- hash_hmac_algos -->
+    <a href="#hash_hmac_algos">HASH_HMAC_ALGOS</a> |
+    <!-- hash_hmac_file -->
+    <a href="#hash_hmac_file">HASH_HMAC_FILE</a> |
+    <!-- hash_init -->
+    <a href="#hash_init">HASH_INIT</a> |
+    <!-- hash_pbkdf2 -->
+    <a href="#hash_pbkdf2">HASH_PBKDF2</a> |
+    <!-- hash_update -->
+    <a href="#hash_update">HASH_UPDATE</a> |
+    <!-- hash_update_file -->
+    <a href="#hash_update_file">HASH_UPDATE_FILE</a> |
+    <!-- hash_update_stream -->
+    <a href="#hash_update_stream">HASH_UPDATE_STREAM</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- HashContext -->
+<h4 id="hashcontext">HASHCONTEXT — THE HASHCONTEXT CLASS</h4>
+
+<!-- HashContext::__construct -->
+<h4 id="hashcontext___construct">HASHCONTEXT::__CONSTRUCT</h4>
+
+<!-- HashContext::__serialize -->
+<h4 id="hashcontext___serialize">HASHCONTEXT::__SERIALIZE</h4>
+
+<!-- HashContext::__unserialize -->
+<h4 id="hashcontext___unserialize">HASHCONTEXT::__UNSERIALIZE</h4>
+
+<!-- hash -->
+<h4 id="hash">HASH</h4>
+
+<!-- hash_algos -->
+<h4 id="hash_algos">HASH_ALGOS</h4>
+
+<!-- hash_copy -->
+<h4 id="hash_copy">HASH_COPY</h4>
+
+<!-- hash_equals -->
+<h4 id="hash_equals">HASH_EQUALS</h4>
+
+<!-- hash_file -->
+<h4 id="hash_file">HASH_FILE</h4>
+
+<!-- hash_final -->
+<h4 id="hash_final">HASH_FINAL</h4>
+
+<!-- hash_hkdf -->
+<h4 id="hash_hkdf">HASH_HKDF</h4>
+
+<!-- hash_hmac -->
+<h4 id="hash_hmac">HASH_HMAC</h4>
+
+<!-- hash_hmac_algos -->
+<h4 id="hash_hmac_algos">HASH_HMAC_ALGOS</h4>
+
+<!-- hash_hmac_file -->
+<h4 id="hash_hmac_file">HASH_HMAC_FILE</h4>
+
+<!-- hash_init -->
+<h4 id="hash_init">HASH_INIT</h4>
+
+<!-- hash_pbkdf2 -->
+<h4 id="hash_pbkdf2">HASH_PBKDF2</h4>
+
+<!-- hash_update -->
+<h4 id="hash_update">HASH_UPDATE</h4>
+
+<!-- hash_update_file -->
+<h4 id="hash_update_file">HASH_UPDATE_FILE</h4>
+
+<!-- hash_update_stream -->
+<h4 id="hash_update_stream">HASH_UPDATE_STREAM</h4>
+
+
+<!-- Mcrypt -->
+<h4 id="mcrypt">MCRYPT</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- mcrypt_create_iv -->
+    <a href="#mcrypt_create_iv">MCRYPT_CREATE_IV</a> |
+    <!-- mcrypt_decrypt -->
+    <a href="#mcrypt_decrypt">MCRYPT_DECRYPT</a> |
+    <!-- mcrypt_enc_get_algorithms_name -->
+    <a href="#mcrypt_enc_get_algorithms_name">MCRYPT_ENC_GET_ALGORITHMS_NAME</a> |
+    <!-- mcrypt_enc_get_block_size -->
+    <a href="#mcrypt_enc_get_block_size">MCRYPT_ENC_GET_BLOCK_SIZE</a> |
+    <!-- mcrypt_enc_get_iv_size -->
+    <a href="#mcrypt_enc_get_iv_size">MCRYPT_ENC_GET_IV_SIZE</a> |
+    <!-- mcrypt_enc_get_key_size -->
+    <a href="#mcrypt_enc_get_key_size">MCRYPT_ENC_GET_KEY_SIZE</a> |
+    <!-- mcrypt_enc_get_modes_name -->
+    <a href="#mcrypt_enc_get_modes_name">MCRYPT_ENC_GET_MODES_NAME</a> |
+    <!-- mcrypt_enc_get_supported_key_sizes -->
+    <a href="#mcrypt_enc_get_supported_key_sizes">MCRYPT_ENC_GET_SUPPORTED_KEY_SIZES</a> |
+    <!-- mcrypt_enc_is_block_algorithm -->
+    <a href="#mcrypt_enc_is_block_algorithm">MCRYPT_ENC_IS_BLOCK_ALGORITHM</a> |
+    <!-- mcrypt_enc_is_block_algorithm_mode -->
+    <a href="#mcrypt_enc_is_block_algorithm_mode">MCRYPT_ENC_IS_BLOCK_ALGORITHM_MODE</a> |
+    <!-- mcrypt_enc_is_block_mode -->
+    <a href="#mcrypt_enc_is_block_mode">MCRYPT_ENC_IS_BLOCK_MODE</a> |
+    <!-- mcrypt_enc_self_test -->
+    <a href="#mcrypt_enc_self_test">MCRYPT_ENC_SELF_TEST</a> |
+    <!-- mcrypt_encrypt -->
+    <a href="#mcrypt_encrypt">MCRYPT_ENCRYPT</a> |
+    <!-- mcrypt_generic -->
+    <a href="#mcrypt_generic">MCRYPT_GENERIC</a> |
+    <!-- mcrypt_generic_deinit -->
+    <a href="#mcrypt_generic_deinit">MCRYPT_GENERIC_DEINIT</a> |
+    <!-- mcrypt_generic_init -->
+    <a href="#mcrypt_generic_init">MCRYPT_GENERIC_INIT</a> |
+    <!-- mcrypt_get_block_size -->
+    <a href="#mcrypt_get_block_size">MCRYPT_GET_BLOCK_SIZE</a> |
+    <!-- mcrypt_get_cipher_name -->
+    <a href="#mcrypt_get_cipher_name">MCRYPT_GET_CIPHER_NAME</a> |
+    <!-- mcrypt_get_iv_size -->
+    <a href="#mcrypt_get_iv_size">MCRYPT_GET_IV_SIZE</a> |
+    <!-- mcrypt_get_key_size -->
+    <a href="#mcrypt_get_key_size">MCRYPT_GET_KEY_SIZE</a> |
+    <!-- mcrypt_list_algorithms -->
+    <a href="#mcrypt_list_algorithms">MCRYPT_LIST_ALGORITHMS</a> |
+    <!-- mcrypt_list_modes -->
+    <a href="#mcrypt_list_modes">MCRYPT_LIST_MODES</a> |
+    <!-- mcrypt_module_close -->
+    <a href="#mcrypt_module_close">MCRYPT_MODULE_CLOSE</a> |
+    <!-- mcrypt_module_get_algo_block_size -->
+    <a href="#mcrypt_module_get_algo_block_size">MCRYPT_MODULE_GET_ALGO_BLOCK_SIZE</a> |
+    <!-- mcrypt_module_get_algo_key_size -->
+    <a href="#mcrypt_module_get_algo_key_size">MCRYPT_MODULE_GET_ALGO_KEY_SIZE</a> |
+    <!-- mcrypt_module_get_supported_key_sizes -->
+    <a href="#mcrypt_module_get_supported_key_sizes">MCRYPT_MODULE_GET_SUPPORTED_KEY_SIZES</a> |
+    <!-- mcrypt_module_is_block_algorithm -->
+    <a href="#mcrypt_module_is_block_algorithm">MCRYPT_MODULE_IS_BLOCK_ALGORITHM</a> |
+    <!-- mcrypt_module_is_block_algorithm_mode -->
+    <a href="#mcrypt_module_is_block_algorithm_mode">MCRYPT_MODULE_IS_BLOCK_ALGORITHM_MODE</a> |
+    <!-- mcrypt_module_is_block_mode -->
+    <a href="#mcrypt_module_is_block_mode">MCRYPT_MODULE_IS_BLOCK_MODE</a> |
+    <!-- mcrypt_module_open -->
+    <a href="#mcrypt_module_open">MCRYPT_MODULE_OPEN</a> |
+    <!-- mcrypt_module_self_test -->
+    <a href="#mcrypt_module_self_test">MCRYPT_MODULE_SELF_TEST</a> |
+    <!-- mdecrypt_generic -->
+    <a href="#mdecrypt_generic">MDECRYPT_GENERIC</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- mcrypt_create_iv -->
+<h4 id="mcrypt_create_iv">MCRYPT_CREATE_IV</h4>
+
+<!-- mcrypt_decrypt -->
+<h4 id="mcrypt_decrypt">MCRYPT_DECRYPT</h4>
+
+<!-- mcrypt_enc_get_algorithms_name -->
+<h4 id="mcrypt_enc_get_algorithms_name">MCRYPT_ENC_GET_ALGORITHMS_NAME</h4>
+
+<!-- mcrypt_enc_get_block_size -->
+<h4 id="mcrypt_enc_get_block_size">MCRYPT_ENC_GET_BLOCK_SIZE</h4>
+
+<!-- mcrypt_enc_get_iv_size -->
+<h4 id="mcrypt_enc_get_iv_size">MCRYPT_ENC_GET_IV_SIZE</h4>
+
+<!-- mcrypt_enc_get_key_size -->
+<h4 id="mcrypt_enc_get_key_size">MCRYPT_ENC_GET_KEY_SIZE</h4>
+
+<!-- mcrypt_enc_get_modes_name -->
+<h4 id="mcrypt_enc_get_modes_name">MCRYPT_ENC_GET_MODES_NAME</h4>
+
+<!-- mcrypt_enc_get_supported_key_sizes -->
+<h4 id="mcrypt_enc_get_supported_key_sizes">MCRYPT_ENC_GET_SUPPORTED_KEY_SIZES</h4>
+
+<!-- mcrypt_enc_is_block_algorithm -->
+<h4 id="mcrypt_enc_is_block_algorithm">MCRYPT_ENC_IS_BLOCK_ALGORITHM</h4>
+
+<!-- mcrypt_enc_is_block_algorithm_mode -->
+<h4 id="mcrypt_enc_is_block_algorithm_mode">MCRYPT_ENC_IS_BLOCK_ALGORITHM_MODE</h4>
+
+<!-- mcrypt_enc_is_block_mode -->
+<h4 id="mcrypt_enc_is_block_mode">MCRYPT_ENC_IS_BLOCK_MODE</h4>
+
+<!-- mcrypt_enc_self_test -->
+<h4 id="mcrypt_enc_self_test">MCRYPT_ENC_SELF_TEST</h4>
+
+<!-- mcrypt_encrypt -->
+<h4 id="mcrypt_encrypt">MCRYPT_ENCRYPT</h4>
+
+<!-- mcrypt_generic -->
+<h4 id="mcrypt_generic">MCRYPT_GENERIC</h4>
+
+<!-- mcrypt_generic_deinit -->
+<h4 id="mcrypt_generic_deinit">MCRYPT_GENERIC_DEINIT</h4>
+
+<!-- mcrypt_generic_init -->
+<h4 id="mcrypt_generic_init">MCRYPT_GENERIC_INIT</h4>
+
+<!-- mcrypt_get_block_size -->
+<h4 id="mcrypt_get_block_size">MCRYPT_GET_BLOCK_SIZE</h4>
+
+<!-- mcrypt_get_cipher_name -->
+<h4 id="mcrypt_get_cipher_name">MCRYPT_GET_CIPHER_NAME</h4>
+
+<!-- mcrypt_get_iv_size -->
+<h4 id="mcrypt_get_iv_size">MCRYPT_GET_IV_SIZE</h4>
+
+<!-- mcrypt_get_key_size -->
+<h4 id="mcrypt_get_key_size">MCRYPT_GET_KEY_SIZE</h4>
+
+<!-- mcrypt_list_algorithms -->
+<h4 id="mcrypt_list_algorithms">MCRYPT_LIST_ALGORITHMS</h4>
+
+<!-- mcrypt_list_modes -->
+<h4 id="mcrypt_list_modes">MCRYPT_LIST_MODES</h4>
+
+<!-- mcrypt_module_close -->
+<h4 id="mcrypt_module_close">MCRYPT_MODULE_CLOSE</h4>
+
+<!-- mcrypt_module_get_algo_block_size -->
+<h4 id="mcrypt_module_get_algo_block_size">MCRYPT_MODULE_GET_ALGO_BLOCK_SIZE</h4>
+
+<!-- mcrypt_module_get_algo_key_size -->
+<h4 id="mcrypt_module_get_algo_key_size">MCRYPT_MODULE_GET_ALGO_KEY_SIZE</h4>
+
+<!-- mcrypt_module_get_supported_key_sizes -->
+<h4 id="mcrypt_module_get_supported_key_sizes">MCRYPT_MODULE_GET_SUPPORTED_KEY_SIZES</h4>
+
+<!-- mcrypt_module_is_block_algorithm -->
+<h4 id="mcrypt_module_is_block_algorithm">MCRYPT_MODULE_IS_BLOCK_ALGORITHM</h4>
+
+<!-- mcrypt_module_is_block_algorithm_mode -->
+<h4 id="mcrypt_module_is_block_algorithm_mode">MCRYPT_MODULE_IS_BLOCK_ALGORITHM_MODE</h4>
+
+<!-- mcrypt_module_is_block_mode -->
+<h4 id="mcrypt_module_is_block_mode">MCRYPT_MODULE_IS_BLOCK_MODE</h4>
+
+<!-- mcrypt_module_open -->
+<h4 id="mcrypt_module_open">MCRYPT_MODULE_OPEN</h4>
+
+<!-- mcrypt_module_self_test -->
+<h4 id="mcrypt_module_self_test">MCRYPT_MODULE_SELF_TEST</h4>
+
+<!-- mdecrypt_generic -->
+<h4 id="mdecrypt_generic">MDECRYPT_GENERIC</h4>
+
+
+<!-- Mhash -->
+<h4 id="mhash">MHASH</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- mhash -->
+    <a href="#mhash">MHASH</a> |
+    <!-- mhash_count -->
+    <a href="#mhash_count">MHASH_COUNT</a> |
+    <!-- mhash_get_block_size -->
+    <a href="#mhash_get_block_size">MHASH_GET_BLOCK_SIZE</a> |
+    <!-- mhash_get_hash_name -->
+    <a href="#mhash_get_hash_name">MHASH_GET_HASH_NAME</a> |
+    <!-- mhash_keygen_s2k -->
+    <a href="#mhash_keygen_s2k">MHASH_KEYGEN_S2K</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- mhash -->
+<h4 id="mhash">MHASH</h4>
+
+<!-- mhash_count -->
+<h4 id="mhash_count">MHASH_COUNT</h4>
+
+<!-- mhash_get_block_size -->
+<h4 id="mhash_get_block_size">MHASH_GET_BLOCK_SIZE</h4>
+
+<!-- mhash_get_hash_name -->
+<h4 id="mhash_get_hash_name">MHASH_GET_HASH_NAME</h4>
+
+<!-- mhash_keygen_s2k -->
+<h4 id="mhash_keygen_s2k">MHASH_KEYGEN_S2K</h4>
+
+
+<!-- OpenSSL -->
+<h4 id="openssl">OPENSSL</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- predefined_constants -->
+    <a href="#predefined_constants">PREDEFINED_CONSTANTS</a> |
+    <!-- key_certificate_parameters -->
+    <a href="#key_certificate_parameters">KEY/CERTIFICATE_PARAMETERS</a> |
+    <!-- certificate_verification -->
+    <a href="#certificate_verification">CERTIFICATE_VERIFICATION</a> |
+    <!-- openssl_cipher_iv_length -->
+    <a href="#openssl_cipher_iv_length">OPENSSL_CIPHER_IV_LENGTH</a> |
+    <!-- openssl_cipher_key_length -->
+    <a href="#openssl_cipher_key_length">OPENSSL_CIPHER_KEY_LENGTH</a> |
+    <!-- openssl_cms_decrypt -->
+    <a href="#openssl_cms_decrypt">OPENSSL_CMS_DECRYPT</a> |
+    <!-- openssl_cms_encrypt -->
+    <a href="#openssl_cms_encrypt">OPENSSL_CMS_ENCRYPT</a> |
+    <!-- openssl_cms_read -->
+    <a href="#openssl_cms_read">OPENSSL_CMS_READ</a> |
+    <!-- openssl_cms_sign -->
+    <a href="#openssl_cms_sign">OPENSSL_CMS_SIGN</a> |
+    <!-- openssl_cms_verify -->
+    <a href="#openssl_cms_verify">OPENSSL_CMS_VERIFY</a> |
+    <!-- openssl_csr_export -->
+    <a href="#openssl_csr_export">OPENSSL_CSR_EXPORT</a> |
+    <!-- openssl_csr_export_to_file -->
+    <a href="#openssl_csr_export_to_file">OPENSSL_CSR_EXPORT_TO_FILE</a> |
+    <!-- openssl_csr_get_public_key -->
+    <a href="#openssl_csr_get_public_key">OPENSSL_CSR_GET_PUBLIC_KEY</a> |
+    <!-- openssl_csr_get_subject -->
+    <a href="#openssl_csr_get_subject">OPENSSL_CSR_GET_SUBJECT</a> |
+    <!-- openssl_csr_new -->
+    <a href="#openssl_csr_new">OPENSSL_CSR_NEW</a> |
+    <!-- openssl_csr_sign -->
+    <a href="#openssl_csr_sign">OPENSSL_CSR_SIGN</a> |
+    <!-- openssl_decrypt -->
+    <a href="#openssl_decrypt">OPENSSL_DECRYPT</a> |
+    <!-- openssl_dh_compute_key -->
+    <a href="#openssl_dh_compute_key">OPENSSL_DH_COMPUTE_KEY</a> |
+    <!-- openssl_digest -->
+    <a href="#openssl_digest">OPENSSL_DIGEST</a> |
+    <!-- openssl_encrypt -->
+    <a href="#openssl_encrypt">OPENSSL_ENCRYPT</a> |
+    <!-- openssl_error_string -->
+    <a href="#openssl_error_string">OPENSSL_ERROR_STRING</a> |
+    <!-- openssl_free_key -->
+    <a href="#openssl_free_key">OPENSSL_FREE_KEY</a> |
+    <!-- openssl_get_cert_locations -->
+    <a href="#openssl_get_cert_locations">OPENSSL_GET_CERT_LOCATIONS</a> |
+    <!-- openssl_get_cipher_methods -->
+    <a href="#openssl_get_cipher_methods">OPENSSL_GET_CIPHER_METHODS</a> |
+    <!-- openssl_get_curve_names -->
+    <a href="#openssl_get_curve_names">OPENSSL_GET_CURVE_NAMES</a> |
+    <!-- openssl_get_md_methods -->
+    <a href="#openssl_get_md_methods">OPENSSL_GET_MD_METHODS</a> |
+    <!-- openssl_get_privatekey -->
+    <a href="#openssl_get_privatekey">OPENSSL_GET_PRIVATEKEY</a> |
+    <!-- openssl_get_publickey -->
+    <a href="#openssl_get_publickey">OPENSSL_GET_PUBLICKEY</a> |
+    <!-- openssl_open -->
+    <a href="#openssl_open">OPENSSL_OPEN</a> |
+    <!-- openssl_pbkdf2 -->
+    <a href="#openssl_pbkdf2">OPENSSL_PBKDF2</a> |
+    <!-- openssl_pkcs12_export -->
+    <a href="#openssl_pkcs12_export">OPENSSL_PKCS12_EXPORT</a> |
+    <!-- openssl_pkcs12_export_to_file -->
+    <a href="#openssl_pkcs12_export_to_file">OPENSSL_PKCS12_EXPORT_TO_FILE</a> |
+    <!-- openssl_pkcs12_read -->
+    <a href="#openssl_pkcs12_read">OPENSSL_PKCS12_READ</a> |
+    <!-- openssl_pkcs7_decrypt -->
+    <a href="#openssl_pkcs7_decrypt">OPENSSL_PKCS7_DECRYPT</a> |
+    <!-- openssl_pkcs7_encrypt -->
+    <a href="#openssl_pkcs7_encrypt">OPENSSL_PKCS7_ENCRYPT</a> |
+    <!-- openssl_pkcs7_read -->
+    <a href="#openssl_pkcs7_read">OPENSSL_PKCS7_READ</a> |
+    <!-- openssl_pkcs7_sign -->
+    <a href="#openssl_pkcs7_sign">OPENSSL_PKCS7_SIGN</a> |
+    <!-- openssl_pkcs7_verify -->
+    <a href="#openssl_pkcs7_verify">OPENSSL_PKCS7_VERIFY</a> |
+    <!-- openssl_pkey_derive -->
+    <a href="#openssl_pkey_derive">OPENSSL_PKEY_DERIVE</a> |
+    <!-- openssl_pkey_export -->
+    <a href="#openssl_pkey_export">OPENSSL_PKEY_EXPORT</a> |
+    <!-- openssl_pkey_export_to_file -->
+    <a href="#openssl_pkey_export_to_file">OPENSSL_PKEY_EXPORT_TO_FILE</a> |
+    <!-- openssl_pkey_free -->
+    <a href="#openssl_pkey_free">OPENSSL_PKEY_FREE</a> |
+    <!-- openssl_pkey_get_details -->
+    <a href="#openssl_pkey_get_details">OPENSSL_PKEY_GET_DETAILS</a> |
+    <!-- openssl_pkey_get_private -->
+    <a href="#openssl_pkey_get_private">OPENSSL_PKEY_GET_PRIVATE</a> |
+    <!-- openssl_pkey_get_public -->
+    <a href="#openssl_pkey_get_public">OPENSSL_PKEY_GET_PUBLIC</a> |
+    <!-- openssl_pkey_new -->
+    <a href="#openssl_pkey_new">OPENSSL_PKEY_NEW</a> |
+    <!-- openssl_private_decrypt -->
+    <a href="#openssl_private_decrypt">OPENSSL_PRIVATE_DECRYPT</a> |
+    <!-- openssl_private_encrypt -->
+    <a href="#openssl_private_encrypt">OPENSSL_PRIVATE_ENCRYPT</a> |
+    <!-- openssl_public_decrypt -->
+    <a href="#openssl_public_decrypt">OPENSSL_PUBLIC_DECRYPT</a> |
+    <!-- openssl_public_encrypt -->
+    <a href="#openssl_public_encrypt">OPENSSL_PUBLIC_ENCRYPT</a> |
+    <!-- openssl_random_pseudo_bytes -->
+    <a href="#openssl_random_pseudo_bytes">OPENSSL_RANDOM_PSEUDO_BYTES</a> |
+    <!-- openssl_seal -->
+    <a href="#openssl_seal">OPENSSL_SEAL</a> |
+    <!-- openssl_sign -->
+    <a href="#openssl_sign">OPENSSL_SIGN</a> |
+    <!-- openssl_spki_export -->
+    <a href="#openssl_spki_export">OPENSSL_SPKI_EXPORT</a> |
+    <!-- openssl_spki_export_challenge -->
+    <a href="#openssl_spki_export_challenge">OPENSSL_SPKI_EXPORT_CHALLENGE</a> |
+    <!-- openssl_spki_new -->
+    <a href="#openssl_spki_new">OPENSSL_SPKI_NEW</a> |
+    <!-- openssl_spki_verify -->
+    <a href="#openssl_spki_verify">OPENSSL_SPKI_VERIFY</a> |
+    <!-- openssl_verify -->
+    <a href="#openssl_verify">OPENSSL_VERIFY</a> |
+    <!-- openssl_x509_check_private_key -->
+    <a href="#openssl_x509_check_private_key">OPENSSL_X509_CHECK_PRIVATE_KEY</a> |
+    <!-- openssl_x509_checkpurpose -->
+    <a href="#openssl_x509_checkpurpose">OPENSSL_X509_CHECKPURPOSE</a> |
+    <!-- openssl_x509_export -->
+    <a href="#openssl_x509_export">OPENSSL_X509_EXPORT</a> |
+    <!-- openssl_x509_export_to_file -->
+    <a href="#openssl_x509_export_to_file">OPENSSL_X509_EXPORT_TO_FILE</a> |
+    <!-- openssl_x509_fingerprint -->
+    <a href="#openssl_x509_fingerprint">OPENSSL_X509_FINGERPRINT</a> |
+    <!-- openssl_x509_free -->
+    <a href="#openssl_x509_free">OPENSSL_X509_FREE</a> |
+    <!-- openssl_x509_parse -->
+    <a href="#openssl_x509_parse">OPENSSL_X509_PARSE</a> |
+    <!-- openssl_x509_read -->
+    <a href="#openssl_x509_read">OPENSSL_X509_READ</a> |
+    <!-- openssl_x509_verify -->
+    <a href="#openssl_x509_verify">OPENSSL_X509_VERIFY</a> |
+    <!-- openssl_certificate -->
+    <a href="#openssl_certificate">OPENSSLCERTIFICATE</a> |
+    <!-- openssl_csr -->
+    <a href="#openssl_csr">OPENSSLCERTIFICATESIGNINGREQUEST</a> |
+    <!-- openssl_asymmetric_key -->
+    <a href="#openssl_asymmetric_key">OPENSSLASYMMETRICKEY</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- Predefined Constants -->
+<h4 id="predefined_constants">PREDEFINED_CONSTANTS</h4>
+
+<!-- Key/Certificate Parameters -->
+<h4 id="key_certificate_parameters">KEY/CERTIFICATE_PARAMETERS</h4>
+
+<!-- Certificate Verification -->
+<h4 id="certificate_verification">CERTIFICATE_VERIFICATION</h4>
+
+<!-- OPENSSL_CIPHER_IV_LENGTH -->
+<h4 id="openssl_cipher_iv_length">OPENSSL_CIPHER_IV_LENGTH</h4>
+
+<!-- OPENSSL_CIPHER_KEY_LENGTH -->
+<h4 id="openssl_cipher_key_length">OPENSSL_CIPHER_KEY_LENGTH</h4>
+
+<!-- OPENSSL_CMS_DECRYPT -->
+<h4 id="openssl_cms_decrypt">OPENSSL_CMS_DECRYPT</h4>
+
+<!-- OPENSSL_CMS_ENCRYPT -->
+<h4 id="openssl_cms_encrypt">OPENSSL_CMS_ENCRYPT</h4>
+
+<!-- OPENSSL_CMS_READ -->
+<h4 id="openssl_cms_read">OPENSSL_CMS_READ</h4>
+
+<!-- OPENSSL_CMS_SIGN -->
+<h4 id="openssl_cms_sign">OPENSSL_CMS_SIGN</h4>
+
+<!-- OPENSSL_CMS_VERIFY -->
+<h4 id="openssl_cms_verify">OPENSSL_CMS_VERIFY</h4>
+
+<!-- OPENSSL_CSR_EXPORT -->
+<h4 id="openssl_csr_export">OPENSSL_CSR_EXPORT</h4>
+
+<!-- OPENSSL_CSR_EXPORT_TO_FILE -->
+<h4 id="openssl_csr_export_to_file">OPENSSL_CSR_EXPORT_TO_FILE</h4>
+
+<!-- OPENSSL_CSR_GET_PUBLIC_KEY -->
+<h4 id="openssl_csr_get_public_key">OPENSSL_CSR_GET_PUBLIC_KEY</h4>
+
+<!-- OPENSSL_CSR_GET_SUBJECT -->
+<h4 id="openssl_csr_get_subject">OPENSSL_CSR_GET_SUBJECT</h4>
+
+<!-- OPENSSL_CSR_NEW -->
+<h4 id="openssl_csr_new">OPENSSL_CSR_NEW</h4>
+
+<!-- OPENSSL_CSR_SIGN -->
+<h4 id="openssl_csr_sign">OPENSSL_CSR_SIGN</h4>
+
+<!-- OPENSSL_DECRYPT -->
+<h4 id="openssl_decrypt">OPENSSL_DECRYPT</h4>
+
+<!-- OPENSSL_DH_COMPUTE_KEY -->
+<h4 id="openssl_dh_compute_key">OPENSSL_DH_COMPUTE_KEY</h4>
+
+<!-- OPENSSL_DIGEST -->
+<h4 id="openssl_digest">OPENSSL_DIGEST</h4>
+
+<!-- OPENSSL_ENCRYPT -->
+<h4 id="openssl_encrypt">OPENSSL_ENCRYPT</h4>
+
+<!-- OPENSSL_ERROR_STRING -->
+<h4 id="openssl_error_string">OPENSSL_ERROR_STRING</h4>
+
+<!-- OPENSSL_FREE_KEY -->
+<h4 id="openssl_free_key">OPENSSL_FREE_KEY</h4>
+
+<!-- OPENSSL_GET_CERT_LOCATIONS -->
+<h4 id="openssl_get_cert_locations">OPENSSL_GET_CERT_LOCATIONS</h4>
+
+<!-- OPENSSL_GET_CIPHER_METHODS -->
+<h4 id="openssl_get_cipher_methods">OPENSSL_GET_CIPHER_METHODS</h4>
+
+<!-- OPENSSL_GET_CURVE_NAMES -->
+<h4 id="openssl_get_curve_names">OPENSSL_GET_CURVE_NAMES</h4>
+
+<!-- OPENSSL_GET_MD_METHODS -->
+<h4 id="openssl_get_md_methods">OPENSSL_GET_MD_METHODS</h4>
+
+<!-- OPENSSL_GET_PRIVATEKEY -->
+<h4 id="openssl_get_privatekey">OPENSSL_GET_PRIVATEKEY</h4>
+
+<!-- OPENSSL_GET_PUBLICKEY -->
+<h4 id="openssl_get_publickey">OPENSSL_GET_PUBLICKEY</h4>
+
+<!-- OPENSSL_OPEN -->
+<h4 id="openssl_open">OPENSSL_OPEN</h4>
+
+<!-- OPENSSL_PBKDF2 -->
+<h4 id="openssl_pbkdf2">OPENSSL_PBKDF2</h4>
+
+<!-- OPENSSL_PKCS12_EXPORT -->
+<h4 id="openssl_pkcs12_export">OPENSSL_PKCS12_EXPORT</h4>
+
+<!-- OPENSSL_PKCS12_EXPORT_TO_FILE -->
+<h4 id="openssl_pkcs12_export_to_file">OPENSSL_PKCS12_EXPORT_TO_FILE</h4>
+
+<!-- OPENSSL_PKCS12_READ -->
+<h4 id="openssl_pkcs12_read">OPENSSL_PKCS12_READ</h4>
+
+<!-- OPENSSL_PKCS7_DECRYPT -->
+<h4 id="openssl_pkcs7_decrypt">OPENSSL_PKCS7_DECRYPT</h4>
+
+<!-- OPENSSL_PKCS7_ENCRYPT -->
+<h4 id="openssl_pkcs7_encrypt">OPENSSL_PKCS7_ENCRYPT</h4>
+
+<!-- OPENSSL_PKCS7_READ -->
+<h4 id="openssl_pkcs7_read">OPENSSL_PKCS7_READ</h4>
+
+<!-- OPENSSL_PKCS7_SIGN -->
+<h4 id="openssl_pkcs7_sign">OPENSSL_PKCS7_SIGN</h4>
+
+<!-- OPENSSL_PKCS7_VERIFY -->
+<h4 id="openssl_pkcs7_verify">OPENSSL_PKCS7_VERIFY</h4>
+
+<!-- OPENSSL_PKEY_DERIVE -->
+<h4 id="openssl_pkey_derive">OPENSSL_PKEY_DERIVE</h4>
+
+<!-- OPENSSL_PKEY_EXPORT -->
+<h4 id="openssl_pkey_export">OPENSSL_PKEY_EXPORT</h4>
+
+<!-- OPENSSL_PKEY_EXPORT_TO_FILE -->
+<h4 id="openssl_pkey_export_to_file">OPENSSL_PKEY_EXPORT_TO_FILE</h4>
+
+<!-- OPENSSL_PKEY_FREE -->
+<h4 id="openssl_pkey_free">OPENSSL_PKEY_FREE</h4>
+
+<!-- OPENSSL_PKEY_GET_DETAILS -->
+<h4 id="openssl_pkey_get_details">OPENSSL_PKEY_GET_DETAILS</h4>
+
+<!-- OPENSSL_PKEY_GET_PRIVATE -->
+<h4 id="openssl_pkey_get_private">OPENSSL_PKEY_GET_PRIVATE</h4>
+
+<!-- OPENSSL_PKEY_GET_PUBLIC -->
+<h4 id="openssl_pkey_get_public">OPENSSL_PKEY_GET_PUBLIC</h4>
+
+<!-- OPENSSL_PKEY_NEW -->
+<h4 id="openssl_pkey_new">OPENSSL_PKEY_NEW</h4>
+
+<!-- OPENSSL_PRIVATE_DECRYPT -->
+<h4 id="openssl_private_decrypt">OPENSSL_PRIVATE_DECRYPT</h4>
+
+<!-- OPENSSL_PRIVATE_ENCRYPT -->
+<h4 id="openssl_private_encrypt">OPENSSL_PRIVATE_ENCRYPT</h4>
+
+<!-- OPENSSL_PUBLIC_DECRYPT -->
+<h4 id="openssl_public_decrypt">OPENSSL_PUBLIC_DECRYPT</h4>
+
+<!-- OPENSSL_PUBLIC_ENCRYPT -->
+<h4 id="openssl_public_encrypt">OPENSSL_PUBLIC_ENCRYPT</h4>
+
+<!-- OPENSSL_RANDOM_PSEUDO_BYTES -->
+<h4 id="openssl_random_pseudo_bytes">OPENSSL_RANDOM_PSEUDO_BYTES</h4>
+
+<!-- OPENSSL_SEAL -->
+<h4 id="openssl_seal">OPENSSL_SEAL</h4>
+
+<!-- OPENSSL_SIGN -->
+<h4 id="openssl_sign">OPENSSL_SIGN</h4>
+
+<!-- OPENSSL_SPKI_EXPORT -->
+<h4 id="openssl_spki_export">OPENSSL_SPKI_EXPORT</h4>
+
+<!-- OPENSSL_SPKI_EXPORT_CHALLENGE -->
+<h4 id="openssl_spki_export_challenge">OPENSSL_SPKI_EXPORT_CHALLENGE</h4>
+
+<!-- OPENSSL_SPKI_NEW -->
+<h4 id="openssl_spki_new">OPENSSL_SPKI_NEW</h4>
+
+<!-- OPENSSL_SPKI_VERIFY -->
+<h4 id="openssl_spki_verify">OPENSSL_SPKI_VERIFY</h4>
+
+<!-- OPENSSL_VERIFY -->
+<h4 id="openssl_verify">OPENSSL_VERIFY</h4>
+
+<!-- OPENSSL_X509_CHECK_PRIVATE_KEY -->
+<h4 id="openssl_x509_check_private_key">OPENSSL_X509_CHECK_PRIVATE_KEY</h4>
+
+<!-- OPENSSL_X509_CHECKPURPOSE -->
+<h4 id="openssl_x509_checkpurpose">OPENSSL_X509_CHECKPURPOSE</h4>
+
+<!-- OPENSSL_X509_EXPORT -->
+<h4 id="openssl_x509_export">OPENSSL_X509_EXPORT</h4>
+
+<!-- OPENSSL_X509_EXPORT_TO_FILE -->
+<h4 id="openssl_x509_export_to_file">OPENSSL_X509_EXPORT_TO_FILE</h4>
+
+<!-- OPENSSL_X509_FINGERPRINT -->
+<h4 id="openssl_x509_fingerprint">OPENSSL_X509_FINGERPRINT</h4>
+
+<!-- OPENSSL_X509_FREE -->
+<h4 id="openssl_x509_free">OPENSSL_X509_FREE</h4>
+
+<!-- OPENSSL_X509_PARSE -->
+<h4 id="openssl_x509_parse">OPENSSL_X509_PARSE</h4>
+
+<!-- OPENSSL_X509_READ -->
+<h4 id="openssl_x509_read">OPENSSL_X509_READ</h4>
+
+<!-- OPENSSL_X509_VERIFY -->
+<h4 id="openssl_x509_verify">OPENSSL_X509_VERIFY</h4>
+
+<!-- OPENSSL_CERTIFICATE -->
+<h4 id="openssl_certificate">OPENSSLCERTIFICATE</h4>
+
+<!-- OPENSSL_CERTIFICATESIGNINGREQUEST -->
+<h4 id="openssl_csr">OPENSSLCERTIFICATESIGNINGREQUEST</h4>
+
+<!-- OPENSSL_ASYMMETRICKEY -->
+<h4 id="openssl_asymmetric_key">OPENSSLASYMMETRICKEY</h4>
+
+
+<!-- Password Hash -->
+<h4 id="password_hash">PASSWORD_HASH</h4>
+
+<!-- Navigation -->
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- Installation/Configuration -->
+    <a href="#installation_configuration">INSTALLATION/CONFIGURATION</a> |
+    <!-- Dependencies -->
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <!-- Installation -->
+    <a href="#installation">INSTALLATION</a> |
+    <!-- password_algos -->
+    <a href="#password_algos">PASSWORD_ALGOS</a> |
+    <!-- password_get_info -->
+    <a href="#password_get_info">PASSWORD_GET_INFO</a> |
+    <!-- password_hash -->
+    <a href="#password_hash">PASSWORD_HASH</a> |
+    <!-- password_needs_rehash -->
+    <a href="#password_needs_rehash">PASSWORD_NEEDS_REHASH</a> |
+    <!-- password_verify -->
+    <a href="#password_verify">PASSWORD_VERIFY</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- Installation/Configuration -->
+<h4 id="installation_configuration">INSTALLATION/CONFIGURATION</h4>
+
+<!-- Dependencies -->
+<h4 id="dependencies">DEPENDENCIES</h4>
+
+<!-- Installation -->
+<h4 id="installation">INSTALLATION</h4>
+
+<!-- PASSWORD_ALGOS -->
+<h4 id="password_algos">PASSWORD_ALGOS</h4>
+
+<!-- PASSWORD_GET_INFO -->
+<h4 id="password_get_info">PASSWORD_GET_INFO</h4>
+
+<!-- PASSWORD_HASH -->
+<h4 id="password_hash">PASSWORD_HASH</h4>
+
+<!-- PASSWORD_NEEDS_REHASH -->
+<h4 id="password_needs_rehash">PASSWORD_NEEDS_REHASH</h4>
+
+<!-- PASSWORD_VERIFY -->
+<h4 id="password_verify">PASSWORD_VERIFY</h4>
+
+
+<!-- Rnp -->
+<h4 id="rnp">RNP</h4>
+
+<!-- Navigation -->
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- Installation/Configuration -->
+    <a href="#installation_configuration">INSTALLATION/CONFIGURATION</a> |
+    <!-- Texto Clearsign -->
+    <a href="#texto_clearsign">TEXTO_CLEARSIGN</a> |
+    <!-- rnp_backend_string -->
+    <a href="#rnp_backend_string">RNP_BACKEND_STRING</a> |
+    <!-- rnp_backend_version -->
+    <a href="#rnp_backend_version">RNP_BACKEND_VERSION</a> |
+    <!-- rnp_decrypt -->
+    <a href="#rnp_decrypt">RNP_DECRYPT</a> |
+    <!-- rnp_dump_packets -->
+    <a href="#rnp_dump_packets">RNP_DUMP_PACKETS</a> |
+    <!-- rnp_dump_packets_to_json -->
+    <a href="#rnp_dump_packets_to_json">RNP_DUMP_PACKETS_TO_JSON</a> |
+    <!-- rnp_ffi_create -->
+    <a href="#rnp_ffi_create">RNP_FFI_CREATE</a> |
+    <!-- rnp_ffi_destroy -->
+    <a href="#rnp_ffi_destroy">RNP_FFI_DESTROY</a> |
+    <!-- rnp_ffi_set_pass_provider -->
+    <a href="#rnp_ffi_set_pass_provider">RNP_FFI_SET_PASS_PROVIDER</a> |
+    <!-- rnp_import_keys -->
+    <a href="#rnp_import_keys">RNP_IMPORT_KEYS</a> |
+    <!-- rnp_import_signatures -->
+    <a href="#rnp_import_signatures">RNP_IMPORT_SIGNATURES</a> |
+    <!-- rnp_key_export -->
+    <a href="#rnp_key_export">RNP_KEY_EXPORT</a> |
+    <!-- rnp_key_export_autocrypt -->
+    <a href="#rnp_key_export_autocrypt">RNP_KEY_EXPORT_AUTOCRYPT</a> |
+    <!-- rnp_key_export_revocation -->
+    <a href="#rnp_key_export_revocation">RNP_KEY_EXPORT_REVOCATION</a> |
+    <!-- rnp_key_get_info -->
+    <a href="#rnp_key_get_info">RNP_KEY_GET_INFO</a> |
+    <!-- rnp_key_remove -->
+    <a href="#rnp_key_remove">RNP_KEY_REMOVE</a> |
+    <!-- rnp_key_revoke -->
+    <a href="#rnp_key_revoke">RNP_KEY_REVOKE</a> |
+    <!-- rnp_list_keys -->
+    <a href="#rnp_list_keys">RNP_LIST_KEYS</a> |
+    <!-- rnp_load_keys -->
+    <a href="#rnp_load_keys">RNP_LOAD_KEYS</a> |
+    <!-- rnp_load_keys_from_path -->
+    <a href="#rnp_load_keys_from_path">RNP_LOAD_KEYS_FROM_PATH</a> |
+    <!-- rnp_locate_key -->
+    <a href="#rnp_locate_key">RNP_LOCATE_KEY</a> |
+    <!-- rnp_op_encrypt -->
+    <a href="#rnp_op_encrypt">RNP_OP_ENCRYPT</a> |
+    <!-- rnp_op_generate_key -->
+    <a href="#rnp_op_generate_key">RNP_OP_GENERATE_KEY</a> |
+    <!-- rnp_op_sign -->
+    <a href="#rnp_op_sign">RNP_OP_SIGN</a> |
+    <!-- rnp_op_sign_cleartext -->
+    <a href="#rnp_op_sign_cleartext">RNP_OP_SIGN_CLEARTEXT</a> |
+    <!-- rnp_op_sign_detached -->
+    <a href="#rnp_op_sign_detached">RNP_OP_SIGN_DETACHED</a> |
+    <!-- rnp_op_verify -->
+    <a href="#rnp_op_verify">RNP_OP_VERIFY</a> |
+    <!-- rnp_op_verify_detached -->
+    <a href="#rnp_op_verify_detached">RNP_OP_VERIFY_DETACHED</a> |
+    <!-- rnp_save_keys -->
+    <a href="#rnp_save_keys">RNP_SAVE_KEYS</a> |
+    <!-- rnp_save_keys_to_path -->
+    <a href="#rnp_save_keys_to_path">RNP_SAVE_KEYS_TO_PATH</a> |
+    <!-- rnp_supported_features -->
+    <a href="#rnp_supported_features">RNP_SUPPORTED_FEATURES</a> |
+    <!-- rnp_version_string -->
+    <a href="#rnp_version_string">RNP_VERSION_STRING</a> |
+    <!-- rnp_version_string_full -->
+    <a href="#rnp_version_string_full">RNP_VERSION_STRING_FULL</a> |
+    <!-- RnpFFI -->
+    <a href="#rnpffi">RNPFFI</a>
+  </p> 
+</nav>
+
+<!-- Introduction -->
+<h4 id="introduction">INTRODUCTION</h4>
+
+<!-- Installation/Configuration -->
+<h4 id="installation_configuration">INSTALLATION/CONFIGURATION</h4>
+
+<!-- Texto Clearsign -->
+<h4 id="texto_clearsign">TEXTO_CLEARSIGN</h4>
+
+<!-- rnp_backend_string -->
+<h4 id="rnp_backend_string">RNP_BACKEND_STRING</h4>
+
+<!-- rnp_backend_version -->
+<h4 id="rnp_backend_version">RNP_BACKEND_VERSION</h4>
+
+<!-- rnp_decrypt -->
+<h4 id="rnp_decrypt">RNP_DECRYPT</h4>
+
+<!-- rnp_dump_packets -->
+<h4 id="rnp_dump_packets">RNP_DUMP_PACKETS</h4>
+
+<!-- rnp_dump_packets_to_json -->
+<h4 id="rnp_dump_packets_to_json">RNP_DUMP_PACKETS_TO_JSON</h4>
+
+<!-- rnp_ffi_create -->
+<h4 id="rnp_ffi_create">RNP_FFI_CREATE</h4>
+
+<!-- rnp_ffi_destroy -->
+<h4 id="rnp_ffi_destroy">RNP_FFI_DESTROY</h4>
+
+<!-- rnp_ffi_set_pass_provider -->
+<h4 id="rnp_ffi_set_pass_provider">RNP_FFI_SET_PASS_PROVIDER</h4>
+
+<!-- rnp_import_keys -->
+<h4 id="rnp_import_keys">RNP_IMPORT_KEYS</h4>
+
+<!-- rnp_import_signatures -->
+<h4 id="rnp_import_signatures">RNP_IMPORT_SIGNATURES</h4>
+
+<!-- rnp_key_export -->
+<h4 id="rnp_key_export">RNP_KEY_EXPORT</h4>
+
+<!-- rnp_key_export_autocrypt -->
+<h4 id="rnp_key_export_autocrypt">RNP_KEY_EXPORT_AUTOCRYPT</h4>
+
+<!-- rnp_key_export_revocation -->
+<h4 id="rnp_key_export_revocation">RNP_KEY_EXPORT_REVOCATION</h4>
+
+<!-- rnp_key_get_info -->
+<h4 id="rnp_key_get_info">RNP_KEY_GET_INFO</h4>
+
+<!-- rnp_key_remove -->
+<h4 id="rnp_key_remove">RNP_KEY_REMOVE</h4>
+
+<!-- rnp_key_revoke -->
+<h4 id="rnp_key_revoke">RNP_KEY_REVOKE</h4>
+
+<!-- rnp_list_keys -->
+<h4 id="rnp_list_keys">RNP_LIST_KEYS</h4>
+
+<!-- rnp_load_keys -->
+<h4 id="rnp_load_keys">RNP_LOAD_KEYS</h4>
+
+<!-- rnp_load_keys_from_path -->
+<h4 id="rnp_load_keys_from_path">RNP_LOAD_KEYS_FROM_PATH</h4>
+
+<!-- rnp_locate_key -->
+<h4 id="rnp_locate_key">RNP_LOCATE_KEY</h4>
+
+<!-- rnp_op_encrypt -->
+<h4 id="rnp_op_encrypt">RNP_OP_ENCRYPT</h4>
+
+<!-- rnp_op_generate_key -->
+<h4 id="rnp_op_generate_key">RNP_OP_GENERATE_KEY</h4>
+
+<!-- rnp_op_sign -->
+<h4 id="rnp_op_sign">RNP_OP_SIGN</h4>
+
+<!-- rnp_op_sign_cleartext -->
+<h4 id="rnp_op_sign_cleartext">RNP_OP_SIGN_CLEARTEXT</h4>
+
+<!-- rnp_op_sign_detached -->
+<h4 id="rnp_op_sign_detached">RNP_OP_SIGN_DETACHED</h4>
+
+<!-- rnp_op_verify -->
+<h4 id="rnp_op_verify">RNP_OP_VERIFY</h4>
+
+<!-- rnp_op_verify_detached -->
+<h4 id="rnp_op_verify_detached">RNP_OP_VERIFY_DETACHED</h4>
+
+<!-- rnp_save_keys -->
+<h4 id="rnp_save_keys">RNP_SAVE_KEYS</h4>
+
+<!-- rnp_save_keys_to_path -->
+<h4 id="rnp_save_keys_to_path">RNP_SAVE_KEYS_TO_PATH</h4>
+
+<!-- rnp_supported_features -->
+<h4 id="rnp_supported_features">RNP_SUPPORTED_FEATURES</h4>
+
+<!-- rnp_version_string -->
+<h4 id="rnp_version_string">RNP_VERSION_STRING</h4>
+
+<!-- rnp_version_string_full -->
+<h4 id="rnp_version_string_full">RNP_VERSION_STRING_FULL</h4>
+
+<!-- RnpFFI -->
+<h4 id="rnpffi">RNPFFI</h4>
+
+
+<!-- Sodium -->
+<h4 id="sodium">SODIUM</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- Installation -->
+    <a href="#installation">INSTALLATION</a> |
+    <!-- sodium_add -->
+    <a href="#sodium_add">SODIUM_ADD</a> |
+    <!-- sodium_base642bin -->
+    <a href="#sodium_base642bin">SODIUM_BASE642BIN</a> |
+    <!-- sodium_bin2base64 -->
+    <a href="#sodium_bin2base64">SODIUM_BIN2BASE64</a> |
+    <!-- sodium_bin2hex -->
+    <a href="#sodium_bin2hex">SODIUM_BIN2HEX</a> |
+    <!-- sodium_compare -->
+    <a href="#sodium_compare">SODIUM_COMPARE</a> |
+    <!-- sodium_crypto_aead_aegis128l_decrypt -->
+    <a href="#sodium_crypto_aead_aegis128l_decrypt">SODIUM_CRYPTO_AEAD_AEGIS128L_DECRYPT</a> |
+    <!-- sodium_crypto_aead_aegis128l_encrypt -->
+    <a href="#sodium_crypto_aead_aegis128l_encrypt">SODIUM_CRYPTO_AEAD_AEGIS128L_ENCRYPT</a> |
+    <!-- sodium_crypto_aead_aegis128l_keygen -->
+    <a href="#sodium_crypto_aead_aegis128l_keygen">SODIUM_CRYPTO_AEAD_AEGIS128L_KEYGEN</a> |
+    <!-- sodium_crypto_aead_aegis256_decrypt -->
+    <a href="#sodium_crypto_aead_aegis256_decrypt">SODIUM_CRYPTO_AEAD_AEGIS256_DECRYPT</a> |
+    <!-- sodium_crypto_aead_aegis256_encrypt -->
+    <a href="#sodium_crypto_aead_aegis256_encrypt">SODIUM_CRYPTO_AEAD_AEGIS256_ENCRYPT</a> |
+    <!-- sodium_crypto_aead_aegis256_keygen -->
+    <a href="#sodium_crypto_aead_aegis256_keygen">SODIUM_CRYPTO_AEAD_AEGIS256_KEYGEN</a> |
+    <!-- sodium_crypto_aead_aes256gcm_decrypt -->
+    <a href="#sodium_crypto_aead_aes256gcm_decrypt">SODIUM_CRYPTO_AEAD_AES256GCM_DECRYPT</a> |
+    <!-- sodium_crypto_aead_aes256gcm_encrypt -->
+    <a href="#sodium_crypto_aead_aes256gcm_encrypt">SODIUM_CRYPTO_AEAD_AES256GCM_ENCRYPT</a> |
+    <!-- sodium_crypto_aead_aes256gcm_is_available -->
+    <a href="#sodium_crypto_aead_aes256gcm_is_available">SODIUM_CRYPTO_AEAD_AES256GCM_IS_AVAILABLE</a> |
+    <!-- sodium_crypto_aead_aes256gcm_keygen -->
+    <a href="#sodium_crypto_aead_aes256gcm_keygen">SODIUM_CRYPTO_AEAD_AES256GCM_KEYGEN</a> |
+    <!-- sodium_crypto_aead_chacha20poly1305_decrypt -->
+    <a href="#sodium_crypto_aead_chacha20poly1305_decrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_DECRYPT</a> |
+    <!-- sodium_crypto_aead_chacha20poly1305_encrypt -->
+    <a href="#sodium_crypto_aead_chacha20poly1305_encrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_ENCRYPT</a> |
+    <!-- sodium_crypto_aead_chacha20poly1305_ietf_decrypt -->
+    <a href="#sodium_crypto_aead_chacha20poly1305_ietf_decrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_DECRYPT</a> |
+    <!-- sodium_crypto_aead_chacha20poly1305_ietf_encrypt -->
+    <a href="#sodium_crypto_aead_chacha20poly1305_ietf_encrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_ENCRYPT</a> |
+    <!-- sodium_crypto_aead_chacha20poly1305_ietf_keygen -->
+    <a href="#sodium_crypto_aead_chacha20poly1305_ietf_keygen">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_KEYGEN</a> |
+    <!-- sodium_crypto_aead_chacha20poly1305_keygen -->
+    <a href="#sodium_crypto_aead_chacha20poly1305_keygen">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_KEYGEN</a> |
+    <!-- sodium_crypto_aead_xchacha20poly1305_ietf_decrypt -->
+    <a href="#sodium_crypto_aead_xchacha20poly1305_ietf_decrypt">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_DECRYPT</a> |
+    <!-- sodium_crypto_aead_xchacha20poly1305_ietf_encrypt -->
+    <a href="#sodium_crypto_aead_xchacha20poly1305_ietf_encrypt">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_ENCRYPT</a> |
+    <!-- sodium_crypto_aead_xchacha20poly1305_ietf_keygen -->
+    <a href="#sodium_crypto_aead_xchacha20poly1305_ietf_keygen">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_KEYGEN</a> |
+    <!-- sodium_crypto_auth -->
+    <a href="#sodium_crypto_auth">SODIUM_CRYPTO_AUTH</a> |
+    <!-- sodium_crypto_auth_keygen -->
+    <a href="#sodium_crypto_auth_keygen">SODIUM_CRYPTO_AUTH_KEYGEN</a> |
+    <!-- sodium_crypto_auth_verify -->
+    <a href="#sodium_crypto_auth_verify">SODIUM_CRYPTO_AUTH_VERIFY</a> |
+    <!-- sodium_crypto_box -->
+    <a href="#sodium_crypto_box">SODIUM_CRYPTO_BOX</a> |
+    <!-- sodium_crypto_box_keypair -->
+    <a href="#sodium_crypto_box_keypair">SODIUM_CRYPTO_BOX_KEYPAIR</a> |
+    <!-- sodium_crypto_box_keypair_from_secretkey_and_publickey -->
+    <a href="#sodium_crypto_box_keypair_from_secretkey_and_publickey">SODIUM_CRYPTO_BOX_KEYPAIR_FROM_SECRETKEY_AND_PUBLICKEY</a> |
+    <!-- sodium_crypto_box_open -->
+    <a href="#sodium_crypto_box_open">SODIUM_CRYPTO_BOX_OPEN</a> |
+    <!-- sodium_crypto_box_publickey -->
+    <a href="#sodium_crypto_box_publickey">SODIUM_CRYPTO_BOX_PUBLICKEY</a> |
+    <!-- sodium_crypto_box_publickey_from_secretkey -->
+    <a href="#sodium_crypto_box_publickey_from_secretkey">SODIUM_CRYPTO_BOX_PUBLICKEY_FROM_SECRETKEY</a> |
+    <!-- sodium_crypto_box_seal -->
+    <a href="#sodium_crypto_box_seal">SODIUM_CRYPTO_BOX_SEAL</a> |
+    <!-- sodium_crypto_box_seal_open -->
+    <a href="#sodium_crypto_box_seal_open">SODIUM_CRYPTO_BOX_SEAL_OPEN</a> |
+    <!-- sodium_crypto_box_secretkey -->
+    <a href="#sodium_crypto_box_secretkey">SODIUM_CRYPTO_BOX_SECRETKEY</a> |
+    <!-- sodium_crypto_box_seed_keypair -->
+    <a href="#sodium_crypto_box_seed_keypair">SODIUM_CRYPTO_BOX_SEED_KEYPAIR</a> |
+    <!-- sodium_crypto_core_ristretto255_add -->
+    <a href="#sodium_crypto_core_ristretto255_add">SODIUM_CRYPTO_CORE_RISTRETTO255_ADD</a> |
+    <!-- sodium_crypto_core_ristretto255_from_hash -->
+    <a href="#sodium_crypto_core_ristretto255_from_hash">SODIUM_CRYPTO_CORE_RISTRETTO255_FROM_HASH</a> |
+    <!-- sodium_crypto_core_ristretto255_is_valid_point -->
+    <a href="#sodium_crypto_core_ristretto255_is_valid_point">SODIUM_CRYPTO_CORE_RISTRETTO255_IS_VALID_POINT</a> |
+    <!-- sodium_crypto_core_ristretto255_random -->
+    <a href="#sodium_crypto_core_ristretto255_random">SODIUM_CRYPTO_CORE_RISTRETTO255_RANDOM</a> |
+    <!-- sodium_crypto_core_ristretto255_scalar_add -->
+    <a href="#sodium_crypto_core_ristretto255_scalar_add">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_ADD</a> |
+    <!-- sodium_crypto_core_ristretto255_scalar_complement -->
+    <a href="#sodium_crypto_core_ristretto255_scalar_complement">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_COMPLEMENT</a> |
+    <!-- sodium_crypto_core_ristretto255_scalar_invert -->
+    <a href="#sodium_crypto_core_ristretto255_scalar_invert">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_INVERT</a> |
+    <!-- sodium_crypto_core_ristretto255_scalar_mul -->
+    <a href="#sodium_crypto_core_ristretto255_scalar_mul">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_MUL</a> |
+    <!-- sodium_crypto_core_ristretto255_scalar_negate -->
+    <a href="#sodium_crypto_core_ristretto255_scalar_negate">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_NEGATE</a> |
+    <!-- sodium_crypto_core_ristretto255_scalar_random -->
+    <a href="#sodium_crypto_core_ristretto255_scalar_random">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_RANDOM</a> |
+    <!-- sodium_crypto_core_ristretto255_scalar_reduce -->
+    <a href="#sodium_crypto_core_ristretto255_scalar_reduce">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_REDUCE</a> |
+    <!-- sodium_crypto_core_ristretto255_scalar_sub -->
+    <a href="#sodium_crypto_core_ristretto255_scalar_sub">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_SUB</a> |
+    <!-- sodium_crypto_core_ristretto255_sub -->
+    <a href="#sodium_crypto_core_ristretto255_sub">SODIUM_CRYPTO_CORE_RISTRETTO255_SUB</a> |
+    <!-- sodium_crypto_generichash -->
+    <a href="#sodium_crypto_generichash">SODIUM_CRYPTO_GENERICHASH</a> |
+    <!-- sodium_crypto_generichash_final -->
+    <a href="#sodium_crypto_generichash_final">SODIUM_CRYPTO_GENERICHASH_FINAL</a> |
+    <!-- sodium_crypto_generichash_init -->
+    <a href="#sodium_crypto_generichash_init">SODIUM_CRYPTO_GENERICHASH_INIT</a> |
+    <!-- sodium_crypto_generichash_keygen -->
+    <a href="#sodium_crypto_generichash_keygen">SODIUM_CRYPTO_GENERICHASH_KEYGEN</a> |
+    <!-- sodium_crypto_generichash_update -->
+    <a href="#sodium_crypto_generichash_update">SODIUM_CRYPTO_GENERICHASH_UPDATE</a> |
+    <!-- sodium_crypto_kdf_derive_from_key -->
+    <a href="#sodium_crypto_kdf_derive_from_key">SODIUM_CRYPTO_KDF_DERIVE_FROM_KEY</a> |
+    <!-- sodium_crypto_kdf_keygen -->
+    <a href="#sodium_crypto_kdf_keygen">SODIUM_CRYPTO_KDF_KEYGEN</a> |
+    <a href="#sodium_crypto_kx_client_session_keys">SODIUM_CRYPTO_KX_CLIENT_SESSION_KEYS</a> |
+    <a href="#sodium_crypto_kx_keypair">SODIUM_CRYPTO_KX_KEYPAIR</a> |
+    <a href="#sodium_crypto_kx_publickey">SODIUM_CRYPTO_KX_PUBLICKEY</a> |
+    <a href="#sodium_crypto_kx_secretkey">SODIUM_CRYPTO_KX_SECRETKEY</a> |
+    <a href="#sodium_crypto_kx_seed_keypair">SODIUM_CRYPTO_KX_SEED_KEYPAIR</a> |
+    <a href="#sodium_crypto_kx_server_session_keys">SODIUM_CRYPTO_KX_SERVER_SESSION_KEYS</a> |
+    <a href="#sodium_crypto_pwhash">SODIUM_CRYPTO_PWHASH</a> |
+    <a href="#sodium_crypto_pwhash_scryptsalsa208sha256">SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256</a> |
+    <a href="#sodium_crypto_pwhash_scryptsalsa208sha256_str">SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STR</a> |
+    <a href="#sodium_crypto_pwhash_scryptsalsa208sha256_str_verify">SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STR_VERIFY</a> |
+    <a href="#sodium_crypto_pwhash_str">SODIUM_CRYPTO_PWHASH_STR</a> |
+    <a href="#sodium_crypto_pwhash_str_needs_rehash">SODIUM_CRYPTO_PWHASH_STR_NEEDS_REHASH</a> |
+    <a href="#sodium_crypto_pwhash_str_verify">SODIUM_CRYPTO_PWHASH_STR_VERIFY</a> |
+    <a href="#sodium_crypto_scalarmult">SODIUM_CRYPTO_SCALARMULT</a> |
+    <a href="#sodium_crypto_scalarmult_base">SODIUM_CRYPTO_SCALARMULT_BASE</a> |
+    <a href="#sodium_crypto_scalarmult_ristretto255">SODIUM_CRYPTO_SCALARMULT_RISTRETTO255</a> |
+    <a href="#sodium_crypto_scalarmult_ristretto255_base">SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_BASE</a> |
+    <a href="#sodium_crypto_secretbox">SODIUM_CRYPTO_SECRETBOX</a> |
+    <a href="#sodium_crypto_secretbox_keygen">SODIUM_CRYPTO_SECRETBOX_KEYGEN</a> |
+    <a href="#sodium_crypto_secretbox_open">SODIUM_CRYPTO_SECRETBOX_OPEN</a> |
+    <a href="#sodium_crypto_secretstream_xchacha20poly1305_init_pull">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_INIT_PULL</a> |
+    <a href="#sodium_crypto_secretstream_xchacha20poly1305_init_push">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_INIT_PUSH</a> |
+    <a href="#sodium_crypto_secretstream_xchacha20poly1305_keygen">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_KEYGEN</a> |
+    <a href="#sodium_crypto_secretstream_xchacha20poly1305_pull">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_PULL</a> |
+    <a href="#sodium_crypto_secretstream_xchacha20poly1305_push">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_PUSH</a> |
+    <a href="#sodium_crypto_secretstream_xchacha20poly1305_rekey">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_REKEY</a> |
+    <a href="#sodium_crypto_shorthash">SODIUM_CRYPTO_SHORTHASH</a> |
+    <a href="#sodium_crypto_shorthash_keygen">SODIUM_CRYPTO_SHORTHASH_KEYGEN</a> |
+    <a href="#sodium_crypto_sign">SODIUM_CRYPTO_SIGN</a> |
+    <a href="#sodium_crypto_sign_detached">SODIUM_CRYPTO_SIGN_DETACHED</a> |
+    <a href="#sodium_crypto_sign_ed25519_pk_to_curve25519">SODIUM_CRYPTO_SIGN_ED25519_PK_TO_CURVE25519</a> |
+    <a href="#sodium_crypto_sign_ed25519_sk_to_curve25519">SODIUM_CRYPTO_SIGN_ED25519_SK_TO_CURVE25519</a> |
+    <a href="#sodium_crypto_sign_keypair">SODIUM_CRYPTO_SIGN_KEYPAIR</a> |
+    <a href="#sodium_crypto_sign_keypair_from_secretkey_and_publickey">SODIUM_CRYPTO_SIGN_KEYPAIR_FROM_SECRETKEY_AND_PUBLICKEY</a> |
+    <a href="#sodium_crypto_sign_open">SODIUM_CRYPTO_SIGN_OPEN</a> |
+    <a href="#sodium_crypto_sign_publickey">SODIUM_CRYPTO_SIGN_PUBLICKEY</a> |
+    <a href="#sodium_crypto_sign_publickey_from_secretkey">SODIUM_CRYPTO_SIGN_PUBLICKEY_FROM_SECRETKEY</a> |
+    <a href="#sodium_crypto_sign_secretkey">SODIUM_CRYPTO_SIGN_SECRETKEY</a> |
+    <a href="#sodium_crypto_sign_seed_keypair">SODIUM_CRYPTO_SIGN_SEED_KEYPAIR</a> |
+    <a href="#sodium_crypto_sign_verify_detached">SODIUM_CRYPTO_SIGN_VERIFY_DETACHED</a> |
+    <a href="#sodium_crypto_stream">SODIUM_CRYPTO_STREAM</a> |
+    <a href="#sodium_crypto_stream_keygen">SODIUM_CRYPTO_STREAM_KEYGEN</a> |
+    <a href="#sodium_crypto_stream_xchacha20">SODIUM_CRYPTO_STREAM_XCHACHA20</a> |
+    <a href="#sodium_crypto_stream_xchacha20_keygen">SODIUM_CRYPTO_STREAM_XCHACHA20_KEYGEN</a> |
+    <a href="#sodium_crypto_stream_xchacha20_xor">SODIUM_CRYPTO_STREAM_XCHACHA20_XOR</a> |
+    <a href="#sodium_crypto_stream_xchacha20_xor_ic">SODIUM_CRYPTO_STREAM_XCHACHA20_XOR_IC</a> |
+    <a href="#sodium_crypto_stream_xor">SODIUM_CRYPTO_STREAM_XOR</a> |
+    <a href="#sodium_hex2bin">SODIUM_HEX2BIN</a> |
+    <a href="#sodium_increment">SODIUM_INCREMENT</a> |
+    <a href="#sodium_memcmp">SODIUM_MEMCMP</a> |
+    <a href="#sodium_memzero">SODIUM_MEMZERO</a> |
+    <a href="#sodium_pad">SODIUM_PAD</a> |
+    <a href="#sodium_unpad">SODIUM_UNPAD</a> |
+    <a href="#sodiumexception">SODIUMEXCEPTION</a>
+  </p> 
+</nav>
+
+<h4 id="sodium_add">SODIUM_ADD</h4>
+<h4 id="sodium_base642bin">SODIUM_BASE642BIN</h4>
+<h4 id="sodium_bin2base64">SODIUM_BIN2BASE64</h4>
+<h4 id="sodium_bin2hex">SODIUM_BIN2HEX</h4>
+<h4 id="sodium_compare">SODIUM_COMPARE</h4>
+<h4 id="sodium_crypto_aead_aegis128l_decrypt">SODIUM_CRYPTO_AEAD_AEGIS128L_DECRYPT</h4>
+<h4 id="sodium_crypto_aead_aegis128l_encrypt">SODIUM_CRYPTO_AEAD_AEGIS128L_ENCRYPT</h4>
+<h4 id="sodium_crypto_aead_aegis128l_keygen">SODIUM_CRYPTO_AEAD_AEGIS128L_KEYGEN</h4>
+<h4 id="sodium_crypto_aead_aegis256_decrypt">SODIUM_CRYPTO_AEAD_AEGIS256_DECRYPT</h4>
+<h4 id="sodium_crypto_aead_aegis256_encrypt">SODIUM_CRYPTO_AEAD_AEGIS256_ENCRYPT</h4>
+<h4 id="sodium_crypto_aead_aegis256_keygen">SODIUM_CRYPTO_AEAD_AEGIS256_KEYGEN</h4>
+<h4 id="sodium_crypto_aead_aes256gcm_decrypt">SODIUM_CRYPTO_AEAD_AES256GCM_DECRYPT</h4>
+<h4 id="sodium_crypto_aead_aes256gcm_encrypt">SODIUM_CRYPTO_AEAD_AES256GCM_ENCRYPT</h4>
+<h4 id="sodium_crypto_aead_aes256gcm_is_available">SODIUM_CRYPTO_AEAD_AES256GCM_IS_AVAILABLE</h4>
+<h4 id="sodium_crypto_aead_aes256gcm_keygen">SODIUM_CRYPTO_AEAD_AES256GCM_KEYGEN</h4>
+<h4 id="sodium_crypto_aead_chacha20poly1305_decrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_DECRYPT</h4>
+<h4 id="sodium_crypto_aead_chacha20poly1305_encrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_ENCRYPT</h4>
+<h4 id="sodium_crypto_aead_chacha20poly1305_ietf_decrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_DECRYPT</h4>
+<h4 id="sodium_crypto_aead_chacha20poly1305_ietf_encrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_ENCRYPT</h4>
+<h4 id="sodium_crypto_aead_chacha20poly1305_ietf_keygen">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_KEYGEN</h4>
+<h4 id="sodium_crypto_aead_chacha20poly1305_keygen">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_KEYGEN</h4>
+<h4 id="sodium_crypto_aead_xchacha20poly1305_ietf_decrypt">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_DECRYPT</h4>
+<h4 id="sodium_crypto_aead_xchacha20poly1305_ietf_encrypt">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_ENCRYPT</h4>
+<h4 id="sodium_crypto_aead_xchacha20poly1305_ietf_keygen">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_KEYGEN</h4>
+<h4 id="sodium_crypto_auth">SODIUM_CRYPTO_AUTH</h4>
+<h4 id="sodium_crypto_auth_keygen">SODIUM_CRYPTO_AUTH_KEYGEN</h4>
+<h4 id="sodium_crypto_auth_verify">SODIUM_CRYPTO_AUTH_VERIFY</h4>
+<h4 id="sodium_crypto_box">SODIUM_CRYPTO_BOX</h4>
+<h4 id="sodium_crypto_box_keypair">SODIUM_CRYPTO_BOX_KEYPAIR</h4>
+<h4 id="sodium_crypto_box_keypair_from_secretkey_and_publickey">SODIUM_CRYPTO_BOX_KEYPAIR_FROM_SECRETKEY_AND_PUBLICKEY</h4>
+<h4 id="sodium_crypto_box_open">SODIUM_CRYPTO_BOX_OPEN</h4>
+<h4 id="sodium_crypto_box_publickey">SODIUM_CRYPTO_BOX_PUBLICKEY</h4>
+<h4 id="sodium_crypto_box_publickey_from_secretkey">SODIUM_CRYPTO_BOX_PUBLICKEY_FROM_SECRETKEY</h4>
+<h4 id="sodium_crypto_box_seal">SODIUM_CRYPTO_BOX_SEAL</h4>
+<h4 id="sodium_crypto_box_seal_open">SODIUM_CRYPTO_BOX_SEAL_OPEN</h4>
+<h4 id="sodium_crypto_box_secretkey">SODIUM_CRYPTO_BOX_SECRETKEY</h4>
+<h4 id="sodium_crypto_box_seed_keypair">SODIUM_CRYPTO_BOX_SEED_KEYPAIR</h4>
+<h4 id="sodium_crypto_core_ristretto255_add">SODIUM_CRYPTO_CORE_RISTRETTO255_ADD</h4>
+<h4 id="sodium_crypto_core_ristretto255_from_hash">SODIUM_CRYPTO_CORE_RISTRETTO255_FROM_HASH</h4>
+<h4 id="sodium_crypto_core_ristretto255_is_valid_point">SODIUM_CRYPTO_CORE_RISTRETTO255_IS_VALID_POINT</h4>
+<h4 id="sodium_crypto_core_ristretto255_random">SODIUM_CRYPTO_CORE_RISTRETTO255_RANDOM</h4>
+<h4 id="sodium_crypto_core_ristretto255_scalar_add">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_ADD</h4>
+<h4 id="sodium_crypto_core_ristretto255_scalar_complement">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_COMPLEMENT</h4>
+<h4 id="sodium_crypto_core_ristretto255_scalar_invert">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_INVERT</h4>
+<h4 id="sodium_crypto_core_ristretto255_scalar_mul">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_MUL</h4>
+<h4 id="sodium_crypto_core_ristretto255_scalar_negate">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_NEGATE</h4>
+<h4 id="sodium_crypto_core_ristretto255_scalar_random">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_RANDOM</h4>
+<h4 id="sodium_crypto_core_ristretto255_scalar_reduce">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_REDUCE</h4>
+<h4 id="sodium_crypto_core_ristretto255_scalar_sub">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_SUB</h4>
+<h4 id="sodium_crypto_core_ristretto255_sub">SODIUM_CRYPTO_CORE_RISTRETTO255_SUB</h4>
+<h4 id="sodium_crypto_generichash">SODIUM_CRYPTO_GENERICHASH</h4>
+<h4 id="sodium_crypto_generichash_final">SODIUM_CRYPTO_GENERICHASH_FINAL</h4>
+<h4 id="sodium_crypto_generichash_init">SODIUM_CRYPTO_GENERICHASH_INIT</h4>
+<h4 id="sodium_crypto_generichash_keygen">SODIUM_CRYPTO_GENERICHASH_KEYGEN</h4>
+<h4 id="sodium_crypto_generichash_update">SODIUM_CRYPTO_GENERICHASH_UPDATE</h4>
+<h4 id="sodium_crypto_kdf_derive_from_key">SODIUM_CRYPTO_KDF_DERIVE_FROM_KEY</h4>
+<h4 id="sodium_crypto_kdf_keygen">SODIUM_CRYPTO_KDF_KEYGEN</h4>
+<h4 id="sodium_crypto_kx_client_session_keys">SODIUM_CRYPTO_KX_CLIENT_SESSION_KEYS</h4>
+<h4 id="sodium_crypto_kx_keypair">SODIUM_CRYPTO_KX_KEYPAIR</h4>
+<h4 id="sodium_crypto_kx_publickey">SODIUM_CRYPTO_KX_PUBLICKEY</h4>
+<h4 id="sodium_crypto_kx_secretkey">SODIUM_CRYPTO_KX_SECRETKEY</h4>
+<h4 id="sodium_crypto_kx_seed_keypair">SODIUM_CRYPTO_KX_SEED_KEYPAIR</h4>
+<h4 id="sodium_crypto_kx_server_session_keys">SODIUM_CRYPTO_KX_SERVER_SESSION_KEYS</h4>
+<h4 id="sodium_crypto_pwhash">SODIUM_CRYPTO_PWHASH</h4>
+<h4 id="sodium_crypto_pwhash_scryptsalsa208sha256">SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256</h4>
+<h4 id="sodium_crypto_pwhash_scryptsalsa208sha256_str">SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STR</h4>
+<h4 id="sodium_crypto_pwhash_scryptsalsa208sha256_str_verify">SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STR_VERIFY</h4>
+<h4 id="sodium_crypto_pwhash_str">SODIUM_CRYPTO_PWHASH_STR</h4>
+<h4 id="sodium_crypto_pwhash_str_needs_rehash">SODIUM_CRYPTO_PWHASH_STR_NEEDS_REHASH</h4>
+<h4 id="sodium_crypto_pwhash_str_verify">SODIUM_CRYPTO_PWHASH_STR_VERIFY</h4>
+<h4 id="sodium_crypto_scalarmult">SODIUM_CRYPTO_SCALARMULT</h4>
+<h4 id="sodium_crypto_scalarmult_base">SODIUM_CRYPTO_SCALARMULT_BASE</h4>
+<h4 id="sodium_crypto_scalarmult_ristretto255">SODIUM_CRYPTO_SCALARMULT_RISTRETTO255</h4>
+<h4 id="sodium_crypto_scalarmult_ristretto255_base">SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_BASE</h4>
+<h4 id="sodium_crypto_secretbox">SODIUM_CRYPTO_SECRETBOX</h4>
+<h4 id="sodium_crypto_secretbox_keygen">SODIUM_CRYPTO_SECRETBOX_KEYGEN</h4>
+<h4 id="sodium_crypto_secretbox_open">SODIUM_CRYPTO_SECRETBOX_OPEN</h4>
+<h4 id="sodium_crypto_secretstream_xchacha20poly1305_init_pull">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_INIT_PULL</h4>
+<h4 id="sodium_crypto_secretstream_xchacha20poly1305_init_push">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_INIT_PUSH</h4>
+<h4 id="sodium_crypto_secretstream_xchacha20poly1305_keygen">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_KEYGEN</h4>
+<h4 id="sodium_crypto_secretstream_xchacha20poly1305_pull">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_PULL</h4>
+<h4 id="sodium_crypto_secretstream_xchacha20poly1305_push">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_PUSH</h4>
+<h4 id="sodium_crypto_secretstream_xchacha20poly1305_rekey">SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_REKEY</h4>
+<h4 id="sodium_crypto_shorthash">SODIUM_CRYPTO_SHORTHASH</h4>
+<h4 id="sodium_crypto_shorthash_keygen">SODIUM_CRYPTO_SHORTHASH_KEYGEN</h4>
+<h4 id="sodium_crypto_sign">SODIUM_CRYPTO_SIGN</h4>
+<h4 id="sodium_crypto_sign_detached">SODIUM_CRYPTO_SIGN_DETACHED</h4>
+<h4 id="sodium_crypto_sign_ed25519_pk_to_curve25519">SODIUM_CRYPTO_SIGN_ED25519_PK_TO_CURVE25519</h4>
+<h4 id="sodium_crypto_sign_ed25519_sk_to_curve25519">SODIUM_CRYPTO_SIGN_ED25519_SK_TO_CURVE25519</h4>
+<h4 id="sodium_crypto_sign_keypair">SODIUM_CRYPTO_SIGN_KEYPAIR</h4>
+<h4 id="sodium_crypto_sign_keypair_from_secretkey_and_publickey">SODIUM_CRYPTO_SIGN_KEYPAIR_FROM_SECRETKEY_AND_PUBLICKEY</h4>
+<h4 id="sodium_crypto_sign_open">SODIUM_CRYPTO_SIGN_OPEN</h4>
+<h4 id="sodium_crypto_sign_publickey">SODIUM_CRYPTO_SIGN_PUBLICKEY</h4>
+<h4 id="sodium_crypto_sign_publickey_from_secretkey">SODIUM_CRYPTO_SIGN_PUBLICKEY_FROM_SECRETKEY</h4>
+<h4 id="sodium_crypto_sign_secretkey">SODIUM_CRYPTO_SIGN_SECRETKEY</h4>
+<h4 id="sodium_crypto_sign_seed_keypair">SODIUM_CRYPTO_SIGN_SEED_KEYPAIR</h4>
+<h4 id="sodium_crypto_sign_verify_detached">SODIUM_CRYPTO_SIGN_VERIFY_DETACHED</h4>
+<h4 id="sodium_crypto_stream">SODIUM_CRYPTO_STREAM</h4>
+<h4 id="sodium_crypto_stream_keygen">SODIUM_CRYPTO_STREAM_KEYGEN</h4>
+<h4 id="sodium_crypto_stream_xchacha20">SODIUM_CRYPTO_STREAM_XCHACHA20</h4>
+<h4 id="sodium_crypto_stream_xchacha20_keygen">SODIUM_CRYPTO_STREAM_XCHACHA20_KEYGEN</h4>
+<h4 id="sodium_crypto_stream_xchacha20_xor">SODIUM_CRYPTO_STREAM_XCHACHA20_XOR</h4>
+<h4 id="sodium_crypto_stream_xchacha20_xor_ic">SODIUM_CRYPTO_STREAM_XCHACHA20_XOR_IC</h4>
+<h4 id="sodium_crypto_stream_xor">SODIUM_CRYPTO_STREAM_XOR</h4>
+<h4 id="sodium_hex2bin">SODIUM_HEX2BIN</h4>
+<h4 id="sodium_increment">SODIUM_INCREMENT</h4>
+<h4 id="sodium_memcmp">SODIUM_MEMCMP</h4>
+<h4 id="sodium_memzero">SODIUM_MEMZERO</h4>
+<h4 id="sodium_pad">SODIUM_PAD</h4>
+<h4 id="sodium_unpad">SODIUM_UNPAD</h4>
+<h4 id="sodiumexception">SODIUMEXCEPTION</h4>
+
+<!-- Xpass -->
+<h4 id="xpass">XPASS</h4>
+
+<h4 id="crypt">CRYPT</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- Installation -->
+    <a href="#installation">INSTALLATION</a> |
+    <!-- crypt_checksalt -->
+    <a href="#crypt_checksalt">CRYPT_CHECKSALT</a> |
+    <!-- crypt_gensalt -->
+    <a href="#crypt_gensalt">CRYPT_GENSALT</a> |
+    <!-- crypt_preferred_method -->
+    <a href="#crypt_preferred_method">CRYPT_PREFERRED_METHOD</a>
+  </p> 
+</nav>
+
+<!-- H4 Sections -->
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="crypt_checksalt">CRYPT_CHECKSALT</h4>
+<h4 id="crypt_gensalt">CRYPT_GENSALT</h4>
+<h4 id="crypt_preferred_method">CRYPT_PREFERRED_METHOD</h4>
+
+
 
 <h3 id="database-extensions">DATABASE EXTENSIONS</h3>
-.
+
+soon....
 
 <h3 id="date-and-time-related-extensions">DATE AND TIME RELATED EXTENSIONS</h3>
 .
