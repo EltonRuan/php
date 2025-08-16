@@ -4343,10 +4343,681 @@
 
 <h3 id="database-extensions">DATABASE EXTENSIONS</h3>
 
-soon....
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Abstraction Layers -->
+    <a href="#abstraction_layers">ABSTRACTION LAYERS</a> |
+    <!-- Third-Party Specific Database Extensions -->
+    <a href="#third_party_extensions">THIRD-PARTY SPECIFIC DATABASE EXTENSIONS</a>
+  </p> 
+</nav>
+
+<!-- H4 Sections -->
+<h4 id="abstraction_layers">ABSTRACTION LAYERS</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- DBA -->
+    <a href="#dba">DBA</a> |
+    <!-- ODBC -->
+    <a href="#odbc">ODBC</a> |
+    <!-- PDO -->
+    <a href="#pdo">PDO</a>
+  </p> 
+</nav>
+
+<!-- H4 Sections -->
+<h4 id="dba">DBA</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- Installation/Configuration -->
+    <a href="#installation-configuration">INSTALLATION/CONFIGURATION</a> |
+    <!-- Dependencies -->
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <!-- Installation -->
+    <a href="#installation">INSTALLATION</a> |
+    <!-- Runtime Configuration -->
+    <a href="#runtime-configuration">RUNTIME CONFIGURATION</a> |
+    <!-- Resource Types -->
+    <a href="#resource-types">RESOURCE TYPES</a> |
+    <!-- Dba\Connection -->
+    <a href="#dba-connection">DBA\CONNECTION</a> |
+    <!-- dba_close -->
+    <a href="#dba_close">DBA_CLOSE</a> |
+    <!-- dba_delete -->
+    <a href="#dba_delete">DBA_DELETE</a> |
+    <!-- dba_exists -->
+    <a href="#dba_exists">DBA_EXISTS</a> |
+    <!-- dba_fetch -->
+    <a href="#dba_fetch">DBA_FETCH</a> |
+    <!-- dba_firstkey -->
+    <a href="#dba_firstkey">DBA_FIRSTKEY</a> |
+    <!-- dba_handlers -->
+    <a href="#dba_handlers">DBA_HANDLERS</a> |
+    <!-- dba_insert -->
+    <a href="#dba_insert">DBA_INSERT</a> |
+    <!-- dba_key_split -->
+    <a href="#dba_key_split">DBA_KEY_SPLIT</a> |
+    <!-- dba_list -->
+    <a href="#dba_list">DBA_LIST</a> |
+    <!-- dba_nextkey -->
+    <a href="#dba_nextkey">DBA_NEXTKEY</a> |
+    <!-- dba_open -->
+    <a href="#dba_open">DBA_OPEN</a> |
+    <!-- dba_optimize -->
+    <a href="#dba_optimize">DBA_OPTIMIZE</a> |
+    <!-- dba_popen -->
+    <a href="#dba_popen">DBA_POPEN</a> |
+    <!-- dba_replace -->
+    <a href="#dba_replace">DBA_REPLACE</a> |
+    <!-- dba_sync -->
+    <a href="#dba_sync">DBA_SYNC</a>
+  </p> 
+</nav>
+
+<!-- H4 Sections -->
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
+<h4 id="resource-types">RESOURCE TYPES</h4>
+
+<h4 id="dba-connection">DBA\CONNECTION</h4>
+<h4 id="dba_close">DBA_CLOSE</h4>
+<h4 id="dba_delete">DBA_DELETE</h4>
+<h4 id="dba_exists">DBA_EXISTS</h4>
+<h4 id="dba_fetch">DBA_FETCH</h4>
+<h4 id="dba_firstkey">DBA_FIRSTKEY</h4>
+<h4 id="dba_handlers">DBA_HANDLERS</h4>
+<h4 id="dba_insert">DBA_INSERT</h4>
+<h4 id="dba_key_split">DBA_KEY_SPLIT</h4>
+<h4 id="dba_list">DBA_LIST</h4>
+<h4 id="dba_nextkey">DBA_NEXTKEY</h4>
+<h4 id="dba_open">DBA_OPEN</h4>
+<h4 id="dba_optimize">DBA_OPTIMIZE</h4>
+<h4 id="dba_popen">DBA_POPEN</h4>
+<h4 id="dba_replace">DBA_REPLACE</h4>
+<h4 id="dba_sync">DBA_SYNC</h4>
+
+
+<h4 id="odbc">ODBC</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introduction -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- Installation -->
+    <a href="#installation">INSTALLATION</a> |
+    <!-- Functions -->
+    <a href="#odbc_autocommit">ODBC_AUTOCOMMIT</a> |
+    <a href="#odbc_binmode">ODBC_BINMODE</a> |
+    <a href="#odbc_close">ODBC_CLOSE</a> |
+    <a href="#odbc_close_all">ODBC_CLOSE_ALL</a> |
+    <a href="#odbc_columnprivileges">ODBC_COLUMNPRIVILEGES</a> |
+    <a href="#odbc_columns">ODBC_COLUMNS</a> |
+    <a href="#odbc_commit">ODBC_COMMIT</a> |
+    <a href="#odbc_connect">ODBC_CONNECT</a> |
+    <a href="#odbc_connection_string_is_quoted">ODBC_CONNECTION_STRING_IS_QUOTED</a> |
+    <a href="#odbc_connection_string_quote">ODBC_CONNECTION_STRING_QUOTE</a> |
+    <a href="#odbc_connection_string_should_quote">ODBC_CONNECTION_STRING_SHOULD_QUOTE</a> |
+    <a href="#odbc_cursor">ODBC_CURSOR</a> |
+    <a href="#odbc_data_source">ODBC_DATA_SOURCE</a> |
+    <a href="#odbc_do">ODBC_DO</a> |
+    <a href="#odbc_error">ODBC_ERROR</a> |
+    <a href="#odbc_errormsg">ODBC_ERRORMSG</a> |
+    <a href="#odbc_exec">ODBC_EXEC</a> |
+    <a href="#odbc_execute">ODBC_EXECUTE</a> |
+    <a href="#odbc_fetch_array">ODBC_FETCH_ARRAY</a> |
+    <a href="#odbc_fetch_into">ODBC_FETCH_INTO</a> |
+    <a href="#odbc_fetch_object">ODBC_FETCH_OBJECT</a> |
+    <a href="#odbc_fetch_row">ODBC_FETCH_ROW</a> |
+    <a href="#odbc_field_len">ODBC_FIELD_LEN</a> |
+    <a href="#odbc_field_name">ODBC_FIELD_NAME</a> |
+    <a href="#odbc_field_num">ODBC_FIELD_NUM</a> |
+    <a href="#odbc_field_precision">ODBC_FIELD_PRECISION</a> |
+    <a href="#odbc_field_scale">ODBC_FIELD_SCALE</a> |
+    <a href="#odbc_field_type">ODBC_FIELD_TYPE</a> |
+    <a href="#odbc_foreignkeys">ODBC_FOREIGNKEYS</a> |
+    <a href="#odbc_free_result">ODBC_FREE_RESULT</a> |
+    <a href="#odbc_gettypeinfo">ODBC_GETTYPEINFO</a> |
+    <a href="#odbc_longreadlen">ODBC_LONGREADLEN</a> |
+    <a href="#odbc_next_result">ODBC_NEXT_RESULT</a> |
+    <a href="#odbc_num_fields">ODBC_NUM_FIELDS</a> |
+    <a href="#odbc_num_rows">ODBC_NUM_ROWS</a> |
+    <a href="#odbc_pconnect">ODBC_PCONNECT</a> |
+    <a href="#odbc_prepare">ODBC_PREPARE</a> |
+    <a href="#odbc_primarykeys">ODBC_PRIMARYKEYS</a> |
+    <a href="#odbc_procedurecolumns">ODBC_PROCEDURECOLUMNS</a> |
+    <a href="#odbc_procedures">ODBC_PROCEDURES</a> |
+    <a href="#odbc_result">ODBC_RESULT</a> |
+    <a href="#odbc_result_all">ODBC_RESULT_ALL</a> |
+    <a href="#odbc_rollback">ODBC_ROLLBACK</a> |
+    <a href="#odbc_setoption">ODBC_SETOPTION</a> |
+    <a href="#odbc_specialcolumns">ODBC_SPECIALCOLUMNS</a> |
+    <a href="#odbc_statistics">ODBC_STATISTICS</a> |
+    <a href="#odbc_tableprivileges">ODBC_TABLEPRIVILEGES</a> |
+    <a href="#odbc_tables">ODBC_TABLES</a>
+  </p> 
+</nav>
+
+<!-- H4 Sections -->
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="odbc_autocommit">ODBC_AUTOCOMMIT</h4>
+<h4 id="odbc_binmode">ODBC_BINMODE</h4>
+<h4 id="odbc_close">ODBC_CLOSE</h4>
+<h4 id="odbc_close_all">ODBC_CLOSE_ALL</h4>
+<h4 id="odbc_columnprivileges">ODBC_COLUMNPRIVILEGES</h4>
+<h4 id="odbc_columns">ODBC_COLUMNS</h4>
+<h4 id="odbc_commit">ODBC_COMMIT</h4>
+<h4 id="odbc_connect">ODBC_CONNECT</h4>
+<h4 id="odbc_connection_string_is_quoted">ODBC_CONNECTION_STRING_IS_QUOTED</h4>
+<h4 id="odbc_connection_string_quote">ODBC_CONNECTION_STRING_QUOTE</h4>
+<h4 id="odbc_connection_string_should_quote">ODBC_CONNECTION_STRING_SHOULD_QUOTE</h4>
+<h4 id="odbc_cursor">ODBC_CURSOR</h4>
+<h4 id="odbc_data_source">ODBC_DATA_SOURCE</h4>
+<h4 id="odbc_do">ODBC_DO</h4>
+<h4 id="odbc_error">ODBC_ERROR</h4>
+<h4 id="odbc_errormsg">ODBC_ERRORMSG</h4>
+<h4 id="odbc_exec">ODBC_EXEC</h4>
+<h4 id="odbc_execute">ODBC_EXECUTE</h4>
+<h4 id="odbc_fetch_array">ODBC_FETCH_ARRAY</h4>
+<h4 id="odbc_fetch_into">ODBC_FETCH_INTO</h4>
+<h4 id="odbc_fetch_object">ODBC_FETCH_OBJECT</h4>
+<h4 id="odbc_fetch_row">ODBC_FETCH_ROW</h4>
+<h4 id="odbc_field_len">ODBC_FIELD_LEN</h4>
+<h4 id="odbc_field_name">ODBC_FIELD_NAME</h4>
+<h4 id="odbc_field_num">ODBC_FIELD_NUM</h4>
+<h4 id="odbc_field_precision">ODBC_FIELD_PRECISION</h4>
+<h4 id="odbc_field_scale">ODBC_FIELD_SCALE</h4>
+<h4 id="odbc_field_type">ODBC_FIELD_TYPE</h4>
+<h4 id="odbc_foreignkeys">ODBC_FOREIGNKEYS</h4>
+<h4 id="odbc_free_result">ODBC_FREE_RESULT</h4>
+<h4 id="odbc_gettypeinfo">ODBC_GETTYPEINFO</h4>
+<h4 id="odbc_longreadlen">ODBC_LONGREADLEN</h4>
+<h4 id="odbc_next_result">ODBC_NEXT_RESULT</h4>
+<h4 id="odbc_num_fields">ODBC_NUM_FIELDS</h4>
+<h4 id="odbc_num_rows">ODBC_NUM_ROWS</h4>
+<h4 id="odbc_pconnect">ODBC_PCONNECT</h4>
+<h4 id="odbc_prepare">ODBC_PREPARE</h4>
+<h4 id="odbc_primarykeys">ODBC_PRIMARYKEYS</h4>
+<h4 id="odbc_procedurecolumns">ODBC_PROCEDURECOLUMNS</h4>
+<h4 id="odbc_procedures">ODBC_PROCEDURES</h4>
+<h4 id="odbc_result">ODBC_RESULT</h4>
+<h4 id="odbc_result_all">ODBC_RESULT_ALL</h4>
+<h4 id="odbc_rollback">ODBC_ROLLBACK</h4>
+<h4 id="odbc_setoption">ODBC_SETOPTION</h4>
+<h4 id="odbc_specialcolumns">ODBC_SPECIALCOLUMNS</h4>
+<h4 id="odbc_statistics">ODBC_STATISTICS</h4>
+<h4 id="odbc_tableprivileges">ODBC_TABLEPRIVILEGES</h4>
+<h4 id="odbc_tables">ODBC_TABLES</h4>
+
+
+<h4 id="pdo">PDO</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- Introdução -->
+    <a href="#introduction">INTRODUCTION</a> |
+    <!-- Instalação -->
+    <a href="#installation">INSTALLATION</a> |
+    <!-- Conexões -->
+    <a href="#connections">CONNECTIONS & MANAGEMENT</a> |
+    <!-- Transações -->
+    <a href="#transactions">TRANSACTIONS & AUTO-COMMIT</a> |
+    <!-- PDO -->
+    <a href="#pdo">PDO</a> |
+    <a href="#pdo_beginTransaction">PDO::BEGINTRANSACTION</a> |
+    <a href="#pdo_commit">PDO::COMMIT</a> |
+    <a href="#pdo_connect">PDO::CONNECT</a> |
+    <a href="#pdo_construct">PDO::__CONSTRUCT</a> |
+    <a href="#pdo_errorCode">PDO::ERRORCODE</a> |
+    <a href="#pdo_errorInfo">PDO::ERRORINFO</a> |
+    <a href="#pdo_exec">PDO::EXEC</a> |
+    <a href="#pdo_getAttribute">PDO::GETATTRIBUTE</a> |
+    <a href="#pdo_getAvailableDrivers">PDO::GETAVAILABLEDRIVERS</a> |
+    <a href="#pdo_inTransaction">PDO::INTRANSACTION</a> |
+    <a href="#pdo_lastInsertId">PDO::LASTINSERTID</a> |
+    <a href="#pdo_prepare">PDO::PREPARE</a> |
+    <a href="#pdo_query">PDO::QUERY</a> |
+    <a href="#pdo_quote">PDO::QUOTE</a> |
+    <a href="#pdo_rollBack">PDO::ROLLBACK</a> |
+    <a href="#pdo_setAttribute">PDO::SETATTRIBUTE</a> |
+    <a href="#pdostatement">PDOSTATEMENT</a> |
+    <a href="#pdostatement_bindColumn">PDOSTATEMENT::BINDCOLUMN</a> |
+    <a href="#pdostatement_bindParam">PDOSTATEMENT::BINDPARAM</a> |
+    <a href="#pdostatement_bindValue">PDOSTATEMENT::BINDVALUE</a> |
+    <a href="#pdostatement_closeCursor">PDOSTATEMENT::CLOSECURSOR</a> |
+    <a href="#pdostatement_columnCount">PDOSTATEMENT::COLUMNCOUNT</a> |
+    <a href="#pdostatement_debugDumpParams">PDOSTATEMENT::DEBUGDUMPPARAMS</a> |
+    <a href="#pdostatement_errorCode">PDOSTATEMENT::ERRORCODE</a> |
+    <a href="#pdostatement_errorInfo">PDOSTATEMENT::ERRORINFO</a> |
+    <a href="#pdostatement_execute">PDOSTATEMENT::EXECUTE</a> |
+    <a href="#pdostatement_fetch">PDOSTATEMENT::FETCH</a> |
+    <a href="#pdostatement_fetchAll">PDOSTATEMENT::FETCHALL</a> |
+    <a href="#pdostatement_fetchColumn">PDOSTATEMENT::FETCHCOLUMN</a> |
+    <a href="#pdostatement_fetchObject">PDOSTATEMENT::FETCHOBJECT</a> |
+    <a href="#pdostatement_getAttribute">PDOSTATEMENT::GETATTRIBUTE</a> |
+    <a href="#pdostatement_getColumnMeta">PDOSTATEMENT::GETCOLUMNMETA</a> |
+    <a href="#pdostatement_getIterator">PDOSTATEMENT::GETITERATOR</a> |
+    <a href="#pdostatement_nextRowset">PDOSTATEMENT::NEXTROWSET</a> |
+    <a href="#pdostatement_rowCount">PDOSTATEMENT::ROWCOUNT</a> |
+    <a href="#pdostatement_setAttribute">PDOSTATEMENT::SETATTRIBUTE</a> |
+    <a href="#pdostatement_setFetchMode">PDOSTATEMENT::SETFETCHMODE</a> |
+    <a href="#pdorow">PDOROW</a> |
+    <a href="#pdoexception">PDOEXCEPTION</a> |
+    <!-- Drivers -->
+    <a href="#pdo_drivers">PDO DRIVERS</a> |
+    <a href="#pdo_cubrid">PDO DRIVER CUBRID</a> |
+    <a href="#pdo_dblib">PDO DRIVER DBLIB</a> |
+    <a href="#pdo_firebird">PDO DRIVER FIREBIRD</a> |
+    <a href="#pdo_ibm">PDO DRIVER IBM</a> |
+    <a href="#pdo_informix">PDO DRIVER INFORMIX</a> |
+    <a href="#pdo_mysql">PDO DRIVER MYSQL</a> |
+    <a href="#pdo_mssql">PDO DRIVER MSSQL</a> |
+    <a href="#pdo_oracle">PDO DRIVER ORACLE</a> |
+    <a href="#pdo_odbc">PDO DRIVER ODBC/DB2</a> |
+    <a href="#pdo_pgsql">PDO DRIVER POSTGRESQL</a> |
+    <a href="#pdo_sqlite">PDO DRIVER SQLITE</a> |
+    <a href="#pdo_sqlite_createAggregate">PDO\SQLITE::CREATEAGGREGATE</a> |
+    <a href="#pdo_sqlite_createCollation">PDO\SQLITE::CREATECOLLATION</a> |
+    <a href="#pdo_sqlite_createFunction">PDO\SQLITE::CREATEFUNCTION</a> |
+    <a href="#pdo_sqlite_loadExtension">PDO\SQLITE::LOADEXTENSION</a> |
+    <a href="#pdo_sqlite_openBlob">PDO\SQLITE::OPENBLOB</a>
+  </p> 
+</nav>
+
+<!-- H4 Sections -->
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="connections">CONNECTIONS & MANAGEMENT</h4>
+<h4 id="transactions">TRANSACTIONS & AUTO-COMMIT</h4>
+<h4 id="pdo">PDO</h4>
+<h4 id="pdo_beginTransaction">PDO::BEGINTRANSACTION</h4>
+<h4 id="pdo_commit">PDO::COMMIT</h4>
+<h4 id="pdo_connect">PDO::CONNECT</h4>
+<h4 id="pdo_construct">PDO::__CONSTRUCT</h4>
+<h4 id="pdo_errorCode">PDO::ERRORCODE</h4>
+<h4 id="pdo_errorInfo">PDO::ERRORINFO</h4>
+<h4 id="pdo_exec">PDO::EXEC</h4>
+<h4 id="pdo_getAttribute">PDO::GETATTRIBUTE</h4>
+<h4 id="pdo_getAvailableDrivers">PDO::GETAVAILABLEDRIVERS</h4>
+<h4 id="pdo_inTransaction">PDO::INTRANSACTION</h4>
+<h4 id="pdo_lastInsertId">PDO::LASTINSERTID</h4>
+<h4 id="pdo_prepare">PDO::PREPARE</h4>
+<h4 id="pdo_query">PDO::QUERY</h4>
+<h4 id="pdo_quote">PDO::QUOTE</h4>
+<h4 id="pdo_rollBack">PDO::ROLLBACK</h4>
+<h4 id="pdo_setAttribute">PDO::SETATTRIBUTE</h4>
+<h4 id="pdostatement">PDOSTATEMENT</h4>
+<h4 id="pdostatement_bindColumn">PDOSTATEMENT::BINDCOLUMN</h4>
+<h4 id="pdostatement_bindParam">PDOSTATEMENT::BINDPARAM</h4>
+<h4 id="pdostatement_bindValue">PDOSTATEMENT::BINDVALUE</h4>
+<h4 id="pdostatement_closeCursor">PDOSTATEMENT::CLOSECURSOR</h4>
+<h4 id="pdostatement_columnCount">PDOSTATEMENT::COLUMNCOUNT</h4>
+<h4 id="pdostatement_debugDumpParams">PDOSTATEMENT::DEBUGDUMPPARAMS</h4>
+<h4 id="pdostatement_errorCode">PDOSTATEMENT::ERRORCODE</h4>
+<h4 id="pdostatement_errorInfo">PDOSTATEMENT::ERRORINFO</h4>
+<h4 id="pdostatement_execute">PDOSTATEMENT::EXECUTE</h4>
+<h4 id="pdostatement_fetch">PDOSTATEMENT::FETCH</h4>
+<h4 id="pdostatement_fetchAll">PDOSTATEMENT::FETCHALL</h4>
+<h4 id="pdostatement_fetchColumn">PDOSTATEMENT::FETCHCOLUMN</h4>
+<h4 id="pdostatement_fetchObject">PDOSTATEMENT::FETCHOBJECT</h4>
+<h4 id="pdostatement_getAttribute">PDOSTATEMENT::GETATTRIBUTE</h4>
+<h4 id="pdostatement_getColumnMeta">PDOSTATEMENT::GETCOLUMNMETA</h4>
+<h4 id="pdostatement_getIterator">PDOSTATEMENT::GETITERATOR</h4>
+<h4 id="pdostatement_nextRowset">PDOSTATEMENT::NEXTROWSET</h4>
+<h4 id="pdostatement_rowCount">PDOSTATEMENT::ROWCOUNT</h4>
+<h4 id="pdostatement_setAttribute">PDOSTATEMENT::SETATTRIBUTE</h4>
+<h4 id="pdostatement_setFetchMode">PDOSTATEMENT::SETFETCHMODE</h4>
+<h4 id="pdorow">PDOROW</h4>
+<h4 id="pdoexception">PDOEXCEPTION</h4>
+<h4 id="pdo_drivers">PDO DRIVERS</h4>
+<h4 id="pdo_cubrid">PDO DRIVER CUBRID</h4>
+<h4 id="pdo_dblib">PDO DRIVER DBLIB</h4>
+<h4 id="pdo_firebird">PDO DRIVER FIREBIRD</h4>
+<h4 id="pdo_ibm">PDO DRIVER IBM</h4>
+<h4 id="pdo_informix">PDO DRIVER INFORMIX</h4>
+<h4 id="pdo_mysql">PDO DRIVER MYSQL</h4>
+<h4 id="pdo_mssql">PDO DRIVER MSSQL</h4>
+<h4 id="pdo_oracle">PDO DRIVER ORACLE</h4>
+<h4 id="pdo_odbc">PDO DRIVER ODBC/DB2</h4>
+<h4 id="pdo_pgsql">PDO DRIVER POSTGRESQL</h4>
+<h4 id="pdo_sqlite">PDO DRIVER SQLITE</h4>
+<h4 id="pdo_sqlite_createAggregate">PDO\SQLITE::CREATEAGGREGATE</h4>
+<h4 id="pdo_sqlite_createCollation">PDO\SQLITE::CREATECOLLATION</h4>
+<h4 id="pdo_sqlite_createFunction">PDO\SQLITE::CREATEFUNCTION</h4>
+<h4 id="pdo_sqlite_loadExtension">PDO\SQLITE::LOADEXTENSION</h4>
+<h4 id="pdo_sqlite_openBlob">PDO\SQLITE::OPENBLOB</h4>
+
+
+<h4 id="third_party_extensions">THIRD-PARTY SPECIFIC DATABASE EXTENSIONS</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <!-- CUBRID -->
+    <a href="#cubrid">CUBRID</a> |
+    <!-- dBase -->
+    <a href="#dbase">DBASE</a> |
+    <!-- Firebird/InterBase -->
+    <a href="#firebird">FIREBIRD/INTERBASE</a> |
+    <!-- IBM DB2 -->
+    <a href="#ibmdb2">IBM DB2</a> |
+    <!-- MongoDB -->
+    <a href="#mongodb">MONGODB</a> |
+    <!-- MySQL -->
+    <a href="#mysql">MYSQL</a> |
+    <!-- OCI8 -->
+    <a href="#oci8">OCI8</a> |
+    <!-- PostgreSQL -->
+    <a href="#postgresql">POSTGRESQL</a> |
+    <!-- SQLite3 -->
+    <a href="#sqlite3">SQLITE3</a> |
+    <!-- SQLSRV -->
+    <a href="#sqlsrv">SQLSRV</a>
+  </p> 
+</nav>
+
+<!-- H4 Sections -->
+<h4 id="cubrid">CUBRID</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a>
+    <a href="#dependencies">DEPENDENCIES</a>
+    <a href="#installation">INSTALLATION</a>
+    <a href="#resource-types">RESOURCE TYPES</a>
+    <a href="#cubrid_bind">CUBRID_BIND</a>
+    <a href="#cubrid_close_prepare">CUBRID_CLOSE_PREPARE</a>
+    <a href="#cubrid_close_request">CUBRID_CLOSE_REQUEST</a>
+    <a href="#cubrid_col_get">CUBRID_COL_GET</a>
+    <a href="#cubrid_col_size">CUBRID_COL_SIZE</a>
+    <a href="#cubrid_column_names">CUBRID_COLUMN_NAMES</a>
+    <a href="#cubrid_column_types">CUBRID_COLUMN_TYPES</a>
+    <a href="#cubrid_commit">CUBRID_COMMIT</a>
+    <a href="#cubrid_connect">CUBRID_CONNECT</a>
+    <a href="#cubrid_connect_with_url">CUBRID_CONNECT_WITH_URL</a>
+    <a href="#cubrid_current_oid">CUBRID_CURRENT_OID</a>
+    <a href="#cubrid_disconnect">CUBRID_DISCONNECT</a>
+    <a href="#cubrid_drop">CUBRID_DROP</a>
+    <a href="#cubrid_error_code">CUBRID_ERROR_CODE</a>
+    <a href="#cubrid_error_code_facility">CUBRID_ERROR_CODE_FACILITY</a>
+    <a href="#cubrid_error_msg">CUBRID_ERROR_MSG</a>
+    <a href="#cubrid_execute">CUBRID_EXECUTE</a>
+    <a href="#cubrid_fetch">CUBRID_FETCH</a>
+    <a href="#cubrid_free_result">CUBRID_FREE_RESULT</a>
+    <a href="#cubrid_get">CUBRID_GET</a>
+    <a href="#cubrid_get_autocommit">CUBRID_GET_AUTOCOMMIT</a>
+    <a href="#cubrid_get_charset">CUBRID_GET_CHARSET</a>
+    <a href="#cubrid_get_class_name">CUBRID_GET_CLASS_NAME</a>
+    <a href="#cubrid_get_client_info">CUBRID_GET_CLIENT_INFO</a>
+    <a href="#cubrid_get_db_parameter">CUBRID_GET_DB_PARAMETER</a>
+    <a href="#cubrid_get_query_timeout">CUBRID_GET_QUERY_TIMEOUT</a>
+    <a href="#cubrid_get_server_info">CUBRID_GET_SERVER_INFO</a>
+    <a href="#cubrid_insert_id">CUBRID_INSERT_ID</a>
+    <a href="#cubrid_is_instance">CUBRID_IS_INSTANCE</a>
+    <a href="#cubrid_lob_close">CUBRID_LOB_CLOSE</a>
+    <a href="#cubrid_lob_export">CUBRID_LOB_EXPORT</a>
+    <a href="#cubrid_lob_get">CUBRID_LOB_GET</a>
+    <a href="#cubrid_lob_send">CUBRID_LOB_SEND</a>
+    <a href="#cubrid_lob_size">CUBRID_LOB_SIZE</a>
+    <a href="#cubrid_lob2_bind">CUBRID_LOB2_BIND</a>
+    <a href="#cubrid_lob2_close">CUBRID_LOB2_CLOSE</a>
+    <a href="#cubrid_lob2_export">CUBRID_LOB2_EXPORT</a>
+    <a href="#cubrid_lob2_import">CUBRID_LOB2_IMPORT</a>
+    <a href="#cubrid_lob2_new">CUBRID_LOB2_NEW</a>
+    <a href="#cubrid_lob2_read">CUBRID_LOB2_READ</a>
+    <a href="#cubrid_lob2_seek">CUBRID_LOB2_SEEK</a>
+    <a href="#cubrid_lob2_seek64">CUBRID_LOB2_SEEK64</a>
+    <a href="#cubrid_lob2_size">CUBRID_LOB2_SIZE</a>
+    <a href="#cubrid_lob2_size64">CUBRID_LOB2_SIZE64</a>
+    <a href="#cubrid_lob2_tell">CUBRID_LOB2_TELL</a>
+    <a href="#cubrid_lob2_tell64">CUBRID_LOB2_TELL64</a>
+    <a href="#cubrid_lob2_write">CUBRID_LOB2_WRITE</a>
+    <a href="#cubrid_lock_read">CUBRID_LOCK_READ</a>
+    <a href="#cubrid_lock_write">CUBRID_LOCK_WRITE</a>
+    <a href="#cubrid_move_cursor">CUBRID_MOVE_CURSOR</a>
+    <a href="#cubrid_next_result">CUBRID_NEXT_RESULT</a>
+    <a href="#cubrid_num_cols">CUBRID_NUM_COLS</a>
+    <a href="#cubrid_num_rows">CUBRID_NUM_ROWS</a>
+    <a href="#cubrid_pconnect">CUBRID_PCONNECT</a>
+    <a href="#cubrid_pconnect_with_url">CUBRID_PCONNECT_WITH_URL</a>
+    <a href="#cubrid_prepare">CUBRID_PREPARE</a>
+    <a href="#cubrid_put">CUBRID_PUT</a>
+    <a href="#cubrid_rollback">CUBRID_ROLLBACK</a>
+    <a href="#cubrid_schema">CUBRID_SCHEMA</a>
+    <a href="#cubrid_seq_drop">CUBRID_SEQ_DROP</a>
+    <a href="#cubrid_seq_insert">CUBRID_SEQ_INSERT</a>
+    <a href="#cubrid_seq_put">CUBRID_SEQ_PUT</a>
+    <a href="#cubrid_set_add">CUBRID_SET_ADD</a>
+    <a href="#cubrid_set_autocommit">CUBRID_SET_AUTOCOMMIT</a>
+    <a href="#cubrid_set_db_parameter">CUBRID_SET_DB_PARAMETER</a>
+    <a href="#cubrid_set_drop">CUBRID_SET_DROP</a>
+    <a href="#cubrid_set_query_timeout">CUBRID_SET_QUERY_TIMEOUT</a>
+    <a href="#cubrid_version">CUBRID_VERSION</a>
+    <a href="#cubrid_mysql_compatibility">CUBRID MYSQL COMPATIBILITY FUNCTIONS</a>
+    <a href="#cubrid_affected_rows">CUBRID_AFFECTED_ROWS</a>
+    <a href="#cubrid_client_encoding">CUBRID_CLIENT_ENCODING</a>
+    <a href="#cubrid_close">CUBRID_CLOSE</a>
+    <a href="#cubrid_data_seek">CUBRID_DATA_SEEK</a>
+    <a href="#cubrid_db_name">CUBRID_DB_NAME</a>
+    <a href="#cubrid_errno">CUBRID_ERRNO</a>
+    <a href="#cubrid_error">CUBRID_ERROR</a>
+    <a href="#cubrid_fetch_array">CUBRID_FETCH_ARRAY</a>
+    <a href="#cubrid_fetch_assoc">CUBRID_FETCH_ASSOC</a>
+    <a href="#cubrid_fetch_field">CUBRID_FETCH_FIELD</a>
+    <a href="#cubrid_fetch_lengths">CUBRID_FETCH_LENGTHS</a>
+    <a href="#cubrid_fetch_object">CUBRID_FETCH_OBJECT</a>
+    <a href="#cubrid_fetch_row">CUBRID_FETCH_ROW</a>
+    <a href="#cubrid_field_flags">CUBRID_FIELD_FLAGS</a>
+    <a href="#cubrid_field_len">CUBRID_FIELD_LEN</a>
+    <a href="#cubrid_field_name">CUBRID_FIELD_NAME</a>
+    <a href="#cubrid_field_seek">CUBRID_FIELD_SEEK</a>
+    <a href="#cubrid_field_table">CUBRID_FIELD_TABLE</a>
+    <a href="#cubrid_field_type">CUBRID_FIELD_TYPE</a>
+    <a href="#cubrid_list_dbs">CUBRID_LIST_DBS</a>
+    <a href="#cubrid_num_fields">CUBRID_NUM_FIELDS</a>
+    <a href="#cubrid_ping">CUBRID_PING</a>
+    <a href="#cubrid_query">CUBRID_QUERY</a>
+    <a href="#cubrid_real_escape_string">CUBRID_REAL_ESCAPE_STRING</a>
+    <a href="#cubrid_result">CUBRID_RESULT</a>
+    <a href="#cubrid_unbuffered_query">CUBRID_UNBUFFERED_QUERY</a>
+    <a href="#cubrid_load_from_glo">CUBRID_LOAD_FROM_GLO</a>
+    <a href="#cubrid_new_glo">CUBRID_NEW_GLO</a>
+    <a href="#cubrid_save_to_glo">CUBRID_SAVE_TO_GLO</a>
+    <a href="#cubrid_send_glo">CUBRID_SEND_GLO</a>
+  </p>
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="resource-types">RESOURCE TYPES</h4>
+<h4 id="cubrid_bind">CUBRID_BIND</h4>
+<h4 id="cubrid_close_prepare">CUBRID_CLOSE_PREPARE</h4>
+<h4 id="cubrid_close_request">CUBRID_CLOSE_REQUEST</h4>
+<h4 id="cubrid_col_get">CUBRID_COL_GET</h4>
+<h4 id="cubrid_col_size">CUBRID_COL_SIZE</h4>
+<h4 id="cubrid_column_names">CUBRID_COLUMN_NAMES</h4>
+<h4 id="cubrid_column_types">CUBRID_COLUMN_TYPES</h4>
+<h4 id="cubrid_commit">CUBRID_COMMIT</h4>
+<h4 id="cubrid_connect">CUBRID_CONNECT</h4>
+<h4 id="cubrid_connect_with_url">CUBRID_CONNECT_WITH_URL</h4>
+<h4 id="cubrid_current_oid">CUBRID_CURRENT_OID</h4>
+<h4 id="cubrid_disconnect">CUBRID_DISCONNECT</h4>
+<h4 id="cubrid_drop">CUBRID_DROP</h4>
+<h4 id="cubrid_error_code">CUBRID_ERROR_CODE</h4>
+<h4 id="cubrid_error_code_facility">CUBRID_ERROR_CODE_FACILITY</h4>
+<h4 id="cubrid_error_msg">CUBRID_ERROR_MSG</h4>
+<h4 id="cubrid_execute">CUBRID_EXECUTE</h4>
+<h4 id="cubrid_fetch">CUBRID_FETCH</h4>
+<h4 id="cubrid_free_result">CUBRID_FREE_RESULT</h4>
+<h4 id="cubrid_get">CUBRID_GET</h4>
+<h4 id="cubrid_get_autocommit">CUBRID_GET_AUTOCOMMIT</h4>
+<h4 id="cubrid_get_charset">CUBRID_GET_CHARSET</h4>
+<h4 id="cubrid_get_class_name">CUBRID_GET_CLASS_NAME</h4>
+<h4 id="cubrid_get_client_info">CUBRID_GET_CLIENT_INFO</h4>
+<h4 id="cubrid_get_db_parameter">CUBRID_GET_DB_PARAMETER</h4>
+<h4 id="cubrid_get_query_timeout">CUBRID_GET_QUERY_TIMEOUT</h4>
+<h4 id="cubrid_get_server_info">CUBRID_GET_SERVER_INFO</h4>
+<h4 id="cubrid_insert_id">CUBRID_INSERT_ID</h4>
+<h4 id="cubrid_is_instance">CUBRID_IS_INSTANCE</h4>
+<h4 id="cubrid_lob_close">CUBRID_LOB_CLOSE</h4>
+<h4 id="cubrid_lob_export">CUBRID_LOB_EXPORT</h4>
+<h4 id="cubrid_lob_get">CUBRID_LOB_GET</h4>
+<h4 id="cubrid_lob_send">CUBRID_LOB_SEND</h4>
+<h4 id="cubrid_lob_size">CUBRID_LOB_SIZE</h4>
+<h4 id="cubrid_lob2_bind">CUBRID_LOB2_BIND</h4>
+<h4 id="cubrid_lob2_close">CUBRID_LOB2_CLOSE</h4>
+<h4 id="cubrid_lob2_export">CUBRID_LOB2_EXPORT</h4>
+<h4 id="cubrid_lob2_import">CUBRID_LOB2_IMPORT</h4>
+<h4 id="cubrid_lob2_new">CUBRID_LOB2_NEW</h4>
+<h4 id="cubrid_lob2_read">CUBRID_LOB2_READ</h4>
+<h4 id="cubrid_lob2_seek">CUBRID_LOB2_SEEK</h4>
+<h4 id="cubrid_lob2_seek64">CUBRID_LOB2_SEEK64</h4>
+<h4 id="cubrid_lob2_size">CUBRID_LOB2_SIZE</h4>
+<h4 id="cubrid_lob2_size64">CUBRID_LOB2_SIZE64</h4>
+<h4 id="cubrid_lob2_tell">CUBRID_LOB2_TELL</h4>
+<h4 id="cubrid_lob2_tell64">CUBRID_LOB2_TELL64</h4>
+<h4 id="cubrid_lob2_write">CUBRID_LOB2_WRITE</h4>
+<h4 id="cubrid_lock_read">CUBRID_LOCK_READ</h4>
+<h4 id="cubrid_lock_write">CUBRID_LOCK_WRITE</h4>
+<h4 id="cubrid_move_cursor">CUBRID_MOVE_CURSOR</h4>
+<h4 id="cubrid_next_result">CUBRID_NEXT_RESULT</h4>
+<h4 id="cubrid_num_cols">CUBRID_NUM_COLS</h4>
+<h4 id="cubrid_num_rows">CUBRID_NUM_ROWS</h4>
+<h4 id="cubrid_pconnect">CUBRID_PCONNECT</h4>
+<h4 id="cubrid_pconnect_with_url">CUBRID_PCONNECT_WITH_URL</h4>
+<h4 id="cubrid_prepare">CUBRID_PREPARE</h4>
+<h4 id="cubrid_put">CUBRID_PUT</h4>
+<h4 id="cubrid_rollback">CUBRID_ROLLBACK</h4>
+<h4 id="cubrid_schema">CUBRID_SCHEMA</h4>
+<h4 id="cubrid_seq_drop">CUBRID_SEQ_DROP</h4>
+<h4 id="cubrid_seq_insert">CUBRID_SEQ_INSERT</h4>
+<h4 id="cubrid_seq_put">CUBRID_SEQ_PUT</h4>
+<h4 id="cubrid_set_add">CUBRID_SET_ADD</h4>
+<h4 id="cubrid_set_autocommit">CUBRID_SET_AUTOCOMMIT</h4>
+<h4 id="cubrid_set_db_parameter">CUBRID_SET_DB_PARAMETER</h4>
+<h4 id="cubrid_set_drop">CUBRID_SET_DROP</h4>
+<h4 id="cubrid_set_query_timeout">CUBRID_SET_QUERY_TIMEOUT</h4>
+<h4 id="cubrid_version">CUBRID_VERSION</h4>
+<h4 id="cubrid_mysql_compatibility">CUBRID MYSQL COMPATIBILITY FUNCTIONS</h4>
+<h4 id="cubrid_affected_rows">CUBRID_AFFECTED_ROWS</h4>
+<h4 id="cubrid_client_encoding">CUBRID_CLIENT_ENCODING</h4>
+<h4 id="cubrid_close">CUBRID_CLOSE</h4>
+<h4 id="cubrid_data_seek">CUBRID_DATA_SEEK</h4>
+<h4 id="cubrid_db_name">CUBRID_DB_NAME</h4>
+<h4 id="cubrid_errno">CUBRID_ERRNO</h4>
+<h4 id="cubrid_error">CUBRID_ERROR</h4>
+<h4 id="cubrid_fetch_array">CUBRID_FETCH_ARRAY</h4>
+<h4 id="cubrid_fetch_assoc">CUBRID_FETCH_ASSOC</h4>
+<h4 id="cubrid_fetch_field">CUBRID_FETCH_FIELD</h4>
+<h4 id="cubrid_fetch_lengths">CUBRID_FETCH_LENGTHS</h4>
+<h4 id="cubrid_fetch_object">CUBRID_FETCH_OBJECT</h4>
+<h4 id="cubrid_fetch_row">CUBRID_FETCH_ROW</h4>
+<h4 id="cubrid_field_flags">CUBRID_FIELD_FLAGS</h4>
+<h4 id="cubrid_field_len">CUBRID_FIELD_LEN</h4>
+<h4 id="cubrid_field_name">CUBRID_FIELD_NAME</h4>
+<h4 id="cubrid_field_seek">CUBRID_FIELD_SEEK</h4>
+<h4 id="cubrid_field_table">CUBRID_FIELD_TABLE</h4>
+<h4 id="cubrid_field_type">CUBRID_FIELD_TYPE</h4>
+<h4 id="cubrid_list_dbs">CUBRID_LIST_DBS</h4>
+<h4 id="cubrid_num_fields">CUBRID_NUM_FIELDS</h4>
+<h4 id="cubrid_ping">CUBRID_PING</h4>
+<h4 id="cubrid_query">CUBRID_QUERY</h4>
+<h4 id="cubrid_real_escape_string">CUBRID_REAL_ESCAPE_STRING</h4>
+<h4 id="cubrid_result">CUBRID_RESULT</h4>
+<h4 id="cubrid_unbuffered_query">CUBRID_UNBUFFERED_QUERY</h4>
+<h4 id="cubrid_load_from_glo">CUBRID_LOAD_FROM_GLO</h4>
+<h4 id="cubrid_new_glo">CUBRID_NEW_GLO</h4>
+<h4 id="cubrid_save_to_glo">CUBRID_SAVE_TO_GLO</h4>
+<h4 id="cubrid_send_glo">CUBRID_SEND_GLO</h4>
+
+
+<h4 id="dbase">DBASE</h4>
+
+<nav align="center"> 
+  <h3>NAVIGATION</h3> 
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#dbase_add_record">DBASE_ADD_RECORD</a> |
+    <a href="#dbase_close">DBASE_CLOSE</a> |
+    <a href="#dbase_create">DBASE_CREATE</a> |
+    <a href="#dbase_delete_record">DBASE_DELETE_RECORD</a> |
+    <a href="#dbase_get_header_info">DBASE_GET_HEADER_INFO</a> |
+    <a href="#dbase_get_record">DBASE_GET_RECORD</a> |
+    <a href="#dbase_get_record_with_names">DBASE_GET_RECORD_WITH_NAMES</a> |
+    <a href="#dbase_numfields">DBASE_NUMFIELDS</a> |
+    <a href="#dbase_numrecords">DBASE_NUMRECORDS</a> |
+    <a href="#dbase_open">DBASE_OPEN</a> |
+    <a href="#dbase_pack">DBASE_PACK</a> |
+    <a href="#dbase_replace_record">DBASE_REPLACE_RECORD</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="dbase_add_record">DBASE_ADD_RECORD</h4>
+<h4 id="dbase_close">DBASE_CLOSE</h4>
+<h4 id="dbase_create">DBASE_CREATE</h4>
+<h4 id="dbase_delete_record">DBASE_DELETE_RECORD</h4>
+<h4 id="dbase_get_header_info">DBASE_GET_HEADER_INFO</h4>
+<h4 id="dbase_get_record">DBASE_GET_RECORD</h4>
+<h4 id="dbase_get_record_with_names">DBASE_GET_RECORD_WITH_NAMES</h4>
+<h4 id="dbase_numfields">DBASE_NUMFIELDS</h4>
+<h4 id="dbase_numrecords">DBASE_NUMRECORDS</h4>
+<h4 id="dbase_open">DBASE_OPEN</h4>
+<h4 id="dbase_pack">DBASE_PACK</h4>
+<h4 id="dbase_replace_record">DBASE_REPLACE_RECORD</h4>
+
+
+<h4 id="firebird">FIREBIRD/INTERBASE</h4>
+
+terminar aqui
+
+<h4 id="ibmdb2">IBM DB2</h4>
+
+
+
+<h4 id="mongodb">MONGODB</h4>
+
+
+
+<h4 id="mysql">MYSQL</h4>
+
+
+
+<h4 id="oci8">OCI8</h4>
+
+
+
+<h4 id="postgresql">POSTGRESQL</h4>
+
+
+
+<h4 id="sqlite3">SQLITE3</h4>
+
+
+
+<h4 id="sqlsrv">SQLSRV</h4>
+
+
 
 <h3 id="date-and-time-related-extensions">DATE AND TIME RELATED EXTENSIONS</h3>
-.
+
+proximo aqui
 
 <h3 id="filesystem-related-extensions">FILESYSTEM RELATED EXTENSIONS</h3>
 .
