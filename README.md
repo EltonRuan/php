@@ -6299,11 +6299,127 @@
 
 <h4 id="original-mysql-api">Original MySQL API</h4>
 
-soon...
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">INTRODUCTION</a> | 
+    <a href="#dependencies">DEPENDENCIES</a> | 
+    <a href="#installation">INSTALLATION</a> | 
+    <a href="#changelog">CHANGELOG</a> | 
+    <a href="#predefined-constants">PREDEFINED CONSTANTS</a> | 
+    <a href="#mysql_affected_rows">mysql_affected_rows</a> | 
+    <a href="#mysql_client_encoding">mysql_client_encoding</a> | 
+    <a href="#mysql_close">mysql_close</a> | 
+    <a href="#mysql_connect">mysql_connect</a> | 
+    <a href="#mysql_create_db">mysql_create_db</a> | 
+    <a href="#mysql_data_seek">mysql_data_seek</a> | 
+    <a href="#mysql_db_name">mysql_db_name</a> | 
+    <a href="#mysql_db_query">mysql_db_query</a> | 
+    <a href="#mysql_drop_db">mysql_drop_db</a> | 
+    <a href="#mysql_errno">mysql_errno</a> | 
+    <a href="#mysql_error">mysql_error</a> | 
+    <a href="#mysql_escape_string">mysql_escape_string</a> | 
+    <a href="#mysql_fetch_array">mysql_fetch_array</a> | 
+    <a href="#mysql_fetch_assoc">mysql_fetch_assoc</a> | 
+    <a href="#mysql_fetch_field">mysql_fetch_field</a> | 
+    <a href="#mysql_fetch_lengths">mysql_fetch_lengths</a>
+  </p>
+  <p>
+    <a href="#mysql_fetch_object">mysql_fetch_object</a> | 
+    <a href="#mysql_fetch_row">mysql_fetch_row</a> | 
+    <a href="#mysql_field_flags">mysql_field_flags</a> | 
+    <a href="#mysql_field_len">mysql_field_len</a> | 
+    <a href="#mysql_field_name">mysql_field_name</a> | 
+    <a href="#mysql_field_seek">mysql_field_seek</a> | 
+    <a href="#mysql_field_table">mysql_field_table</a> | 
+    <a href="#mysql_field_type">mysql_field_type</a> | 
+    <a href="#mysql_free_result">mysql_free_result</a> | 
+    <a href="#mysql_get_client_info">mysql_get_client_info</a> | 
+    <a href="#mysql_get_host_info">mysql_get_host_info</a> | 
+    <a href="#mysql_get_proto_info">mysql_get_proto_info</a> | 
+    <a href="#mysql_get_server_info">mysql_get_server_info</a> | 
+    <a href="#mysql_info">mysql_info</a> | 
+    <a href="#mysql_insert_id">mysql_insert_id</a> | 
+    <a href="#mysql_list_dbs">mysql_list_dbs</a>
+  </p>
+  <p>
+    <a href="#mysql_list_fields">mysql_list_fields</a> | 
+    <a href="#mysql_list_processes">mysql_list_processes</a> | 
+    <a href="#mysql_list_tables">mysql_list_tables</a> | 
+    <a href="#mysql_num_fields">mysql_num_fields</a> | 
+    <a href="#mysql_num_rows">mysql_num_rows</a> | 
+    <a href="#mysql_pconnect">mysql_pconnect</a> | 
+    <a href="#mysql_ping">mysql_ping</a> | 
+    <a href="#mysql_query">mysql_query</a> | 
+    <a href="#mysql_real_escape_string">mysql_real_escape_string</a> | 
+    <a href="#mysql_result">mysql_result</a> | 
+    <a href="#mysql_select_db">mysql_select_db</a> | 
+    <a href="#mysql_set_charset">mysql_set_charset</a> | 
+    <a href="#mysql_stat">mysql_stat</a> | 
+    <a href="#mysql_tablename">mysql_tablename</a> | 
+    <a href="#mysql_thread_id">mysql_thread_id</a> | 
+    <a href="#mysql_unbuffered_query">mysql_unbuffered_query</a>
+  </p>
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="changelog">CHANGELOG</h4>
+<h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
+<h4 id="mysql_affected_rows">mysql_affected_rows</h4>
+<h4 id="mysql_client_encoding">mysql_client_encoding</h4>
+<h4 id="mysql_close">mysql_close</h4>
+<h4 id="mysql_connect">mysql_connect</h4>
+<h4 id="mysql_create_db">mysql_create_db</h4>
+<h4 id="mysql_data_seek">mysql_data_seek</h4>
+<h4 id="mysql_db_name">mysql_db_name</h4>
+<h4 id="mysql_db_query">mysql_db_query</h4>
+<h4 id="mysql_drop_db">mysql_drop_db</h4>
+<h4 id="mysql_errno">mysql_errno</h4>
+<h4 id="mysql_error">mysql_error</h4>
+<h4 id="mysql_escape_string">mysql_escape_string</h4>
+<h4 id="mysql_fetch_array">mysql_fetch_array</h4>
+<h4 id="mysql_fetch_assoc">mysql_fetch_assoc</h4>
+<h4 id="mysql_fetch_field">mysql_fetch_field</h4>
+<h4 id="mysql_fetch_lengths">mysql_fetch_lengths</h4>
+<h4 id="mysql_fetch_object">mysql_fetch_object</h4>
+<h4 id="mysql_fetch_row">mysql_fetch_row</h4>
+<h4 id="mysql_field_flags">mysql_field_flags</h4>
+<h4 id="mysql_field_len">mysql_field_len</h4>
+<h4 id="mysql_field_name">mysql_field_name</h4>
+<h4 id="mysql_field_seek">mysql_field_seek</h4>
+<h4 id="mysql_field_table">mysql_field_table</h4>
+<h4 id="mysql_field_type">mysql_field_type</h4>
+<h4 id="mysql_free_result">mysql_free_result</h4>
+<h4 id="mysql_get_client_info">mysql_get_client_info</h4>
+<h4 id="mysql_get_host_info">mysql_get_host_info</h4>
+<h4 id="mysql_get_proto_info">mysql_get_proto_info</h4>
+<h4 id="mysql_get_server_info">mysql_get_server_info</h4>
+<h4 id="mysql_info">mysql_info</h4>
+<h4 id="mysql_insert_id">mysql_insert_id</h4>
+<h4 id="mysql_list_dbs">mysql_list_dbs</h4>
+<h4 id="mysql_list_fields">mysql_list_fields</h4>
+<h4 id="mysql_list_processes">mysql_list_processes</h4>
+<h4 id="mysql_list_tables">mysql_list_tables</h4>
+<h4 id="mysql_num_fields">mysql_num_fields</h4>
+<h4 id="mysql_num_rows">mysql_num_rows</h4>
+<h4 id="mysql_pconnect">mysql_pconnect</h4>
+<h4 id="mysql_ping">mysql_ping</h4>
+<h4 id="mysql_query">mysql_query</h4>
+<h4 id="mysql_real_escape_string">mysql_real_escape_string</h4>
+<h4 id="mysql_result">mysql_result</h4>
+<h4 id="mysql_select_db">mysql_select_db</h4>
+<h4 id="mysql_set_charset">mysql_set_charset</h4>
+<h4 id="mysql_stat">mysql_stat</h4>
+<h4 id="mysql_tablename">mysql_tablename</h4>
+<h4 id="mysql_thread_id">mysql_thread_id</h4>
+<h4 id="mysql_unbuffered_query">mysql_unbuffered_query</h4>
+
 
 <h4 id="mysqlnd">MySQL Native Driver</h4>
 
-
+soon...
 
 
 <h4 id="oci8">OCI8</h4>
