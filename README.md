@@ -7141,13 +7141,779 @@
 
 <h3 id="date-and-time-related-extensions">DATE AND TIME RELATED EXTENSIONS</h3>
 
-proximo aqui
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#calendar">Calendar</a> |
+    <a href="#date-and-time">Date and Time</a> |
+    <a href="#high-resolution-timing">High-Resolution Timing</a>
+  </p>
+</nav>
+
+<h4 id="calendar">Calendar</h4>
+
+<nav align="center"> 
+  <h2>NAVIGATION</h2> 
+  <p>
+    <a href="#introduction">Introduction</a> | 
+    <a href="#installation">Installation</a> | 
+    <a href="#predefined-constants">Predefined Constants</a> | 
+    <a href="#cal_days_in_month">cal_days_in_month</a> | 
+    <a href="#cal_from_jd">cal_from_jd</a> | 
+    <a href="#cal_info">cal_info</a> | 
+    <a href="#cal_to_jd">cal_to_jd</a> | 
+    <a href="#easter_date">easter_date</a> | 
+    <a href="#easter_days">easter_days</a> | 
+    <a href="#french_to_jd">frenchtojd</a> | 
+    <a href="#gregorian_to_jd">gregoriantojd</a> | 
+    <a href="#jd_day_of_week">jddayofweek</a> | 
+    <a href="#jd_month_name">jdmonthname</a> | 
+    <a href="#jd_to_french">jdtofrench</a> | 
+    <a href="#jd_to_gregorian">jdtogregorian</a> | 
+    <a href="#jd_to_jewish">jdtojewish</a> | 
+    <a href="#jd_to_julian">jdtojulian</a> | 
+    <a href="#jd_to_unix">jdtounix</a> | 
+    <a href="#jewish_to_jd">jewishtojd</a> | 
+    <a href="#julian_to_jd">juliantojd</a> | 
+    <a href="#unix_to_jd">unixtojd</a>
+  </p> 
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="predefined-constants">Predefined Constants</h4>
+<h4 id="cal_days_in_month">cal_days_in_month</h4>
+<h4 id="cal_from_jd">cal_from_jd</h4>
+<h4 id="cal_info">cal_info</h4>
+<h4 id="cal_to_jd">cal_to_jd</h4>
+<h4 id="easter_date">easter_date</h4>
+<h4 id="easter_days">easter_days</h4>
+<h4 id="french_to_jd">frenchtojd</h4>
+<h4 id="gregorian_to_jd">gregoriantojd</h4>
+<h4 id="jd_day_of_week">jddayofweek</h4>
+<h4 id="jd_month_name">jdmonthname</h4>
+<h4 id="jd_to_french">jdtofrench</h4>
+<h4 id="jd_to_gregorian">jdtogregorian</h4>
+<h4 id="jd_to_jewish">jdtojewish</h4>
+<h4 id="jd_to_julian">jdtojulian</h4>
+<h4 id="jd_to_unix">jdtounix</h4>
+<h4 id="jewish_to_jd">jewishtojd</h4>
+<h4 id="julian_to_jd">juliantojd</h4>
+<h4 id="unix_to_jd">unixtojd</h4>
+
+<h4 id="date-and-time">Date and Time</h4>
+
+<p>
+  <a href="#introduction">Introduction</a> |
+  <a href="#installation">Installation</a> |
+  <a href="#runtime-configuration">Runtime Configuration</a> |
+  <a href="#date-time-arithmetic">Date/Time Arithmetic</a> |
+  <a href="#datetime-class">DateTime Class</a> |
+  <a href="#datetime-add">DateTime::add</a> |
+  <a href="#datetime-construct">DateTime::__construct</a> |
+  <a href="#datetime-createfromformat">DateTime::createFromFormat</a> |
+  <a href="#datetime-createfromimmutable">DateTime::createFromImmutable</a> |
+  <a href="#datetime-createfrominterface">DateTime::createFromInterface</a> |
+  <a href="#datetime-getlasterrors">DateTime::getLastErrors</a> |
+  <a href="#datetime-modify">DateTime::modify</a> |
+  <a href="#datetime-setstate">DateTime::__set_state</a> |
+  <a href="#datetime-setdate">DateTime::setDate</a> |
+  <a href="#datetime-setisodate">DateTime::setISODate</a> |
+  <a href="#datetime-settime">DateTime::setTime</a> |
+  <a href="#datetime-settimestamp">DateTime::setTimestamp</a> |
+  <a href="#datetime-settimezone">DateTime::setTimezone</a> |
+  <a href="#datetime-sub">DateTime::sub</a> |
+  <a href="#datetimeimmutable-class">DateTimeImmutable Class</a> |
+  <a href="#datetimeimmutable-add">DateTimeImmutable::add</a> |
+  <a href="#datetimeimmutable-construct">DateTimeImmutable::__construct</a> |
+  <a href="#datetimeimmutable-createfromformat">DateTimeImmutable::createFromFormat</a> |
+  <a href="#datetimeimmutable-createfrominterface">DateTimeImmutable::createFromInterface</a> |
+  <a href="#datetimeimmutable-createfrommutable">DateTimeImmutable::createFromMutable</a> |
+  <a href="#datetimeimmutable-getlasterrors">DateTimeImmutable::getLastErrors</a> |
+  <a href="#datetimeimmutable-modify">DateTimeImmutable::modify</a> |
+  <a href="#datetimeimmutable-setstate">DateTimeImmutable::__set_state</a> |
+  <a href="#datetimeimmutable-setdate">DateTimeImmutable::setDate</a> |
+  <a href="#datetimeimmutable-setisodate">DateTimeImmutable::setISODate</a> |
+  <a href="#datetimeimmutable-settime">DateTimeImmutable::setTime</a> |
+  <a href="#datetimeimmutable-settimestamp">DateTimeImmutable::setTimestamp</a> |
+  <a href="#datetimeimmutable-settimezone">DateTimeImmutable::setTimezone</a> |
+  <a href="#datetimeimmutable-sub">DateTimeImmutable::sub</a> |
+  <a href="#datetimeinterface">DateTimeInterface</a> |
+  <a href="#datetimeinterface-diff">DateTimeInterface::diff</a> |
+  <a href="#datetimeinterface-format">DateTimeInterface::format</a> |
+  <a href="#datetimeinterface-getoffset">DateTimeInterface::getOffset</a> |
+  <a href="#datetimeinterface-gettimestamp">DateTimeInterface::getTimestamp</a> |
+  <a href="#datetimeinterface-gettimezone">DateTimeInterface::getTimezone</a> |
+  <a href="#datetime-serialize">DateTime::__serialize</a> |
+  <a href="#datetime-unserialize">DateTime::__unserialize</a> |
+  <a href="#datetime-wakeup">DateTime::__wakeup</a> |
+  <a href="#datetimezone-class">DateTimeZone Class</a> |
+  <a href="#datetimezone-construct">DateTimeZone::__construct</a> |
+  <a href="#datetimezone-getlocation">DateTimeZone::getLocation</a> |
+  <a href="#datetimezone-getname">DateTimeZone::getName</a> |
+  <a href="#datetimezone-getoffset">DateTimeZone::getOffset</a> |
+  <a href="#datetimezone-gettransitions">DateTimeZone::getTransitions</a> |
+  <a href="#datetimezone-listabbreviations">DateTimeZone::listAbbreviations</a> |
+  <a href="#datetimezone-listidentifiers">DateTimeZone::listIdentifiers</a> |
+  <a href="#dateinterval-class">DateInterval Class</a> |
+  <a href="#dateinterval-construct">DateInterval::__construct</a> |
+  <a href="#dateinterval-createfromdatestring">DateInterval::createFromDateString</a> |
+  <a href="#dateinterval-format">DateInterval::format</a> |
+  <a href="#dateperiod-class">DatePeriod Class</a> |
+  <a href="#dateperiod-construct">DatePeriod::__construct</a> |
+  <a href="#dateperiod-createfromiso8601string">DatePeriod::createFromISO8601String</a> |
+  <a href="#dateperiod-getdateinterval">DatePeriod::getDateInterval</a> |
+  <a href="#dateperiod-getenddate">DatePeriod::getEndDate</a> |
+  <a href="#dateperiod-getrecurrences">DatePeriod::getRecurrences</a> |
+  <a href="#dateperiod-getstartdate">DatePeriod::getStartDate</a> |
+  <a href="#date-functions">Date/Time Functions</a> |
+  <a href="#checkdate">checkdate</a> |
+  <a href="#date">date</a> |
+  <a href="#date_add">date_add</a> |
+  <a href="#date_create">date_create</a> |
+  <a href="#date_create_from_format">date_create_from_format</a> |
+  <a href="#date_create_immutable">date_create_immutable</a> |
+  <a href="#date_create_immutable_from_format">date_create_immutable_from_format</a> |
+  <a href="#date_date_set">date_date_set</a> |
+  <a href="#date_default_timezone_get">date_default_timezone_get</a> |
+  <a href="#date_default_timezone_set">date_default_timezone_set</a> |
+  <a href="#date_diff">date_diff</a> |
+  <a href="#date_format">date_format</a> |
+  <a href="#date_get_last_errors">date_get_last_errors</a> |
+  <a href="#date_interval_create_from_date_string">date_interval_create_from_date_string</a> |
+  <a href="#date_interval_format">date_interval_format</a> |
+  <a href="#date_isodate_set">date_isodate_set</a> |
+  <a href="#date_modify">date_modify</a> |
+  <a href="#date_offset_get">date_offset_get</a> |
+  <a href="#date_parse">date_parse</a> |
+  <a href="#date_parse_from_format">date_parse_from_format</a> |
+  <a href="#date_sub">date_sub</a> |
+  <a href="#date_sun_info">date_sun_info</a> |
+  <a href="#date_sunrise">date_sunrise</a> |
+  <a href="#date_sunset">date_sunset</a> |
+  <a href="#date_time_set">date_time_set</a> |
+  <a href="#date_timestamp_get">date_timestamp_get</a> |
+  <a href="#date_timestamp_set">date_timestamp_set</a> |
+  <a href="#date_timezone_get">date_timezone_get</a> |
+  <a href="#date_timezone_set">date_timezone_set</a> |
+  <a href="#getdate">getdate</a> |
+  <a href="#gettimeofday">gettimeofday</a> |
+  <a href="#gmdate">gmdate</a> |
+  <a href="#gmmktime">gmmktime</a> |
+  <a href="#gmstrftime">gmstrftime</a> |
+  <a href="#idate">idate</a> |
+  <a href="#localtime">localtime</a> |
+  <a href="#microtime">microtime</a> |
+  <a href="#mktime">mktime</a> |
+  <a href="#strftime">strftime</a> |
+  <a href="#strptime">strptime</a> |
+  <a href="#strtotime">strtotime</a> |
+  <a href="#time">time</a> |
+  <a href="#timezone_abbreviations_list">timezone_abbreviations_list</a> |
+  <a href="#timezone_identifiers_list">timezone_identifiers_list</a> |
+  <a href="#timezone_location_get">timezone_location_get</a> |
+  <a href="#timezone_name_from_abbr">timezone_name_from_abbr</a> |
+  <a href="#timezone_name_get">timezone_name_get</a> |
+  <a href="#timezone_offset_get">timezone_offset_get</a> |
+  <a href="#timezone_open">timezone_open</a> |
+  <a href="#timezone_transitions_get">timezone_transitions_get</a> |
+  <a href="#timezone_version_get">timezone_version_get</a> |
+  <a href="#date-time-errors">Errors and Exceptions</a> |
+  <a href="#supported-date-formats">Supported Date/Time Formats</a> |
+  <a href="#supported-timezones">Supported Timezones</a> |
+  <a href="#africa">Africa</a> |
+  <a href="#america">America</a> |
+  <a href="#antarctica">Antarctica</a> |
+  <a href="#arctic">Arctic</a> |
+  <a href="#asia">Asia</a> |
+  <a href="#atlantic">Atlantic</a> |
+  <a href="#australia">Australia</a> |
+  <a href="#europe">Europe</a> |
+  <a href="#india">India</a> |
+  <a href="#pacific">Pacific</a> |
+  <a href="#others">Others</a> |
+  <a href="#dateerror">DateError</a> |
+  <a href="#dateobjecterror">DateObjectError</a> |
+  <a href="#daterangeerror">DateRangeError</a> |
+  <a href="#dateexception">DateException</a> |
+  <a href="#dateinvalidoperationexception">DateInvalidOperationException</a> |
+  <a href="#dateinvalidtimezoneexception">DateInvalidTimeZoneException</a> |
+  <a href="#datamalformedintervalstringexception">DateMalformedIntervalStringException</a> |
+  <a href="#datamalformedperiodstringexception">DateMalformedPeriodStringException</a> |
+  <a href="#datamalformedstringexception">DateMalformedStringException</a>
+</p>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="runtime-configuration">Runtime Configuration</h4>
+<h4 id="date-time-arithmetic">Date/Time Arithmetic</h4>
+<h4 id="datetime-class">DateTime — The DateTime Class</h4>
+<h4 id="datetime-add">DateTime::add</h4>
+<h4 id="datetime-construct">DateTime::__construct</h4>
+<h4 id="datetime-createfromformat">DateTime::createFromFormat</h4>
+<h4 id="datetime-createfromimmutable">DateTime::createFromImmutable</h4>
+<h4 id="datetime-createfrominterface">DateTime::createFromInterface</h4>
+<h4 id="datetime-getlasterrors">DateTime::getLastErrors</h4>
+<h4 id="datetime-modify">DateTime::modify</h4>
+<h4 id="datetime-set-state">DateTime::__set_state</h4>
+<h4 id="datetime-setdate">DateTime::setDate</h4>
+<h4 id="datetime-setisodate">DateTime::setISODate</h4>
+<h4 id="datetime-settime">DateTime::setTime</h4>
+<h4 id="datetime-settimestamp">DateTime::setTimestamp</h4>
+<h4 id="datetime-settimezone">DateTime::setTimezone</h4>
+<h4 id="datetime-sub">DateTime::sub</h4>
+<h4 id="datetimeimmutable-class">DateTimeImmutable — The DateTimeImmutable Class</h4>
+<h4 id="datetimeimmutable-add">DateTimeImmutable::add</h4>
+<h4 id="datetimeimmutable-construct">DateTimeImmutable::__construct</h4>
+<h4 id="datetimeimmutable-createfromformat">DateTimeImmutable::createFromFormat</h4>
+<h4 id="datetimeimmutable-createfrominterface">DateTimeImmutable::createFromInterface</h4>
+<h4 id="datetimeimmutable-createfrommutable">DateTimeImmutable::createFromMutable</h4>
+<h4 id="datetimeimmutable-getlasterrors">DateTimeImmutable::getLastErrors</h4>
+<h4 id="datetimeimmutable-modify">DateTimeImmutable::modify</h4>
+<h4 id="datetimeimmutable-set-state">DateTimeImmutable::__set_state</h4>
+<h4 id="datetimeimmutable-setdate">DateTimeImmutable::setDate</h4>
+<h4 id="datetimeimmutable-setisodate">DateTimeImmutable::setISODate</h4>
+<h4 id="datetimeimmutable-settime">DateTimeImmutable::setTime</h4>
+<h4 id="datetimeimmutable-settimestamp">DateTimeImmutable::setTimestamp</h4>
+<h4 id="datetimeimmutable-settimezone">DateTimeImmutable::setTimezone</h4>
+<h4 id="datetimeimmutable-sub">DateTimeImmutable::sub</h4>
+<h4 id="datetimeinterface">DateTimeInterface — The DateTimeInterface</h4>
+<h4 id="datetimeinterface-diff">DateTimeInterface::diff</h4>
+<h4 id="datetimeinterface-format">DateTimeInterface::format</h4>
+<h4 id="datetimeinterface-getoffset">DateTimeInterface::getOffset</h4>
+<h4 id="datetimeinterface-gettimestamp">DateTimeInterface::getTimestamp</h4>
+<h4 id="datetimeinterface-gettimezone">DateTimeInterface::getTimezone</h4>
+<h4 id="datetime-serialize">DateTime::__serialize</h4>
+<h4 id="datetime-unserialize">DateTime::__unserialize</h4>
+<h4 id="datetime-wakeup">DateTime::__wakeup</h4>
+<h4 id="datetimezone-class">DateTimeZone — The DateTimeZone Class</h4>
+<h4 id="datetimezone-construct">DateTimeZone::__construct</h4>
+<h4 id="datetimezone-getlocation">DateTimeZone::getLocation</h4>
+<h4 id="datetimezone-getname">DateTimeZone::getName</h4>
+<h4 id="datetimezone-getoffset">DateTimeZone::getOffset</h4>
+<h4 id="datetimezone-gettransitions">DateTimeZone::getTransitions</h4>
+<h4 id="datetimezone-listabbreviations">DateTimeZone::listAbbreviations</h4>
+<h4 id="datetimezone-listidentifiers">DateTimeZone::listIdentifiers</h4>
+<h4 id="dateinterval-class">DateInterval — The DateInterval Class</h4>
+<h4 id="dateinterval-construct">DateInterval::__construct</h4>
+<h4 id="dateinterval-createfromdatestring">DateInterval::createFromDateString</h4>
+<h4 id="dateinterval-format">DateInterval::format</h4>
+<h4 id="dateperiod-class">DatePeriod — The DatePeriod Class</h4>
+<h4 id="dateperiod-construct">DatePeriod::__construct</h4>
+<h4 id="dateperiod-createfromiso8601string">DatePeriod::createFromISO8601String</h4>
+<h4 id="dateperiod-getdateinterval">DatePeriod::getDateInterval</h4>
+<h4 id="dateperiod-getenddate">DatePeriod::getEndDate</h4>
+<h4 id="dateperiod-getrecurrences">DatePeriod::getRecurrences</h4>
+<h4 id="dateperiod-getstartdate">DatePeriod::getStartDate</h4>
+<h4 id="date-time-functions">Date/Time Functions</h4>
+<h4 id="checkdate">checkdate</h4>
+<h4 id="date">date</h4>
+<h4 id="date-add">date_add</h4>
+<h4 id="date-create">date_create</h4>
+<h4 id="date-create-from-format">date_create_from_format</h4>
+<h4 id="date-create-immutable">date_create_immutable</h4>
+<h4 id="date-create-immutable-from-format">date_create_immutable_from_format</h4>
+<h4 id="date-date-set">date_date_set</h4>
+<h4 id="date-default-timezone-get">date_default_timezone_get</h4>
+<h4 id="date-default-timezone-set">date_default_timezone_set</h4>
+<h4 id="date-diff">date_diff</h4>
+<h4 id="date-format">date_format</h4>
+<h4 id="date-get-last-errors">date_get_last_errors</h4>
+<h4 id="date-interval-create-from-date-string">date_interval_create_from_date_string</h4>
+<h4 id="date-interval-format">date_interval_format</h4>
+<h4 id="date-isodate-set">date_isodate_set</h4>
+<h4 id="date-modify">date_modify</h4>
+<h4 id="date-offset-get">date_offset_get</h4>
+<h4 id="date-parse">date_parse</h4>
+<h4 id="date-parse-from-format">date_parse_from_format</h4>
+<h4 id="date-sub">date_sub</h4>
+<h4 id="date-sun-info">date_sun_info</h4>
+<h4 id="date-sunrise">date_sunrise</h4>
+<h4 id="date-sunset">date_sunset</h4>
+<h4 id="date-time-set">date_time_set</h4>
+<h4 id="date-timestamp-get">date_timestamp_get</h4>
+<h4 id="date-timestamp-set">date_timestamp_set</h4>
+<h4 id="date-timezone-get">date_timezone_get</h4>
+<h4 id="date-timezone-set">date_timezone_set</h4>
+<h4 id="getdate">getdate</h4>
+<h4 id="gettimeofday">gettimeofday</h4>
+<h4 id="gmdate">gmdate</h4>
+<h4 id="gmmktime">gmmktime</h4>
+<h4 id="gmstrftime">gmstrftime</h4>
+<h4 id="idate">idate</h4>
+<h4 id="localtime">localtime</h4>
+<h4 id="microtime">microtime</h4>
+<h4 id="mktime">mktime</h4>
+<h4 id="strftime">strftime</h4>
+<h4 id="strptime">strptime</h4>
+<h4 id="strtotime">strtotime</h4>
+<h4 id="time">time</h4>
+<h4 id="timezone-abbreviations-list">timezone_abbreviations_list</h4>
+<h4 id="timezone-identifiers-list">timezone_identifiers_list</h4>
+<h4 id="timezone-location-get">timezone_location_get</h4>
+<h4 id="timezone-name-from-abbr">timezone_name_from_abbr</h4>
+<h4 id="timezone-name-get">timezone_name_get</h4>
+<h4 id="timezone-offset-get">timezone_offset_get</h4>
+<h4 id="timezone-open">timezone_open</h4>
+<h4 id="timezone-transitions-get">timezone_transitions_get</h4>
+<h4 id="timezone-version-get">timezone_version_get</h4>
+<h4 id="date-time-errors-exceptions">Date/Time Errors and Exceptions</h4>
+<h4 id="supported-date-time-formats">Supported Date/Time Formats</h4>
+<h4 id="supported-timezones">Supported Timezones</h4>
+<h4 id="africa">Africa</h4>
+<h4 id="america">America</h4>
+<h4 id="antarctica">Antarctica</h4>
+<h4 id="arctic">Arctic</h4>
+<h4 id="asia">Asia</h4>
+<h4 id="atlantic">Atlantic</h4>
+<h4 id="australia">Australia</h4>
+<h4 id="europe">Europe</h4>
+<h4 id="india">India</h4>
+<h4 id="pacific">Pacific</h4>
+<h4 id="others">Others</h4>
+<h4 id="dateerror">DateError</h4>
+<h4 id="dateobjecterror">DateObjectError</h4>
+<h4 id="daterangeerror">DateRangeError</h4>
+<h4 id="dateexception">DateException</h4>
+<h4 id="dateinvalidoperationexception">DateInvalidOperationException</h4>
+<h4 id="dateinvalidtimezoneexception">DateInvalidTimeZoneException</h4>
+<h4 id="datamalformedintervalstringexception">DateMalformedIntervalStringException</h4>
+<h4 id="datamalformedperiodstringexception">DateMalformedPeriodStringException</h4>
+<h4 id="datamalformedstringexception">DateMalformedStringException</h4>
+
+
+<h4 id="high-resolution-timing">High-Resolution Timing</h4>
+
+<p>
+  <a href="#introduction">Introduction</a> |
+  <a href="#installation">Installation</a> |
+  <a href="#hrtime-performancecounter">HRTime\PerformanceCounter</a> |
+  <a href="#hrtime-performancecounter-getfrequency">HRTime\PerformanceCounter::getFrequency</a> |
+  <a href="#hrtime-performancecounter-getticks">HRTime\PerformanceCounter::getTicks</a> |
+  <a href="#hrtime-performancecounter-gettickssince">HRTime\PerformanceCounter::getTicksSince</a> |
+  <a href="#hrtime-stopwatch">HRTime\StopWatch</a> |
+  <a href="#hrtime-stopwatch-getelapsedticks">HRTime\StopWatch::getElapsedTicks</a> |
+  <a href="#hrtime-stopwatch-getelapsedtime">HRTime\StopWatch::getElapsedTime</a> |
+  <a href="#hrtime-stopwatch-getlastelapsedticks">HRTime\StopWatch::getLastElapsedTicks</a> |
+  <a href="#hrtime-stopwatch-getlastelapsedtime">HRTime\StopWatch::getLastElapsedTime</a> |
+  <a href="#hrtime-stopwatch-isrunning">HRTime\StopWatch::isRunning</a> |
+  <a href="#hrtime-stopwatch-start">HRTime\StopWatch::start</a> |
+  <a href="#hrtime-stopwatch-stop">HRTime\StopWatch::stop</a> |
+  <a href="#hrtime-unit">HRTime\Unit</a>
+</p>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="hrtime-performancecounter">HRTime\PerformanceCounter</h4>
+<h4 id="hrtime-performancecounter-getfrequency">HRTime\PerformanceCounter::getFrequency</h4>
+<h4 id="hrtime-performancecounter-getticks">HRTime\PerformanceCounter::getTicks</h4>
+<h4 id="hrtime-performancecounter-gettickssince">HRTime\PerformanceCounter::getTicksSince</h4>
+<h4 id="hrtime-stopwatch">HRTime\StopWatch</h4>
+<h4 id="hrtime-stopwatch-getelapsedticks">HRTime\StopWatch::getElapsedTicks</h4>
+<h4 id="hrtime-stopwatch-getelapsedtime">HRTime\StopWatch::getElapsedTime</h4>
+<h4 id="hrtime-stopwatch-getlastelapsedticks">HRTime\StopWatch::getLastElapsedTicks</h4>
+<h4 id="hrtime-stopwatch-getlastelapsedtime">HRTime\StopWatch::getLastElapsedTime</h4>
+<h4 id="hrtime-stopwatch-isrunning">HRTime\StopWatch::isRunning</h4>
+<h4 id="hrtime-stopwatch-start">HRTime\StopWatch::start</h4>
+<h4 id="hrtime-stopwatch-stop">HRTime\StopWatch::stop</h4>
+<h4 id="hrtime-unit">HRTime\Unit</h4>
 
 <h3 id="filesystem-related-extensions">FILESYSTEM RELATED EXTENSIONS</h3>
-.
+
+<nav>
+  <p>
+    <a href="#direct-io">Direct I/O</a> |
+    <a href="#directories">Directories</a> |
+    <a href="#fileinfo">Fileinfo</a> |
+    <a href="#filesystem-extension">Filesystem Extension</a> |
+    <a href="#inotify">Inotify</a> |
+    <a href="#xattr">xattr</a> |
+    <a href="#xdiff">xdiff</a>
+  </p>
+</nav>
+
+<h4 id="direct-io">Direct I/O</h4>
+
+<nav>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#resource-types">Resource Types</a> |
+    <a href="#dio_close">dio_close</a> |
+    <a href="#dio_fcntl">dio_fcntl</a> |
+    <a href="#dio_open">dio_open</a> |
+    <a href="#dio_read">dio_read</a> |
+    <a href="#dio_seek">dio_seek</a> |
+    <a href="#dio_stat">dio_stat</a> |
+    <a href="#dio_tcsetattr">dio_tcsetattr</a> |
+    <a href="#dio_truncate">dio_truncate</a> |
+    <a href="#dio_write">dio_write</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="resource-types">Resource Types</h4>
+<h4 id="dio_close">dio_close</h4>
+<h4 id="dio_fcntl">dio_fcntl</h4>
+<h4 id="dio_open">dio_open</h4>
+<h4 id="dio_read">dio_read</h4>
+<h4 id="dio_seek">dio_seek</h4>
+<h4 id="dio_stat">dio_stat</h4>
+<h4 id="dio_tcsetattr">dio_tcsetattr</h4>
+<h4 id="dio_truncate">dio_truncate</h4>
+<h4 id="dio_write">dio_write</h4>
+
+
+<h4 id="directories">Directories</h4>
+
+<nav>
+  <p>
+    <a href="#directory">Directory</a> |
+    <a href="#directory_close">Directory::close</a> |
+    <a href="#directory_read">Directory::read</a> |
+    <a href="#directory_rewind">Directory::rewind</a> |
+    <a href="#chdir">chdir</a> |
+    <a href="#chroot">chroot</a> |
+    <a href="#closedir">closedir</a> |
+    <a href="#dir">dir</a> |
+    <a href="#getcwd">getcwd</a> |
+    <a href="#opendir">opendir</a> |
+    <a href="#readdir">readdir</a> |
+    <a href="#rewinddir">rewinddir</a> |
+    <a href="#scandir">scandir</a>
+  </p>
+</nav>
+
+<h4 id="directory">Directory</h4>
+<h4 id="directory_close">Directory::close</h4>
+<h4 id="directory_read">Directory::read</h4>
+<h4 id="directory_rewind">Directory::rewind</h4>
+<h4 id="chdir">chdir</h4>
+<h4 id="chroot">chroot</h4>
+<h4 id="closedir">closedir</h4>
+<h4 id="dir">dir</h4>
+<h4 id="getcwd">getcwd</h4>
+<h4 id="opendir">opendir</h4>
+<h4 id="readdir">readdir</h4>
+<h4 id="rewinddir">rewinddir</h4>
+<h4 id="scandir">scandir</h4>
+
+
+<h4 id="fileinfo">Fileinfo</h4>
+
+<nav>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#finfo_buffer">finfo_buffer</a> |
+    <a href="#finfo_close">finfo_close</a> |
+    <a href="#finfo_file">finfo_file</a> |
+    <a href="#finfo_open">finfo_open</a> |
+    <a href="#finfo_set_flags">finfo_set_flags</a> |
+    <a href="#mime_content_type">mime_content_type</a> |
+    <a href="#finfo">finfo</a> |
+    <a href="#finfo_buffer_class">finfo::buffer</a> |
+    <a href="#finfo_construct">finfo::__construct</a> |
+    <a href="#finfo_file_class">finfo::file</a> |
+    <a href="#finfo_set_flags_class">finfo::set_flags</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="finfo_buffer">finfo_buffer</h4>
+<h4 id="finfo_close">finfo_close</h4>
+<h4 id="finfo_file">finfo_file</h4>
+<h4 id="finfo_open">finfo_open</h4>
+<h4 id="finfo_set_flags">finfo_set_flags</h4>
+<h4 id="mime_content_type">mime_content_type</h4>
+<h4 id="finfo">finfo</h4>
+<h4 id="finfo_buffer_class">finfo::buffer</h4>
+<h4 id="finfo_construct">finfo::__construct</h4>
+<h4 id="finfo_file_class">finfo::file</h4>
+<h4 id="finfo_set_flags_class">finfo::set_flags</h4>
+
+
+<h4 id="filesystem-extension">Filesystem Extension</h4>
+
+<nav>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation/Configuration</a> |
+    <a href="#basename">basename</a> |
+    <a href="#chgrp">chgrp</a> |
+    <a href="#chmod">chmod</a> |
+    <a href="#chown">chown</a> |
+    <a href="#clearstatcache">clearstatcache</a> |
+    <a href="#copy">copy</a> |
+    <a href="#delete">delete</a> |
+    <a href="#dirname">dirname</a> |
+    <a href="#disk_free_space">disk_free_space</a> |
+    <a href="#disk_total_space">disk_total_space</a> |
+    <a href="#diskfreespace">diskfreespace</a> |
+    <a href="#fclose">fclose</a> |
+    <a href="#fdatasync">fdatasync</a> |
+    <a href="#feof">feof</a> |
+    <a href="#fflush">fflush</a> |
+    <a href="#fgetc">fgetc</a> |
+    <a href="#fgetcsv">fgetcsv</a> |
+    <a href="#fgets">fgets</a> |
+    <a href="#fgetss">fgetss</a> |
+    <a href="#file">file</a> |
+    <a href="#file_exists">file_exists</a> |
+    <a href="#file_get_contents">file_get_contents</a> |
+    <a href="#file_put_contents">file_put_contents</a> |
+    <a href="#fileatime">fileatime</a> |
+    <a href="#filectime">filectime</a> |
+    <a href="#filegroup">filegroup</a> |
+    <a href="#fileinode">fileinode</a> |
+    <a href="#filemtime">filemtime</a> |
+    <a href="#fileowner">fileowner</a> |
+    <a href="#fileperms">fileperms</a> |
+    <a href="#filesize">filesize</a> |
+    <a href="#filetype">filetype</a> |
+    <a href="#flock">flock</a> |
+    <a href="#fnmatch">fnmatch</a> |
+    <a href="#fopen">fopen</a> |
+    <a href="#fpassthru">fpassthru</a> |
+    <a href="#fputcsv">fputcsv</a> |
+    <a href="#fputs">fputs</a> |
+    <a href="#fread">fread</a> |
+    <a href="#fscanf">fscanf</a> |
+    <a href="#fseek">fseek</a> |
+    <a href="#fstat">fstat</a> |
+    <a href="#fsync">fsync</a> |
+    <a href="#ftell">ftell</a> |
+    <a href="#ftruncate">ftruncate</a> |
+    <a href="#fwrite">fwrite</a> |
+    <a href="#glob">glob</a> |
+    <a href="#is_dir">is_dir</a> |
+    <a href="#is_executable">is_executable</a> |
+    <a href="#is_file">is_file</a> |
+    <a href="#is_link">is_link</a> |
+    <a href="#is_readable">is_readable</a> |
+    <a href="#is_uploaded_file">is_uploaded_file</a> |
+    <a href="#is_writable">is_writable</a> |
+    <a href="#is_writeable">is_writeable</a> |
+    <a href="#lchgrp">lchgrp</a> |
+    <a href="#lchown">lchown</a> |
+    <a href="#link">link</a> |
+    <a href="#linkinfo">linkinfo</a> |
+    <a href="#lstat">lstat</a> |
+    <a href="#mkdir">mkdir</a> |
+    <a href="#move_uploaded_file">move_uploaded_file</a> |
+    <a href="#parse_ini_file">parse_ini_file</a> |
+    <a href="#parse_ini_string">parse_ini_string</a> |
+    <a href="#pathinfo">pathinfo</a> |
+    <a href="#pclose">pclose</a> |
+    <a href="#popen">popen</a> |
+    <a href="#readfile">readfile</a> |
+    <a href="#readlink">readlink</a> |
+    <a href="#realpath">realpath</a> |
+    <a href="#realpath_cache_get">realpath_cache_get</a> |
+    <a href="#realpath_cache_size">realpath_cache_size</a> |
+    <a href="#rename">rename</a> |
+    <a href="#rewind">rewind</a> |
+    <a href="#rmdir">rmdir</a> |
+    <a href="#set_file_buffer">set_file_buffer</a> |
+    <a href="#stat">stat</a> |
+    <a href="#symlink">symlink</a> |
+    <a href="#tempnam">tempnam</a> |
+    <a href="#tmpfile">tmpfile</a> |
+    <a href="#touch">touch</a> |
+    <a href="#umask">umask</a> |
+    <a href="#unlink">unlink</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation/Configuration</h4>
+<h4 id="basename">basename</h4>
+<h4 id="chgrp">chgrp</h4>
+<h4 id="chmod">chmod</h4>
+<h4 id="chown">chown</h4>
+<h4 id="clearstatcache">clearstatcache</h4>
+<h4 id="copy">copy</h4>
+<h4 id="delete">delete</h4>
+<h4 id="dirname">dirname</h4>
+<h4 id="disk_free_space">disk_free_space</h4>
+<h4 id="disk_total_space">disk_total_space</h4>
+<h4 id="diskfreespace">diskfreespace</h4>
+<h4 id="fclose">fclose</h4>
+<h4 id="fdatasync">fdatasync</h4>
+<h4 id="feof">feof</h4>
+<h4 id="fflush">fflush</h4>
+<h4 id="fgetc">fgetc</h4>
+<h4 id="fgetcsv">fgetcsv</h4>
+<h4 id="fgets">fgets</h4>
+<h4 id="fgetss">fgetss</h4>
+<h4 id="file">file</h4>
+<h4 id="file_exists">file_exists</h4>
+<h4 id="file_get_contents">file_get_contents</h4>
+<h4 id="file_put_contents">file_put_contents</h4>
+<h4 id="fileatime">fileatime</h4>
+<h4 id="filectime">filectime</h4>
+<h4 id="filegroup">filegroup</h4>
+<h4 id="fileinode">fileinode</h4>
+<h4 id="filemtime">filemtime</h4>
+<h4 id="fileowner">fileowner</h4>
+<h4 id="fileperms">fileperms</h4>
+<h4 id="filesize">filesize</h4>
+<h4 id="filetype">filetype</h4>
+<h4 id="flock">flock</h4>
+<h4 id="fnmatch">fnmatch</h4>
+<h4 id="fopen">fopen</h4>
+<h4 id="fpassthru">fpassthru</h4>
+<h4 id="fputcsv">fputcsv</h4>
+<h4 id="fputs">fputs</h4>
+<h4 id="fread">fread</h4>
+<h4 id="fscanf">fscanf</h4>
+<h4 id="fseek">fseek</h4>
+<h4 id="fstat">fstat</h4>
+<h4 id="fsync">fsync</h4>
+<h4 id="ftell">ftell</h4>
+<h4 id="ftruncate">ftruncate</h4>
+<h4 id="fwrite">fwrite</h4>
+<h4 id="glob">glob</h4>
+<h4 id="is_dir">is_dir</h4>
+<h4 id="is_executable">is_executable</h4>
+<h4 id="is_file">is_file</h4>
+<h4 id="is_link">is_link</h4>
+<h4 id="is_readable">is_readable</h4>
+<h4 id="is_uploaded_file">is_uploaded_file</h4>
+<h4 id="is_writable">is_writable</h4>
+<h4 id="is_writeable">is_writeable</h4>
+<h4 id="lchgrp">lchgrp</h4>
+<h4 id="lchown">lchown</h4>
+<h4 id="link">link</h4>
+<h4 id="linkinfo">linkinfo</h4>
+<h4 id="lstat">lstat</h4>
+<h4 id="mkdir">mkdir</h4>
+<h4 id="move_uploaded_file">move_uploaded_file</h4>
+<h4 id="parse_ini_file">parse_ini_file</h4>
+<h4 id="parse_ini_string">parse_ini_string</h4>
+<h4 id="pathinfo">pathinfo</h4>
+<h4 id="pclose">pclose</h4>
+<h4 id="popen">popen</h4>
+<h4 id="readfile">readfile</h4>
+<h4 id="readlink">readlink</h4>
+<h4 id="realpath">realpath</h4>
+<h4 id="realpath_cache_get">realpath_cache_get</h4>
+<h4 id="realpath_cache_size">realpath_cache_size</h4>
+<h4 id="rename">rename</h4>
+<h4 id="rewind">rewind</h4>
+<h4 id="rmdir">rmdir</h4>
+<h4 id="set_file_buffer">set_file_buffer</h4>
+<h4 id="stat">stat</h4>
+<h4 id="symlink">symlink</h4>
+<h4 id="tempnam">tempnam</h4>
+<h4 id="tmpfile">tmpfile</h4>
+<h4 id="touch">touch</h4>
+<h4 id="umask">umask</h4>
+<h4 id="unlink">unlink</h4>
+
+<h4 id="inotify">Inotify</h4>
+
+<nav>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#inotify-functions">Inotify Functions</a> |
+    <a href="#inotify_add_watch">inotify_add_watch</a> |
+    <a href="#inotify_init">inotify_init</a> |
+    <a href="#inotify_queue_len">inotify_queue_len</a> |
+    <a href="#inotify_read">inotify_read</a> |
+    <a href="#inotify_rm_watch">inotify_rm_watch</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="inotify-functions">Inotify Functions</h4>
+<h4 id="inotify_add_watch">inotify_add_watch</h4>
+<h4 id="inotify_init">inotify_init</h4>
+<h4 id="inotify_queue_len">inotify_queue_len</h4>
+<h4 id="inotify_read">inotify_read</h4>
+<h4 id="inotify_rm_watch">inotify_rm_watch</h4>
+
+
+<h4 id="xattr">xattr</h4>
+
+<nav>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#xattr_get">xattr_get</a> |
+    <a href="#xattr_list">xattr_list</a> |
+    <a href="#xattr_remove">xattr_remove</a> |
+    <a href="#xattr_set">xattr_set</a> |
+    <a href="#xattr_supported">xattr_supported</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="xattr_get">xattr_get</h4>
+<h4 id="xattr_list">xattr_list</h4>
+<h4 id="xattr_remove">xattr_remove</h4>
+<h4 id="xattr_set">xattr_set</h4>
+<h4 id="xattr_supported">xattr_supported</h4>
+
+
+<h4 id="xdiff">xdiff</h4>
+
+<nav>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#xdiff_file_bdiff">xdiff_file_bdiff</a> |
+    <a href="#xdiff_file_bdiff_size">xdiff_file_bdiff_size</a> |
+    <a href="#xdiff_file_bpatch">xdiff_file_bpatch</a> |
+    <a href="#xdiff_file_diff">xdiff_file_diff</a> |
+    <a href="#xdiff_file_diff_binary">xdiff_file_diff_binary</a> |
+    <a href="#xdiff_file_merge3">xdiff_file_merge3</a> |
+    <a href="#xdiff_file_patch">xdiff_file_patch</a> |
+    <a href="#xdiff_file_patch_binary">xdiff_file_patch_binary</a> |
+    <a href="#xdiff_file_rabdiff">xdiff_file_rabdiff</a> |
+    <a href="#xdiff_string_bdiff">xdiff_string_bdiff</a> |
+    <a href="#xdiff_string_bdiff_size">xdiff_string_bdiff_size</a> |
+    <a href="#xdiff_string_bpatch">xdiff_string_bpatch</a> |
+    <a href="#xdiff_string_diff">xdiff_string_diff</a> |
+    <a href="#xdiff_string_diff_binary">xdiff_string_diff_binary</a> |
+    <a href="#xdiff_string_merge3">xdiff_string_merge3</a> |
+    <a href="#xdiff_string_patch">xdiff_string_patch</a> |
+    <a href="#xdiff_string_patch_binary">xdiff_string_patch_binary</a> |
+    <a href="#xdiff_string_rabdiff">xdiff_string_rabdiff</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="xdiff_file_bdiff">xdiff_file_bdiff</h4>
+<h4 id="xdiff_file_bdiff_size">xdiff_file_bdiff_size</h4>
+<h4 id="xdiff_file_bpatch">xdiff_file_bpatch</h4>
+<h4 id="xdiff_file_diff">xdiff_file_diff</h4>
+<h4 id="xdiff_file_diff_binary">xdiff_file_diff_binary</h4>
+<h4 id="xdiff_file_merge3">xdiff_file_merge3</h4>
+<h4 id="xdiff_file_patch">xdiff_file_patch</h4>
+<h4 id="xdiff_file_patch_binary">xdiff_file_patch_binary</h4>
+<h4 id="xdiff_file_rabdiff">xdiff_file_rabdiff</h4>
+<h4 id="xdiff_string_bdiff">xdiff_string_bdiff</h4>
+<h4 id="xdiff_string_bdiff_size">xdiff_string_bdiff_size</h4>
+<h4 id="xdiff_string_bpatch">xdiff_string_bpatch</h4>
+<h4 id="xdiff_string_diff">xdiff_string_diff</h4>
+<h4 id="xdiff_string_diff_binary">xdiff_string_diff_binary</h4>
+<h4 id="xdiff_string_merge3">xdiff_string_merge3</h4>
+<h4 id="xdiff_string_patch">xdiff_string_patch</h4>
+<h4 id="xdiff_string_patch_binary">xdiff_string_patch_binary</h4>
+<h4 id="xdiff_string_rabdiff">xdiff_string_rabdiff</h4>
 
 <h3 id="human-language-and-character-encoding-support">HUMAN LANGUAGE AND CHARACTER ENCODING SUPPORT</h3>
-.
+
+soon...
 
 <h3 id="image-processing-and-generation">IMAGE PROCESSING AND GENERATION</h3>
 .
