@@ -10328,18 +10328,258 @@
 
 <h4 id="IMAP">IMAP</h4>
 
-soon...
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation-configuration">Installation/Configuration</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#runtime-configuration">Runtime Configuration</a> |
+    <a href="#resource-types">Resource Types</a> |
+    <a href="#predefined-constants">Predefined Constants</a> |
+    <a href="#imap-functions">IMAP Functions</a> |
+    <a href="#imap_8bit">imap_8bit</a> |
+    <a href="#imap_alerts">imap_alerts</a> |
+    <a href="#imap_append">imap_append</a> |
+    <a href="#imap_base64">imap_base64</a> |
+    <a href="#imap_binary">imap_binary</a> |
+    <a href="#imap_body">imap_body</a> |
+    <a href="#imap_bodystruct">imap_bodystruct</a> |
+    <a href="#imap_check">imap_check</a> |
+    <a href="#imap_clearflag_full">imap_clearflag_full</a> |
+    <a href="#imap_close">imap_close</a> |
+    <a href="#imap_create">imap_create</a> |
+    <a href="#imap_createmailbox">imap_createmailbox</a> |
+    <a href="#imap_delete">imap_delete</a> |
+    <a href="#imap_deletemailbox">imap_deletemailbox</a> |
+    <a href="#imap_errors">imap_errors</a> |
+    <a href="#imap_expunge">imap_expunge</a> |
+    <a href="#imap_fetch_overview">imap_fetch_overview</a> |
+    <a href="#imap_fetchbody">imap_fetchbody</a> |
+    <a href="#imap_fetchheader">imap_fetchheader</a> |
+    <a href="#imap_fetchmime">imap_fetchmime</a> |
+    <a href="#imap_fetchstructure">imap_fetchstructure</a> |
+    <a href="#imap_fetchtext">imap_fetchtext</a> |
+    <a href="#imap_gc">imap_gc</a> |
+    <a href="#imap_get_quota">imap_get_quota</a> |
+    <a href="#imap_get_quotaroot">imap_get_quotaroot</a> |
+    <a href="#imap_getacl">imap_getacl</a> |
+    <a href="#imap_getmailboxes">imap_getmailboxes</a> |
+    <a href="#imap_getsubscribed">imap_getsubscribed</a> |
+    <a href="#imap_header">imap_header</a> |
+    <a href="#imap_headerinfo">imap_headerinfo</a> |
+    <a href="#imap_headers">imap_headers</a> |
+    <a href="#imap_is_open">imap_is_open</a> |
+    <a href="#imap_last_error">imap_last_error</a> |
+    <a href="#imap_list">imap_list</a> |
+    <a href="#imap_listmailbox">imap_listmailbox</a> |
+    <a href="#imap_listscan">imap_listscan</a> |
+    <a href="#imap_listsubscribed">imap_listsubscribed</a> |
+    <a href="#imap_lsub">imap_lsub</a> |
+    <a href="#imap_mail">imap_mail</a> |
+    <a href="#imap_mail_compose">imap_mail_compose</a> |
+    <a href="#imap_mail_copy">imap_mail_copy</a> |
+    <a href="#imap_mail_move">imap_mail_move</a> |
+    <a href="#imap_mailboxmsginfo">imap_mailboxmsginfo</a> |
+    <a href="#imap_mime_header_decode">imap_mime_header_decode</a> |
+    <a href="#imap_msgno">imap_msgno</a> |
+    <a href="#imap_mutf7_to_utf8">imap_mutf7_to_utf8</a> |
+    <a href="#imap_num_msg">imap_num_msg</a> |
+    <a href="#imap_num_recent">imap_num_recent</a> |
+    <a href="#imap_open">imap_open</a> |
+    <a href="#imap_ping">imap_ping</a> |
+    <a href="#imap_qprint">imap_qprint</a> |
+    <a href="#imap_rename">imap_rename</a> |
+    <a href="#imap_renamemailbox">imap_renamemailbox</a> |
+    <a href="#imap_reopen">imap_reopen</a> |
+    <a href="#imap_rfc822_parse_adrlist">imap_rfc822_parse_adrlist</a> |
+    <a href="#imap_rfc822_parse_headers">imap_rfc822_parse_headers</a> |
+    <a href="#imap_rfc822_write_address">imap_rfc822_write_address</a> |
+    <a href="#imap_savebody">imap_savebody</a> |
+    <a href="#imap_scan">imap_scan</a> |
+    <a href="#imap_scanmailbox">imap_scanmailbox</a> |
+    <a href="#imap_search">imap_search</a> |
+    <a href="#imap_set_quota">imap_set_quota</a> |
+    <a href="#imap_setacl">imap_setacl</a> |
+    <a href="#imap_setflag_full">imap_setflag_full</a> |
+    <a href="#imap_sort">imap_sort</a> |
+    <a href="#imap_status">imap_status</a> |
+    <a href="#imap_subscribe">imap_subscribe</a> |
+    <a href="#imap_thread">imap_thread</a> |
+    <a href="#imap_timeout">imap_timeout</a> |
+    <a href="#imap_uid">imap_uid</a> |
+    <a href="#imap_undelete">imap_undelete</a> |
+    <a href="#imap_unsubscribe">imap_unsubscribe</a> |
+    <a href="#imap_utf7_decode">imap_utf7_decode</a> |
+    <a href="#imap_utf7_encode">imap_utf7_encode</a> |
+    <a href="#imap_utf8">imap_utf8</a> |
+    <a href="#imap_utf8_to_mutf7">imap_utf8_to_mutf7</a> |
+    <a href="#imap-connection">IMAP\Connection</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation-configuration">Installation/Configuration</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="runtime-configuration">Runtime Configuration</h4>
+<h4 id="resource-types">Resource Types</h4>
+<h4 id="predefined-constants">Predefined Constants</h4>
+<h4 id="imap-functions">IMAP Functions</h4>
+<h4 id="imap_8bit">imap_8bit</h4>
+<h4 id="imap_alerts">imap_alerts</h4>
+<h4 id="imap_append">imap_append</h4>
+<h4 id="imap_base64">imap_base64</h4>
+<h4 id="imap_binary">imap_binary</h4>
+<h4 id="imap_body">imap_body</h4>
+<h4 id="imap_bodystruct">imap_bodystruct</h4>
+<h4 id="imap_check">imap_check</h4>
+<h4 id="imap_clearflag_full">imap_clearflag_full</h4>
+<h4 id="imap_close">imap_close</h4>
+<h4 id="imap_create">imap_create</h4>
+<h4 id="imap_createmailbox">imap_createmailbox</h4>
+<h4 id="imap_delete">imap_delete</h4>
+<h4 id="imap_deletemailbox">imap_deletemailbox</h4>
+<h4 id="imap_errors">imap_errors</h4>
+<h4 id="imap_expunge">imap_expunge</h4>
+<h4 id="imap_fetch_overview">imap_fetch_overview</h4>
+<h4 id="imap_fetchbody">imap_fetchbody</h4>
+<h4 id="imap_fetchheader">imap_fetchheader</h4>
+<h4 id="imap_fetchmime">imap_fetchmime</h4>
+<h4 id="imap_fetchstructure">imap_fetchstructure</h4>
+<h4 id="imap_fetchtext">imap_fetchtext</h4>
+<h4 id="imap_gc">imap_gc</h4>
+<h4 id="imap_get_quota">imap_get_quota</h4>
+<h4 id="imap_get_quotaroot">imap_get_quotaroot</h4>
+<h4 id="imap_getacl">imap_getacl</h4>
+<h4 id="imap_getmailboxes">imap_getmailboxes</h4>
+<h4 id="imap_getsubscribed">imap_getsubscribed</h4>
+<h4 id="imap_header">imap_header</h4>
+<h4 id="imap_headerinfo">imap_headerinfo</h4>
+<h4 id="imap_headers">imap_headers</h4>
+<h4 id="imap_is_open">imap_is_open</h4>
+<h4 id="imap_last_error">imap_last_error</h4>
+<h4 id="imap_list">imap_list</h4>
+<h4 id="imap_listmailbox">imap_listmailbox</h4>
+<h4 id="imap_listscan">imap_listscan</h4>
+<h4 id="imap_listsubscribed">imap_listsubscribed</h4>
+<h4 id="imap_lsub">imap_lsub</h4>
+<h4 id="imap_mail">imap_mail</h4>
+<h4 id="imap_mail_compose">imap_mail_compose</h4>
+<h4 id="imap_mail_copy">imap_mail_copy</h4>
+<h4 id="imap_mail_move">imap_mail_move</h4>
+<h4 id="imap_mailboxmsginfo">imap_mailboxmsginfo</h4>
+<h4 id="imap_mime_header_decode">imap_mime_header_decode</h4>
+<h4 id="imap_msgno">imap_msgno</h4>
+<h4 id="imap_mutf7_to_utf8">imap_mutf7_to_utf8</h4>
+<h4 id="imap_num_msg">imap_num_msg</h4>
+<h4 id="imap_num_recent">imap_num_recent</h4>
+<h4 id="imap_open">imap_open</h4>
+<h4 id="imap_ping">imap_ping</h4>
+<h4 id="imap_qprint">imap_qprint</h4>
+<h4 id="imap_rename">imap_rename</h4>
+<h4 id="imap_renamemailbox">imap_renamemailbox</h4>
+<h4 id="imap_reopen">imap_reopen</h4>
+<h4 id="imap_rfc822_parse_adrlist">imap_rfc822_parse_adrlist</h4>
+<h4 id="imap_rfc822_parse_headers">imap_rfc822_parse_headers</h4>
+<h4 id="imap_rfc822_write_address">imap_rfc822_write_address</h4>
+<h4 id="imap_savebody">imap_savebody</h4>
+<h4 id="imap_scan">imap_scan</h4>
+<h4 id="imap_scanmailbox">imap_scanmailbox</h4>
+<h4 id="imap_search">imap_search</h4>
+<h4 id="imap_set_quota">imap_set_quota</h4>
+<h4 id="imap_setacl">imap_setacl</h4>
+<h4 id="imap_setflag_full">imap_setflag_full</h4>
+<h4 id="imap_sort">imap_sort</h4>
+<h4 id="imap_status">imap_status</h4>
+<h4 id="imap_subscribe">imap_subscribe</h4>
+<h4 id="imap_thread">imap_thread</h4>
+<h4 id="imap_timeout">imap_timeout</h4>
+<h4 id="imap_uid">imap_uid</h4>
+<h4 id="imap_undelete">imap_undelete</h4>
+<h4 id="imap_unsubscribe">imap_unsubscribe</h4>
+<h4 id="imap_utf7_decode">imap_utf7_decode</h4>
+<h4 id="imap_utf7_encode">imap_utf7_encode</h4>
+<h4 id="imap_utf8">imap_utf8</h4>
+<h4 id="imap_utf8_to_mutf7">imap_utf8_to_mutf7</h4>
+<h4 id="imap-connection">IMAP\Connection</h4>
 
 <h4 id="Mail">Mail</h4>
 
-.
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#ezmlm_hash">ezmlm_hash</a> |
+    <a href="#mail">mail</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="ezmlm_hash">ezmlm_hash</h4>
+<h4 id="mail">mail</h4>
+
 
 <h4 id="Mailparse">Mailparse</h4>
 
-.
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation-configuration">Installation/Configuration</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#runtime-configuration">Runtime Configuration</a> |
+    <a href="#resource-types">Resource Types</a> |
+    <a href="#predefined-constants">Predefined Constants</a> |
+    <a href="#mailparse-functions">Mailparse Functions</a> |
+    <a href="#mailparse_determine_best_xfer_encoding">mailparse_determine_best_xfer_encoding</a> |
+    <a href="#mailparse_msg_create">mailparse_msg_create</a> |
+    <a href="#mailparse_msg_extract_part">mailparse_msg_extract_part</a> |
+    <a href="#mailparse_msg_extract_part_file">mailparse_msg_extract_part_file</a> |
+    <a href="#mailparse_msg_extract_whole_part_file">mailparse_msg_extract_whole_part_file</a> |
+    <a href="#mailparse_msg_free">mailparse_msg_free</a> |
+    <a href="#mailparse_msg_get_part">mailparse_msg_get_part</a> |
+    <a href="#mailparse_msg_get_part_data">mailparse_msg_get_part_data</a> |
+    <a href="#mailparse_msg_get_structure">mailparse_msg_get_structure</a> |
+    <a href="#mailparse_msg_parse">mailparse_msg_parse</a> |
+    <a href="#mailparse_msg_parse_file">mailparse_msg_parse_file</a> |
+    <a href="#mailparse_rfc822_parse_addresses">mailparse_rfc822_parse_addresses</a> |
+    <a href="#mailparse_stream_encode">mailparse_stream_encode</a> |
+    <a href="#mailparse_uudecode_all">mailparse_uudecode_all</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation-configuration">Installation/Configuration</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="runtime-configuration">Runtime Configuration</h4>
+<h4 id="resource-types">Resource Types</h4>
+<h4 id="predefined-constants">Predefined Constants</h4>
+<h4 id="mailparse-functions">Mailparse Functions</h4>
+<h4 id="mailparse_determine_best_xfer_encoding">mailparse_determine_best_xfer_encoding</h4>
+<h4 id="mailparse_msg_create">mailparse_msg_create</h4>
+<h4 id="mailparse_msg_extract_part">mailparse_msg_extract_part</h4>
+<h4 id="mailparse_msg_extract_part_file">mailparse_msg_extract_part_file</h4>
+<h4 id="mailparse_msg_extract_whole_part_file">mailparse_msg_extract_whole_part_file</h4>
+<h4 id="mailparse_msg_free">mailparse_msg_free</h4>
+<h4 id="mailparse_msg_get_part">mailparse_msg_get_part</h4>
+<h4 id="mailparse_msg_get_part_data">mailparse_msg_get_part_data</h4>
+<h4 id="mailparse_msg_get_structure">mailparse_msg_get_structure</h4>
+<h4 id="mailparse_msg_parse">mailparse_msg_parse</h4>
+<h4 id="mailparse_msg_parse_file">mailparse_msg_parse_file</h4>
+<h4 id="mailparse_rfc822_parse_addresses">mailparse_rfc822_parse_addresses</h4>
+<h4 id="mailparse_stream_encode">mailparse_stream_encode</h4>
+<h4 id="mailparse_uudecode_all">mailparse_uudecode_all</h4>
+
 
 <h3 id="mathematical-extensions">MATHEMATICAL EXTENSIONS</h3>
-.
+
+soon...
 
 <h3 id="non-text-mime-output">NON-TEXT MIME OUTPUT</h3>
 .
