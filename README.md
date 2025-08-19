@@ -9006,7 +9006,7 @@
 
 <h3 id="image-processing-and-generation">IMAGE PROCESSING AND GENERATION</h3>
 
-.
+soon...
 
 <h3 id="mail-related-extensions">MAIL RELATED EXTENSIONS</h3>
 .
