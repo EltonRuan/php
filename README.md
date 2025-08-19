@@ -7913,7 +7913,51 @@
 
 <h3 id="human-language-and-character-encoding-support">HUMAN LANGUAGE AND CHARACTER ENCODING SUPPORT</h3>
 
+<nav>
+  <p>
+    <a href="#enchant">Enchant</a> |
+    <a href="#gender">Gender</a> |
+    <a href="#gettext">Gettext</a> |
+    <a href="#iconv">iconv</a> |
+    <a href="#intl">intl</a> |
+    <a href="#string-multibyte">String Multibyte</a> |
+    <a href="#pspell">Pspell</a> |
+    <a href="#recode">Recode</a>
+  </p>
+</nav>
+
+<h4 id="enchant">Enchant</h4>
+
 soon...
+
+<h4 id="gender">Gender</h4>
+
+.
+
+<h4 id="gettext">Gettext</h4>
+
+.
+
+<h4 id="iconv">iconv</h4>
+
+.
+
+<h4 id="intl">intl</h4>
+
+.
+
+<h4 id="string-multibyte">String Multibyte</h4>
+
+.
+
+<h4 id="pspell">Pspell</h4>
+
+.
+
+<h4 id="recode">Recode</h4>
+
+.
+
 
 <h3 id="image-processing-and-generation">IMAGE PROCESSING AND GENERATION</h3>
 .
