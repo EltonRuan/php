@@ -11874,10 +11874,1105 @@
 
 <h3 id="process-control-extensions">PROCESS CONTROL EXTENSIONS</h3>
 
-soon...
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#eio">Eio</a> |
+    <a href="#ev">Ev</a> |
+    <a href="#expect">Expect</a> |
+    <a href="#pcntl">PCNTL</a> |
+    <a href="#posix">POSIX</a> |
+    <a href="#program-execution">Program Execution</a> |
+    <a href="#parallel">parallel</a> |
+    <a href="#pthreads">pthreads</a> |
+    <a href="#semaphore">Semaphore</a> |
+    <a href="#shared-memory">Shared Memory</a> |
+    <a href="#sync">Sync</a>
+  </p>
+</nav>
+
+<h4 id="eio">Eio</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#eio-busy">eio_busy</a> |
+    <a href="#eio-cancel">eio_cancel</a> |
+    <a href="#eio-chmod">eio_chmod</a> |
+    <a href="#eio-chown">eio_chown</a> |
+    <a href="#eio-close">eio_close</a> |
+    <a href="#eio-custom">eio_custom</a> |
+    <a href="#eio-dup2">eio_dup2</a> |
+    <a href="#eio-event-loop">eio_event_loop</a> |
+    <a href="#eio-fallocate">eio_fallocate</a> |
+    <a href="#eio-fchmod">eio_fchmod</a> |
+    <a href="#eio-fchown">eio_fchown</a> |
+    <a href="#eio-fdatasync">eio_fdatasync</a> |
+    <a href="#eio-fstat">eio_fstat</a> |
+    <a href="#eio-fstatvfs">eio_fstatvfs</a> |
+    <a href="#eio-fsync">eio_fsync</a> |
+    <a href="#eio-ftruncate">eio_ftruncate</a> |
+    <a href="#eio-futime">eio_futime</a> |
+    <a href="#eio-get-event-stream">eio_get_event_stream</a> |
+    <a href="#eio-get-last-error">eio_get_last_error</a> |
+    <a href="#eio-grp">eio_grp</a> |
+    <a href="#eio-grp-add">eio_grp_add</a> |
+    <a href="#eio-grp-cancel">eio_grp_cancel</a> |
+    <a href="#eio-grp-limit">eio_grp_limit</a> |
+    <a href="#eio-init">eio_init</a> |
+    <a href="#eio-link">eio_link</a> |
+    <a href="#eio-lstat">eio_lstat</a> |
+    <a href="#eio-mkdir">eio_mkdir</a> |
+    <a href="#eio-mknod">eio_mknod</a> |
+    <a href="#eio-nop">eio_nop</a> |
+    <a href="#eio-npending">eio_npending</a> |
+    <a href="#eio-nready">eio_nready</a> |
+    <a href="#eio-nreqs">eio_nreqs</a> |
+    <a href="#eio-nthreads">eio_nthreads</a> |
+    <a href="#eio-open">eio_open</a> |
+    <a href="#eio-poll">eio_poll</a> |
+    <a href="#eio-read">eio_read</a> |
+    <a href="#eio-readahead">eio_readahead</a> |
+    <a href="#eio-readdir">eio_readdir</a> |
+    <a href="#eio-readlink">eio_readlink</a> |
+    <a href="#eio-realpath">eio_realpath</a> |
+    <a href="#eio-rename">eio_rename</a> |
+    <a href="#eio-rmdir">eio_rmdir</a> |
+    <a href="#eio-seek">eio_seek</a> |
+    <a href="#eio-sendfile">eio_sendfile</a> |
+    <a href="#eio-set-max-idle">eio_set_max_idle</a> |
+    <a href="#eio-set-max-parallel">eio_set_max_parallel</a> |
+    <a href="#eio-set-max-poll-reqs">eio_set_max_poll_reqs</a> |
+    <a href="#eio-set-max-poll-time">eio_set_max_poll_time</a> |
+    <a href="#eio-set-min-parallel">eio_set_min_parallel</a> |
+    <a href="#eio-stat">eio_stat</a> |
+    <a href="#eio-statvfs">eio_statvfs</a> |
+    <a href="#eio-symlink">eio_symlink</a> |
+    <a href="#eio-sync">eio_sync</a> |
+    <a href="#eio-sync-file-range">eio_sync_file_range</a> |
+    <a href="#eio-syncfs">eio_syncfs</a> |
+    <a href="#eio-truncate">eio_truncate</a> |
+    <a href="#eio-unlink">eio_unlink</a> |
+    <a href="#eio-utime">eio_utime</a> |
+    <a href="#eio-write">eio_write</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="eio-busy">eio_busy</h4>
+<h4 id="eio-cancel">eio_cancel</h4>
+<h4 id="eio-chmod">eio_chmod</h4>
+<h4 id="eio-chown">eio_chown</h4>
+<h4 id="eio-close">eio_close</h4>
+<h4 id="eio-custom">eio_custom</h4>
+<h4 id="eio-dup2">eio_dup2</h4>
+<h4 id="eio-event-loop">eio_event_loop</h4>
+<h4 id="eio-fallocate">eio_fallocate</h4>
+<h4 id="eio-fchmod">eio_fchmod</h4>
+<h4 id="eio-fchown">eio_fchown</h4>
+<h4 id="eio-fdatasync">eio_fdatasync</h4>
+<h4 id="eio-fstat">eio_fstat</h4>
+<h4 id="eio-fstatvfs">eio_fstatvfs</h4>
+<h4 id="eio-fsync">eio_fsync</h4>
+<h4 id="eio-ftruncate">eio_ftruncate</h4>
+<h4 id="eio-futime">eio_futime</h4>
+<h4 id="eio-get-event-stream">eio_get_event_stream</h4>
+<h4 id="eio-get-last-error">eio_get_last_error</h4>
+<h4 id="eio-grp">eio_grp</h4>
+<h4 id="eio-grp-add">eio_grp_add</h4>
+<h4 id="eio-grp-cancel">eio_grp_cancel</h4>
+<h4 id="eio-grp-limit">eio_grp_limit</h4>
+<h4 id="eio-init">eio_init</h4>
+<h4 id="eio-link">eio_link</h4>
+<h4 id="eio-lstat">eio_lstat</h4>
+<h4 id="eio-mkdir">eio_mkdir</h4>
+<h4 id="eio-mknod">eio_mknod</h4>
+<h4 id="eio-nop">eio_nop</h4>
+<h4 id="eio-npending">eio_npending</h4>
+<h4 id="eio-nready">eio_nready</h4>
+<h4 id="eio-nreqs">eio_nreqs</h4>
+<h4 id="eio-nthreads">eio_nthreads</h4>
+<h4 id="eio-open">eio_open</h4>
+<h4 id="eio-poll">eio_poll</h4>
+<h4 id="eio-read">eio_read</h4>
+<h4 id="eio-readahead">eio_readahead</h4>
+<h4 id="eio-readdir">eio_readdir</h4>
+<h4 id="eio-readlink">eio_readlink</h4>
+<h4 id="eio-realpath">eio_realpath</h4>
+<h4 id="eio-rename">eio_rename</h4>
+<h4 id="eio-rmdir">eio_rmdir</h4>
+<h4 id="eio-seek">eio_seek</h4>
+<h4 id="eio-sendfile">eio_sendfile</h4>
+<h4 id="eio-set-max-idle">eio_set_max_idle</h4>
+<h4 id="eio-set-max-parallel">eio_set_max_parallel</h4>
+<h4 id="eio-set-max-poll-reqs">eio_set_max_poll_reqs</h4>
+<h4 id="eio-set-max-poll-time">eio_set_max_poll_time</h4>
+<h4 id="eio-set-min-parallel">eio_set_min_parallel</h4>
+<h4 id="eio-stat">eio_stat</h4>
+<h4 id="eio-statvfs">eio_statvfs</h4>
+<h4 id="eio-symlink">eio_symlink</h4>
+<h4 id="eio-sync">eio_sync</h4>
+<h4 id="eio-sync-file-range">eio_sync_file_range</h4>
+<h4 id="eio-syncfs">eio_syncfs</h4>
+<h4 id="eio-truncate">eio_truncate</h4>
+<h4 id="eio-unlink">eio_unlink</h4>
+<h4 id="eio-utime">eio_utime</h4>
+<h4 id="eio-write">eio_write</h4>
+
+<h4 id="ev">Ev</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#observers">Observers</a> |
+    <a href="#observer-callbacks">Observer Callbacks</a> |
+    <a href="#periodic-observer-modes">Periodic Observer Modes</a> |
+    <a href="#ev">Ev</a> |
+    <a href="#ev-backend">Ev::backend</a> |
+    <a href="#ev-depth">Ev::depth</a> |
+    <a href="#ev-embeddablebackends">Ev::embeddableBackends</a> |
+    <a href="#ev-feedsignal">Ev::feedSignal</a> |
+    <a href="#ev-feedsignalevent">Ev::feedSignalEvent</a> |
+    <a href="#ev-iteration">Ev::iteration</a> |
+    <a href="#ev-now">Ev::now</a> |
+    <a href="#ev-nowupdate">Ev::nowUpdate</a> |
+    <a href="#ev-recommendedbackends">Ev::recommendedBackends</a> |
+    <a href="#ev-resume">Ev::resume</a> |
+    <a href="#ev-run">Ev::run</a> |
+    <a href="#ev-sleep">Ev::sleep</a> |
+    <a href="#ev-stop">Ev::stop</a> |
+    <a href="#ev-supportedbackends">Ev::supportedBackends</a> |
+    <a href="#ev-suspend">Ev::suspend</a> |
+    <a href="#ev-time">Ev::time</a> |
+    <a href="#ev-verify">Ev::verify</a> |
+    <a href="#evcheck">EvCheck</a> |
+    <a href="#evcheck-construct">EvCheck::__construct</a> |
+    <a href="#evcheck-createstopped">EvCheck::createStopped</a> |
+    <a href="#evchild">EvChild</a> |
+    <a href="#evchild-construct">EvChild::__construct</a> |
+    <a href="#evchild-createstopped">EvChild::createStopped</a> |
+    <a href="#evchild-set">EvChild::set</a> |
+    <a href="#evembed">EvEmbed</a> |
+    <a href="#evembed-construct">EvEmbed::__construct</a> |
+    <a href="#evembed-createstopped">EvEmbed::createStopped</a> |
+    <a href="#evembed-set">EvEmbed::set</a> |
+    <a href="#evembed-sweep">EvEmbed::sweep</a> |
+    <a href="#evfork">EvFork</a> |
+    <a href="#evfork-construct">EvFork::__construct</a> |
+    <a href="#evfork-createstopped">EvFork::createStopped</a> |
+    <a href="#evidle">EvIdle</a> |
+    <a href="#evidle-construct">EvIdle::__construct</a> |
+    <a href="#evidle-createstopped">EvIdle::createStopped</a> |
+    <a href="#evio">EvIo</a> |
+    <a href="#evio-construct">EvIo::__construct</a> |
+    <a href="#evio-createstopped">EvIo::createStopped</a> |
+    <a href="#evio-set">EvIo::set</a> |
+    <a href="#evloop">EvLoop</a> |
+    <a href="#evloop-backend">EvLoop::backend</a> |
+    <a href="#evloop-check">EvLoop::check</a> |
+    <a href="#evloop-child">EvLoop::child</a> |
+    <a href="#evloop-construct">EvLoop::__construct</a> |
+    <a href="#evloop-defaultloop">EvLoop::defaultLoop</a> |
+    <a href="#evloop-embed">EvLoop::embed</a> |
+    <a href="#evloop-fork">EvLoop::fork</a> |
+    <a href="#evloop-idle">EvLoop::idle</a> |
+    <a href="#evloop-invokepending">EvLoop::invokePending</a> |
+    <a href="#evloop-io">EvLoop::io</a> |
+    <a href="#evloop-loopfork">EvLoop::loopFork</a> |
+    <a href="#evloop-now">EvLoop::now</a> |
+    <a href="#evloop-nowupdate">EvLoop::nowUpdate</a> |
+    <a href="#evloop-periodic">EvLoop::periodic</a> |
+    <a href="#evloop-prepare">EvLoop::prepare</a> |
+    <a href="#evloop-resume">EvLoop::resume</a> |
+    <a href="#evloop-run">EvLoop::run</a> |
+    <a href="#evloop-signal">EvLoop::signal</a> |
+    <a href="#evloop-stat">EvLoop::stat</a> |
+    <a href="#evloop-stop">EvLoop::stop</a> |
+    <a href="#evloop-suspend">EvLoop::suspend</a> |
+    <a href="#evloop-timer">EvLoop::timer</a> |
+    <a href="#evloop-verify">EvLoop::verify</a> |
+    <a href="#evperiodic">EvPeriodic</a> |
+    <a href="#evperiodic-again">EvPeriodic::again</a> |
+    <a href="#evperiodic-at">EvPeriodic::at</a> |
+    <a href="#evperiodic-construct">EvPeriodic::__construct</a> |
+    <a href="#evperiodic-createstopped">EvPeriodic::createStopped</a> |
+    <a href="#evperiodic-set">EvPeriodic::set</a> |
+    <a href="#evprepare">EvPrepare</a> |
+    <a href="#evprepare-construct">EvPrepare::__construct</a> |
+    <a href="#evprepare-createstopped">EvPrepare::createStopped</a> |
+    <a href="#evsignal">EvSignal</a> |
+    <a href="#evsignal-construct">EvSignal::__construct</a> |
+    <a href="#evsignal-createstopped">EvSignal::createStopped</a> |
+    <a href="#evsignal-set">EvSignal::set</a> |
+    <a href="#evstat">EvStat</a> |
+    <a href="#evstat-attr">EvStat::attr</a> |
+    <a href="#evstat-construct">EvStat::__construct</a> |
+    <a href="#evstat-createstopped">EvStat::createStopped</a> |
+    <a href="#evstat-prev">EvStat::prev</a> |
+    <a href="#evstat-set">EvStat::set</a> |
+    <a href="#evstat-stat">EvStat::stat</a> |
+    <a href="#evtimer">EvTimer</a> |
+    <a href="#evtimer-again">EvTimer::again</a> |
+    <a href="#evtimer-construct">EvTimer::__construct</a> |
+    <a href="#evtimer-createstopped">EvTimer::createStopped</a> |
+    <a href="#evtimer-set">EvTimer::set</a> |
+    <a href="#evwatcher">EvWatcher</a> |
+    <a href="#evwatcher-clear">EvWatcher::clear</a> |
+    <a href="#evwatcher-construct">EvWatcher::__construct</a> |
+    <a href="#evwatcher-feed">EvWatcher::feed</a> |
+    <a href="#evwatcher-getloop">EvWatcher::getLoop</a> |
+    <a href="#evwatcher-invoke">EvWatcher::invoke</a> |
+    <a href="#evwatcher-keepalive">EvWatcher::keepalive</a> |
+    <a href="#evwatcher-setcallback">EvWatcher::setCallback</a> |
+    <a href="#evwatcher-start">EvWatcher::start</a> |
+    <a href="#evwatcher-stop">EvWatcher::stop</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="observers">Observers</h4>
+<h4 id="observer-callbacks">Observer Callbacks</h4>
+<h4 id="periodic-observer-modes">Periodic Observer Modes</h4>
+<h4 id="ev">Ev</h4>
+<h4 id="ev-backend">Ev::backend</h4>
+<h4 id="ev-depth">Ev::depth</h4>
+<h4 id="ev-embeddablebackends">Ev::embeddableBackends</h4>
+<h4 id="ev-feedsignal">Ev::feedSignal</h4>
+<h4 id="ev-feedsignalevent">Ev::feedSignalEvent</h4>
+<h4 id="ev-iteration">Ev::iteration</h4>
+<h4 id="ev-now">Ev::now</h4>
+<h4 id="ev-nowupdate">Ev::nowUpdate</h4>
+<h4 id="ev-recommendedbackends">Ev::recommendedBackends</h4>
+<h4 id="ev-resume">Ev::resume</h4>
+<h4 id="ev-run">Ev::run</h4>
+<h4 id="ev-sleep">Ev::sleep</h4>
+<h4 id="ev-stop">Ev::stop</h4>
+<h4 id="ev-supportedbackends">Ev::supportedBackends</h4>
+<h4 id="ev-suspend">Ev::suspend</h4>
+<h4 id="ev-time">Ev::time</h4>
+<h4 id="ev-verify">Ev::verify</h4>
+<h4 id="evcheck">EvCheck</h4>
+<h4 id="evcheck-construct">EvCheck::__construct</h4>
+<h4 id="evcheck-createstopped">EvCheck::createStopped</h4>
+<h4 id="evchild">EvChild</h4>
+<h4 id="evchild-construct">EvChild::__construct</h4>
+<h4 id="evchild-createstopped">EvChild::createStopped</h4>
+<h4 id="evchild-set">EvChild::set</h4>
+<h4 id="evembed">EvEmbed</h4>
+<h4 id="evembed-construct">EvEmbed::__construct</h4>
+<h4 id="evembed-createstopped">EvEmbed::createStopped</h4>
+<h4 id="evembed-set">EvEmbed::set</h4>
+<h4 id="evembed-sweep">EvEmbed::sweep</h4>
+<h4 id="evfork">EvFork</h4>
+<h4 id="evfork-construct">EvFork::__construct</h4>
+<h4 id="evfork-createstopped">EvFork::createStopped</h4>
+<h4 id="evidle">EvIdle</h4>
+<h4 id="evidle-construct">EvIdle::__construct</h4>
+<h4 id="evidle-createstopped">EvIdle::createStopped</h4>
+<h4 id="evio">EvIo</h4>
+<h4 id="evio-construct">EvIo::__construct</h4>
+<h4 id="evio-createstopped">EvIo::createStopped</h4>
+<h4 id="evio-set">EvIo::set</h4>
+<h4 id="evloop">EvLoop</h4>
+<h4 id="evloop-backend">EvLoop::backend</h4>
+<h4 id="evloop-check">EvLoop::check</h4>
+<h4 id="evloop-child">EvLoop::child</h4>
+<h4 id="evloop-construct">EvLoop::__construct</h4>
+<h4 id="evloop-defaultloop">EvLoop::defaultLoop</h4>
+<h4 id="evloop-embed">EvLoop::embed</h4>
+<h4 id="evloop-fork">EvLoop::fork</h4>
+<h4 id="evloop-idle">EvLoop::idle</h4>
+<h4 id="evloop-invokepending">EvLoop::invokePending</h4>
+<h4 id="evloop-io">EvLoop::io</h4>
+<h4 id="evloop-loopfork">EvLoop::loopFork</h4>
+<h4 id="evloop-now">EvLoop::now</h4>
+<h4 id="evloop-nowupdate">EvLoop::nowUpdate</h4>
+<h4 id="evloop-periodic">EvLoop::periodic</h4>
+<h4 id="evloop-prepare">EvLoop::prepare</h4>
+<h4 id="evloop-resume">EvLoop::resume</h4>
+<h4 id="evloop-run">EvLoop::run</h4>
+<h4 id="evloop-signal">EvLoop::signal</h4>
+<h4 id="evloop-stat">EvLoop::stat</h4>
+<h4 id="evloop-stop">EvLoop::stop</h4>
+<h4 id="evloop-suspend">EvLoop::suspend</h4>
+<h4 id="evloop-timer">EvLoop::timer</h4>
+<h4 id="evloop-verify">EvLoop::verify</h4>
+<h4 id="evperiodic">EvPeriodic</h4>
+<h4 id="evperiodic-again">EvPeriodic::again</h4>
+<h4 id="evperiodic-at">EvPeriodic::at</h4>
+<h4 id="evperiodic-construct">EvPeriodic::__construct</h4>
+<h4 id="evperiodic-createstopped">EvPeriodic::createStopped</h4>
+<h4 id="evperiodic-set">EvPeriodic::set</h4>
+<h4 id="evprepare">EvPrepare</h4>
+<h4 id="evprepare-construct">EvPrepare::__construct</h4>
+<h4 id="evprepare-createstopped">EvPrepare::createStopped</h4>
+<h4 id="evsignal">EvSignal</h4>
+<h4 id="evsignal-construct">EvSignal::__construct</h4>
+<h4 id="evsignal-createstopped">EvSignal::createStopped</h4>
+<h4 id="evsignal-set">EvSignal::set</h4>
+<h4 id="evstat">EvStat</h4>
+<h4 id="evstat-attr">EvStat::attr</h4>
+<h4 id="evstat-construct">EvStat::__construct</h4>
+<h4 id="evstat-createstopped">EvStat::createStopped</h4>
+<h4 id="evstat-prev">EvStat::prev</h4>
+<h4 id="evstat-set">EvStat::set</h4>
+<h4 id="evstat-stat">EvStat::stat</h4>
+<h4 id="evtimer">EvTimer</h4>
+<h4 id="evtimer-again">EvTimer::again</h4>
+<h4 id="evtimer-construct">EvTimer::__construct</h4>
+<h4 id="evtimer-createstopped">EvTimer::createStopped</h4>
+<h4 id="evtimer-set">EvTimer::set</h4>
+<h4 id="evwatcher">EvWatcher</h4>
+<h4 id="evwatcher-clear">EvWatcher::clear</h4>
+<h4 id="evwatcher-construct">EvWatcher::__construct</h4>
+<h4 id="evwatcher-feed">EvWatcher::feed</h4>
+<h4 id="evwatcher-getloop">EvWatcher::getLoop</h4>
+<h4 id="evwatcher-invoke">EvWatcher::invoke</h4>
+<h4 id="evwatcher-keepalive">EvWatcher::keepalive</h4>
+<h4 id="evwatcher-setcallback">EvWatcher::setCallback</h4>
+<h4 id="evwatcher-start">EvWatcher::start</h4>
+<h4 id="evwatcher-stop">EvWatcher::stop</h4>
+
+
+<h4 id="expect">Expect</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#runtime-settings">Runtime Settings</a> |
+    <a href="#expect-expectl">expect_expectl</a> |
+    <a href="#expect-popen">expect_popen</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="runtime-settings">Runtime Settings</h4>
+<h4 id="expect-expectl">expect_expectl</h4>
+<h4 id="expect-popen">expect_popen</h4>
+
+
+<h4 id="pcntl">PCNTL</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#pcntl-qosclass">Pcntl\QosClass</a> |
+    <a href="#pcntl-alarm">pcntl_alarm</a> |
+    <a href="#pcntl-async-signals">pcntl_async_signals</a> |
+    <a href="#pcntl-errno">pcntl_errno</a> |
+    <a href="#pcntl-exec">pcntl_exec</a> |
+    <a href="#pcntl-fork">pcntl_fork</a> |
+    <a href="#pcntl-get-last-error">pcntl_get_last_error</a> |
+    <a href="#pcntl-getcpuaffinity">pcntl_getcpuaffinity</a> |
+    <a href="#pcntl-getpriority">pcntl_getpriority</a> |
+    <a href="#pcntl-rfork">pcntl_rfork</a> |
+    <a href="#pcntl-setcpuaffinity">pcntl_setcpuaffinity</a> |
+    <a href="#pcntl-setpriority">pcntl_setpriority</a> |
+    <a href="#pcntl-signal">pcntl_signal</a> |
+    <a href="#pcntl-signal-dispatch">pcntl_signal_dispatch</a> |
+    <a href="#pcntl-signal-get-handler">pcntl_signal_get_handler</a> |
+    <a href="#pcntl-sigprocmask">pcntl_sigprocmask</a> |
+    <a href="#pcntl-sigtimedwait">pcntl_sigtimedwait</a> |
+    <a href="#pcntl-sigwaitinfo">pcntl_sigwaitinfo</a> |
+    <a href="#pcntl-strerror">pcntl_strerror</a> |
+    <a href="#pcntl-unshare">pcntl_unshare</a> |
+    <a href="#pcntl-wait">pcntl_wait</a> |
+    <a href="#pcntl-waitid">pcntl_waitid</a> |
+    <a href="#pcntl-waitpid">pcntl_waitpid</a> |
+    <a href="#pcntl-wexitstatus">pcntl_wexitstatus</a> |
+    <a href="#pcntl-wifexited">pcntl_wifexited</a> |
+    <a href="#pcntl-wifsignaled">pcntl_wifsignaled</a> |
+    <a href="#pcntl-wifstopped">pcntl_wifstopped</a> |
+    <a href="#pcntl-wstopsig">pcntl_wstopsig</a> |
+    <a href="#pcntl-wtermsig">pcntl_wtermsig</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="pcntl-qosclass">Pcntl\QosClass</h4>
+<h4 id="pcntl-alarm">pcntl_alarm</h4>
+<h4 id="pcntl-async-signals">pcntl_async_signals</h4>
+<h4 id="pcntl-errno">pcntl_errno</h4>
+<h4 id="pcntl-exec">pcntl_exec</h4>
+<h4 id="pcntl-fork">pcntl_fork</h4>
+<h4 id="pcntl-get-last-error">pcntl_get_last_error</h4>
+<h4 id="pcntl-getcpuaffinity">pcntl_getcpuaffinity</h4>
+<h4 id="pcntl-getpriority">pcntl_getpriority</h4>
+<h4 id="pcntl-rfork">pcntl_rfork</h4>
+<h4 id="pcntl-setcpuaffinity">pcntl_setcpuaffinity</h4>
+<h4 id="pcntl-setpriority">pcntl_setpriority</h4>
+<h4 id="pcntl-signal">pcntl_signal</h4>
+<h4 id="pcntl-signal-dispatch">pcntl_signal_dispatch</h4>
+<h4 id="pcntl-signal-get-handler">pcntl_signal_get_handler</h4>
+<h4 id="pcntl-sigprocmask">pcntl_sigprocmask</h4>
+<h4 id="pcntl-sigtimedwait">pcntl_sigtimedwait</h4>
+<h4 id="pcntl-sigwaitinfo">pcntl_sigwaitinfo</h4>
+<h4 id="pcntl-strerror">pcntl_strerror</h4>
+<h4 id="pcntl-unshare">pcntl_unshare</h4>
+<h4 id="pcntl-wait">pcntl_wait</h4>
+<h4 id="pcntl-waitid">pcntl_waitid</h4>
+<h4 id="pcntl-waitpid">pcntl_waitpid</h4>
+<h4 id="pcntl-wexitstatus">pcntl_wexitstatus</h4>
+<h4 id="pcntl-wifexited">pcntl_wifexited</h4>
+<h4 id="pcntl-wifsignaled">pcntl_wifsignaled</h4>
+<h4 id="pcntl-wifstopped">pcntl_wifstopped</h4>
+<h4 id="pcntl-wstopsig">pcntl_wstopsig</h4>
+<h4 id="pcntl-wtermsig">pcntl_wtermsig</h4>
+
+
+<h4 id="posix">POSIX</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#posix-constants-access">Constantes de posix_access</a> |
+    <a href="#posix-constants-mknod">Constantes de posix_mknod</a> |
+    <a href="#posix-constants-setrlimit">Constantes de posix_setrlimit</a> |
+    <a href="#posix-constants-pathconf">Constantes de posix_pathconf</a> |
+    <a href="#posix-constants-sysconf">Constantes posix_sysconf</a> |
+    <a href="#posix-access">posix_access</a> |
+    <a href="#posix-ctermid">posix_ctermid</a> |
+    <a href="#posix-eaccess">posix_eaccess</a> |
+    <a href="#posix-errno">posix_errno</a> |
+    <a href="#posix-fpathconf">posix_fpathconf</a> |
+    <a href="#posix-get-last-error">posix_get_last_error</a> |
+    <a href="#posix-getcwd">posix_getcwd</a> |
+    <a href="#posix-getegid">posix_getegid</a> |
+    <a href="#posix-geteuid">posix_geteuid</a> |
+    <a href="#posix-getgid">posix_getgid</a> |
+    <a href="#posix-getgrgid">posix_getgrgid</a> |
+    <a href="#posix-getgrnam">posix_getgrnam</a> |
+    <a href="#posix-getgroups">posix_getgroups</a> |
+    <a href="#posix-getlogin">posix_getlogin</a> |
+    <a href="#posix-getpgid">posix_getpgid</a> |
+    <a href="#posix-getpgrp">posix_getpgrp</a> |
+    <a href="#posix-getpid">posix_getpid</a> |
+    <a href="#posix-getppid">posix_getppid</a> |
+    <a href="#posix-getpwnam">posix_getpwnam</a> |
+    <a href="#posix-getpwuid">posix_getpwuid</a> |
+    <a href="#posix-getrlimit">posix_getrlimit</a> |
+    <a href="#posix-getsid">posix_getsid</a> |
+    <a href="#posix-getuid">posix_getuid</a> |
+    <a href="#posix-initgroups">posix_initgroups</a> |
+    <a href="#posix-isatty">posix_isatty</a> |
+    <a href="#posix-kill">posix_kill</a> |
+    <a href="#posix-mkfifo">posix_mkfifo</a> |
+    <a href="#posix-mknod">posix_mknod</a> |
+    <a href="#posix-pathconf">posix_pathconf</a> |
+    <a href="#posix-setegid">posix_setegid</a> |
+    <a href="#posix-seteuid">posix_seteuid</a> |
+    <a href="#posix-setgid">posix_setgid</a> |
+    <a href="#posix-setpgid">posix_setpgid</a> |
+    <a href="#posix-setrlimit">posix_setrlimit</a> |
+    <a href="#posix-setsid">posix_setsid</a> |
+    <a href="#posix-setuid">posix_setuid</a> |
+    <a href="#posix-strerror">posix_strerror</a> |
+    <a href="#posix-sysconf">posix_sysconf</a> |
+    <a href="#posix-times">posix_times</a> |
+    <a href="#posix-ttyname">posix_ttyname</a> |
+    <a href="#posix-uname">posix_uname</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="posix-constants-access">Constantes de posix_access</h4>
+<h4 id="posix-constants-mknod">Constantes de posix_mknod</h4>
+<h4 id="posix-constants-setrlimit">Constantes de posix_setrlimit</h4>
+<h4 id="posix-constants-pathconf">Constantes de posix_pathconf</h4>
+<h4 id="posix-constants-sysconf">Constantes posix_sysconf</h4>
+<h4 id="posix-access">posix_access</h4>
+<h4 id="posix-ctermid">posix_ctermid</h4>
+<h4 id="posix-eaccess">posix_eaccess</h4>
+<h4 id="posix-errno">posix_errno</h4>
+<h4 id="posix-fpathconf">posix_fpathconf</h4>
+<h4 id="posix-get-last-error">posix_get_last_error</h4>
+<h4 id="posix-getcwd">posix_getcwd</h4>
+<h4 id="posix-getegid">posix_getegid</h4>
+<h4 id="posix-geteuid">posix_geteuid</h4>
+<h4 id="posix-getgid">posix_getgid</h4>
+<h4 id="posix-getgrgid">posix_getgrgid</h4>
+<h4 id="posix-getgrnam">posix_getgrnam</h4>
+<h4 id="posix-getgroups">posix_getgroups</h4>
+<h4 id="posix-getlogin">posix_getlogin</h4>
+<h4 id="posix-getpgid">posix_getpgid</h4>
+<h4 id="posix-getpgrp">posix_getpgrp</h4>
+<h4 id="posix-getpid">posix_getpid</h4>
+<h4 id="posix-getppid">posix_getppid</h4>
+<h4 id="posix-getpwnam">posix_getpwnam</h4>
+<h4 id="posix-getpwuid">posix_getpwuid</h4>
+<h4 id="posix-getrlimit">posix_getrlimit</h4>
+<h4 id="posix-getsid">posix_getsid</h4>
+<h4 id="posix-getuid">posix_getuid</h4>
+<h4 id="posix-initgroups">posix_initgroups</h4>
+<h4 id="posix-isatty">posix_isatty</h4>
+<h4 id="posix-kill">posix_kill</h4>
+<h4 id="posix-mkfifo">posix_mkfifo</h4>
+<h4 id="posix-mknod">posix_mknod</h4>
+<h4 id="posix-pathconf">posix_pathconf</h4>
+<h4 id="posix-setegid">posix_setegid</h4>
+<h4 id="posix-seteuid">posix_seteuid</h4>
+<h4 id="posix-setgid">posix_setgid</h4>
+<h4 id="posix-setpgid">posix_setpgid</h4>
+<h4 id="posix-setrlimit">posix_setrlimit</h4>
+<h4 id="posix-setsid">posix_setsid</h4>
+<h4 id="posix-setuid">posix_setuid</h4>
+<h4 id="posix-strerror">posix_strerror</h4>
+<h4 id="posix-sysconf">posix_sysconf</h4>
+<h4 id="posix-times">posix_times</h4>
+<h4 id="posix-ttyname">posix_ttyname</h4>
+<h4 id="posix-uname">posix_uname</h4>
+
+<h4 id="program-execution">Program Execution</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#resource-types">Resource Types</a> |
+    <a href="#escapeshellarg">escapeshellarg</a> |
+    <a href="#escapeshellcmd">escapeshellcmd</a> |
+    <a href="#exec">exec</a> |
+    <a href="#passthru">passthru</a> |
+    <a href="#proc-close">proc_close</a> |
+    <a href="#proc-get-status">proc_get_status</a> |
+    <a href="#proc-nice">proc_nice</a> |
+    <a href="#proc-open">proc_open</a> |
+    <a href="#proc-terminate">proc_terminate</a> |
+    <a href="#shell-exec">shell_exec</a> |
+    <a href="#system">system</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="resource-types">Resource Types</h4>
+<h4 id="escapeshellarg">escapeshellarg</h4>
+<h4 id="escapeshellcmd">escapeshellcmd</h4>
+<h4 id="exec">exec</h4>
+<h4 id="passthru">passthru</h4>
+<h4 id="proc-close">proc_close</h4>
+<h4 id="proc-get-status">proc_get_status</h4>
+<h4 id="proc-nice">proc_nice</h4>
+<h4 id="proc-open">proc_open</h4>
+<h4 id="proc-terminate">proc_terminate</h4>
+<h4 id="shell-exec">shell_exec</h4>
+<h4 id="system">system</h4>
+
+<h4 id="parallel">parallel</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#philosophy">Philosophy</a> |
+    <a href="#functional-api">Functional API</a> |
+    <a href="#parallel-bootstrap">parallel\bootstrap</a> |
+    <a href="#parallel-run">parallel\run</a> |
+    <a href="#parallel-runtime">parallel\Runtime</a> |
+    <a href="#parallel-runtime-construct">parallel\Runtime::__construct</a> |
+    <a href="#parallel-runtime-run">parallel\Runtime::run</a> |
+    <a href="#parallel-runtime-close">parallel\Runtime::close</a> |
+    <a href="#parallel-runtime-kill">parallel\Runtime::kill</a> |
+    <a href="#parallel-future">parallel\Future</a> |
+    <a href="#parallel-future-cancel">parallel\Future::cancel</a> |
+    <a href="#parallel-future-cancelled">parallel\Future::cancelled</a> |
+    <a href="#parallel-future-done">parallel\Future::done</a> |
+    <a href="#parallel-future-value">parallel\Future::value</a> |
+    <a href="#parallel-channel">parallel\Channel</a> |
+    <a href="#parallel-channel-construct">parallel\Channel::__construct</a> |
+    <a href="#parallel-channel-make">parallel\Channel::make</a> |
+    <a href="#parallel-channel-open">parallel\Channel::open</a> |
+    <a href="#parallel-channel-recv">parallel\Channel::recv</a> |
+    <a href="#parallel-channel-send">parallel\Channel::send</a> |
+    <a href="#parallel-channel-close">parallel\Channel::close</a> |
+    <a href="#parallel-events">parallel\Events</a> |
+    <a href="#parallel-events-setblocking">parallel\Events::setBlocking</a> |
+    <a href="#parallel-events-settimeout">parallel\Events::setTimeout</a> |
+    <a href="#parallel-events-setinput">parallel\Events::setInput</a> |
+    <a href="#parallel-events-addchannel">parallel\Events::addChannel</a> |
+    <a href="#parallel-events-addfuture">parallel\Events::addFuture</a> |
+    <a href="#parallel-events-remove">parallel\Events::remove</a> |
+    <a href="#parallel-events-poll">parallel\Events::poll</a> |
+    <a href="#parallel-events-input">parallel\Events\Input</a> |
+    <a href="#parallel-events-input-add">parallel\Events\Input::add</a> |
+    <a href="#parallel-events-input-clear">parallel\Events\Input::clear</a> |
+    <a href="#parallel-events-input-remove">parallel\Events\Input::remove</a> |
+    <a href="#parallel-events-event">parallel\Events\Event</a> |
+    <a href="#parallel-events-event-type">parallel\Events\Event\Type</a> |
+    <a href="#parallel-sync">parallel\Sync</a> |
+    <a href="#parallel-sync-construct">parallel\Sync::__construct</a> |
+    <a href="#parallel-sync-get">parallel\Sync::get</a> |
+    <a href="#parallel-sync-set">parallel\Sync::set</a> |
+    <a href="#parallel-sync-wait">parallel\Sync::wait</a> |
+    <a href="#parallel-sync-notify">parallel\Sync::notify</a> |
+    <a href="#parallel-sync-invoque">parallel\Sync::__invoque</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="philosophy">Philosophy</h4>
+<h4 id="functional-api">Functional API</h4>
+<h4 id="parallel-bootstrap">parallel\bootstrap</h4>
+<h4 id="parallel-run">parallel\run</h4>
+<h4 id="parallel-runtime">parallel\Runtime</h4>
+<h4 id="parallel-runtime-construct">parallel\Runtime::__construct</h4>
+<h4 id="parallel-runtime-run">parallel\Runtime::run</h4>
+<h4 id="parallel-runtime-close">parallel\Runtime::close</h4>
+<h4 id="parallel-runtime-kill">parallel\Runtime::kill</h4>
+<h4 id="parallel-future">parallel\Future</h4>
+<h4 id="parallel-future-cancel">parallel\Future::cancel</h4>
+<h4 id="parallel-future-cancelled">parallel\Future::cancelled</h4>
+<h4 id="parallel-future-done">parallel\Future::done</h4>
+<h4 id="parallel-future-value">parallel\Future::value</h4>
+<h4 id="parallel-channel">parallel\Channel</h4>
+<h4 id="parallel-channel-construct">parallel\Channel::__construct</h4>
+<h4 id="parallel-channel-make">parallel\Channel::make</h4>
+<h4 id="parallel-channel-open">parallel\Channel::open</h4>
+<h4 id="parallel-channel-recv">parallel\Channel::recv</h4>
+<h4 id="parallel-channel-send">parallel\Channel::send</h4>
+<h4 id="parallel-channel-close">parallel\Channel::close</h4>
+<h4 id="parallel-events">parallel\Events</h4>
+<h4 id="parallel-events-setblocking">parallel\Events::setBlocking</h4>
+<h4 id="parallel-events-settimeout">parallel\Events::setTimeout</h4>
+<h4 id="parallel-events-setinput">parallel\Events::setInput</h4>
+<h4 id="parallel-events-addchannel">parallel\Events::addChannel</h4>
+<h4 id="parallel-events-addfuture">parallel\Events::addFuture</h4>
+<h4 id="parallel-events-remove">parallel\Events::remove</h4>
+<h4 id="parallel-events-poll">parallel\Events::poll</h4>
+<h4 id="parallel-events-input">parallel\Events\Input</h4>
+<h4 id="parallel-events-input-add">parallel\Events\Input::add</h4>
+<h4 id="parallel-events-input-clear">parallel\Events\Input::clear</h4>
+<h4 id="parallel-events-input-remove">parallel\Events\Input::remove</h4>
+<h4 id="parallel-events-event">parallel\Events\Event</h4>
+<h4 id="parallel-events-event-type">parallel\Events\Event\Type</h4>
+<h4 id="parallel-sync">parallel\Sync</h4>
+<h4 id="parallel-sync-construct">parallel\Sync::__construct</h4>
+<h4 id="parallel-sync-get">parallel\Sync::get</h4>
+<h4 id="parallel-sync-set">parallel\Sync::set</h4>
+<h4 id="parallel-sync-wait">parallel\Sync::wait</h4>
+<h4 id="parallel-sync-notify">parallel\Sync::notify</h4>
+<h4 id="parallel-sync-invoque">parallel\Sync::__invoque</h4>
+
+
+<h4 id="pthreads">pthreads</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#threaded">Threaded</a> |
+    <a href="#threaded-chunk">Threaded::chunk</a> |
+    <a href="#threaded-count">Threaded::count</a> |
+    <a href="#threaded-extend">Threaded::extend</a> |
+    <a href="#threaded-isrunning">Threaded::isRunning</a> |
+    <a href="#threaded-isterminated">Threaded::isTerminated</a> |
+    <a href="#threaded-merge">Threaded::merge</a> |
+    <a href="#threaded-notify">Threaded::notify</a> |
+    <a href="#threaded-notifyone">Threaded::notifyOne</a> |
+    <a href="#threaded-pop">Threaded::pop</a> |
+    <a href="#threaded-run">Threaded::run</a> |
+    <a href="#threaded-shift">Threaded::shift</a> |
+    <a href="#threaded-synchronized">Threaded::synchronized</a> |
+    <a href="#threaded-wait">Threaded::wait</a> |
+    <a href="#thread">Thread</a> |
+    <a href="#thread-getcreatorid">Thread::getCreatorId</a> |
+    <a href="#thread-getcurrentthread">Thread::getCurrentThread</a> |
+    <a href="#thread-getcurrentthreadid">Thread::getCurrentThreadId</a> |
+    <a href="#thread-getthreadid">Thread::getThreadId</a> |
+    <a href="#thread-isjoined">Thread::isJoined</a> |
+    <a href="#thread-isstarted">Thread::isStarted</a> |
+    <a href="#thread-join">Thread::join</a> |
+    <a href="#thread-start">Thread::start</a> |
+    <a href="#worker">Worker</a> |
+    <a href="#worker-collect">Worker::collect</a> |
+    <a href="#worker-getstacked">Worker::getStacked</a> |
+    <a href="#worker-isshutdown">Worker::isShutdown</a> |
+    <a href="#worker-shutdown">Worker::shutdown</a> |
+    <a href="#worker-stack">Worker::stack</a> |
+    <a href="#worker-unstack">Worker::unstack</a> |
+    <a href="#collectable">Collectable</a> |
+    <a href="#collectable-isgarbage">Collectable::isGarbage</a> |
+    <a href="#pool">Pool</a> |
+    <a href="#pool-collect">Pool::collect</a> |
+    <a href="#pool-construct">Pool::__construct</a> |
+    <a href="#pool-resize">Pool::resize</a> |
+    <a href="#pool-shutdown">Pool::shutdown</a> |
+    <a href="#pool-submit">Pool::submit</a> |
+    <a href="#pool-submittto">Pool::submitTo</a> |
+    <a href="#volatile">Volatile</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="threaded">Threaded</h4>
+<h4 id="threaded-chunk">Threaded::chunk</h4>
+<h4 id="threaded-count">Threaded::count</h4>
+<h4 id="threaded-extend">Threaded::extend</h4>
+<h4 id="threaded-isrunning">Threaded::isRunning</h4>
+<h4 id="threaded-isterminated">Threaded::isTerminated</h4>
+<h4 id="threaded-merge">Threaded::merge</h4>
+<h4 id="threaded-notify">Threaded::notify</h4>
+<h4 id="threaded-notifyone">Threaded::notifyOne</h4>
+<h4 id="threaded-pop">Threaded::pop</h4>
+<h4 id="threaded-run">Threaded::run</h4>
+<h4 id="threaded-shift">Threaded::shift</h4>
+<h4 id="threaded-synchronized">Threaded::synchronized</h4>
+<h4 id="threaded-wait">Threaded::wait</h4>
+<h4 id="thread">Thread</h4>
+<h4 id="thread-getcreatorid">Thread::getCreatorId</h4>
+<h4 id="thread-getcurrentthread">Thread::getCurrentThread</h4>
+<h4 id="thread-getcurrentthreadid">Thread::getCurrentThreadId</h4>
+<h4 id="thread-getthreadid">Thread::getThreadId</h4>
+<h4 id="thread-isjoined">Thread::isJoined</h4>
+<h4 id="thread-isstarted">Thread::isStarted</h4>
+<h4 id="thread-join">Thread::join</h4>
+<h4 id="thread-start">Thread::start</h4>
+<h4 id="worker">Worker</h4>
+<h4 id="worker-collect">Worker::collect</h4>
+<h4 id="worker-getstacked">Worker::getStacked</h4>
+<h4 id="worker-isshutdown">Worker::isShutdown</h4>
+<h4 id="worker-shutdown">Worker::shutdown</h4>
+<h4 id="worker-stack">Worker::stack</h4>
+<h4 id="worker-unstack">Worker::unstack</h4>
+<h4 id="collectable">Collectable</h4>
+<h4 id="collectable-isgarbage">Collectable::isGarbage</h4>
+<h4 id="pool">Pool</h4>
+<h4 id="pool-collect">Pool::collect</h4>
+<h4 id="pool-construct">Pool::__construct</h4>
+<h4 id="pool-resize">Pool::resize</h4>
+<h4 id="pool-shutdown">Pool::shutdown</h4>
+<h4 id="pool-submit">Pool::submit</h4>
+<h4 id="pool-submittto">Pool::submitTo</h4>
+<h4 id="volatile">Volatile</h4>
+
+
+<h4 id="semaphore">Semaphore</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#resource-types">Resource Types</a> |
+    <a href="#ftok">ftok</a> |
+    <a href="#msg-get-queue">msg_get_queue</a> |
+    <a href="#msg-queue-exists">msg_queue_exists</a> |
+    <a href="#msg-receive">msg_receive</a> |
+    <a href="#msg-remove-queue">msg_remove_queue</a> |
+    <a href="#msg-send">msg_send</a> |
+    <a href="#msg-set-queue">msg_set_queue</a> |
+    <a href="#msg-stat-queue">msg_stat_queue</a> |
+    <a href="#sem-acquire">sem_acquire</a> |
+    <a href="#sem-get">sem_get</a> |
+    <a href="#sem-release">sem_release</a> |
+    <a href="#sem-remove">sem_remove</a> |
+    <a href="#shm-attach">shm_attach</a> |
+    <a href="#shm-detach">shm_detach</a> |
+    <a href="#shm-get-var">shm_get_var</a> |
+    <a href="#shm-has-var">shm_has_var</a> |
+    <a href="#shm-put-var">shm_put_var</a> |
+    <a href="#shm-remove">shm_remove</a> |
+    <a href="#shm-remove-var">shm_remove_var</a> |
+    <a href="#sysvmessagequeue">SysvMessageQueue</a> |
+    <a href="#sysvsemaphore">SysvSemaphore</a> |
+    <a href="#sysvsharedmemory">SysvSharedMemory</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="resource-types">Resource Types</h4>
+<h4 id="ftok">ftok</h4>
+<h4 id="msg-get-queue">msg_get_queue</h4>
+<h4 id="msg-queue-exists">msg_queue_exists</h4>
+<h4 id="msg-receive">msg_receive</h4>
+<h4 id="msg-remove-queue">msg_remove_queue</h4>
+<h4 id="msg-send">msg_send</h4>
+<h4 id="msg-set-queue">msg_set_queue</h4>
+<h4 id="msg-stat-queue">msg_stat_queue</h4>
+<h4 id="sem-acquire">sem_acquire</h4>
+<h4 id="sem-get">sem_get</h4>
+<h4 id="sem-release">sem_release</h4>
+<h4 id="sem-remove">sem_remove</h4>
+<h4 id="shm-attach">shm_attach</h4>
+<h4 id="shm-detach">shm_detach</h4>
+<h4 id="shm-get-var">shm_get_var</h4>
+<h4 id="shm-has-var">shm_has_var</h4>
+<h4 id="shm-put-var">shm_put_var</h4>
+<h4 id="shm-remove">shm_remove</h4>
+<h4 id="shm-remove-var">shm_remove_var</h4>
+<h4 id="sysvmessagequeue">SysvMessageQueue</h4>
+<h4 id="sysvsemaphore">SysvSemaphore</h4>
+<h4 id="sysvsharedmemory">SysvSharedMemory</h4>
+
+
+<h4 id="shared-memory">Shared Memory</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#resource-types">Resource Types</a> |
+    <a href="#shmop-close">shmop_close</a> |
+    <a href="#shmop-delete">shmop_delete</a> |
+    <a href="#shmop-open">shmop_open</a> |
+    <a href="#shmop-read">shmop_read</a> |
+    <a href="#shmop-size">shmop_size</a> |
+    <a href="#shmop-write">shmop_write</a> |
+    <a href="#shmop">Shmop</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="resource-types">Resource Types</h4>
+<h4 id="shmop-close">shmop_close</h4>
+<h4 id="shmop-delete">shmop_delete</h4>
+<h4 id="shmop-open">shmop_open</h4>
+<h4 id="shmop-read">shmop_read</h4>
+<h4 id="shmop-size">shmop_size</h4>
+<h4 id="shmop-write">shmop_write</h4>
+<h4 id="shmop">Shmop</h4>
+
+
+<h4 id="sync">Sync</h4>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#introduction">Introduction</a> |
+    <a href="#dependencies">Dependencies</a> |
+    <a href="#installation">Installation</a> |
+    <a href="#syncmutex">SyncMutex</a> |
+    <a href="#syncmutex-construct">SyncMutex::__construct</a> |
+    <a href="#syncmutex-lock">SyncMutex::lock</a> |
+    <a href="#syncmutex-unlock">SyncMutex::unlock</a> |
+    <a href="#syncsemaphore">SyncSemaphore</a> |
+    <a href="#syncsemaphore-construct">SyncSemaphore::__construct</a> |
+    <a href="#syncsemaphore-lock">SyncSemaphore::lock</a> |
+    <a href="#syncsemaphore-unlock">SyncSemaphore::unlock</a> |
+    <a href="#syncevent">SyncEvent</a> |
+    <a href="#syncevent-construct">SyncEvent::__construct</a> |
+    <a href="#syncevent-fire">SyncEvent::fire</a> |
+    <a href="#syncevent-reset">SyncEvent::reset</a> |
+    <a href="#syncevent-wait">SyncEvent::wait</a> |
+    <a href="#syncreaderwriter">SyncReaderWriter</a> |
+    <a href="#syncreaderwriter-construct">SyncReaderWriter::__construct</a> |
+    <a href="#syncreaderwriter-readlock">SyncReaderWriter::readlock</a> |
+    <a href="#syncreaderwriter-readunlock">SyncReaderWriter::readunlock</a> |
+    <a href="#syncreaderwriter-writelock">SyncReaderWriter::writelock</a> |
+    <a href="#syncreaderwriter-writeunlock">SyncReaderWriter::writeunlock</a> |
+    <a href="#syncsharedmemory">SyncSharedMemory</a> |
+    <a href="#syncsharedmemory-construct">SyncSharedMemory::__construct</a> |
+    <a href="#syncsharedmemory-first">SyncSharedMemory::first</a> |
+    <a href="#syncsharedmemory-read">SyncSharedMemory::read</a> |
+    <a href="#syncsharedmemory-size">SyncSharedMemory::size</a> |
+    <a href="#syncsharedmemory-write">SyncSharedMemory::write</a>
+  </p>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="syncmutex">SyncMutex</h4>
+<h4 id="syncmutex-construct">SyncMutex::__construct</h4>
+<h4 id="syncmutex-lock">SyncMutex::lock</h4>
+<h4 id="syncmutex-unlock">SyncMutex::unlock</h4>
+<h4 id="syncsemaphore">SyncSemaphore</h4>
+<h4 id="syncsemaphore-construct">SyncSemaphore::__construct</h4>
+<h4 id="syncsemaphore-lock">SyncSemaphore::lock</h4>
+<h4 id="syncsemaphore-unlock">SyncSemaphore::unlock</h4>
+<h4 id="syncevent">SyncEvent</h4>
+<h4 id="syncevent-construct">SyncEvent::__construct</h4>
+<h4 id="syncevent-fire">SyncEvent::fire</h4>
+<h4 id="syncevent-reset">SyncEvent::reset</h4>
+<h4 id="syncevent-wait">SyncEvent::wait</h4>
+<h4 id="syncreaderwriter">SyncReaderWriter</h4>
+<h4 id="syncreaderwriter-construct">SyncReaderWriter::__construct</h4>
+<h4 id="syncreaderwriter-readlock">SyncReaderWriter::readlock</h4>
+<h4 id="syncreaderwriter-readunlock">SyncReaderWriter::readunlock</h4>
+<h4 id="syncreaderwriter-writelock">SyncReaderWriter::writelock</h4>
+<h4 id="syncreaderwriter-writeunlock">SyncReaderWriter::writeunlock</h4>
+<h4 id="syncsharedmemory">SyncSharedMemory</h4>
+<h4 id="syncsharedmemory-construct">SyncSharedMemory::__construct</h4>
+<h4 id="syncsharedmemory-first">SyncSharedMemory::first</h4>
+<h4 id="syncsharedmemory-read">SyncSharedMemory::read</h4>
+<h4 id="syncsharedmemory-size">SyncSharedMemory::size</h4>
+<h4 id="syncsharedmemory-write">SyncSharedMemory::write</h4>
 
 <h3 id="other-basic-extensions">OTHER BASIC EXTENSIONS</h3>
+
+<nav align="center">
+  <h2>NAVIGATION</h2>
+  <p>
+    <a href="#geoip">GeoIP</a> |
+    <a href="#fann">FANN</a> |
+    <a href="#igbinary">Igbinary</a> |
+    <a href="#json">JSON</a> |
+    <a href="#simdjson">Simdjson</a> |
+    <a href="#lua">Lua</a> |
+    <a href="#luasandbox">LuaSandbox</a> |
+    <a href="#misc">Misc.</a> |
+    <a href="#random">Random</a> |
+    <a href="#seaslog">Seaslog</a> |
+    <a href="#spl">SPL</a> |
+    <a href="#fluxos">Fluxos</a> |
+    <a href="#swoole">Swoole</a> |
+    <a href="#tidy">Tidy</a> |
+    <a href="#tokenizer">Tokenizer</a> |
+    <a href="#urls">URLs</a> |
+    <a href="#v8js">V8js</a> |
+    <a href="#yaml">Yaml</a> |
+    <a href="#yaf">Yaf</a> |
+    <a href="#yaconf">Yaconf</a> |
+    <a href="#taint">Taint</a> |
+    <a href="#data-structures">Data Structures</a> |
+    <a href="#var-representation">var_representation</a>
+  </p>
+</nav>
+
+<h4 id="geoip">GeoIP</h4>
+
+soon...
+
+<h4 id="fann">FANN</h4>
+
 .
+
+
+<h4 id="igbinary">Igbinary</h4>
+
+.
+
+
+<h4 id="json">JSON</h4>
+
+.
+
+
+<h4 id="simdjson">Simdjson</h4>
+
+.
+
+
+<h4 id="lua">Lua</h4>
+
+.
+
+
+<h4 id="luasandbox">LuaSandbox</h4>
+
+.
+
+
+<h4 id="misc">Misc.</h4>
+
+.
+
+
+<h4 id="random">Random</h4>
+
+.
+
+
+<h4 id="seaslog">Seaslog</h4>
+
+.
+
+
+<h4 id="spl">SPL</h4>
+
+.
+
+
+<h4 id="fluxos">Fluxos</h4>
+
+.
+
+
+<h4 id="swoole">Swoole</h4>
+
+.
+
+
+<h4 id="tidy">Tidy</h4>
+
+.
+
+
+<h4 id="tokenizer">Tokenizer</h4>
+
+.
+
+
+<h4 id="urls">URLs</h4>
+
+.
+
+
+<h4 id="v8js">V8js</h4>
+
+.
+
+
+<h4 id="yaml">Yaml</h4>
+
+.
+
+
+<h4 id="yaf">Yaf</h4>
+
+.
+
+
+<h4 id="yaconf">Yaconf</h4>
+
+.
+
+
+<h4 id="taint">Taint</h4>
+
+.
+
+
+<h4 id="data-structures">Data Structures</h4>
+
+.
+
+
+<h4 id="var-representation">var_representation</h4>
+
+.
+
 
 <h3 id="other-services">OTHER SERVICES</h3>
 .
