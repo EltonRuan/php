@@ -842,17 +842,18 @@
 <h4 id="cookie">$_COOKIE</h4>
 .
 
-<h4 id="http-response-header">$http_response_header</h4>
+<h4 id="http-response-header">$HTTP_RESPONSE_HEADER</h4>
 .
 
-<h4 id="argc">$argc</h4>
+<h4 id="argc">$ARGC</h4>
 .
 
-<h4 id="argv">$argv</h4>
+<h4 id="argv">$ARGV</h4>
 .
 
-<h4 id="php-errormsg">$php_errormsg</h4>
+<h4 id="php-errormsg">$PHP_ERRORMSG</h4>
 .
+
 
 
 <h3 id="predefined-exceptions">PREDEFINED EXCEPTIONS</h3>
@@ -1961,22 +1962,32 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <a href="#introduction">Introduction</a> |
-    <a href="#installation-configuration">Installation/Configuration</a> |
-    <a href="#xhprof-disable">xhprof_disable</a> |
-    <a href="#xhprof-enable">xhprof_enable</a> |
-    <a href="#xhprof-sample-disable">xhprof_sample_disable</a> |
-    <a href="#xhprof-sample-enable">xhprof_sample_enable</a>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#installation-configuration">INSTALLATION/CONFIGURATION</a> |
+    <a href="#xhprof-disable">XHPROF_DISABLE</a> |
+    <a href="#xhprof-enable">XHPROF_ENABLE</a> |
+    <a href="#xhprof-sample-disable">XHPROF_SAMPLE_DISABLE</a> |
+    <a href="#xhprof-sample-enable">XHPROF_SAMPLE_ENABLE</a>
   </p> 
 </nav>
 
-<h4 id="introduction">Introduction</h4>
-<h4 id="installation-configuration">Installation/Configuration</h4>
-<h4 id="xhprof-disable">xhprof_disable</h4>
-<h4 id="xhprof-enable">xhprof_enable</h4>
-<h4 id="xhprof-sample-disable">xhprof_sample_disable</h4>
-<h4 id="xhprof-sample-enable">xhprof_sample_enable</h4>
+<h4 id="introduction">INTRODUCTION</h4>
+.
 
+<h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+.
+
+<h4 id="xhprof-disable">XHPROF_DISABLE</h4>
+.
+
+<h4 id="xhprof-enable">XHPROF_ENABLE</h4>
+.
+
+<h4 id="xhprof-sample-disable">XHPROF_SAMPLE_DISABLE</h4>
+.
+
+<h4 id="xhprof-sample-enable">XHPROF_SAMPLE_ENABLE</h4>
+.
 
 
 <h4 id="yac">YAC</h4>
@@ -1984,33 +1995,34 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <a href="#introduction">Introduction</a> |
-    <a href="#installation">Installation</a> |
-    <a href="#yac-add">Yac::add</a> |
-    <a href="#yac-construct">Yac::__construct</a> |
-    <a href="#yac-delete">Yac::delete</a> |
-    <a href="#yac-dump">Yac::dump</a> |
-    <a href="#yac-flush">Yac::flush</a> |
-    <a href="#yac-get">Yac::get</a> |
-    <a href="#yac-get-magic">Yac::__get</a> |
-    <a href="#yac-info">Yac::info</a> |
-    <a href="#yac-set">Yac::set</a> |
-    <a href="#yac-set-magic">Yac::__set</a>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#yac-add">YAC::ADD</a> |
+    <a href="#yac-construct">YAC::__CONSTRUCT</a> |
+    <a href="#yac-delete">YAC::DELETE</a> |
+    <a href="#yac-dump">YAC::DUMP</a> |
+    <a href="#yac-flush">YAC::FLUSH</a> |
+    <a href="#yac-get">YAC::GET</a> |
+    <a href="#yac-get-magic">YAC::__GET</a> |
+    <a href="#yac-info">YAC::INFO</a> |
+    <a href="#yac-set">YAC::SET</a> |
+    <a href="#yac-set-magic">YAC::__SET</a>
   </p> 
 </nav>
 
-<h4 id="introduction">Introduction</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="yac-add">Yac::add</h4>
-<h4 id="yac-construct">Yac::__construct</h4>
-<h4 id="yac-delete">Yac::delete</h4>
-<h4 id="yac-dump">Yac::dump</h4>
-<h4 id="yac-flush">Yac::flush</h4>
-<h4 id="yac-get">Yac::get</h4>
-<h4 id="yac-get-magic">Yac::__get</h4>
-<h4 id="yac-info">Yac::info</h4>
-<h4 id="yac-set">Yac::set</h4>
-<h4 id="yac-set-magic">Yac::__set</h4>
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="yac-add">YAC::ADD</h4>
+<h4 id="yac-construct">YAC::__CONSTRUCT</h4>
+<h4 id="yac-delete">YAC::DELETE</h4>
+<h4 id="yac-dump">YAC::DUMP</h4>
+<h4 id="yac-flush">YAC::FLUSH</h4>
+<h4 id="yac-get">YAC::GET</h4>
+<h4 id="yac-get-magic">YAC::__GET</h4>
+<h4 id="yac-info">YAC::INFO</h4>
+<h4 id="yac-set">YAC::SET</h4>
+<h4 id="yac-set-magic">YAC::__SET</h4>
+
 
 
 
@@ -2019,11 +2031,11 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <a href="#openal">OpenAL</a>
+    <a href="#openal">OPENAL</a>
   </p> 
 </nav>
 
-<h4 id="openal">OpenAL</h4>
+<h4 id="openal">OPENAL</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
@@ -2211,17 +2223,11 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Bzip2 -->
     <a href="#bzip2">BZIP2</a> |
-    <!-- LZF -->
     <a href="#lzf">LZF</a> |
-    <!-- Phar -->
     <a href="#phar">PHAR</a> |
-    <!-- Rar -->
     <a href="#rar">RAR</a> |
-    <!-- Zip -->
     <a href="#zip">ZIP</a> |
-    <!-- Zlib -->
     <a href="#zlib">ZLIB</a>
   </p> 
 </nav>
@@ -2232,114 +2238,60 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- bzclose -->
     <a href="#bzclose">BZCLOSE</a> |
-    <!-- bzcompress -->
     <a href="#bzcompress">BZCOMPRESS</a> |
-    <!-- bzdecompress -->
     <a href="#bzdecompress">BZDECOMPRESS</a> |
-    <!-- bzerrno -->
     <a href="#bzerrno">BZERRNO</a> |
-    <!-- bzerror -->
     <a href="#bzerror">BZERROR</a> |
-    <!-- bzerrstr -->
     <a href="#bzerrstr">BZERRSTR</a> |
-    <!-- bzflush -->
     <a href="#bzflush">BZFLUSH</a> |
-    <!-- bzopen -->
     <a href="#bzopen">BZOPEN</a> |
-    <!-- bzread -->
     <a href="#bzread">BZREAD</a> |
-    <!-- bzwrite -->
     <a href="#bzwrite">BZWRITE</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- bzclose -->
 <h4 id="bzclose">BZCLOSE</h4>
-
-<!-- bzcompress -->
 <h4 id="bzcompress">BZCOMPRESS</h4>
-
-<!-- bzdecompress -->
 <h4 id="bzdecompress">BZDECOMPRESS</h4>
-
-<!-- bzerrno -->
 <h4 id="bzerrno">BZERRNO</h4>
-
-<!-- bzerror -->
 <h4 id="bzerror">BZERROR</h4>
-
-<!-- bzerrstr -->
 <h4 id="bzerrstr">BZERRSTR</h4>
-
-<!-- bzflush -->
 <h4 id="bzflush">BZFLUSH</h4>
-
-<!-- bzopen -->
 <h4 id="bzopen">BZOPEN</h4>
-
-<!-- bzread -->
 <h4 id="bzread">BZREAD</h4>
-
-<!-- bzwrite -->
 <h4 id="bzwrite">BZWRITE</h4>
-
-
-<!-- LZF -->
 <h4 id="lzf">LZF</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- lzf_compress -->
     <a href="#lzf_compress">LZF_COMPRESS</a> |
-    <!-- lzf_decompress -->
     <a href="#lzf_decompress">LZF_DECOMPRESS</a> |
-    <!-- lzf_optimized_for -->
     <a href="#lzf_optimized_for">LZF_OPTIMIZED_FOR</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- lzf_compress -->
 <h4 id="lzf_compress">LZF_COMPRESS</h4>
-
-<!-- lzf_decompress -->
 <h4 id="lzf_decompress">LZF_DECOMPRESS</h4>
-
-<!-- lzf_optimized_for -->
 <h4 id="lzf_optimized_for">LZF_OPTIMIZED_FOR</h4>
 
 
-<!-- Phar -->
 <h4 id="phar">PHAR</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- INTRODUCTION -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- PREDEFINED_CONSTANTS -->
     <a href="#predefined_constants">PREDEFINED_CONSTANTS</a> |
-    <!-- USING_PHAR_FILES -->
     <a href="#using_phar_files">USING_PHAR_FILES</a> |
-    <!-- CREATING_PHAR_FILES -->
     <a href="#creating_phar_files">CREATING_PHAR_FILES</a> |
-    <!-- PHAR_DIFFERENCE -->
     <a href="#phar_difference">PHAR_DIFFERENCE</a> |
-    <!-- PHAR_CLASS -->
     <a href="#phar_class">PHAR_CLASS</a> |
-    <!-- PHAR METHODS -->
     <a href="#phar_addEmptyDir">PHAR::ADD_EMPTY_DIR</a> |
     <a href="#phar_addFile">PHAR::ADD_FILE</a> |
     <a href="#phar_addFromString">PHAR::ADD_FROM_STRING</a> |
@@ -2396,9 +2348,7 @@
     <a href="#phar_stopBuffering">PHAR::STOP_BUFFERING</a> |
     <a href="#phar_unlinkArchive">PHAR::UNLINK_ARCHIVE</a> |
     <a href="#phar_webPhar">PHAR::WEBPHAR</a> |
-    <!-- PHARDATA_CLASS -->
     <a href="#phardata_class">PHARDATA_CLASS</a> |
-    <!-- PHARDATA METHODS -->
     <a href="#phardata_addEmptyDir">PHARDATA::ADD_EMPTY_DIR</a> |
     <a href="#phardata_addFile">PHARDATA::ADD_FILE</a> |
     <a href="#phardata_addFromString">PHARDATA::ADD_FROM_STRING</a> |
@@ -2424,9 +2374,7 @@
     <a href="#phardata_setMetadata">PHARDATA::SET_METADATA</a> |
     <a href="#phardata_setSignatureAlgorithm">PHARDATA::SET_SIGNATURE_ALGORITHM</a> |
     <a href="#phardata_setStub">PHARDATA::SET_STUB</a> |
-    <!-- PHARFILEINFO_CLASS -->
     <a href="#pharfileinfo_class">PHARFILEINFO_CLASS</a> |
-    <!-- PHARFILEINFO METHODS -->
     <a href="#pharfileinfo_chmod">PHARFILEINFO::CHMOD</a> |
     <a href="#pharfileinfo_compress">PHARFILEINFO::COMPRESS</a> |
     <a href="#pharfileinfo___construct">PHARFILEINFO::__CONSTRUCT</a> |
@@ -2442,30 +2390,16 @@
     <a href="#pharfileinfo_isCRCChecked">PHARFILEINFO::IS_CRC_CHECKED</a> |
     <a href="#pharfileinfo_isCompressed">PHARFILEINFO::IS_COMPRESSED</a> |
     <a href="#pharfileinfo_setMetadata">PHARFILEINFO::SET_METADATA</a> |
-    <!-- PHAREXCEPTION_CLASS -->
     <a href="#pharexception_class">PHAREXCEPTION_CLASS</a>
   </p> 
 </nav>
 
-<!-- INTRODUCTION -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- PREDEFINED_CONSTANTS -->
 <h4 id="predefined_constants">PREDEFINED_CONSTANTS</h4>
-
-<!-- USING_PHAR_FILES -->
 <h4 id="using_phar_files">USING_PHAR_FILES</h4>
-
-<!-- CREATING_PHAR_FILES -->
 <h4 id="creating_phar_files">CREATING_PHAR_FILES</h4>
-
-<!-- PHAR_DIFFERENCE -->
 <h4 id="phar_difference">PHAR_DIFFERENCE</h4>
-
-<!-- PHAR_CLASS -->
 <h4 id="phar_class">PHAR_CLASS</h4>
-
-<!-- PHAR METHODS -->
 <h4 id="phar_addEmptyDir">PHAR::ADD_EMPTY_DIR</h4>
 <h4 id="phar_addFile">PHAR::ADD_FILE</h4>
 <h4 id="phar_addFromString">PHAR::ADD_FROM_STRING</h4>
@@ -2522,11 +2456,7 @@
 <h4 id="phar_stopBuffering">PHAR::STOP_BUFFERING</h4>
 <h4 id="phar_unlinkArchive">PHAR::UNLINK_ARCHIVE</h4>
 <h4 id="phar_webPhar">PHAR::WEBPHAR</h4>
-
-<!-- PHARDATA_CLASS -->
 <h4 id="phardata_class">PHARDATA_CLASS</h4>
-
-<!-- PHARDATA METHODS -->
 <h4 id="phardata_addEmptyDir">PHARDATA::ADD_EMPTY_DIR</h4>
 <h4 id="phardata_addFile">PHARDATA::ADD_FILE</h4>
 <h4 id="phardata_addFromString">PHARDATA::ADD_FROM_STRING</h4>
@@ -2552,11 +2482,7 @@
 <h4 id="phardata_setMetadata">PHARDATA::SET_METADATA</h4>
 <h4 id="phardata_setSignatureAlgorithm">PHARDATA::SET_SIGNATURE_ALGORITHM</h4>
 <h4 id="phardata_setStub">PHARDATA::SET_STUB</h4>
-
-<!-- PHARFILEINFO_CLASS -->
 <h4 id="pharfileinfo_class">PHARFILEINFO_CLASS</h4>
-
-<!-- PHARFILEINFO METHODS -->
 <h4 id="pharfileinfo_chmod">PHARFILEINFO::CHMOD</h4>
 <h4 id="pharfileinfo_compress">PHARFILEINFO::COMPRESS</h4>
 <h4 id="pharfileinfo___construct">PHARFILEINFO::__CONSTRUCT</h4>
@@ -2572,168 +2498,75 @@
 <h4 id="pharfileinfo_isCRCChecked">PHARFILEINFO::IS_CRC_CHECKED</h4>
 <h4 id="pharfileinfo_isCompressed">PHARFILEINFO::IS_COMPRESSED</h4>
 <h4 id="pharfileinfo_setMetadata">PHARFILEINFO::SET_METADATA</h4>
-
-<!-- PHAREXCEPTION_CLASS -->
 <h4 id="pharexception_class">PHAREXCEPTION_CLASS</h4>
 
-
-<!-- Rar -->
 <h4 id="rar">RAR</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- INSTALLATION/CONFIGURATION -->
     <a href="#installation_configuration">INSTALLATION/CONFIGURATION</a> |
-    <!-- RAR_WRAPPER_CACHE_STATS -->
     <a href="#rar_wrapper_cache_stats">RAR_WRAPPER_CACHE_STATS</a> |
-    <!-- RARARCHIVE_CLASS -->
     <a href="#rararchive_class">RARARCHIVE_CLASS</a> |
-    <!-- RARARCHIVE_CLOSE -->
     <a href="#rararchive_close">RARARCHIVE::CLOSE</a> |
-    <!-- RARARCHIVE_GETCOMMENT -->
     <a href="#rararchive_getComment">RARARCHIVE::GETCOMMENT / RAR_COMMENT_GET</a> |
-    <!-- RARARCHIVE_GETENTRIES -->
     <a href="#rararchive_getEntries">RARARCHIVE::GETENTRIES / RAR_LIST</a> |
-    <!-- RARARCHIVE_GETENTRY -->
     <a href="#rararchive_getEntry">RARARCHIVE::GETENTRY / RAR_ENTRY_GET</a> |
-    <!-- RARARCHIVE_ISBROKEN -->
     <a href="#rararchive_isBroken">RARARCHIVE::ISBROKEN / RAR_BROKEN_IS</a> |
-    <!-- RARARCHIVE_ISSOLID -->
     <a href="#rararchive_isSolid">RARARCHIVE::ISSOLID / RAR_SOLID_IS</a> |
-    <!-- RARARCHIVE_OPEN -->
     <a href="#rararchive_open">RARARCHIVE::OPEN / RAR_OPEN</a> |
-    <!-- RARARCHIVE_SETALLOWBROKEN -->
     <a href="#rararchive_setAllowBroken">RARARCHIVE::SETALLOWBROKEN</a> |
-    <!-- RARARCHIVE_TOSTRING -->
     <a href="#rararchive___toString">RARARCHIVE::__TOSTRING</a> |
-    <!-- RARENTRY_CLASS -->
     <a href="#rarentry_class">RARENTRY_CLASS</a> |
-    <!-- RARENTRY_EXTRACT -->
     <a href="#rarentry_extract">RARENTRY::EXTRACT</a> |
-    <!-- RARENTRY_GETATTR -->
     <a href="#rarentry_getAttr">RARENTRY::GETATTR</a> |
-    <!-- RARENTRY_GETCRC -->
     <a href="#rarentry_getCrc">RARENTRY::GETCRC</a> |
-    <!-- RARENTRY_GETFILETIME -->
     <a href="#rarentry_getFileTime">RARENTRY::GETFILETIME</a> |
-    <!-- RARENTRY_GETHOSTOS -->
     <a href="#rarentry_getHostOs">RARENTRY::GETHOSTOS</a> |
-    <!-- RARENTRY_GETMETHOD -->
     <a href="#rarentry_getMethod">RARENTRY::GETMETHOD</a> |
-    <!-- RARENTRY_GETNAME -->
     <a href="#rarentry_getName">RARENTRY::GETNAME</a> |
-    <!-- RARENTRY_GETPACKEDSIZE -->
     <a href="#rarentry_getPackedSize">RARENTRY::GETPACKEDSIZE</a> |
-    <!-- RARENTRY_GETSTREAM -->
     <a href="#rarentry_getStream">RARENTRY::GETSTREAM</a> |
-    <!-- RARENTRY_GETUNPACKEDSIZE -->
     <a href="#rarentry_getUnpackedSize">RARENTRY::GETUNPACKEDSIZE</a> |
-    <!-- RARENTRY_GETVERSION -->
     <a href="#rarentry_getVersion">RARENTRY::GETVERSION</a> |
-    <!-- RARENTRY_ISDIRECTORY -->
     <a href="#rarentry_isDirectory">RARENTRY::ISDIRECTORY</a> |
-    <!-- RARENTRY_ISENCRYPTED -->
     <a href="#rarentry_isEncrypted">RARENTRY::ISENCRYPTED</a> |
-    <!-- RARENTRY_TOSTRING -->
     <a href="#rarentry___toString">RARENTRY::__TOSTRING</a> |
-    <!-- RAREXCEPTION_CLASS -->
     <a href="#rarexception_class">RAREXCEPTION_CLASS</a> |
-    <!-- RAREXCEPTION_ISUSINGEXCEPTIONS -->
     <a href="#rarexception_isUsingExceptions">RAREXCEPTION::ISUSINGEXCEPTIONS</a> |
-    <!-- RAREXCEPTION_SETUSINGEXCEPTIONS -->
     <a href="#rarexception_setUsingExceptions">RAREXCEPTION::SETUSINGEXCEPTIONS</a>
   </p> 
 </nav>
 
-<!-- INSTALLATION/CONFIGURATION -->
 <h4 id="installation_configuration">INSTALLATION/CONFIGURATION</h4>
-
-<!-- RAR_WRAPPER_CACHE_STATS -->
 <h4 id="rar_wrapper_cache_stats">RAR_WRAPPER_CACHE_STATS</h4>
-
-<!-- RARARCHIVE_CLASS -->
 <h4 id="rararchive_class">RARARCHIVE_CLASS</h4>
-
-<!-- RARARCHIVE_CLOSE -->
 <h4 id="rararchive_close">RARARCHIVE::CLOSE</h4>
-
-<!-- RARARCHIVE_GETCOMMENT -->
 <h4 id="rararchive_getComment">RARARCHIVE::GETCOMMENT / RAR_COMMENT_GET</h4>
-
-<!-- RARARCHIVE_GETENTRIES -->
 <h4 id="rararchive_getEntries">RARARCHIVE::GETENTRIES / RAR_LIST</h4>
-
-<!-- RARARCHIVE_GETENTRY -->
 <h4 id="rararchive_getEntry">RARARCHIVE::GETENTRY / RAR_ENTRY_GET</h4>
-
-<!-- RARARCHIVE_ISBROKEN -->
 <h4 id="rararchive_isBroken">RARARCHIVE::ISBROKEN / RAR_BROKEN_IS</h4>
-
-<!-- RARARCHIVE_ISSOLID -->
 <h4 id="rararchive_isSolid">RARARCHIVE::ISSOLID / RAR_SOLID_IS</h4>
-
-<!-- RARARCHIVE_OPEN -->
 <h4 id="rararchive_open">RARARCHIVE::OPEN / RAR_OPEN</h4>
-
-<!-- RARARCHIVE_SETALLOWBROKEN -->
 <h4 id="rararchive_setAllowBroken">RARARCHIVE::SETALLOWBROKEN</h4>
-
-<!-- RARARCHIVE_TOSTRING -->
 <h4 id="rararchive___toString">RARARCHIVE::__TOSTRING</h4>
-
-<!-- RARENTRY_CLASS -->
 <h4 id="rarentry_class">RARENTRY_CLASS</h4>
-
-<!-- RARENTRY_EXTRACT -->
 <h4 id="rarentry_extract">RARENTRY::EXTRACT</h4>
-
-<!-- RARENTRY_GETATTR -->
 <h4 id="rarentry_getAttr">RARENTRY::GETATTR</h4>
-
-<!-- RARENTRY_GETCRC -->
 <h4 id="rarentry_getCrc">RARENTRY::GETCRC</h4>
-
-<!-- RARENTRY_GETFILETIME -->
 <h4 id="rarentry_getFileTime">RARENTRY::GETFILETIME</h4>
-
-<!-- RARENTRY_GETHOSTOS -->
 <h4 id="rarentry_getHostOs">RARENTRY::GETHOSTOS</h4>
-
-<!-- RARENTRY_GETMETHOD -->
 <h4 id="rarentry_getMethod">RARENTRY::GETMETHOD</h4>
-
-<!-- RARENTRY_GETNAME -->
 <h4 id="rarentry_getName">RARENTRY::GETNAME</h4>
-
-<!-- RARENTRY_GETPACKEDSIZE -->
 <h4 id="rarentry_getPackedSize">RARENTRY::GETPACKEDSIZE</h4>
-
-<!-- RARENTRY_GETSTREAM -->
 <h4 id="rarentry_getStream">RARENTRY::GETSTREAM</h4>
-
-<!-- RARENTRY_GETUNPACKEDSIZE -->
 <h4 id="rarentry_getUnpackedSize">RARENTRY::GETUNPACKEDSIZE</h4>
-
-<!-- RARENTRY_GETVERSION -->
 <h4 id="rarentry_getVersion">RARENTRY::GETVERSION</h4>
-
-<!-- RARENTRY_ISDIRECTORY -->
 <h4 id="rarentry_isDirectory">RARENTRY::ISDIRECTORY</h4>
-
-<!-- RARENTRY_ISENCRYPTED -->
 <h4 id="rarentry_isEncrypted">RARENTRY::ISENCRYPTED</h4>
-
-<!-- RARENTRY_TOSTRING -->
 <h4 id="rarentry___toString">RARENTRY::__TOSTRING</h4>
-
-<!-- RAREXCEPTION_CLASS -->
 <h4 id="rarexception_class">RAREXCEPTION_CLASS</h4>
-
-<!-- RAREXCEPTION_ISUSINGEXCEPTIONS -->
 <h4 id="rarexception_isUsingExceptions">RAREXCEPTION::ISUSINGEXCEPTIONS</h4>
-
-<!-- RAREXCEPTION_SETUSINGEXCEPTIONS -->
 <h4 id="rarexception_setUsingExceptions">RAREXCEPTION::SETUSINGEXCEPTIONS</h4>
 
 
@@ -2808,10 +2641,7 @@
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- ZipArchive Class -->
 <h4 id="ziparchive_class">ZIPARCHIVE_CLASS</h4>
 <h4 id="ziparchive_addEmptyDir">ZIPARCHIVE::ADDEMPTYDIR</h4>
 <h4 id="ziparchive_addFile">ZIPARCHIVE::ADDFILE</h4>
@@ -2864,8 +2694,6 @@
 <h4 id="ziparchive_unchangeArchive">ZIPARCHIVE::UNCHANGEARCHIVE</h4>
 <h4 id="ziparchive_unchangeIndex">ZIPARCHIVE::UNCHANGEINDEX</h4>
 <h4 id="ziparchive_unchangeName">ZIPARCHIVE::UNCHANGENAME</h4>
-
-<!-- ZIP Functions -->
 <h4 id="zip_close">ZIP_CLOSE</h4>
 <h4 id="zip_entry_close">ZIP_ENTRY_CLOSE</h4>
 <h4 id="zip_entry_compressedsize">ZIP_ENTRY_COMPRESSEDSIZE</h4>
@@ -2877,7 +2705,7 @@
 <h4 id="zip_open">ZIP_OPEN</h4>
 <h4 id="zip_read">ZIP_READ</h4>
 
-<!-- Zlib -->
+
 <h4 id="zlib">ZLIB</h4>
 
 <nav align="center"> 
