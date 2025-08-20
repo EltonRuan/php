@@ -18767,13 +18767,176 @@
 
 <h3 id="server-specific-extensions">SERVER SPECIFIC EXTENSIONS</h3>
 
-soon...
+<nav>
+  <a href="#apache">Apache</a>
+  <a href="#fastcgi_process_manager">FastCGI Process Manager</a>
+</nav>
+
+<h4 id="apache">Apache</h4>
+
+<nav>
+  <a href="#introduction">Introduction</a>
+  <a href="#installation">Installation</a>
+  <a href="#apache_child_terminate">apache_child_terminate</a>
+  <a href="#apache_get_modules">apache_get_modules</a>
+  <a href="#apache_get_version">apache_get_version</a>
+  <a href="#apache_getenv">apache_getenv</a>
+  <a href="#apache_lookup_uri">apache_lookup_uri</a>
+  <a href="#apache_note">apache_note</a>
+  <a href="#apache_request_headers">apache_request_headers</a>
+  <a href="#apache_response_headers">apache_response_headers</a>
+  <a href="#apache_setenv">apache_setenv</a>
+  <a href="#getallheaders">getallheaders</a>
+  <a href="#virtual">virtual</a>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="apache_child_terminate">apache_child_terminate</h4>
+<h4 id="apache_get_modules">apache_get_modules</h4>
+<h4 id="apache_get_version">apache_get_version</h4>
+<h4 id="apache_getenv">apache_getenv</h4>
+<h4 id="apache_lookup_uri">apache_lookup_uri</h4>
+<h4 id="apache_note">apache_note</h4>
+<h4 id="apache_request_headers">apache_request_headers</h4>
+<h4 id="apache_response_headers">apache_response_headers</h4>
+<h4 id="apache_setenv">apache_setenv</h4>
+<h4 id="getallheaders">getallheaders</h4>
+<h4 id="virtual">virtual</h4>
+
+
+<h4 id="fastcgi_process_manager">FastCGI Process Manager</h4>
+
+<nav>
+  <a href="#introduction">Introduction</a>
+  <a href="#installation">Installation</a>
+  <a href="#observability">Observability</a>
+  <a href="#status_page">Status Page</a>
+  <a href="#fastcgi_finish_request">fastcgi_finish_request</a>
+  <a href="#fpm_get_status">fpm_get_status</a>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="observability">Observability</h4>
+<h4 id="status_page">Status Page</h4>
+<h4 id="fastcgi_finish_request">fastcgi_finish_request</h4>
+<h4 id="fpm_get_status">fpm_get_status</h4>
+
+
 
 <h3 id="session-extensions">SESSION EXTENSIONS</h3>
-.
+
+<nav>
+  <a href="#introduction">Introduction</a>
+  <a href="#dependencies">Dependencies</a>
+  <a href="#installation">Installation</a>
+  <a href="#passing_session_id">Passing the Session ID</a>
+  <a href="#custom_session_handlers">Custom Session Handlers</a>
+  <a href="#session_upload_progress">Session Upload Progress</a>
+  <a href="#sessions_and_security">Sessions and Security</a>
+  <a href="#basic_session_management">Basic Session Management</a>
+  <a href="#protecting_ini_settings">Protecting Session-related INI Settings</a>
+  <a href="#session_abort">session_abort</a>
+  <a href="#session_cache_expire">session_cache_expire</a>
+  <a href="#session_cache_limiter">session_cache_limiter</a>
+  <a href="#session_commit">session_commit</a>
+  <a href="#session_create_id">session_create_id</a>
+  <a href="#session_decode">session_decode</a>
+  <a href="#session_destroy">session_destroy</a>
+  <a href="#session_encode">session_encode</a>
+  <a href="#session_gc">session_gc</a>
+  <a href="#session_get_cookie_params">session_get_cookie_params</a>
+  <a href="#session_id">session_id</a>
+  <a href="#session_module_name">session_module_name</a>
+  <a href="#session_name">session_name</a>
+  <a href="#session_regenerate_id">session_regenerate_id</a>
+  <a href="#session_register_shutdown">session_register_shutdown</a>
+  <a href="#session_reset">session_reset</a>
+  <a href="#session_save_path">session_save_path</a>
+  <a href="#session_set_cookie_params">session_set_cookie_params</a>
+  <a href="#session_set_save_handler">session_set_save_handler</a>
+  <a href="#session_start">session_start</a>
+  <a href="#session_status">session_status</a>
+  <a href="#session_unset">session_unset</a>
+  <a href="#session_write_close">session_write_close</a>
+  <a href="#sessionhandler">SessionHandler</a>
+  <a href="#sessionhandler_methods">SessionHandler Methods</a>
+  <a href="#sessionhandlerinterface">SessionHandlerInterface</a>
+  <a href="#sessionidinterface">SessionIdInterface</a>
+  <a href="#sessionupdatetimestamphandlerinterface">SessionUpdateTimestampHandlerInterface</a>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="passing_session_id">Passing the Session ID</h4>
+<h4 id="custom_session_handlers">Custom Session Handlers</h4>
+<h4 id="session_upload_progress">Session Upload Progress</h4>
+<h4 id="sessions_and_security">Sessions and Security</h4>
+<h4 id="basic_session_management">Basic Session Management</h4>
+<h4 id="protecting_ini_settings">Protecting Session-related INI Settings</h4>
+<h4 id="session_abort">session_abort</h4>
+<h4 id="session_cache_expire">session_cache_expire</h4>
+<h4 id="session_cache_limiter">session_cache_limiter</h4>
+<h4 id="session_commit">session_commit</h4>
+<h4 id="session_create_id">session_create_id</h4>
+<h4 id="session_decode">session_decode</h4>
+<h4 id="session_destroy">session_destroy</h4>
+<h4 id="session_encode">session_encode</h4>
+<h4 id="session_gc">session_gc</h4>
+<h4 id="session_get_cookie_params">session_get_cookie_params</h4>
+<h4 id="session_id">session_id</h4>
+<h4 id="session_module_name">session_module_name</h4>
+<h4 id="session_name">session_name</h4>
+<h4 id="session_regenerate_id">session_regenerate_id</h4>
+<h4 id="session_register_shutdown">session_register_shutdown</h4>
+<h4 id="session_reset">session_reset</h4>
+<h4 id="session_save_path">session_save_path</h4>
+<h4 id="session_set_cookie_params">session_set_cookie_params</h4>
+<h4 id="session_set_save_handler">session_set_save_handler</h4>
+<h4 id="session_start">session_start</h4>
+<h4 id="session_status">session_status</h4>
+<h4 id="session_unset">session_unset</h4>
+<h4 id="session_write_close">session_write_close</h4>
+<h4 id="sessionhandler">SessionHandler</h4>
+<h4 id="sessionhandler_methods">SessionHandler Methods</h4>
+<h4 id="sessionhandlerinterface">SessionHandlerInterface</h4>
+<h4 id="sessionidinterface">SessionIdInterface</h4>
+<h4 id="sessionupdatetimestamphandlerinterface">SessionUpdateTimestampHandlerInterface</h4>
+
 
 <h3 id="text-processing">TEXT PROCESSING</h3>
+
+<nav>
+  <a href="#commonmark">CommonMark</a>
+  <a href="#parle">Parle</a>
+  <a href="#pcre">PCRE</a>
+  <a href="#ssdeep">ssdeep</a>
+  <a href="#strings">Strings</a>
+</nav>
+
+<h4 id="commonmark">CommonMark</h4>
+
+soon...
+
+<h4 id="parle">Parle</h4>
+
 .
+
+<h4 id="pcre">PCRE</h4>
+
+.
+
+<h4 id="ssdeep">ssdeep</h4>
+
+.
+
+<h4 id="strings">Strings</h4>
+
+.
+
+
 
 <h3 id="variable-and-type-related-extensions">VARIABLE AND TYPE RELATED EXTENSIONS</h3>
 .
