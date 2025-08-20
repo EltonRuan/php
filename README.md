@@ -20725,31 +20725,353 @@
 
 <h4 id="oauth">OAuth</h4>
 
-soon...
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#runtime-configuration">Runtime Configuration</a></li>
+    <li><a href="#boolval">boolval</a></li>
+    <li><a href="#debug_zval_dump">debug_zval_dump</a></li>
+    <li><a href="#doubleval">doubleval</a></li>
+    <li><a href="#empty">empty</a></li>
+    <li><a href="#floatval">floatval</a></li>
+    <li><a href="#get_debug_type">get_debug_type</a></li>
+    <li><a href="#get_defined_vars">get_defined_vars</a></li>
+    <li><a href="#get_resource_id">get_resource_id</a></li>
+    <li><a href="#get_resource_type">get_resource_type</a></li>
+    <li><a href="#gettype">gettype</a></li>
+    <li><a href="#intval">intval</a></li>
+    <li><a href="#is_array">is_array</a></li>
+    <li><a href="#is_bool">is_bool</a></li>
+    <li><a href="#is_callable">is_callable</a></li>
+    <li><a href="#is_countable">is_countable</a></li>
+    <li><a href="#is_double">is_double</a></li>
+    <li><a href="#is_float">is_float</a></li>
+    <li><a href="#is_int">is_int</a></li>
+    <li><a href="#is_integer">is_integer</a></li>
+    <li><a href="#is_iterable">is_iterable</a></li>
+    <li><a href="#is_long">is_long</a></li>
+    <li><a href="#is_null">is_null</a></li>
+    <li><a href="#is_numeric">is_numeric</a></li>
+    <li><a href="#is_object">is_object</a></li>
+    <li><a href="#is_real">is_real</a></li>
+    <li><a href="#is_resource">is_resource</a></li>
+    <li><a href="#is_scalar">is_scalar</a></li>
+    <li><a href="#is_string">is_string</a></li>
+    <li><a href="#isset">isset</a></li>
+    <li><a href="#print_r">print_r</a></li>
+    <li><a href="#serialize">serialize</a></li>
+    <li><a href="#settype">settype</a></li>
+    <li><a href="#strval">strval</a></li>
+    <li><a href="#unserialize">unserialize</a></li>
+    <li><a href="#unset">unset</a></li>
+    <li><a href="#var_dump">var_dump</a></li>
+    <li><a href="#var_export">var_export</a></li>
+  </ul>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="runtime-configuration">Runtime Configuration</h4>
+<h4 id="boolval">boolval</h4>
+<h4 id="debug_zval_dump">debug_zval_dump</h4>
+<h4 id="doubleval">doubleval</h4>
+<h4 id="empty">empty</h4>
+<h4 id="floatval">floatval</h4>
+<h4 id="get_debug_type">get_debug_type</h4>
+<h4 id="get_defined_vars">get_defined_vars</h4>
+<h4 id="get_resource_id">get_resource_id</h4>
+<h4 id="get_resource_type">get_resource_type</h4>
+<h4 id="gettype">gettype</h4>
+<h4 id="intval">intval</h4>
+<h4 id="is_array">is_array</h4>
+<h4 id="is_bool">is_bool</h4>
+<h4 id="is_callable">is_callable</h4>
+<h4 id="is_countable">is_countable</h4>
+<h4 id="is_double">is_double</h4>
+<h4 id="is_float">is_float</h4>
+<h4 id="is_int">is_int</h4>
+<h4 id="is_integer">is_integer</h4>
+<h4 id="is_iterable">is_iterable</h4>
+<h4 id="is_long">is_long</h4>
+<h4 id="is_null">is_null</h4>
+<h4 id="is_numeric">is_numeric</h4>
+<h4 id="is_object">is_object</h4>
+<h4 id="is_real">is_real</h4>
+<h4 id="is_resource">is_resource</h4>
+<h4 id="is_scalar">is_scalar</h4>
+<h4 id="is_string">is_string</h4>
+<h4 id="isset">isset</h4>
+<h4 id="print_r">print_r</h4>
+<h4 id="serialize">serialize</h4>
+<h4 id="settype">settype</h4>
+<h4 id="strval">strval</h4>
+<h4 id="unserialize">unserialize</h4>
+<h4 id="unset">unset</h4>
+<h4 id="var_dump">var_dump</h4>
+<h4 id="var_export">var_export</h4>
+
 
 <h4 id="soap">SOAP</h4>
 
-.
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#dependencies">Dependencies</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#is_soap_fault">is_soap_fault</a></li>
+    <li><a href="#use_soap_error_handler">use_soap_error_handler</a></li>
+    <li><a href="#soapclient">SoapClient</a></li>
+    <li><a href="#soapclient___call">SoapClient::__call</a></li>
+    <li><a href="#soapclient___construct">SoapClient::__construct</a></li>
+    <li><a href="#soapclient___doRequest">SoapClient::__doRequest</a></li>
+    <li><a href="#soapclient___getCookies">SoapClient::__getCookies</a></li>
+    <li><a href="#soapclient___getFunctions">SoapClient::__getFunctions</a></li>
+    <li><a href="#soapclient___getLastRequest">SoapClient::__getLastRequest</a></li>
+    <li><a href="#soapclient___getLastRequestHeaders">SoapClient::__getLastRequestHeaders</a></li>
+    <li><a href="#soapclient___getLastResponse">SoapClient::__getLastResponse</a></li>
+    <li><a href="#soapclient___getLastResponseHeaders">SoapClient::__getLastResponseHeaders</a></li>
+    <li><a href="#soapclient___getTypes">SoapClient::__getTypes</a></li>
+    <li><a href="#soapclient___setCookie">SoapClient::__setCookie</a></li>
+    <li><a href="#soapclient___setLocation">SoapClient::__setLocation</a></li>
+    <li><a href="#soapclient___setSoapHeaders">SoapClient::__setSoapHeaders</a></li>
+    <li><a href="#soapclient___soapCall">SoapClient::__soapCall</a></li>
+    <li><a href="#soapserver">SoapServer</a></li>
+    <li><a href="#soapserver_addFunction">SoapServer::addFunction</a></li>
+    <li><a href="#soapserver_addSoapHeader">SoapServer::addSoapHeader</a></li>
+    <li><a href="#soapserver___construct">SoapServer::__construct</a></li>
+    <li><a href="#soapserver_fault">SoapServer::fault</a></li>
+    <li><a href="#soapserver_getFunctions">SoapServer::getFunctions</a></li>
+    <li><a href="#soapserver___getLastResponse">SoapServer::__getLastResponse</a></li>
+    <li><a href="#soapserver_handle">SoapServer::handle</a></li>
+    <li><a href="#soapserver_setClass">SoapServer::setClass</a></li>
+    <li><a href="#soapserver_setObject">SoapServer::setObject</a></li>
+    <li><a href="#soapserver_setPersistence">SoapServer::setPersistence</a></li>
+    <li><a href="#soapfault">SoapFault</a></li>
+    <li><a href="#soapfault___construct">SoapFault::__construct</a></li>
+    <li><a href="#soapfault___toString">SoapFault::__toString</a></li>
+    <li><a href="#soapheader">SoapHeader</a></li>
+    <li><a href="#soapheader___construct">SoapHeader::__construct</a></li>
+    <li><a href="#soapparam">SoapParam</a></li>
+    <li><a href="#soapparam___construct">SoapParam::__construct</a></li>
+    <li><a href="#soapvar">SoapVar</a></li>
+    <li><a href="#soapvar___construct">SoapVar::__construct</a></li>
+  </ul>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="is_soap_fault">is_soap_fault</h4>
+<h4 id="use_soap_error_handler">use_soap_error_handler</h4>
+<h4 id="soapclient">SoapClient</h4>
+<h4 id="soapclient___call">SoapClient::__call</h4>
+<h4 id="soapclient___construct">SoapClient::__construct</h4>
+<h4 id="soapclient___doRequest">SoapClient::__doRequest</h4>
+<h4 id="soapclient___getCookies">SoapClient::__getCookies</h4>
+<h4 id="soapclient___getFunctions">SoapClient::__getFunctions</h4>
+<h4 id="soapclient___getLastRequest">SoapClient::__getLastRequest</h4>
+<h4 id="soapclient___getLastRequestHeaders">SoapClient::__getLastRequestHeaders</h4>
+<h4 id="soapclient___getLastResponse">SoapClient::__getLastResponse</h4>
+<h4 id="soapclient___getLastResponseHeaders">SoapClient::__getLastResponseHeaders</h4>
+<h4 id="soapclient___getTypes">SoapClient::__getTypes</h4>
+<h4 id="soapclient___setCookie">SoapClient::__setCookie</h4>
+<h4 id="soapclient___setLocation">SoapClient::__setLocation</h4>
+<h4 id="soapclient___setSoapHeaders">SoapClient::__setSoapHeaders</h4>
+<h4 id="soapclient___soapCall">SoapClient::__soapCall</h4>
+<h4 id="soapserver">SoapServer</h4>
+<h4 id="soapserver_addFunction">SoapServer::addFunction</h4>
+<h4 id="soapserver_addSoapHeader">SoapServer::addSoapHeader</h4>
+<h4 id="soapserver___construct">SoapServer::__construct</h4>
+<h4 id="soapserver_fault">SoapServer::fault</h4>
+<h4 id="soapserver_getFunctions">SoapServer::getFunctions</h4>
+<h4 id="soapserver___getLastResponse">SoapServer::__getLastResponse</h4>
+<h4 id="soapserver_handle">SoapServer::handle</h4>
+<h4 id="soapserver_setClass">SoapServer::setClass</h4>
+<h4 id="soapserver_setObject">SoapServer::setObject</h4>
+<h4 id="soapserver_setPersistence">SoapServer::setPersistence</h4>
+<h4 id="soapfault">SoapFault</h4>
+<h4 id="soapfault___construct">SoapFault::__construct</h4>
+<h4 id="soapfault___toString">SoapFault::__toString</h4>
+<h4 id="soapheader">SoapHeader</h4>
+<h4 id="soapheader___construct">SoapHeader::__construct</h4>
+<h4 id="soapparam">SoapParam</h4>
+<h4 id="soapparam___construct">SoapParam::__construct</h4>
+<h4 id="soapvar">SoapVar</h4>
+<h4 id="soapvar___construct">SoapVar::__construct</h4>
+
 
 <h4 id="yar">Yar</h4>
 
-.
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#dependencies">Dependencies</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#yar_server">Yar_Server</a></li>
+    <li><a href="#yar_server___construct">Yar_Server::__construct</a></li>
+    <li><a href="#yar_server_handle">Yar_Server::handle</a></li>
+    <li><a href="#yar_client">Yar_Client</a></li>
+    <li><a href="#yar_client___call">Yar_Client::__call</a></li>
+    <li><a href="#yar_client___construct">Yar_Client::__construct</a></li>
+    <li><a href="#yar_client_setOpt">Yar_Client::setOpt</a></li>
+    <li><a href="#yar_concurrent_client">Yar_Concurrent_Client</a></li>
+    <li><a href="#yar_concurrent_client_call">Yar_Concurrent_Client::call</a></li>
+    <li><a href="#yar_concurrent_client_loop">Yar_Concurrent_Client::loop</a></li>
+    <li><a href="#yar_concurrent_client_reset">Yar_Concurrent_Client::reset</a></li>
+    <li><a href="#yar_server_exception">Yar_Server_Exception</a></li>
+    <li><a href="#yar_server_exception_getType">Yar_Server_Exception::getType</a></li>
+    <li><a href="#yar_client_exception">Yar_Client_Exception</a></li>
+    <li><a href="#yar_client_exception_getType">Yar_Client_Exception::getType</a></li>
+  </ul>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="yar_server">Yar_Server</h4>
+<h4 id="yar_server___construct">Yar_Server::__construct</h4>
+<h4 id="yar_server_handle">Yar_Server::handle</h4>
+<h4 id="yar_client">Yar_Client</h4>
+<h4 id="yar_client___call">Yar_Client::__call</h4>
+<h4 id="yar_client___construct">Yar_Client::__construct</h4>
+<h4 id="yar_client_setOpt">Yar_Client::setOpt</h4>
+<h4 id="yar_concurrent_client">Yar_Concurrent_Client</h4>
+<h4 id="yar_concurrent_client_call">Yar_Concurrent_Client::call</h4>
+<h4 id="yar_concurrent_client_loop">Yar_Concurrent_Client::loop</h4>
+<h4 id="yar_concurrent_client_reset">Yar_Concurrent_Client::reset</h4>
+<h4 id="yar_server_exception">Yar_Server_Exception</h4>
+<h4 id="yar_server_exception_getType">Yar_Server_Exception::getType</h4>
+<h4 id="yar_client_exception">Yar_Client_Exception</h4>
+<h4 id="yar_client_exception_getType">Yar_Client_Exception::getType</h4>
+
 
 <h4 id="xml-rpc">XML-RPC</h4>
 
-.
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#dependencies">Dependencies</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#xmlrpc_decode">xmlrpc_decode</a></li>
+    <li><a href="#xmlrpc_decode_request">xmlrpc_decode_request</a></li>
+    <li><a href="#xmlrpc_encode">xmlrpc_encode</a></li>
+    <li><a href="#xmlrpc_encode_request">xmlrpc_encode_request</a></li>
+    <li><a href="#xmlrpc_get_type">xmlrpc_get_type</a></li>
+    <li><a href="#xmlrpc_is_fault">xmlrpc_is_fault</a></li>
+    <li><a href="#xmlrpc_parse_method_descriptions">xmlrpc_parse_method_descriptions</a></li>
+    <li><a href="#xmlrpc_server_add_introspection_data">xmlrpc_server_add_introspection_data</a></li>
+    <li><a href="#xmlrpc_server_call_method">xmlrpc_server_call_method</a></li>
+    <li><a href="#xmlrpc_server_create">xmlrpc_server_create</a></li>
+    <li><a href="#xmlrpc_server_destroy">xmlrpc_server_destroy</a></li>
+    <li><a href="#xmlrpc_server_register_introspection_callback">xmlrpc_server_register_introspection_callback</a></li>
+    <li><a href="#xmlrpc_server_register_method">xmlrpc_server_register_method</a></li>
+    <li><a href="#xmlrpc_set_type">xmlrpc_set_type</a></li>
+  </ul>
+</nav>
 
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="xmlrpc_decode">xmlrpc_decode</h4>
+<h4 id="xmlrpc_decode_request">xmlrpc_decode_request</h4>
+<h4 id="xmlrpc_encode">xmlrpc_encode</h4>
+<h4 id="xmlrpc_encode_request">xmlrpc_encode_request</h4>
+<h4 id="xmlrpc_get_type">xmlrpc_get_type</h4>
+<h4 id="xmlrpc_is_fault">xmlrpc_is_fault</h4>
+<h4 id="xmlrpc_parse_method_descriptions">xmlrpc_parse_method_descriptions</h4>
+<h4 id="xmlrpc_server_add_introspection_data">xmlrpc_server_add_introspection_data</h4>
+<h4 id="xmlrpc_server_call_method">xmlrpc_server_call_method</h4>
+<h4 id="xmlrpc_server_create">xmlrpc_server_create</h4>
+<h4 id="xmlrpc_server_destroy">xmlrpc_server_destroy</h4>
+<h4 id="xmlrpc_server_register_introspection_callback">xmlrpc_server_register_introspection_callback</h4>
+<h4 id="xmlrpc_server_register_method">xmlrpc_server_register_method</h4>
+<h4 id="xmlrpc_set_type">xmlrpc_set_type</h4>
 
 
 <h3 id="windows-only-extensions">WINDOWS ONLY EXTENSIONS</h3>
+
+<nav>
+  <ul>
+    <li><a href="#com">COM</a></li>
+    <li><a href="#win32service">win32service</a></li>
+  </ul>
+</nav>
+
+<h4 id="com">COM</h4>
+
+soon...
+
+<h4 id="win32service">win32service</h4>
+
 .
+
 
 <h3 id="xml-manipulation">XML MANIPULATION</h3>
+
+<nav>
+  <ul>
+    <li><a href="#dom">DOM</a></li>
+    <li><a href="#libxml">libxml</a></li>
+    <li><a href="#simplexml">SimpleXML</a></li>
+    <li><a href="#wddx">WDDX</a></li>
+    <li><a href="#xmldiff">XMLDiff</a></li>
+    <li><a href="#xml-parser">XML Parser</a></li>
+    <li><a href="#xmlreader">XMLReader</a></li>
+    <li><a href="#xmlwriter">XMLWriter</a></li>
+    <li><a href="#xsl">XSL</a></li>
+  </ul>
+</nav>
+
+<h4 id="dom">DOM</h4>
+
 .
+
+<h4 id="libxml">libxml</h4>
+
+.
+
+<h4 id="simplexml">SimpleXML</h4>
+
+.
+
+<h4 id="wddx">WDDX</h4>
+
+.
+
+<h4 id="xmldiff">XMLDiff</h4>
+
+.
+
+<h4 id="xml-parser">XML Parser</h4>
+
+.
+
+<h4 id="xmlreader">XMLReader</h4>
+
+.
+
+<h4 id="xmlwriter">XMLWriter</h4>
+
+.
+
+<h4 id="xsl">XSL</h4>
+
+.
+
+
 
 <h3 id="gui-extensions">GUI EXTENSIONS</h3>
-.
 
+<nav>
+  <ul>
+    <li><a href="#ui">UI</a></li>
+  </ul>
+</nav>
+
+<h4 id="ui">UI</h4>
+
+.
 
 
 
