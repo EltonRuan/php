@@ -18918,28 +18918,823 @@
 
 <h4 id="commonmark">CommonMark</h4>
 
-soon...
+<nav>
+  <a href="#introduction">Introduction</a>
+  <a href="#dependencies">Dependencies</a>
+  <a href="#installation">Installation</a>
+  <a href="#commonmark_node_document">CommonMark\Node\Document</a>
+  <a href="#commonmark_node_heading">CommonMark\Node\Heading</a>
+  <a href="#commonmark_node_heading_construct">CommonMark\Node\Heading::__construct</a>
+  <a href="#commonmark_node_paragraph">CommonMark\Node\Paragraph</a>
+  <a href="#commonmark_node_blockquote">CommonMark\Node\BlockQuote</a>
+  <a href="#commonmark_node_bulletlist">CommonMark\Node\BulletList</a>
+  <a href="#commonmark_node_bulletlist_construct">CommonMark\Node\BulletList::__construct</a>
+  <a href="#commonmark_node_orderedlist">CommonMark\Node\OrderedList</a>
+  <a href="#commonmark_node_orderedlist_construct">CommonMark\Node\OrderedList::__construct</a>
+  <a href="#commonmark_node_item">CommonMark\Node\Item</a>
+  <a href="#commonmark_node_text">CommonMark\Node\Text</a>
+  <a href="#commonmark_node_text_construct">CommonMark\Node\Text::__construct</a>
+  <a href="#commonmark_node_text_strong">CommonMark\Node\Text\Strong</a>
+  <a href="#commonmark_node_text_emphasis">CommonMark\Node\Text\Emphasis</a>
+  <a href="#commonmark_node_thematicbreak">CommonMark\Node\ThematicBreak</a>
+  <a href="#commonmark_node_softbreak">CommonMark\Node\SoftBreak</a>
+  <a href="#commonmark_node_linebreak">CommonMark\Node\LineBreak</a>
+  <a href="#commonmark_node_code">CommonMark\Node\Code</a>
+  <a href="#commonmark_node_codeblock">CommonMark\Node\CodeBlock</a>
+  <a href="#commonmark_node_codeblock_construct">CommonMark\Node\CodeBlock::__construct</a>
+  <a href="#commonmark_node_htmlblock">CommonMark\Node\HTMLBlock</a>
+  <a href="#commonmark_node_htmlinline">CommonMark\Node\HTMLInline</a>
+  <a href="#commonmark_node_image">CommonMark\Node\Image</a>
+  <a href="#commonmark_node_image_construct">CommonMark\Node\Image::__construct</a>
+  <a href="#commonmark_node_link">CommonMark\Node\Link</a>
+  <a href="#commonmark_node_link_construct">CommonMark\Node\Link::__construct</a>
+  <a href="#commonmark_node_customblock">CommonMark\Node\CustomBlock</a>
+  <a href="#commonmark_node_custominline">CommonMark\Node\CustomInline</a>
+  <a href="#commonmark_node">CommonMark\Node</a>
+  <a href="#commonmark_node_appendchild">CommonMark\Node::appendChild</a>
+  <a href="#commonmark_node_prependchild">CommonMark\Node::prependChild</a>
+  <a href="#commonmark_node_insertafter">CommonMark\Node::insertAfter</a>
+  <a href="#commonmark_node_insertbefore">CommonMark\Node::insertBefore</a>
+  <a href="#commonmark_node_replace">CommonMark\Node::replace</a>
+  <a href="#commonmark_node_unlink">CommonMark\Node::unlink</a>
+  <a href="#commonmark_node_accept">CommonMark\Node::accept</a>
+  <a href="#commonmark_interfaces_ivisitor">CommonMark\Interfaces\IVisitor</a>
+  <a href="#commonmark_interfaces_ivisitor_enter">CommonMark\Interfaces\IVisitor::enter</a>
+  <a href="#commonmark_interfaces_ivisitor_leave">CommonMark\Interfaces\IVisitor::leave</a>
+  <a href="#commonmark_interfaces_ivisitable">CommonMark\Interfaces\IVisitable</a>
+  <a href="#commonmark_interfaces_ivisitable_accept">CommonMark\Interfaces\IVisitable::accept</a>
+  <a href="#commonmark_parser">CommonMark\Parser</a>
+  <a href="#commonmark_parser_construct">CommonMark\Parser::__construct</a>
+  <a href="#commonmark_parser_parse">CommonMark\Parser::parse</a>
+  <a href="#commonmark_parser_finish">CommonMark\Parser::finish</a>
+  <a href="#commonmark_cql">CommonMark\CQL</a>
+  <a href="#commonmark_cql_construct">CommonMark\CQL::__construct</a>
+  <a href="#commonmark_cql_invoke">CommonMark\CQL::__invoke</a>
+  <a href="#commonmark_functions">CommonMark Functions</a>
+  <a href="#commonmark_parse">CommonMark\Parse</a>
+  <a href="#commonmark_render">CommonMark\Render</a>
+  <a href="#commonmark_render_html">CommonMark\Render\HTML</a>
+  <a href="#commonmark_render_latex">CommonMark\Render\Latex</a>
+  <a href="#commonmark_render_man">CommonMark\Render\Man</a>
+  <a href="#commonmark_render_xml">CommonMark\Render\XML</a>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="commonmark_node_document">CommonMark\Node\Document</h4>
+<h4 id="commonmark_node_heading">CommonMark\Node\Heading</h4>
+<h4 id="commonmark_node_heading_construct">CommonMark\Node\Heading::__construct</h4>
+<h4 id="commonmark_node_paragraph">CommonMark\Node\Paragraph</h4>
+<h4 id="commonmark_node_blockquote">CommonMark\Node\BlockQuote</h4>
+<h4 id="commonmark_node_bulletlist">CommonMark\Node\BulletList</h4>
+<h4 id="commonmark_node_bulletlist_construct">CommonMark\Node\BulletList::__construct</h4>
+<h4 id="commonmark_node_orderedlist">CommonMark\Node\OrderedList</h4>
+<h4 id="commonmark_node_orderedlist_construct">CommonMark\Node\OrderedList::__construct</h4>
+<h4 id="commonmark_node_item">CommonMark\Node\Item</h4>
+<h4 id="commonmark_node_text">CommonMark\Node\Text</h4>
+<h4 id="commonmark_node_text_construct">CommonMark\Node\Text::__construct</h4>
+<h4 id="commonmark_node_text_strong">CommonMark\Node\Text\Strong</h4>
+<h4 id="commonmark_node_text_emphasis">CommonMark\Node\Text\Emphasis</h4>
+<h4 id="commonmark_node_thematicbreak">CommonMark\Node\ThematicBreak</h4>
+<h4 id="commonmark_node_softbreak">CommonMark\Node\SoftBreak</h4>
+<h4 id="commonmark_node_linebreak">CommonMark\Node\LineBreak</h4>
+<h4 id="commonmark_node_code">CommonMark\Node\Code</h4>
+<h4 id="commonmark_node_codeblock">CommonMark\Node\CodeBlock</h4>
+<h4 id="commonmark_node_codeblock_construct">CommonMark\Node\CodeBlock::__construct</h4>
+<h4 id="commonmark_node_htmlblock">CommonMark\Node\HTMLBlock</h4>
+<h4 id="commonmark_node_htmlinline">CommonMark\Node\HTMLInline</h4>
+<h4 id="commonmark_node_image">CommonMark\Node\Image</h4>
+<h4 id="commonmark_node_image_construct">CommonMark\Node\Image::__construct</h4>
+<h4 id="commonmark_node_link">CommonMark\Node\Link</h4>
+<h4 id="commonmark_node_link_construct">CommonMark\Node\Link::__construct</h4>
+<h4 id="commonmark_node_customblock">CommonMark\Node\CustomBlock</h4>
+<h4 id="commonmark_node_custominline">CommonMark\Node\CustomInline</h4>
+<h4 id="commonmark_node">CommonMark\Node</h4>
+<h4 id="commonmark_node_appendchild">CommonMark\Node::appendChild</h4>
+<h4 id="commonmark_node_prependchild">CommonMark\Node::prependChild</h4>
+<h4 id="commonmark_node_insertafter">CommonMark\Node::insertAfter</h4>
+<h4 id="commonmark_node_insertbefore">CommonMark\Node::insertBefore</h4>
+<h4 id="commonmark_node_replace">CommonMark\Node::replace</h4>
+<h4 id="commonmark_node_unlink">CommonMark\Node::unlink</h4>
+<h4 id="commonmark_node_accept">CommonMark\Node::accept</h4>
+<h4 id="commonmark_interfaces_ivisitor">CommonMark\Interfaces\IVisitor</h4>
+<h4 id="commonmark_interfaces_ivisitor_enter">CommonMark\Interfaces\IVisitor::enter</h4>
+<h4 id="commonmark_interfaces_ivisitor_leave">CommonMark\Interfaces\IVisitor::leave</h4>
+<h4 id="commonmark_interfaces_ivisitable">CommonMark\Interfaces\IVisitable</h4>
+<h4 id="commonmark_interfaces_ivisitable_accept">CommonMark\Interfaces\IVisitable::accept</h4>
+<h4 id="commonmark_parser">CommonMark\Parser</h4>
+<h4 id="commonmark_parser_construct">CommonMark\Parser::__construct</h4>
+<h4 id="commonmark_parser_parse">CommonMark\Parser::parse</h4>
+<h4 id="commonmark_parser_finish">CommonMark\Parser::finish</h4>
+<h4 id="commonmark_cql">CommonMark\CQL</h4>
+<h4 id="commonmark_cql_construct">CommonMark\CQL::__construct</h4>
+<h4 id="commonmark_cql_invoke">CommonMark\CQL::__invoke</h4>
+<h4 id="commonmark_functions">CommonMark Functions</h4>
+<h4 id="commonmark_parse">CommonMark\Parse</h4>
+<h4 id="commonmark_render">CommonMark\Render</h4>
+<h4 id="commonmark_render_html">CommonMark\Render\HTML</h4>
+<h4 id="commonmark_render_latex">CommonMark\Render\Latex</h4>
+<h4 id="commonmark_render_man">CommonMark\Render\Man</h4>
+<h4 id="commonmark-render-xml">CommonMark\Render\XML</h4>
+
 
 <h4 id="parle">Parle</h4>
 
-.
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#installation-configuration">Installation/Configuration</a></li>
+    <li><a href="#dependencies">Dependencies</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#predefined-constants">Predefined Constants</a></li>
+    <li><a href="#pattern-matching">Pattern Matching — Parle Pattern Matching</a></li>
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#lexer-examples">Lexer Examples</a></li>
+    <li><a href="#parser-examples">Parser Examples</a></li>
+    <li><a href="#parle-lexer">Parle\Lexer</a></li>
+    <li><a href="#parle-lexer-advance">Parle\Lexer::advance</a></li>
+    <li><a href="#parle-lexer-build">Parle\Lexer::build</a></li>
+    <li><a href="#parle-lexer-callout">Parle\Lexer::callout</a></li>
+    <li><a href="#parle-lexer-consume">Parle\Lexer::consume</a></li>
+    <li><a href="#parle-lexer-dump">Parle\Lexer::dump</a></li>
+    <li><a href="#parle-lexer-gettoken">Parle\Lexer::getToken</a></li>
+    <li><a href="#parle-lexer-insertmacro">Parle\Lexer::insertMacro</a></li>
+    <li><a href="#parle-lexer-push">Parle\Lexer::push</a></li>
+    <li><a href="#parle-lexer-reset">Parle\Lexer::reset</a></li>
+    <li><a href="#parle-rlexer">Parle\RLexer</a></li>
+    <li><a href="#parle-rlexer-advance">Parle\RLexer::advance</a></li>
+    <li><a href="#parle-rlexer-build">Parle\RLexer::build</a></li>
+    <li><a href="#parle-rlexer-callout">Parle\RLexer::callout</a></li>
+    <li><a href="#parle-rlexer-consume">Parle\RLexer::consume</a></li>
+    <li><a href="#parle-rlexer-dump">Parle\RLexer::dump</a></li>
+    <li><a href="#parle-rlexer-gettoken">Parle\RLexer::getToken</a></li>
+    <li><a href="#parle-rlexer-insertmacro">Parle\RLexer::insertMacro</a></li>
+    <li><a href="#parle-rlexer-push">Parle\RLexer::push</a></li>
+    <li><a href="#parle-rlexer-pushstate">Parle\RLexer::pushState</a></li>
+    <li><a href="#parle-rlexer-reset">Parle\RLexer::reset</a></li>
+    <li><a href="#parle-parser">Parle\Parser</a></li>
+    <li><a href="#parle-parser-advance">Parle\Parser::advance</a></li>
+    <li><a href="#parle-parser-build">Parle\Parser::build</a></li>
+    <li><a href="#parle-parser-consume">Parle\Parser::consume</a></li>
+    <li><a href="#parle-parser-dump">Parle\Parser::dump</a></li>
+    <li><a href="#parle-parser-errorinfo">Parle\Parser::errorInfo</a></li>
+    <li><a href="#parle-parser-left">Parle\Parser::left</a></li>
+    <li><a href="#parle-parser-nonassoc">Parle\Parser::nonassoc</a></li>
+    <li><a href="#parle-parser-precedence">Parle\Parser::precedence</a></li>
+    <li><a href="#parle-parser-push">Parle\Parser::push</a></li>
+    <li><a href="#parle-parser-reset">Parle\Parser::reset</a></li>
+    <li><a href="#parle-parser-right">Parle\Parser::right</a></li>
+    <li><a href="#parle-parser-sigil">Parle\Parser::sigil</a></li>
+    <li><a href="#parle-parser-sigilcount">Parle\Parser::sigilCount</a></li>
+    <li><a href="#parle-parser-sigilname">Parle\Parser::sigilName</a></li>
+    <li><a href="#parle-parser-token">Parle\Parser::token</a></li>
+    <li><a href="#parle-parser-tokenid">Parle\Parser::tokenId</a></li>
+    <li><a href="#parle-parser-trace">Parle\Parser::trace</a></li>
+    <li><a href="#parle-parser-validate">Parle\Parser::validate</a></li>
+    <li><a href="#parle-rparser">Parle\RParser</a></li>
+    <li><a href="#parle-rparser-advance">Parle\RParser::advance</a></li>
+    <li><a href="#parle-rparser-build">Parle\RParser::build</a></li>
+    <li><a href="#parle-rparser-consume">Parle\RParser::consume</a></li>
+    <li><a href="#parle-rparser-dump">Parle\RParser::dump</a></li>
+    <li><a href="#parle-rparser-errorinfo">Parle\RParser::errorInfo</a></li>
+    <li><a href="#parle-rparser-left">Parle\RParser::left</a></li>
+    <li><a href="#parle-rparser-nonassoc">Parle\RParser::nonassoc</a></li>
+    <li><a href="#parle-rparser-precedence">Parle\RParser::precedence</a></li>
+    <li><a href="#parle-rparser-push">Parle\RParser::push</a></li>
+    <li><a href="#parle-rparser-reset">Parle\RParser::reset</a></li>
+    <li><a href="#parle-rparser-right">Parle\RParser::right</a></li>
+    <li><a href="#parle-rparser-sigil">Parle\RParser::sigil</a></li>
+    <li><a href="#parle-rparser-sigilcount">Parle\RParser::sigilCount</a></li>
+    <li><a href="#parle-rparser-sigilname">Parle\RParser::sigilName</a></li>
+    <li><a href="#parle-rparser-token">Parle\RParser::token</a></li>
+    <li><a href="#parle-rparser-tokenid">Parle\RParser::tokenId</a></li>
+    <li><a href="#parle-rparser-trace">Parle\RParser::trace</a></li>
+    <li><a href="#parle-rparser-validate">Parle\RParser::validate</a></li>
+    <li><a href="#parle-stack">Parle\Stack</a></li>
+    <li><a href="#parle-stack-pop">Parle\Stack::pop</a></li>
+    <li><a href="#parle-stack-push">Parle\Stack::push</a></li>
+    <li><a href="#parle-token">Parle\Token</a></li>
+    <li><a href="#parle-errorinfo">Parle\ErrorInfo</a></li>
+    <li><a href="#parle-lexerexception">Parle\LexerException</a></li>
+    <li><a href="#parle-parserexception">Parle\ParserException</a></li>
+  </ul>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation-configuration">Installation/Configuration</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="predefined-constants">Predefined Constants</h4>
+<h4 id="pattern-matching">Pattern Matching — Parle Pattern Matching</h4>
+<h4 id="examples">Examples</h4>
+<h4 id="lexer-examples">Lexer Examples</h4>
+<h4 id="parser-examples">Parser Examples</h4>
+
+<h4 id="parle-lexer">Parle\Lexer</h4>
+<h4 id="parle-lexer-advance">Parle\Lexer::advance</h4>
+<h4 id="parle-lexer-build">Parle\Lexer::build</h4>
+<h4 id="parle-lexer-callout">Parle\Lexer::callout</h4>
+<h4 id="parle-lexer-consume">Parle\Lexer::consume</h4>
+<h4 id="parle-lexer-dump">Parle\Lexer::dump</h4>
+<h4 id="parle-lexer-gettoken">Parle\Lexer::getToken</h4>
+<h4 id="parle-lexer-insertmacro">Parle\Lexer::insertMacro</h4>
+<h4 id="parle-lexer-push">Parle\Lexer::push</h4>
+<h4 id="parle-lexer-reset">Parle\Lexer::reset</h4>
+
+<h4 id="parle-rlexer">Parle\RLexer</h4>
+<h4 id="parle-rlexer-advance">Parle\RLexer::advance</h4>
+<h4 id="parle-rlexer-build">Parle\RLexer::build</h4>
+<h4 id="parle-rlexer-callout">Parle\RLexer::callout</h4>
+<h4 id="parle-rlexer-consume">Parle\RLexer::consume</h4>
+<h4 id="parle-rlexer-dump">Parle\RLexer::dump</h4>
+<h4 id="parle-rlexer-gettoken">Parle\RLexer::getToken</h4>
+<h4 id="parle-rlexer-insertmacro">Parle\RLexer::insertMacro</h4>
+<h4 id="parle-rlexer-push">Parle\RLexer::push</h4>
+<h4 id="parle-rlexer-pushstate">Parle\RLexer::pushState</h4>
+<h4 id="parle-rlexer-reset">Parle\RLexer::reset</h4>
+
+<h4 id="parle-parser">Parle\Parser</h4>
+<h4 id="parle-parser-advance">Parle\Parser::advance</h4>
+<h4 id="parle-parser-build">Parle\Parser::build</h4>
+<h4 id="parle-parser-consume">Parle\Parser::consume</h4>
+<h4 id="parle-parser-dump">Parle\Parser::dump</h4>
+<h4 id="parle-parser-errorinfo">Parle\Parser::errorInfo</h4>
+<h4 id="parle-parser-left">Parle\Parser::left</h4>
+<h4 id="parle-parser-nonassoc">Parle\Parser::nonassoc</h4>
+<h4 id="parle-parser-precedence">Parle\Parser::precedence</h4>
+<h4 id="parle-parser-push">Parle\Parser::push</h4>
+<h4 id="parle-parser-reset">Parle\Parser::reset</h4>
+<h4 id="parle-parser-right">Parle\Parser::right</h4>
+<h4 id="parle-parser-sigil">Parle\Parser::sigil</h4>
+<h4 id="parle-parser-sigilcount">Parle\Parser::sigilCount</h4>
+<h4 id="parle-parser-sigilname">Parle\Parser::sigilName</h4>
+<h4 id="parle-parser-token">Parle\Parser::token</h4>
+<h4 id="parle-parser-tokenid">Parle\Parser::tokenId</h4>
+<h4 id="parle-parser-trace">Parle\Parser::trace</h4>
+<h4 id="parle-parser-validate">Parle\Parser::validate</h4>
+
+<h4 id="parle-rparser">Parle\RParser</h4>
+<h4 id="parle-rparser-advance">Parle\RParser::advance</h4>
+<h4 id="parle-rparser-build">Parle\RParser::build</h4>
+<h4 id="parle-rparser-consume">Parle\RParser::consume</h4>
+<h4 id="parle-rparser-dump">Parle\RParser::dump</h4>
+<h4 id="parle-rparser-errorinfo">Parle\RParser::errorInfo</h4>
+<h4 id="parle-rparser-left">Parle\RParser::left</h4>
+<h4 id="parle-rparser-nonassoc">Parle\RParser::nonassoc</h4>
+<h4 id="parle-rparser-precedence">Parle\RParser::precedence</h4>
+<h4 id="parle-rparser-push">Parle\RParser::push</h4>
+<h4 id="parle-rparser-reset">Parle\RParser::reset</h4>
+<h4 id="parle-rparser-right">Parle\RParser::right</h4>
+<h4 id="parle-rparser-sigil">Parle\RParser::sigil</h4>
+<h4 id="parle-rparser-sigilcount">Parle\RParser::sigilCount</h4>
+<h4 id="parle-rparser-sigilname">Parle\RParser::sigilName</h4>
+<h4 id="parle-rparser-token">Parle\RParser::token</h4>
+<h4 id="parle-rparser-tokenid">Parle\RParser::tokenId</h4>
+<h4 id="parle-rparser-trace">Parle\RParser::trace</h4>
+<h4 id="parle-rparser-validate">Parle\RParser::validate</h4>
+
+<h4 id="parle-stack">Parle\Stack</h4>
+<h4 id="parle-stack-pop">Parle\Stack::pop</h4>
+<h4 id="parle-stack-push">Parle\Stack::push</h4>
+
+<h4 id="parle-token">Parle\Token</h4>
+<h4 id="parle-errorinfo">Parle\ErrorInfo</h4>
+<h4 id="parle-lexerexception">Parle\LexerException</h4>
+<h4 id="parle-parserexception">Parle\ParserException</h4>
+
 
 <h4 id="pcre">PCRE</h4>
 
-.
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#pcre-expressions">PCRE Expressions</a></li>
+    <li><a href="#pcre-syntax">PCRE Regular Expression Syntax</a></li>
+    <li><a href="#pcre-modifiers">Possible Modifiers in Regular Expressions</a></li>
+    <li><a href="#perl-differences">Differences from Perl</a></li>
+    <li><a href="#preg-filter">preg_filter</a></li>
+    <li><a href="#preg-grep">preg_grep</a></li>
+    <li><a href="#preg-last-error">preg_last_error</a></li>
+    <li><a href="#preg-last-error-msg">preg_last_error_msg</a></li>
+    <li><a href="#preg-match">preg_match</a></li>
+    <li><a href="#preg-match-all">preg_match_all</a></li>
+    <li><a href="#preg-quote">preg_quote</a></li>
+    <li><a href="#preg-replace">preg_replace</a></li>
+    <li><a href="#preg-replace-callback">preg_replace_callback</a></li>
+    <li><a href="#preg-replace-callback-array">preg_replace_callback_array</a></li>
+    <li><a href="#preg-split">preg_split</a></li>
+  </ul>
+</nav>
+
+<!-- Content with h4 -->
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="pcre-expressions">PCRE Expressions</h4>
+<h4 id="pcre-syntax">PCRE Regular Expression Syntax</h4>
+<h4 id="pcre-modifiers">Possible Modifiers in Regular Expressions</h4>
+<h4 id="perl-differences">Differences from Perl</h4>
+<h4 id="preg-filter">preg_filter</h4>
+<h4 id="preg-grep">preg_grep</h4>
+<h4 id="preg-last-error">preg_last_error</h4>
+<h4 id="preg-last-error-msg">preg_last_error_msg</h4>
+<h4 id="preg-match">preg_match</h4>
+<h4 id="preg-match-all">preg_match_all</h4>
+<h4 id="preg-quote">preg_quote</h4>
+<h4 id="preg-replace">preg_replace</h4>
+<h4 id="preg-replace-callback">preg_replace_callback</h4>
+<h4 id="preg-replace-callback-array">preg_replace_callback_array</h4>
+<h4 id="preg-split">preg_split</h4>
+
 
 <h4 id="ssdeep">ssdeep</h4>
 
-.
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#dependencies">Dependencies</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#ssdeep-fuzzy-compare">ssdeep_fuzzy_compare</a></li>
+    <li><a href="#ssdeep-fuzzy-hash">ssdeep_fuzzy_hash</a></li>
+    <li><a href="#ssdeep-fuzzy-hash-filename">ssdeep_fuzzy_hash_filename</a></li>
+  </ul>
+</nav>
+
+<!-- Content with h4 -->
+<h4 id="introduction">Introduction</h4>
+<h4 id="dependencies">Dependencies</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="ssdeep-fuzzy-compare">ssdeep_fuzzy_compare</h4>
+<h4 id="ssdeep-fuzzy-hash">ssdeep_fuzzy_hash</h4>
+<h4 id="ssdeep-fuzzy-hash-filename">ssdeep_fuzzy_hash_filename</h4>
+
 
 <h4 id="strings">Strings</h4>
 
-.
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#installation-configuration">Installation/Configuration</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#predefined-constants">Predefined Constants</a></li>
+    <li><a href="#string-functions">String Functions</a></li>
+    <li><a href="#addcslashes">addcslashes</a></li>
+    <li><a href="#addslashes">addslashes</a></li>
+    <li><a href="#bin2hex">bin2hex</a></li>
+    <li><a href="#chop">chop</a></li>
+    <li><a href="#chr">chr</a></li>
+    <li><a href="#chunk-split">chunk_split</a></li>
+    <li><a href="#convert-cyr-string">convert_cyr_string</a></li>
+    <li><a href="#convert-uudecode">convert_uudecode</a></li>
+    <li><a href="#convert-uuencode">convert_uuencode</a></li>
+    <li><a href="#count-chars">count_chars</a></li>
+    <li><a href="#crc32">crc32</a></li>
+    <li><a href="#crypt">crypt</a></li>
+    <li><a href="#echo">echo</a></li>
+    <li><a href="#explode">explode</a></li>
+    <li><a href="#fprintf">fprintf</a></li>
+    <li><a href="#get-html-translation-table">get_html_translation_table</a></li>
+    <li><a href="#hebrev">hebrev</a></li>
+    <li><a href="#hebrevc">hebrevc</a></li>
+    <li><a href="#hex2bin">hex2bin</a></li>
+    <li><a href="#html-entity-decode">html_entity_decode</a></li>
+    <li><a href="#htmlentities">htmlentities</a></li>
+    <li><a href="#htmlspecialchars">htmlspecialchars</a></li>
+    <li><a href="#htmlspecialchars-decode">htmlspecialchars_decode</a></li>
+    <li><a href="#implode">implode</a></li>
+    <li><a href="#join">join</a></li>
+    <li><a href="#lcfirst">lcfirst</a></li>
+    <li><a href="#levenshtein">levenshtein</a></li>
+    <li><a href="#localeconv">localeconv</a></li>
+    <li><a href="#ltrim">ltrim</a></li>
+    <li><a href="#md5">md5</a></li>
+    <li><a href="#md5-file">md5_file</a></li>
+    <li><a href="#metaphone">metaphone</a></li>
+    <li><a href="#money-format">money_format</a></li>
+    <li><a href="#nl-langinfo">nl_langinfo</a></li>
+    <li><a href="#nl2br">nl2br</a></li>
+    <li><a href="#number-format">number_format</a></li>
+    <li><a href="#ord">ord</a></li>
+    <li><a href="#parse-str">parse_str</a></li>
+    <li><a href="#print">print</a></li>
+    <li><a href="#printf">printf</a></li>
+    <li><a href="#quoted-printable-decode">quoted_printable_decode</a></li>
+    <li><a href="#quoted-printable-encode">quoted_printable_encode</a></li>
+    <li><a href="#quotemeta">quotemeta</a></li>
+    <li><a href="#rtrim">rtrim</a></li>
+    <li><a href="#setlocale">setlocale</a></li>
+    <li><a href="#sha1">sha1</a></li>
+    <li><a href="#sha1-file">sha1_file</a></li>
+    <li><a href="#similar-text">similar_text</a></li>
+    <li><a href="#soundex">soundex</a></li>
+    <li><a href="#sprintf">sprintf</a></li>
+    <li><a href="#sscanf">sscanf</a></li>
+    <li><a href="#str-contains">str_contains</a></li>
+    <li><a href="#str-decrement">str_decrement</a></li>
+    <li><a href="#str-ends-with">str_ends_with</a></li>
+    <li><a href="#str-getcsv">str_getcsv</a></li>
+    <li><a href="#str-increment">str_increment</a></li>
+    <li><a href="#str-ireplace">str_ireplace</a></li>
+    <li><a href="#str-pad">str_pad</a></li>
+    <li><a href="#str-repeat">str_repeat</a></li>
+    <li><a href="#str-replace">str_replace</a></li>
+    <li><a href="#str-rot13">str_rot13</a></li>
+    <li><a href="#str-shuffle">str_shuffle</a></li>
+    <li><a href="#str-split">str_split</a></li>
+    <li><a href="#str-starts-with">str_starts_with</a></li>
+    <li><a href="#str-word-count">str_word_count</a></li>
+    <li><a href="#strcasecmp">strcasecmp</a></li>
+    <li><a href="#strchr">strchr</a></li>
+    <li><a href="#strcmp">strcmp</a></li>
+    <li><a href="#strcoll">strcoll</a></li>
+    <li><a href="#strcspn">strcspn</a></li>
+    <li><a href="#strip-tags">strip_tags</a></li>
+    <li><a href="#stripcslashes">stripcslashes</a></li>
+    <li><a href="#stripos">stripos</a></li>
+    <li><a href="#stripslashes">stripslashes</a></li>
+    <li><a href="#stristr">stristr</a></li>
+    <li><a href="#strlen">strlen</a></li>
+    <li><a href="#strnatcasecmp">strnatcasecmp</a></li>
+    <li><a href="#strnatcmp">strnatcmp</a></li>
+    <li><a href="#strncasecmp">strncasecmp</a></li>
+    <li><a href="#strncmp">strncmp</a></li>
+    <li><a href="#strpbrk">strpbrk</a></li>
+    <li><a href="#strpos">strpos</a></li>
+    <li><a href="#strrchr">strrchr</a></li>
+    <li><a href="#strrev">strrev</a></li>
+    <li><a href="#strripos">strripos</a></li>
+    <li><a href="#strrpos">strrpos</a></li>
+    <li><a href="#strspn">strspn</a></li>
+    <li><a href="#strstr">strstr</a></li>
+    <li><a href="#strtok">strtok</a></li>
+    <li><a href="#strtolower">strtolower</a></li>
+    <li><a href="#strtoupper">strtoupper</a></li>
+    <li><a href="#strtr">strtr</a></li>
+    <li><a href="#substr">substr</a></li>
+    <li><a href="#substr-compare">substr_compare</a></li>
+    <li><a href="#substr-count">substr_count</a></li>
+    <li><a href="#substr-replace">substr_replace</a></li>
+    <li><a href="#trim">trim</a></li>
+    <li><a href="#ucfirst">ucfirst</a></li>
+    <li><a href="#ucwords">ucwords</a></li>
+    <li><a href="#utf8-decode">utf8_decode</a></li>
+    <li><a href="#utf8-encode">utf8_encode</a></li>
+    <li><a href="#vfprintf">vfprintf</a></li>
+    <li><a href="#vprintf">vprintf</a></li>
+    <li><a href="#vsprintf">vsprintf</a></li>
+    <li><a href="#wordwrap">wordwrap</a></li>
+  </ul>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="installation-configuration">Installation/Configuration</h4>
+<h4 id="installation">Installation</h4>
+<h4 id="predefined-constants">Predefined Constants</h4>
+<h4 id="string-functions">String Functions</h4>
+<h4 id="addcslashes">addcslashes</h4>
+<h4 id="addslashes">addslashes</h4>
+<h4 id="bin2hex">bin2hex</h4>
+<h4 id="chop">chop</h4>
+<h4 id="chr">chr</h4>
+<h4 id="chunk-split">chunk_split</h4>
+<h4 id="convert-cyr-string">convert_cyr_string</h4>
+<h4 id="convert-uudecode">convert_uudecode</h4>
+<h4 id="convert-uuencode">convert_uuencode</h4>
+<h4 id="count-chars">count_chars</h4>
+<h4 id="crc32">crc32</h4>
+<h4 id="crypt">crypt</h4>
+<h4 id="echo">echo</h4>
+<h4 id="explode">explode</h4>
+<h4 id="fprintf">fprintf</h4>
+<h4 id="get-html-translation-table">get_html_translation_table</h4>
+<h4 id="hebrev">hebrev</h4>
+<h4 id="hebrevc">hebrevc</h4>
+<h4 id="hex2bin">hex2bin</h4>
+<h4 id="html-entity-decode">html_entity_decode</h4>
+<h4 id="htmlentities">htmlentities</h4>
+<h4 id="htmlspecialchars">htmlspecialchars</h4>
+<h4 id="htmlspecialchars-decode">htmlspecialchars_decode</h4>
+<h4 id="implode">implode</h4>
+<h4 id="join">join</h4>
+<h4 id="lcfirst">lcfirst</h4>
+<h4 id="levenshtein">levenshtein</h4>
+<h4 id="localeconv">localeconv</h4>
+<h4 id="ltrim">ltrim</h4>
+<h4 id="md5">md5</h4>
+<h4 id="md5-file">md5_file</h4>
+<h4 id="metaphone">metaphone</h4>
+<h4 id="money-format">money_format</h4>
+<h4 id="nl-langinfo">nl_langinfo</h4>
+<h4 id="nl2br">nl2br</h4>
+<h4 id="number-format">number_format</h4>
+<h4 id="ord">ord</h4>
+<h4 id="parse-str">parse_str</h4>
+<h4 id="print">print</h4>
+<h4 id="printf">printf</h4>
+<h4 id="quoted-printable-decode">quoted_printable_decode</h4>
+<h4 id="quoted-printable-encode">quoted_printable_encode</h4>
+<h4 id="quotemeta">quotemeta</h4>
+<h4 id="rtrim">rtrim</h4>
+<h4 id="setlocale">setlocale</h4>
+<h4 id="sha1">sha1</h4>
+<h4 id="sha1-file">sha1_file</h4>
+<h4 id="similar-text">similar_text</h4>
+<h4 id="soundex">soundex</h4>
+<h4 id="sprintf">sprintf</h4>
+<h4 id="sscanf">sscanf</h4>
+<h4 id="str-contains">str_contains</h4>
+<h4 id="str-decrement">str_decrement</h4>
+<h4 id="str-ends-with">str_ends_with</h4>
+<h4 id="str-getcsv">str_getcsv</h4>
+<h4 id="str-increment">str_increment</h4>
+<h4 id="str-ireplace">str_ireplace</h4>
+<h4 id="str-pad">str_pad</h4>
+<h4 id="str-repeat">str_repeat</h4>
+<h4 id="str-replace">str_replace</h4>
+<h4 id="str-rot13">str_rot13</h4>
+<h4 id="str-shuffle">str_shuffle</h4>
+<h4 id="str-split">str_split</h4>
+<h4 id="str-starts-with">str_starts_with</h4>
+<h4 id="str-word-count">str_word_count</h4>
+<h4 id="strcasecmp">strcasecmp</h4>
+<h4 id="strchr">strchr</h4>
+<h4 id="strcmp">strcmp</h4>
+<h4 id="strcoll">strcoll</h4>
+<h4 id="strcspn">strcspn</h4>
+<h4 id="strip-tags">strip_tags</h4>
+<h4 id="stripcslashes">stripcslashes</h4>
+<h4 id="stripos">stripos</h4>
+<h4 id="stripslashes">stripslashes</h4>
+<h4 id="stristr">stristr</h4>
+<h4 id="strlen">strlen</h4>
+<h4 id="strnatcasecmp">strnatcasecmp</h4>
+<h4 id="strnatcmp">strnatcmp</h4>
+<h4 id="strncasecmp">strncasecmp</h4>
+<h4 id="strncmp">strncmp</h4>
+<h4 id="strpbrk">strpbrk</h4>
+<h4 id="strpos">strpos</h4>
+<h4 id="strrchr">strrchr</h4>
+<h4 id="strrev">strrev</h4>
+<h4 id="strripos">strripos</h4>
+<h4 id="strrpos">strrpos</h4>
+<h4 id="strspn">strspn</h4>
+<h4 id="strstr">strstr</h4>
+<h4 id="strtok">strtok</h4>
+<h4 id="strtolower">strtolower</h4>
+<h4 id="strtoupper">strtoupper</h4>
+<h4 id="strtr">strtr</h4>
+<h4 id="substr">substr</h4>
+<h4 id="substr-compare">substr_compare</h4>
+<h4 id="substr-count">substr_count</h4>
+<h4 id="substr-replace">substr_replace</h4>
+<h4 id="trim">trim</h4>
+<h4 id="ucfirst">ucfirst</h4>
+<h4 id="ucwords">ucwords</h4>
+<h4 id="utf8-decode">utf8_decode</h4>
+<h4 id="utf8-encode">utf8_encode</h4>
+<h4 id="vfprintf">vfprintf</h4>
+<h4 id="vprintf">vprintf</h4>
+<h4 id="vsprintf">vsprintf</h4>
+<h4 id="wordwrap">wordwrap</h4>
+
 
 
 
 <h3 id="variable-and-type-related-extensions">VARIABLE AND TYPE RELATED EXTENSIONS</h3>
+
+<nav>
+  <ul>
+    <li><a href="#arrays">Arrays</a></li>
+    <li><a href="#classes-objects">Classes/Objects</a></li>
+    <li><a href="#ctype">Ctype</a></li>
+    <li><a href="#filter">Filter</a></li>
+    <li><a href="#function-handling">Function Handling</a></li>
+    <li><a href="#quickhash">Quickhash</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+    <li><a href="#variable-handling">Variable Handling</a></li>
+  </ul>
+</nav>
+
+<h4 id="arrays">Arrays</h4>
+
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#predefined-constants">Predefined Constants</a></li>
+    <li><a href="#array-sorting">Array Sorting</a></li>
+    <li><a href="#array-functions">Array Functions</a></li>
+    <li><a href="#array">array</a></li>
+    <li><a href="#array-all">array_all</a></li>
+    <li><a href="#array-any">array_any</a></li>
+    <li><a href="#array-change-key-case">array_change_key_case</a></li>
+    <li><a href="#array-chunk">array_chunk</a></li>
+    <li><a href="#array-column">array_column</a></li>
+    <li><a href="#array-combine">array_combine</a></li>
+    <li><a href="#array-count-values">array_count_values</a></li>
+    <li><a href="#array-diff">array_diff</a></li>
+    <li><a href="#array-diff-assoc">array_diff_assoc</a></li>
+    <li><a href="#array-diff-key">array_diff_key</a></li>
+    <li><a href="#array-diff-uassoc">array_diff_uassoc</a></li>
+    <li><a href="#array-diff-ukey">array_diff_ukey</a></li>
+    <li><a href="#array-fill">array_fill</a></li>
+    <li><a href="#array-fill-keys">array_fill_keys</a></li>
+    <li><a href="#array-filter">array_filter</a></li>
+    <li><a href="#array-find">array_find</a></li>
+    <li><a href="#array-find-key">array_find_key</a></li>
+    <li><a href="#array-flip">array_flip</a></li>
+    <li><a href="#array-intersect">array_intersect</a></li>
+    <li><a href="#array-intersect-assoc">array_intersect_assoc</a></li>
+    <li><a href="#array-intersect-key">array_intersect_key</a></li>
+    <li><a href="#array-intersect-uassoc">array_intersect_uassoc</a></li>
+    <li><a href="#array-intersect-ukey">array_intersect_ukey</a></li>
+    <li><a href="#array-is-list">array_is_list</a></li>
+    <li><a href="#array-key-exists">array_key_exists</a></li>
+    <li><a href="#array-key-first">array_key_first</a></li>
+    <li><a href="#array-key-last">array_key_last</a></li>
+    <li><a href="#array-keys">array_keys</a></li>
+    <li><a href="#array-map">array_map</a></li>
+    <li><a href="#array-merge">array_merge</a></li>
+    <li><a href="#array-merge-recursive">array_merge_recursive</a></li>
+    <li><a href="#array-multisort">array_multisort</a></li>
+    <li><a href="#array-pad">array_pad</a></li>
+    <li><a href="#array-pop">array_pop</a></li>
+    <li><a href="#array-product">array_product</a></li>
+    <li><a href="#array-push">array_push</a></li>
+    <li><a href="#array-rand">array_rand</a></li>
+    <li><a href="#array-reduce">array_reduce</a></li>
+    <li><a href="#array-replace">array_replace</a></li>
+    <li><a href="#array-replace-recursive">array_replace_recursive</a></li>
+    <li><a href="#array-reverse">array_reverse</a></li>
+    <li><a href="#array-search">array_search</a></li>
+    <li><a href="#array-shift">array_shift</a></li>
+    <li><a href="#array-slice">array_slice</a></li>
+    <li><a href="#array-splice">array_splice</a></li>
+    <li><a href="#array-sum">array_sum</a></li>
+    <li><a href="#array-udiff">array_udiff</a></li>
+    <li><a href="#array-udiff-assoc">array_udiff_assoc</a></li>
+    <li><a href="#array-udiff-uassoc">array_udiff_uassoc</a></li>
+    <li><a href="#array-uintersect">array_uintersect</a></li>
+    <li><a href="#array-uintersect-assoc">array_uintersect_assoc</a></li>
+    <li><a href="#array-uintersect-uassoc">array_uintersect_uassoc</a></li>
+    <li><a href="#array-unique">array_unique</a></li>
+    <li><a href="#array-unshift">array_unshift</a></li>
+    <li><a href="#array-values">array_values</a></li>
+    <li><a href="#array-walk">array_walk</a></li>
+    <li><a href="#array-walk-recursive">array_walk_recursive</a></li>
+    <li><a href="#arsort">arsort</a></li>
+    <li><a href="#asort">asort</a></li>
+    <li><a href="#compact">compact</a></li>
+    <li><a href="#count">count</a></li>
+    <li><a href="#current">current</a></li>
+    <li><a href="#each">each</a></li>
+    <li><a href="#end">end</a></li>
+    <li><a href="#extract">extract</a></li>
+    <li><a href="#in-array">in_array</a></li>
+    <li><a href="#key">key</a></li>
+    <li><a href="#key-exists">key_exists</a></li>
+    <li><a href="#krsort">krsort</a></li>
+    <li><a href="#ksort">ksort</a></li>
+    <li><a href="#list">list</a></li>
+    <li><a href="#natcasesort">natcasesort</a></li>
+    <li><a href="#natsort">natsort</a></li>
+    <li><a href="#next">next</a></li>
+    <li><a href="#pos">pos</a></li>
+    <li><a href="#prev">prev</a></li>
+    <li><a href="#range">range</a></li>
+    <li><a href="#reset">reset</a></li>
+    <li><a href="#rsort">rsort</a></li>
+    <li><a href="#shuffle">shuffle</a></li>
+    <li><a href="#sizeof">sizeof</a></li>
+    <li><a href="#sort">sort</a></li>
+    <li><a href="#uasort">uasort</a></li>
+    <li><a href="#uksort">uksort</a></li>
+    <li><a href="#usort">usort</a></li>
+  </ul>
+</nav>
+
+<h4 id="introduction">Introduction</h4>
+<h4 id="predefined-constants">Predefined Constants</h4>
+<h4 id="array-sorting">Array Sorting</h4>
+<h4 id="array-functions">Array Functions</h4>
+<h4 id="array">array</h4>
+<h4 id="array-all">array_all</h4>
+<h4 id="array-any">array_any</h4>
+<h4 id="array-change-key-case">array_change_key_case</h4>
+<h4 id="array-chunk">array_chunk</h4>
+<h4 id="array-column">array_column</h4>
+<h4 id="array-combine">array_combine</h4>
+<h4 id="array-count-values">array_count_values</h4>
+<h4 id="array-diff">array_diff</h4>
+<h4 id="array-diff-assoc">array_diff_assoc</h4>
+<h4 id="array-diff-key">array_diff_key</h4>
+<h4 id="array-diff-uassoc">array_diff_uassoc</h4>
+<h4 id="array-diff-ukey">array_diff_ukey</h4>
+<h4 id="array-fill">array_fill</h4>
+<h4 id="array-fill-keys">array_fill_keys</h4>
+<h4 id="array-filter">array_filter</h4>
+<h4 id="array-find">array_find</h4>
+<h4 id="array-find-key">array_find_key</h4>
+<h4 id="array-flip">array_flip</h4>
+<h4 id="array-intersect">array_intersect</h4>
+<h4 id="array-intersect-assoc">array_intersect_assoc</h4>
+<h4 id="array-intersect-key">array_intersect_key</h4>
+<h4 id="array-intersect-uassoc">array_intersect_uassoc</h4>
+<h4 id="array-intersect-ukey">array_intersect_ukey</h4>
+<h4 id="array-is-list">array_is_list</h4>
+<h4 id="array-key-exists">array_key_exists</h4>
+<h4 id="array-key-first">array_key_first</h4>
+<h4 id="array-key-last">array_key_last</h4>
+<h4 id="array-keys">array_keys</h4>
+<h4 id="array-map">array_map</h4>
+<h4 id="array-merge">array_merge</h4>
+<h4 id="array-merge-recursive">array_merge_recursive</h4>
+<h4 id="array-multisort">array_multisort</h4>
+<h4 id="array-pad">array_pad</h4>
+<h4 id="array-pop">array_pop</h4>
+<h4 id="array-product">array_product</h4>
+<h4 id="array-push">array_push</h4>
+<h4 id="array-rand">array_rand</h4>
+<h4 id="array-reduce">array_reduce</h4>
+<h4 id="array-replace">array_replace</h4>
+<h4 id="array-replace-recursive">array_replace_recursive</h4>
+<h4 id="array-reverse">array_reverse</h4>
+<h4 id="array-search">array_search</h4>
+<h4 id="array-shift">array_shift</h4>
+<h4 id="array-slice">array_slice</h4>
+<h4 id="array-splice">array_splice</h4>
+<h4 id="array-sum">array_sum</h4>
+<h4 id="array-udiff">array_udiff</h4>
+<h4 id="array-udiff-assoc">array_udiff_assoc</h4>
+<h4 id="array-udiff-uassoc">array_udiff_uassoc</h4>
+<h4 id="array-uintersect">array_uintersect</h4>
+<h4 id="array-uintersect-assoc">array_uintersect_assoc</h4>
+<h4 id="array-uintersect-uassoc">array_uintersect_uassoc</h4>
+<h4 id="array-unique">array_unique</h4>
+<h4 id="array-unshift">array_unshift</h4>
+<h4 id="array-values">array_values</h4>
+<h4 id="array-walk">array_walk</h4>
+<h4 id="array-walk-recursive">array_walk_recursive</h4>
+<h4 id="arsort">arsort</h4>
+<h4 id="asort">asort</h4>
+<h4 id="compact">compact</h4>
+<h4 id="count">count</h4>
+<h4 id="current">current</h4>
+<h4 id="each">each</h4>
+<h4 id="end">end</h4>
+<h4 id="extract">extract</h4>
+<h4 id="in-array">in_array</h4>
+<h4 id="key">key</h4>
+<h4 id="key-exists">key_exists</h4>
+<h4 id="krsort">krsort</h4>
+<h4 id="ksort">ksort</h4>
+<h4 id="list">list</h4>
+<h4 id="natcasesort">natcasesort</h4>
+<h4 id="natsort">natsort</h4>
+<h4 id="next">next</h4>
+<h4 id="pos">pos</h4>
+<h4 id="prev">prev</h4>
+<h4 id="range">range</h4>
+<h4 id="reset">reset</h4>
+<h4 id="rsort">rsort</h4>
+<h4 id="shuffle">shuffle</h4>
+<h4 id="sizeof">sizeof</h4>
+<h4 id="sort">sort</h4>
+<h4 id="uasort">uasort</h4>
+<h4 id="uksort">uksort</h4>
+<h4 id="usort">usort</h4>
+
+<h4 id="classes-objects">Classes/Objects</h4>
+
+soon...
+
+<h4 id="ctype">Ctype</h4>
+
 .
+
+<h4 id="filter">Filter</h4>
+
+.
+
+<h4 id="function-handling">Function Handling</h4>
+
+.
+
+<h4 id="quickhash">Quickhash</h4>
+
+.
+
+<h4 id="reflection">Reflection</h4>
+
+.
+
+<h4 id="variable-handling">Variable Handling</h4>
+
+.
+
+
 
 <h3 id="web-services">WEB SERVICES</h3>
 .
