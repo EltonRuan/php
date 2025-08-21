@@ -2711,177 +2711,76 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- deflate_add -->
     <a href="#deflate_add">DEFLATE_ADD</a> |
-    <!-- deflate_init -->
     <a href="#deflate_init">DEFLATE_INIT</a> |
-    <!-- gzclose -->
     <a href="#gzclose">GZCLOSE</a> |
-    <!-- gzcompress -->
     <a href="#gzcompress">GZCOMPRESS</a> |
-    <!-- gzdecode -->
     <a href="#gzdecode">GZDECODE</a> |
-    <!-- gzdeflate -->
     <a href="#gzdeflate">GZDEFLATE</a> |
-    <!-- gzencode -->
     <a href="#gzencode">GZENCODE</a> |
-    <!-- gzeof -->
     <a href="#gzeof">GZEOF</a> |
-    <!-- gzfile -->
     <a href="#gzfile">GZFILE</a> |
-    <!-- gzgetc -->
     <a href="#gzgetc">GZGETC</a> |
-    <!-- gzgets -->
     <a href="#gzgets">ZGGETS</a> |
-    <!-- gzgetss -->
     <a href="#gzgetss">GZGETSS</a> |
-    <!-- gzinflate -->
     <a href="#gzinflate">GZINFLATE</a> |
-    <!-- gzopen -->
     <a href="#gzopen">GZOPEN</a> |
-    <!-- gzpassthru -->
     <a href="#gzpassthru">GZPASSTHRU</a> |
-    <!-- gzputs -->
     <a href="#gzputs">GZPUTS</a> |
-    <!-- gzread -->
     <a href="#gzread">GZREAD</a> |
-    <!-- gzrewind -->
     <a href="#gzrewind">GZREWIND</a> |
-    <!-- gzseek -->
     <a href="#gzseek">GZSEEK</a> |
-    <!-- gztell -->
     <a href="#gztell">GZTELL</a> |
-    <!-- gzuncompress -->
     <a href="#gzuncompress">GZUNCOMPRESS</a> |
-    <!-- gzwrite -->
     <a href="#gzwrite">GZWRITE</a> |
-    <!-- inflate_add -->
     <a href="#inflate_add">INFLATE_ADD</a> |
-    <!-- inflate_get_read_len -->
     <a href="#inflate_get_read_len">INFLATE_GET_READ_LEN</a> |
-    <!-- inflate_get_status -->
     <a href="#inflate_get_status">INFLATE_GET_STATUS</a> |
-    <!-- inflate_init -->
     <a href="#inflate_init">INFLATE_INIT</a> |
-    <!-- ob_gzhandler -->
     <a href="#ob_gzhandler">OB_GZHANDLER</a> |
-    <!-- readgzfile -->
     <a href="#readgzfile">READGZFILE</a> |
-    <!-- zlib_decode -->
     <a href="#zlib_decode">ZLIB_DECODE</a> |
-    <!-- zlib_encode -->
     <a href="#zlib_encode">ZLIB_ENCODE</a> |
-    <!-- zlib_get_coding_type -->
     <a href="#zlib_get_coding_type">ZLIB_GET_CODING_TYPE</a> |
-    <!-- DeflateContext -->
     <a href="#deflatecontext">DEFLATECONTEXT</a> |
-    <!-- InflateContext -->
     <a href="#inflatecontext">INFLATECONTEXT</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- deflate_add -->
 <h4 id="deflate_add">DEFLATE_ADD</h4>
-
-<!-- deflate_init -->
 <h4 id="deflate_init">DEFLATE_INIT</h4>
-
-<!-- gzclose -->
 <h4 id="gzclose">GZCLOSE</h4>
-
-<!-- gzcompress -->
 <h4 id="gzcompress">GZCOMPRESS</h4>
-
-<!-- gzdecode -->
 <h4 id="gzdecode">GZDECODE</h4>
-
-<!-- gzdeflate -->
 <h4 id="gzdeflate">GZDEFLATE</h4>
-
-<!-- gzencode -->
 <h4 id="gzencode">GZENCODE</h4>
-
-<!-- gzeof -->
 <h4 id="gzeof">GZEOF</h4>
-
-<!-- gzfile -->
 <h4 id="gzfile">GZFILE</h4>
-
-<!-- gzgetc -->
 <h4 id="gzgetc">GZGETC</h4>
-
-<!-- gzgets -->
 <h4 id="gzgets">GZGETS</h4>
-
-<!-- gzgetss -->
 <h4 id="gzgetss">GZGETSS</h4>
-
-<!-- gzinflate -->
 <h4 id="gzinflate">GZINFLATE</h4>
-
-<!-- gzopen -->
 <h4 id="gzopen">GZOPEN</h4>
-
-<!-- gzpassthru -->
 <h4 id="gzpassthru">GZPASSTHRU</h4>
-
-<!-- gzputs -->
 <h4 id="gzputs">GZPUTS</h4>
-
-<!-- gzread -->
 <h4 id="gzread">GZREAD</h4>
-
-<!-- gzrewind -->
 <h4 id="gzrewind">GZREWIND</h4>
-
-<!-- gzseek -->
 <h4 id="gzseek">GZSEEK</h4>
-
-<!-- gztell -->
 <h4 id="gztell">GZTELL</h4>
-
-<!-- gzuncompress -->
 <h4 id="gzuncompress">GZUNCOMPRESS</h4>
-
-<!-- gzwrite -->
 <h4 id="gzwrite">GZWRITE</h4>
-
-<!-- inflate_add -->
 <h4 id="inflate_add">INFLATE_ADD</h4>
-
-<!-- inflate_get_read_len -->
 <h4 id="inflate_get_read_len">INFLATE_GET_READ_LEN</h4>
-
-<!-- inflate_get_status -->
 <h4 id="inflate_get_status">INFLATE_GET_STATUS</h4>
-
-<!-- inflate_init -->
 <h4 id="inflate_init">INFLATE_INIT</h4>
-
-<!-- ob_gzhandler -->
 <h4 id="ob_gzhandler">OB_GZHANDLER</h4>
-
-<!-- readgzfile -->
 <h4 id="readgzfile">READGZFILE</h4>
-
-<!-- zlib_decode -->
 <h4 id="zlib_decode">ZLIB_DECODE</h4>
-
-<!-- zlib_encode -->
 <h4 id="zlib_encode">ZLIB_ENCODE</h4>
-
-<!-- zlib_get_coding_type -->
 <h4 id="zlib_get_coding_type">ZLIB_GET_CODING_TYPE</h4>
-
-<!-- DeflateContext -->
 <h4 id="deflatecontext">DEFLATECONTEXT</h4>
-
-<!-- InflateContext -->
 <h4 id="inflatecontext">INFLATECONTEXT</h4>
   
 
@@ -2890,1085 +2789,484 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Hash -->
     <a href="#hash">HASH</a> |
-    <!-- Mcrypt -->
     <a href="#mcrypt">MCRYPT</a> |
-    <!-- Mhash -->
     <a href="#mhash">MHASH</a> |
-    <!-- OpenSSL -->
     <a href="#openssl">OPENSSL</a> |
-    <!-- Password Hash -->
     <a href="#password_hash">PASSWORD_HASH</a> |
-    <!-- Rnp -->
     <a href="#rnp">RNP</a> |
-    <!-- Sodium -->
     <a href="#sodium">SODIUM</a> |
-    <!-- Xpass -->
     <a href="#xpass">XPASS</a>
   </p> 
 </nav>
 
-<!-- Hash -->
 <h4 id="hash">HASH</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- HashContext -->
     <a href="#hashcontext">HASHCONTEXT — THE HASHCONTEXT CLASS</a> |
-    <!-- HashContext::__construct -->
     <a href="#hashcontext___construct">HASHCONTEXT::__CONSTRUCT</a> |
-    <!-- HashContext::__serialize -->
     <a href="#hashcontext___serialize">HASHCONTEXT::__SERIALIZE</a> |
-    <!-- HashContext::__unserialize -->
     <a href="#hashcontext___unserialize">HASHCONTEXT::__UNSERIALIZE</a> |
-    <!-- hash -->
     <a href="#hash">HASH</a> |
-    <!-- hash_algos -->
     <a href="#hash_algos">HASH_ALGOS</a> |
-    <!-- hash_copy -->
     <a href="#hash_copy">HASH_COPY</a> |
-    <!-- hash_equals -->
     <a href="#hash_equals">HASH_EQUALS</a> |
-    <!-- hash_file -->
     <a href="#hash_file">HASH_FILE</a> |
-    <!-- hash_final -->
     <a href="#hash_final">HASH_FINAL</a> |
-    <!-- hash_hkdf -->
     <a href="#hash_hkdf">HASH_HKDF</a> |
-    <!-- hash_hmac -->
     <a href="#hash_hmac">HASH_HMAC</a> |
-    <!-- hash_hmac_algos -->
     <a href="#hash_hmac_algos">HASH_HMAC_ALGOS</a> |
-    <!-- hash_hmac_file -->
     <a href="#hash_hmac_file">HASH_HMAC_FILE</a> |
-    <!-- hash_init -->
     <a href="#hash_init">HASH_INIT</a> |
-    <!-- hash_pbkdf2 -->
     <a href="#hash_pbkdf2">HASH_PBKDF2</a> |
-    <!-- hash_update -->
     <a href="#hash_update">HASH_UPDATE</a> |
-    <!-- hash_update_file -->
     <a href="#hash_update_file">HASH_UPDATE_FILE</a> |
-    <!-- hash_update_stream -->
     <a href="#hash_update_stream">HASH_UPDATE_STREAM</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- HashContext -->
 <h4 id="hashcontext">HASHCONTEXT — THE HASHCONTEXT CLASS</h4>
-
-<!-- HashContext::__construct -->
 <h4 id="hashcontext___construct">HASHCONTEXT::__CONSTRUCT</h4>
-
-<!-- HashContext::__serialize -->
 <h4 id="hashcontext___serialize">HASHCONTEXT::__SERIALIZE</h4>
-
-<!-- HashContext::__unserialize -->
 <h4 id="hashcontext___unserialize">HASHCONTEXT::__UNSERIALIZE</h4>
-
-<!-- hash -->
 <h4 id="hash">HASH</h4>
-
-<!-- hash_algos -->
 <h4 id="hash_algos">HASH_ALGOS</h4>
-
-<!-- hash_copy -->
 <h4 id="hash_copy">HASH_COPY</h4>
-
-<!-- hash_equals -->
 <h4 id="hash_equals">HASH_EQUALS</h4>
-
-<!-- hash_file -->
 <h4 id="hash_file">HASH_FILE</h4>
-
-<!-- hash_final -->
 <h4 id="hash_final">HASH_FINAL</h4>
-
-<!-- hash_hkdf -->
 <h4 id="hash_hkdf">HASH_HKDF</h4>
-
-<!-- hash_hmac -->
 <h4 id="hash_hmac">HASH_HMAC</h4>
-
-<!-- hash_hmac_algos -->
 <h4 id="hash_hmac_algos">HASH_HMAC_ALGOS</h4>
-
-<!-- hash_hmac_file -->
 <h4 id="hash_hmac_file">HASH_HMAC_FILE</h4>
-
-<!-- hash_init -->
 <h4 id="hash_init">HASH_INIT</h4>
-
-<!-- hash_pbkdf2 -->
 <h4 id="hash_pbkdf2">HASH_PBKDF2</h4>
-
-<!-- hash_update -->
 <h4 id="hash_update">HASH_UPDATE</h4>
-
-<!-- hash_update_file -->
 <h4 id="hash_update_file">HASH_UPDATE_FILE</h4>
-
-<!-- hash_update_stream -->
 <h4 id="hash_update_stream">HASH_UPDATE_STREAM</h4>
-
-
-<!-- Mcrypt -->
 <h4 id="mcrypt">MCRYPT</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- mcrypt_create_iv -->
     <a href="#mcrypt_create_iv">MCRYPT_CREATE_IV</a> |
-    <!-- mcrypt_decrypt -->
     <a href="#mcrypt_decrypt">MCRYPT_DECRYPT</a> |
-    <!-- mcrypt_enc_get_algorithms_name -->
     <a href="#mcrypt_enc_get_algorithms_name">MCRYPT_ENC_GET_ALGORITHMS_NAME</a> |
-    <!-- mcrypt_enc_get_block_size -->
     <a href="#mcrypt_enc_get_block_size">MCRYPT_ENC_GET_BLOCK_SIZE</a> |
-    <!-- mcrypt_enc_get_iv_size -->
     <a href="#mcrypt_enc_get_iv_size">MCRYPT_ENC_GET_IV_SIZE</a> |
-    <!-- mcrypt_enc_get_key_size -->
     <a href="#mcrypt_enc_get_key_size">MCRYPT_ENC_GET_KEY_SIZE</a> |
-    <!-- mcrypt_enc_get_modes_name -->
     <a href="#mcrypt_enc_get_modes_name">MCRYPT_ENC_GET_MODES_NAME</a> |
-    <!-- mcrypt_enc_get_supported_key_sizes -->
     <a href="#mcrypt_enc_get_supported_key_sizes">MCRYPT_ENC_GET_SUPPORTED_KEY_SIZES</a> |
-    <!-- mcrypt_enc_is_block_algorithm -->
     <a href="#mcrypt_enc_is_block_algorithm">MCRYPT_ENC_IS_BLOCK_ALGORITHM</a> |
-    <!-- mcrypt_enc_is_block_algorithm_mode -->
     <a href="#mcrypt_enc_is_block_algorithm_mode">MCRYPT_ENC_IS_BLOCK_ALGORITHM_MODE</a> |
-    <!-- mcrypt_enc_is_block_mode -->
     <a href="#mcrypt_enc_is_block_mode">MCRYPT_ENC_IS_BLOCK_MODE</a> |
-    <!-- mcrypt_enc_self_test -->
     <a href="#mcrypt_enc_self_test">MCRYPT_ENC_SELF_TEST</a> |
-    <!-- mcrypt_encrypt -->
     <a href="#mcrypt_encrypt">MCRYPT_ENCRYPT</a> |
-    <!-- mcrypt_generic -->
     <a href="#mcrypt_generic">MCRYPT_GENERIC</a> |
-    <!-- mcrypt_generic_deinit -->
     <a href="#mcrypt_generic_deinit">MCRYPT_GENERIC_DEINIT</a> |
-    <!-- mcrypt_generic_init -->
     <a href="#mcrypt_generic_init">MCRYPT_GENERIC_INIT</a> |
-    <!-- mcrypt_get_block_size -->
     <a href="#mcrypt_get_block_size">MCRYPT_GET_BLOCK_SIZE</a> |
-    <!-- mcrypt_get_cipher_name -->
     <a href="#mcrypt_get_cipher_name">MCRYPT_GET_CIPHER_NAME</a> |
-    <!-- mcrypt_get_iv_size -->
     <a href="#mcrypt_get_iv_size">MCRYPT_GET_IV_SIZE</a> |
-    <!-- mcrypt_get_key_size -->
     <a href="#mcrypt_get_key_size">MCRYPT_GET_KEY_SIZE</a> |
-    <!-- mcrypt_list_algorithms -->
     <a href="#mcrypt_list_algorithms">MCRYPT_LIST_ALGORITHMS</a> |
-    <!-- mcrypt_list_modes -->
     <a href="#mcrypt_list_modes">MCRYPT_LIST_MODES</a> |
-    <!-- mcrypt_module_close -->
     <a href="#mcrypt_module_close">MCRYPT_MODULE_CLOSE</a> |
-    <!-- mcrypt_module_get_algo_block_size -->
     <a href="#mcrypt_module_get_algo_block_size">MCRYPT_MODULE_GET_ALGO_BLOCK_SIZE</a> |
-    <!-- mcrypt_module_get_algo_key_size -->
     <a href="#mcrypt_module_get_algo_key_size">MCRYPT_MODULE_GET_ALGO_KEY_SIZE</a> |
-    <!-- mcrypt_module_get_supported_key_sizes -->
     <a href="#mcrypt_module_get_supported_key_sizes">MCRYPT_MODULE_GET_SUPPORTED_KEY_SIZES</a> |
-    <!-- mcrypt_module_is_block_algorithm -->
     <a href="#mcrypt_module_is_block_algorithm">MCRYPT_MODULE_IS_BLOCK_ALGORITHM</a> |
-    <!-- mcrypt_module_is_block_algorithm_mode -->
     <a href="#mcrypt_module_is_block_algorithm_mode">MCRYPT_MODULE_IS_BLOCK_ALGORITHM_MODE</a> |
-    <!-- mcrypt_module_is_block_mode -->
     <a href="#mcrypt_module_is_block_mode">MCRYPT_MODULE_IS_BLOCK_MODE</a> |
-    <!-- mcrypt_module_open -->
     <a href="#mcrypt_module_open">MCRYPT_MODULE_OPEN</a> |
-    <!-- mcrypt_module_self_test -->
     <a href="#mcrypt_module_self_test">MCRYPT_MODULE_SELF_TEST</a> |
-    <!-- mdecrypt_generic -->
     <a href="#mdecrypt_generic">MDECRYPT_GENERIC</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- mcrypt_create_iv -->
 <h4 id="mcrypt_create_iv">MCRYPT_CREATE_IV</h4>
-
-<!-- mcrypt_decrypt -->
 <h4 id="mcrypt_decrypt">MCRYPT_DECRYPT</h4>
-
-<!-- mcrypt_enc_get_algorithms_name -->
 <h4 id="mcrypt_enc_get_algorithms_name">MCRYPT_ENC_GET_ALGORITHMS_NAME</h4>
-
-<!-- mcrypt_enc_get_block_size -->
 <h4 id="mcrypt_enc_get_block_size">MCRYPT_ENC_GET_BLOCK_SIZE</h4>
-
-<!-- mcrypt_enc_get_iv_size -->
 <h4 id="mcrypt_enc_get_iv_size">MCRYPT_ENC_GET_IV_SIZE</h4>
-
-<!-- mcrypt_enc_get_key_size -->
 <h4 id="mcrypt_enc_get_key_size">MCRYPT_ENC_GET_KEY_SIZE</h4>
-
-<!-- mcrypt_enc_get_modes_name -->
 <h4 id="mcrypt_enc_get_modes_name">MCRYPT_ENC_GET_MODES_NAME</h4>
-
-<!-- mcrypt_enc_get_supported_key_sizes -->
 <h4 id="mcrypt_enc_get_supported_key_sizes">MCRYPT_ENC_GET_SUPPORTED_KEY_SIZES</h4>
-
-<!-- mcrypt_enc_is_block_algorithm -->
 <h4 id="mcrypt_enc_is_block_algorithm">MCRYPT_ENC_IS_BLOCK_ALGORITHM</h4>
-
-<!-- mcrypt_enc_is_block_algorithm_mode -->
 <h4 id="mcrypt_enc_is_block_algorithm_mode">MCRYPT_ENC_IS_BLOCK_ALGORITHM_MODE</h4>
-
-<!-- mcrypt_enc_is_block_mode -->
 <h4 id="mcrypt_enc_is_block_mode">MCRYPT_ENC_IS_BLOCK_MODE</h4>
-
-<!-- mcrypt_enc_self_test -->
 <h4 id="mcrypt_enc_self_test">MCRYPT_ENC_SELF_TEST</h4>
-
-<!-- mcrypt_encrypt -->
 <h4 id="mcrypt_encrypt">MCRYPT_ENCRYPT</h4>
-
-<!-- mcrypt_generic -->
 <h4 id="mcrypt_generic">MCRYPT_GENERIC</h4>
-
-<!-- mcrypt_generic_deinit -->
 <h4 id="mcrypt_generic_deinit">MCRYPT_GENERIC_DEINIT</h4>
-
-<!-- mcrypt_generic_init -->
 <h4 id="mcrypt_generic_init">MCRYPT_GENERIC_INIT</h4>
-
-<!-- mcrypt_get_block_size -->
 <h4 id="mcrypt_get_block_size">MCRYPT_GET_BLOCK_SIZE</h4>
-
-<!-- mcrypt_get_cipher_name -->
 <h4 id="mcrypt_get_cipher_name">MCRYPT_GET_CIPHER_NAME</h4>
-
-<!-- mcrypt_get_iv_size -->
 <h4 id="mcrypt_get_iv_size">MCRYPT_GET_IV_SIZE</h4>
-
-<!-- mcrypt_get_key_size -->
 <h4 id="mcrypt_get_key_size">MCRYPT_GET_KEY_SIZE</h4>
-
-<!-- mcrypt_list_algorithms -->
 <h4 id="mcrypt_list_algorithms">MCRYPT_LIST_ALGORITHMS</h4>
-
-<!-- mcrypt_list_modes -->
 <h4 id="mcrypt_list_modes">MCRYPT_LIST_MODES</h4>
-
-<!-- mcrypt_module_close -->
 <h4 id="mcrypt_module_close">MCRYPT_MODULE_CLOSE</h4>
-
-<!-- mcrypt_module_get_algo_block_size -->
 <h4 id="mcrypt_module_get_algo_block_size">MCRYPT_MODULE_GET_ALGO_BLOCK_SIZE</h4>
-
-<!-- mcrypt_module_get_algo_key_size -->
 <h4 id="mcrypt_module_get_algo_key_size">MCRYPT_MODULE_GET_ALGO_KEY_SIZE</h4>
-
-<!-- mcrypt_module_get_supported_key_sizes -->
 <h4 id="mcrypt_module_get_supported_key_sizes">MCRYPT_MODULE_GET_SUPPORTED_KEY_SIZES</h4>
-
-<!-- mcrypt_module_is_block_algorithm -->
 <h4 id="mcrypt_module_is_block_algorithm">MCRYPT_MODULE_IS_BLOCK_ALGORITHM</h4>
-
-<!-- mcrypt_module_is_block_algorithm_mode -->
 <h4 id="mcrypt_module_is_block_algorithm_mode">MCRYPT_MODULE_IS_BLOCK_ALGORITHM_MODE</h4>
-
-<!-- mcrypt_module_is_block_mode -->
 <h4 id="mcrypt_module_is_block_mode">MCRYPT_MODULE_IS_BLOCK_MODE</h4>
-
-<!-- mcrypt_module_open -->
 <h4 id="mcrypt_module_open">MCRYPT_MODULE_OPEN</h4>
-
-<!-- mcrypt_module_self_test -->
 <h4 id="mcrypt_module_self_test">MCRYPT_MODULE_SELF_TEST</h4>
-
-<!-- mdecrypt_generic -->
 <h4 id="mdecrypt_generic">MDECRYPT_GENERIC</h4>
 
-
-<!-- Mhash -->
 <h4 id="mhash">MHASH</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- mhash -->
     <a href="#mhash">MHASH</a> |
-    <!-- mhash_count -->
     <a href="#mhash_count">MHASH_COUNT</a> |
-    <!-- mhash_get_block_size -->
     <a href="#mhash_get_block_size">MHASH_GET_BLOCK_SIZE</a> |
-    <!-- mhash_get_hash_name -->
     <a href="#mhash_get_hash_name">MHASH_GET_HASH_NAME</a> |
-    <!-- mhash_keygen_s2k -->
     <a href="#mhash_keygen_s2k">MHASH_KEYGEN_S2K</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- mhash -->
 <h4 id="mhash">MHASH</h4>
-
-<!-- mhash_count -->
 <h4 id="mhash_count">MHASH_COUNT</h4>
-
-<!-- mhash_get_block_size -->
 <h4 id="mhash_get_block_size">MHASH_GET_BLOCK_SIZE</h4>
-
-<!-- mhash_get_hash_name -->
 <h4 id="mhash_get_hash_name">MHASH_GET_HASH_NAME</h4>
-
-<!-- mhash_keygen_s2k -->
 <h4 id="mhash_keygen_s2k">MHASH_KEYGEN_S2K</h4>
 
-
-<!-- OpenSSL -->
 <h4 id="openssl">OPENSSL</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- predefined_constants -->
     <a href="#predefined_constants">PREDEFINED_CONSTANTS</a> |
-    <!-- key_certificate_parameters -->
     <a href="#key_certificate_parameters">KEY/CERTIFICATE_PARAMETERS</a> |
-    <!-- certificate_verification -->
     <a href="#certificate_verification">CERTIFICATE_VERIFICATION</a> |
-    <!-- openssl_cipher_iv_length -->
     <a href="#openssl_cipher_iv_length">OPENSSL_CIPHER_IV_LENGTH</a> |
-    <!-- openssl_cipher_key_length -->
     <a href="#openssl_cipher_key_length">OPENSSL_CIPHER_KEY_LENGTH</a> |
-    <!-- openssl_cms_decrypt -->
     <a href="#openssl_cms_decrypt">OPENSSL_CMS_DECRYPT</a> |
-    <!-- openssl_cms_encrypt -->
     <a href="#openssl_cms_encrypt">OPENSSL_CMS_ENCRYPT</a> |
-    <!-- openssl_cms_read -->
     <a href="#openssl_cms_read">OPENSSL_CMS_READ</a> |
-    <!-- openssl_cms_sign -->
     <a href="#openssl_cms_sign">OPENSSL_CMS_SIGN</a> |
-    <!-- openssl_cms_verify -->
     <a href="#openssl_cms_verify">OPENSSL_CMS_VERIFY</a> |
-    <!-- openssl_csr_export -->
     <a href="#openssl_csr_export">OPENSSL_CSR_EXPORT</a> |
-    <!-- openssl_csr_export_to_file -->
     <a href="#openssl_csr_export_to_file">OPENSSL_CSR_EXPORT_TO_FILE</a> |
-    <!-- openssl_csr_get_public_key -->
     <a href="#openssl_csr_get_public_key">OPENSSL_CSR_GET_PUBLIC_KEY</a> |
-    <!-- openssl_csr_get_subject -->
     <a href="#openssl_csr_get_subject">OPENSSL_CSR_GET_SUBJECT</a> |
-    <!-- openssl_csr_new -->
     <a href="#openssl_csr_new">OPENSSL_CSR_NEW</a> |
-    <!-- openssl_csr_sign -->
     <a href="#openssl_csr_sign">OPENSSL_CSR_SIGN</a> |
-    <!-- openssl_decrypt -->
     <a href="#openssl_decrypt">OPENSSL_DECRYPT</a> |
-    <!-- openssl_dh_compute_key -->
     <a href="#openssl_dh_compute_key">OPENSSL_DH_COMPUTE_KEY</a> |
-    <!-- openssl_digest -->
     <a href="#openssl_digest">OPENSSL_DIGEST</a> |
-    <!-- openssl_encrypt -->
     <a href="#openssl_encrypt">OPENSSL_ENCRYPT</a> |
-    <!-- openssl_error_string -->
     <a href="#openssl_error_string">OPENSSL_ERROR_STRING</a> |
-    <!-- openssl_free_key -->
     <a href="#openssl_free_key">OPENSSL_FREE_KEY</a> |
-    <!-- openssl_get_cert_locations -->
     <a href="#openssl_get_cert_locations">OPENSSL_GET_CERT_LOCATIONS</a> |
-    <!-- openssl_get_cipher_methods -->
     <a href="#openssl_get_cipher_methods">OPENSSL_GET_CIPHER_METHODS</a> |
-    <!-- openssl_get_curve_names -->
     <a href="#openssl_get_curve_names">OPENSSL_GET_CURVE_NAMES</a> |
-    <!-- openssl_get_md_methods -->
     <a href="#openssl_get_md_methods">OPENSSL_GET_MD_METHODS</a> |
-    <!-- openssl_get_privatekey -->
     <a href="#openssl_get_privatekey">OPENSSL_GET_PRIVATEKEY</a> |
-    <!-- openssl_get_publickey -->
     <a href="#openssl_get_publickey">OPENSSL_GET_PUBLICKEY</a> |
-    <!-- openssl_open -->
     <a href="#openssl_open">OPENSSL_OPEN</a> |
-    <!-- openssl_pbkdf2 -->
     <a href="#openssl_pbkdf2">OPENSSL_PBKDF2</a> |
-    <!-- openssl_pkcs12_export -->
     <a href="#openssl_pkcs12_export">OPENSSL_PKCS12_EXPORT</a> |
-    <!-- openssl_pkcs12_export_to_file -->
     <a href="#openssl_pkcs12_export_to_file">OPENSSL_PKCS12_EXPORT_TO_FILE</a> |
-    <!-- openssl_pkcs12_read -->
     <a href="#openssl_pkcs12_read">OPENSSL_PKCS12_READ</a> |
-    <!-- openssl_pkcs7_decrypt -->
     <a href="#openssl_pkcs7_decrypt">OPENSSL_PKCS7_DECRYPT</a> |
-    <!-- openssl_pkcs7_encrypt -->
     <a href="#openssl_pkcs7_encrypt">OPENSSL_PKCS7_ENCRYPT</a> |
-    <!-- openssl_pkcs7_read -->
     <a href="#openssl_pkcs7_read">OPENSSL_PKCS7_READ</a> |
-    <!-- openssl_pkcs7_sign -->
     <a href="#openssl_pkcs7_sign">OPENSSL_PKCS7_SIGN</a> |
-    <!-- openssl_pkcs7_verify -->
     <a href="#openssl_pkcs7_verify">OPENSSL_PKCS7_VERIFY</a> |
-    <!-- openssl_pkey_derive -->
     <a href="#openssl_pkey_derive">OPENSSL_PKEY_DERIVE</a> |
-    <!-- openssl_pkey_export -->
     <a href="#openssl_pkey_export">OPENSSL_PKEY_EXPORT</a> |
-    <!-- openssl_pkey_export_to_file -->
     <a href="#openssl_pkey_export_to_file">OPENSSL_PKEY_EXPORT_TO_FILE</a> |
-    <!-- openssl_pkey_free -->
     <a href="#openssl_pkey_free">OPENSSL_PKEY_FREE</a> |
-    <!-- openssl_pkey_get_details -->
     <a href="#openssl_pkey_get_details">OPENSSL_PKEY_GET_DETAILS</a> |
-    <!-- openssl_pkey_get_private -->
     <a href="#openssl_pkey_get_private">OPENSSL_PKEY_GET_PRIVATE</a> |
-    <!-- openssl_pkey_get_public -->
     <a href="#openssl_pkey_get_public">OPENSSL_PKEY_GET_PUBLIC</a> |
-    <!-- openssl_pkey_new -->
     <a href="#openssl_pkey_new">OPENSSL_PKEY_NEW</a> |
-    <!-- openssl_private_decrypt -->
     <a href="#openssl_private_decrypt">OPENSSL_PRIVATE_DECRYPT</a> |
-    <!-- openssl_private_encrypt -->
     <a href="#openssl_private_encrypt">OPENSSL_PRIVATE_ENCRYPT</a> |
-    <!-- openssl_public_decrypt -->
     <a href="#openssl_public_decrypt">OPENSSL_PUBLIC_DECRYPT</a> |
-    <!-- openssl_public_encrypt -->
     <a href="#openssl_public_encrypt">OPENSSL_PUBLIC_ENCRYPT</a> |
-    <!-- openssl_random_pseudo_bytes -->
     <a href="#openssl_random_pseudo_bytes">OPENSSL_RANDOM_PSEUDO_BYTES</a> |
-    <!-- openssl_seal -->
     <a href="#openssl_seal">OPENSSL_SEAL</a> |
-    <!-- openssl_sign -->
     <a href="#openssl_sign">OPENSSL_SIGN</a> |
-    <!-- openssl_spki_export -->
     <a href="#openssl_spki_export">OPENSSL_SPKI_EXPORT</a> |
-    <!-- openssl_spki_export_challenge -->
     <a href="#openssl_spki_export_challenge">OPENSSL_SPKI_EXPORT_CHALLENGE</a> |
-    <!-- openssl_spki_new -->
     <a href="#openssl_spki_new">OPENSSL_SPKI_NEW</a> |
-    <!-- openssl_spki_verify -->
     <a href="#openssl_spki_verify">OPENSSL_SPKI_VERIFY</a> |
-    <!-- openssl_verify -->
     <a href="#openssl_verify">OPENSSL_VERIFY</a> |
-    <!-- openssl_x509_check_private_key -->
     <a href="#openssl_x509_check_private_key">OPENSSL_X509_CHECK_PRIVATE_KEY</a> |
-    <!-- openssl_x509_checkpurpose -->
     <a href="#openssl_x509_checkpurpose">OPENSSL_X509_CHECKPURPOSE</a> |
-    <!-- openssl_x509_export -->
     <a href="#openssl_x509_export">OPENSSL_X509_EXPORT</a> |
-    <!-- openssl_x509_export_to_file -->
     <a href="#openssl_x509_export_to_file">OPENSSL_X509_EXPORT_TO_FILE</a> |
-    <!-- openssl_x509_fingerprint -->
     <a href="#openssl_x509_fingerprint">OPENSSL_X509_FINGERPRINT</a> |
-    <!-- openssl_x509_free -->
     <a href="#openssl_x509_free">OPENSSL_X509_FREE</a> |
-    <!-- openssl_x509_parse -->
     <a href="#openssl_x509_parse">OPENSSL_X509_PARSE</a> |
-    <!-- openssl_x509_read -->
     <a href="#openssl_x509_read">OPENSSL_X509_READ</a> |
-    <!-- openssl_x509_verify -->
     <a href="#openssl_x509_verify">OPENSSL_X509_VERIFY</a> |
-    <!-- openssl_certificate -->
     <a href="#openssl_certificate">OPENSSLCERTIFICATE</a> |
-    <!-- openssl_csr -->
     <a href="#openssl_csr">OPENSSLCERTIFICATESIGNINGREQUEST</a> |
-    <!-- openssl_asymmetric_key -->
     <a href="#openssl_asymmetric_key">OPENSSLASYMMETRICKEY</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- Predefined Constants -->
 <h4 id="predefined_constants">PREDEFINED_CONSTANTS</h4>
-
-<!-- Key/Certificate Parameters -->
 <h4 id="key_certificate_parameters">KEY/CERTIFICATE_PARAMETERS</h4>
-
-<!-- Certificate Verification -->
 <h4 id="certificate_verification">CERTIFICATE_VERIFICATION</h4>
-
-<!-- OPENSSL_CIPHER_IV_LENGTH -->
 <h4 id="openssl_cipher_iv_length">OPENSSL_CIPHER_IV_LENGTH</h4>
-
-<!-- OPENSSL_CIPHER_KEY_LENGTH -->
 <h4 id="openssl_cipher_key_length">OPENSSL_CIPHER_KEY_LENGTH</h4>
-
-<!-- OPENSSL_CMS_DECRYPT -->
 <h4 id="openssl_cms_decrypt">OPENSSL_CMS_DECRYPT</h4>
-
-<!-- OPENSSL_CMS_ENCRYPT -->
 <h4 id="openssl_cms_encrypt">OPENSSL_CMS_ENCRYPT</h4>
-
-<!-- OPENSSL_CMS_READ -->
 <h4 id="openssl_cms_read">OPENSSL_CMS_READ</h4>
-
-<!-- OPENSSL_CMS_SIGN -->
 <h4 id="openssl_cms_sign">OPENSSL_CMS_SIGN</h4>
-
-<!-- OPENSSL_CMS_VERIFY -->
 <h4 id="openssl_cms_verify">OPENSSL_CMS_VERIFY</h4>
-
-<!-- OPENSSL_CSR_EXPORT -->
 <h4 id="openssl_csr_export">OPENSSL_CSR_EXPORT</h4>
-
-<!-- OPENSSL_CSR_EXPORT_TO_FILE -->
 <h4 id="openssl_csr_export_to_file">OPENSSL_CSR_EXPORT_TO_FILE</h4>
-
-<!-- OPENSSL_CSR_GET_PUBLIC_KEY -->
 <h4 id="openssl_csr_get_public_key">OPENSSL_CSR_GET_PUBLIC_KEY</h4>
-
-<!-- OPENSSL_CSR_GET_SUBJECT -->
 <h4 id="openssl_csr_get_subject">OPENSSL_CSR_GET_SUBJECT</h4>
-
-<!-- OPENSSL_CSR_NEW -->
 <h4 id="openssl_csr_new">OPENSSL_CSR_NEW</h4>
-
-<!-- OPENSSL_CSR_SIGN -->
 <h4 id="openssl_csr_sign">OPENSSL_CSR_SIGN</h4>
-
-<!-- OPENSSL_DECRYPT -->
 <h4 id="openssl_decrypt">OPENSSL_DECRYPT</h4>
-
-<!-- OPENSSL_DH_COMPUTE_KEY -->
 <h4 id="openssl_dh_compute_key">OPENSSL_DH_COMPUTE_KEY</h4>
-
-<!-- OPENSSL_DIGEST -->
 <h4 id="openssl_digest">OPENSSL_DIGEST</h4>
-
-<!-- OPENSSL_ENCRYPT -->
 <h4 id="openssl_encrypt">OPENSSL_ENCRYPT</h4>
-
-<!-- OPENSSL_ERROR_STRING -->
 <h4 id="openssl_error_string">OPENSSL_ERROR_STRING</h4>
-
-<!-- OPENSSL_FREE_KEY -->
 <h4 id="openssl_free_key">OPENSSL_FREE_KEY</h4>
-
-<!-- OPENSSL_GET_CERT_LOCATIONS -->
 <h4 id="openssl_get_cert_locations">OPENSSL_GET_CERT_LOCATIONS</h4>
-
-<!-- OPENSSL_GET_CIPHER_METHODS -->
 <h4 id="openssl_get_cipher_methods">OPENSSL_GET_CIPHER_METHODS</h4>
-
-<!-- OPENSSL_GET_CURVE_NAMES -->
 <h4 id="openssl_get_curve_names">OPENSSL_GET_CURVE_NAMES</h4>
-
-<!-- OPENSSL_GET_MD_METHODS -->
 <h4 id="openssl_get_md_methods">OPENSSL_GET_MD_METHODS</h4>
-
-<!-- OPENSSL_GET_PRIVATEKEY -->
 <h4 id="openssl_get_privatekey">OPENSSL_GET_PRIVATEKEY</h4>
-
-<!-- OPENSSL_GET_PUBLICKEY -->
 <h4 id="openssl_get_publickey">OPENSSL_GET_PUBLICKEY</h4>
-
-<!-- OPENSSL_OPEN -->
 <h4 id="openssl_open">OPENSSL_OPEN</h4>
-
-<!-- OPENSSL_PBKDF2 -->
 <h4 id="openssl_pbkdf2">OPENSSL_PBKDF2</h4>
-
-<!-- OPENSSL_PKCS12_EXPORT -->
 <h4 id="openssl_pkcs12_export">OPENSSL_PKCS12_EXPORT</h4>
-
-<!-- OPENSSL_PKCS12_EXPORT_TO_FILE -->
 <h4 id="openssl_pkcs12_export_to_file">OPENSSL_PKCS12_EXPORT_TO_FILE</h4>
-
-<!-- OPENSSL_PKCS12_READ -->
 <h4 id="openssl_pkcs12_read">OPENSSL_PKCS12_READ</h4>
-
-<!-- OPENSSL_PKCS7_DECRYPT -->
 <h4 id="openssl_pkcs7_decrypt">OPENSSL_PKCS7_DECRYPT</h4>
-
-<!-- OPENSSL_PKCS7_ENCRYPT -->
 <h4 id="openssl_pkcs7_encrypt">OPENSSL_PKCS7_ENCRYPT</h4>
-
-<!-- OPENSSL_PKCS7_READ -->
 <h4 id="openssl_pkcs7_read">OPENSSL_PKCS7_READ</h4>
-
-<!-- OPENSSL_PKCS7_SIGN -->
 <h4 id="openssl_pkcs7_sign">OPENSSL_PKCS7_SIGN</h4>
-
-<!-- OPENSSL_PKCS7_VERIFY -->
 <h4 id="openssl_pkcs7_verify">OPENSSL_PKCS7_VERIFY</h4>
-
-<!-- OPENSSL_PKEY_DERIVE -->
 <h4 id="openssl_pkey_derive">OPENSSL_PKEY_DERIVE</h4>
-
-<!-- OPENSSL_PKEY_EXPORT -->
 <h4 id="openssl_pkey_export">OPENSSL_PKEY_EXPORT</h4>
-
-<!-- OPENSSL_PKEY_EXPORT_TO_FILE -->
 <h4 id="openssl_pkey_export_to_file">OPENSSL_PKEY_EXPORT_TO_FILE</h4>
-
-<!-- OPENSSL_PKEY_FREE -->
 <h4 id="openssl_pkey_free">OPENSSL_PKEY_FREE</h4>
-
-<!-- OPENSSL_PKEY_GET_DETAILS -->
 <h4 id="openssl_pkey_get_details">OPENSSL_PKEY_GET_DETAILS</h4>
-
-<!-- OPENSSL_PKEY_GET_PRIVATE -->
 <h4 id="openssl_pkey_get_private">OPENSSL_PKEY_GET_PRIVATE</h4>
-
-<!-- OPENSSL_PKEY_GET_PUBLIC -->
 <h4 id="openssl_pkey_get_public">OPENSSL_PKEY_GET_PUBLIC</h4>
-
-<!-- OPENSSL_PKEY_NEW -->
 <h4 id="openssl_pkey_new">OPENSSL_PKEY_NEW</h4>
-
-<!-- OPENSSL_PRIVATE_DECRYPT -->
 <h4 id="openssl_private_decrypt">OPENSSL_PRIVATE_DECRYPT</h4>
-
-<!-- OPENSSL_PRIVATE_ENCRYPT -->
 <h4 id="openssl_private_encrypt">OPENSSL_PRIVATE_ENCRYPT</h4>
-
-<!-- OPENSSL_PUBLIC_DECRYPT -->
 <h4 id="openssl_public_decrypt">OPENSSL_PUBLIC_DECRYPT</h4>
-
-<!-- OPENSSL_PUBLIC_ENCRYPT -->
 <h4 id="openssl_public_encrypt">OPENSSL_PUBLIC_ENCRYPT</h4>
-
-<!-- OPENSSL_RANDOM_PSEUDO_BYTES -->
 <h4 id="openssl_random_pseudo_bytes">OPENSSL_RANDOM_PSEUDO_BYTES</h4>
-
-<!-- OPENSSL_SEAL -->
 <h4 id="openssl_seal">OPENSSL_SEAL</h4>
-
-<!-- OPENSSL_SIGN -->
 <h4 id="openssl_sign">OPENSSL_SIGN</h4>
-
-<!-- OPENSSL_SPKI_EXPORT -->
 <h4 id="openssl_spki_export">OPENSSL_SPKI_EXPORT</h4>
-
-<!-- OPENSSL_SPKI_EXPORT_CHALLENGE -->
 <h4 id="openssl_spki_export_challenge">OPENSSL_SPKI_EXPORT_CHALLENGE</h4>
-
-<!-- OPENSSL_SPKI_NEW -->
 <h4 id="openssl_spki_new">OPENSSL_SPKI_NEW</h4>
-
-<!-- OPENSSL_SPKI_VERIFY -->
 <h4 id="openssl_spki_verify">OPENSSL_SPKI_VERIFY</h4>
-
-<!-- OPENSSL_VERIFY -->
 <h4 id="openssl_verify">OPENSSL_VERIFY</h4>
-
-<!-- OPENSSL_X509_CHECK_PRIVATE_KEY -->
 <h4 id="openssl_x509_check_private_key">OPENSSL_X509_CHECK_PRIVATE_KEY</h4>
-
-<!-- OPENSSL_X509_CHECKPURPOSE -->
 <h4 id="openssl_x509_checkpurpose">OPENSSL_X509_CHECKPURPOSE</h4>
-
-<!-- OPENSSL_X509_EXPORT -->
 <h4 id="openssl_x509_export">OPENSSL_X509_EXPORT</h4>
-
-<!-- OPENSSL_X509_EXPORT_TO_FILE -->
 <h4 id="openssl_x509_export_to_file">OPENSSL_X509_EXPORT_TO_FILE</h4>
-
-<!-- OPENSSL_X509_FINGERPRINT -->
 <h4 id="openssl_x509_fingerprint">OPENSSL_X509_FINGERPRINT</h4>
-
-<!-- OPENSSL_X509_FREE -->
 <h4 id="openssl_x509_free">OPENSSL_X509_FREE</h4>
-
-<!-- OPENSSL_X509_PARSE -->
 <h4 id="openssl_x509_parse">OPENSSL_X509_PARSE</h4>
-
-<!-- OPENSSL_X509_READ -->
 <h4 id="openssl_x509_read">OPENSSL_X509_READ</h4>
-
-<!-- OPENSSL_X509_VERIFY -->
 <h4 id="openssl_x509_verify">OPENSSL_X509_VERIFY</h4>
-
-<!-- OPENSSL_CERTIFICATE -->
 <h4 id="openssl_certificate">OPENSSLCERTIFICATE</h4>
-
-<!-- OPENSSL_CERTIFICATESIGNINGREQUEST -->
 <h4 id="openssl_csr">OPENSSLCERTIFICATESIGNINGREQUEST</h4>
-
-<!-- OPENSSL_ASYMMETRICKEY -->
 <h4 id="openssl_asymmetric_key">OPENSSLASYMMETRICKEY</h4>
-
-
-<!-- Password Hash -->
 <h4 id="password_hash">PASSWORD_HASH</h4>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- Installation/Configuration -->
     <a href="#installation_configuration">INSTALLATION/CONFIGURATION</a> |
-    <!-- Dependencies -->
     <a href="#dependencies">DEPENDENCIES</a> |
-    <!-- Installation -->
     <a href="#installation">INSTALLATION</a> |
-    <!-- password_algos -->
     <a href="#password_algos">PASSWORD_ALGOS</a> |
-    <!-- password_get_info -->
     <a href="#password_get_info">PASSWORD_GET_INFO</a> |
-    <!-- password_hash -->
     <a href="#password_hash">PASSWORD_HASH</a> |
-    <!-- password_needs_rehash -->
     <a href="#password_needs_rehash">PASSWORD_NEEDS_REHASH</a> |
-    <!-- password_verify -->
     <a href="#password_verify">PASSWORD_VERIFY</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- Installation/Configuration -->
 <h4 id="installation_configuration">INSTALLATION/CONFIGURATION</h4>
-
-<!-- Dependencies -->
 <h4 id="dependencies">DEPENDENCIES</h4>
-
-<!-- Installation -->
 <h4 id="installation">INSTALLATION</h4>
-
-<!-- PASSWORD_ALGOS -->
 <h4 id="password_algos">PASSWORD_ALGOS</h4>
-
-<!-- PASSWORD_GET_INFO -->
 <h4 id="password_get_info">PASSWORD_GET_INFO</h4>
-
-<!-- PASSWORD_HASH -->
 <h4 id="password_hash">PASSWORD_HASH</h4>
-
-<!-- PASSWORD_NEEDS_REHASH -->
 <h4 id="password_needs_rehash">PASSWORD_NEEDS_REHASH</h4>
-
-<!-- PASSWORD_VERIFY -->
 <h4 id="password_verify">PASSWORD_VERIFY</h4>
 
 
-<!-- Rnp -->
 <h4 id="rnp">RNP</h4>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- Installation/Configuration -->
     <a href="#installation_configuration">INSTALLATION/CONFIGURATION</a> |
-    <!-- Texto Clearsign -->
     <a href="#texto_clearsign">TEXTO_CLEARSIGN</a> |
-    <!-- rnp_backend_string -->
     <a href="#rnp_backend_string">RNP_BACKEND_STRING</a> |
-    <!-- rnp_backend_version -->
     <a href="#rnp_backend_version">RNP_BACKEND_VERSION</a> |
-    <!-- rnp_decrypt -->
     <a href="#rnp_decrypt">RNP_DECRYPT</a> |
-    <!-- rnp_dump_packets -->
     <a href="#rnp_dump_packets">RNP_DUMP_PACKETS</a> |
-    <!-- rnp_dump_packets_to_json -->
     <a href="#rnp_dump_packets_to_json">RNP_DUMP_PACKETS_TO_JSON</a> |
-    <!-- rnp_ffi_create -->
     <a href="#rnp_ffi_create">RNP_FFI_CREATE</a> |
-    <!-- rnp_ffi_destroy -->
     <a href="#rnp_ffi_destroy">RNP_FFI_DESTROY</a> |
-    <!-- rnp_ffi_set_pass_provider -->
     <a href="#rnp_ffi_set_pass_provider">RNP_FFI_SET_PASS_PROVIDER</a> |
-    <!-- rnp_import_keys -->
     <a href="#rnp_import_keys">RNP_IMPORT_KEYS</a> |
-    <!-- rnp_import_signatures -->
     <a href="#rnp_import_signatures">RNP_IMPORT_SIGNATURES</a> |
-    <!-- rnp_key_export -->
     <a href="#rnp_key_export">RNP_KEY_EXPORT</a> |
-    <!-- rnp_key_export_autocrypt -->
     <a href="#rnp_key_export_autocrypt">RNP_KEY_EXPORT_AUTOCRYPT</a> |
-    <!-- rnp_key_export_revocation -->
     <a href="#rnp_key_export_revocation">RNP_KEY_EXPORT_REVOCATION</a> |
-    <!-- rnp_key_get_info -->
     <a href="#rnp_key_get_info">RNP_KEY_GET_INFO</a> |
-    <!-- rnp_key_remove -->
     <a href="#rnp_key_remove">RNP_KEY_REMOVE</a> |
-    <!-- rnp_key_revoke -->
     <a href="#rnp_key_revoke">RNP_KEY_REVOKE</a> |
-    <!-- rnp_list_keys -->
     <a href="#rnp_list_keys">RNP_LIST_KEYS</a> |
-    <!-- rnp_load_keys -->
     <a href="#rnp_load_keys">RNP_LOAD_KEYS</a> |
-    <!-- rnp_load_keys_from_path -->
     <a href="#rnp_load_keys_from_path">RNP_LOAD_KEYS_FROM_PATH</a> |
-    <!-- rnp_locate_key -->
     <a href="#rnp_locate_key">RNP_LOCATE_KEY</a> |
-    <!-- rnp_op_encrypt -->
     <a href="#rnp_op_encrypt">RNP_OP_ENCRYPT</a> |
-    <!-- rnp_op_generate_key -->
     <a href="#rnp_op_generate_key">RNP_OP_GENERATE_KEY</a> |
-    <!-- rnp_op_sign -->
     <a href="#rnp_op_sign">RNP_OP_SIGN</a> |
-    <!-- rnp_op_sign_cleartext -->
     <a href="#rnp_op_sign_cleartext">RNP_OP_SIGN_CLEARTEXT</a> |
-    <!-- rnp_op_sign_detached -->
     <a href="#rnp_op_sign_detached">RNP_OP_SIGN_DETACHED</a> |
-    <!-- rnp_op_verify -->
     <a href="#rnp_op_verify">RNP_OP_VERIFY</a> |
-    <!-- rnp_op_verify_detached -->
     <a href="#rnp_op_verify_detached">RNP_OP_VERIFY_DETACHED</a> |
-    <!-- rnp_save_keys -->
     <a href="#rnp_save_keys">RNP_SAVE_KEYS</a> |
-    <!-- rnp_save_keys_to_path -->
     <a href="#rnp_save_keys_to_path">RNP_SAVE_KEYS_TO_PATH</a> |
-    <!-- rnp_supported_features -->
     <a href="#rnp_supported_features">RNP_SUPPORTED_FEATURES</a> |
-    <!-- rnp_version_string -->
     <a href="#rnp_version_string">RNP_VERSION_STRING</a> |
-    <!-- rnp_version_string_full -->
     <a href="#rnp_version_string_full">RNP_VERSION_STRING_FULL</a> |
-    <!-- RnpFFI -->
     <a href="#rnpffi">RNPFFI</a>
   </p> 
 </nav>
 
-<!-- Introduction -->
 <h4 id="introduction">INTRODUCTION</h4>
-
-<!-- Installation/Configuration -->
 <h4 id="installation_configuration">INSTALLATION/CONFIGURATION</h4>
-
-<!-- Texto Clearsign -->
 <h4 id="texto_clearsign">TEXTO_CLEARSIGN</h4>
-
-<!-- rnp_backend_string -->
 <h4 id="rnp_backend_string">RNP_BACKEND_STRING</h4>
-
-<!-- rnp_backend_version -->
 <h4 id="rnp_backend_version">RNP_BACKEND_VERSION</h4>
-
-<!-- rnp_decrypt -->
 <h4 id="rnp_decrypt">RNP_DECRYPT</h4>
-
-<!-- rnp_dump_packets -->
 <h4 id="rnp_dump_packets">RNP_DUMP_PACKETS</h4>
-
-<!-- rnp_dump_packets_to_json -->
 <h4 id="rnp_dump_packets_to_json">RNP_DUMP_PACKETS_TO_JSON</h4>
-
-<!-- rnp_ffi_create -->
 <h4 id="rnp_ffi_create">RNP_FFI_CREATE</h4>
-
-<!-- rnp_ffi_destroy -->
 <h4 id="rnp_ffi_destroy">RNP_FFI_DESTROY</h4>
-
-<!-- rnp_ffi_set_pass_provider -->
 <h4 id="rnp_ffi_set_pass_provider">RNP_FFI_SET_PASS_PROVIDER</h4>
-
-<!-- rnp_import_keys -->
 <h4 id="rnp_import_keys">RNP_IMPORT_KEYS</h4>
-
-<!-- rnp_import_signatures -->
 <h4 id="rnp_import_signatures">RNP_IMPORT_SIGNATURES</h4>
-
-<!-- rnp_key_export -->
 <h4 id="rnp_key_export">RNP_KEY_EXPORT</h4>
-
-<!-- rnp_key_export_autocrypt -->
 <h4 id="rnp_key_export_autocrypt">RNP_KEY_EXPORT_AUTOCRYPT</h4>
-
-<!-- rnp_key_export_revocation -->
 <h4 id="rnp_key_export_revocation">RNP_KEY_EXPORT_REVOCATION</h4>
-
-<!-- rnp_key_get_info -->
 <h4 id="rnp_key_get_info">RNP_KEY_GET_INFO</h4>
-
-<!-- rnp_key_remove -->
 <h4 id="rnp_key_remove">RNP_KEY_REMOVE</h4>
-
-<!-- rnp_key_revoke -->
 <h4 id="rnp_key_revoke">RNP_KEY_REVOKE</h4>
-
-<!-- rnp_list_keys -->
 <h4 id="rnp_list_keys">RNP_LIST_KEYS</h4>
-
-<!-- rnp_load_keys -->
 <h4 id="rnp_load_keys">RNP_LOAD_KEYS</h4>
-
-<!-- rnp_load_keys_from_path -->
 <h4 id="rnp_load_keys_from_path">RNP_LOAD_KEYS_FROM_PATH</h4>
-
-<!-- rnp_locate_key -->
 <h4 id="rnp_locate_key">RNP_LOCATE_KEY</h4>
-
-<!-- rnp_op_encrypt -->
 <h4 id="rnp_op_encrypt">RNP_OP_ENCRYPT</h4>
-
-<!-- rnp_op_generate_key -->
 <h4 id="rnp_op_generate_key">RNP_OP_GENERATE_KEY</h4>
-
-<!-- rnp_op_sign -->
 <h4 id="rnp_op_sign">RNP_OP_SIGN</h4>
-
-<!-- rnp_op_sign_cleartext -->
 <h4 id="rnp_op_sign_cleartext">RNP_OP_SIGN_CLEARTEXT</h4>
-
-<!-- rnp_op_sign_detached -->
 <h4 id="rnp_op_sign_detached">RNP_OP_SIGN_DETACHED</h4>
-
-<!-- rnp_op_verify -->
 <h4 id="rnp_op_verify">RNP_OP_VERIFY</h4>
-
-<!-- rnp_op_verify_detached -->
 <h4 id="rnp_op_verify_detached">RNP_OP_VERIFY_DETACHED</h4>
-
-<!-- rnp_save_keys -->
 <h4 id="rnp_save_keys">RNP_SAVE_KEYS</h4>
-
-<!-- rnp_save_keys_to_path -->
 <h4 id="rnp_save_keys_to_path">RNP_SAVE_KEYS_TO_PATH</h4>
-
-<!-- rnp_supported_features -->
 <h4 id="rnp_supported_features">RNP_SUPPORTED_FEATURES</h4>
-
-<!-- rnp_version_string -->
 <h4 id="rnp_version_string">RNP_VERSION_STRING</h4>
-
-<!-- rnp_version_string_full -->
 <h4 id="rnp_version_string_full">RNP_VERSION_STRING_FULL</h4>
-
-<!-- RnpFFI -->
 <h4 id="rnpffi">RNPFFI</h4>
 
 
-<!-- Sodium -->
 <h4 id="sodium">SODIUM</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- Installation -->
     <a href="#installation">INSTALLATION</a> |
-    <!-- sodium_add -->
     <a href="#sodium_add">SODIUM_ADD</a> |
-    <!-- sodium_base642bin -->
     <a href="#sodium_base642bin">SODIUM_BASE642BIN</a> |
-    <!-- sodium_bin2base64 -->
     <a href="#sodium_bin2base64">SODIUM_BIN2BASE64</a> |
-    <!-- sodium_bin2hex -->
     <a href="#sodium_bin2hex">SODIUM_BIN2HEX</a> |
-    <!-- sodium_compare -->
     <a href="#sodium_compare">SODIUM_COMPARE</a> |
-    <!-- sodium_crypto_aead_aegis128l_decrypt -->
     <a href="#sodium_crypto_aead_aegis128l_decrypt">SODIUM_CRYPTO_AEAD_AEGIS128L_DECRYPT</a> |
-    <!-- sodium_crypto_aead_aegis128l_encrypt -->
     <a href="#sodium_crypto_aead_aegis128l_encrypt">SODIUM_CRYPTO_AEAD_AEGIS128L_ENCRYPT</a> |
-    <!-- sodium_crypto_aead_aegis128l_keygen -->
     <a href="#sodium_crypto_aead_aegis128l_keygen">SODIUM_CRYPTO_AEAD_AEGIS128L_KEYGEN</a> |
-    <!-- sodium_crypto_aead_aegis256_decrypt -->
     <a href="#sodium_crypto_aead_aegis256_decrypt">SODIUM_CRYPTO_AEAD_AEGIS256_DECRYPT</a> |
-    <!-- sodium_crypto_aead_aegis256_encrypt -->
     <a href="#sodium_crypto_aead_aegis256_encrypt">SODIUM_CRYPTO_AEAD_AEGIS256_ENCRYPT</a> |
-    <!-- sodium_crypto_aead_aegis256_keygen -->
     <a href="#sodium_crypto_aead_aegis256_keygen">SODIUM_CRYPTO_AEAD_AEGIS256_KEYGEN</a> |
-    <!-- sodium_crypto_aead_aes256gcm_decrypt -->
     <a href="#sodium_crypto_aead_aes256gcm_decrypt">SODIUM_CRYPTO_AEAD_AES256GCM_DECRYPT</a> |
-    <!-- sodium_crypto_aead_aes256gcm_encrypt -->
     <a href="#sodium_crypto_aead_aes256gcm_encrypt">SODIUM_CRYPTO_AEAD_AES256GCM_ENCRYPT</a> |
-    <!-- sodium_crypto_aead_aes256gcm_is_available -->
     <a href="#sodium_crypto_aead_aes256gcm_is_available">SODIUM_CRYPTO_AEAD_AES256GCM_IS_AVAILABLE</a> |
-    <!-- sodium_crypto_aead_aes256gcm_keygen -->
     <a href="#sodium_crypto_aead_aes256gcm_keygen">SODIUM_CRYPTO_AEAD_AES256GCM_KEYGEN</a> |
-    <!-- sodium_crypto_aead_chacha20poly1305_decrypt -->
     <a href="#sodium_crypto_aead_chacha20poly1305_decrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_DECRYPT</a> |
-    <!-- sodium_crypto_aead_chacha20poly1305_encrypt -->
     <a href="#sodium_crypto_aead_chacha20poly1305_encrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_ENCRYPT</a> |
-    <!-- sodium_crypto_aead_chacha20poly1305_ietf_decrypt -->
     <a href="#sodium_crypto_aead_chacha20poly1305_ietf_decrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_DECRYPT</a> |
-    <!-- sodium_crypto_aead_chacha20poly1305_ietf_encrypt -->
     <a href="#sodium_crypto_aead_chacha20poly1305_ietf_encrypt">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_ENCRYPT</a> |
-    <!-- sodium_crypto_aead_chacha20poly1305_ietf_keygen -->
     <a href="#sodium_crypto_aead_chacha20poly1305_ietf_keygen">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_KEYGEN</a> |
-    <!-- sodium_crypto_aead_chacha20poly1305_keygen -->
     <a href="#sodium_crypto_aead_chacha20poly1305_keygen">SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_KEYGEN</a> |
-    <!-- sodium_crypto_aead_xchacha20poly1305_ietf_decrypt -->
     <a href="#sodium_crypto_aead_xchacha20poly1305_ietf_decrypt">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_DECRYPT</a> |
-    <!-- sodium_crypto_aead_xchacha20poly1305_ietf_encrypt -->
     <a href="#sodium_crypto_aead_xchacha20poly1305_ietf_encrypt">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_ENCRYPT</a> |
-    <!-- sodium_crypto_aead_xchacha20poly1305_ietf_keygen -->
     <a href="#sodium_crypto_aead_xchacha20poly1305_ietf_keygen">SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_KEYGEN</a> |
-    <!-- sodium_crypto_auth -->
     <a href="#sodium_crypto_auth">SODIUM_CRYPTO_AUTH</a> |
-    <!-- sodium_crypto_auth_keygen -->
     <a href="#sodium_crypto_auth_keygen">SODIUM_CRYPTO_AUTH_KEYGEN</a> |
-    <!-- sodium_crypto_auth_verify -->
     <a href="#sodium_crypto_auth_verify">SODIUM_CRYPTO_AUTH_VERIFY</a> |
-    <!-- sodium_crypto_box -->
     <a href="#sodium_crypto_box">SODIUM_CRYPTO_BOX</a> |
-    <!-- sodium_crypto_box_keypair -->
     <a href="#sodium_crypto_box_keypair">SODIUM_CRYPTO_BOX_KEYPAIR</a> |
-    <!-- sodium_crypto_box_keypair_from_secretkey_and_publickey -->
     <a href="#sodium_crypto_box_keypair_from_secretkey_and_publickey">SODIUM_CRYPTO_BOX_KEYPAIR_FROM_SECRETKEY_AND_PUBLICKEY</a> |
-    <!-- sodium_crypto_box_open -->
     <a href="#sodium_crypto_box_open">SODIUM_CRYPTO_BOX_OPEN</a> |
-    <!-- sodium_crypto_box_publickey -->
     <a href="#sodium_crypto_box_publickey">SODIUM_CRYPTO_BOX_PUBLICKEY</a> |
-    <!-- sodium_crypto_box_publickey_from_secretkey -->
     <a href="#sodium_crypto_box_publickey_from_secretkey">SODIUM_CRYPTO_BOX_PUBLICKEY_FROM_SECRETKEY</a> |
-    <!-- sodium_crypto_box_seal -->
     <a href="#sodium_crypto_box_seal">SODIUM_CRYPTO_BOX_SEAL</a> |
-    <!-- sodium_crypto_box_seal_open -->
     <a href="#sodium_crypto_box_seal_open">SODIUM_CRYPTO_BOX_SEAL_OPEN</a> |
-    <!-- sodium_crypto_box_secretkey -->
     <a href="#sodium_crypto_box_secretkey">SODIUM_CRYPTO_BOX_SECRETKEY</a> |
-    <!-- sodium_crypto_box_seed_keypair -->
     <a href="#sodium_crypto_box_seed_keypair">SODIUM_CRYPTO_BOX_SEED_KEYPAIR</a> |
-    <!-- sodium_crypto_core_ristretto255_add -->
     <a href="#sodium_crypto_core_ristretto255_add">SODIUM_CRYPTO_CORE_RISTRETTO255_ADD</a> |
-    <!-- sodium_crypto_core_ristretto255_from_hash -->
     <a href="#sodium_crypto_core_ristretto255_from_hash">SODIUM_CRYPTO_CORE_RISTRETTO255_FROM_HASH</a> |
-    <!-- sodium_crypto_core_ristretto255_is_valid_point -->
     <a href="#sodium_crypto_core_ristretto255_is_valid_point">SODIUM_CRYPTO_CORE_RISTRETTO255_IS_VALID_POINT</a> |
-    <!-- sodium_crypto_core_ristretto255_random -->
     <a href="#sodium_crypto_core_ristretto255_random">SODIUM_CRYPTO_CORE_RISTRETTO255_RANDOM</a> |
-    <!-- sodium_crypto_core_ristretto255_scalar_add -->
     <a href="#sodium_crypto_core_ristretto255_scalar_add">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_ADD</a> |
-    <!-- sodium_crypto_core_ristretto255_scalar_complement -->
     <a href="#sodium_crypto_core_ristretto255_scalar_complement">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_COMPLEMENT</a> |
-    <!-- sodium_crypto_core_ristretto255_scalar_invert -->
     <a href="#sodium_crypto_core_ristretto255_scalar_invert">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_INVERT</a> |
-    <!-- sodium_crypto_core_ristretto255_scalar_mul -->
     <a href="#sodium_crypto_core_ristretto255_scalar_mul">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_MUL</a> |
-    <!-- sodium_crypto_core_ristretto255_scalar_negate -->
     <a href="#sodium_crypto_core_ristretto255_scalar_negate">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_NEGATE</a> |
-    <!-- sodium_crypto_core_ristretto255_scalar_random -->
     <a href="#sodium_crypto_core_ristretto255_scalar_random">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_RANDOM</a> |
-    <!-- sodium_crypto_core_ristretto255_scalar_reduce -->
     <a href="#sodium_crypto_core_ristretto255_scalar_reduce">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_REDUCE</a> |
-    <!-- sodium_crypto_core_ristretto255_scalar_sub -->
     <a href="#sodium_crypto_core_ristretto255_scalar_sub">SODIUM_CRYPTO_CORE_RISTRETTO255_SCALAR_SUB</a> |
-    <!-- sodium_crypto_core_ristretto255_sub -->
     <a href="#sodium_crypto_core_ristretto255_sub">SODIUM_CRYPTO_CORE_RISTRETTO255_SUB</a> |
-    <!-- sodium_crypto_generichash -->
     <a href="#sodium_crypto_generichash">SODIUM_CRYPTO_GENERICHASH</a> |
-    <!-- sodium_crypto_generichash_final -->
     <a href="#sodium_crypto_generichash_final">SODIUM_CRYPTO_GENERICHASH_FINAL</a> |
-    <!-- sodium_crypto_generichash_init -->
     <a href="#sodium_crypto_generichash_init">SODIUM_CRYPTO_GENERICHASH_INIT</a> |
-    <!-- sodium_crypto_generichash_keygen -->
     <a href="#sodium_crypto_generichash_keygen">SODIUM_CRYPTO_GENERICHASH_KEYGEN</a> |
-    <!-- sodium_crypto_generichash_update -->
     <a href="#sodium_crypto_generichash_update">SODIUM_CRYPTO_GENERICHASH_UPDATE</a> |
-    <!-- sodium_crypto_kdf_derive_from_key -->
     <a href="#sodium_crypto_kdf_derive_from_key">SODIUM_CRYPTO_KDF_DERIVE_FROM_KEY</a> |
-    <!-- sodium_crypto_kdf_keygen -->
     <a href="#sodium_crypto_kdf_keygen">SODIUM_CRYPTO_KDF_KEYGEN</a> |
     <a href="#sodium_crypto_kx_client_session_keys">SODIUM_CRYPTO_KX_CLIENT_SESSION_KEYS</a> |
     <a href="#sodium_crypto_kx_keypair">SODIUM_CRYPTO_KX_KEYPAIR</a> |
@@ -4139,7 +3437,6 @@
 <h4 id="sodium_unpad">SODIUM_UNPAD</h4>
 <h4 id="sodiumexception">SODIUMEXCEPTION</h4>
 
-<!-- Xpass -->
 <h4 id="xpass">XPASS</h4>
 
 <h4 id="crypt">CRYPT</h4>
@@ -4147,20 +3444,14 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- Installation -->
     <a href="#installation">INSTALLATION</a> |
-    <!-- crypt_checksalt -->
     <a href="#crypt_checksalt">CRYPT_CHECKSALT</a> |
-    <!-- crypt_gensalt -->
     <a href="#crypt_gensalt">CRYPT_GENSALT</a> |
-    <!-- crypt_preferred_method -->
     <a href="#crypt_preferred_method">CRYPT_PREFERRED_METHOD</a>
   </p> 
 </nav>
 
-<!-- H4 Sections -->
 <h4 id="introduction">INTRODUCTION</h4>
 <h4 id="installation">INSTALLATION</h4>
 <h4 id="crypt_checksalt">CRYPT_CHECKSALT</h4>
@@ -4174,89 +3465,58 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Abstraction Layers -->
     <a href="#abstraction_layers">ABSTRACTION LAYERS</a> |
-    <!-- Third-Party Specific Database Extensions -->
     <a href="#third_party_extensions">THIRD-PARTY SPECIFIC DATABASE EXTENSIONS</a>
   </p> 
 </nav>
 
-<!-- H4 Sections -->
 <h4 id="abstraction_layers">ABSTRACTION LAYERS</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- DBA -->
     <a href="#dba">DBA</a> |
-    <!-- ODBC -->
     <a href="#odbc">ODBC</a> |
-    <!-- PDO -->
     <a href="#pdo">PDO</a>
   </p> 
 </nav>
 
-<!-- H4 Sections -->
 <h4 id="dba">DBA</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- Installation/Configuration -->
     <a href="#installation-configuration">INSTALLATION/CONFIGURATION</a> |
-    <!-- Dependencies -->
     <a href="#dependencies">DEPENDENCIES</a> |
-    <!-- Installation -->
     <a href="#installation">INSTALLATION</a> |
-    <!-- Runtime Configuration -->
     <a href="#runtime-configuration">RUNTIME CONFIGURATION</a> |
-    <!-- Resource Types -->
     <a href="#resource-types">RESOURCE TYPES</a> |
-    <!-- Dba\Connection -->
     <a href="#dba-connection">DBA\CONNECTION</a> |
-    <!-- dba_close -->
     <a href="#dba_close">DBA_CLOSE</a> |
-    <!-- dba_delete -->
     <a href="#dba_delete">DBA_DELETE</a> |
-    <!-- dba_exists -->
     <a href="#dba_exists">DBA_EXISTS</a> |
-    <!-- dba_fetch -->
     <a href="#dba_fetch">DBA_FETCH</a> |
-    <!-- dba_firstkey -->
     <a href="#dba_firstkey">DBA_FIRSTKEY</a> |
-    <!-- dba_handlers -->
     <a href="#dba_handlers">DBA_HANDLERS</a> |
-    <!-- dba_insert -->
     <a href="#dba_insert">DBA_INSERT</a> |
-    <!-- dba_key_split -->
     <a href="#dba_key_split">DBA_KEY_SPLIT</a> |
-    <!-- dba_list -->
     <a href="#dba_list">DBA_LIST</a> |
-    <!-- dba_nextkey -->
     <a href="#dba_nextkey">DBA_NEXTKEY</a> |
-    <!-- dba_open -->
     <a href="#dba_open">DBA_OPEN</a> |
-    <!-- dba_optimize -->
     <a href="#dba_optimize">DBA_OPTIMIZE</a> |
-    <!-- dba_popen -->
     <a href="#dba_popen">DBA_POPEN</a> |
-    <!-- dba_replace -->
     <a href="#dba_replace">DBA_REPLACE</a> |
-    <!-- dba_sync -->
     <a href="#dba_sync">DBA_SYNC</a>
   </p> 
 </nav>
 
-<!-- H4 Sections -->
 <h4 id="introduction">INTRODUCTION</h4>
 <h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
 <h4 id="dependencies">DEPENDENCIES</h4>
 <h4 id="installation">INSTALLATION</h4>
 <h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
 <h4 id="resource-types">RESOURCE TYPES</h4>
-
 <h4 id="dba-connection">DBA\CONNECTION</h4>
 <h4 id="dba_close">DBA_CLOSE</h4>
 <h4 id="dba_delete">DBA_DELETE</h4>
@@ -4280,11 +3540,8 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introduction -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- Installation -->
     <a href="#installation">INSTALLATION</a> |
-    <!-- Functions -->
     <a href="#odbc_autocommit">ODBC_AUTOCOMMIT</a> |
     <a href="#odbc_binmode">ODBC_BINMODE</a> |
     <a href="#odbc_close">ODBC_CLOSE</a> |
@@ -4336,7 +3593,6 @@
   </p> 
 </nav>
 
-<!-- H4 Sections -->
 <h4 id="introduction">INTRODUCTION</h4>
 <h4 id="installation">INSTALLATION</h4>
 <h4 id="odbc_autocommit">ODBC_AUTOCOMMIT</h4>
@@ -4394,15 +3650,10 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- Introdução -->
     <a href="#introduction">INTRODUCTION</a> |
-    <!-- Instalação -->
     <a href="#installation">INSTALLATION</a> |
-    <!-- Conexões -->
     <a href="#connections">CONNECTIONS & MANAGEMENT</a> |
-    <!-- Transações -->
     <a href="#transactions">TRANSACTIONS & AUTO-COMMIT</a> |
-    <!-- PDO -->
     <a href="#pdo">PDO</a> |
     <a href="#pdo_beginTransaction">PDO::BEGINTRANSACTION</a> |
     <a href="#pdo_commit">PDO::COMMIT</a> |
@@ -4443,7 +3694,6 @@
     <a href="#pdostatement_setFetchMode">PDOSTATEMENT::SETFETCHMODE</a> |
     <a href="#pdorow">PDOROW</a> |
     <a href="#pdoexception">PDOEXCEPTION</a> |
-    <!-- Drivers -->
     <a href="#pdo_drivers">PDO DRIVERS</a> |
     <a href="#pdo_cubrid">PDO DRIVER CUBRID</a> |
     <a href="#pdo_dblib">PDO DRIVER DBLIB</a> |
@@ -4464,7 +3714,6 @@
   </p> 
 </nav>
 
-<!-- H4 Sections -->
 <h4 id="introduction">INTRODUCTION</h4>
 <h4 id="installation">INSTALLATION</h4>
 <h4 id="connections">CONNECTIONS & MANAGEMENT</h4>
@@ -4533,137 +3782,126 @@
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <!-- CUBRID -->
     <a href="#cubrid">CUBRID</a> |
-    <!-- dBase -->
     <a href="#dbase">DBASE</a> |
-    <!-- Firebird/InterBase -->
     <a href="#firebird">FIREBIRD/INTERBASE</a> |
-    <!-- IBM DB2 -->
     <a href="#ibmdb2">IBM DB2</a> |
-    <!-- MongoDB -->
     <a href="#mongodb">MONGODB</a> |
-    <!-- MySQL -->
     <a href="#mysql">MYSQL</a> |
-    <!-- OCI8 -->
     <a href="#oci8">OCI8</a> |
-    <!-- PostgreSQL -->
     <a href="#postgresql">POSTGRESQL</a> |
-    <!-- SQLite3 -->
     <a href="#sqlite3">SQLITE3</a> |
-    <!-- SQLSRV -->
     <a href="#sqlsrv">SQLSRV</a>
   </p> 
 </nav>
 
-<!-- H4 Sections -->
 <h4 id="cubrid">CUBRID</h4>
 
 <nav align="center"> 
   <h3>NAVIGATION</h3> 
   <p>
-    <a href="#introduction">INTRODUCTION</a>
-    <a href="#dependencies">DEPENDENCIES</a>
-    <a href="#installation">INSTALLATION</a>
-    <a href="#resource-types">RESOURCE TYPES</a>
-    <a href="#cubrid_bind">CUBRID_BIND</a>
-    <a href="#cubrid_close_prepare">CUBRID_CLOSE_PREPARE</a>
-    <a href="#cubrid_close_request">CUBRID_CLOSE_REQUEST</a>
-    <a href="#cubrid_col_get">CUBRID_COL_GET</a>
-    <a href="#cubrid_col_size">CUBRID_COL_SIZE</a>
-    <a href="#cubrid_column_names">CUBRID_COLUMN_NAMES</a>
-    <a href="#cubrid_column_types">CUBRID_COLUMN_TYPES</a>
-    <a href="#cubrid_commit">CUBRID_COMMIT</a>
-    <a href="#cubrid_connect">CUBRID_CONNECT</a>
-    <a href="#cubrid_connect_with_url">CUBRID_CONNECT_WITH_URL</a>
-    <a href="#cubrid_current_oid">CUBRID_CURRENT_OID</a>
-    <a href="#cubrid_disconnect">CUBRID_DISCONNECT</a>
-    <a href="#cubrid_drop">CUBRID_DROP</a>
-    <a href="#cubrid_error_code">CUBRID_ERROR_CODE</a>
-    <a href="#cubrid_error_code_facility">CUBRID_ERROR_CODE_FACILITY</a>
-    <a href="#cubrid_error_msg">CUBRID_ERROR_MSG</a>
-    <a href="#cubrid_execute">CUBRID_EXECUTE</a>
-    <a href="#cubrid_fetch">CUBRID_FETCH</a>
-    <a href="#cubrid_free_result">CUBRID_FREE_RESULT</a>
-    <a href="#cubrid_get">CUBRID_GET</a>
-    <a href="#cubrid_get_autocommit">CUBRID_GET_AUTOCOMMIT</a>
-    <a href="#cubrid_get_charset">CUBRID_GET_CHARSET</a>
-    <a href="#cubrid_get_class_name">CUBRID_GET_CLASS_NAME</a>
-    <a href="#cubrid_get_client_info">CUBRID_GET_CLIENT_INFO</a>
-    <a href="#cubrid_get_db_parameter">CUBRID_GET_DB_PARAMETER</a>
-    <a href="#cubrid_get_query_timeout">CUBRID_GET_QUERY_TIMEOUT</a>
-    <a href="#cubrid_get_server_info">CUBRID_GET_SERVER_INFO</a>
-    <a href="#cubrid_insert_id">CUBRID_INSERT_ID</a>
-    <a href="#cubrid_is_instance">CUBRID_IS_INSTANCE</a>
-    <a href="#cubrid_lob_close">CUBRID_LOB_CLOSE</a>
-    <a href="#cubrid_lob_export">CUBRID_LOB_EXPORT</a>
-    <a href="#cubrid_lob_get">CUBRID_LOB_GET</a>
-    <a href="#cubrid_lob_send">CUBRID_LOB_SEND</a>
-    <a href="#cubrid_lob_size">CUBRID_LOB_SIZE</a>
-    <a href="#cubrid_lob2_bind">CUBRID_LOB2_BIND</a>
-    <a href="#cubrid_lob2_close">CUBRID_LOB2_CLOSE</a>
-    <a href="#cubrid_lob2_export">CUBRID_LOB2_EXPORT</a>
-    <a href="#cubrid_lob2_import">CUBRID_LOB2_IMPORT</a>
-    <a href="#cubrid_lob2_new">CUBRID_LOB2_NEW</a>
-    <a href="#cubrid_lob2_read">CUBRID_LOB2_READ</a>
-    <a href="#cubrid_lob2_seek">CUBRID_LOB2_SEEK</a>
-    <a href="#cubrid_lob2_seek64">CUBRID_LOB2_SEEK64</a>
-    <a href="#cubrid_lob2_size">CUBRID_LOB2_SIZE</a>
-    <a href="#cubrid_lob2_size64">CUBRID_LOB2_SIZE64</a>
-    <a href="#cubrid_lob2_tell">CUBRID_LOB2_TELL</a>
-    <a href="#cubrid_lob2_tell64">CUBRID_LOB2_TELL64</a>
-    <a href="#cubrid_lob2_write">CUBRID_LOB2_WRITE</a>
-    <a href="#cubrid_lock_read">CUBRID_LOCK_READ</a>
-    <a href="#cubrid_lock_write">CUBRID_LOCK_WRITE</a>
-    <a href="#cubrid_move_cursor">CUBRID_MOVE_CURSOR</a>
-    <a href="#cubrid_next_result">CUBRID_NEXT_RESULT</a>
-    <a href="#cubrid_num_cols">CUBRID_NUM_COLS</a>
-    <a href="#cubrid_num_rows">CUBRID_NUM_ROWS</a>
-    <a href="#cubrid_pconnect">CUBRID_PCONNECT</a>
-    <a href="#cubrid_pconnect_with_url">CUBRID_PCONNECT_WITH_URL</a>
-    <a href="#cubrid_prepare">CUBRID_PREPARE</a>
-    <a href="#cubrid_put">CUBRID_PUT</a>
-    <a href="#cubrid_rollback">CUBRID_ROLLBACK</a>
-    <a href="#cubrid_schema">CUBRID_SCHEMA</a>
-    <a href="#cubrid_seq_drop">CUBRID_SEQ_DROP</a>
-    <a href="#cubrid_seq_insert">CUBRID_SEQ_INSERT</a>
-    <a href="#cubrid_seq_put">CUBRID_SEQ_PUT</a>
-    <a href="#cubrid_set_add">CUBRID_SET_ADD</a>
-    <a href="#cubrid_set_autocommit">CUBRID_SET_AUTOCOMMIT</a>
-    <a href="#cubrid_set_db_parameter">CUBRID_SET_DB_PARAMETER</a>
-    <a href="#cubrid_set_drop">CUBRID_SET_DROP</a>
-    <a href="#cubrid_set_query_timeout">CUBRID_SET_QUERY_TIMEOUT</a>
-    <a href="#cubrid_version">CUBRID_VERSION</a>
-    <a href="#cubrid_mysql_compatibility">CUBRID MYSQL COMPATIBILITY FUNCTIONS</a>
-    <a href="#cubrid_affected_rows">CUBRID_AFFECTED_ROWS</a>
-    <a href="#cubrid_client_encoding">CUBRID_CLIENT_ENCODING</a>
-    <a href="#cubrid_close">CUBRID_CLOSE</a>
-    <a href="#cubrid_data_seek">CUBRID_DATA_SEEK</a>
-    <a href="#cubrid_db_name">CUBRID_DB_NAME</a>
-    <a href="#cubrid_errno">CUBRID_ERRNO</a>
-    <a href="#cubrid_error">CUBRID_ERROR</a>
-    <a href="#cubrid_fetch_array">CUBRID_FETCH_ARRAY</a>
-    <a href="#cubrid_fetch_assoc">CUBRID_FETCH_ASSOC</a>
-    <a href="#cubrid_fetch_field">CUBRID_FETCH_FIELD</a>
-    <a href="#cubrid_fetch_lengths">CUBRID_FETCH_LENGTHS</a>
-    <a href="#cubrid_fetch_object">CUBRID_FETCH_OBJECT</a>
-    <a href="#cubrid_fetch_row">CUBRID_FETCH_ROW</a>
-    <a href="#cubrid_field_flags">CUBRID_FIELD_FLAGS</a>
-    <a href="#cubrid_field_len">CUBRID_FIELD_LEN</a>
-    <a href="#cubrid_field_name">CUBRID_FIELD_NAME</a>
-    <a href="#cubrid_field_seek">CUBRID_FIELD_SEEK</a>
-    <a href="#cubrid_field_table">CUBRID_FIELD_TABLE</a>
-    <a href="#cubrid_field_type">CUBRID_FIELD_TYPE</a>
-    <a href="#cubrid_list_dbs">CUBRID_LIST_DBS</a>
-    <a href="#cubrid_num_fields">CUBRID_NUM_FIELDS</a>
-    <a href="#cubrid_ping">CUBRID_PING</a>
-    <a href="#cubrid_query">CUBRID_QUERY</a>
-    <a href="#cubrid_real_escape_string">CUBRID_REAL_ESCAPE_STRING</a>
-    <a href="#cubrid_result">CUBRID_RESULT</a>
-    <a href="#cubrid_unbuffered_query">CUBRID_UNBUFFERED_QUERY</a>
-    <a href="#cubrid_load_from_glo">CUBRID_LOAD_FROM_GLO</a>
-    <a href="#cubrid_new_glo">CUBRID_NEW_GLO</a>
-    <a href="#cubrid_save_to_glo">CUBRID_SAVE_TO_GLO</a>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#resource-types">RESOURCE TYPES</a> |
+    <a href="#cubrid_bind">CUBRID_BIND</a> |
+    <a href="#cubrid_close_prepare">CUBRID_CLOSE_PREPARE</a> |
+    <a href="#cubrid_close_request">CUBRID_CLOSE_REQUEST</a> |
+    <a href="#cubrid_col_get">CUBRID_COL_GET</a> |
+    <a href="#cubrid_col_size">CUBRID_COL_SIZE</a> |
+    <a href="#cubrid_column_names">CUBRID_COLUMN_NAMES</a> |
+    <a href="#cubrid_column_types">CUBRID_COLUMN_TYPES</a> |
+    <a href="#cubrid_commit">CUBRID_COMMIT</a> |
+    <a href="#cubrid_connect">CUBRID_CONNECT</a> |
+    <a href="#cubrid_connect_with_url">CUBRID_CONNECT_WITH_URL</a> |
+    <a href="#cubrid_current_oid">CUBRID_CURRENT_OID</a> |
+    <a href="#cubrid_disconnect">CUBRID_DISCONNECT</a> |
+    <a href="#cubrid_drop">CUBRID_DROP</a> |
+    <a href="#cubrid_error_code">CUBRID_ERROR_CODE</a> |
+    <a href="#cubrid_error_code_facility">CUBRID_ERROR_CODE_FACILITY</a> |
+    <a href="#cubrid_error_msg">CUBRID_ERROR_MSG</a> |
+    <a href="#cubrid_execute">CUBRID_EXECUTE</a> |
+    <a href="#cubrid_fetch">CUBRID_FETCH</a> |
+    <a href="#cubrid_free_result">CUBRID_FREE_RESULT</a> |
+    <a href="#cubrid_get">CUBRID_GET</a> |
+    <a href="#cubrid_get_autocommit">CUBRID_GET_AUTOCOMMIT</a> |
+    <a href="#cubrid_get_charset">CUBRID_GET_CHARSET</a> |
+    <a href="#cubrid_get_class_name">CUBRID_GET_CLASS_NAME</a> |
+    <a href="#cubrid_get_client_info">CUBRID_GET_CLIENT_INFO</a> |
+    <a href="#cubrid_get_db_parameter">CUBRID_GET_DB_PARAMETER</a> |
+    <a href="#cubrid_get_query_timeout">CUBRID_GET_QUERY_TIMEOUT</a> |
+    <a href="#cubrid_get_server_info">CUBRID_GET_SERVER_INFO</a> |
+    <a href="#cubrid_insert_id">CUBRID_INSERT_ID</a> |
+    <a href="#cubrid_is_instance">CUBRID_IS_INSTANCE</a> |
+    <a href="#cubrid_lob_close">CUBRID_LOB_CLOSE</a> |
+    <a href="#cubrid_lob_export">CUBRID_LOB_EXPORT</a> |
+    <a href="#cubrid_lob_get">CUBRID_LOB_GET</a> |
+    <a href="#cubrid_lob_send">CUBRID_LOB_SEND</a> |
+    <a href="#cubrid_lob_size">CUBRID_LOB_SIZE</a> |
+    <a href="#cubrid_lob2_bind">CUBRID_LOB2_BIND</a> |
+    <a href="#cubrid_lob2_close">CUBRID_LOB2_CLOSE</a> |
+    <a href="#cubrid_lob2_export">CUBRID_LOB2_EXPORT</a> |
+    <a href="#cubrid_lob2_import">CUBRID_LOB2_IMPORT</a> |
+    <a href="#cubrid_lob2_new">CUBRID_LOB2_NEW</a> |
+    <a href="#cubrid_lob2_read">CUBRID_LOB2_READ</a> |
+    <a href="#cubrid_lob2_seek">CUBRID_LOB2_SEEK</a> |
+    <a href="#cubrid_lob2_seek64">CUBRID_LOB2_SEEK64</a> |
+    <a href="#cubrid_lob2_size">CUBRID_LOB2_SIZE</a> |
+    <a href="#cubrid_lob2_size64">CUBRID_LOB2_SIZE64</a> |
+    <a href="#cubrid_lob2_tell">CUBRID_LOB2_TELL</a> |
+    <a href="#cubrid_lob2_tell64">CUBRID_LOB2_TELL64</a> |
+    <a href="#cubrid_lob2_write">CUBRID_LOB2_WRITE</a> |
+    <a href="#cubrid_lock_read">CUBRID_LOCK_READ</a> |
+    <a href="#cubrid_lock_write">CUBRID_LOCK_WRITE</a> |
+    <a href="#cubrid_move_cursor">CUBRID_MOVE_CURSOR</a> |
+    <a href="#cubrid_next_result">CUBRID_NEXT_RESULT</a> |
+    <a href="#cubrid_num_cols">CUBRID_NUM_COLS</a> |
+    <a href="#cubrid_num_rows">CUBRID_NUM_ROWS</a> |
+    <a href="#cubrid_pconnect">CUBRID_PCONNECT</a> |
+    <a href="#cubrid_pconnect_with_url">CUBRID_PCONNECT_WITH_URL</a> |
+    <a href="#cubrid_prepare">CUBRID_PREPARE</a> |
+    <a href="#cubrid_put">CUBRID_PUT</a> |
+    <a href="#cubrid_rollback">CUBRID_ROLLBACK</a> |
+    <a href="#cubrid_schema">CUBRID_SCHEMA</a> |
+    <a href="#cubrid_seq_drop">CUBRID_SEQ_DROP</a> |
+    <a href="#cubrid_seq_insert">CUBRID_SEQ_INSERT</a> |
+    <a href="#cubrid_seq_put">CUBRID_SEQ_PUT</a> |
+    <a href="#cubrid_set_add">CUBRID_SET_ADD</a> |
+    <a href="#cubrid_set_autocommit">CUBRID_SET_AUTOCOMMIT</a> |
+    <a href="#cubrid_set_db_parameter">CUBRID_SET_DB_PARAMETER</a> |
+    <a href="#cubrid_set_drop">CUBRID_SET_DROP</a> |
+    <a href="#cubrid_set_query_timeout">CUBRID_SET_QUERY_TIMEOUT</a> |
+    <a href="#cubrid_version">CUBRID_VERSION</a> |
+    <a href="#cubrid_mysql_compatibility">CUBRID MYSQL COMPATIBILITY FUNCTIONS</a> |
+    <a href="#cubrid_affected_rows">CUBRID_AFFECTED_ROWS</a> |
+    <a href="#cubrid_client_encoding">CUBRID_CLIENT_ENCODING</a> |
+    <a href="#cubrid_close">CUBRID_CLOSE</a> |
+    <a href="#cubrid_data_seek">CUBRID_DATA_SEEK</a> |
+    <a href="#cubrid_db_name">CUBRID_DB_NAME</a> |
+    <a href="#cubrid_errno">CUBRID_ERRNO</a> |
+    <a href="#cubrid_error">CUBRID_ERROR</a> |
+    <a href="#cubrid_fetch_array">CUBRID_FETCH_ARRAY</a> |
+    <a href="#cubrid_fetch_assoc">CUBRID_FETCH_ASSOC</a> |
+    <a href="#cubrid_fetch_field">CUBRID_FETCH_FIELD</a> |
+    <a href="#cubrid_fetch_lengths">CUBRID_FETCH_LENGTHS</a> |
+    <a href="#cubrid_fetch_object">CUBRID_FETCH_OBJECT</a> |
+    <a href="#cubrid_fetch_row">CUBRID_FETCH_ROW</a> |
+    <a href="#cubrid_field_flags">CUBRID_FIELD_FLAGS</a> |
+    <a href="#cubrid_field_len">CUBRID_FIELD_LEN</a> |
+    <a href="#cubrid_field_name">CUBRID_FIELD_NAME</a> |
+    <a href="#cubrid_field_seek">CUBRID_FIELD_SEEK</a> |
+    <a href="#cubrid_field_table">CUBRID_FIELD_TABLE</a> |
+    <a href="#cubrid_field_type">CUBRID_FIELD_TYPE</a> |
+    <a href="#cubrid_list_dbs">CUBRID_LIST_DBS</a> |
+    <a href="#cubrid_num_fields">CUBRID_NUM_FIELDS</a> |
+    <a href="#cubrid_ping">CUBRID_PING</a> |
+    <a href="#cubrid_query">CUBRID_QUERY</a> |
+    <a href="#cubrid_real_escape_string">CUBRID_REAL_ESCAPE_STRING</a> |
+    <a href="#cubrid_result">CUBRID_RESULT</a> |
+    <a href="#cubrid_unbuffered_query">CUBRID_UNBUFFERED_QUERY</a> |
+    <a href="#cubrid_load_from_glo">CUBRID_LOAD_FROM_GLO</a> |
+    <a href="#cubrid_new_glo">CUBRID_NEW_GLO</a> |
+    <a href="#cubrid_save_to_glo">CUBRID_SAVE_TO_GLO</a> |
     <a href="#cubrid_send_glo">CUBRID_SEND_GLO</a>
   </p>
 </nav>
@@ -4919,8 +4157,6 @@
 
 <h4 id="introduction">Introduction</h4>
 <h4 id="installation">Installation</h4>
-
-<!-- Firebird -->
 <h4 id="fbird_add_user">fbird_add_user</h4>
 <h4 id="fbird_affected_rows">fbird_affected_rows</h4>
 <h4 id="fbird_backup">fbird_backup</h4>
@@ -4969,8 +4205,6 @@
 <h4 id="fbird_set_event_handler">fbird_set_event_handler</h4>
 <h4 id="fbird_trans">fbird_trans</h4>
 <h4 id="fbird_wait_event">fbird_wait_event</h4>
-
-<!-- InterBase -->
 <h4 id="ibase_add_user">ibase_add_user</h4>
 <h4 id="ibase_affected_rows">ibase_affected_rows</h4>
 <h4 id="ibase_backup">ibase_backup</h4>
@@ -5023,1170 +4257,1164 @@
 
 <h4 id="ibmdb2">IBM DB2</h4>
 
-<nav>
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#dependencies">Dependencies</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#db2_autocommit">db2_autocommit</a></li>
-    <li><a href="#db2_bind_param">db2_bind_param</a></li>
-    <li><a href="#db2_client_info">db2_client_info</a></li>
-    <li><a href="#db2_close">db2_close</a></li>
-    <li><a href="#db2_column_privileges">db2_column_privileges</a></li>
-    <li><a href="#db2_columns">db2_columns</a></li>
-    <li><a href="#db2_commit">db2_commit</a></li>
-    <li><a href="#db2_conn_error">db2_conn_error</a></li>
-    <li><a href="#db2_conn_errormsg">db2_conn_errormsg</a></li>
-    <li><a href="#db2_connect">db2_connect</a></li>
-    <li><a href="#db2_cursor_type">db2_cursor_type</a></li>
-    <li><a href="#db2_escape_string">db2_escape_string</a></li>
-    <li><a href="#db2_exec">db2_exec</a></li>
-    <li><a href="#db2_execute">db2_execute</a></li>
-    <li><a href="#db2_fetch_array">db2_fetch_array</a></li>
-    <li><a href="#db2_fetch_assoc">db2_fetch_assoc</a></li>
-    <li><a href="#db2_fetch_both">db2_fetch_both</a></li>
-    <li><a href="#db2_fetch_object">db2_fetch_object</a></li>
-    <li><a href="#db2_fetch_row">db2_fetch_row</a></li>
-    <li><a href="#db2_field_display_size">db2_field_display_size</a></li>
-    <li><a href="#db2_field_name">db2_field_name</a></li>
-    <li><a href="#db2_field_num">db2_field_num</a></li>
-    <li><a href="#db2_field_precision">db2_field_precision</a></li>
-    <li><a href="#db2_field_scale">db2_field_scale</a></li>
-    <li><a href="#db2_field_type">db2_field_type</a></li>
-    <li><a href="#db2_field_width">db2_field_width</a></li>
-    <li><a href="#db2_foreign_keys">db2_foreign_keys</a></li>
-    <li><a href="#db2_free_result">db2_free_result</a></li>
-    <li><a href="#db2_free_stmt">db2_free_stmt</a></li>
-    <li><a href="#db2_get_option">db2_get_option</a></li>
-    <li><a href="#db2_last_insert_id">db2_last_insert_id</a></li>
-    <li><a href="#db2_lob_read">db2_lob_read</a></li>
-    <li><a href="#db2_next_result">db2_next_result</a></li>
-    <li><a href="#db2_num_fields">db2_num_fields</a></li>
-    <li><a href="#db2_num_rows">db2_num_rows</a></li>
-    <li><a href="#db2_pclose">db2_pclose</a></li>
-    <li><a href="#db2_pconnect">db2_pconnect</a></li>
-    <li><a href="#db2_prepare">db2_prepare</a></li>
-    <li><a href="#db2_primary_keys">db2_primary_keys</a></li>
-    <li><a href="#db2_procedure_columns">db2_procedure_columns</a></li>
-    <li><a href="#db2_procedures">db2_procedures</a></li>
-    <li><a href="#db2_result">db2_result</a></li>
-    <li><a href="#db2_rollback">db2_rollback</a></li>
-    <li><a href="#db2_server_info">db2_server_info</a></li>
-    <li><a href="#db2_set_option">db2_set_option</a></li>
-    <li><a href="#db2_special_columns">db2_special_columns</a></li>
-    <li><a href="#db2_statistics">db2_statistics</a></li>
-    <li><a href="#db2_stmt_error">db2_stmt_error</a></li>
-    <li><a href="#db2_stmt_errormsg">db2_stmt_errormsg</a></li>
-    <li><a href="#db2_table_privileges">db2_table_privileges</a></li>
-    <li><a href="#db2_tables">db2_tables</a></li>
-  </ul>
+<nav align="center">
+  <h3>NAVIGATION</h3>
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#db2_autocommit">DB2_AUTOCOMMIT</a> |
+    <a href="#db2_bind_param">DB2_BIND_PARAM</a> |
+    <a href="#db2_client_info">DB2_CLIENT_INFO</a> |
+    <a href="#db2_close">DB2_CLOSE</a> |
+    <a href="#db2_column_privileges">DB2_COLUMN_PRIVILEGES</a> |
+    <a href="#db2_columns">DB2_COLUMNS</a> |
+    <a href="#db2_commit">DB2_COMMIT</a> |
+    <a href="#db2_conn_error">DB2_CONN_ERROR</a> |
+    <a href="#db2_conn_errormsg">DB2_CONN_ERRORMSG</a> |
+    <a href="#db2_connect">DB2_CONNECT</a> |
+    <a href="#db2_cursor_type">DB2_CURSOR_TYPE</a> |
+    <a href="#db2_escape_string">DB2_ESCAPE_STRING</a> |
+    <a href="#db2_exec">DB2_EXEC</a> |
+    <a href="#db2_execute">DB2_EXECUTE</a> |
+    <a href="#db2_fetch_array">DB2_FETCH_ARRAY</a> |
+    <a href="#db2_fetch_assoc">DB2_FETCH_ASSOC</a> |
+    <a href="#db2_fetch_both">DB2_FETCH_BOTH</a> |
+    <a href="#db2_fetch_object">DB2_FETCH_OBJECT</a> |
+    <a href="#db2_fetch_row">DB2_FETCH_ROW</a> |
+    <a href="#db2_field_display_size">DB2_FIELD_DISPLAY_SIZE</a> |
+    <a href="#db2_field_name">DB2_FIELD_NAME</a> |
+    <a href="#db2_field_num">DB2_FIELD_NUM</a> |
+    <a href="#db2_field_precision">DB2_FIELD_PRECISION</a> |
+    <a href="#db2_field_scale">DB2_FIELD_SCALE</a> |
+    <a href="#db2_field_type">DB2_FIELD_TYPE</a> |
+    <a href="#db2_field_width">DB2_FIELD_WIDTH</a> |
+    <a href="#db2_foreign_keys">DB2_FOREIGN_KEYS</a> |
+    <a href="#db2_free_result">DB2_FREE_RESULT</a> |
+    <a href="#db2_free_stmt">DB2_FREE_STMT</a> |
+    <a href="#db2_get_option">DB2_GET_OPTION</a> |
+    <a href="#db2_last_insert_id">DB2_LAST_INSERT_ID</a> |
+    <a href="#db2_lob_read">DB2_LOB_READ</a> |
+    <a href="#db2_next_result">DB2_NEXT_RESULT</a> |
+    <a href="#db2_num_fields">DB2_NUM_FIELDS</a> |
+    <a href="#db2_num_rows">DB2_NUM_ROWS</a> |
+    <a href="#db2_pclose">DB2_PCLOSE</a> |
+    <a href="#db2_pconnect">DB2_PCONNECT</a> |
+    <a href="#db2_prepare">DB2_PREPARE</a> |
+    <a href="#db2_primary_keys">DB2_PRIMARY_KEYS</a> |
+    <a href="#db2_procedure_columns">DB2_PROCEDURE_COLUMNS</a> |
+    <a href="#db2_procedures">DB2_PROCEDURES</a> |
+    <a href="#db2_result">DB2_RESULT</a> |
+    <a href="#db2_rollback">DB2_ROLLBACK</a> |
+    <a href="#db2_server_info">DB2_SERVER_INFO</a> |
+    <a href="#db2_set_option">DB2_SET_OPTION</a> |
+    <a href="#db2_special_columns">DB2_SPECIAL_COLUMNS</a> |
+    <a href="#db2_statistics">DB2_STATISTICS</a> |
+    <a href="#db2_stmt_error">DB2_STMT_ERROR</a> |
+    <a href="#db2_stmt_errormsg">DB2_STMT_ERRORMSG</a> |
+    <a href="#db2_table_privileges">DB2_TABLE_PRIVILEGES</a> |
+    <a href="#db2_tables">DB2_TABLES</a>
+  </p>
 </nav>
 
 
-<h4 id="introduction">Introduction</h4>
-<h4 id="dependencies">Dependencies</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="db2_autocommit">db2_autocommit</h4>
-<h4 id="db2_bind_param">db2_bind_param</h4>
-<h4 id="db2_client_info">db2_client_info</h4>
-<h4 id="db2_close">db2_close</h4>
-<h4 id="db2_column_privileges">db2_column_privileges</h4>
-<h4 id="db2_columns">db2_columns</h4>
-<h4 id="db2_commit">db2_commit</h4>
-<h4 id="db2_conn_error">db2_conn_error</h4>
-<h4 id="db2_conn_errormsg">db2_conn_errormsg</h4>
-<h4 id="db2_connect">db2_connect</h4>
-<h4 id="db2_cursor_type">db2_cursor_type</h4>
-<h4 id="db2_escape_string">db2_escape_string</h4>
-<h4 id="db2_exec">db2_exec</h4>
-<h4 id="db2_execute">db2_execute</h4>
-<h4 id="db2_fetch_array">db2_fetch_array</h4>
-<h4 id="db2_fetch_assoc">db2_fetch_assoc</h4>
-<h4 id="db2_fetch_both">db2_fetch_both</h4>
-<h4 id="db2_fetch_object">db2_fetch_object</h4>
-<h4 id="db2_fetch_row">db2_fetch_row</h4>
-<h4 id="db2_field_display_size">db2_field_display_size</h4>
-<h4 id="db2_field_name">db2_field_name</h4>
-<h4 id="db2_field_num">db2_field_num</h4>
-<h4 id="db2_field_precision">db2_field_precision</h4>
-<h4 id="db2_field_scale">db2_field_scale</h4>
-<h4 id="db2_field_type">db2_field_type</h4>
-<h4 id="db2_field_width">db2_field_width</h4>
-<h4 id="db2_foreign_keys">db2_foreign_keys</h4>
-<h4 id="db2_free_result">db2_free_result</h4>
-<h4 id="db2_free_stmt">db2_free_stmt</h4>
-<h4 id="db2_get_option">db2_get_option</h4>
-<h4 id="db2_last_insert_id">db2_last_insert_id</h4>
-<h4 id="db2_lob_read">db2_lob_read</h4>
-<h4 id="db2_next_result">db2_next_result</h4>
-<h4 id="db2_num_fields">db2_num_fields</h4>
-<h4 id="db2_num_rows">db2_num_rows</h4>
-<h4 id="db2_pclose">db2_pclose</h4>
-<h4 id="db2_pconnect">db2_pconnect</h4>
-<h4 id="db2_prepare">db2_prepare</h4>
-<h4 id="db2_primary_keys">db2_primary_keys</h4>
-<h4 id="db2_procedure_columns">db2_procedure_columns</h4>
-<h4 id="db2_procedures">db2_procedures</h4>
-<h4 id="db2_result">db2_result</h4>
-<h4 id="db2_rollback">db2_rollback</h4>
-<h4 id="db2_server_info">db2_server_info</h4>
-<h4 id="db2_set_option">db2_set_option</h4>
-<h4 id="db2_special_columns">db2_special_columns</h4>
-<h4 id="db2_statistics">db2_statistics</h4>
-<h4 id="db2_stmt_error">db2_stmt_error</h4>
-<h4 id="db2_stmt_errormsg">db2_stmt_errormsg</h4>
-<h4 id="db2_table_privileges">db2_table_privileges</h4>
-<h4 id="db2_tables">db2_tables</h4>
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="db2_autocommit">DB2_AUTOCOMMIT</h4>
+<h4 id="db2_bind_param">DB2_BIND_PARAM</h4>
+<h4 id="db2_client_info">DB2_CLIENT_INFO</h4>
+<h4 id="db2_close">DB2_CLOSE</h4>
+<h4 id="db2_column_privileges">DB2_COLUMN_PRIVILEGES</h4>
+<h4 id="db2_columns">DB2_COLUMNS</h4>
+<h4 id="db2_commit">DB2_COMMIT</h4>
+<h4 id="db2_conn_error">DB2_CONN_ERROR</h4>
+<h4 id="db2_conn_errormsg">DB2_CONN_ERRORMSG</h4>
+<h4 id="db2_connect">DB2_CONNECT</h4>
+<h4 id="db2_cursor_type">DB2_CURSOR_TYPE</h4>
+<h4 id="db2_escape_string">DB2_ESCAPE_STRING</h4>
+<h4 id="db2_exec">DB2_EXEC</h4>
+<h4 id="db2_execute">DB2_EXECUTE</h4>
+<h4 id="db2_fetch_array">DB2_FETCH_ARRAY</h4>
+<h4 id="db2_fetch_assoc">DB2_FETCH_ASSOC</h4>
+<h4 id="db2_fetch_both">DB2_FETCH_BOTH</h4>
+<h4 id="db2_fetch_object">DB2_FETCH_OBJECT</h4>
+<h4 id="db2_fetch_row">DB2_FETCH_ROW</h4>
+<h4 id="db2_field_display_size">DB2_FIELD_DISPLAY_SIZE</h4>
+<h4 id="db2_field_name">DB2_FIELD_NAME</h4>
+<h4 id="db2_field_num">DB2_FIELD_NUM</h4>
+<h4 id="db2_field_precision">DB2_FIELD_PRECISION</h4>
+<h4 id="db2_field_scale">DB2_FIELD_SCALE</h4>
+<h4 id="db2_field_type">DB2_FIELD_TYPE</h4>
+<h4 id="db2_field_width">DB2_FIELD_WIDTH</h4>
+<h4 id="db2_foreign_keys">DB2_FOREIGN_KEYS</h4>
+<h4 id="db2_free_result">DB2_FREE_RESULT</h4>
+<h4 id="db2_free_stmt">DB2_FREE_STMT</h4>
+<h4 id="db2_get_option">DB2_GET_OPTION</h4>
+<h4 id="db2_last_insert_id">DB2_LAST_INSERT_ID</h4>
+<h4 id="db2_lob_read">DB2_LOB_READ</h4>
+<h4 id="db2_next_result">DB2_NEXT_RESULT</h4>
+<h4 id="db2_num_fields">DB2_NUM_FIELDS</h4>
+<h4 id="db2_num_rows">DB2_NUM_ROWS</h4>
+<h4 id="db2_pclose">DB2_PCLOSE</h4>
+<h4 id="db2_pconnect">DB2_PCONNECT</h4>
+<h4 id="db2_prepare">DB2_PREPARE</h4>
+<h4 id="db2_primary_keys">DB2_PRIMARY_KEYS</h4>
+<h4 id="db2_procedure_columns">DB2_PROCEDURE_COLUMNS</h4>
+<h4 id="db2_procedures">DB2_PROCEDURES</h4>
+<h4 id="db2_result">DB2_RESULT</h4>
+<h4 id="db2_rollback">DB2_ROLLBACK</h4>
+<h4 id="db2_server_info">DB2_SERVER_INFO</h4>
+<h4 id="db2_set_option">DB2_SET_OPTION</h4>
+<h4 id="db2_special_columns">DB2_SPECIAL_COLUMNS</h4>
+<h4 id="db2_statistics">DB2_STATISTICS</h4>
+<h4 id="db2_stmt_error">DB2_STMT_ERROR</h4>
+<h4 id="db2_stmt_errormsg">DB2_STMT_ERRORMSG</h4>
+<h4 id="db2_table_privileges">DB2_TABLE_PRIVILEGES</h4>
+<h4 id="db2_tables">DB2_TABLES</h4>
 
 
 <h4 id="mongodb">MONGODB</h4>
 
-<nav>
-  <ul>
-    <li><a href="#dependencies">Dependencies</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#using-php-library">Using the PHP Library for MongoDB (PHPLIB)</a></li>
-    <li><a href="#apm">Application Performance Monitoring (APM)</a></li>
-    <li><a href="#architecture-driver">Driver Architecture and Internal Components</a></li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#connections">Connections</a></li>
-    <li><a href="#persistent-data">Persistent Data</a></li>
-    <li><a href="#security">Security</a></li>
-    <li><a href="#request-injection">Request Injection Attacks</a></li>
-    <li><a href="#script-injection">Script Injection Attacks</a></li>
-    <li><a href="#driver">MongoDB\Driver</a></li>
-    <li><a href="#manager">MongoDB\Driver\Manager</a></li>
-    <li><a href="#command">MongoDB\Driver\Command</a></li>
-    <li><a href="#query">MongoDB\Driver\Query</a></li>
-    <li><a href="#bulkwrite">MongoDB\Driver\BulkWrite</a></li>
-    <li><a href="#bulkwritecommand">MongoDB\Driver\BulkWriteCommand</a></li>
-    <li><a href="#session">MongoDB\Driver\Session</a></li>
-    <li><a href="#clientencryption">MongoDB\Driver\ClientEncryption</a></li>
-    <li><a href="#serverapi">MongoDB\Driver\ServerApi</a></li>
-    <li><a href="#writeconcern">MongoDB\Driver\WriteConcern</a></li>
-    <li><a href="#readpreference">MongoDB\Driver\ReadPreference</a></li>
-    <li><a href="#readconcern">MongoDB\Driver\ReadConcern</a></li>
-    <li><a href="#cursor">MongoDB\Driver\Cursor</a></li>
-    <li><a href="#cursorid">MongoDB\Driver\CursorId</a></li>
-    <li><a href="#cursorinterface">MongoDB\Driver\CursorInterface</a></li>
-    <li><a href="#server">MongoDB\Driver\Server</a></li>
-    <li><a href="#serverdescription">MongoDB\Driver\ServerDescription</a></li>
-    <li><a href="#topologydescription">MongoDB\Driver\TopologyDescription</a></li>
-    <li><a href="#writeconcernerror">MongoDB\Driver\WriteConcernError</a></li>
-    <li><a href="#writeerror">MongoDB\Driver\WriteError</a></li>
-    <li><a href="#writeresult">MongoDB\Driver\WriteResult</a></li>
-    <li><a href="#bulkwritecommandresult">MongoDB\Driver\BulkWriteCommandResult</a></li>
-    <li><a href="#bson">MongoDB\BSON</a></li>
-    <li><a href="#document">MongoDB\BSON\Document</a></li>
-    <li><a href="#packedarray">MongoDB\BSON\PackedArray</a></li>
-    <li><a href="#iterator">MongoDB\BSON\Iterator</a></li>
-    <li><a href="#binary">MongoDB\BSON\Binary</a></li>
-    <li><a href="#decimal128">MongoDB\BSON\Decimal128</a></li>
-    <li><a href="#javascript">MongoDB\BSON\Javascript</a></li>
-    <li><a href="#maxkey">MongoDB\BSON\MaxKey</a></li>
-    <li><a href="#minkey">MongoDB\BSON\MinKey</a></li>
-    <li><a href="#objectid">MongoDB\BSON\ObjectId</a></li>
-    <li><a href="#regex">MongoDB\BSON\Regex</a></li>
-    <li><a href="#timestamp">MongoDB\BSON\Timestamp</a></li>
-    <li><a href="#utcdatetime">MongoDB\BSON\UTCDateTime</a></li>
-    <li><a href="#type">MongoDB\BSON\Type</a></li>
-    <li><a href="#persistable">MongoDB\BSON\Persistable</a></li>
-    <li><a href="#serializable">MongoDB\BSON\Serializable</a></li>
-    <li><a href="#unserializable">MongoDB\BSON\Unserializable</a></li>
-    <li><a href="#binaryinterface">MongoDB\BSON\BinaryInterface</a></li>
-    <li><a href="#decimal128interface">MongoDB\BSON\Decimal128Interface</a></li>
-    <li><a href="#javascriptinterface">MongoDB\BSON\JavascriptInterface</a></li>
-    <li><a href="#maxkeyinterface">MongoDB\BSON\MaxKeyInterface</a></li>
-    <li><a href="#minkeyinterface">MongoDB\BSON\MinKeyInterface</a></li>
-    <li><a href="#objectidinterface">MongoDB\BSON\ObjectIdInterface</a></li>
-    <li><a href="#regexinterface">MongoDB\BSON\RegexInterface</a></li>
-    <li><a href="#timestampinterface">MongoDB\BSON\TimestampInterface</a></li>
-    <li><a href="#utcdatetimeinterface">MongoDB\BSON\UTCDateTimeInterface</a></li>
-    <li><a href="#dbpointer">MongoDB\BSON\DBPointer</a></li>
-    <li><a href="#int64">MongoDB\BSON\Int64</a></li>
-    <li><a href="#symbol">MongoDB\BSON\Symbol</a></li>
-    <li><a href="#undefined">MongoDB\BSON\Undefined</a></li>
-    <li><a href="#monitoring">MongoDB\Driver\Monitoring</a></li>
-    <li><a href="#commandfailedevent">MongoDB\Driver\Monitoring\CommandFailedEvent</a></li>
-    <li><a href="#commandstartedevent">MongoDB\Driver\Monitoring\CommandStartedEvent</a></li>
-    <li><a href="#commandsucceededevent">MongoDB\Driver\Monitoring\CommandSucceededEvent</a></li>
-    <li><a href="#serverchangedevent">MongoDB\Driver\Monitoring\ServerChangedEvent</a></li>
-    <li><a href="#serverclosedevent">MongoDB\Driver\Monitoring\ServerClosedEvent</a></li>
-    <li><a href="#serveropeningevent">MongoDB\Driver\Monitoring\ServerOpeningEvent</a></li>
-    <li><a href="#serverheartbeatfailedevent">MongoDB\Driver\Monitoring\ServerHeartbeatFailedEvent</a></li>
-    <li><a href="#serverheartbeatstartedevent">MongoDB\Driver\Monitoring\ServerHeartbeatStartedEvent</a></li>
-    <li><a href="#serverheartbeatsucceededevent">MongoDB\Driver\Monitoring\ServerHeartbeatSucceededEvent</a></li>
-    <li><a href="#topologychangedevent">MongoDB\Driver\Monitoring\TopologyChangedEvent</a></li>
-    <li><a href="#topologyclosedevent">MongoDB\Driver\Monitoring\TopologyClosedEvent</a></li>
-    <li><a href="#topologyopeningevent">MongoDB\Driver\Monitoring\TopologyOpeningEvent</a></li>
-    <li><a href="#commandsubscriber">MongoDB\Driver\Monitoring\CommandSubscriber</a></li>
-    <li><a href="#logsubscriber">MongoDB\Driver\Monitoring\LogSubscriber</a></li>
-    <li><a href="#sdamsubscriber">MongoDB\Driver\Monitoring\SDAMSubscriber</a></li>
-    <li><a href="#subscriber">MongoDB\Driver\Monitoring\Subscriber</a></li>
-    <li><a href="#exception">MongoDB\Driver\Exception</a></li>
-    <li><a href="#authenticationexception">MongoDB\Driver\Exception\AuthenticationException</a></li>
-    <li><a href="#bulkwriteexception">MongoDB\Driver\Exception\BulkWriteException</a></li>
-    <li><a href="#bulkwritecommandexception">MongoDB\Driver\Exception\BulkWriteCommandException</a></li>
-    <li><a href="#commandexception">MongoDB\Driver\Exception\CommandException</a></li>
-    <li><a href="#connectionexception">MongoDB\Driver\Exception\ConnectionException</a></li>
-    <li><a href="#connectiontimeoutexception">MongoDB\Driver\Exception\ConnectionTimeoutException</a></li>
-    <li><a href="#encryptionexception">MongoDB\Driver\Exception\EncryptionException</a></li>
-    <li><a href="#exception-base">MongoDB\Driver\Exception\Exception</a></li>
-    <li><a href="#executiontimeoutexception">MongoDB\Driver\Exception\ExecutionTimeoutException</a></li>
-    <li><a href="#invalidargumentexception">MongoDB\Driver\Exception\InvalidArgumentException</a></li>
-    <li><a href="#logicexception">MongoDB\Driver\Exception\LogicException</a></li>
-    <li><a href="#runtimeexception">MongoDB\Driver\Exception\RuntimeException</a></li>
-    <li><a href="#serverexception">MongoDB\Driver\Exception\ServerException</a></li>
-    <li><a href="#sslconnectionexception">MongoDB\Driver\Exception\SSLConnectionException</a></li>
-    <li><a href="#unexpectedvalueexception">MongoDB\Driver\Exception\UnexpectedValueException</a></li>
-    <li><a href="#writeexception">MongoDB\Driver\Exception\WriteException</a></li>
-    <li><a href="#class-tree">Class Tree</a></li>
-  </ul>
+<nav align="center">
+  <h3>NAVIGATION</h3>
+  <p>
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#using-php-library">USING THE PHP LIBRARY FOR MONGODB (PHPLIB)</a> |
+    <a href="#apm">APPLICATION PERFORMANCE MONITORING (APM)</a> |
+    <a href="#architecture-driver">DRIVER ARCHITECTURE AND INTERNAL COMPONENTS</a> |
+    <a href="#architecture">ARCHITECTURE</a> |
+    <a href="#connections">CONNECTIONS</a> |
+    <a href="#persistent-data">PERSISTENT DATA</a> |
+    <a href="#security">SECURITY</a> |
+    <a href="#request-injection">REQUEST INJECTION ATTACKS</a> |
+    <a href="#script-injection">SCRIPT INJECTION ATTACKS</a> |
+    <a href="#driver">MONGODB\DRIVER</a> |
+    <a href="#manager">MONGODB\DRIVER\MANAGER</a> |
+    <a href="#command">MONGODB\DRIVER\COMMAND</a> |
+    <a href="#query">MONGODB\DRIVER\QUERY</a> |
+    <a href="#bulkwrite">MONGODB\DRIVER\BULKWRITE</a> |
+    <a href="#bulkwritecommand">MONGODB\DRIVER\BULKWRITECOMMAND</a> |
+    <a href="#session">MONGODB\DRIVER\SESSION</a> |
+    <a href="#clientencryption">MONGODB\DRIVER\CLIENTENCRYPTION</a> |
+    <a href="#serverapi">MONGODB\DRIVER\SERVERAPI</a> |
+    <a href="#writeconcern">MONGODB\DRIVER\WRITECONCERN</a> |
+    <a href="#readpreference">MONGODB\DRIVER\READPREFERENCE</a> |
+    <a href="#readconcern">MONGODB\DRIVER\READCONCERN</a> |
+    <a href="#cursor">MONGODB\DRIVER\CURSOR</a> |
+    <a href="#cursorid">MONGODB\DRIVER\CURSORID</a> |
+    <a href="#cursorinterface">MONGODB\DRIVER\CURSORINTERFACE</a> |
+    <a href="#server">MONGODB\DRIVER\SERVER</a> |
+    <a href="#serverdescription">MONGODB\DRIVER\SERVERDESCRIPTION</a> |
+    <a href="#topologydescription">MONGODB\DRIVER\TOPOLOGYDESCRIPTION</a> |
+    <a href="#writeconcernerror">MONGODB\DRIVER\WRITECONCERNERROR</a> |
+    <a href="#writeerror">MONGODB\DRIVER\WRITEERROR</a> |
+    <a href="#writeresult">MONGODB\DRIVER\WRITERESULT</a> |
+    <a href="#bulkwritecommandresult">MONGODB\DRIVER\BULKWRITECOMMANDRESULT</a> |
+    <a href="#bson">MONGODB\BSON</a> |
+    <a href="#document">MONGODB\BSON\DOCUMENT</a> |
+    <a href="#packedarray">MONGODB\BSON\PACKEDARRAY</a> |
+    <a href="#iterator">MONGODB\BSON\ITERATOR</a> |
+    <a href="#binary">MONGODB\BSON\BINARY</a> |
+    <a href="#decimal128">MONGODB\BSON\DECIMAL128</a> |
+    <a href="#javascript">MONGODB\BSON\JAVASCRIPT</a> |
+    <a href="#maxkey">MONGODB\BSON\MAXKEY</a> |
+    <a href="#minkey">MONGODB\BSON\MINKEY</a> |
+    <a href="#objectid">MONGODB\BSON\OBJECTID</a> |
+    <a href="#regex">MONGODB\BSON\REGEX</a> |
+    <a href="#timestamp">MONGODB\BSON\TIMESTAMP</a> |
+    <a href="#utcdatetime">MONGODB\BSON\UTCDATETIME</a> |
+    <a href="#type">MONGODB\BSON\TYPE</a> |
+    <a href="#persistable">MONGODB\BSON\PERSISTABLE</a> |
+    <a href="#serializable">MONGODB\BSON\SERIALIZABLE</a> |
+    <a href="#unserializable">MONGODB\BSON\UNSERIALIZABLE</a> |
+    <a href="#binaryinterface">MONGODB\BSON\BINARYINTERFACE</a> |
+    <a href="#decimal128interface">MONGODB\BSON\DECIMAL128INTERFACE</a> |
+    <a href="#javascriptinterface">MONGODB\BSON\JAVASCRIPTINTERFACE</a> |
+    <a href="#maxkeyinterface">MONGODB\BSON\MAXKEYINTERFACE</a> |
+    <a href="#minkeyinterface">MONGODB\BSON\MINKEYINTERFACE</a> |
+    <a href="#objectidinterface">MONGODB\BSON\OBJECTIDINTERFACE</a> |
+    <a href="#regexinterface">MONGODB\BSON\REGEXINTERFACE</a> |
+    <a href="#timestampinterface">MONGODB\BSON\TIMESTAMPINTERFACE</a> |
+    <a href="#utcdatetimeinterface">MONGODB\BSON\UTCDATETIMEINTERFACE</a> |
+    <a href="#dbpointer">MONGODB\BSON\DBPOINTER</a> |
+    <a href="#int64">MONGODB\BSON\INT64</a> |
+    <a href="#symbol">MONGODB\BSON\SYMBOL</a> |
+    <a href="#undefined">MONGODB\BSON\UNDEFINED</a> |
+    <a href="#monitoring">MONGODB\DRIVER\MONITORING</a> |
+    <a href="#commandfailedevent">MONGODB\DRIVER\MONITORING\COMMANDFAILEDEVENT</a> |
+    <a href="#commandstartedevent">MONGODB\DRIVER\MONITORING\COMMANDSTARTEDEVENT</a> |
+    <a href="#commandsucceededevent">MONGODB\DRIVER\MONITORING\COMMANDSUCCEEDEDEVENT</a> |
+    <a href="#serverchangedevent">MONGODB\DRIVER\MONITORING\SERVERCHANGEEVENT</a> |
+    <a href="#serverclosedevent">MONGODB\DRIVER\MONITORING\SERVERCLOSEDEVENT</a> |
+    <a href="#serveropeningevent">MONGODB\DRIVER\MONITORING\SERVEROPENINGEVENT</a> |
+    <a href="#serverheartbeatfailedevent">MONGODB\DRIVER\MONITORING\SERVERHEARTBEATFAILEDEVENT</a> |
+    <a href="#serverheartbeatstartedevent">MONGODB\DRIVER\MONITORING\SERVERHEARTBEATSTARTEDEVENT</a> |
+    <a href="#serverheartbeatsucceededevent">MONGODB\DRIVER\MONITORING\SERVERHEARTBEATSUCCESSDEDEVENT</a> |
+    <a href="#topologychangedevent">MONGODB\DRIVER\MONITORING\TOPOLOGYCHANGEEVENT</a> |
+    <a href="#topologyclosedevent">MONGODB\DRIVER\MONITORING\TOPOLOGYCLOSEDEVENT</a> |
+    <a href="#topologyopeningevent">MONGODB\DRIVER\MONITORING\TOPOLOGYOPENINGEVENT</a> |
+    <a href="#commandsubscriber">MONGODB\DRIVER\MONITORING\COMMANDSUBSCRIBER</a> |
+    <a href="#logsubscriber">MONGODB\DRIVER\MONITORING\LOGSUBSCRIBER</a> |
+    <a href="#sdamsubscriber">MONGODB\DRIVER\MONITORING\SDAMSUBSCRIBER</a> |
+    <a href="#subscriber">MONGODB\DRIVER\MONITORING\SUBSCRIBER</a> |
+    <a href="#exception">MONGODB\DRIVER\EXCEPTION</a> |
+    <a href="#authenticationexception">MONGODB\DRIVER\EXCEPTION\AUTHENTICATIONEXCEPTION</a> |
+    <a href="#bulkwriteexception">MONGODB\DRIVER\EXCEPTION\BULKWRITEEXCEPTION</a> |
+    <a href="#bulkwritecommandexception">MONGODB\DRIVER\EXCEPTION\BULKWRITECOMMANDEXCEPTION</a> |
+    <a href="#commandexception">MONGODB\DRIVER\EXCEPTION\COMMANDEXCEPTION</a> |
+    <a href="#connectionexception">MONGODB\DRIVER\EXCEPTION\CONNECTIONEXCEPTION</a> |
+    <a href="#connectiontimeoutexception">MONGODB\DRIVER\EXCEPTION\CONNECTIONTIMEOUTEXCEPTION</a> |
+    <a href="#encryptionexception">MONGODB\DRIVER\EXCEPTION\ENCRYPTIONEXCEPTION</a> |
+    <a href="#exception-base">MONGODB\DRIVER\EXCEPTION\EXCEPTION</a> |
+    <a href="#executiontimeoutexception">MONGODB\DRIVER\EXCEPTION\EXECUTIONTIMEOUTEXCEPTION</a> |
+    <a href="#invalidargumentexception">MONGODB\DRIVER\EXCEPTION\INVALIDARGUMENTEXCEPTION</a> |
+    <a href="#logicexception">MONGODB\DRIVER\EXCEPTION\LOGICEXCEPTION</a> |
+    <a href="#runtimeexception">MONGODB\DRIVER\EXCEPTION\RUNTIMEEXCEPTION</a> |
+    <a href="#serverexception">MONGODB\DRIVER\EXCEPTION\SERVEREXCEPTION</a> |
+    <a href="#sslconnectionexception">MONGODB\DRIVER\EXCEPTION\SSLCONNECTIONEXCEPTION</a> |
+    <a href="#unexpectedvalueexception">MONGODB\DRIVER\EXCEPTION\UNEXPECTEDVALUEEXCEPTION</a> |
+    <a href="#writeexception">MONGODB\DRIVER\EXCEPTION\WRITEEXCEPTION</a> |
+    <a href="#class-tree">CLASS TREE</a>
+  </p>
 </nav>
 
-<h4 id="dependencies">Dependencies</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="using-php-library-for-mongodb-phplib">Using the PHP Library for MongoDB (PHPLIB)</h4>
-<h4 id="application-performance-monitoring-apm">Application Performance Monitoring (APM)</h4>
-<h4 id="driver-architecture-and-internals">Driver Architecture and Internals</h4>
-<h4 id="architecture">Architecture</h4>
-<h4 id="connections">Connections</h4>
-<h4 id="persistent-data">Persistent Data</h4>
-<h4 id="security">Security</h4>
-<h4 id="request-injection-attacks">Request Injection Attacks</h4>
-<h4 id="script-injection-attacks">Script Injection Attacks</h4>
-
-<h4 id="mongodb-driver">MongoDB\Driver</h4>
-<h4 id="mongodb-driver-manager">MongoDB\Driver\Manager</h4>
-<h4 id="mongodb-driver-command">MongoDB\Driver\Command</h4>
-<h4 id="mongodb-driver-query">MongoDB\Driver\Query</h4>
-<h4 id="mongodb-driver-bulkwrite">MongoDB\Driver\BulkWrite</h4>
-<h4 id="mongodb-driver-bulkwritecommand">MongoDB\Driver\BulkWriteCommand</h4>
-<h4 id="mongodb-driver-session">MongoDB\Driver\Session</h4>
-<h4 id="mongodb-driver-clientencryption">MongoDB\Driver\ClientEncryption</h4>
-<h4 id="mongodb-driver-serverapi">MongoDB\Driver\ServerApi</h4>
-<h4 id="mongodb-driver-writeconcern">MongoDB\Driver\WriteConcern</h4>
-<h4 id="mongodb-driver-readpreference">MongoDB\Driver\ReadPreference</h4>
-<h4 id="mongodb-driver-readconcern">MongoDB\Driver\ReadConcern</h4>
-<h4 id="mongodb-driver-cursor">MongoDB\Driver\Cursor</h4>
-<h4 id="mongodb-driver-cursorid">MongoDB\Driver\CursorId</h4>
-<h4 id="mongodb-driver-cursorinterface">MongoDB\Driver\CursorInterface</h4>
-<h4 id="mongodb-driver-server">MongoDB\Driver\Server</h4>
-<h4 id="mongodb-driver-serverdescription">MongoDB\Driver\ServerDescription</h4>
-<h4 id="mongodb-driver-topologydescription">MongoDB\Driver\TopologyDescription</h4>
-<h4 id="mongodb-driver-writeconcernerror">MongoDB\Driver\WriteConcernError</h4>
-<h4 id="mongodb-driver-writeerror">MongoDB\Driver\WriteError</h4>
-<h4 id="mongodb-driver-writeresult">MongoDB\Driver\WriteResult</h4>
-<h4 id="mongodb-driver-bulkwritecommandresult">MongoDB\Driver\BulkWriteCommandResult</h4>
-
-<h4 id="mongodb-bson">MongoDB\BSON</h4>
-<h4 id="mongodb-bson-document">MongoDB\BSON\Document</h4>
-<h4 id="mongodb-bson-packedarray">MongoDB\BSON\PackedArray</h4>
-<h4 id="mongodb-bson-iterator">MongoDB\BSON\Iterator</h4>
-<h4 id="mongodb-bson-binary">MongoDB\BSON\Binary</h4>
-<h4 id="mongodb-bson-decimal128">MongoDB\BSON\Decimal128</h4>
-<h4 id="mongodb-bson-javascript">MongoDB\BSON\Javascript</h4>
-<h4 id="mongodb-bson-maxkey">MongoDB\BSON\MaxKey</h4>
-<h4 id="mongodb-bson-minkey">MongoDB\BSON\MinKey</h4>
-<h4 id="mongodb-bson-objectid">MongoDB\BSON\ObjectId</h4>
-<h4 id="mongodb-bson-regex">MongoDB\BSON\Regex</h4>
-<h4 id="mongodb-bson-timestamp">MongoDB\BSON\Timestamp</h4>
-<h4 id="mongodb-bson-utcdatetime">MongoDB\BSON\UTCDateTime</h4>
-<h4 id="mongodb-bson-type">MongoDB\BSON\Type</h4>
-<h4 id="mongodb-bson-persistable">MongoDB\BSON\Persistable</h4>
-<h4 id="mongodb-bson-serializable">MongoDB\BSON\Serializable</h4>
-<h4 id="mongodb-bson-unserializable">MongoDB\BSON\Unserializable</h4>
-<h4 id="mongodb-bson-binaryinterface">MongoDB\BSON\BinaryInterface</h4>
-<h4 id="mongodb-bson-decimal128interface">MongoDB\BSON\Decimal128Interface</h4>
-<h4 id="mongodb-bson-javascriptinterface">MongoDB\BSON\JavascriptInterface</h4>
-<h4 id="mongodb-bson-maxkeyinterface">MongoDB\BSON\MaxKeyInterface</h4>
-<h4 id="mongodb-bson-minkeyinterface">MongoDB\BSON\MinKeyInterface</h4>
-<h4 id="mongodb-bson-objectidinterface">MongoDB\BSON\ObjectIdInterface</h4>
-<h4 id="mongodb-bson-regexinterface">MongoDB\BSON\RegexInterface</h4>
-<h4 id="mongodb-bson-timestampinterface">MongoDB\BSON\TimestampInterface</h4>
-<h4 id="mongodb-bson-utcdatetimeinterface">MongoDB\BSON\UTCDateTimeInterface</h4>
-<h4 id="mongodb-bson-dbpointer">MongoDB\BSON\DBPointer</h4>
-<h4 id="mongodb-bson-int64">MongoDB\BSON\Int64</h4>
-<h4 id="mongodb-bson-symbol">MongoDB\BSON\Symbol</h4>
-<h4 id="mongodb-bson-undefined">MongoDB\BSON\Undefined</h4>
-
-<h4 id="mongodb-driver-monitoring">MongoDB\Driver\Monitoring</h4>
-<h4 id="mongodb-driver-monitoring-commandfailedevent">MongoDB\Driver\Monitoring\CommandFailedEvent</h4>
-<h4 id="mongodb-driver-monitoring-commandstartedevent">MongoDB\Driver\Monitoring\CommandStartedEvent</h4>
-<h4 id="mongodb-driver-monitoring-commandsucceededevent">MongoDB\Driver\Monitoring\CommandSucceededEvent</h4>
-<h4 id="mongodb-driver-monitoring-serverchangedevent">MongoDB\Driver\Monitoring\ServerChangedEvent</h4>
-<h4 id="mongodb-driver-monitoring-serverclosedevent">MongoDB\Driver\Monitoring\ServerClosedEvent</h4>
-<h4 id="mongodb-driver-monitoring-serveropeningevent">MongoDB\Driver\Monitoring\ServerOpeningEvent</h4>
-<h4 id="mongodb-driver-monitoring-serverheartbeatfailedevent">MongoDB\Driver\Monitoring\ServerHeartbeatFailedEvent</h4>
-<h4 id="mongodb-driver-monitoring-serverheartbeatstartedevent">MongoDB\Driver\Monitoring\ServerHeartbeatStartedEvent</h4>
-<h4 id="mongodb-driver-monitoring-serverheartbeatsucceededevent">MongoDB\Driver\Monitoring\ServerHeartbeatSucceededEvent</h4>
-<h4 id="mongodb-driver-monitoring-topologychangedevent">MongoDB\Driver\Monitoring\TopologyChangedEvent</h4>
-<h4 id="mongodb-driver-monitoring-topologyclosedevent">MongoDB\Driver\Monitoring\TopologyClosedEvent</h4>
-<h4 id="mongodb-driver-monitoring-topologyopeningevent">MongoDB\Driver\Monitoring\TopologyOpeningEvent</h4>
-<h4 id="mongodb-driver-monitoring-commandsubscriber">MongoDB\Driver\Monitoring\CommandSubscriber</h4>
-<h4 id="mongodb-driver-monitoring-logsubscriber">MongoDB\Driver\Monitoring\LogSubscriber</h4>
-<h4 id="mongodb-driver-monitoring-sdamsubscriber">MongoDB\Driver\Monitoring\SDAMSubscriber</h4>
-<h4 id="mongodb-driver-monitoring-subscriber">MongoDB\Driver\Monitoring\Subscriber</h4>
-
-<h4 id="mongodb-driver-exception">MongoDB\Driver\Exception</h4>
-<h4 id="mongodb-driver-exception-authenticationexception">MongoDB\Driver\Exception\AuthenticationException</h4>
-<h4 id="mongodb-driver-exception-bulkwriteexception">MongoDB\Driver\Exception\BulkWriteException</h4>
-<h4 id="mongodb-driver-exception-bulkwritecommandexception">MongoDB\Driver\Exception\BulkWriteCommandException</h4>
-<h4 id="mongodb-driver-exception-commandexception">MongoDB\Driver\Exception\CommandException</h4>
-<h4 id="mongodb-driver-exception-connectionexception">MongoDB\Driver\Exception\ConnectionException</h4>
-<h4 id="mongodb-driver-exception-connectiontimeoutexception">MongoDB\Driver\Exception\ConnectionTimeoutException</h4>
-<h4 id="mongodb-driver-exception-encryptionexception">MongoDB\Driver\Exception\EncryptionException</h4>
-<h4 id="mongodb-driver-exception-exception">MongoDB\Driver\Exception\Exception</h4>
-<h4 id="mongodb-driver-exception-executiontimeoutexception">MongoDB\Driver\Exception\ExecutionTimeoutException</h4>
-<h4 id="mongodb-driver-exception-invalidargumentexception">MongoDB\Driver\Exception\InvalidArgumentException</h4>
-<h4 id="mongodb-driver-exception-logicexception">MongoDB\Driver\Exception\LogicException</h4>
-<h4 id="mongodb-driver-exception-runtimeexception">MongoDB\Driver\Exception\RuntimeException</h4>
-<h4 id="mongodb-driver-exception-serverexception">MongoDB\Driver\Exception\ServerException</h4>
-<h4 id="mongodb-driver-exception-sslconnectionexception">MongoDB\Driver\Exception\SSLConnectionException</h4>
-<h4 id="mongodb-driver-exception-unexpectedvalueexception">MongoDB\Driver\Exception\UnexpectedValueException</h4>
-<h4 id="mongodb-driver-exception-writeexception">MongoDB\Driver\Exception\WriteException</h4>
-
-<h4 id="class-tree">Class Tree</h4>
-
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="using-php-library-for-mongodb-phplib">USING THE PHP LIBRARY FOR MONGODB (PHPLIB)</h4>
+<h4 id="application-performance-monitoring-apm">APPLICATION PERFORMANCE MONITORING (APM)</h4>
+<h4 id="driver-architecture-and-internals">DRIVER ARCHITECTURE AND INTERNALS</h4>
+<h4 id="architecture">ARCHITECTURE</h4>
+<h4 id="connections">CONNECTIONS</h4>
+<h4 id="persistent-data">PERSISTENT DATA</h4>
+<h4 id="security">SECURITY</h4>
+<h4 id="request-injection-attacks">REQUEST INJECTION ATTACKS</h4>
+<h4 id="script-injection-attacks">SCRIPT INJECTION ATTACKS</h4>
+<h4 id="mongodb-driver">MONGODB\DRIVER</h4>
+<h4 id="mongodb-driver-manager">MONGODB\DRIVER\MANAGER</h4>
+<h4 id="mongodb-driver-command">MONGODB\DRIVER\COMMAND</h4>
+<h4 id="mongodb-driver-query">MONGODB\DRIVER\QUERY</h4>
+<h4 id="mongodb-driver-bulkwrite">MONGODB\DRIVER\BULKWRITE</h4>
+<h4 id="mongodb-driver-bulkwritecommand">MONGODB\DRIVER\BULKWRITECOMMAND</h4>
+<h4 id="mongodb-driver-session">MONGODB\DRIVER\SESSION</h4>
+<h4 id="mongodb-driver-clientencryption">MONGODB\DRIVER\CLIENTENCRYPTION</h4>
+<h4 id="mongodb-driver-serverapi">MONGODB\DRIVER\SERVERAPI</h4>
+<h4 id="mongodb-driver-writeconcern">MONGODB\DRIVER\WRITECONCERN</h4>
+<h4 id="mongodb-driver-readpreference">MONGODB\DRIVER\READPREFERENCE</h4>
+<h4 id="mongodb-driver-readconcern">MONGODB\DRIVER\READCONCERN</h4>
+<h4 id="mongodb-driver-cursor">MONGODB\DRIVER\CURSOR</h4>
+<h4 id="mongodb-driver-cursorid">MONGODB\DRIVER\CURSORID</h4>
+<h4 id="mongodb-driver-cursorinterface">MONGODB\DRIVER\CURSORINTERFACE</h4>
+<h4 id="mongodb-driver-server">MONGODB\DRIVER\SERVER</h4>
+<h4 id="mongodb-driver-serverdescription">MONGODB\DRIVER\SERVERDESCRIPTION</h4>
+<h4 id="mongodb-driver-topologydescription">MONGODB\DRIVER\TOPOLOGYDESCRIPTION</h4>
+<h4 id="mongodb-driver-writeconcernerror">MONGODB\DRIVER\WRITECONCERNERROR</h4>
+<h4 id="mongodb-driver-writeerror">MONGODB\DRIVER\WRITEERROR</h4>
+<h4 id="mongodb-driver-writeresult">MONGODB\DRIVER\WRITERESULT</h4>
+<h4 id="mongodb-driver-bulkwritecommandresult">MONGODB\DRIVER\BULKWRITECOMMANDRESULT</h4>
+<h4 id="mongodb-bson">MONGODB\BSON</h4>
+<h4 id="mongodb-bson-document">MONGODB\BSON\DOCUMENT</h4>
+<h4 id="mongodb-bson-packedarray">MONGODB\BSON\PACKEDARRAY</h4>
+<h4 id="mongodb-bson-iterator">MONGODB\BSON\ITERATOR</h4>
+<h4 id="mongodb-bson-binary">MONGODB\BSON\BINARY</h4>
+<h4 id="mongodb-bson-decimal128">MONGODB\BSON\DECIMAL128</h4>
+<h4 id="mongodb-bson-javascript">MONGODB\BSON\JAVASCRIPT</h4>
+<h4 id="mongodb-bson-maxkey">MONGODB\BSON\MAXKEY</h4>
+<h4 id="mongodb-bson-minkey">MONGODB\BSON\MINKEY</h4>
+<h4 id="mongodb-bson-objectid">MONGODB\BSON\OBJECTID</h4>
+<h4 id="mongodb-bson-regex">MONGODB\BSON\REGEX</h4>
+<h4 id="mongodb-bson-timestamp">MONGODB\BSON\TIMESTAMP</h4>
+<h4 id="mongodb-bson-utcdatetime">MONGODB\BSON\UTCDATETIME</h4>
+<h4 id="mongodb-bson-type">MONGODB\BSON\TYPE</h4>
+<h4 id="mongodb-bson-persistable">MONGODB\BSON\PERSISTABLE</h4>
+<h4 id="mongodb-bson-serializable">MONGODB\BSON\SERIALIZABLE</h4>
+<h4 id="mongodb-bson-unserializable">MONGODB\BSON\UNSERIALIZABLE</h4>
+<h4 id="mongodb-bson-binaryinterface">MONGODB\BSON\BINARYINTERFACE</h4>
+<h4 id="mongodb-bson-decimal128interface">MONGODB\BSON\DECIMAL128INTERFACE</h4>
+<h4 id="mongodb-bson-javascriptinterface">MONGODB\BSON\JAVASCRIPTINTERFACE</h4>
+<h4 id="mongodb-bson-maxkeyinterface">MONGODB\BSON\MAXKEYINTERFACE</h4>
+<h4 id="mongodb-bson-minkeyinterface">MONGODB\BSON\MINKEYINTERFACE</h4>
+<h4 id="mongodb-bson-objectidinterface">MONGODB\BSON\OBJECTIDINTERFACE</h4>
+<h4 id="mongodb-bson-regexinterface">MONGODB\BSON\REGEXINTERFACE</h4>
+<h4 id="mongodb-bson-timestampinterface">MONGODB\BSON\TIMESTAMPINTERFACE</h4>
+<h4 id="mongodb-bson-utcdatetimeinterface">MONGODB\BSON\UTCDATETIMEINTERFACE</h4>
+<h4 id="mongodb-bson-dbpointer">MONGODB\BSON\DBPOINTER</h4>
+<h4 id="mongodb-bson-int64">MONGODB\BSON\INT64</h4>
+<h4 id="mongodb-bson-symbol">MONGODB\BSON\SYMBOL</h4>
+<h4 id="mongodb-bson-undefined">MONGODB\BSON\UNDEFINED</h4>
+<h4 id="mongodb-driver-monitoring">MONGODB\DRIVER\MONITORING</h4>
+<h4 id="mongodb-driver-monitoring-commandfailedevent">MONGODB\DRIVER\MONITORING\COMMANDFAILEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-commandstartedevent">MONGODB\DRIVER\MONITORING\COMMANDSTARTEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-commandsucceededevent">MONGODB\DRIVER\MONITORING\COMMANDSUCCEEDEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-serverchangedevent">MONGODB\DRIVER\MONITORING\SERVERCHANGEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-serverclosedevent">MONGODB\DRIVER\MONITORING\SERVERCLOSEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-serveropeningevent">MONGODB\DRIVER\MONITORING\SERVEROPENINGEVENT</h4>
+<h4 id="mongodb-driver-monitoring-serverheartbeatfailedevent">MONGODB\DRIVER\MONITORING\SERVERHEARTBEATFAILEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-serverheartbeatstartedevent">MONGODB\DRIVER\MONITORING\SERVERHEARTBEATSTARTEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-serverheartbeatsucceededevent">MONGODB\DRIVER\MONITORING\SERVERHEARTBEATSUCCESSDEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-topologychangedevent">MONGODB\DRIVER\MONITORING\TOPOLOGYCHANGEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-topologyclosedevent">MONGODB\DRIVER\MONITORING\TOPOLOGYCLOSEDEVENT</h4>
+<h4 id="mongodb-driver-monitoring-topologyopeningevent">MONGODB\DRIVER\MONITORING\TOPOLOGYOPENINGEVENT</h4>
+<h4 id="mongodb-driver-monitoring-commandsubscriber">MONGODB\DRIVER\MONITORING\COMMANDSUBSCRIBER</h4>
+<h4 id="mongodb-driver-monitoring-logsubscriber">MONGODB\DRIVER\MONITORING\LOGSUBSCRIBER</h4>
+<h4 id="mongodb-driver-monitoring-sdamsubscriber">MONGODB\DRIVER\MONITORING\SDAMSUBSCRIBER</h4>
+<h4 id="mongodb-driver-monitoring-subscriber">MONGODB\DRIVER\MONITORING\SUBSCRIBER</h4>
+<h4 id="mongodb-driver-exception">MONGODB\DRIVER\EXCEPTION</h4>
+<h4 id="mongodb-driver-exception-authenticationexception">MONGODB\DRIVER\EXCEPTION\AUTHENTICATIONEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-bulkwriteexception">MONGODB\DRIVER\EXCEPTION\BULKWRITEEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-bulkwritecommandexception">MONGODB\DRIVER\EXCEPTION\BULKWRITECOMMANDEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-commandexception">MONGODB\DRIVER\EXCEPTION\COMMANDEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-connectionexception">MONGODB\DRIVER\EXCEPTION\CONNECTIONEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-connectiontimeoutexception">MONGODB\DRIVER\EXCEPTION\CONNECTIONTIMEOUTEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-encryptionexception">MONGODB\DRIVER\EXCEPTION\ENCRYPTIONEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-exception">MONGODB\DRIVER\EXCEPTION\EXCEPTION</h4>
+<h4 id="mongodb-driver-exception-executiontimeoutexception">MONGODB\DRIVER\EXCEPTION\EXECUTIONTIMEOUTEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-invalidargumentexception">MONGODB\DRIVER\EXCEPTION\INVALIDARGUMENTEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-logicexception">MONGODB\DRIVER\EXCEPTION\LOGICEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-runtimeexception">MONGODB\DRIVER\EXCEPTION\RUNTIMEEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-serverexception">MONGODB\DRIVER\EXCEPTION\SERVEREXCEPTION</h4>
+<h4 id="mongodb-driver-exception-sslconnectionexception">MONGODB\DRIVER\EXCEPTION\SSLCONNECTIONEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-unexpectedvalueexception">MONGODB\DRIVER\EXCEPTION\UNEXPECTEDVALUEEXCEPTION</h4>
+<h4 id="mongodb-driver-exception-writeexception">MONGODB\DRIVER\EXCEPTION\WRITEEXCEPTION</h4>
+<h4 id="class-tree">CLASS TREE</h4>
 
 <h4 id="mysql">MYSQL</h4>
 
 <nav align="center">
   <h3>NAVIGATION</h3>
   <p>
-    <a href="#mysql-drivers-plugins">MySQL Drivers and Plugins</a> |
-    <a href="#mysqli">MySQLi — MySQL Improved Extension</a> |
-    <a href="#mysql-xdevapi">Mysql_xdevapi</a> |
-    <a href="#original-mysql-api">Original MySQL API</a> |
-    <a href="#mysqlnd">MySQL Native Driver</a>
+    <a href="#mysql-drivers-plugins">MYSQL DRIVERS AND PLUGINS</a> |
+    <a href="#mysqli">MYSQLI — MYSQL IMPROVED EXTENSION</a> |
+    <a href="#mysql-xdevapi">MYSQL_XDEVAPI</a> |
+    <a href="#original-mysql-api">ORIGINAL MYSQL API</a> |
+    <a href="#mysqlnd">MYSQL NATIVE DRIVER</a>
   </p>
 </nav>
 
-<h4 id="mysql-drivers-plugins">MySQL Drivers and Plugins</h4>
 
-<!-- Navigation -->
+<h4 id="mysql-drivers-plugins">MYSQL DRIVERS AND PLUGINS</h4>
+
 <nav align="center">
   <h3>NAVIGATION</h3>
   <p>
-    <a href="#introduction">Introduction</a> |
-    <a href="#terminology-overview">Terminology Overview</a> |
-    <a href="#choosing-an-api">Choosing an API</a> |
-    <a href="#choosing-a-library">Choosing a Library</a> |
-    <a href="#concepts">Concepts</a>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#terminology-overview">TERMINOLOGY OVERVIEW</a> |
+    <a href="#choosing-an-api">CHOOSING AN API</a> |
+    <a href="#choosing-a-library">CHOOSING A LIBRARY</a> |
+    <a href="#concepts">CONCEPTS</a>
   </p>
 </nav>
 
-<!-- H4 Sections -->
-<h4 id="introduction">Introduction</h4>
-<h4 id="terminology-overview">Terminology Overview</h4>
-<h4 id="choosing-an-api">Choosing an API</h4>
-<h4 id="choosing-a-library">Choosing a Library</h4>
-<h4 id="concepts">Concepts</h4>
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="terminology-overview">TERMINOLOGY OVERVIEW</h4>
+<h4 id="choosing-an-api">CHOOSING AN API</h4>
+<h4 id="choosing-a-library">CHOOSING A LIBRARY</h4>
+<h4 id="concepts">CONCEPTS</h4>
 
+<h4 id="mysqli">MYSQLI — MYSQL IMPROVED EXTENSION</h4>
 
-<h4 id="mysqli">MySQLi — MySQL Improved Extension</h4>
-
-<nav>
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#quick-start-guide">Quick Start Guide</a></li>
-    <li><a href="#dual-interface">Dual Interface: Procedural & OOP</a></li>
-    <li><a href="#connections">Connections</a></li>
-    <li><a href="#executing-statements">Executing Statements</a></li>
-    <li><a href="#prepared-statements">Prepared Statements</a></li>
-    <li><a href="#stored-procedures">Stored Procedures</a></li>
-    <li><a href="#multiple-statements">Multiple Statements</a></li>
-    <li><a href="#transaction-support">API Transaction Support</a></li>
-    <li><a href="#metadata">Metadata</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#runtime-configuration">Runtime Configuration</a></li>
-    <li><a href="#persistent-connections">mysqli Extension & Persistent Connections</a></li>
-    <li><a href="#mysqli-class">mysqli</a></li>
-    <li><a href="#mysqli-affected-rows">mysqli::$affected_rows</a></li>
-    <li><a href="#mysqli-autocommit">mysqli::autocommit</a></li>
-    <li><a href="#mysqli-begin-transaction">mysqli::begin_transaction</a></li>
-    <li><a href="#mysqli-change-user">mysqli::change_user</a></li>
-    <li><a href="#mysqli-character-set-name">mysqli::character_set_name</a></li>
-    <li><a href="#mysqli-close">mysqli::close</a></li>
-    <li><a href="#mysqli-commit">mysqli::commit</a></li>
-    <li><a href="#mysqli-connect-errno">mysqli::$connect_errno</a></li>
-    <li><a href="#mysqli-connect-error">mysqli::$connect_error</a></li>
-    <li><a href="#mysqli-construct">mysqli::__construct</a></li>
-    <li><a href="#mysqli-debug">mysqli::debug</a></li>
-    <li><a href="#mysqli-dump-debug-info">mysqli::dump_debug_info</a></li>
-    <li><a href="#mysqli-errno">mysqli->errno</a></li>
-    <li><a href="#mysqli-error">mysqli->error</a></li>
-    <li><a href="#mysqli-error-list">mysqli::$error_list</a></li>
-    <li><a href="#mysqli-execute-query">mysqli::execute_query</a></li>
-    <li><a href="#mysqli-field-count">mysqli::$field_count</a></li>
-    <li><a href="#mysqli-get-charset">mysqli::get_charset</a></li>
-    <li><a href="#mysqli-client-info">mysqli::$client_info</a></li>
-    <li><a href="#mysqli-client-version">mysqli::$client_version</a></li>
-    <li><a href="#mysqli-get-connection-stats">mysqli::get_connection_stats</a></li>
-    <li><a href="#mysqli-host-info">mysqli::$host_info</a></li>
-    <li><a href="#mysqli-protocol-version">mysqli::$protocol_version</a></li>
-    <li><a href="#mysqli-server-info">mysqli::$server_info</a></li>
-    <li><a href="#mysqli-server-version">mysqli::$server_version</a></li>
-    <li><a href="#mysqli-get-warnings">mysqli::get_warnings</a></li>
-    <li><a href="#mysqli-info">mysqli::$info</a></li>
-    <li><a href="#mysqli-init">mysqli::init</a></li>
-    <li><a href="#mysqli-insert-id">mysqli::$insert_id</a></li>
-    <li><a href="#mysqli-kill">mysqli::kill</a></li>
-    <li><a href="#mysqli-more-results">mysqli::more_results</a></li>
-    <li><a href="#mysqli-multi-query">mysqli::multi_query</a></li>
-    <li><a href="#mysqli-next-result">mysqli::next_result</a></li>
-    <li><a href="#mysqli-options">mysqli::options</a></li>
-    <li><a href="#mysqli-ping">mysqli::ping</a></li>
-    <li><a href="#mysqli-poll">mysqli::poll</a></li>
-    <li><a href="#mysqli-prepare">mysqli::prepare</a></li>
-    <li><a href="#mysqli-query">mysqli::query</a></li>
-    <li><a href="#mysqli-real-connect">mysqli::real_connect</a></li>
-    <li><a href="#mysqli-real-escape-string">mysqli::real_escape_string</a></li>
-    <li><a href="#mysqli-real-query">mysqli::real_query</a></li>
-    <li><a href="#mysqli-reap-async-query">mysqli::reap_async_query</a></li>
-    <li><a href="#mysqli-refresh">mysqli::refresh</a></li>
-    <li><a href="#mysqli-release-savepoint">mysqli::release_savepoint</a></li>
-    <li><a href="#mysqli-rollback">mysqli::rollback</a></li>
-    <li><a href="#mysqli-savepoint">mysqli::savepoint</a></li>
-    <li><a href="#mysqli-select-db">mysqli::select_db</a></li>
-    <li><a href="#mysqli-set-charset">mysqli::set_charset</a></li>
-    <li><a href="#mysqli-sqlstate">mysqli::$sqlstate</a></li>
-    <li><a href="#mysqli-ssl-set">mysqli::ssl_set</a></li>
-    <li><a href="#mysqli-stat">mysqli::stat</a></li>
-    <li><a href="#mysqli-stmt-init">mysqli::stmt_init</a></li>
-    <li><a href="#mysqli-store-result">mysqli::store_result</a></li>
-    <li><a href="#mysqli-thread-id">mysqli::$thread_id</a></li>
-    <li><a href="#mysqli-thread-safe">mysqli::thread_safe</a></li>
-    <li><a href="#mysqli-use-result">mysqli::use_result</a></li>
-    <li><a href="#mysqli-warning-count">mysqli::$warning_count</a></li>
-    <li><a href="#mysqli-stmt-class">mysqli_stmt</a></li>
-    <li><a href="#mysqli-stmt-affected-rows">mysqli_stmt::$affected_rows</a></li>
-    <li><a href="#mysqli-stmt-attr-get">mysqli_stmt::attr_get</a></li>
-    <li><a href="#mysqli-stmt-attr-set">mysqli_stmt::attr_set</a></li>
-    <li><a href="#mysqli-stmt-bind-param">mysqli_stmt::bind_param</a></li>
-    <li><a href="#mysqli-stmt-bind-result">mysqli_stmt::bind_result</a></li>
-    <li><a href="#mysqli-stmt-close">mysqli_stmt::close</a></li>
-    <li><a href="#mysqli-stmt-construct">mysqli_stmt::__construct</a></li>
-    <li><a href="#mysqli-stmt-data-seek">mysqli_stmt::data_seek</a></li>
-    <li><a href="#mysqli-stmt-errno">mysqli_stmt::$errno</a></li>
-    <li><a href="#mysqli-stmt-error">mysqli_stmt::$error</a></li>
-    <li><a href="#mysqli-stmt-error-list">mysqli_stmt::$error_list</a></li>
-    <li><a href="#mysqli-stmt-execute">mysqli_stmt::execute</a></li>
-    <li><a href="#mysqli-stmt-fetch">mysqli_stmt::fetch</a></li>
-    <li><a href="#mysqli-stmt-field-count">mysqli_stmt::$field_count</a></li>
-    <li><a href="#mysqli-stmt-free-result">mysqli_stmt::free_result</a></li>
-    <li><a href="#mysqli-stmt-get-result">mysqli_stmt::get_result</a></li>
-    <li><a href="#mysqli-stmt-get-warnings">mysqli_stmt::get_warnings</a></li>
-    <li><a href="#mysqli-stmt-insert-id">mysqli_stmt::$insert_id</a></li>
-    <li><a href="#mysqli-stmt-more-results">mysqli_stmt::more_results</a></li>
-    <li><a href="#mysqli-stmt-next-result">mysqli_stmt::next_result</a></li>
-    <li><a href="#mysqli-stmt-num-rows">mysqli_stmt::$num_rows</a></li>
-    <li><a href="#mysqli-stmt-param-count">mysqli_stmt::$param_count</a></li>
-    <li><a href="#mysqli-stmt-prepare">mysqli_stmt::prepare</a></li>
-    <li><a href="#mysqli-stmt-reset">mysqli_stmt::reset</a></li>
-    <li><a href="#mysqli-stmt-result-metadata">mysqli_stmt::result_metadata</a></li>
-    <li><a href="#mysqli-stmt-send-long-data">mysqli_stmt::send_long_data</a></li>
-    <li><a href="#mysqli-stmt-sqlstate">mysqli_stmt::$sqlstate</a></li>
-    <li><a href="#mysqli-stmt-store-result">mysqli_stmt::store_result</a></li>
-    <li><a href="#mysqli-result-class">mysqli_result</a></li>
-    <li><a href="#mysqli-result-construct">mysqli_result::__construct</a></li>
-    <li><a href="#mysqli-result-current-field">mysqli_result::$current_field</a></li>
-    <li><a href="#mysqli-result-data-seek">mysqli_result::data_seek</a></li>
-    <li><a href="#mysqli-result-fetch-all">mysqli_result::fetch_all</a></li>
-    <li><a href="#mysqli-result-fetch-array">mysqli_result::fetch_array</a></li>
-    <li><a href="#mysqli-result-fetch-assoc">mysqli_result::fetch_assoc</a></li>
-    <li><a href="#mysqli-result-fetch-column">mysqli_result::fetch_column</a></li>
-    <li><a href="#mysqli-result-fetch-field">mysqli_result::fetch_field</a></li>
-    <li><a href="#mysqli-result-fetch-field-direct">mysqli_result::fetch_field_direct</a></li>
-    <li><a href="#mysqli-result-fetch-fields">mysqli_result::fetch_fields</a></li>
-    <li><a href="#mysqli-result-fetch-object">mysqli_result::fetch_object</a></li>
-    <li><a href="#mysqli-result-fetch-row">mysqli_result::fetch_row</a></li>
-    <li><a href="#mysqli-result-field-count">mysqli_result::$field_count</a></li>
-    <li><a href="#mysqli-result-field-seek">mysqli_result::field_seek</a></li>
-    <li><a href="#mysqli-result-free">mysqli_result::free</a></li>
-    <li><a href="#mysqli-result-get-iterator">mysqli_result::getIterator</a></li>
-    <li><a href="#mysqli-result-lengths">mysqli_result::$lengths</a></li>
-    <li><a href="#mysqli-result-num-rows">mysqli_result::$num_rows</a></li>
-    <li><a href="#mysqli-driver-class">mysqli_driver</a></li>
-    <li><a href="#mysqli-driver-embedded-server-end">mysqli_driver::embedded_server_end</a></li>
-    <li><a href="#mysqli-driver-embedded-server-start">mysqli_driver::embedded_server_start</a></li>
-    <li><a href="#mysqli-driver-report-mode">mysqli_driver::$report_mode</a></li>
-    <li><a href="#mysqli-warning-class">mysqli_warning</a></li>
-    <li><a href="#mysqli-warning-construct">mysqli_warning::__construct</a></li>
-    <li><a href="#mysqli-warning-next">mysqli_warning::next</a></li>
-    <li><a href="#mysqli-sql-exception-class">mysqli_sql_exception</a></li>
-    <li><a href="#mysqli-sql-exception-getsqlstate">mysqli_sql_exception::getSqlState</a></li>
-    <li><a href="#mysqli-connect-function">mysqli_connect</a></li>
-    <li><a href="#mysqli-escape-string">mysqli::escape_string</a></li>
-    <li><a href="#mysqli-execute">mysqli_execute</a></li>
-    <li><a href="#mysqli-get-client-stats">mysqli_get_client_stats</a></li>
-    <li><a href="#mysqli-get-links-stats">mysqli_get_links_stats</a></li>
-    <li><a href="#mysqli-report">mysqli_report</a></li>
-    <li><a href="#mysqli-set-opt">mysqli::set_opt</a></li>
-  </ul>
-</nav>
-
-<h4 id="introduction">Introduction</h4>
-<h4 id="overview">Overview</h4>
-<h4 id="quick-start-guide">Quick Start Guide</h4>
-<h4 id="dual-interface">Dual Interface: Procedural & OOP</h4>
-<h4 id="connections">Connections</h4>
-<h4 id="executing-statements">Executing Statements</h4>
-<h4 id="prepared-statements">Prepared Statements</h4>
-<h4 id="stored-procedures">Stored Procedures</h4>
-<h4 id="multiple-statements">Multiple Statements</h4>
-<h4 id="transaction-support">API Transaction Support</h4>
-<h4 id="metadata">Metadata</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="runtime-configuration">Runtime Configuration</h4>
-<h4 id="persistent-connections">mysqli Extension & Persistent Connections</h4>
-<h4 id="mysqli-class">mysqli</h4>
-<h4 id="mysqli-affected-rows">mysqli::$affected_rows</h4>
-<h4 id="mysqli-autocommit">mysqli::autocommit</h4>
-<h4 id="mysqli-begin-transaction">mysqli::begin_transaction</h4>
-<h4 id="mysqli-change-user">mysqli::change_user</h4>
-<h4 id="mysqli-character-set-name">mysqli::character_set_name</h4>
-<h4 id="mysqli-close">mysqli::close</h4>
-<h4 id="mysqli-commit">mysqli::commit</h4>
-<h4 id="mysqli-connect-errno">mysqli::$connect_errno</h4>
-<h4 id="mysqli-connect-error">mysqli::$connect_error</h4>
-<h4 id="mysqli-construct">mysqli::__construct</h4>
-<h4 id="mysqli-debug">mysqli::debug</h4>
-<h4 id="mysqli-dump-debug-info">mysqli::dump_debug_info</h4>
-<h4 id="mysqli-errno">mysqli->errno</h4>
-<h4 id="mysqli-error">mysqli->error</h4>
-<h4 id="mysqli-error-list">mysqli::$error_list</h4>
-<h4 id="mysqli-execute-query">mysqli::execute_query</h4>
-<h4 id="mysqli-field-count">mysqli::$field_count</h4>
-<h4 id="mysqli-get-charset">mysqli::get_charset</h4>
-<h4 id="mysqli-client-info">mysqli::$client_info</h4>
-<h4 id="mysqli-client-version">mysqli::$client_version</h4>
-<h4 id="mysqli-get-connection-stats">mysqli::get_connection_stats</h4>
-<h4 id="mysqli-host-info">mysqli::$host_info</h4>
-<h4 id="mysqli-protocol-version">mysqli::$protocol_version</h4>
-<h4 id="mysqli-server-info">mysqli::$server_info</h4>
-<h4 id="mysqli-server-version">mysqli::$server_version</h4>
-<h4 id="mysqli-get-warnings">mysqli::get_warnings</h4>
-<h4 id="mysqli-info">mysqli::$info</h4>
-<h4 id="mysqli-init">mysqli::init</h4>
-<h4 id="mysqli-insert-id">mysqli::$insert_id</h4>
-<h4 id="mysqli-kill">mysqli::kill</h4>
-<h4 id="mysqli-more-results">mysqli::more_results</h4>
-<h4 id="mysqli-multi-query">mysqli::multi_query</h4>
-<h4 id="mysqli-next-result">mysqli::next_result</h4>
-<h4 id="mysqli-options">mysqli::options</h4>
-<h4 id="mysqli-ping">mysqli::ping</h4>
-<h4 id="mysqli-poll">mysqli::poll</h4>
-<h4 id="mysqli-prepare">mysqli::prepare</h4>
-<h4 id="mysqli-query">mysqli::query</h4>
-<h4 id="mysqli-real-connect">mysqli::real_connect</h4>
-<h4 id="mysqli-real-escape-string">mysqli::real_escape_string</h4>
-<h4 id="mysqli-real-query">mysqli::real_query</h4>
-<h4 id="mysqli-reap-async-query">mysqli::reap_async_query</h4>
-<h4 id="mysqli-refresh">mysqli::refresh</h4>
-<h4 id="mysqli-release-savepoint">mysqli::release_savepoint</h4>
-<h4 id="mysqli-rollback">mysqli::rollback</h4>
-<h4 id="mysqli-savepoint">mysqli::savepoint</h4>
-<h4 id="mysqli-select-db">mysqli::select_db</h4>
-<h4 id="mysqli-set-charset">mysqli::set_charset</h4>
-<h4 id="mysqli-sqlstate">mysqli::$sqlstate</h4>
-<h4 id="mysqli-ssl-set">mysqli::ssl_set</h4>
-<h4 id="mysqli-stat">mysqli::stat</h4>
-<h4 id="mysqli-stmt-init">mysqli::stmt_init</h4>
-<h4 id="mysqli-store-result">mysqli::store_result</h4>
-<h4 id="mysqli-thread-id">mysqli::$thread_id</h4>
-<h4 id="mysqli-thread-safe">mysqli::thread_safe</h4>
-<h4 id="mysqli-use-result">mysqli::use_result</h4>
-<h4 id="mysqli-warning-count">mysqli::$warning_count</h4>
-<h4 id="mysqli-stmt-class">mysqli_stmt</h4>
-<h4 id="mysqli-stmt-affected-rows">mysqli_stmt::$affected_rows</h4>
-<h4 id="mysqli-stmt-attr-get">mysqli_stmt::attr_get</h4>
-<h4 id="mysqli-stmt-attr-set">mysqli_stmt::attr_set</h4>
-<h4 id="mysqli-stmt-bind-param">mysqli_stmt::bind_param</h4>
-<h4 id="mysqli-stmt-bind-result">mysqli_stmt::bind_result</h4>
-<h4 id="mysqli-stmt-close">mysqli_stmt::close</h4>
-<h4 id="mysqli-stmt-construct">mysqli_stmt::__construct</h4>
-<h4 id="mysqli-stmt-data-seek">mysqli_stmt::data_seek</h4>
-<h4 id="mysqli-stmt-errno">mysqli_stmt::$errno</h4>
-<h4 id="mysqli-stmt-error">mysqli_stmt::$error</h4>
-<h4 id="mysqli-stmt-error-list">mysqli_stmt::$error_list</h4>
-<h4 id="mysqli-stmt-execute">mysqli_stmt::execute</h4>
-<h4 id="mysqli-stmt-fetch">mysqli_stmt::fetch</h4>
-<h4 id="mysqli-stmt-field-count">mysqli_stmt::$field_count</h4>
-<h4 id="mysqli-stmt-free-result">mysqli_stmt::free_result</h4>
-<h4 id="mysqli-stmt-get-result">mysqli_stmt::get_result</h4>
-<h4 id="mysqli-stmt-get-warnings">mysqli_stmt::get_warnings</h4>
-<h4 id="mysqli-stmt-insert-id">mysqli_stmt::$insert_id</h4>
-<h4 id="mysqli-stmt-more-results">mysqli_stmt::more_results</h4>
-<h4 id="mysqli-stmt-next-result">mysqli_stmt::next_result</h4>
-<h4 id="mysqli-stmt-num-rows">mysqli_stmt::$num_rows</h4>
-<h4 id="mysqli-stmt-param-count">mysqli_stmt::$param_count</h4>
-<h4 id="mysqli-stmt-prepare">mysqli_stmt::prepare</h4>
-<h4 id="mysqli-stmt-reset">mysqli_stmt::reset</h4>
-<h4 id="mysqli-stmt-result-metadata">mysqli_stmt::result_metadata</h4>
-<h4 id="mysqli-stmt-send-long-data">mysqli_stmt::send_long_data</h4>
-<h4 id="mysqli-stmt-sqlstate">mysqli_stmt::$sqlstate</h4>
-<h4 id="mysqli-stmt-store-result">mysqli_stmt::store_result</h4>
-<h4 id="mysqli-result-class">mysqli_result</h4>
-<h4 id="mysqli-result-construct">mysqli_result::__construct</h4>
-<h4 id="mysqli-result-current-field">mysqli_result::$current_field</h4>
-<h4 id="mysqli-result-data-seek">mysqli_result::data_seek</h4>
-<h4 id="mysqli-result-fetch-all">mysqli_result::fetch_all</h4>
-<h4 id="mysqli-result-fetch-array">mysqli_result::fetch_array</h4>
-<h4 id="mysqli-result-fetch-assoc">mysqli_result::fetch_assoc</h4>
-<h4 id="mysqli-result-fetch-column">mysqli_result::fetch_column</h4>
-<h4 id="mysqli-result-fetch-field">mysqli_result::fetch_field</h4>
-<h4 id="mysqli-result-fetch-field-direct">mysqli_result::fetch_field_direct</h4>
-<h4 id="mysqli-result-fetch-fields">mysqli_result::fetch_fields</h4>
-<h4 id="mysqli-result-fetch-object">mysqli_result::fetch_object</h4>
-<h4 id="mysqli-result-fetch-row">mysqli_result::fetch_row</h4>
-<h4 id="mysqli-result-field-count">mysqli_result::$field_count</h4>
-<h4 id="mysqli-result-field-seek">mysqli_result::field_seek</h4>
-<h4 id="mysqli-result-free">mysqli_result::free</h4>
-<h4 id="mysqli-result-get-iterator">mysqli_result::getIterator</h4>
-<h4 id="mysqli-result-lengths">mysqli_result::$lengths</h4>
-<h4 id="mysqli-result-num-rows">mysqli_result::$num_rows</h4>
-<h4 id="mysqli-driver-class">mysqli_driver</h4>
-<h4 id="mysqli-driver-embedded-server-end">mysqli_driver::embedded_server_end</h4>
-<h4 id="mysqli-driver-embedded-server-start">mysqli_driver::embedded_server_start</h4>
-<h4 id="mysqli-driver-report-mode">mysqli_driver::$report_mode</h4>
-<h4 id="mysqli-warning-class">mysqli_warning</h4>
-<h4 id="mysqli-warning-construct">mysqli_warning::__construct</h4>
-<h4 id="mysqli-warning-next">mysqli_warning::next</h4>
-<h4 id="mysqli-sql-exception-class">mysqli_sql_exception</h4>
-<h4 id="mysqli-sql-exception-getsqlstate">mysqli_sql_exception::getSqlState</h4>
-<h4 id="mysqli-connect-function">mysqli_connect</h4>
-<h4 id="mysqli-escape-string">mysqli::escape_string</h4>
-<h4 id="mysqli-execute">mysqli_execute</h4>
-<h4 id="mysqli-get-client-stats">mysqli_get_client_stats</h4>
-<h4 id="mysqli-get-links-stats">mysqli_get_links_stats</h4>
-<h4 id="mysqli-report">mysqli_report</h4>
-<h4 id="mysqli-set-opt">mysqli::set_opt</h4>
-
-
-<h4 id="mysql-xdevapi">Mysql_xdevapi</h4>
-
-<nav>
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#dependencies">Dependencies</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#runtime-configuration">Runtime Configuration</a></li>
-    <li><a href="#building-from-source">Building / Compiling from Source</a></li>
-    <li><a href="#changelog">Changelog</a></li>
-    <li><a href="#functions">Mysql_xdevapi Functions</a></li>
-    <li><a href="#expression">expression</a></li>
-    <li><a href="#getsession">getSession</a></li>
-    <li><a href="#baseresult-class">mysql_xdevapi\BaseResult</a></li>
-    <li><a href="#baseresult-getwarnings">BaseResult::getWarnings</a></li>
-    <li><a href="#baseresult-getwarningscount">BaseResult::getWarningsCount</a></li>
-    <li><a href="#client-class">mysql_xdevapi\Client</a></li>
-    <li><a href="#client-close">Client::close</a></li>
-    <li><a href="#client-construct">Client::__construct</a></li>
-    <li><a href="#client-getclient">Client::getClient</a></li>
-    <li><a href="#collection-class">mysql_xdevapi\Collection</a></li>
-    <li><a href="#collection-add">Collection::add</a></li>
-    <li><a href="#collection-addorreplaceone">Collection::addOrReplaceOne</a></li>
-    <li><a href="#collection-construct">Collection::__construct</a></li>
-    <li><a href="#collection-count">Collection::count</a></li>
-    <li><a href="#collection-createindex">Collection::createIndex</a></li>
-    <li><a href="#collection-dropindex">Collection::dropIndex</a></li>
-    <li><a href="#collection-exists">Collection::existsInDatabase</a></li>
-    <li><a href="#collection-find">Collection::find</a></li>
-    <li><a href="#collection-getname">Collection::getName</a></li>
-    <li><a href="#collection-getone">Collection::getOne</a></li>
-    <li><a href="#collection-getschema">Collection::getSchema</a></li>
-    <li><a href="#collection-getsession">Collection::getSession</a></li>
-    <li><a href="#collection-modify">Collection::modify</a></li>
-    <li><a href="#collection-remove">Collection::remove</a></li>
-    <li><a href="#collection-removeone">Collection::removeOne</a></li>
-    <li><a href="#collection-replaceone">Collection::replaceOne</a></li>
-    <li><a href="#collectionadd-class">mysql_xdevapi\CollectionAdd</a></li>
-    <li><a href="#collectionadd-construct">CollectionAdd::__construct</a></li>
-    <li><a href="#collectionadd-execute">CollectionAdd::execute</a></li>
-    <li><a href="#collectionfind-class">mysql_xdevapi\CollectionFind</a></li>
-    <li><a href="#collectionfind-bind">CollectionFind::bind</a></li>
-    <li><a href="#collectionfind-construct">CollectionFind::__construct</a></li>
-    <li><a href="#collectionfind-execute">CollectionFind::execute</a></li>
-    <li><a href="#collectionfind-fields">CollectionFind::fields</a></li>
-    <li><a href="#collectionfind-groupby">CollectionFind::groupBy</a></li>
-    <li><a href="#collectionfind-having">CollectionFind::having</a></li>
-    <li><a href="#collectionfind-limit">CollectionFind::limit</a></li>
-    <li><a href="#collectionfind-lockexclusive">CollectionFind::lockExclusive</a></li>
-    <li><a href="#collectionfind-lockshared">CollectionFind::lockShared</a></li>
-    <li><a href="#collectionfind-offset">CollectionFind::offset</a></li>
-    <li><a href="#collectionfind-sort">CollectionFind::sort</a></li>
-    <li><a href="#collectionmodify-class">mysql_xdevapi\CollectionModify</a></li>
-    <li><a href="#collectionmodify-arrayappend">CollectionModify::arrayAppend</a></li>
-    <li><a href="#collectionmodify-arrayinsert">CollectionModify::arrayInsert</a></li>
-    <li><a href="#collectionmodify-bind">CollectionModify::bind</a></li>
-    <li><a href="#collectionmodify-construct">CollectionModify::__construct</a></li>
-    <li><a href="#collectionmodify-execute">CollectionModify::execute</a></li>
-    <li><a href="#collectionmodify-limit">CollectionModify::limit</a></li>
-    <li><a href="#collectionmodify-patch">CollectionModify::patch</a></li>
-    <li><a href="#collectionmodify-replace">CollectionModify::replace</a></li>
-    <li><a href="#collectionmodify-set">CollectionModify::set</a></li>
-    <li><a href="#collectionmodify-skip">CollectionModify::skip</a></li>
-    <li><a href="#collectionmodify-sort">CollectionModify::sort</a></li>
-    <li><a href="#collectionmodify-unset">CollectionModify::unset</a></li>
-    <li><a href="#collectionremove-class">mysql_xdevapi\CollectionRemove</a></li>
-    <li><a href="#collectionremove-bind">CollectionRemove::bind</a></li>
-    <li><a href="#collectionremove-construct">CollectionRemove::__construct</a></li>
-    <li><a href="#collectionremove-execute">CollectionRemove::execute</a></li>
-    <li><a href="#collectionremove-limit">CollectionRemove::limit</a></li>
-    <li><a href="#collectionremove-sort">CollectionRemove::sort</a></li>
-    <li><a href="#columnresult-class">mysql_xdevapi\ColumnResult</a></li>
-    <li><a href="#columnresult-construct">ColumnResult::__construct</a></li>
-    <li><a href="#columnresult-getcharset">ColumnResult::getCharacterSetName</a></li>
-    <li><a href="#columnresult-getcollation">ColumnResult::getCollationName</a></li>
-    <li><a href="#columnresult-getcolumnlabel">ColumnResult::getColumnLabel</a></li>
-    <li><a href="#columnresult-getcolumnname">ColumnResult::getColumnName</a></li>
-    <li><a href="#columnresult-getfractionaldigits">ColumnResult::getFractionalDigits</a></li>
-    <li><a href="#columnresult-getlength">ColumnResult::getLength</a></li>
-    <li><a href="#columnresult-getschemaname">ColumnResult::getSchemaName</a></li>
-    <li><a href="#columnresult-gettablelabel">ColumnResult::getTableLabel</a></li>
-    <li><a href="#columnresult-gettablename">ColumnResult::getTableName</a></li>
-    <li><a href="#columnresult-gettype">ColumnResult::getType</a></li>
-    <li><a href="#columnresult-isnumbersigned">ColumnResult::isNumberSigned</a></li>
-    <li><a href="#columnresult-ispadded">ColumnResult::isPadded</a></li>
-    <li><a href="#crudoperationbindable-class">mysql_xdevapi\CrudOperationBindable</a></li>
-    <li><a href="#crudoperationbindable-bind">CrudOperationBindable::bind</a></li>
-    <li><a href="#crudoperationlimitable-class">mysql_xdevapi\CrudOperationLimitable</a></li>
-    <li><a href="#crudoperationlimitable-limit">CrudOperationLimitable::limit</a></li>
-    <li><a href="#crudoperationskippable-class">mysql_xdevapi\CrudOperationSkippable</a></li>
-    <li><a href="#crudoperationskippable-skip">CrudOperationSkippable::skip</a></li>
-    <li><a href="#crudoperationsortable-class">mysql_xdevapi\CrudOperationSortable</a></li>
-    <li><a href="#crudoperationsortable-sort">CrudOperationSortable::sort</a></li>
-    <li><a href="#databaseobject-class">mysql_xdevapi\DatabaseObject</a></li>
-    <li><a href="#databaseobject-exists">DatabaseObject::existsInDatabase</a></li>
-    <li><a href="#databaseobject-getname">DatabaseObject::getName</a></li>
-    <li><a href="#databaseobject-getsession">DatabaseObject::getSession</a></li>
-    <li><a href="#docresult-class">mysql_xdevapi\DocResult</a></li>
-    <li><a href="#docresult-construct">DocResult::__construct</a></li>
-    <li><a href="#docresult-fetchall">DocResult::fetchAll</a></li>
-    <li><a href="#docresult-fetchone">DocResult::fetchOne</a></li>
-    <li><a href="#docresult-getwarnings">DocResult::getWarnings</a></li>
-    <li><a href="#docresult-getwarningscount">DocResult::getWarningsCount</a></li>
-    <li><a href="#exception-class">mysql_xdevapi\Exception</a></li>
-    <li><a href="#executable-class">mysql_xdevapi\Executable</a></li>
-    <li><a href="#executable-execute">Executable::execute</a></li>
-    <li><a href="#executionstatus-class">mysql_xdevapi\ExecutionStatus</a></li>
-    <li><a href="#executionstatus-construct">ExecutionStatus::__construct</a></li>
-    <li><a href="#expression-class">mysql_xdevapi\Expression</a></li>
-    <li><a href="#expression-construct">Expression::__construct</a></li>
-    <li><a href="#result-class">mysql_xdevapi\Result</a></li>
-    <li><a href="#result-construct">Result::__construct</a></li>
-    <li><a href="#result-getaffecteditems">Result::getAffectedItemsCount</a></li>
-    <li><a href="#result-getautoincrement">Result::getAutoIncrementValue</a></li>
-    <li><a href="#result-getgeneratedids">Result::getGeneratedIds</a></li>
-    <li><a href="#result-getwarnings">Result::getWarnings</a></li>
-    <li><a href="#result-getwarningscount">Result::getWarningsCount</a></li>
-    <li><a href="#rowresult-class">mysql_xdevapi\RowResult</a></li>
-    <li><a href="#rowresult-construct">RowResult::__construct</a></li>
-    <li><a href="#rowresult-fetchall">RowResult::fetchAll</a></li>
-    <li><a href="#rowresult-fetchone">RowResult::fetchOne</a></li>
-    <li><a href="#rowresult-getcolumnscount">RowResult::getColumnsCount</a></li>
-    <li><a href="#rowresult-getcolumnnames">RowResult::getColumnNames</a></li>
-    <li><a href="#rowresult-getcolumns">RowResult::getColumns</a></li>
-    <li><a href="#rowresult-getwarnings">RowResult::getWarnings</a></li>
-    <li><a href="#rowresult-getwarningscount">RowResult::getWarningsCount</a></li>
-    <li><a href="#schema-class">mysql_xdevapi\Schema</a></li>
-    <li><a href="#schema-construct">Schema::__construct</a></li>
-    <li><a href="#schema-createcollection">Schema::createCollection</a></li>
-    <li><a href="#schema-dropcollection">Schema::dropCollection</a></li>
-    <li><a href="#schema-exists">Schema::existsInDatabase</a></li>
-    <li><a href="#schema-getcollection">Schema::getCollection</a></li>
-    <li><a href="#schema-getcollectionastable">Schema::getCollectionAsTable</a></li>
-    <li><a href="#schema-getcollections">Schema::getCollections</a></li>
-    <li><a href="#schema-getname">Schema::getName</a></li>
-    <li><a href="#schema-getsession">Schema::getSession</a></li>
-    <li><a href="#schema-gettable">Schema::getTable</a></li>
-    <li><a href="#schema-gettables">Schema::getTables</a></li>
-    <li><a href="#schemaobject-class">mysql_xdevapi\SchemaObject</a></li>
-    <li><a href="#schemaobject-getschema">SchemaObject::getSchema</a></li>
-    <li><a href="#session-class">mysql_xdevapi\Session</a></li>
-    <li><a href="#session-close">Session::close</a></li>
-    <li><a href="#session-commit">Session::commit</a></li>
-    <li><a href="#session-construct">Session::__construct</a></li>
-    <li><a href="#session-createschema">Session::createSchema</a></li>
-    <li><a href="#session-dropschema">Session::dropSchema</a></li>
-    <li><a href="#session-generateuuid">Session::generateUUID</a></li>
-    <li><a href="#session-getdefaultschema">Session::getDefaultSchema</a></li>
-    <li><a href="#session-getschema">Session::getSchema</a></li>
-    <li><a href="#session-getschemas">Session::getSchemas</a></li>
-    <li><a href="#session-getserverversion">Session::getServerVersion</a></li>
-    <li><a href="#session-listclients">Session::listClients</a></li>
-    <li><a href="#session-quotename">Session::quoteName</a></li>
-    <li><a href="#session-releasesavepoint">Session::releaseSavepoint</a></li>
-    <li><a href="#session-rollback">Session::rollback</a></li>
-    <li><a href="#session-rollbackto">Session::rollbackTo</a></li>
-    <li><a href="#session-setsavepoint">Session::setSavepoint</a></li>
-    <li><a href="#session-sql">Session::sql</a></li>
-    <li><a href="#session-starttransaction">Session::startTransaction</a></li>
-    <li><a href="#sqlstatement-class">mysql_xdevapi\SqlStatement</a></li>
-    <li><a href="#sqlstatement-bind">SqlStatement::bind</a></li>
-    <li><a href="#sqlstatement-construct">SqlStatement::__construct</a></li>
-    <li><a href="#sqlstatement-execute">SqlStatement::execute</a></li>
-    <li><a href="#sqlstatement-getnextresult">SqlStatement::getNextResult</a></li>
-    <li><a href="#sqlstatement-getresult">SqlStatement::getResult</a></li>
-    <li><a href="#sqlstatement-hasmoreresults">SqlStatement::hasMoreResults</a></li>
-    <li><a href="#sqlstatementresult-class">mysql_xdevapi\SqlStatementResult</a></li>
-    <li><a href="#sqlstatementresult-construct">SqlStatementResult::__construct</a></li>
-    <li><a href="#sqlstatementresult-fetchall">SqlStatementResult::fetchAll</a></li>
-    <li><a href="#sqlstatementresult-fetchone">SqlStatementResult::fetchOne</a></li>
-    <li><a href="#sqlstatementresult-getaffecteditems">SqlStatementResult::getAffectedItemsCount</a></li>
-    <li><a href="#sqlstatementresult-getcolumnscount">SqlStatementResult::getColumnsCount</a></li>
-    <li><a href="#sqlstatementresult-getcolumnnames">SqlStatementResult::getColumnNames</a></li>
-    <li><a href="#sqlstatementresult-getcolumns">SqlStatementResult::getColumns</a></li>
-    <li><a href="#sqlstatementresult-getgeneratedids">SqlStatementResult::getGeneratedIds</a></li>
-    <li><a href="#sqlstatementresult-getlastinsertid">SqlStatementResult::getLastInsertId</a></li>
-    <li><a href="#sqlstatementresult-getwarnings">SqlStatementResult::getWarnings</a></li>
-    <li><a href="#sqlstatementresult-getwarningscount">SqlStatementResult::getWarningsCount</a></li>
-    <li><a href="#sqlstatementresult-hasdata">SqlStatementResult::hasData</a></li>
-    <li><a href="#sqlstatementresult-nextresult">SqlStatementResult::nextResult</a></li>
-    <li><a href="#statement-class">mysql_xdevapi\Statement</a></li>
-    <li><a href="#statement-construct">Statement::__construct</a></li>
-    <li><a href="#statement-getnextresult">Statement::getNextResult</a></li>
-    <li><a href="#statement-getresult">Statement::getResult</a></li>
-    <li><a href="#statement-hasmoreresults">Statement::hasMoreResults</a></li>
-    <li><a href="#table-class">mysql_xdevapi\Table</a></li>
-    <li><a href="#table-construct">Table::__construct</a></li>
-    <li><a href="#table-count">Table::count</a></li>
-    <li><a href="#table-delete">Table::delete</a></li>
-    <li><a href="#table-exists">Table::existsInDatabase</a></li>
-    <li><a href="#table-getname">Table::getName</a></li>
-    <li><a href="#table-getschema">Table::getSchema</a></li>
-    <li><a href="#table-getsession">Table::getSession</a></li>
-    <li><a href="#table-insert">Table::insert</a></li>
-    <li><a href="#table-isview">Table::isView</a></li>
-    <li><a href="#table-select">Table::select</a></li>
-    <li><a href="#table-update">Table::update</a></li>
-    <li><a href="#tabledelete-class">mysql_xdevapi\TableDelete</a></li>
-    <li><a href="#tabledelete-bind">TableDelete::bind</a></li>
-    <li><a href="#tabledelete-construct">TableDelete::__construct</a></li>
-    <li><a href="#tabledelete-execute">TableDelete::execute</a></li>
-    <li><a href="#tabledelete-limit">TableDelete::limit</a></li>
-    <li><a href="#tabledelete-orderby">TableDelete::orderby</a></li>
-    <li><a href="#tabledelete-where">TableDelete::where</a></li>
-    <li><a href="#tableinsert-class">mysql_xdevapi\TableInsert</a></li>
-    <li><a href="#tableinsert-construct">TableInsert::__construct</a></li>
-    <li><a href="#tableinsert-execute">TableInsert::execute</a></li>
-    <li><a href="#tableinsert-values">TableInsert::values</a></li>
-    <li><a href="#tableselect-class">mysql_xdevapi\TableSelect</a></li>
-    <li><a href="#tableselect-bind">TableSelect::bind</a></li>
-    <li><a href="#tableselect-construct">TableSelect::__construct</a></li>
-    <li><a href="#tableselect-execute">TableSelect::execute</a></li>
-    <li><a href="#tableselect-groupby">TableSelect::groupBy</a></li>
-    <li><a href="#tableselect-having">TableSelect::having</a></li>
-    <li><a href="#tableselect-limit">TableSelect::limit</a></li>
-    <li><a href="#tableselect-lockexclusive">TableSelect::lockExclusive</a></li>
-    <li><a href="#tableselect-lockshared">TableSelect::lockShared</a></li>
-    <li><a href="#tableselect-offset">TableSelect::offset</a></li>
-    <li><a href="#tableselect-orderby">TableSelect::orderby</a></li>
-    <li><a href="#tableselect-where">TableSelect::where</a></li>
-    <li><a href="#tableupdate-class">mysql_xdevapi\TableUpdate</a></li>
-    <li><a href="#tableupdate-bind">TableUpdate::bind</a></li>
-    <li><a href="#tableupdate-construct">TableUpdate::__construct</a></li>
-    <li><a href="#tableupdate-execute">TableUpdate::execute</a></li>
-    <li><a href="#tableupdate-limit">TableUpdate::limit</a></li>
-    <li><a href="#tableupdate-orderby">TableUpdate::orderby</a></li>
-    <li><a href="#tableupdate-set">TableUpdate::set</a></li>
-    <li><a href="#tableupdate-where">TableUpdate::where</a></li>
-    <li><a href="#warning-class">mysql_xdevapi\Warning</a></li>
-    <li><a href="#warning-construct">Warning::__construct</a></li>
-  </ul>
-</nav>
-
-<h4 id="introduction">Introduction</h4>
-<h4 id="dependencies">Dependencies</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="runtime-configuration">Runtime Configuration</h4>
-<h4 id="building-from-source">Building / Compiling from Source</h4>
-<h4 id="changelog">Changelog</h4>
-<h4 id="functions">Mysql_xdevapi Functions</h4>
-<h4 id="expression">expression</h4>
-<h4 id="getsession">getSession</h4>
-<h4 id="baseresult-class">mysql_xdevapi\BaseResult</h4>
-<h4 id="baseresult-getwarnings">BaseResult::getWarnings</h4>
-<h4 id="baseresult-getwarningscount">BaseResult::getWarningsCount</h4>
-<h4 id="client-class">mysql_xdevapi\Client</h4>
-<h4 id="client-close">Client::close</h4>
-<h4 id="client-construct">Client::__construct</h4>
-<h4 id="client-getclient">Client::getClient</h4>
-<h4 id="collection-class">mysql_xdevapi\Collection</h4>
-<h4 id="collection-add">Collection::add</h4>
-<h4 id="collection-addorreplaceone">Collection::addOrReplaceOne</h4>
-<h4 id="collection-construct">Collection::__construct</h4>
-<h4 id="collection-count">Collection::count</h4>
-<h4 id="collection-createindex">Collection::createIndex</h4>
-<h4 id="collection-dropindex">Collection::dropIndex</h4>
-<h4 id="collection-exists">Collection::existsInDatabase</h4>
-<h4 id="collection-find">Collection::find</h4>
-<h4 id="collection-getname">Collection::getName</h4>
-<h4 id="collection-getone">Collection::getOne</h4>
-<h4 id="collection-getschema">Collection::getSchema</h4>
-<h4 id="collection-getsession">Collection::getSession</h4>
-<h4 id="collection-modify">Collection::modify</h4>
-<h4 id="collection-remove">Collection::remove</h4>
-<h4 id="collection-removeone">Collection::removeOne</h4>
-<h4 id="collection-replaceone">Collection::replaceOne</h4>
-<h4 id="collectionadd-class">mysql_xdevapi\CollectionAdd</h4>
-<h4 id="collectionadd-construct">CollectionAdd::__construct</h4>
-<h4 id="collectionadd-execute">CollectionAdd::execute</h4>
-<h4 id="collectionfind-class">mysql_xdevapi\CollectionFind</h4>
-<h4 id="collectionfind-bind">CollectionFind::bind</h4>
-<h4 id="collectionfind-construct">CollectionFind::__construct</h4>
-<h4 id="collectionfind-execute">CollectionFind::execute</h4>
-<h4 id="collectionfind-fields">CollectionFind::fields</h4>
-<h4 id="collectionfind-groupby">CollectionFind::groupBy</h4>
-<h4 id="collectionfind-having">CollectionFind::having</h4>
-<h4 id="collectionfind-limit">CollectionFind::limit</h4>
-<h4 id="collectionfind-lockexclusive">CollectionFind::lockExclusive</h4>
-<h4 id="collectionfind-lockshared">CollectionFind::lockShared</h4>
-<h4 id="collectionfind-offset">CollectionFind::offset</h4>
-<h4 id="collectionfind-sort">CollectionFind::sort</h4>
-<h4 id="collectionmodify-class">mysql_xdevapi\CollectionModify</h4>
-<h4 id="collectionmodify-arrayappend">CollectionModify::arrayAppend</h4>
-<h4 id="collectionmodify-arrayinsert">CollectionModify::arrayInsert</h4>
-<h4 id="collectionmodify-bind">CollectionModify::bind</h4>
-<h4 id="collectionmodify-construct">CollectionModify::__construct</h4>
-<h4 id="collectionmodify-execute">CollectionModify::execute</h4>
-<h4 id="collectionmodify-limit">CollectionModify::limit</h4>
-<h4 id="collectionmodify-patch">CollectionModify::patch</h4>
-<h4 id="collectionmodify-replace">CollectionModify::replace</h4>
-<h4 id="collectionmodify-set">CollectionModify::set</h4>
-<h4 id="collectionmodify-skip">CollectionModify::skip</h4>
-<h4 id="collectionmodify-sort">CollectionModify::sort</h4>
-<h4 id="collectionmodify-unset">CollectionModify::unset</h4>
-<h4 id="collectionremove-class">mysql_xdevapi\CollectionRemove</h4>
-<h4 id="collectionremove-bind">CollectionRemove::bind</h4>
-<h4 id="collectionremove-construct">CollectionRemove::__construct</h4>
-<h4 id="collectionremove-execute">CollectionRemove::execute</h4>
-<h4 id="collectionremove-limit">CollectionRemove::limit</h4>
-<h4 id="collectionremove-sort">CollectionRemove::sort</h4>
-<h4 id="columnresult-class">mysql_xdevapi\ColumnResult</h4>
-<h4 id="columnresult-construct">ColumnResult::__construct</h4>
-<h4 id="columnresult-getcharset">ColumnResult::getCharacterSetName</h4>
-<h4 id="columnresult-getcollation">ColumnResult::getCollationName</h4>
-<h4 id="columnresult-getcolumnlabel">ColumnResult::getColumnLabel</h4>
-<h4 id="columnresult-getcolumnname">ColumnResult::getColumnName</h4>
-<h4 id="columnresult-getfractionaldigits">ColumnResult::getFractionalDigits</h4>
-<h4 id="columnresult-getlength">ColumnResult::getLength</h4>
-<h4 id="columnresult-getschemaname">ColumnResult::getSchemaName</h4>
-<h4 id="columnresult-gettablelabel">ColumnResult::getTableLabel</h4>
-<h4 id="columnresult-gettablename">ColumnResult::getTableName</h4>
-<h4 id="columnresult-gettype">ColumnResult::getType</h4>
-<h4 id="columnresult-isnumbersigned">ColumnResult::isNumberSigned</h4>
-<h4 id="columnresult-ispadded">ColumnResult::isPadded</h4>
-<h4 id="crudoperationbindable-class">mysql_xdevapi\CrudOperationBindable</h4>
-<h4 id="crudoperationbindable-bind">CrudOperationBindable::bind</h4>
-<h4 id="crudoperationlimitable-class">mysql_xdevapi\CrudOperationLimitable</h4>
-<h4 id="crudoperationlimitable-limit">CrudOperationLimitable::limit</h4>
-<h4 id="crudoperationskippable-class">mysql_xdevapi\CrudOperationSkippable</h4>
-<h4 id="crudoperationskippable-skip">CrudOperationSkippable::skip</h4>
-<h4 id="crudoperationsortable-class">mysql_xdevapi\CrudOperationSortable</h4>
-<h4 id="crudoperationsortable-sort">CrudOperationSortable::sort</h4>
-<h4 id="databaseobject-class">mysql_xdevapi\DatabaseObject</h4>
-<h4 id="databaseobject-exists">DatabaseObject::existsInDatabase</h4>
-<h4 id="databaseobject-getname">DatabaseObject::getName</h4>
-<h4 id="databaseobject-getsession">DatabaseObject::getSession</h4>
-<h4 id="docresult-class">mysql_xdevapi\DocResult</h4>
-<h4 id="docresult-construct">DocResult::__construct</h4>
-<h4 id="docresult-fetchall">DocResult::fetchAll</h4>
-<h4 id="docresult-fetchone">DocResult::fetchOne</h4>
-<h4 id="docresult-getwarnings">DocResult::getWarnings</h4>
-<h4 id="docresult-getwarningscount">DocResult::getWarningsCount</h4>
-<h4 id="exception-class">mysql_xdevapi\Exception</h4>
-<h4 id="executable-class">mysql_xdevapi\Executable</h4>
-<h4 id="executable-execute">Executable::execute</h4>
-<h4 id="executionstatus-class">mysql_xdevapi\ExecutionStatus</h4>
-<h4 id="executionstatus-construct">ExecutionStatus::__construct</h4>
-<h4 id="expression-class">mysql_xdevapi\Expression</h4>
-<h4 id="expression-construct">Expression::__construct</h4>
-<h4 id="result-class">mysql_xdevapi\Result</h4>
-<h4 id="result-construct">Result::__construct</h4>
-<h4 id="result-getaffecteditems">Result::getAffectedItemsCount</h4>
-<h4 id="result-getautoincrement">Result::getAutoIncrementValue</h4>
-<h4 id="result-getgeneratedids">Result::getGeneratedIds</h4>
-<h4 id="result-getwarnings">Result::getWarnings</h4>
-<h4 id="result-getwarningscount">Result::getWarningsCount</h4>
-<h4 id="rowresult-class">mysql_xdevapi\RowResult</h4>
-<h4 id="rowresult-construct">RowResult::__construct</h4>
-<h4 id="rowresult-fetchall">RowResult::fetchAll</h4>
-<h4 id="rowresult-fetchone">RowResult::fetchOne</h4>
-<h4 id="rowresult-getcolumnscount">RowResult::getColumnsCount</h4>
-<h4 id="rowresult-getcolumnnames">RowResult::getColumnNames</h4>
-<h4 id="rowresult-getcolumns">RowResult::getColumns</h4>
-<h4 id="rowresult-getwarnings">RowResult::getWarnings</h4>
-<h4 id="rowresult-getwarningscount">RowResult::getWarningsCount</h4>
-<h4 id="schema-class">mysql_xdevapi\Schema</h4>
-<h4 id="schema-construct">Schema::__construct</h4>
-<h4 id="schema-createcollection">Schema::createCollection</h4>
-<h4 id="schema-dropcollection">Schema::dropCollection</h4>
-<h4 id="schema-exists">Schema::existsInDatabase</h4>
-<h4 id="schema-getcollection">Schema::getCollection</h4>
-<h4 id="schema-getcollectionastable">Schema::getCollectionAsTable</h4>
-<h4 id="schema-getcollections">Schema::getCollections</h4>
-<h4 id="schema-getname">Schema::getName</h4>
-<h4 id="schema-getsession">Schema::getSession</h4>
-<h4 id="schema-gettable">Schema::getTable</h4>
-<h4 id="schema-gettables">Schema::getTables</h4>
-<h4 id="schemaobject-class">mysql_xdevapi\SchemaObject</h4>
-<h4 id="schemaobject-getschema">SchemaObject::getSchema</h4>
-<h4 id="session-class">mysql_xdevapi\Session</h4>
-<h4 id="session-close">Session::close</h4>
-<h4 id="session-commit">Session::commit</h4>
-<h4 id="session-construct">Session::__construct</h4>
-<h4 id="session-createschema">Session::createSchema</h4>
-<h4 id="session-dropschema">Session::dropSchema</h4>
-<h4 id="session-generateuuid">Session::generateUUID</h4>
-<h4 id="session-getdefaultschema">Session::getDefaultSchema</h4>
-<h4 id="session-getschema">Session::getSchema</h4>
-<h4 id="session-getschemas">Session::getSchemas</h4>
-<h4 id="session-getserverversion">Session::getServerVersion</h4>
-<h4 id="session-listclients">Session::listClients</h4>
-<h4 id="session-quotename">Session::quoteName</h4>
-<h4 id="session-releasesavepoint">Session::releaseSavepoint</h4>
-<h4 id="session-rollback">Session::rollback</h4>
-<h4 id="session-rollbackto">Session::rollbackTo</h4>
-<h4 id="session-setsavepoint">Session::setSavepoint</h4>
-<h4 id="session-sql">Session::sql</h4>
-<h4 id="session-starttransaction">Session::startTransaction</h4>
-<h4 id="sqlstatement-class">mysql_xdevapi\SqlStatement</h4>
-<h4 id="sqlstatement-bind">SqlStatement::bind</h4>
-<h4 id="sqlstatement-construct">SqlStatement::__construct</h4>
-<h4 id="sqlstatement-execute">SqlStatement::execute</h4>
-<h4 id="sqlstatement-getnextresult">SqlStatement::getNextResult</h4>
-<h4 id="sqlstatement-getresult">SqlStatement::getResult</h4>
-<h4 id="sqlstatement-hasmoreresults">SqlStatement::hasMoreResults</h4>
-<h4 id="sqlstatementresult-class">mysql_xdevapi\SqlStatementResult</h4>
-<h4 id="sqlstatementresult-construct">SqlStatementResult::__construct</h4>
-<h4 id="sqlstatementresult-fetchall">SqlStatementResult::fetchAll</h4>
-<h4 id="sqlstatementresult-fetchone">SqlStatementResult::fetchOne</h4>
-<h4 id="sqlstatementresult-getaffecteditems">SqlStatementResult::getAffectedItemsCount</h4>
-<h4 id="sqlstatementresult-getcolumnscount">SqlStatementResult::getColumnsCount</h4>
-<h4 id="sqlstatementresult-getcolumnnames">SqlStatementResult::getColumnNames</h4>
-<h4 id="sqlstatementresult-getcolumns">SqlStatementResult::getColumns</h4>
-<h4 id="sqlstatementresult-getgeneratedids">SqlStatementResult::getGeneratedIds</h4>
-<h4 id="sqlstatementresult-getlastinsertid">SqlStatementResult::getLastInsertId</h4>
-<h4 id="sqlstatementresult-getwarnings">SqlStatementResult::getWarnings</h4>
-<h4 id="sqlstatementresult-getwarningscount">SqlStatementResult::getWarningsCount</h4>
-<h4 id="sqlstatementresult-hasdata">SqlStatementResult::hasData</h4>
-<h4 id="sqlstatementresult-nextresult">SqlStatementResult::nextResult</h4>
-<h4 id="statement-class">mysql_xdevapi\Statement</h4>
-<h4 id="statement-construct">Statement::__construct</h4>
-<h4 id="statement-getnextresult">Statement::getNextResult</h4>
-<h4 id="statement-getresult">Statement::getResult</h4>
-<h4 id="statement-hasmoreresults">Statement::hasMoreResults</h4>
-<h4 id="table-class">mysql_xdevapi\Table</h4>
-<h4 id="table-construct">Table::__construct</h4>
-<h4 id="table-count">Table::count</h4>
-<h4 id="table-delete">Table::delete</h4>
-<h4 id="table-exists">Table::existsInDatabase</h4>
-<h4 id="table-getname">Table::getName</h4>
-<h4 id="table-getschema">Table::getSchema</h4>
-<h4 id="table-getsession">Table::getSession</h4>
-<h4 id="table-insert">Table::insert</h4>
-<h4 id="table-isview">Table::isView</h4>
-<h4 id="table-select">Table::select</h4>
-<h4 id="table-update">Table::update</h4>
-<h4 id="tabledelete-class">mysql_xdevapi\TableDelete</h4>
-<h4 id="tabledelete-bind">TableDelete::bind</h4>
-<h4 id="tabledelete-construct">TableDelete::__construct</h4>
-<h4 id="tabledelete-execute">TableDelete::execute</h4>
-<h4 id="tabledelete-limit">TableDelete::limit</h4>
-<h4 id="tabledelete-orderby">TableDelete::orderby</h4>
-<h4 id="tabledelete-where">TableDelete::where</h4>
-<h4 id="tableinsert-class">mysql_xdevapi\TableInsert</h4>
-<h4 id="tableinsert-construct">TableInsert::__construct</h4>
-<h4 id="tableinsert-execute">TableInsert::execute</h4>
-<h4 id="tableinsert-values">TableInsert::values</h4>
-<h4 id="tableselect-class">mysql_xdevapi\TableSelect</h4>
-<h4 id="tableselect-bind">TableSelect::bind</h4>
-<h4 id="tableselect-construct">TableSelect::__construct</h4>
-<h4 id="tableselect-execute">TableSelect::execute</h4>
-<h4 id="tableselect-groupby">TableSelect::groupBy</h4>
-<h4 id="tableselect-having">TableSelect::having</h4>
-<h4 id="tableselect-limit">TableSelect::limit</h4>
-<h4 id="tableselect-lockexclusive">TableSelect::lockExclusive</h4>
-<h4 id="tableselect-lockshared">TableSelect::lockShared</h4>
-<h4 id="tableselect-offset">TableSelect::offset</h4>
-<h4 id="tableselect-orderby">TableSelect::orderby</h4>
-<h4 id="tableselect-where">TableSelect::where</h4>
-<h4 id="tableupdate-class">mysql_xdevapi\TableUpdate</h4>
-<h4 id="tableupdate-bind">TableUpdate::bind</h4>
-<h4 id="tableupdate-construct">TableUpdate::__construct</h4>
-<h4 id="tableupdate-execute">TableUpdate::execute</h4>
-<h4 id="tableupdate-limit">TableUpdate::limit</h4>
-<h4 id="tableupdate-orderby">TableUpdate::orderby</h4>
-<h4 id="tableupdate-set">TableUpdate::set</h4>
-<h4 id="tableupdate-where">TableUpdate::where</h4>
-<h4 id="warning-class">mysql_xdevapi\Warning</h4>
-<h4 id="warning-construct">Warning::__construct</h4>
-
-<h4 id="original-mysql-api">Original MySQL API</h4>
 
 <nav align="center">
-  <h2>NAVIGATION</h2>
+  <h3>NAVIGATION</h3>
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#overview">OVERVIEW</a> |
+    <a href="#quick-start-guide">QUICK START GUIDE</a> |
+    <a href="#dual-interface">DUAL INTERFACE: PROCEDURAL & OOP</a> |
+    <a href="#connections">CONNECTIONS</a> |
+    <a href="#executing-statements">EXECUTING STATEMENTS</a> |
+    <a href="#prepared-statements">PREPARED STATEMENTS</a> |
+    <a href="#stored-procedures">STORED PROCEDURES</a> |
+    <a href="#multiple-statements">MULTIPLE STATEMENTS</a> |
+    <a href="#transaction-support">API TRANSACTION SUPPORT</a> |
+    <a href="#metadata">METADATA</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#runtime-configuration">RUNTIME CONFIGURATION</a> |
+    <a href="#persistent-connections">MYSQLI EXTENSION & PERSISTENT CONNECTIONS</a> |
+    <a href="#mysqli-class">MYSQLI</a> |
+    <a href="#mysqli-affected-rows">MYSQLI::$AFFECTED_ROWS</a> |
+    <a href="#mysqli-autocommit">MYSQLI::AUTOCOMMIT</a> |
+    <a href="#mysqli-begin-transaction">MYSQLI::BEGIN_TRANSACTION</a> |
+    <a href="#mysqli-change-user">MYSQLI::CHANGE_USER</a> |
+    <a href="#mysqli-character-set-name">MYSQLI::CHARACTER_SET_NAME</a> |
+    <a href="#mysqli-close">MYSQLI::CLOSE</a> |
+    <a href="#mysqli-commit">MYSQLI::COMMIT</a> |
+    <a href="#mysqli-connect-errno">MYSQLI::$CONNECT_ERRNO</a> |
+    <a href="#mysqli-connect-error">MYSQLI::$CONNECT_ERROR</a> |
+    <a href="#mysqli-construct">MYSQLI::__CONSTRUCT</a> |
+    <a href="#mysqli-debug">MYSQLI::DEBUG</a> |
+    <a href="#mysqli-dump-debug-info">MYSQLI::DUMP_DEBUG_INFO</a> |
+    <a href="#mysqli-errno">MYSQLI->ERRNO</a> |
+    <a href="#mysqli-error">MYSQLI->ERROR</a> |
+    <a href="#mysqli-error-list">MYSQLI::$ERROR_LIST</a> |
+    <a href="#mysqli-execute-query">MYSQLI::EXECUTE_QUERY</a> |
+    <a href="#mysqli-field-count">MYSQLI::$FIELD_COUNT</a> |
+    <a href="#mysqli-get-charset">MYSQLI::GET_CHARSET</a> |
+    <a href="#mysqli-client-info">MYSQLI::$CLIENT_INFO</a> |
+    <a href="#mysqli-client-version">MYSQLI::$CLIENT_VERSION</a> |
+    <a href="#mysqli-get-connection-stats">MYSQLI::GET_CONNECTION_STATS</a> |
+    <a href="#mysqli-host-info">MYSQLI::$HOST_INFO</a> |
+    <a href="#mysqli-protocol-version">MYSQLI::$PROTOCOL_VERSION</a> |
+    <a href="#mysqli-server-info">MYSQLI::$SERVER_INFO</a> |
+    <a href="#mysqli-server-version">MYSQLI::$SERVER_VERSION</a> |
+    <a href="#mysqli-get-warnings">MYSQLI::GET_WARNINGS</a> |
+    <a href="#mysqli-info">MYSQLI::$INFO</a> |
+    <a href="#mysqli-init">MYSQLI::INIT</a> |
+    <a href="#mysqli-insert-id">MYSQLI::$INSERT_ID</a> |
+    <a href="#mysqli-kill">MYSQLI::KILL</a> |
+    <a href="#mysqli-more-results">MYSQLI::MORE_RESULTS</a> |
+    <a href="#mysqli-multi-query">MYSQLI::MULTI_QUERY</a> |
+    <a href="#mysqli-next-result">MYSQLI::NEXT_RESULT</a> |
+    <a href="#mysqli-options">MYSQLI::OPTIONS</a> |
+    <a href="#mysqli-ping">MYSQLI::PING</a> |
+    <a href="#mysqli-poll">MYSQLI::POLL</a> |
+    <a href="#mysqli-prepare">MYSQLI::PREPARE</a> |
+    <a href="#mysqli-query">MYSQLI::QUERY</a> |
+    <a href="#mysqli-real-connect">MYSQLI::REAL_CONNECT</a> |
+    <a href="#mysqli-real-escape-string">MYSQLI::REAL_ESCAPE_STRING</a> |
+    <a href="#mysqli-real-query">MYSQLI::REAL_QUERY</a> |
+    <a href="#mysqli-reap-async-query">MYSQLI::REAP_ASYNC_QUERY</a> |
+    <a href="#mysqli-refresh">MYSQLI::REFRESH</a> |
+    <a href="#mysqli-release-savepoint">MYSQLI::RELEASE_SAVEPOINT</a> |
+    <a href="#mysqli-rollback">MYSQLI::ROLLBACK</a> |
+    <a href="#mysqli-savepoint">MYSQLI::SAVEPOINT</a> |
+    <a href="#mysqli-select-db">MYSQLI::SELECT_DB</a> |
+    <a href="#mysqli-set-charset">MYSQLI::SET_CHARSET</a> |
+    <a href="#mysqli-sqlstate">MYSQLI::$SQLSTATE</a> |
+    <a href="#mysqli-ssl-set">MYSQLI::SSL_SET</a> |
+    <a href="#mysqli-stat">MYSQLI::STAT</a> |
+    <a href="#mysqli-stmt-init">MYSQLI::STMT_INIT</a> |
+    <a href="#mysqli-store-result">MYSQLI::STORE_RESULT</a> |
+    <a href="#mysqli-thread-id">MYSQLI::$THREAD_ID</a> |
+    <a href="#mysqli-thread-safe">MYSQLI::THREAD_SAFE</a> |
+    <a href="#mysqli-use-result">MYSQLI::USE_RESULT</a> |
+    <a href="#mysqli-warning-count">MYSQLI::$WARNING_COUNT</a> |
+    <a href="#mysqli-stmt-class">MYSQLI_STMT</a> |
+    <a href="#mysqli-stmt-affected-rows">MYSQLI_STMT::$AFFECTED_ROWS</a> |
+    <a href="#mysqli-stmt-attr-get">MYSQLI_STMT::ATTR_GET</a> |
+    <a href="#mysqli-stmt-attr-set">MYSQLI_STMT::ATTR_SET</a> |
+    <a href="#mysqli-stmt-bind-param">MYSQLI_STMT::BIND_PARAM</a> |
+    <a href="#mysqli-stmt-bind-result">MYSQLI_STMT::BIND_RESULT</a> |
+    <a href="#mysqli-stmt-close">MYSQLI_STMT::CLOSE</a> |
+    <a href="#mysqli-stmt-construct">MYSQLI_STMT::__CONSTRUCT</a> |
+    <a href="#mysqli-stmt-data-seek">MYSQLI_STMT::DATA_SEEK</a> |
+    <a href="#mysqli-stmt-errno">MYSQLI_STMT::$ERRNO</a> |
+    <a href="#mysqli-stmt-error">MYSQLI_STMT::$ERROR</a> |
+    <a href="#mysqli-stmt-error-list">MYSQLI_STMT::$ERROR_LIST</a> |
+    <a href="#mysqli-stmt-execute">MYSQLI_STMT::EXECUTE</a> |
+    <a href="#mysqli-stmt-fetch">MYSQLI_STMT::FETCH</a> |
+    <a href="#mysqli-stmt-field-count">MYSQLI_STMT::$FIELD_COUNT</a> |
+    <a href="#mysqli-stmt-free-result">MYSQLI_STMT::FREE_RESULT</a> |
+    <a href="#mysqli-stmt-get-result">MYSQLI_STMT::GET_RESULT</a> |
+    <a href="#mysqli-stmt-get-warnings">MYSQLI_STMT::GET_WARNINGS</a> |
+    <a href="#mysqli-stmt-insert-id">MYSQLI_STMT::$INSERT_ID</a> |
+    <a href="#mysqli-stmt-more-results">MYSQLI_STMT::MORE_RESULTS</a> |
+    <a href="#mysqli-stmt-next-result">MYSQLI_STMT::NEXT_RESULT</a> |
+    <a href="#mysqli-stmt-num-rows">MYSQLI_STMT::$NUM_ROWS</a> |
+    <a href="#mysqli-stmt-param-count">MYSQLI_STMT::$PARAM_COUNT</a> |
+    <a href="#mysqli-stmt-prepare">MYSQLI_STMT::PREPARE</a> |
+    <a href="#mysqli-stmt-reset">MYSQLI_STMT::RESET</a> |
+    <a href="#mysqli-stmt-result-metadata">MYSQLI_STMT::RESULT_METADATA</a> |
+    <a href="#mysqli-stmt-send-long-data">MYSQLI_STMT::SEND_LONG_DATA</a> |
+    <a href="#mysqli-stmt-sqlstate">MYSQLI_STMT::$SQLSTATE</a> |
+    <a href="#mysqli-stmt-store-result">MYSQLI_STMT::STORE_RESULT</a> |
+    <a href="#mysqli-result-class">MYSQLI_RESULT</a> |
+    <a href="#mysqli-result-construct">MYSQLI_RESULT::__CONSTRUCT</a> |
+    <a href="#mysqli-result-current-field">MYSQLI_RESULT::$CURRENT_FIELD</a> |
+    <a href="#mysqli-result-data-seek">MYSQLI_RESULT::DATA_SEEK</a> |
+    <a href="#mysqli-result-fetch-all">MYSQLI_RESULT::FETCH_ALL</a> |
+    <a href="#mysqli-result-fetch-array">MYSQLI_RESULT::FETCH_ARRAY</a> |
+    <a href="#mysqli-result-fetch-assoc">MYSQLI_RESULT::FETCH_ASSOC</a> |
+    <a href="#mysqli-result-fetch-column">MYSQLI_RESULT::FETCH_COLUMN</a> |
+    <a href="#mysqli-result-fetch-field">MYSQLI_RESULT::FETCH_FIELD</a> |
+    <a href="#mysqli-result-fetch-field-direct">MYSQLI_RESULT::FETCH_FIELD_DIRECT</a> |
+    <a href="#mysqli-result-fetch-fields">MYSQLI_RESULT::FETCH_FIELDS</a> |
+    <a href="#mysqli-result-fetch-object">MYSQLI_RESULT::FETCH_OBJECT</a> |
+    <a href="#mysqli-result-fetch-row">MYSQLI_RESULT::FETCH_ROW</a> |
+    <a href="#mysqli-result-field-count">MYSQLI_RESULT::$FIELD_COUNT</a> |
+    <a href="#mysqli-result-field-seek">MYSQLI_RESULT::FIELD_SEEK</a> |
+    <a href="#mysqli-result-free">MYSQLI_RESULT::FREE</a> |
+    <a href="#mysqli-result-get-iterator">MYSQLI_RESULT::GETITERATOR</a> |
+    <a href="#mysqli-result-lengths">MYSQLI_RESULT::$LENGTHS</a> |
+    <a href="#mysqli-result-num-rows">MYSQLI_RESULT::$NUM_ROWS</a> |
+    <a href="#mysqli-driver-class">MYSQLI_DRIVER</a> |
+    <a href="#mysqli-driver-embedded-server-end">MYSQLI_DRIVER::EMBEDDED_SERVER_END</a> |
+    <a href="#mysqli-driver-embedded-server-start">MYSQLI_DRIVER::EMBEDDED_SERVER_START</a> |
+    <a href="#mysqli-driver-report-mode">MYSQLI_DRIVER::$REPORT_MODE</a> |
+    <a href="#mysqli-warning-class">MYSQLI_WARNING</a> |
+    <a href="#mysqli-warning-construct">MYSQLI_WARNING::__CONSTRUCT</a> |
+    <a href="#mysqli-warning-next">MYSQLI_WARNING::NEXT</a> |
+    <a href="#mysqli-sql-exception-class">MYSQLI_SQL_EXCEPTION</a> |
+    <a href="#mysqli-sql-exception-getsqlstate">MYSQLI_SQL_EXCEPTION::GETSQLSTATE</a> |
+    <a href="#mysqli-connect-function">MYSQLI_CONNECT</a> |
+    <a href="#mysqli-escape-string">MYSQLI::ESCAPE_STRING</a> |
+    <a href="#mysqli-execute">MYSQLI_EXECUTE</a> |
+    <a href="#mysqli-get-client-stats">MYSQLI_GET_CLIENT_STATS</a> |
+    <a href="#mysqli-get-links-stats">MYSQLI_GET_LINKS_STATS</a> |
+    <a href="#mysqli-report">MYSQLI_REPORT</a> |
+    <a href="#mysqli-set-opt">MYSQLI::SET_OPT</a>
+  </p>
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="overview">OVERVIEW</h4>
+<h4 id="quick-start-guide">QUICK START GUIDE</h4>
+<h4 id="dual-interface">DUAL INTERFACE: PROCEDURAL & OOP</h4>
+<h4 id="connections">CONNECTIONS</h4>
+<h4 id="executing-statements">EXECUTING STATEMENTS</h4>
+<h4 id="prepared-statements">PREPARED STATEMENTS</h4>
+<h4 id="stored-procedures">STORED PROCEDURES</h4>
+<h4 id="multiple-statements">MULTIPLE STATEMENTS</h4>
+<h4 id="transaction-support">API TRANSACTION SUPPORT</h4>
+<h4 id="metadata">METADATA</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
+<h4 id="persistent-connections">MYSQLI EXTENSION & PERSISTENT CONNECTIONS</h4>
+<h4 id="mysqli-class">MYSQLI</h4>
+<h4 id="mysqli-affected-rows">MYSQLI::$AFFECTED_ROWS</h4>
+<h4 id="mysqli-autocommit">MYSQLI::AUTOCOMMIT</h4>
+<h4 id="mysqli-begin-transaction">MYSQLI::BEGIN_TRANSACTION</h4>
+<h4 id="mysqli-change-user">MYSQLI::CHANGE_USER</h4>
+<h4 id="mysqli-character-set-name">MYSQLI::CHARACTER_SET_NAME</h4>
+<h4 id="mysqli-close">MYSQLI::CLOSE</h4>
+<h4 id="mysqli-commit">MYSQLI::COMMIT</h4>
+<h4 id="mysqli-connect-errno">MYSQLI::$CONNECT_ERRNO</h4>
+<h4 id="mysqli-connect-error">MYSQLI::$CONNECT_ERROR</h4>
+<h4 id="mysqli-construct">MYSQLI::__CONSTRUCT</h4>
+<h4 id="mysqli-debug">MYSQLI::DEBUG</h4>
+<h4 id="mysqli-dump-debug-info">MYSQLI::DUMP_DEBUG_INFO</h4>
+<h4 id="mysqli-errno">MYSQLI->ERRNO</h4>
+<h4 id="mysqli-error">MYSQLI->ERROR</h4>
+<h4 id="mysqli-error-list">MYSQLI::$ERROR_LIST</h4>
+<h4 id="mysqli-execute-query">MYSQLI::EXECUTE_QUERY</h4>
+<h4 id="mysqli-field-count">MYSQLI::$FIELD_COUNT</h4>
+<h4 id="mysqli-get-charset">MYSQLI::GET_CHARSET</h4>
+<h4 id="mysqli-client-info">MYSQLI::$CLIENT_INFO</h4>
+<h4 id="mysqli-client-version">MYSQLI::$CLIENT_VERSION</h4>
+<h4 id="mysqli-get-connection-stats">MYSQLI::GET_CONNECTION_STATS</h4>
+<h4 id="mysqli-host-info">MYSQLI::$HOST_INFO</h4>
+<h4 id="mysqli-protocol-version">MYSQLI::$PROTOCOL_VERSION</h4>
+<h4 id="mysqli-server-info">MYSQLI::$SERVER_INFO</h4>
+<h4 id="mysqli-server-version">MYSQLI::$SERVER_VERSION</h4>
+<h4 id="mysqli-get-warnings">MYSQLI::GET_WARNINGS</h4>
+<h4 id="mysqli-info">MYSQLI::$INFO</h4>
+<h4 id="mysqli-init">MYSQLI::INIT</h4>
+<h4 id="mysqli-insert-id">MYSQLI::$INSERT_ID</h4>
+<h4 id="mysqli-kill">MYSQLI::KILL</h4>
+<h4 id="mysqli-more-results">MYSQLI::MORE_RESULTS</h4>
+<h4 id="mysqli-multi-query">MYSQLI::MULTI_QUERY</h4>
+<h4 id="mysqli-next-result">MYSQLI::NEXT_RESULT</h4>
+<h4 id="mysqli-options">MYSQLI::OPTIONS</h4>
+<h4 id="mysqli-ping">MYSQLI::PING</h4>
+<h4 id="mysqli-poll">MYSQLI::POLL</h4>
+<h4 id="mysqli-prepare">MYSQLI::PREPARE</h4>
+<h4 id="mysqli-query">MYSQLI::QUERY</h4>
+<h4 id="mysqli-real-connect">MYSQLI::REAL_CONNECT</h4>
+<h4 id="mysqli-real-escape-string">MYSQLI::REAL_ESCAPE_STRING</h4>
+<h4 id="mysqli-real-query">MYSQLI::REAL_QUERY</h4>
+<h4 id="mysqli-reap-async-query">MYSQLI::REAP_ASYNC_QUERY</h4>
+<h4 id="mysqli-refresh">MYSQLI::REFRESH</h4>
+<h4 id="mysqli-release-savepoint">MYSQLI::RELEASE_SAVEPOINT</h4>
+<h4 id="mysqli-rollback">MYSQLI::ROLLBACK</h4>
+<h4 id="mysqli-savepoint">MYSQLI::SAVEPOINT</h4>
+<h4 id="mysqli-select-db">MYSQLI::SELECT_DB</h4>
+<h4 id="mysqli-set-charset">MYSQLI::SET_CHARSET</h4>
+<h4 id="mysqli-sqlstate">MYSQLI::$SQLSTATE</h4>
+<h4 id="mysqli-ssl-set">MYSQLI::SSL_SET</h4>
+<h4 id="mysqli-stat">MYSQLI::STAT</h4>
+<h4 id="mysqli-stmt-init">MYSQLI::STMT_INIT</h4>
+<h4 id="mysqli-store-result">MYSQLI::STORE_RESULT</h4>
+<h4 id="mysqli-thread-id">MYSQLI::$THREAD_ID</h4>
+<h4 id="mysqli-thread-safe">MYSQLI::THREAD_SAFE</h4>
+<h4 id="mysqli-use-result">MYSQLI::USE_RESULT</h4>
+<h4 id="mysqli-warning-count">MYSQLI::$WARNING_COUNT</h4>
+<h4 id="mysqli-stmt-class">MYSQLI_STMT</h4>
+<h4 id="mysqli-stmt-affected-rows">MYSQLI_STMT::$AFFECTED_ROWS</h4>
+<h4 id="mysqli-stmt-attr-get">MYSQLI_STMT::ATTR_GET</h4>
+<h4 id="mysqli-stmt-attr-set">MYSQLI_STMT::ATTR_SET</h4>
+<h4 id="mysqli-stmt-bind-param">MYSQLI_STMT::BIND_PARAM</h4>
+<h4 id="mysqli-stmt-bind-result">MYSQLI_STMT::BIND_RESULT</h4>
+<h4 id="mysqli-stmt-close">MYSQLI_STMT::CLOSE</h4>
+<h4 id="mysqli-stmt-construct">MYSQLI_STMT::__CONSTRUCT</h4>
+<h4 id="mysqli-stmt-data-seek">MYSQLI_STMT::DATA_SEEK</h4>
+<h4 id="mysqli-stmt-errno">MYSQLI_STMT::$ERRNO</h4>
+<h4 id="mysqli-stmt-error">MYSQLI_STMT::$ERROR</h4>
+<h4 id="mysqli-stmt-error-list">MYSQLI_STMT::$ERROR_LIST</h4>
+<h4 id="mysqli-stmt-execute">MYSQLI_STMT::EXECUTE</h4>
+<h4 id="mysqli-stmt-fetch">MYSQLI_STMT::FETCH</h4>
+<h4 id="mysqli-stmt-field-count">MYSQLI_STMT::$FIELD_COUNT</h4>
+<h4 id="mysqli-stmt-free-result">MYSQLI_STMT::FREE_RESULT</h4>
+<h4 id="mysqli-stmt-get-result">MYSQLI_STMT::GET_RESULT</h4>
+<h4 id="mysqli-stmt-get-warnings">MYSQLI_STMT::GET_WARNINGS</h4>
+<h4 id="mysqli-stmt-insert-id">MYSQLI_STMT::$INSERT_ID</h4>
+<h4 id="mysqli-stmt-more-results">MYSQLI_STMT::MORE_RESULTS</h4>
+<h4 id="mysqli-stmt-next-result">MYSQLI_STMT::NEXT_RESULT</h4>
+<h4 id="mysqli-stmt-num-rows">MYSQLI_STMT::$NUM_ROWS</h4>
+<h4 id="mysqli-stmt-param-count">MYSQLI_STMT::$PARAM_COUNT</h4>
+<h4 id="mysqli-stmt-prepare">MYSQLI_STMT::PREPARE</h4>
+<h4 id="mysqli-stmt-reset">MYSQLI_STMT::RESET</h4>
+<h4 id="mysqli-stmt-result-metadata">MYSQLI_STMT::RESULT_METADATA</h4>
+<h4 id="mysqli-stmt-send-long-data">MYSQLI_STMT::SEND_LONG_DATA</h4>
+<h4 id="mysqli-stmt-sqlstate">MYSQLI_STMT::$SQLSTATE</h4>
+<h4 id="mysqli-stmt-store-result">MYSQLI_STMT::STORE_RESULT</h4>
+<h4 id="mysqli-result-class">MYSQLI_RESULT</h4>
+<h4 id="mysqli-result-construct">MYSQLI_RESULT::__CONSTRUCT</h4>
+<h4 id="mysqli-result-current-field">MYSQLI_RESULT::$CURRENT_FIELD</h4>
+<h4 id="mysqli-result-data-seek">MYSQLI_RESULT::DATA_SEEK</h4>
+<h4 id="mysqli-result-fetch-all">MYSQLI_RESULT::FETCH_ALL</h4>
+<h4 id="mysqli-result-fetch-array">MYSQLI_RESULT::FETCH_ARRAY</h4>
+<h4 id="mysqli-result-fetch-assoc">MYSQLI_RESULT::FETCH_ASSOC</h4>
+<h4 id="mysqli-result-fetch-column">MYSQLI_RESULT::FETCH_COLUMN</h4>
+<h4 id="mysqli-result-fetch-field">MYSQLI_RESULT::FETCH_FIELD</h4>
+<h4 id="mysqli-result-fetch-field-direct">MYSQLI_RESULT::FETCH_FIELD_DIRECT</h4>
+<h4 id="mysqli-result-fetch-fields">MYSQLI_RESULT::FETCH_FIELDS</h4>
+<h4 id="mysqli-result-fetch-object">MYSQLI_RESULT::FETCH_OBJECT</h4>
+<h4 id="mysqli-result-fetch-row">MYSQLI_RESULT::FETCH_ROW</h4>
+<h4 id="mysqli-result-field-count">MYSQLI_RESULT::$FIELD_COUNT</h4>
+<h4 id="mysqli-result-field-seek">MYSQLI_RESULT::FIELD_SEEK</h4>
+<h4 id="mysqli-result-free">MYSQLI_RESULT::FREE</h4>
+<h4 id="mysqli-result-get-iterator">MYSQLI_RESULT::GETITERATOR</h4>
+<h4 id="mysqli-result-lengths">MYSQLI_RESULT::$LENGTHS</h4>
+<h4 id="mysqli-result-num-rows">MYSQLI_RESULT::$NUM_ROWS</h4>
+<h4 id="mysqli-driver-class">MYSQLI_DRIVER</h4>
+<h4 id="mysqli-driver-embedded-server-end">MYSQLI_DRIVER::EMBEDDED_SERVER_END</h4>
+<h4 id="mysqli-driver-embedded-server-start">MYSQLI_DRIVER::EMBEDDED_SERVER_START</h4>
+<h4 id="mysqli-driver-report-mode">MYSQLI_DRIVER::$REPORT_MODE</h4>
+<h4 id="mysqli-warning-class">MYSQLI_WARNING</h4>
+<h4 id="mysqli-warning-construct">MYSQLI_WARNING::__CONSTRUCT</h4>
+<h4 id="mysqli-warning-next">MYSQLI_WARNING::NEXT</h4>
+<h4 id="mysqli-sql-exception-class">MYSQLI_SQL_EXCEPTION</h4>
+<h4 id="mysqli-sql-exception-getsqlstate">MYSQLI_SQL_EXCEPTION::GETSQLSTATE</h4>
+<h4 id="mysqli-connect-function">MYSQLI_CONNECT</h4>
+<h4 id="mysqli-escape-string">MYSQLI::ESCAPE_STRING</h4>
+<h4 id="mysqli-execute">MYSQLI_EXECUTE</h4>
+<h4 id="mysqli-get-client-stats">MYSQLI_GET_CLIENT_STATS</h4>
+<h4 id="mysqli-get-links-stats">MYSQLI_GET_LINKS_STATS</h4>
+<h4 id="mysqli-report">MYSQLI_REPORT</h4>
+<h4 id="mysqli-set-opt">MYSQLI::SET_OPT</h4>
+
+
+<h4 id="mysql-xdevapi">MYSQL_XDEVAPI</h4>
+
+<nav align="center">
+  <h3>NAVIGATION</h3>
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#runtime-configuration">RUNTIME CONFIGURATION</a> |
+    <a href="#building-from-source">BUILDING / COMPILING FROM SOURCE</a> |
+    <a href="#changelog">CHANGELOG</a> |
+    <a href="#functions">MYSQL_XDEVAPI FUNCTIONS</a> |
+    <a href="#expression">EXPRESSION</a> |
+    <a href="#getsession">GETSESSION</a> |
+    <a href="#baseresult-class">MYSQL_XDEVAPI\BASERESULT</a> |
+    <a href="#baseresult-getwarnings">BASERESULT::GETWARNINGS</a> |
+    <a href="#baseresult-getwarningscount">BASERESULT::GETWARNINGSCOUNT</a> |
+    <a href="#client-class">MYSQL_XDEVAPI\CLIENT</a> |
+    <a href="#client-close">CLIENT::CLOSE</a> |
+    <a href="#client-construct">CLIENT::__CONSTRUCT</a> |
+    <a href="#client-getclient">CLIENT::GETCLIENT</a> |
+    <a href="#collection-class">MYSQL_XDEVAPI\COLLECTION</a> |
+    <a href="#collection-add">COLLECTION::ADD</a> |
+    <a href="#collection-addorreplaceone">COLLECTION::ADDORREPLACEONE</a> |
+    <a href="#collection-construct">COLLECTION::__CONSTRUCT</a> |
+    <a href="#collection-count">COLLECTION::COUNT</a> |
+    <a href="#collection-createindex">COLLECTION::CREATEINDEX</a> |
+    <a href="#collection-dropindex">COLLECTION::DROPINDEX</a> |
+    <a href="#collection-exists">COLLECTION::EXISTSINDATABASE</a> |
+    <a href="#collection-find">COLLECTION::FIND</a> |
+    <a href="#collection-getname">COLLECTION::GETNAME</a> |
+    <a href="#collection-getone">COLLECTION::GETONE</a> |
+    <a href="#collection-getschema">COLLECTION::GETSCHEMA</a> |
+    <a href="#collection-getsession">COLLECTION::GETSESSION</a> |
+    <a href="#collection-modify">COLLECTION::MODIFY</a> |
+    <a href="#collection-remove">COLLECTION::REMOVE</a> |
+    <a href="#collection-removeone">COLLECTION::REMOVEONE</a> |
+    <a href="#collection-replaceone">COLLECTION::REPLACEONE</a> |
+    <a href="#collectionadd-class">MYSQL_XDEVAPI\COLLECTIONADD</a> |
+    <a href="#collectionadd-construct">COLLECTIONADD::__CONSTRUCT</a> |
+    <a href="#collectionadd-execute">COLLECTIONADD::EXECUTE</a> |
+    <a href="#collectionfind-class">MYSQL_XDEVAPI\COLLECTIONFIND</a> |
+    <a href="#collectionfind-bind">COLLECTIONFIND::BIND</a> |
+    <a href="#collectionfind-construct">COLLECTIONFIND::__CONSTRUCT</a> |
+    <a href="#collectionfind-execute">COLLECTIONFIND::EXECUTE</a> |
+    <a href="#collectionfind-fields">COLLECTIONFIND::FIELDS</a> |
+    <a href="#collectionfind-groupby">COLLECTIONFIND::GROUPBY</a> |
+    <a href="#collectionfind-having">COLLECTIONFIND::HAVING</a> |
+    <a href="#collectionfind-limit">COLLECTIONFIND::LIMIT</a> |
+    <a href="#collectionfind-lockexclusive">COLLECTIONFIND::LOCKEXCLUSIVE</a> |
+    <a href="#collectionfind-lockshared">COLLECTIONFIND::LOCKSHARED</a> |
+    <a href="#collectionfind-offset">COLLECTIONFIND::OFFSET</a> |
+    <a href="#collectionfind-sort">COLLECTIONFIND::SORT</a> |
+    <a href="#collectionmodify-class">MYSQL_XDEVAPI\COLLECTIONMODIFY</a> |
+    <a href="#collectionmodify-arrayappend">COLLECTIONMODIFY::ARRAYAPPEND</a> |
+    <a href="#collectionmodify-arrayinsert">COLLECTIONMODIFY::ARRAYINSERT</a> |
+    <a href="#collectionmodify-bind">COLLECTIONMODIFY::BIND</a> |
+    <a href="#collectionmodify-construct">COLLECTIONMODIFY::__CONSTRUCT</a> |
+    <a href="#collectionmodify-execute">COLLECTIONMODIFY::EXECUTE</a> |
+    <a href="#collectionmodify-limit">COLLECTIONMODIFY::LIMIT</a> |
+    <a href="#collectionmodify-patch">COLLECTIONMODIFY::PATCH</a> |
+    <a href="#collectionmodify-replace">COLLECTIONMODIFY::REPLACE</a> |
+    <a href="#collectionmodify-set">COLLECTIONMODIFY::SET</a> |
+    <a href="#collectionmodify-skip">COLLECTIONMODIFY::SKIP</a> |
+    <a href="#collectionmodify-sort">COLLECTIONMODIFY::SORT</a> |
+    <a href="#collectionmodify-unset">COLLECTIONMODIFY::UNSET</a> |
+    <a href="#collectionremove-class">MYSQL_XDEVAPI\COLLECTIONREMOVE</a> |
+    <a href="#collectionremove-bind">COLLECTIONREMOVE::BIND</a> |
+    <a href="#collectionremove-construct">COLLECTIONREMOVE::__CONSTRUCT</a> |
+    <a href="#collectionremove-execute">COLLECTIONREMOVE::EXECUTE</a> |
+    <a href="#collectionremove-limit">COLLECTIONREMOVE::LIMIT</a> |
+    <a href="#collectionremove-sort">COLLECTIONREMOVE::SORT</a> |
+    <a href="#columnresult-class">MYSQL_XDEVAPI\COLUMNRESULT</a> |
+    <a href="#columnresult-construct">COLUMNRESULT::__CONSTRUCT</a> |
+    <a href="#columnresult-getcharset">COLUMNRESULT::GETCHARACTERSETNAME</a> |
+    <a href="#columnresult-getcollation">COLUMNRESULT::GETCOLLATIONNAME</a> |
+    <a href="#columnresult-getcolumnlabel">COLUMNRESULT::GETCOLUMNLABEL</a> |
+    <a href="#columnresult-getcolumnname">COLUMNRESULT::GETCOLUMNNAME</a> |
+    <a href="#columnresult-getfractionaldigits">COLUMNRESULT::GETFRACTIONALDIGITS</a> |
+    <a href="#columnresult-getlength">COLUMNRESULT::GETLENGTH</a> |
+    <a href="#columnresult-getschemaname">COLUMNRESULT::GETSCHEMANAME</a> |
+    <a href="#columnresult-gettablelabel">COLUMNRESULT::GETTABLELABEL</a> |
+    <a href="#columnresult-gettablename">COLUMNRESULT::GETTABLENAME</a> |
+    <a href="#columnresult-gettype">COLUMNRESULT::GETTYPE</a> |
+    <a href="#columnresult-isnumbersigned">COLUMNRESULT::ISNUMBERSIGNED</a> |
+    <a href="#columnresult-ispadded">COLUMNRESULT::ISPADDED</a> |
+    <a href="#crudoperationbindable-class">MYSQL_XDEVAPI\CRUDOPERATIONBINDABLE</a> |
+    <a href="#crudoperationbindable-bind">CRUDOPERATIONBINDABLE::BIND</a> |
+    <a href="#crudoperationlimitable-class">MYSQL_XDEVAPI\CRUDOPERATIONLIMITABLE</a> |
+    <a href="#crudoperationlimitable-limit">CRUDOPERATIONLIMITABLE::LIMIT</a> |
+    <a href="#crudoperationskippable-class">MYSQL_XDEVAPI\CRUDOPERATIONSKIPPABLE</a> |
+    <a href="#crudoperationskippable-skip">CRUDOPERATIONSKIPPABLE::SKIP</a> |
+    <a href="#crudoperationsortable-class">MYSQL_XDEVAPI\CRUDOPERATIONSORTABLE</a> |
+    <a href="#crudoperationsortable-sort">CRUDOPERATIONSORTABLE::SORT</a> |
+    <a href="#databaseobject-class">MYSQL_XDEVAPI\DATABASEOBJECT</a> |
+    <a href="#databaseobject-exists">DATABASEOBJECT::EXISTSINDATABASE</a> |
+    <a href="#databaseobject-getname">DATABASEOBJECT::GETNAME</a> |
+    <a href="#databaseobject-getsession">DATABASEOBJECT::GETSESSION</a> |
+    <a href="#docresult-class">MYSQL_XDEVAPI\DOCRESULT</a> |
+    <a href="#docresult-construct">DOCRESULT::__CONSTRUCT</a> |
+    <a href="#docresult-fetchall">DOCRESULT::FETCHALL</a> |
+    <a href="#docresult-fetchone">DOCRESULT::FETCHONE</a> |
+    <a href="#docresult-getwarnings">DOCRESULT::GETWARNINGS</a> |
+    <a href="#docresult-getwarningscount">DOCRESULT::GETWARNINGSCOUNT</a> |
+    <a href="#exception-class">MYSQL_XDEVAPI\EXCEPTION</a> |
+    <a href="#executable-class">MYSQL_XDEVAPI\EXECUTABLE</a> |
+    <a href="#executable-execute">EXECUTABLE::EXECUTE</a> |
+    <a href="#executionstatus-class">MYSQL_XDEVAPI\EXECUTIONSTATUS</a> |
+    <a href="#executionstatus-construct">EXECUTIONSTATUS::__CONSTRUCT</a> |
+    <a href="#expression-class">MYSQL_XDEVAPI\EXPRESSION</a> |
+    <a href="#expression-construct">EXPRESSION::__CONSTRUCT</a> |
+    <a href="#result-class">MYSQL_XDEVAPI\RESULT</a> |
+    <a href="#result-construct">RESULT::__CONSTRUCT</a> |
+    <a href="#result-getaffecteditems">RESULT::GETAFFECTEDITEMSCOUNT</a> |
+    <a href="#result-getautoincrement">RESULT::GETAUTOINCREMENTVALUE</a> |
+    <a href="#result-getgeneratedids">RESULT::GETGENERATEDIDS</a> |
+    <a href="#result-getwarnings">RESULT::GETWARNINGS</a> |
+    <a href="#result-getwarningscount">RESULT::GETWARNINGSCOUNT</a> |
+    <a href="#rowresult-class">MYSQL_XDEVAPI\ROWRESULT</a> |
+    <a href="#rowresult-construct">ROWRESULT::__CONSTRUCT</a> |
+    <a href="#rowresult-fetchall">ROWRESULT::FETCHALL</a> |
+    <a href="#rowresult-fetchone">ROWRESULT::FETCHONE</a> |
+    <a href="#rowresult-getcolumnscount">ROWRESULT::GETCOLUMNSCOUNT</a> |
+    <a href="#rowresult-getcolumnnames">ROWRESULT::GETCOLUMNNAMES</a> |
+    <a href="#rowresult-getcolumns">ROWRESULT::GETCOLUMNS</a> |
+    <a href="#rowresult-getwarnings">ROWRESULT::GETWARNINGS</a> |
+    <a href="#rowresult-getwarningscount">ROWRESULT::GETWARNINGSCOUNT</a> |
+    <a href="#schema-class">MYSQL_XDEVAPI\SCHEMA</a> |
+    <a href="#schema-construct">SCHEMA::__CONSTRUCT</a> |
+    <a href="#schema-createcollection">SCHEMA::CREATECOLLECTION</a> |
+    <a href="#schema-dropcollection">SCHEMA::DROPCOLLECTION</a> |
+    <a href="#schema-exists">SCHEMA::EXISTSINDATABASE</a> |
+    <a href="#schema-getcollection">SCHEMA::GETCOLLECTION</a> |
+    <a href="#schema-getcollectionastable">SCHEMA::GETCOLLECTIONASTABLE</a> |
+    <a href="#schema-getcollections">SCHEMA::GETCOLLECTIONS</a> |
+    <a href="#schema-getname">SCHEMA::GETNAME</a> |
+    <a href="#schema-getsession">SCHEMA::GETSESSION</a> |
+    <a href="#schema-gettable">SCHEMA::GETTABLE</a> |
+    <a href="#schema-gettables">SCHEMA::GETTABLES</a> |
+    <a href="#schemaobject-class">MYSQL_XDEVAPI\SCHEMAOBJECT</a> |
+    <a href="#schemaobject-getschema">SCHEMAOBJECT::GETSCHEMA</a> |
+    <a href="#session-class">MYSQL_XDEVAPI\SESSION</a> |
+    <a href="#session-close">SESSION::CLOSE</a> |
+    <a href="#session-commit">SESSION::COMMIT</a> |
+    <a href="#session-construct">SESSION::__CONSTRUCT</a> |
+    <a href="#session-createschema">SESSION::CREATESCHEMA</a> |
+    <a href="#session-dropschema">SESSION::DROPSCHEMA</a> |
+    <a href="#session-generateuuid">SESSION::GENERATEUUID</a> |
+    <a href="#session-getdefaultschema">SESSION::GETDEFAULTSCHEMA</a> |
+    <a href="#session-getschema">SESSION::GETSCHEMA</a> |
+    <a href="#session-getschemas">SESSION::GETSCHEMAS</a> |
+    <a href="#session-getserverversion">SESSION::GETSERVERVERSION</a> |
+    <a href="#session-listclients">SESSION::LISTCLIENTS</a> |
+    <a href="#session-quotename">SESSION::QUOTENAME</a> |
+    <a href="#session-releasesavepoint">SESSION::RELEASESAVEPOINT</a> |
+    <a href="#session-rollback">SESSION::ROLLBACK</a> |
+    <a href="#session-rollbackto">SESSION::ROLLBACKTO</a> |
+    <a href="#session-setsavepoint">SESSION::SETSAVEPOINT</a> |
+    <a href="#session-sql">SESSION::SQL</a> |
+    <a href="#session-starttransaction">SESSION::STARTTRANSACTION</a> |
+    <a href="#sqlstatement-class">MYSQL_XDEVAPI\SQLSTATEMENT</a> |
+    <a href="#sqlstatement-bind">SQLSTATEMENT::BIND</a> |
+    <a href="#sqlstatement-construct">SQLSTATEMENT::__CONSTRUCT</a> |
+    <a href="#sqlstatement-execute">SQLSTATEMENT::EXECUTE</a> |
+    <a href="#sqlstatement-getnextresult">SQLSTATEMENT::GETNEXTRESULT</a> |
+    <a href="#sqlstatement-getresult">SQLSTATEMENT::GETRESULT</a> |
+    <a href="#sqlstatement-hasmoreresults">SQLSTATEMENT::HASMORERESULTS</a> |
+    <a href="#sqlstatementresult-class">MYSQL_XDEVAPI\SQLSTATEMENTRESULT</a> |
+    <a href="#sqlstatementresult-construct">SQLSTATEMENTRESULT::__CONSTRUCT</a> |
+    <a href="#sqlstatementresult-fetchall">SQLSTATEMENTRESULT::FETCHALL</a> |
+    <a href="#sqlstatementresult-fetchone">SQLSTATEMENTRESULT::FETCHONE</a> |
+    <a href="#sqlstatementresult-getaffecteditems">SQLSTATEMENTRESULT::GETAFFECTEDITEMSCOUNT</a> |
+    <a href="#sqlstatementresult-getcolumnscount">SQLSTATEMENTRESULT::GETCOLUMNSCOUNT</a> |
+    <a href="#sqlstatementresult-getcolumnnames">SQLSTATEMENTRESULT::GETCOLUMNNAMES</a> |
+    <a href="#sqlstatementresult-getcolumns">SQLSTATEMENTRESULT::GETCOLUMNS</a> |
+    <a href="#sqlstatementresult-getgeneratedids">SQLSTATEMENTRESULT::GETGENERATEDIDS</a> |
+    <a href="#sqlstatementresult-getlastinsertid">SQLSTATEMENTRESULT::GETLASTINSERTID</a> |
+    <a href="#sqlstatementresult-getwarnings">SQLSTATEMENTRESULT::GETWARNINGS</a> |
+    <a href="#sqlstatementresult-getwarningscount">SQLSTATEMENTRESULT::GETWARNINGSCOUNT</a> |
+    <a href="#sqlstatementresult-hasdata">SQLSTATEMENTRESULT::HASDATA</a> |
+    <a href="#sqlstatementresult-nextresult">SQLSTATEMENTRESULT::NEXTRESULT</a> |
+    <a href="#statement-class">MYSQL_XDEVAPI\STATEMENT</a> |
+    <a href="#statement-construct">STATEMENT::__CONSTRUCT</a> |
+    <a href="#statement-getnextresult">STATEMENT::GETNEXTRESULT</a> |
+    <a href="#statement-getresult">STATEMENT::GETRESULT</a> |
+    <a href="#statement-hasmoreresults">STATEMENT::HASMORERESULTS</a> |
+    <a href="#table-class">MYSQL_XDEVAPI\TABLE</a> |
+    <a href="#table-construct">TABLE::__CONSTRUCT</a> |
+    <a href="#table-count">TABLE::COUNT</a> |
+    <a href="#table-delete">TABLE::DELETE</a> |
+    <a href="#table-exists">TABLE::EXISTSINDATABASE</a> |
+    <a href="#table-getname">TABLE::GETNAME</a> |
+    <a href="#table-getschema">TABLE::GETSCHEMA</a> |
+    <a href="#table-getsession">TABLE::GETSESSION</a> |
+    <a href="#table-insert">TABLE::INSERT</a> |
+    <a href="#table-isview">TABLE::ISVIEW</a> |
+    <a href="#table-select">TABLE::SELECT</a> |
+    <a href="#table-update">TABLE::UPDATE</a> |
+    <a href="#tabledelete-class">MYSQL_XDEVAPI\TABLEDELETE</a> |
+    <a href="#tabledelete-bind">TABLEDELETE::BIND</a> |
+    <a href="#tabledelete-construct">TABLEDELETE::__CONSTRUCT</a> |
+    <a href="#tabledelete-execute">TABLEDELETE::EXECUTE</a> |
+    <a href="#tabledelete-limit">TABLEDELETE::LIMIT</a> |
+    <a href="#tabledelete-orderby">TABLEDELETE::ORDERBY</a> |
+    <a href="#tabledelete-where">TABLEDELETE::WHERE</a> |
+    <a href="#tableinsert-class">MYSQL_XDEVAPI\TABLEINSERT</a> |
+    <a href="#tableinsert-construct">TABLEINSERT::__CONSTRUCT</a> |
+    <a href="#tableinsert-execute">TABLEINSERT::EXECUTE</a> |
+    <a href="#tableinsert-values">TABLEINSERT::VALUES</a> |
+    <a href="#tableselect-class">MYSQL_XDEVAPI\TABLESELECT</a> |
+    <a href="#tableselect-bind">TABLESELECT::BIND</a> |
+    <a href="#tableselect-construct">TABLESELECT::__CONSTRUCT</a> |
+    <a href="#tableselect-execute">TABLESELECT::EXECUTE</a> |
+    <a href="#tableselect-groupby">TABLESELECT::GROUPBY</a> |
+    <a href="#tableselect-having">TABLESELECT::HAVING</a> |
+    <a href="#tableselect-limit">TABLESELECT::LIMIT</a> |
+    <a href="#tableselect-lockexclusive">TABLESELECT::LOCKEXCLUSIVE</a> |
+    <a href="#tableselect-lockshared">TABLESELECT::LOCKSHARED</a> |
+    <a href="#tableselect-offset">TABLESELECT::OFFSET</a> |
+    <a href="#tableselect-orderby">TABLESELECT::ORDERBY</a> |
+    <a href="#tableselect-where">TABLESELECT::WHERE</a> |
+    <a href="#tableupdate-class">MYSQL_XDEVAPI\TABLEUPDATE</a> |
+    <a href="#tableupdate-bind">TABLEUPDATE::BIND</a> |
+    <a href="#tableupdate-construct">TABLEUPDATE::__CONSTRUCT</a> |
+    <a href="#tableupdate-execute">TABLEUPDATE::EXECUTE</a> |
+    <a href="#tableupdate-limit">TABLEUPDATE::LIMIT</a> |
+    <a href="#tableupdate-orderby">TABLEUPDATE::ORDERBY</a> |
+    <a href="#tableupdate-set">TABLEUPDATE::SET</a> |
+    <a href="#tableupdate-where">TABLEUPDATE::WHERE</a> |
+    <a href="#warning-class">MYSQL_XDEVAPI\WARNING</a> |
+    <a href="#warning-construct">WARNING::__CONSTRUCT</a>
+  </p>
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
+<h4 id="building-from-source">BUILDING / COMPILING FROM SOURCE</h4>
+<h4 id="changelog">CHANGELOG</h4>
+<h4 id="functions">MYSQL_XDEVAPI FUNCTIONS</h4>
+<h4 id="expression">EXPRESSION</h4>
+<h4 id="getsession">GETSESSION</h4>
+<h4 id="baseresult-class">MYSQL_XDEVAPI/ BASERESULT</h4>
+<h4 id="baseresult-getwarnings">BASERESULT::GETWARNINGS</h4>
+<h4 id="baseresult-getwarningscount">BASERESULT::GETWARNINGSCOUNT</h4>
+<h4 id="client-class">MYSQL_XDEVAPI/ CLIENT</h4>
+<h4 id="client-close">CLIENT::CLOSE</h4>
+<h4 id="client-construct">CLIENT::__CONSTRUCT</h4>
+<h4 id="client-getclient">CLIENT::GETCLIENT</h4>
+<h4 id="collection-class">MYSQL_XDEVAPI/ COLLECTION</h4>
+<h4 id="collection-add">COLLECTION::ADD</h4>
+<h4 id="collection-addorreplaceone">COLLECTION::ADDORREPLACEONE</h4>
+<h4 id="collection-construct">COLLECTION::__CONSTRUCT</h4>
+<h4 id="collection-count">COLLECTION::COUNT</h4>
+<h4 id="collection-createindex">COLLECTION::CREATEINDEX</h4>
+<h4 id="collection-dropindex">COLLECTION::DROPINDEX</h4>
+<h4 id="collection-exists">COLLECTION::EXISTSINDATABASE</h4>
+<h4 id="collection-find">COLLECTION::FIND</h4>
+<h4 id="collection-getname">COLLECTION::GETNAME</h4>
+<h4 id="collection-getone">COLLECTION::GETONE</h4>
+<h4 id="collection-getschema">COLLECTION::GETSCHEMA</h4>
+<h4 id="collection-getsession">COLLECTION::GETSESSION</h4>
+<h4 id="collection-modify">COLLECTION::MODIFY</h4>
+<h4 id="collection-remove">COLLECTION::REMOVE</h4>
+<h4 id="collection-removeone">COLLECTION::REMOVEONE</h4>
+<h4 id="collection-replaceone">COLLECTION::REPLACEONE</h4>
+<h4 id="collectionadd-class">MYSQL_XDEVAPI/ COLLECTIONADD</h4>
+<h4 id="collectionadd-construct">COLLECTIONADD::__CONSTRUCT</h4>
+<h4 id="collectionadd-execute">COLLECTIONADD::EXECUTE</h4>
+<h4 id="collectionfind-class">MYSQL_XDEVAPI/ COLLECTIONFIND</h4>
+<h4 id="collectionfind-bind">COLLECTIONFIND::BIND</h4>
+<h4 id="collectionfind-construct">COLLECTIONFIND::__CONSTRUCT</h4>
+<h4 id="collectionfind-execute">COLLECTIONFIND::EXECUTE</h4>
+<h4 id="collectionfind-fields">COLLECTIONFIND::FIELDS</h4>
+<h4 id="collectionfind-groupby">COLLECTIONFIND::GROUPBY</h4>
+<h4 id="collectionfind-having">COLLECTIONFIND::HAVING</h4>
+<h4 id="collectionfind-limit">COLLECTIONFIND::LIMIT</h4>
+<h4 id="collectionfind-lockexclusive">COLLECTIONFIND::LOCKEXCLUSIVE</h4>
+<h4 id="collectionfind-lockshared">COLLECTIONFIND::LOCKSHARED</h4>
+<h4 id="collectionfind-offset">COLLECTIONFIND::OFFSET</h4>
+<h4 id="collectionfind-sort">COLLECTIONFIND::SORT</h4>
+<h4 id="collectionmodify-class">MYSQL_XDEVAPI/ COLLECTIONMODIFY</h4>
+<h4 id="collectionmodify-arrayappend">COLLECTIONMODIFY::ARRAYAPPEND</h4>
+<h4 id="collectionmodify-arrayinsert">COLLECTIONMODIFY::ARRAYINSERT</h4>
+<h4 id="collectionmodify-bind">COLLECTIONMODIFY::BIND</h4>
+<h4 id="collectionmodify-construct">COLLECTIONMODIFY::__CONSTRUCT</h4>
+<h4 id="collectionmodify-execute">COLLECTIONMODIFY::EXECUTE</h4>
+<h4 id="collectionmodify-limit">COLLECTIONMODIFY::LIMIT</h4>
+<h4 id="collectionmodify-patch">COLLECTIONMODIFY::PATCH</h4>
+<h4 id="collectionmodify-replace">COLLECTIONMODIFY::REPLACE</h4>
+<h4 id="collectionmodify-set">COLLECTIONMODIFY::SET</h4>
+<h4 id="collectionmodify-skip">COLLECTIONMODIFY::SKIP</h4>
+<h4 id="collectionmodify-sort">COLLECTIONMODIFY::SORT</h4>
+<h4 id="collectionmodify-unset">COLLECTIONMODIFY::UNSET</h4>
+<h4 id="collectionremove-class">MYSQL_XDEVAPI/ COLLECTIONREMOVE</h4>
+<h4 id="collectionremove-bind">COLLECTIONREMOVE::BIND</h4>
+<h4 id="collectionremove-construct">COLLECTIONREMOVE::__CONSTRUCT</h4>
+<h4 id="collectionremove-execute">COLLECTIONREMOVE::EXECUTE</h4>
+<h4 id="collectionremove-limit">COLLECTIONREMOVE::LIMIT</h4>
+<h4 id="collectionremove-sort">COLLECTIONREMOVE::SORT</h4>
+<h4 id="columnresult-class">MYSQL_XDEVAPI/ COLUMNRESULT</h4>
+<h4 id="columnresult-construct">COLUMNRESULT::__CONSTRUCT</h4>
+<h4 id="columnresult-getcharset">COLUMNRESULT::GETCHARACTERSETNAME</h4>
+<h4 id="columnresult-getcollation">COLUMNRESULT::GETCOLLATIONNAME</h4>
+<h4 id="columnresult-getcolumnlabel">COLUMNRESULT::GETCOLUMNLABEL</h4>
+<h4 id="columnresult-getcolumnname">COLUMNRESULT::GETCOLUMNNAME</h4>
+<h4 id="columnresult-getfractionaldigits">COLUMNRESULT::GETFRACTIONALDIGITS</h4>
+<h4 id="columnresult-getlength">COLUMNRESULT::GETLENGTH</h4>
+<h4 id="columnresult-getschemaname">COLUMNRESULT::GETSCHEMANAME</h4>
+<h4 id="columnresult-gettablelabel">COLUMNRESULT::GETTABLELABEL</h4>
+<h4 id="columnresult-gettablename">COLUMNRESULT::GETTABLENAME</h4>
+<h4 id="columnresult-gettype">COLUMNRESULT::GETTYPE</h4>
+<h4 id="columnresult-isnumbersigned">COLUMNRESULT::ISNUMBERSIGNED</h4>
+<h4 id="columnresult-ispadded">COLUMNRESULT::ISPADDED</h4>
+<h4 id="crudoperationbindable-class">MYSQL_XDEVAPI/ CRUDOPERATIONBINDABLE</h4>
+<h4 id="crudoperationbindable-bind">CRUDOPERATIONBINDABLE::BIND</h4>
+<h4 id="crudoperationlimitable-class">MYSQL_XDEVAPI/ CRUDOPERATIONLIMITABLE</h4>
+<h4 id="crudoperationlimitable-limit">CRUDOPERATIONLIMITABLE::LIMIT</h4>
+<h4 id="crudoperationskippable-class">MYSQL_XDEVAPI/ CRUDOPERATIONSKIPPABLE</h4>
+<h4 id="crudoperationskippable-skip">CRUDOPERATIONSKIPPABLE::SKIP</h4>
+<h4 id="crudoperationsortable-class">MYSQL_XDEVAPI/ CRUDOPERATIONSORTABLE</h4>
+<h4 id="crudoperationsortable-sort">CRUDOPERATIONSORTABLE::SORT</h4>
+<h4 id="databaseobject-class">MYSQL_XDEVAPI/ DATABASEOBJECT</h4>
+<h4 id="databaseobject-exists">DATABASEOBJECT::EXISTSINDATABASE</h4>
+<h4 id="databaseobject-getname">DATABASEOBJECT::GETNAME</h4>
+<h4 id="databaseobject-getsession">DATABASEOBJECT::GETSESSION</h4>
+<h4 id="docresult-class">MYSQL_XDEVAPI/ DOCRESULT</h4>
+<h4 id="docresult-construct">DOCRESULT::__CONSTRUCT</h4>
+<h4 id="docresult-fetchall">DOCRESULT::FETCHALL</h4>
+<h4 id="docresult-fetchone">DOCRESULT::FETCHONE</h4>
+<h4 id="docresult-getwarnings">DOCRESULT::GETWARNINGS</h4>
+<h4 id="docresult-getwarningscount">DOCRESULT::GETWARNINGSCOUNT</h4>
+<h4 id="exception-class">MYSQL_XDEVAPI/ EXCEPTION</h4>
+<h4 id="executable-class">MYSQL_XDEVAPI/ EXECUTABLE</h4>
+<h4 id="executable-execute">EXECUTABLE::EXECUTE</h4>
+<h4 id="executionstatus-class">MYSQL_XDEVAPI/ EXECUTIONSTATUS</h4>
+<h4 id="executionstatus-construct">EXECUTIONSTATUS::__CONSTRUCT</h4>
+<h4 id="expression-class">MYSQL_XDEVAPI/ EXPRESSION</h4>
+<h4 id="expression-construct">EXPRESSION::__CONSTRUCT</h4>
+<h4 id="result-class">MYSQL_XDEVAPI/ RESULT</h4>
+<h4 id="result-construct">RESULT::__CONSTRUCT</h4>
+<h4 id="result-getaffecteditems">RESULT::GETAFFECTEDITEMSCOUNT</h4>
+<h4 id="result-getautoincrement">RESULT::GETAUTOINCREMENTVALUE</h4>
+<h4 id="result-getgeneratedids">RESULT::GETGENERATEDIDS</h4>
+<h4 id="result-getwarnings">RESULT::GETWARNINGS</h4>
+<h4 id="result-getwarningscount">RESULT::GETWARNINGSCOUNT</h4>
+<h4 id="rowresult-class">MYSQL_XDEVAPI/ ROWRESULT</h4>
+<h4 id="rowresult-construct">ROWRESULT::__CONSTRUCT</h4>
+<h4 id="rowresult-fetchall">ROWRESULT::FETCHALL</h4>
+<h4 id="rowresult-fetchone">ROWRESULT::FETCHONE</h4>
+<h4 id="rowresult-getcolumnscount">ROWRESULT::GETCOLUMNSCOUNT</h4>
+<h4 id="rowresult-getcolumnnames">ROWRESULT::GETCOLUMNNAMES</h4>
+<h4 id="rowresult-getcolumns">ROWRESULT::GETCOLUMNS</h4>
+<h4 id="rowresult-getwarnings">ROWRESULT::GETWARNINGS</h4>
+<h4 id="rowresult-getwarningscount">ROWRESULT::GETWARNINGSCOUNT</h4>
+<h4 id="schema-class">MYSQL_XDEVAPI/ SCHEMA</h4>
+<h4 id="schema-construct">SCHEMA::__CONSTRUCT</h4>
+<h4 id="schema-createcollection">SCHEMA::CREATECOLLECTION</h4>
+<h4 id="schema-dropcollection">SCHEMA::DROPCOLLECTION</h4>
+<h4 id="schema-exists">SCHEMA::EXISTSINDATABASE</h4>
+<h4 id="schema-getcollection">SCHEMA::GETCOLLECTION</h4>
+<h4 id="schema-getcollectionastable">SCHEMA::GETCOLLECTIONASTABLE</h4>
+<h4 id="schema-getcollections">SCHEMA::GETCOLLECTIONS</h4>
+<h4 id="schema-getname">SCHEMA::GETNAME</h4>
+<h4 id="schema-getsession">SCHEMA::GETSESSION</h4>
+<h4 id="schema-gettable">SCHEMA::GETTABLE</h4>
+<h4 id="schema-gettables">SCHEMA::GETTABLES</h4>
+<h4 id="schemaobject-class">MYSQL_XDEVAPI/ SCHEMAOBJECT</h4>
+<h4 id="schemaobject-getschema">SCHEMAOBJECT::GETSCHEMA</h4>
+<h4 id="session-class">MYSQL_XDEVAPI/ SESSION</h4>
+<h4 id="session-close">SESSION::CLOSE</h4>
+<h4 id="session-commit">SESSION::COMMIT</h4>
+<h4 id="session-construct">SESSION::__CONSTRUCT</h4>
+<h4 id="session-createschema">SESSION::CREATESCHEMA</h4>
+<h4 id="session-dropschema">SESSION::DROPSCHEMA</h4>
+<h4 id="session-generateuuid">SESSION::GENERATEUUID</h4>
+<h4 id="session-getdefaultschema">SESSION::GETDEFAULTSCHEMA</h4>
+<h4 id="session-getschema">SESSION::GETSCHEMA</h4>
+<h4 id="session-getschemas">SESSION::GETSCHEMAS</h4>
+<h4 id="session-getserverversion">SESSION::GETSERVERVERSION</h4>
+<h4 id="session-listclients">SESSION::LISTCLIENTS</h4>
+<h4 id="session-quotename">SESSION::QUOTENAME</h4>
+<h4 id="session-releasesavepoint">SESSION::RELEASESAVEPOINT</h4>
+<h4 id="session-rollback">SESSION::ROLLBACK</h4>
+<h4 id="session-rollbackto">SESSION::ROLLBACKTO</h4>
+<h4 id="session-setsavepoint">SESSION::SETSAVEPOINT</h4>
+<h4 id="session-sql">SESSION::SQL</h4>
+<h4 id="session-starttransaction">SESSION::STARTTRANSACTION</h4>
+<h4 id="sqlstatement-class">MYSQL_XDEVAPI/ SQLSTATEMENT</h4>
+<h4 id="sqlstatement-bind">SQLSTATEMENT::BIND</h4>
+<h4 id="sqlstatement-construct">SQLSTATEMENT::__CONSTRUCT</h4>
+<h4 id="sqlstatement-execute">SQLSTATEMENT::EXECUTE</h4>
+<h4 id="sqlstatement-getnextresult">SQLSTATEMENT::GETNEXTRESULT</h4>
+<h4 id="sqlstatement-getresult">SQLSTATEMENT::GETRESULT</h4>
+<h4 id="sqlstatement-hasmoreresults">SQLSTATEMENT::HASMORERESULTS</h4>
+<h4 id="sqlstatementresult-class">MYSQL_XDEVAPI/ SQLSTATEMENTRESULT</h4>
+<h4 id="sqlstatementresult-construct">SQLSTATEMENTRESULT::__CONSTRUCT</h4>
+<h4 id="sqlstatementresult-fetchall">SQLSTATEMENTRESULT::FETCHALL</h4>
+<h4 id="sqlstatementresult-fetchone">SQLSTATEMENTRESULT::FETCHONE</h4>
+<h4 id="sqlstatementresult-getaffecteditems">SQLSTATEMENTRESULT::GETAFFECTEDITEMSCOUNT</h4>
+<h4 id="sqlstatementresult-getcolumnscount">SQLSTATEMENTRESULT::GETCOLUMNSCOUNT</h4>
+<h4 id="sqlstatementresult-getcolumnnames">SQLSTATEMENTRESULT::GETCOLUMNNAMES</h4>
+<h4 id="sqlstatementresult-getcolumns">SQLSTATEMENTRESULT::GETCOLUMNS</h4>
+<h4 id="sqlstatementresult-getgeneratedids">SQLSTATEMENTRESULT::GETGENERATEDIDS</h4>
+<h4 id="sqlstatementresult-getlastinsertid">SQLSTATEMENTRESULT::GETLASTINSERTID</h4>
+<h4 id="sqlstatementresult-getwarnings">SQLSTATEMENTRESULT::GETWARNINGS</h4>
+<h4 id="sqlstatementresult-getwarningscount">SQLSTATEMENTRESULT::GETWARNINGSCOUNT</h4>
+<h4 id="sqlstatementresult-hasdata">SQLSTATEMENTRESULT::HASDATA</h4>
+<h4 id="sqlstatementresult-nextresult">SQLSTATEMENTRESULT::NEXTRESULT</h4>
+<h4 id="statement-class">MYSQL_XDEVAPI/ STATEMENT</h4>
+<h4 id="statement-construct">STATEMENT::__CONSTRUCT</h4>
+<h4 id="statement-getnextresult">STATEMENT::GETNEXTRESULT</h4>
+<h4 id="statement-getresult">STATEMENT::GETRESULT</h4>
+<h4 id="statement-hasmoreresults">STATEMENT::HASMORERESULTS</h4>
+<h4 id="table-class">MYSQL_XDEVAPI/ TABLE</h4>
+<h4 id="table-construct">TABLE::__CONSTRUCT</h4>
+<h4 id="table-count">TABLE::COUNT</h4>
+<h4 id="table-delete">TABLE::DELETE</h4>
+<h4 id="table-exists">TABLE::EXISTSINDATABASE</h4>
+<h4 id="table-getname">TABLE::GETNAME</h4>
+<h4 id="table-getschema">TABLE::GETSCHEMA</h4>
+<h4 id="table-getsession">TABLE::GETSESSION</h4>
+<h4 id="table-insert">TABLE::INSERT</h4>
+<h4 id="table-isview">TABLE::ISVIEW</h4>
+<h4 id="table-select">TABLE::SELECT</h4>
+<h4 id="table-update">TABLE::UPDATE</h4>
+<h4 id="tabledelete-class">MYSQL_XDEVAPI/ TABLEDELETE</h4>
+<h4 id="tabledelete-bind">TABLEDELETE::BIND</h4>
+<h4 id="tabledelete-construct">TABLEDELETE::__CONSTRUCT</h4>
+<h4 id="tabledelete-execute">TABLEDELETE::EXECUTE</h4>
+<h4 id="tabledelete-limit">TABLEDELETE::LIMIT</h4>
+<h4 id="tabledelete-orderby">TABLEDELETE::ORDERBY</h4>
+<h4 id="tabledelete-where">TABLEDELETE::WHERE</h4>
+<h4 id="tableinsert-class">MYSQL_XDEVAPI/ TABLEINSERT</h4>
+<h4 id="tableinsert-construct">TABLEINSERT::__CONSTRUCT</h4>
+<h4 id="tableinsert-execute">TABLEINSERT::EXECUTE</h4>
+<h4 id="tableinsert-values">TABLEINSERT::VALUES</h4>
+<h4 id="tableselect-class">MYSQL_XDEVAPI/ TABLESELECT</h4>
+<h4 id="tableselect-bind">TABLESELECT::BIND</h4>
+<h4 id="tableselect-construct">TABLESELECT::__CONSTRUCT</h4>
+<h4 id="tableselect-execute">TABLESELECT::EXECUTE</h4>
+<h4 id="tableselect-groupby">TABLESELECT::GROUPBY</h4>
+<h4 id="tableselect-having">TABLESELECT::HAVING</h4>
+<h4 id="tableselect-limit">TABLESELECT::LIMIT</h4>
+<h4 id="tableselect-lockexclusive">TABLESELECT::LOCKEXCLUSIVE</h4>
+<h4 id="tableselect-lockshared">TABLESELECT::LOCKSHARED</h4>
+<h4 id="tableselect-offset">TABLESELECT::OFFSET</h4>
+<h4 id="tableselect-orderby">TABLESELECT::ORDERBY</h4>
+<h4 id="tableselect-where">TABLESELECT::WHERE</h4>
+<h4 id="tableupdate-class">MYSQL_XDEVAPI/ TABLEUPDATE</h4>
+<h4 id="tableupdate-bind">TABLEUPDATE::BIND</h4>
+<h4 id="tableupdate-construct">TABLEUPDATE::__CONSTRUCT</h4>
+<h4 id="tableupdate-execute">TABLEUPDATE::EXECUTE</h4>
+<h4 id="tableupdate-limit">TABLEUPDATE::LIMIT</h4>
+<h4 id="tableupdate-orderby">TABLEUPDATE::ORDERBY</h4>
+<h4 id="tableupdate-set">TABLEUPDATE::SET</h4>
+<h4 id="tableupdate-where">TABLEUPDATE::WHERE</h4>
+<h4 id="warning-class">MYSQL_XDEVAPI/ WARNING</h4>
+<h4 id="warning-construct">WARNING::__CONSTRUCT</h4>
+
+
+<h4 id="original-mysql-api">ORIGINAL MYSQL API</h4>
+
+<nav align="center">
+  <h3>NAVIGATION</h3>
   <p>
     <a href="#introduction">INTRODUCTION</a> | 
     <a href="#dependencies">DEPENDENCIES</a> | 
     <a href="#installation">INSTALLATION</a> | 
     <a href="#changelog">CHANGELOG</a> | 
     <a href="#predefined-constants">PREDEFINED CONSTANTS</a> | 
-    <a href="#mysql_affected_rows">mysql_affected_rows</a> | 
-    <a href="#mysql_client_encoding">mysql_client_encoding</a> | 
-    <a href="#mysql_close">mysql_close</a> | 
-    <a href="#mysql_connect">mysql_connect</a> | 
-    <a href="#mysql_create_db">mysql_create_db</a> | 
-    <a href="#mysql_data_seek">mysql_data_seek</a> | 
-    <a href="#mysql_db_name">mysql_db_name</a> | 
-    <a href="#mysql_db_query">mysql_db_query</a> | 
-    <a href="#mysql_drop_db">mysql_drop_db</a> | 
-    <a href="#mysql_errno">mysql_errno</a> | 
-    <a href="#mysql_error">mysql_error</a> | 
-    <a href="#mysql_escape_string">mysql_escape_string</a> | 
-    <a href="#mysql_fetch_array">mysql_fetch_array</a> | 
-    <a href="#mysql_fetch_assoc">mysql_fetch_assoc</a> | 
-    <a href="#mysql_fetch_field">mysql_fetch_field</a> | 
-    <a href="#mysql_fetch_lengths">mysql_fetch_lengths</a>
-  </p>
-  <p>
-    <a href="#mysql_fetch_object">mysql_fetch_object</a> | 
-    <a href="#mysql_fetch_row">mysql_fetch_row</a> | 
-    <a href="#mysql_field_flags">mysql_field_flags</a> | 
-    <a href="#mysql_field_len">mysql_field_len</a> | 
-    <a href="#mysql_field_name">mysql_field_name</a> | 
-    <a href="#mysql_field_seek">mysql_field_seek</a> | 
-    <a href="#mysql_field_table">mysql_field_table</a> | 
-    <a href="#mysql_field_type">mysql_field_type</a> | 
-    <a href="#mysql_free_result">mysql_free_result</a> | 
-    <a href="#mysql_get_client_info">mysql_get_client_info</a> | 
-    <a href="#mysql_get_host_info">mysql_get_host_info</a> | 
-    <a href="#mysql_get_proto_info">mysql_get_proto_info</a> | 
-    <a href="#mysql_get_server_info">mysql_get_server_info</a> | 
-    <a href="#mysql_info">mysql_info</a> | 
-    <a href="#mysql_insert_id">mysql_insert_id</a> | 
-    <a href="#mysql_list_dbs">mysql_list_dbs</a>
-  </p>
-  <p>
-    <a href="#mysql_list_fields">mysql_list_fields</a> | 
-    <a href="#mysql_list_processes">mysql_list_processes</a> | 
-    <a href="#mysql_list_tables">mysql_list_tables</a> | 
-    <a href="#mysql_num_fields">mysql_num_fields</a> | 
-    <a href="#mysql_num_rows">mysql_num_rows</a> | 
-    <a href="#mysql_pconnect">mysql_pconnect</a> | 
-    <a href="#mysql_ping">mysql_ping</a> | 
-    <a href="#mysql_query">mysql_query</a> | 
-    <a href="#mysql_real_escape_string">mysql_real_escape_string</a> | 
-    <a href="#mysql_result">mysql_result</a> | 
-    <a href="#mysql_select_db">mysql_select_db</a> | 
-    <a href="#mysql_set_charset">mysql_set_charset</a> | 
-    <a href="#mysql_stat">mysql_stat</a> | 
-    <a href="#mysql_tablename">mysql_tablename</a> | 
-    <a href="#mysql_thread_id">mysql_thread_id</a> | 
-    <a href="#mysql_unbuffered_query">mysql_unbuffered_query</a>
+    <a href="#mysql_affected_rows">MYSQL_AFFECTED_ROWS</a> | 
+    <a href="#mysql_client_encoding">MYSQL_CLIENT_ENCODING</a> | 
+    <a href="#mysql_close">MYSQL_CLOSE</a> | 
+    <a href="#mysql_connect">MYSQL_CONNECT</a> | 
+    <a href="#mysql_create_db">MYSQL_CREATE_DB</a> | 
+    <a href="#mysql_data_seek">MYSQL_DATA_SEEK</a> | 
+    <a href="#mysql_db_name">MYSQL_DB_NAME</a> | 
+    <a href="#mysql_db_query">MYSQL_DB_QUERY</a> | 
+    <a href="#mysql_drop_db">MYSQL_DROP_DB</a> | 
+    <a href="#mysql_errno">MYSQL_ERRNO</a> | 
+    <a href="#mysql_error">MYSQL_ERROR</a> | 
+    <a href="#mysql_escape_string">MYSQL_ESCAPE_STRING</a> | 
+    <a href="#mysql_fetch_array">MYSQL_FETCH_ARRAY</a> | 
+    <a href="#mysql_fetch_assoc">MYSQL_FETCH_ASSOC</a> | 
+    <a href="#mysql_fetch_field">MYSQL_FETCH_FIELD</a> | 
+    <a href="#mysql_fetch_lengths">MYSQL_FETCH_LENGTHS</a>
+    <a href="#mysql_fetch_object">MYSQL_FETCH_OBJECT</a> | 
+    <a href="#mysql_fetch_row">MYSQL_FETCH_ROW</a> | 
+    <a href="#mysql_field_flags">MYSQL_FIELD_FLAGS</a> | 
+    <a href="#mysql_field_len">MYSQL_FIELD_LEN</a> | 
+    <a href="#mysql_field_name">MYSQL_FIELD_NAME</a> | 
+    <a href="#mysql_field_seek">MYSQL_FIELD_SEEK</a> | 
+    <a href="#mysql_field_table">MYSQL_FIELD_TABLE</a> | 
+    <a href="#mysql_field_type">MYSQL_FIELD_TYPE</a> | 
+    <a href="#mysql_free_result">MYSQL_FREE_RESULT</a> | 
+    <a href="#mysql_get_client_info">MYSQL_GET_CLIENT_INFO</a> | 
+    <a href="#mysql_get_host_info">MYSQL_GET_HOST_INFO</a> | 
+    <a href="#mysql_get_proto_info">MYSQL_GET_PROTO_INFO</a> | 
+    <a href="#mysql_get_server_info">MYSQL_GET_SERVER_INFO</a> | 
+    <a href="#mysql_info">MYSQL_INFO</a> | 
+    <a href="#mysql_insert_id">MYSQL_INSERT_ID</a> | 
+    <a href="#mysql_list_dbs">MYSQL_LIST_DBS</a>
+    <a href="#mysql_list_fields">MYSQL_LIST_FIELDS</a> | 
+    <a href="#mysql_list_processes">MYSQL_LIST_PROCESSES</a> | 
+    <a href="#mysql_list_tables">MYSQL_LIST_TABLES</a> | 
+    <a href="#mysql_num_fields">MYSQL_NUM_FIELDS</a> | 
+    <a href="#mysql_num_rows">MYSQL_NUM_ROWS</a> | 
+    <a href="#mysql_pconnect">MYSQL_PCONNECT</a> | 
+    <a href="#mysql_ping">MYSQL_PING</a> | 
+    <a href="#mysql_query">MYSQL_QUERY</a> | 
+    <a href="#mysql_real_escape_string">MYSQL_REAL_ESCAPE_STRING</a> | 
+    <a href="#mysql_result">MYSQL_RESULT</a> | 
+    <a href="#mysql_select_db">MYSQL_SELECT_DB</a> | 
+    <a href="#mysql_set_charset">MYSQL_SET_CHARSET</a> | 
+    <a href="#mysql_stat">MYSQL_STAT</a> | 
+    <a href="#mysql_tablename">MYSQL_TABLENAME</a> | 
+    <a href="#mysql_thread_id">MYSQL_THREAD_ID</a> | 
+    <a href="#mysql_unbuffered_query">MYSQL_UNBUFFERED_QUERY</a>
   </p>
 </nav>
 
@@ -6195,705 +5423,676 @@
 <h4 id="installation">INSTALLATION</h4>
 <h4 id="changelog">CHANGELOG</h4>
 <h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
-<h4 id="mysql_affected_rows">mysql_affected_rows</h4>
-<h4 id="mysql_client_encoding">mysql_client_encoding</h4>
-<h4 id="mysql_close">mysql_close</h4>
-<h4 id="mysql_connect">mysql_connect</h4>
-<h4 id="mysql_create_db">mysql_create_db</h4>
-<h4 id="mysql_data_seek">mysql_data_seek</h4>
-<h4 id="mysql_db_name">mysql_db_name</h4>
-<h4 id="mysql_db_query">mysql_db_query</h4>
-<h4 id="mysql_drop_db">mysql_drop_db</h4>
-<h4 id="mysql_errno">mysql_errno</h4>
-<h4 id="mysql_error">mysql_error</h4>
-<h4 id="mysql_escape_string">mysql_escape_string</h4>
-<h4 id="mysql_fetch_array">mysql_fetch_array</h4>
-<h4 id="mysql_fetch_assoc">mysql_fetch_assoc</h4>
-<h4 id="mysql_fetch_field">mysql_fetch_field</h4>
-<h4 id="mysql_fetch_lengths">mysql_fetch_lengths</h4>
-<h4 id="mysql_fetch_object">mysql_fetch_object</h4>
-<h4 id="mysql_fetch_row">mysql_fetch_row</h4>
-<h4 id="mysql_field_flags">mysql_field_flags</h4>
-<h4 id="mysql_field_len">mysql_field_len</h4>
-<h4 id="mysql_field_name">mysql_field_name</h4>
-<h4 id="mysql_field_seek">mysql_field_seek</h4>
-<h4 id="mysql_field_table">mysql_field_table</h4>
-<h4 id="mysql_field_type">mysql_field_type</h4>
-<h4 id="mysql_free_result">mysql_free_result</h4>
-<h4 id="mysql_get_client_info">mysql_get_client_info</h4>
-<h4 id="mysql_get_host_info">mysql_get_host_info</h4>
-<h4 id="mysql_get_proto_info">mysql_get_proto_info</h4>
-<h4 id="mysql_get_server_info">mysql_get_server_info</h4>
-<h4 id="mysql_info">mysql_info</h4>
-<h4 id="mysql_insert_id">mysql_insert_id</h4>
-<h4 id="mysql_list_dbs">mysql_list_dbs</h4>
-<h4 id="mysql_list_fields">mysql_list_fields</h4>
-<h4 id="mysql_list_processes">mysql_list_processes</h4>
-<h4 id="mysql_list_tables">mysql_list_tables</h4>
-<h4 id="mysql_num_fields">mysql_num_fields</h4>
-<h4 id="mysql_num_rows">mysql_num_rows</h4>
-<h4 id="mysql_pconnect">mysql_pconnect</h4>
-<h4 id="mysql_ping">mysql_ping</h4>
-<h4 id="mysql_query">mysql_query</h4>
-<h4 id="mysql_real_escape_string">mysql_real_escape_string</h4>
-<h4 id="mysql_result">mysql_result</h4>
-<h4 id="mysql_select_db">mysql_select_db</h4>
-<h4 id="mysql_set_charset">mysql_set_charset</h4>
-<h4 id="mysql_stat">mysql_stat</h4>
-<h4 id="mysql_tablename">mysql_tablename</h4>
-<h4 id="mysql_thread_id">mysql_thread_id</h4>
-<h4 id="mysql_unbuffered_query">mysql_unbuffered_query</h4>
+<h4 id="mysql_affected_rows">MYSQL_AFFECTED_ROWS</h4>
+<h4 id="mysql_client_encoding">MYSQL_CLIENT_ENCODING</h4>
+<h4 id="mysql_close">MYSQL_CLOSE</h4>
+<h4 id="mysql_connect">MYSQL_CONNECT</h4>
+<h4 id="mysql_create_db">MYSQL_CREATE_DB</h4>
+<h4 id="mysql_data_seek">MYSQL_DATA_SEEK</h4>
+<h4 id="mysql_db_name">MYSQL_DB_NAME</h4>
+<h4 id="mysql_db_query">MYSQL_DB_QUERY</h4>
+<h4 id="mysql_drop_db">MYSQL_DROP_DB</h4>
+<h4 id="mysql_errno">MYSQL_ERRNO</h4>
+<h4 id="mysql_error">MYSQL_ERROR</h4>
+<h4 id="mysql_escape_string">MYSQL_ESCAPE_STRING</h4>
+<h4 id="mysql_fetch_array">MYSQL_FETCH_ARRAY</h4>
+<h4 id="mysql_fetch_assoc">MYSQL_FETCH_ASSOC</h4>
+<h4 id="mysql_fetch_field">MYSQL_FETCH_FIELD</h4>
+<h4 id="mysql_fetch_lengths">MYSQL_FETCH_LENGTHS</h4>
+<h4 id="mysql_fetch_object">MYSQL_FETCH_OBJECT</h4>
+<h4 id="mysql_fetch_row">MYSQL_FETCH_ROW</h4>
+<h4 id="mysql_field_flags">MYSQL_FIELD_FLAGS</h4>
+<h4 id="mysql_field_len">MYSQL_FIELD_LEN</h4>
+<h4 id="mysql_field_name">MYSQL_FIELD_NAME</h4>
+<h4 id="mysql_field_seek">MYSQL_FIELD_SEEK</h4>
+<h4 id="mysql_field_table">MYSQL_FIELD_TABLE</h4>
+<h4 id="mysql_field_type">MYSQL_FIELD_TYPE</h4>
+<h4 id="mysql_free_result">MYSQL_FREE_RESULT</h4>
+<h4 id="mysql_get_client_info">MYSQL_GET_CLIENT_INFO</h4>
+<h4 id="mysql_get_host_info">MYSQL_GET_HOST_INFO</h4>
+<h4 id="mysql_get_proto_info">MYSQL_GET_PROTO_INFO</h4>
+<h4 id="mysql_get_server_info">MYSQL_GET_SERVER_INFO</h4>
+<h4 id="mysql_info">MYSQL_INFO</h4>
+<h4 id="mysql_insert_id">MYSQL_INSERT_ID</h4>
+<h4 id="mysql_list_dbs">MYSQL_LIST_DBS</h4>
+<h4 id="mysql_list_fields">MYSQL_LIST_FIELDS</h4>
+<h4 id="mysql_list_processes">MYSQL_LIST_PROCESSES</h4>
+<h4 id="mysql_list_tables">MYSQL_LIST_TABLES</h4>
+<h4 id="mysql_num_fields">MYSQL_NUM_FIELDS</h4>
+<h4 id="mysql_num_rows">MYSQL_NUM_ROWS</h4>
+<h4 id="mysql_pconnect">MYSQL_PCONNECT</h4>
+<h4 id="mysql_ping">MYSQL_PING</h4>
+<h4 id="mysql_query">MYSQL_QUERY</h4>
+<h4 id="mysql_real_escape_string">MYSQL_REAL_ESCAPE_STRING</h4>
+<h4 id="mysql_result">MYSQL_RESULT</h4>
+<h4 id="mysql_select_db">MYSQL_SELECT_DB</h4>
+<h4 id="mysql_set_charset">MYSQL_SET_CHARSET</h4>
+<h4 id="mysql_stat">MYSQL_STAT</h4>
+<h4 id="mysql_tablename">MYSQL_TABLENAME</h4>
+<h4 id="mysql_thread_id">MYSQL_THREAD_ID</h4>
+<h4 id="mysql_unbuffered_query">MYSQL_UNBUFFERED_QUERY</h4>
 
+<h4 id="mysqlnd">MYSQL NATIVE DRIVER</h4>
 
-<h4 id="mysqlnd">MySQL Native Driver</h4>
 
 <nav align="center">
-  <h2>NAVIGATION</h2>
+  <h3>NAVIGATION</h3>
   <p>
-    <a href="#introduction">Introduction</a> |
-    <a href="#overview">Overview</a> |
-    <a href="#installation">Installation</a> |
-    <a href="#runtime-configuration">Runtime Configuration</a> |
-    <a href="#incompatibilities">Incompatibilities</a> |
-    <a href="#persistent-connections">Persistent Connections</a> |
-    <a href="#statistics">Statistics</a> |
-    <a href="#notes">Notes</a> |
-    <a href="#memory-management">Memory Management</a> |
-    <a href="#native-mysql-driver-plugin-api">Native MySQL Driver Plugin API</a> |
-    <a href="#mysqlnd-vs-mysql-proxy">mysqlnd vs MySQL Proxy</a> |
-    <a href="#getting-mysqlnd-plugin-api">Getting the mysqlnd Plugin API</a> |
-    <a href="#mysqlnd-plugin-architecture">MySQLnd Plugin Architecture</a> |
-    <a href="#mysqlnd-plugin-api">The mysqlnd Plugin API</a> |
-    <a href="#building-mysqlnd-plugin">Building a mysqlnd Plugin</a>
+    <a href="#introduction">INTRODUCTION</a> | 
+    <a href="#overview">OVERVIEW</a> | 
+    <a href="#installation">INSTALLATION</a> | 
+    <a href="#runtime-configuration">RUNTIME CONFIGURATION</a> | 
+    <a href="#incompatibilities">INCOMPATIBILITIES</a> | 
+    <a href="#persistent-connections">PERSISTENT CONNECTIONS</a> | 
+    <a href="#statistics">STATISTICS</a> | 
+    <a href="#notes">NOTES</a> | 
+    <a href="#memory-management">MEMORY MANAGEMENT</a> | 
+    <a href="#native-mysql-driver-plugin-api">NATIVE MYSQL DRIVER PLUGIN API</a> | 
+    <a href="#mysqlnd-vs-mysql-proxy">MYSQLND VS MYSQL PROXY</a> | 
+    <a href="#getting-mysqlnd-plugin-api">GETTING THE MYSQLND PLUGIN API</a> | 
+    <a href="#mysqlnd-plugin-architecture">MYSQLND PLUGIN ARCHITECTURE</a> | 
+    <a href="#mysqlnd-plugin-api">THE MYSQLND PLUGIN API</a> | 
+    <a href="#building-mysqlnd-plugin">BUILDING A MYSQLND PLUGIN</a>
   </p>
 </nav>
 
 
-<h4 id="introduction">Introduction</h4>
-<h4 id="overview">Overview</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="runtime-configuration">Runtime Configuration</h4>
-<h4 id="incompatibilities">Incompatibilities</h4>
-<h4 id="persistent-connections">Persistent Connections</h4>
-<h4 id="statistics">Statistics</h4>
-<h4 id="notes">Notes</h4>
-<h4 id="memory-management">Memory Management</h4>
-<h4 id="native-mysql-driver-plugin-api">Native MySQL Driver Plugin API</h4>
-<h4 id="mysqlnd-vs-mysql-proxy">A Comparison of mysqlnd Plugins with MySQL Proxy</h4>
-<h4 id="getting-mysqlnd-plugin-api">Getting the mysqlnd Plugin API</h4>
-<h4 id="mysqlnd-plugin-architecture">Architecture of the Native MySQL Driver Plugin</h4>
-<h4 id="mysqlnd-plugin-api">The mysqlnd Plugin API</h4>
-<h4 id="building-mysqlnd-plugin">Getting Started Building a mysqlnd Plugin</h4>
-
-
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="overview">OVERVIEW</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
+<h4 id="incompatibilities">INCOMPATIBILITIES</h4>
+<h4 id="persistent-connections">PERSISTENT CONNECTIONS</h4>
+<h4 id="statistics">STATISTICS</h4>
+<h4 id="notes">NOTES</h4>
+<h4 id="memory-management">MEMORY MANAGEMENT</h4>
+<h4 id="native-mysql-driver-plugin-api">NATIVE MYSQL DRIVER PLUGIN API</h4>
+<h4 id="mysqlnd-vs-mysql-proxy">A COMPARISON OF MYSQLND PLUGINS WITH MYSQL PROXY</h4>
+<h4 id="getting-mysqlnd-plugin-api">GETTING THE MYSQLND PLUGIN API</h4>
+<h4 id="mysqlnd-plugin-architecture">ARCHITECTURE OF THE NATIVE MYSQL DRIVER PLUGIN</h4>
+<h4 id="mysqlnd-plugin-api">THE MYSQLND PLUGIN API</h4>
+<h4 id="building-mysqlnd-plugin">GETTING STARTED BUILDING A MYSQLND PLUGIN</h4>
 
 <h4 id="oci8">OCI8</h4>
+
 
 <nav align="center"> 
   <h2>NAVIGATION</h2> 
   <p>
-    <a href="#introduction">Introduction</a> | 
-    <a href="#dependencies">Dependencies</a> | 
-    <a href="#installation">Installation</a> | 
-    <a href="#runtime-configuration">Runtime Configuration</a> | 
-    <a href="#oci8-connection-pooling">OCI8 Connection Pooling and Management</a> | 
-    <a href="#oci8-fan-support">OCI8 Fast Application Notification (FAN) Support</a> | 
-    <a href="#oci8-taf-support">OCI8 Transparent Application Failover (TAF) Support</a> | 
-    <a href="#oci8-dtrace">OCI8 and Dynamic Tracing (DTrace)</a> | 
-    <a href="#supported-data-types">Supported Data Types</a> | 
-    <a href="#oci_bind_array_by_name">oci_bind_array_by_name</a> | 
-    <a href="#oci_bind_by_name">oci_bind_by_name</a> | 
-    <a href="#oci_cancel">oci_cancel</a> | 
-    <a href="#oci_client_version">oci_client_version</a> | 
-    <a href="#oci_close">oci_close</a> | 
-    <a href="#oci_commit">oci_commit</a> | 
-    <a href="#oci_connect">oci_connect</a> | 
-    <a href="#oci_define_by_name">oci_define_by_name</a> | 
-    <a href="#oci_error">oci_error</a> | 
-    <a href="#oci_execute">oci_execute</a> | 
-    <a href="#oci_fetch">oci_fetch</a> | 
-    <a href="#oci_fetch_all">oci_fetch_all</a> | 
-    <a href="#oci_fetch_array">oci_fetch_array</a> | 
-    <a href="#oci_fetch_assoc">oci_fetch_assoc</a> | 
-    <a href="#oci_fetch_object">oci_fetch_object</a> | 
-    <a href="#oci_fetch_row">oci_fetch_row</a> | 
-    <a href="#oci_field_is_null">oci_field_is_null</a> | 
-    <a href="#oci_field_name">oci_field_name</a> | 
-    <a href="#oci_field_precision">oci_field_precision</a> | 
-    <a href="#oci_field_scale">oci_field_scale</a> | 
-    <a href="#oci_field_size">oci_field_size</a> | 
-    <a href="#oci_field_type">oci_field_type</a> | 
-    <a href="#oci_field_type_raw">oci_field_type_raw</a> | 
-    <a href="#oci_free_descriptor">oci_free_descriptor</a> | 
-    <a href="#oci_free_statement">oci_free_statement</a> | 
-    <a href="#oci_get_implicit_resultset">oci_get_implicit_resultset</a> | 
-    <a href="#oci_lob_copy">oci_lob_copy</a> | 
-    <a href="#oci_lob_is_equal">oci_lob_is_equal</a> | 
-    <a href="#oci_new_collection">oci_new_collection</a> | 
-    <a href="#oci_new_connect">oci_new_connect</a> | 
-    <a href="#oci_new_cursor">oci_new_cursor</a> | 
-    <a href="#oci_new_descriptor">oci_new_descriptor</a> | 
-    <a href="#oci_num_fields">oci_num_fields</a> | 
-    <a href="#oci_num_rows">oci_num_rows</a> | 
-    <a href="#oci_parse">oci_parse</a> | 
-    <a href="#oci_password_change">oci_password_change</a> | 
-    <a href="#oci_pconnect">oci_pconnect</a> | 
-    <a href="#oci_register_taf_callback">oci_register_taf_callback</a> | 
-    <a href="#oci_result">oci_result</a> | 
-    <a href="#oci_rollback">oci_rollback</a> | 
-    <a href="#oci_server_version">oci_server_version</a> | 
-    <a href="#oci_set_action">oci_set_action</a> | 
-    <a href="#oci_set_call_timeout">oci_set_call_timeout</a> | 
-    <a href="#oci_set_client_identifier">oci_set_client_identifier</a> | 
-    <a href="#oci_set_client_info">oci_set_client_info</a> | 
-    <a href="#oci_set_db_operation">oci_set_db_operation</a> | 
-    <a href="#oci_set_edition">oci_set_edition</a> | 
-    <a href="#oci_set_module_name">oci_set_module_name</a> | 
-    <a href="#oci_set_prefetch">oci_set_prefetch</a> | 
-    <a href="#oci_set_prefetch_lob">oci_set_prefetch_lob</a> | 
-    <a href="#oci_statement_type">oci_statement_type</a> | 
-    <a href="#oci_unregister_taf_callback">oci_unregister_taf_callback</a> | 
-    <a href="#oci_collection">OCICollection</a> | 
-    <a href="#oci_collection_append">OCICollection::append</a> | 
-    <a href="#oci_collection_assign">OCICollection::assign</a> | 
-    <a href="#oci_collection_assign_elem">OCICollection::assignElem</a> | 
-    <a href="#oci_collection_free">OCICollection::free</a> | 
-    <a href="#oci_collection_get_elem">OCICollection::getElem</a> | 
-    <a href="#oci_collection_max">OCICollection::max</a> | 
-    <a href="#oci_collection_size">OCICollection::size</a> | 
-    <a href="#oci_collection_trim">OCICollection::trim</a> | 
-    <a href="#oci_lob">OCILob</a> | 
-    <a href="#oci_lob_append">OCILob::append</a> | 
-    <a href="#oci_lob_close">OCILob::close</a> | 
-    <a href="#oci_lob_eof">OCILob::eof</a> | 
-    <a href="#oci_lob_erase">OCILob::erase</a> | 
-    <a href="#oci_lob_export">OCILob::export</a> | 
-    <a href="#oci_lob_flush">OCILob::flush</a> | 
-    <a href="#oci_lob_free">OCILob::free</a> | 
-    <a href="#oci_lob_get_buffering">OCILob::getBuffering</a> | 
-    <a href="#oci_lob_import">OCILob::import</a> | 
-    <a href="#oci_lob_load">OCILob::load</a> | 
-    <a href="#oci_lob_read">OCILob::read</a> | 
-    <a href="#oci_lob_rewind">OCILob::rewind</a> | 
-    <a href="#oci_lob_save">OCILob::save</a> | 
-    <a href="#oci_lob_save_file">OCILob::saveFile</a> | 
-    <a href="#oci_lob_seek">OCILob::seek</a> | 
-    <a href="#oci_lob_set_buffering">OCILob::setBuffering</a> | 
-    <a href="#oci_lob_size">OCILob::size</a> | 
-    <a href="#oci_lob_tell">OCILob::tell</a> | 
-    <a href="#oci_lob_truncate">OCILob::truncate</a> | 
-    <a href="#oci_lob_write">OCILob::write</a> | 
-    <a href="#oci_lob_write_temporary">OCILob::writeTemporary</a> | 
-    <a href="#oci_lob_write_to_file">OCILob::writeToFile</a> | 
-    <a href="#oci_internal_debug">oci_internal_debug</a>
-    <a href="#oci_bind_by_name">ocibindbyname</a> | 
-    <a href="#oci_cancel">ocicancel</a> | 
-    <a href="#oci_close_lob">ocicloselob</a> | 
-    <a href="#oci_collection_append">ocicollappend</a> | 
-    <a href="#oci_collection_assign">ocicollassign</a> | 
-    <a href="#oci_collection_assign_elem">ocicollassignelem</a> | 
-    <a href="#oci_collection_get_elem">ocicollgetelem</a> | 
-    <a href="#oci_collection_max">ocicollmax</a> | 
-    <a href="#oci_collection_size">ocicollsize</a> | 
-    <a href="#oci_collection_trim">ocicolltrim</a> | 
-    <a href="#oci_column_is_null">ocicolumnisnull</a> | 
-    <a href="#oci_column_name">ocicolumnname</a> | 
-    <a href="#oci_column_precision">ocicolumnprecision</a> | 
-    <a href="#oci_column_scale">ocicolumnscale</a> | 
-    <a href="#oci_column_size">ocicolumnsize</a> | 
-    <a href="#oci_column_type">ocicolumntype</a> | 
-    <a href="#oci_column_type_raw">ocicolumntyperaw</a> | 
-    <a href="#oci_commit">ocicommit</a> | 
-    <a href="#oci_define_by_name">ocidefinebyname</a> | 
-    <a href="#oci_error">ocierror</a> | 
-    <a href="#oci_execute">ociexecute</a> | 
-    <a href="#oci_fetch">ocifetch</a> | 
-    <a href="#oci_fetch_into">ocifetchinto</a> | 
-    <a href="#oci_fetch_statement">ocifetchstatement</a> | 
-    <a href="#oci_free_collection">ocifreecollection</a> | 
-    <a href="#oci_free_cursor">ocifreecursor</a> | 
-    <a href="#oci_free_descriptor">ocifreedesc</a> | 
-    <a href="#oci_free_statement">ocifreestatement</a> | 
-    <a href="#oci_internal_debug">ociinternaldebug</a> | 
-    <a href="#oci_load_lob">ociloadlob</a> | 
-    <a href="#oci_log_off">ocilogoff</a> | 
-    <a href="#oci_log_on">ocilogon</a> | 
-    <a href="#oci_new_collection">ocinewcollection</a> | 
-    <a href="#oci_new_cursor">ocinewcursor</a> | 
-    <a href="#oci_new_descriptor">ocinewdescriptor</a> | 
-    <a href="#oci_n_logon">ocinlogon</a> | 
-    <a href="#oci_num_cols">ocinumcols</a> | 
-    <a href="#oci_parse">ociparse</a> | 
-    <a href="#oci_p_logon">ociplogon</a> | 
-    <a href="#oci_result">ociresult</a> | 
-    <a href="#oci_rollback">ocirollback</a> | 
-    <a href="#oci_row_count">ocirowcount</a> | 
-    <a href="#oci_save_lob">ocisavelob</a> | 
-    <a href="#oci_save_lob_file">ocisavelobfile</a> | 
-    <a href="#oci_server_version">ociserverversion</a> | 
-    <a href="#oci_set_prefetch">ocisetprefetch</a> | 
-    <a href="#oci_statement_type">ocistatementtype</a> | 
-    <a href="#oci_write_lob_to_file">ociwritelobtofile</a> | 
-    <a href="#oci_write_temporary_lob">ociwritetemporarylob</a>
+    <a href="#introduction">INTRODUCTION</a> | 
+    <a href="#dependencies">DEPENDENCIES</a> | 
+    <a href="#installation">INSTALLATION</a> | 
+    <a href="#runtime-configuration">RUNTIME CONFIGURATION</a> | 
+    <a href="#oci8-connection-pooling">OCI8 CONNECTION POOLING AND MANAGEMENT</a> | 
+    <a href="#oci8-fan-support">OCI8 FAST APPLICATION NOTIFICATION (FAN) SUPPORT</a> | 
+    <a href="#oci8-taf-support">OCI8 TRANSPARENT APPLICATION FAILOVER (TAF) SUPPORT</a> | 
+    <a href="#oci8-dtrace">OCI8 AND DYNAMIC TRACING (DTRACE)</a> | 
+    <a href="#supported-data-types">SUPPORTED DATA TYPES</a> | 
+    <a href="#oci_bind_array_by_name">OCI_BIND_ARRAY_BY_NAME</a> | 
+    <a href="#oci_bind_by_name">OCI_BIND_BY_NAME</a> | 
+    <a href="#oci_cancel">OCI_CANCEL</a> | 
+    <a href="#oci_client_version">OCI_CLIENT_VERSION</a> | 
+    <a href="#oci_close">OCI_CLOSE</a> | 
+    <a href="#oci_commit">OCI_COMMIT</a> | 
+    <a href="#oci_connect">OCI_CONNECT</a> | 
+    <a href="#oci_define_by_name">OCI_DEFINE_BY_NAME</a> | 
+    <a href="#oci_error">OCI_ERROR</a> | 
+    <a href="#oci_execute">OCI_EXECUTE</a> | 
+    <a href="#oci_fetch">OCI_FETCH</a> | 
+    <a href="#oci_fetch_all">OCI_FETCH_ALL</a> | 
+    <a href="#oci_fetch_array">OCI_FETCH_ARRAY</a> | 
+    <a href="#oci_fetch_assoc">OCI_FETCH_ASSOC</a> | 
+    <a href="#oci_fetch_object">OCI_FETCH_OBJECT</a> | 
+    <a href="#oci_fetch_row">OCI_FETCH_ROW</a> | 
+    <a href="#oci_field_is_null">OCI_FIELD_IS_NULL</a> | 
+    <a href="#oci_field_name">OCI_FIELD_NAME</a> | 
+    <a href="#oci_field_precision">OCI_FIELD_PRECISION</a> | 
+    <a href="#oci_field_scale">OCI_FIELD_SCALE</a> | 
+    <a href="#oci_field_size">OCI_FIELD_SIZE</a> | 
+    <a href="#oci_field_type">OCI_FIELD_TYPE</a> | 
+    <a href="#oci_field_type_raw">OCI_FIELD_TYPE_RAW</a> | 
+    <a href="#oci_free_descriptor">OCI_FREE_DESCRIPTOR</a> | 
+    <a href="#oci_free_statement">OCI_FREE_STATEMENT</a> | 
+    <a href="#oci_get_implicit_resultset">OCI_GET_IMPLICIT_RESULTSET</a> | 
+    <a href="#oci_lob_copy">OCI_LOB_COPY</a> | 
+    <a href="#oci_lob_is_equal">OCI_LOB_IS_EQUAL</a> | 
+    <a href="#oci_new_collection">OCI_NEW_COLLECTION</a> | 
+    <a href="#oci_new_connect">OCI_NEW_CONNECT</a> | 
+    <a href="#oci_new_cursor">OCI_NEW_CURSOR</a> | 
+    <a href="#oci_new_descriptor">OCI_NEW_DESCRIPTOR</a> | 
+    <a href="#oci_num_fields">OCI_NUM_FIELDS</a> | 
+    <a href="#oci_num_rows">OCI_NUM_ROWS</a> | 
+    <a href="#oci_parse">OCI_PARSE</a> | 
+    <a href="#oci_password_change">OCI_PASSWORD_CHANGE</a> | 
+    <a href="#oci_pconnect">OCI_PCONNECT</a> | 
+    <a href="#oci_register_taf_callback">OCI_REGISTER_TAF_CALLBACK</a> | 
+    <a href="#oci_result">OCI_RESULT</a> | 
+    <a href="#oci_rollback">OCI_ROLLBACK</a> | 
+    <a href="#oci_server_version">OCI_SERVER_VERSION</a> | 
+    <a href="#oci_set_action">OCI_SET_ACTION</a> | 
+    <a href="#oci_set_call_timeout">OCI_SET_CALL_TIMEOUT</a> | 
+    <a href="#oci_set_client_identifier">OCI_SET_CLIENT_IDENTIFIER</a> | 
+    <a href="#oci_set_client_info">OCI_SET_CLIENT_INFO</a> | 
+    <a href="#oci_set_db_operation">OCI_SET_DB_OPERATION</a> | 
+    <a href="#oci_set_edition">OCI_SET_EDITION</a> | 
+    <a href="#oci_set_module_name">OCI_SET_MODULE_NAME</a> | 
+    <a href="#oci_set_prefetch">OCI_SET_PREFETCH</a> | 
+    <a href="#oci_set_prefetch_lob">OCI_SET_PREFETCH_LOB</a> | 
+    <a href="#oci_statement_type">OCI_STATEMENT_TYPE</a> | 
+    <a href="#oci_unregister_taf_callback">OCI_UNREGISTER_TAF_CALLBACK</a> | 
+    <a href="#oci_collection">OCI_COLLECTION</a> | 
+    <a href="#oci_collection_append">OCI_COLLECTION::APPEND</a> | 
+    <a href="#oci_collection_assign">OCI_COLLECTION::ASSIGN</a> | 
+    <a href="#oci_collection_assign_elem">OCI_COLLECTION::ASSIGNELEM</a> | 
+    <a href="#oci_collection_free">OCI_COLLECTION::FREE</a> | 
+    <a href="#oci_collection_get_elem">OCI_COLLECTION::GETELEM</a> | 
+    <a href="#oci_collection_max">OCI_COLLECTION::MAX</a> | 
+    <a href="#oci_collection_size">OCI_COLLECTION::SIZE</a> | 
+    <a href="#oci_collection_trim">OCI_COLLECTION::TRIM</a> | 
+    <a href="#oci_lob">OCI_LOB</a> | 
+    <a href="#oci_lob_append">OCI_LOB::APPEND</a> | 
+    <a href="#oci_lob_close">OCI_LOB::CLOSE</a> | 
+    <a href="#oci_lob_eof">OCI_LOB::EOF</a> | 
+    <a href="#oci_lob_erase">OCI_LOB::ERASE</a> | 
+    <a href="#oci_lob_export">OCI_LOB::EXPORT</a> | 
+    <a href="#oci_lob_flush">OCI_LOB::FLUSH</a> | 
+    <a href="#oci_lob_free">OCI_LOB::FREE</a> | 
+    <a href="#oci_lob_get_buffering">OCI_LOB::GETBUFFERING</a> | 
+    <a href="#oci_lob_import">OCI_LOB::IMPORT</a> | 
+    <a href="#oci_lob_load">OCI_LOB::LOAD</a> | 
+    <a href="#oci_lob_read">OCI_LOB::READ</a> | 
+    <a href="#oci_lob_rewind">OCI_LOB::REWIND</a> | 
+    <a href="#oci_lob_save">OCI_LOB::SAVE</a> | 
+    <a href="#oci_lob_save_file">OCI_LOB::SAVEFILE</a> | 
+    <a href="#oci_lob_seek">OCI_LOB::SEEK</a> | 
+    <a href="#oci_lob_set_buffering">OCI_LOB::SETBUFFERING</a> | 
+    <a href="#oci_lob_size">OCI_LOB::SIZE</a> | 
+    <a href="#oci_lob_tell">OCI_LOB::TELL</a> | 
+    <a href="#oci_lob_truncate">OCI_LOB::TRUNCATE</a> | 
+    <a href="#oci_lob_write">OCI_LOB::WRITE</a> | 
+    <a href="#oci_lob_write_temporary">OCI_LOB::WRITETEMPORARY</a> | 
+    <a href="#oci_lob_write_to_file">OCI_LOB::WRITETOFILE</a> | 
+    <a href="#oci_internal_debug">OCI_INTERNAL_DEBUG</a>
+    <a href="#oci_load_lob">OCILOADLOB</a> | 
+    <a href="#oci_log_off">OCILOGOFF</a> | 
+    <a href="#oci_log_on">OCILOGON</a> | 
+    <a href="#oci_new_collection">OCINEWCOLLECTION</a> | 
+    <a href="#oci_new_cursor">OCINEWCURSOR</a> | 
+    <a href="#oci_new_descriptor">OCINEWDESCRIPTOR</a> | 
+    <a href="#oci_n_logon">OCINLOGON</a> | 
+    <a href="#oci_num_cols">OCINUMCOLS</a> | 
+    <a href="#oci_parse">OCIPARSE</a> | 
+    <a href="#oci_p_logon">OCIPLOGON</a> | 
+    <a href="#oci_result">OCIRESULT</a> | 
+    <a href="#oci_rollback">OCIROLLBACK</a> | 
+    <a href="#oci_row_count">OCIROWCOUNT</a> | 
+    <a href="#oci_save_lob">OCISAVELOB</a> | 
+    <a href="#oci_save_lob_file">OCISAVELOBFILE</a> | 
+    <a href="#oci_server_version">OCISERVERVERSION</a> | 
+    <a href="#oci_set_prefetch">OCISETPREFETCH</a> | 
+    <a href="#oci_statement_type">OCISTATEMENTTYPE</a> | 
+    <a href="#oci_write_lob_to_file">OCIWRITELOBTOFILE</a> | 
+    <a href="#oci_write_temporary_lob">OCIWRITETEMPORARYLOB</a>
   </p> 
 </nav>
 
-
-<h4 id="introduction">Introduction</h4>
-<h4 id="dependencies">Dependencies</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="runtime-configuration">Runtime Configuration</h4>
-<h4 id="oci8-connection-pooling">OCI8 Connection Pooling and Management</h4>
-<h4 id="oci8-fan-support">OCI8 Fast Application Notification (FAN) Support</h4>
-<h4 id="oci8-taf-support">OCI8 Transparent Application Failover (TAF) Support</h4>
-<h4 id="oci8-dtrace">OCI8 and Dynamic Tracing (DTrace)</h4>
-<h4 id="supported-data-types">Supported Data Types</h4>
-<h4 id="oci_bind_array_by_name">oci_bind_array_by_name</h4>
-<h4 id="oci_bind_by_name">oci_bind_by_name</h4>
-<h4 id="oci_cancel">oci_cancel</h4>
-<h4 id="oci_client_version">oci_client_version</h4>
-<h4 id="oci_close">oci_close</h4>
-<h4 id="oci_commit">oci_commit</h4>
-<h4 id="oci_connect">oci_connect</h4>
-<h4 id="oci_define_by_name">oci_define_by_name</h4>
-<h4 id="oci_error">oci_error</h4>
-<h4 id="oci_execute">oci_execute</h4>
-<h4 id="oci_fetch">oci_fetch</h4>
-<h4 id="oci_fetch_all">oci_fetch_all</h4>
-<h4 id="oci_fetch_array">oci_fetch_array</h4>
-<h4 id="oci_fetch_assoc">oci_fetch_assoc</h4>
-<h4 id="oci_fetch_object">oci_fetch_object</h4>
-<h4 id="oci_fetch_row">oci_fetch_row</h4>
-<h4 id="oci_field_is_null">oci_field_is_null</h4>
-<h4 id="oci_field_name">oci_field_name</h4>
-<h4 id="oci_field_precision">oci_field_precision</h4>
-<h4 id="oci_field_scale">oci_field_scale</h4>
-<h4 id="oci_field_size">oci_field_size</h4>
-<h4 id="oci_field_type">oci_field_type</h4>
-<h4 id="oci_field_type_raw">oci_field_type_raw</h4>
-<h4 id="oci_free_descriptor">oci_free_descriptor</h4>
-<h4 id="oci_free_statement">oci_free_statement</h4>
-<h4 id="oci_get_implicit_resultset">oci_get_implicit_resultset</h4>
-<h4 id="oci_lob_copy">oci_lob_copy</h4>
-<h4 id="oci_lob_is_equal">oci_lob_is_equal</h4>
-<h4 id="oci_new_collection">oci_new_collection</h4>
-<h4 id="oci_new_connect">oci_new_connect</h4>
-<h4 id="oci_new_cursor">oci_new_cursor</h4>
-<h4 id="oci_new_descriptor">oci_new_descriptor</h4>
-<h4 id="oci_num_fields">oci_num_fields</h4>
-<h4 id="oci_num_rows">oci_num_rows</h4>
-<h4 id="oci_parse">oci_parse</h4>
-<h4 id="oci_password_change">oci_password_change</h4>
-<h4 id="oci_pconnect">oci_pconnect</h4>
-<h4 id="oci_register_taf_callback">oci_register_taf_callback</h4>
-<h4 id="oci_result">oci_result</h4>
-<h4 id="oci_rollback">oci_rollback</h4>
-<h4 id="oci_server_version">oci_server_version</h4>
-<h4 id="oci_set_action">oci_set_action</h4>
-<h4 id="oci_set_call_timeout">oci_set_call_timeout</h4>
-<h4 id="oci_set_client_identifier">oci_set_client_identifier</h4>
-<h4 id="oci_set_client_info">oci_set_client_info</h4>
-<h4 id="oci_set_db_operation">oci_set_db_operation</h4>
-<h4 id="oci_set_edition">oci_set_edition</h4>
-<h4 id="oci_set_module_name">oci_set_module_name</h4>
-<h4 id="oci_set_prefetch">oci_set_prefetch</h4>
-<h4 id="oci_set_prefetch_lob">oci_set_prefetch_lob</h4>
-<h4 id="oci_statement_type">oci_statement_type</h4>
-<h4 id="oci_unregister_taf_callback">oci_unregister_taf_callback</h4>
-<h4 id="oci_collection">OCICollection</h4>
-<h4 id="oci_collection_append">OCICollection::append</h4>
-<h4 id="oci_collection_assign">OCICollection::assign</h4>
-<h4 id="oci_collection_assign_elem">OCICollection::assignElem</h4>
-<h4 id="oci_collection_free">OCICollection::free</h4>
-<h4 id="oci_collection_get_elem">OCICollection::getElem</h4>
-<h4 id="oci_collection_max">OCICollection::max</h4>
-<h4 id="oci_collection_size">OCICollection::size</h4>
-<h4 id="oci_collection_trim">OCICollection::trim</h4>
-<h4 id="oci_lob">OCILob</h4>
-<h4 id="oci_lob_append">OCILob::append</h4>
-<h4 id="oci_lob_close">OCILob::close</h4>
-<h4 id="oci_lob_eof">OCILob::eof</h4>
-<h4 id="oci_lob_erase">OCILob::erase</h4>
-<h4 id="oci_lob_export">OCILob::export</h4>
-<h4 id="oci_lob_flush">OCILob::flush</h4>
-<h4 id="oci_lob_free">OCILob::free</h4>
-<h4 id="oci_lob_get_buffering">OCILob::getBuffering</h4>
-<h4 id="oci_lob_import">OCILob::import</h4>
-<h4 id="oci_lob_load">OCILob::load</h4>
-<h4 id="oci_lob_read">OCILob::read</h4>
-<h4 id="oci_lob_rewind">OCILob::rewind</h4>
-<h4 id="oci_lob_save">OCILob::save</h4>
-<h4 id="oci_lob_save_file">OCILob::saveFile</h4>
-<h4 id="oci_lob_seek">OCILob::seek</h4>
-<h4 id="oci_lob_set_buffering">OCILob::setBuffering</h4>
-<h4 id="oci_lob_size">OCILob::size</h4>
-<h4 id="oci_lob_tell">OCILob::tell</h4>
-<h4 id="oci_lob_truncate">OCILob::truncate</h4>
-<h4 id="oci_lob_write">OCILob::write</h4>
-<h4 id="oci_lob_write_temporary">OCILob::writeTemporary</h4>
-<h4 id="oci_lob_write_to_file">OCILob::writeToFile</h4>
-<h4 id="oci_internal_debug">oci_internal_debug</h4>
-<h4 id="oci_bind_by_name">ocibindbyname</h4>
-<h4 id="oci_cancel">ocicancel</h4>
-<h4 id="oci_close_lob">ocicloselob</h4>
-<h4 id="oci_collection_append">ocicollappend</h4>
-<h4 id="oci_collection_assign">ocicollassign</h4>
-<h4 id="oci_collection_assign_elem">ocicollassignelem</h4>
-<h4 id="oci_collection_get_elem">ocicollgetelem</h4>
-<h4 id="oci_collection_max">ocicollmax</h4>
-<h4 id="oci_collection_size">ocicollsize</h4>
-<h4 id="oci_collection_trim">ocicolltrim</h4>
-<h4 id="oci_column_is_null">ocicolumnisnull</h4>
-<h4 id="oci_column_name">ocicolumnname</h4>
-<h4 id="oci_column_precision">ocicolumnprecision</h4>
-<h4 id="oci_column_scale">ocicolumnscale</h4>
-<h4 id="oci_column_size">ocicolumnsize</h4>
-<h4 id="oci_column_type">ocicolumntype</h4>
-<h4 id="oci_column_type_raw">ocicolumntyperaw</h4>
-<h4 id="oci_commit">ocicommit</h4>
-<h4 id="oci_define_by_name">ocidefinebyname</h4>
-<h4 id="oci_error">ocierror</h4>
-<h4 id="oci_execute">ociexecute</h4>
-<h4 id="oci_fetch">ocifetch</h4>
-<h4 id="oci_fetch_into">ocifetchinto</h4>
-<h4 id="oci_fetch_statement">ocifetchstatement</h4>
-<h4 id="oci_free_collection">ocifreecollection</h4>
-<h4 id="oci_free_cursor">ocifreecursor</h4>
-<h4 id="oci_free_descriptor">ocifreedesc</h4>
-<h4 id="oci_free_statement">ocifreestatement</h4>
-<h4 id="oci_internal_debug">ociinternaldebug</h4>
-<h4 id="oci_load_lob">ociloadlob</h4>
-<h4 id="oci_log_off">ocilogoff</h4>
-<h4 id="oci_log_on">ocilogon</h4>
-<h4 id="oci_new_collection">ocinewcollection</h4>
-<h4 id="oci_new_cursor">ocinewcursor</h4>
-<h4 id="oci_new_descriptor">ocinewdescriptor</h4>
-<h4 id="oci_n_logon">ocinlogon</h4>
-<h4 id="oci_num_cols">ocinumcols</h4>
-<h4 id="oci_parse">ociparse</h4>
-<h4 id="oci_p_logon">ociplogon</h4>
-<h4 id="oci_result">ociresult</h4>
-<h4 id="oci_rollback">ocirollback</h4>
-<h4 id="oci_row_count">ocirowcount</h4>
-<h4 id="oci_save_lob">ocisavelob</h4>
-<h4 id="oci_save_lob_file">ocisavelobfile</h4>
-<h4 id="oci_server_version">ociserverversion</h4>
-<h4 id="oci_set_prefetch">ocisetprefetch</h4>
-<h4 id="oci_statement_type">ocistatementtype</h4>
-<h4 id="oci_write_lob_to_file">ociwritelobtofile</h4>
-<h4 id="oci_write_temporary_lob">ociwritetemporarylob</h4>
-
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
+<h4 id="oci8-connection-pooling">OCI8 CONNECTION POOLING AND MANAGEMENT</h4>
+<h4 id="oci8-fan-support">OCI8 FAST APPLICATION NOTIFICATION (FAN) SUPPORT</h4>
+<h4 id="oci8-taf-support">OCI8 TRANSPARENT APPLICATION FAILOVER (TAF) SUPPORT</h4>
+<h4 id="oci8-dtrace">OCI8 AND DYNAMIC TRACING (DTRACE)</h4>
+<h4 id="supported-data-types">SUPPORTED DATA TYPES</h4>
+<h4 id="oci_bind_array_by_name">OCI_BIND_ARRAY_BY_NAME</h4>
+<h4 id="oci_bind_by_name">OCI_BIND_BY_NAME</h4>
+<h4 id="oci_cancel">OCI_CANCEL</h4>
+<h4 id="oci_client_version">OCI_CLIENT_VERSION</h4>
+<h4 id="oci_close">OCI_CLOSE</h4>
+<h4 id="oci_commit">OCI_COMMIT</h4>
+<h4 id="oci_connect">OCI_CONNECT</h4>
+<h4 id="oci_define_by_name">OCI_DEFINE_BY_NAME</h4>
+<h4 id="oci_error">OCI_ERROR</h4>
+<h4 id="oci_execute">OCI_EXECUTE</h4>
+<h4 id="oci_fetch">OCI_FETCH</h4>
+<h4 id="oci_fetch_all">OCI_FETCH_ALL</h4>
+<h4 id="oci_fetch_array">OCI_FETCH_ARRAY</h4>
+<h4 id="oci_fetch_assoc">OCI_FETCH_ASSOC</h4>
+<h4 id="oci_fetch_object">OCI_FETCH_OBJECT</h4>
+<h4 id="oci_fetch_row">OCI_FETCH_ROW</h4>
+<h4 id="oci_field_is_null">OCI_FIELD_IS_NULL</h4>
+<h4 id="oci_field_name">OCI_FIELD_NAME</h4>
+<h4 id="oci_field_precision">OCI_FIELD_PRECISION</h4>
+<h4 id="oci_field_scale">OCI_FIELD_SCALE</h4>
+<h4 id="oci_field_size">OCI_FIELD_SIZE</h4>
+<h4 id="oci_field_type">OCI_FIELD_TYPE</h4>
+<h4 id="oci_field_type_raw">OCI_FIELD_TYPE_RAW</h4>
+<h4 id="oci_free_descriptor">OCI_FREE_DESCRIPTOR</h4>
+<h4 id="oci_free_statement">OCI_FREE_STATEMENT</h4>
+<h4 id="oci_get_implicit_resultset">OCI_GET_IMPLICIT_RESULTSET</h4>
+<h4 id="oci_lob_copy">OCI_LOB_COPY</h4>
+<h4 id="oci_lob_is_equal">OCI_LOB_IS_EQUAL</h4>
+<h4 id="oci_new_collection">OCI_NEW_COLLECTION</h4>
+<h4 id="oci_new_connect">OCI_NEW_CONNECT</h4>
+<h4 id="oci_new_cursor">OCI_NEW_CURSOR</h4>
+<h4 id="oci_new_descriptor">OCI_NEW_DESCRIPTOR</h4>
+<h4 id="oci_num_fields">OCI_NUM_FIELDS</h4>
+<h4 id="oci_num_rows">OCI_NUM_ROWS</h4>
+<h4 id="oci_parse">OCI_PARSE</h4>
+<h4 id="oci_password_change">OCI_PASSWORD_CHANGE</h4>
+<h4 id="oci_pconnect">OCI_PCONNECT</h4>
+<h4 id="oci_register_taf_callback">OCI_REGISTER_TAF_CALLBACK</h4>
+<h4 id="oci_result">OCI_RESULT</h4>
+<h4 id="oci_rollback">OCI_ROLLBACK</h4>
+<h4 id="oci_server_version">OCI_SERVER_VERSION</h4>
+<h4 id="oci_set_action">OCI_SET_ACTION</h4>
+<h4 id="oci_set_call_timeout">OCI_SET_CALL_TIMEOUT</h4>
+<h4 id="oci_set_client_identifier">OCI_SET_CLIENT_IDENTIFIER</h4>
+<h4 id="oci_set_client_info">OCI_SET_CLIENT_INFO</h4>
+<h4 id="oci_set_db_operation">OCI_SET_DB_OPERATION</h4>
+<h4 id="oci_set_edition">OCI_SET_EDITION</h4>
+<h4 id="oci_set_module_name">OCI_SET_MODULE_NAME</h4>
+<h4 id="oci_set_prefetch">OCI_SET_PREFETCH</h4>
+<h4 id="oci_set_prefetch_lob">OCI_SET_PREFETCH_LOB</h4>
+<h4 id="oci_statement_type">OCI_STATEMENT_TYPE</h4>
+<h4 id="oci_unregister_taf_callback">OCI_UNREGISTER_TAF_CALLBACK</h4>
+<h4 id="oci_collection">OCICOLLECTION</h4>
+<h4 id="oci_collection_append">OCICOLLECTION::APPEND</h4>
+<h4 id="oci_collection_assign">OCICOLLECTION::ASSIGN</h4>
+<h4 id="oci_collection_assign_elem">OCICOLLECTION::ASSIGNELEM</h4>
+<h4 id="oci_collection_free">OCICOLLECTION::FREE</h4>
+<h4 id="oci_collection_get_elem">OCICOLLECTION::GETELEM</h4>
+<h4 id="oci_collection_max">OCICOLLECTION::MAX</h4>
+<h4 id="oci_collection_size">OCICOLLECTION::SIZE</h4>
+<h4 id="oci_collection_trim">OCICOLLECTION::TRIM</h4>
+<h4 id="oci_lob">OCILOB</h4>
+<h4 id="oci_lob_append">OCILOB::APPEND</h4>
+<h4 id="oci_lob_close">OCILOB::CLOSE</h4>
+<h4 id="oci_lob_eof">OCILOB::EOF</h4>
+<h4 id="oci_lob_erase">OCILOB::ERASE</h4>
+<h4 id="oci_lob_export">OCILOB::EXPORT</h4>
+<h4 id="oci_lob_flush">OCILOB::FLUSH</h4>
+<h4 id="oci_lob_free">OCILOB::FREE</h4>
+<h4 id="oci_lob_get_buffering">OCILOB::GETBUFFERING</h4>
+<h4 id="oci_lob_import">OCILOB::IMPORT</h4>
+<h4 id="oci_lob_load">OCILOB::LOAD</h4>
+<h4 id="oci_lob_read">OCILOB::READ</h4>
+<h4 id="oci_lob_rewind">OCILOB::REWIND</h4>
+<h4 id="oci_lob_save">OCILOB::SAVE</h4>
+<h4 id="oci_lob_save_file">OCILOB::SAVEFILE</h4>
+<h4 id="oci_lob_seek">OCILOB::SEEK</h4>
+<h4 id="oci_lob_set_buffering">OCILOB::SETBUFFERING</h4>
+<h4 id="oci_lob_size">OCILOB::SIZE</h4>
+<h4 id="oci_lob_tell">OCILOB::TELL</h4>
+<h4 id="oci_lob_truncate">OCILOB::TRUNCATE</h4>
+<h4 id="oci_lob_write">OCILOB::WRITE</h4>
+<h4 id="oci_lob_write_temporary">OCILOB::WRITETEMPORARY</h4>
+<h4 id="oci_lob_write_to_file">OCILOB::WRITETOFILE</h4>
+<h4 id="oci_internal_debug">OCI_INTERNAL_DEBUG</h4>
+<h4 id="oci_bind_by_name">OCIBINDBYNAME</h4>
+<h4 id="oci_cancel">OCICANCEL</h4>
+<h4 id="oci_close_lob">OCICLOSELOB</h4>
+<h4 id="oci_collection_append">OCICOLLAPPEND</h4>
+<h4 id="oci_collection_assign">OCICOLLASSIGN</h4>
+<h4 id="oci_collection_assign_elem">OCICOLLASSIGNELEM</h4>
+<h4 id="oci_collection_get_elem">OCICOLLGETELEM</h4>
+<h4 id="oci_collection_max">OCICOLLMAX</h4>
+<h4 id="oci_collection_size">OCICOLLSIZE</h4>
+<h4 id="oci_collection_trim">OCICOLLTRIM</h4>
+<h4 id="oci_column_is_null">OCICOLUMNISNULL</h4>
+<h4 id="oci_column_name">OCICOLUMNNAME</h4>
+<h4 id="oci_column_precision">OCICOLUMNPRECISION</h4>
+<h4 id="oci_column_scale">OCICOLUMNSCALE</h4>
+<h4 id="oci_column_size">OCICOLUMNSIZE</h4>
+<h4 id="oci_column_type">OCICOLUMNTYPE</h4>
+<h4 id="oci_column_type_raw">OCICOLUMNTYPERAW</h4>
+<h4 id="oci_commit">OCICOMMIT</h4>
+<h4 id="oci_define_by_name">OCIDEFINEBYNAME</h4>
+<h4 id="oci_error">OCIERROR</h4>
+<h4 id="oci_execute">OCIEXECUTE</h4>
+<h4 id="oci_fetch">OCIFETCH</h4>
+<h4 id="oci_fetch_into">OCIFETCHINTO</h4>
+<h4 id="oci_fetch_statement">OCIFETCHSTATEMENT</h4>
+<h4 id="oci_free_collection">OCIFREECOLLECTION</h4>
+<h4 id="oci_free_cursor">OCIFREECURSOR</h4>
+<h4 id="oci_free_descriptor">OCIFREEDESC</h4>
+<h4 id="oci_free_statement">OCIFREESTATEMENT</h4>
+<h4 id="oci_internal_debug">OCIINTERNALDEBUG</h4>
+<h4 id="oci_load_lob">OCILOADLOB</h4>
+<h4 id="oci_log_off">OCILOGOFF</h4>
+<h4 id="oci_log_on">OCILOGON</h4>
+<h4 id="oci_new_collection">OCINEWCOLLECTION</h4>
+<h4 id="oci_new_cursor">OCINEWCURSOR</h4>
+<h4 id="oci_new_descriptor">OCINEWDESCRIPTOR</h4>
+<h4 id="oci_n_logon">OCINLOGON</h4>
+<h4 id="oci_num_cols">OCINUMCOLS</h4>
+<h4 id="oci_parse">OCIPARSE</h4>
+<h4 id="oci_p_logon">OCIPLOGON</h4>
+<h4 id="oci_result">OCIRESULT</h4>
+<h4 id="oci_rollback">OCIROLLBACK</h4>
+<h4 id="oci_row_count">OCIROWCOUNT</h4>
+<h4 id="oci_save_lob">OCISAVELOB</h4>
+<h4 id="oci_save_lob_file">OCISAVELOBFILE</h4>
+<h4 id="oci_server_version">OCISERVERVERSION</h4>
+<h4 id="oci_set_prefetch">OCISETPREFETCH</h4>
+<h4 id="oci_statement_type">OCISTATEMENTTYPE</h4>
+<h4 id="oci_write_lob_to_file">OCIWRITELOBTOFILE</h4>
+<h4 id="oci_write_temporary_lob">OCIWRITETEMPORARYLOB</h4>
 
 <h4 id="postgresql">POSTGRESQL</h4>
 
 <nav align="center">
   <h2>NAVIGATION</h2>
   <p>
-    <a href="#dependencies">Dependencies</a> |
-    <a href="#installation">Installation</a> |
-    <a href="#runtime-configuration">Runtime Configuration</a> |
-    <a href="#resource-types">Resource Types</a> |
-    <a href="#basic-usage">Basic Usage</a> |
-    <a href="#pg_affected_rows">pg_affected_rows</a> |
-    <a href="#pg_cancel_query">pg_cancel_query</a> |
-    <a href="#pg_client_encoding">pg_client_encoding</a> |
-    <a href="#pg_close">pg_close</a> |
-    <a href="#pg_connect">pg_connect</a> |
-    <a href="#pg_connect_poll">pg_connect_poll</a> |
-    <a href="#pg_connection_busy">pg_connection_busy</a> |
-    <a href="#pg_connection_reset">pg_connection_reset</a> |
-    <a href="#pg_connection_status">pg_connection_status</a> |
-    <a href="#pg_consume_input">pg_consume_input</a> |
-    <a href="#pg_convert">pg_convert</a> |
-    <a href="#pg_copy_from">pg_copy_from</a> |
-    <a href="#pg_copy_to">pg_copy_to</a> |
-    <a href="#pg_dbname">pg_dbname</a> |
-    <a href="#pg_delete">pg_delete</a> |
-    <a href="#pg_end_copy">pg_end_copy</a> |
-    <a href="#pg_escape_bytea">pg_escape_bytea</a> |
-    <a href="#pg_escape_identifier">pg_escape_identifier</a> |
-    <a href="#pg_escape_literal">pg_escape_literal</a> |
-    <a href="#pg_escape_string">pg_escape_string</a> |
-    <a href="#pg_execute">pg_execute</a> |
-    <a href="#pg_fetch_all">pg_fetch_all</a> |
-    <a href="#pg_fetch_all_columns">pg_fetch_all_columns</a> |
-    <a href="#pg_fetch_array">pg_fetch_array</a> |
-    <a href="#pg_fetch_assoc">pg_fetch_assoc</a> |
-    <a href="#pg_fetch_object">pg_fetch_object</a> |
-    <a href="#pg_fetch_result">pg_fetch_result</a> |
-    <a href="#pg_fetch_row">pg_fetch_row</a> |
-    <a href="#pg_field_is_null">pg_field_is_null</a> |
-    <a href="#pg_field_name">pg_field_name</a> |
-    <a href="#pg_field_num">pg_field_num</a> |
-    <a href="#pg_field_prtlen">pg_field_prtlen</a> |
-    <a href="#pg_field_size">pg_field_size</a> |
-    <a href="#pg_field_table">pg_field_table</a> |
-    <a href="#pg_field_type">pg_field_type</a> |
-    <a href="#pg_field_type_oid">pg_field_type_oid</a> |
-    <a href="#pg_flush">pg_flush</a> |
-    <a href="#pg_free_result">pg_free_result</a> |
-    <a href="#pg_get_notify">pg_get_notify</a> |
-    <a href="#pg_get_pid">pg_get_pid</a> |
-    <a href="#pg_get_result">pg_get_result</a> |
-    <a href="#pg_host">pg_host</a> |
-    <a href="#pg_insert">pg_insert</a> |
-    <a href="#pg_last_error">pg_last_error</a> |
-    <a href="#pg_last_notice">pg_last_notice</a> |
-    <a href="#pg_last_oid">pg_last_oid</a> |
-    <a href="#pg_lo_close">pg_lo_close</a> |
-    <a href="#pg_lo_create">pg_lo_create</a> |
-    <a href="#pg_lo_export">pg_lo_export</a> |
-    <a href="#pg_lo_import">pg_lo_import</a> |
-    <a href="#pg_lo_open">pg_lo_open</a> |
-    <a href="#pg_lo_read">pg_lo_read</a> |
-    <a href="#pg_lo_read_all">pg_lo_read_all</a> |
-    <a href="#pg_lo_seek">pg_lo_seek</a> |
-    <a href="#pg_lo_tell">pg_lo_tell</a> |
-    <a href="#pg_lo_truncate">pg_lo_truncate</a> |
-    <a href="#pg_lo_unlink">pg_lo_unlink</a> |
-    <a href="#pg_lo_write">pg_lo_write</a> |
-    <a href="#pg_meta_data">pg_meta_data</a> |
-    <a href="#pg_num_fields">pg_num_fields</a> |
-    <a href="#pg_num_rows">pg_num_rows</a> |
-    <a href="#pg_options">pg_options</a> |
-    <a href="#pg_parameter_status">pg_parameter_status</a> |
-    <a href="#pg_pconnect">pg_pconnect</a> |
-    <a href="#pg_ping">pg_ping</a> |
-    <a href="#pg_port">pg_port</a> |
-    <a href="#pg_prepare">pg_prepare</a> |
-    <a href="#pg_put_line">pg_put_line</a> |
-    <a href="#pg_query">pg_query</a> |
-    <a href="#pg_query_params">pg_query_params</a> |
-    <a href="#pg_result_error">pg_result_error</a> |
-    <a href="#pg_result_error_field">pg_result_error_field</a> |
-    <a href="#pg_result_memory_size">pg_result_memory_size</a> |
-    <a href="#pg_result_seek">pg_result_seek</a> |
-    <a href="#pg_result_status">pg_result_status</a> |
-    <a href="#pg_select">pg_select</a> |
-    <a href="#pg_send_execute">pg_send_execute</a> |
-    <a href="#pg_send_prepare">pg_send_prepare</a> |
-    <a href="#pg_send_query">pg_send_query</a> |
-    <a href="#pg_send_query_params">pg_send_query_params</a> |
-    <a href="#pg_set_chunked_rows_size">pg_set_chunked_rows_size</a> |
-    <a href="#pg_set_client_encoding">pg_set_client_encoding</a> |
-    <a href="#pg_set_error_context_visibility">pg_set_error_context_visibility</a> |
-    <a href="#pg_set_error_verbosity">pg_set_error_verbosity</a> |
-    <a href="#pg_socket">pg_socket</a> |
-    <a href="#pg_trace">pg_trace</a> |
-    <a href="#pg_transaction_status">pg_transaction_status</a> |
-    <a href="#pg_tty">pg_tty</a> |
-    <a href="#pg_unescape_bytea">pg_unescape_bytea</a> |
-    <a href="#pg_untrace">pg_untrace</a> |
-    <a href="#pg_update">pg_update</a> |
-    <a href="#pg_version">pg_version</a> |
-    <a href="#pgsql_connection">PgSql\Connection</a> |
-    <a href="#pgsql_result">PgSql\Result</a> |
-    <a href="#pgsql_lob">PgSql\Lob</a>
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#runtime-configuration">RUNTIME CONFIGURATION</a> |
+    <a href="#resource-types">RESOURCE TYPES</a> |
+    <a href="#basic-usage">BASIC USAGE</a> |
+    <a href="#pg_affected_rows">PG_AFFECTED_ROWS</a> |
+    <a href="#pg_cancel_query">PG_CANCEL_QUERY</a> |
+    <a href="#pg_client_encoding">PG_CLIENT_ENCODING</a> |
+    <a href="#pg_close">PG_CLOSE</a> |
+    <a href="#pg_connect">PG_CONNECT</a> |
+    <a href="#pg_connect_poll">PG_CONNECT_POLL</a> |
+    <a href="#pg_connection_busy">PG_CONNECTION_BUSY</a> |
+    <a href="#pg_connection_reset">PG_CONNECTION_RESET</a> |
+    <a href="#pg_connection_status">PG_CONNECTION_STATUS</a> |
+    <a href="#pg_consume_input">PG_CONSUME_INPUT</a> |
+    <a href="#pg_convert">PG_CONVERT</a> |
+    <a href="#pg_copy_from">PG_COPY_FROM</a> |
+    <a href="#pg_copy_to">PG_COPY_TO</a> |
+    <a href="#pg_dbname">PG_DBNAME</a> |
+    <a href="#pg_delete">PG_DELETE</a> |
+    <a href="#pg_end_copy">PG_END_COPY</a> |
+    <a href="#pg_escape_bytea">PG_ESCAPE_BYTEA</a> |
+    <a href="#pg_escape_identifier">PG_ESCAPE_IDENTIFIER</a> |
+    <a href="#pg_escape_literal">PG_ESCAPE_LITERAL</a> |
+    <a href="#pg_escape_string">PG_ESCAPE_STRING</a> |
+    <a href="#pg_execute">PG_EXECUTE</a> |
+    <a href="#pg_fetch_all">PG_FETCH_ALL</a> |
+    <a href="#pg_fetch_all_columns">PG_FETCH_ALL_COLUMNS</a> |
+    <a href="#pg_fetch_array">PG_FETCH_ARRAY</a> |
+    <a href="#pg_fetch_assoc">PG_FETCH_ASSOC</a> |
+    <a href="#pg_fetch_object">PG_FETCH_OBJECT</a> |
+    <a href="#pg_fetch_result">PG_FETCH_RESULT</a> |
+    <a href="#pg_fetch_row">PG_FETCH_ROW</a> |
+    <a href="#pg_field_is_null">PG_FIELD_IS_NULL</a> |
+    <a href="#pg_field_name">PG_FIELD_NAME</a> |
+    <a href="#pg_field_num">PG_FIELD_NUM</a> |
+    <a href="#pg_field_prtlen">PG_FIELD_PRTLEN</a> |
+    <a href="#pg_field_size">PG_FIELD_SIZE</a> |
+    <a href="#pg_field_table">PG_FIELD_TABLE</a> |
+    <a href="#pg_field_type">PG_FIELD_TYPE</a> |
+    <a href="#pg_field_type_oid">PG_FIELD_TYPE_OID</a> |
+    <a href="#pg_flush">PG_FLUSH</a> |
+    <a href="#pg_free_result">PG_FREE_RESULT</a> |
+    <a href="#pg_get_notify">PG_GET_NOTIFY</a> |
+    <a href="#pg_get_pid">PG_GET_PID</a> |
+    <a href="#pg_get_result">PG_GET_RESULT</a> |
+    <a href="#pg_host">PG_HOST</a> |
+    <a href="#pg_insert">PG_INSERT</a> |
+    <a href="#pg_last_error">PG_LAST_ERROR</a> |
+    <a href="#pg_last_notice">PG_LAST_NOTICE</a> |
+    <a href="#pg_last_oid">PG_LAST_OID</a> |
+    <a href="#pg_lo_close">PG_LO_CLOSE</a> |
+    <a href="#pg_lo_create">PG_LO_CREATE</a> |
+    <a href="#pg_lo_export">PG_LO_EXPORT</a> |
+    <a href="#pg_lo_import">PG_LO_IMPORT</a> |
+    <a href="#pg_lo_open">PG_LO_OPEN</a> |
+    <a href="#pg_lo_read">PG_LO_READ</a> |
+    <a href="#pg_lo_read_all">PG_LO_READ_ALL</a> |
+    <a href="#pg_lo_seek">PG_LO_SEEK</a> |
+    <a href="#pg_lo_tell">PG_LO_TELL</a> |
+    <a href="#pg_lo_truncate">PG_LO_TRUNCATE</a> |
+    <a href="#pg_lo_unlink">PG_LO_UNLINK</a> |
+    <a href="#pg_lo_write">PG_LO_WRITE</a> |
+    <a href="#pg_meta_data">PG_META_DATA</a> |
+    <a href="#pg_num_fields">PG_NUM_FIELDS</a> |
+    <a href="#pg_num_rows">PG_NUM_ROWS</a> |
+    <a href="#pg_options">PG_OPTIONS</a> |
+    <a href="#pg_parameter_status">PG_PARAMETER_STATUS</a> |
+    <a href="#pg_pconnect">PG_PCONNECT</a> |
+    <a href="#pg_ping">PG_PING</a> |
+    <a href="#pg_port">PG_PORT</a> |
+    <a href="#pg_prepare">PG_PREPARE</a> |
+    <a href="#pg_put_line">PG_PUT_LINE</a> |
+    <a href="#pg_query">PG_QUERY</a> |
+    <a href="#pg_query_params">PG_QUERY_PARAMS</a> |
+    <a href="#pg_result_error">PG_RESULT_ERROR</a> |
+    <a href="#pg_result_error_field">PG_RESULT_ERROR_FIELD</a> |
+    <a href="#pg_result_memory_size">PG_RESULT_MEMORY_SIZE</a> |
+    <a href="#pg_result_seek">PG_RESULT_SEEK</a> |
+    <a href="#pg_result_status">PG_RESULT_STATUS</a> |
+    <a href="#pg_select">PG_SELECT</a> |
+    <a href="#pg_send_execute">PG_SEND_EXECUTE</a> |
+    <a href="#pg_send_prepare">PG_SEND_PREPARE</a> |
+    <a href="#pg_send_query">PG_SEND_QUERY</a> |
+    <a href="#pg_send_query_params">PG_SEND_QUERY_PARAMS</a> |
+    <a href="#pg_set_chunked_rows_size">PG_SET_CHUNKED_ROWS_SIZE</a> |
+    <a href="#pg_set_client_encoding">PG_SET_CLIENT_ENCODING</a> |
+    <a href="#pg_set_error_context_visibility">PG_SET_ERROR_CONTEXT_VISIBILITY</a> |
+    <a href="#pg_set_error_verbosity">PG_SET_ERROR_VERBOSITY</a> |
+    <a href="#pg_socket">PG_SOCKET</a> |
+    <a href="#pg_trace">PG_TRACE</a> |
+    <a href="#pg_transaction_status">PG_TRANSACTION_STATUS</a> |
+    <a href="#pg_tty">PG_TTY</a> |
+    <a href="#pg_unescape_bytea">PG_UNESCAPE_BYTEA</a> |
+    <a href="#pg_untrace">PG_UNTRACE</a> |
+    <a href="#pg_update">PG_UPDATE</a> |
+    <a href="#pg_version">PG_VERSION</a> |
+    <a href="#pgsql_connection">PGSQL\CONNECTION</a> |
+    <a href="#pgsql_result">PGSQL\RESULT</a> |
+    <a href="#pgsql_lob">PGSQL\LOB</a>
   </p>
 </nav>
 
-<h4 id="dependencies">Dependencies</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="runtime-configuration">Runtime Configuration</h4>
-<h4 id="resource-types">Resource Types</h4>
-<h4 id="basic-usage">Basic Usage</h4>
-<h4 id="pg_affected_rows">pg_affected_rows</h4>
-<h4 id="pg_cancel_query">pg_cancel_query</h4>
-<h4 id="pg_client_encoding">pg_client_encoding</h4>
-<h4 id="pg_close">pg_close</h4>
-<h4 id="pg_connect">pg_connect</h4>
-<h4 id="pg_connect_poll">pg_connect_poll</h4>
-<h4 id="pg_connection_busy">pg_connection_busy</h4>
-<h4 id="pg_connection_reset">pg_connection_reset</h4>
-<h4 id="pg_connection_status">pg_connection_status</h4>
-<h4 id="pg_consume_input">pg_consume_input</h4>
-<h4 id="pg_convert">pg_convert</h4>
-<h4 id="pg_copy_from">pg_copy_from</h4>
-<h4 id="pg_copy_to">pg_copy_to</h4>
-<h4 id="pg_dbname">pg_dbname</h4>
-<h4 id="pg_delete">pg_delete</h4>
-<h4 id="pg_end_copy">pg_end_copy</h4>
-<h4 id="pg_escape_bytea">pg_escape_bytea</h4>
-<h4 id="pg_escape_identifier">pg_escape_identifier</h4>
-<h4 id="pg_escape_literal">pg_escape_literal</h4>
-<h4 id="pg_escape_string">pg_escape_string</h4>
-<h4 id="pg_execute">pg_execute</h4>
-<h4 id="pg_fetch_all">pg_fetch_all</h4>
-<h4 id="pg_fetch_all_columns">pg_fetch_all_columns</h4>
-<h4 id="pg_fetch_array">pg_fetch_array</h4>
-<h4 id="pg_fetch_assoc">pg_fetch_assoc</h4>
-<h4 id="pg_fetch_object">pg_fetch_object</h4>
-<h4 id="pg_fetch_result">pg_fetch_result</h4>
-<h4 id="pg_fetch_row">pg_fetch_row</h4>
-<h4 id="pg_field_is_null">pg_field_is_null</h4>
-<h4 id="pg_field_name">pg_field_name</h4>
-<h4 id="pg_field_num">pg_field_num</h4>
-<h4 id="pg_field_prtlen">pg_field_prtlen</h4>
-<h4 id="pg_field_size">pg_field_size</h4>
-<h4 id="pg_field_table">pg_field_table</h4>
-<h4 id="pg_field_type">pg_field_type</h4>
-<h4 id="pg_field_type_oid">pg_field_type_oid</h4>
-<h4 id="pg_flush">pg_flush</h4>
-<h4 id="pg_free_result">pg_free_result</h4>
-<h4 id="pg_get_notify">pg_get_notify</h4>
-<h4 id="pg_get_pid">pg_get_pid</h4>
-<h4 id="pg_get_result">pg_get_result</h4>
-<h4 id="pg_host">pg_host</h4>
-<h4 id="pg_insert">pg_insert</h4>
-<h4 id="pg_last_error">pg_last_error</h4>
-<h4 id="pg_last_notice">pg_last_notice</h4>
-<h4 id="pg_last_oid">pg_last_oid</h4>
-<h4 id="pg_lo_close">pg_lo_close</h4>
-<h4 id="pg_lo_create">pg_lo_create</h4>
-<h4 id="pg_lo_export">pg_lo_export</h4>
-<h4 id="pg_lo_import">pg_lo_import</h4>
-<h4 id="pg_lo_open">pg_lo_open</h4>
-<h4 id="pg_lo_read">pg_lo_read</h4>
-<h4 id="pg_lo_read_all">pg_lo_read_all</h4>
-<h4 id="pg_lo_seek">pg_lo_seek</h4>
-<h4 id="pg_lo_tell">pg_lo_tell</h4>
-<h4 id="pg_lo_truncate">pg_lo_truncate</h4>
-<h4 id="pg_lo_unlink">pg_lo_unlink</h4>
-<h4 id="pg_lo_write">pg_lo_write</h4>
-<h4 id="pg_meta_data">pg_meta_data</h4>
-<h4 id="pg_num_fields">pg_num_fields</h4>
-<h4 id="pg_num_rows">pg_num_rows</h4>
-<h4 id="pg_options">pg_options</h4>
-<h4 id="pg_parameter_status">pg_parameter_status</h4>
-<h4 id="pg_pconnect">pg_pconnect</h4>
-<h4 id="pg_ping">pg_ping</h4>
-<h4 id="pg_port">pg_port</h4>
-<h4 id="pg_prepare">pg_prepare</h4>
-<h4 id="pg_put_line">pg_put_line</h4>
-<h4 id="pg_query">pg_query</h4>
-<h4 id="pg_query_params">pg_query_params</h4>
-<h4 id="pg_result_error">pg_result_error</h4>
-<h4 id="pg_result_error_field">pg_result_error_field</h4>
-<h4 id="pg_result_memory_size">pg_result_memory_size</h4>
-<h4 id="pg_result_seek">pg_result_seek</h4>
-<h4 id="pg_result_status">pg_result_status</h4>
-<h4 id="pg_select">pg_select</h4>
-<h4 id="pg_send_execute">pg_send_execute</h4>
-<h4 id="pg_send_prepare">pg_send_prepare</h4>
-<h4 id="pg_send_query">pg_send_query</h4>
-<h4 id="pg_send_query_params">pg_send_query_params</h4>
-<h4 id="pg_set_chunked_rows_size">pg_set_chunked_rows_size</h4>
-<h4 id="pg_set_client_encoding">pg_set_client_encoding</h4>
-<h4 id="pg_set_error_context_visibility">pg_set_error_context_visibility</h4>
-<h4 id="pg_set_error_verbosity">pg_set_error_verbosity</h4>
-<h4 id="pg_socket">pg_socket</h4>
-<h4 id="pg_trace">pg_trace</h4>
-<h4 id="pg_transaction_status">pg_transaction_status</h4>
-<h4 id="pg_tty">pg_tty</h4>
-<h4 id="pg_unescape_bytea">pg_unescape_bytea</h4>
-<h4 id="pg_untrace">pg_untrace</h4>
-<h4 id="pg_update">pg_update</h4>
-<h4 id="pg_version">pg_version</h4>
-<h4 id="pgsql_connection">PgSql\Connection</h4>
-<h4 id="pgsql_result">PgSql\Result</h4>
-<h4 id="pgsql_lob">PgSql\Lob</h4>
+
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
+<h4 id="resource-types">RESOURCE TYPES</h4>
+<h4 id="basic-usage">BASIC USAGE</h4>
+<h4 id="pg_affected_rows">PG_AFFECTED_ROWS</h4>
+<h4 id="pg_cancel_query">PG_CANCEL_QUERY</h4>
+<h4 id="pg_client_encoding">PG_CLIENT_ENCODING</h4>
+<h4 id="pg_close">PG_CLOSE</h4>
+<h4 id="pg_connect">PG_CONNECT</h4>
+<h4 id="pg_connect_poll">PG_CONNECT_POLL</h4>
+<h4 id="pg_connection_busy">PG_CONNECTION_BUSY</h4>
+<h4 id="pg_connection_reset">PG_CONNECTION_RESET</h4>
+<h4 id="pg_connection_status">PG_CONNECTION_STATUS</h4>
+<h4 id="pg_consume_input">PG_CONSUME_INPUT</h4>
+<h4 id="pg_convert">PG_CONVERT</h4>
+<h4 id="pg_copy_from">PG_COPY_FROM</h4>
+<h4 id="pg_copy_to">PG_COPY_TO</h4>
+<h4 id="pg_dbname">PG_DBNAME</h4>
+<h4 id="pg_delete">PG_DELETE</h4>
+<h4 id="pg_end_copy">PG_END_COPY</h4>
+<h4 id="pg_escape_bytea">PG_ESCAPE_BYTEA</h4>
+<h4 id="pg_escape_identifier">PG_ESCAPE_IDENTIFIER</h4>
+<h4 id="pg_escape_literal">PG_ESCAPE_LITERAL</h4>
+<h4 id="pg_escape_string">PG_ESCAPE_STRING</h4>
+<h4 id="pg_execute">PG_EXECUTE</h4>
+<h4 id="pg_fetch_all">PG_FETCH_ALL</h4>
+<h4 id="pg_fetch_all_columns">PG_FETCH_ALL_COLUMNS</h4>
+<h4 id="pg_fetch_array">PG_FETCH_ARRAY</h4>
+<h4 id="pg_fetch_assoc">PG_FETCH_ASSOC</h4>
+<h4 id="pg_fetch_object">PG_FETCH_OBJECT</h4>
+<h4 id="pg_fetch_result">PG_FETCH_RESULT</h4>
+<h4 id="pg_fetch_row">PG_FETCH_ROW</h4>
+<h4 id="pg_field_is_null">PG_FIELD_IS_NULL</h4>
+<h4 id="pg_field_name">PG_FIELD_NAME</h4>
+<h4 id="pg_field_num">PG_FIELD_NUM</h4>
+<h4 id="pg_field_prtlen">PG_FIELD_PRTLEN</h4>
+<h4 id="pg_field_size">PG_FIELD_SIZE</h4>
+<h4 id="pg_field_table">PG_FIELD_TABLE</h4>
+<h4 id="pg_field_type">PG_FIELD_TYPE</h4>
+<h4 id="pg_field_type_oid">PG_FIELD_TYPE_OID</h4>
+<h4 id="pg_flush">PG_FLUSH</h4>
+<h4 id="pg_free_result">PG_FREE_RESULT</h4>
+<h4 id="pg_get_notify">PG_GET_NOTIFY</h4>
+<h4 id="pg_get_pid">PG_GET_PID</h4>
+<h4 id="pg_get_result">PG_GET_RESULT</h4>
+<h4 id="pg_host">PG_HOST</h4>
+<h4 id="pg_insert">PG_INSERT</h4>
+<h4 id="pg_last_error">PG_LAST_ERROR</h4>
+<h4 id="pg_last_notice">PG_LAST_NOTICE</h4>
+<h4 id="pg_last_oid">PG_LAST_OID</h4>
+<h4 id="pg_lo_close">PG_LO_CLOSE</h4>
+<h4 id="pg_lo_create">PG_LO_CREATE</h4>
+<h4 id="pg_lo_export">PG_LO_EXPORT</h4>
+<h4 id="pg_lo_import">PG_LO_IMPORT</h4>
+<h4 id="pg_lo_open">PG_LO_OPEN</h4>
+<h4 id="pg_lo_read">PG_LO_READ</h4>
+<h4 id="pg_lo_read_all">PG_LO_READ_ALL</h4>
+<h4 id="pg_lo_seek">PG_LO_SEEK</h4>
+<h4 id="pg_lo_tell">PG_LO_TELL</h4>
+<h4 id="pg_lo_truncate">PG_LO_TRUNCATE</h4>
+<h4 id="pg_lo_unlink">PG_LO_UNLINK</h4>
+<h4 id="pg_lo_write">PG_LO_WRITE</h4>
+<h4 id="pg_meta_data">PG_META_DATA</h4>
+<h4 id="pg_num_fields">PG_NUM_FIELDS</h4>
+<h4 id="pg_num_rows">PG_NUM_ROWS</h4>
+<h4 id="pg_options">PG_OPTIONS</h4>
+<h4 id="pg_parameter_status">PG_PARAMETER_STATUS</h4>
+<h4 id="pg_pconnect">PG_PCONNECT</h4>
+<h4 id="pg_ping">PG_PING</h4>
+<h4 id="pg_port">PG_PORT</h4>
+<h4 id="pg_prepare">PG_PREPARE</h4>
+<h4 id="pg_put_line">PG_PUT_LINE</h4>
+<h4 id="pg_query">PG_QUERY</h4>
+<h4 id="pg_query_params">PG_QUERY_PARAMS</h4>
+<h4 id="pg_result_error">PG_RESULT_ERROR</h4>
+<h4 id="pg_result_error_field">PG_RESULT_ERROR_FIELD</h4>
+<h4 id="pg_result_memory_size">PG_RESULT_MEMORY_SIZE</h4>
+<h4 id="pg_result_seek">PG_RESULT_SEEK</h4>
+<h4 id="pg_result_status">PG_RESULT_STATUS</h4>
+<h4 id="pg_select">PG_SELECT</h4>
+<h4 id="pg_send_execute">PG_SEND_EXECUTE</h4>
+<h4 id="pg_send_prepare">PG_SEND_PREPARE</h4>
+<h4 id="pg_send_query">PG_SEND_QUERY</h4>
+<h4 id="pg_send_query_params">PG_SEND_QUERY_PARAMS</h4>
+<h4 id="pg_set_chunked_rows_size">PG_SET_CHUNKED_ROWS_SIZE</h4>
+<h4 id="pg_set_client_encoding">PG_SET_CLIENT_ENCODING</h4>
+<h4 id="pg_set_error_context_visibility">PG_SET_ERROR_CONTEXT_VISIBILITY</h4>
+<h4 id="pg_set_error_verbosity">PG_SET_ERROR_VERBOSITY</h4>
+<h4 id="pg_socket">PG_SOCKET</h4>
+<h4 id="pg_trace">PG_TRACE</h4>
+<h4 id="pg_transaction_status">PG_TRANSACTION_STATUS</h4>
+<h4 id="pg_tty">PG_TTY</h4>
+<h4 id="pg_unescape_bytea">PG_UNESCAPE_BYTEA</h4>
+<h4 id="pg_untrace">PG_UNTRACE</h4>
+<h4 id="pg_update">PG_UPDATE</h4>
+<h4 id="pg_version">PG_VERSION</h4>
+<h4 id="pgsql_connection">PGSQL\CONNECTION</h4>
+<h4 id="pgsql_result">PGSQL\RESULT</h4>
+<h4 id="pgsql_lob">PGSQL\LOB</h4>
 
 
 <h4 id="sqlite3">SQLITE3</h4>
 
 <nav align="center"> 
-  <h2>NAVIGATION</h2> 
+  <h3>NAVIGATION</h3> 
   <p>
-    <a href="#introduction">Introduction</a> | 
-    <a href="#dependencies">Dependencies</a> | 
-    <a href="#installation">Installation</a> | 
-    <a href="#sqlite3-class">SQLite3 — The SQLite3 Class</a> | 
-    <a href="#sqlite3-backup">SQLite3::backup</a> | 
-    <a href="#sqlite3-busytimeout">SQLite3::busyTimeout</a> | 
-    <a href="#sqlite3-changes">SQLite3::changes</a> | 
-    <a href="#sqlite3-close">SQLite3::close</a> | 
-    <a href="#sqlite3-construct">SQLite3::__construct</a> | 
-    <a href="#sqlite3-createaggregate">SQLite3::createAggregate</a> | 
-    <a href="#sqlite3-createcollation">SQLite3::createCollation</a> | 
-    <a href="#sqlite3-createfunction">SQLite3::createFunction</a> | 
-    <a href="#sqlite3-enableexceptions">SQLite3::enableExceptions</a> | 
-    <a href="#sqlite3-escapestring">SQLite3::escapeString</a> | 
-    <a href="#sqlite3-exec">SQLite3::exec</a> | 
-    <a href="#sqlite3-lasterrorcode">SQLite3::lastErrorCode</a> | 
-    <a href="#sqlite3-lasterrormsg">SQLite3::lastErrorMsg</a> | 
-    <a href="#sqlite3-lastinsertrowid">SQLite3::lastInsertRowID</a> | 
-    <a href="#sqlite3-loadextension">SQLite3::loadExtension</a> | 
-    <a href="#sqlite3-open">SQLite3::open</a> | 
-    <a href="#sqlite3-openblob">SQLite3::openBlob</a> | 
-    <a href="#sqlite3-prepare">SQLite3::prepare</a> | 
-    <a href="#sqlite3-query">SQLite3::query</a> | 
-    <a href="#sqlite3-querysingle">SQLite3::querySingle</a> | 
-    <a href="#sqlite3-setauthorizer">SQLite3::setAuthorizer</a> | 
-    <a href="#sqlite3-version">SQLite3::version</a> | 
-    <a href="#sqlite3exception-class">SQLite3Exception — The SQLite3Exception Class</a> | 
-    <a href="#sqlite3stmt-class">SQLite3Stmt — The SQLite3Stmt Class</a> | 
-    <a href="#sqlite3stmt-bindparam">SQLite3Stmt::bindParam</a> | 
-    <a href="#sqlite3stmt-bindvalue">SQLite3Stmt::bindValue</a> | 
-    <a href="#sqlite3stmt-clear">SQLite3Stmt::clear</a> | 
-    <a href="#sqlite3stmt-close">SQLite3Stmt::close</a> | 
-    <a href="#sqlite3stmt-construct">SQLite3Stmt::__construct</a> | 
-    <a href="#sqlite3stmt-execute">SQLite3Stmt::execute</a> | 
-    <a href="#sqlite3stmt-getsql">SQLite3Stmt::getSQL</a> | 
-    <a href="#sqlite3stmt-paramcount">SQLite3Stmt::paramCount</a> | 
-    <a href="#sqlite3stmt-readonly">SQLite3Stmt::readOnly</a> | 
-    <a href="#sqlite3stmt-reset">SQLite3Stmt::reset</a> | 
-    <a href="#sqlite3result-class">SQLite3Result — The SQLite3Result Class</a> | 
-    <a href="#sqlite3result-columnname">SQLite3Result::columnName</a> | 
-    <a href="#sqlite3result-columntype">SQLite3Result::columnType</a> | 
-    <a href="#sqlite3result-construct">SQLite3Result::__construct</a> | 
-    <a href="#sqlite3result-fetcharray">SQLite3Result::fetchArray</a> | 
-    <a href="#sqlite3result-finalize">SQLite3Result::finalize</a> | 
-    <a href="#sqlite3result-numcolumns">SQLite3Result::numColumns</a> | 
-    <a href="#sqlite3result-reset">SQLite3Result::reset</a>
+    <a href="#introduction">INTRODUCTION</a> | 
+    <a href="#dependencies">DEPENDENCIES</a> | 
+    <a href="#installation">INSTALLATION</a> | 
+    <a href="#sqlite3-class">SQLITE3 — THE SQLITE3 CLASS</a> | 
+    <a href="#sqlite3-backup">SQLITE3::BACKUP</a> | 
+    <a href="#sqlite3-busytimeout">SQLITE3::BUSYTIMEOUT</a> | 
+    <a href="#sqlite3-changes">SQLITE3::CHANGES</a> | 
+    <a href="#sqlite3-close">SQLITE3::CLOSE</a> | 
+    <a href="#sqlite3-construct">SQLITE3::__CONSTRUCT</a> | 
+    <a href="#sqlite3-createaggregate">SQLITE3::CREATEAGGREGATE</a> | 
+    <a href="#sqlite3-createcollation">SQLITE3::CREATECOLLATION</a> | 
+    <a href="#sqlite3-createfunction">SQLITE3::CREATEFUNCTION</a> | 
+    <a href="#sqlite3-enableexceptions">SQLITE3::ENABLEEXCEPTIONS</a> | 
+    <a href="#sqlite3-escapestring">SQLITE3::ESCAPESTRING</a> | 
+    <a href="#sqlite3-exec">SQLITE3::EXEC</a> | 
+    <a href="#sqlite3-lasterrorcode">SQLITE3::LASTERRORCODE</a> | 
+    <a href="#sqlite3-lasterrormsg">SQLITE3::LASTERRORMSG</a> | 
+    <a href="#sqlite3-lastinsertrowid">SQLITE3::LASTINSERTROWID</a> | 
+    <a href="#sqlite3-loadextension">SQLITE3::LOADEXTENSION</a> | 
+    <a href="#sqlite3-open">SQLITE3::OPEN</a> | 
+    <a href="#sqlite3-openblob">SQLITE3::OPENBLOB</a> | 
+    <a href="#sqlite3-prepare">SQLITE3::PREPARE</a> | 
+    <a href="#sqlite3-query">SQLITE3::QUERY</a> | 
+    <a href="#sqlite3-querysingle">SQLITE3::QUERYSINGLE</a> | 
+    <a href="#sqlite3-setauthorizer">SQLITE3::SETAUTHORIZER</a> | 
+    <a href="#sqlite3-version">SQLITE3::VERSION</a> | 
+    <a href="#sqlite3exception-class">SQLITE3EXCEPTION — THE SQLITE3EXCEPTION CLASS</a> | 
+    <a href="#sqlite3stmt-class">SQLITE3STMT — THE SQLITE3STMT CLASS</a> | 
+    <a href="#sqlite3stmt-bindparam">SQLITE3STMT::BINDPARAM</a> | 
+    <a href="#sqlite3stmt-bindvalue">SQLITE3STMT::BINDVALUE</a> | 
+    <a href="#sqlite3stmt-clear">SQLITE3STMT::CLEAR</a> | 
+    <a href="#sqlite3stmt-close">SQLITE3STMT::CLOSE</a> | 
+    <a href="#sqlite3stmt-construct">SQLITE3STMT::__CONSTRUCT</a> | 
+    <a href="#sqlite3stmt-execute">SQLITE3STMT::EXECUTE</a> | 
+    <a href="#sqlite3stmt-getsql">SQLITE3STMT::GETSQL</a> | 
+    <a href="#sqlite3stmt-paramcount">SQLITE3STMT::PARAMCOUNT</a> | 
+    <a href="#sqlite3stmt-readonly">SQLITE3STMT::READONLY</a> | 
+    <a href="#sqlite3stmt-reset">SQLITE3STMT::RESET</a> | 
+    <a href="#sqlite3result-class">SQLITE3RESULT — THE SQLITE3RESULT CLASS</a> | 
+    <a href="#sqlite3result-columnname">SQLITE3RESULT::COLUMNNAME</a> | 
+    <a href="#sqlite3result-columntype">SQLITE3RESULT::COLUMNTYPE</a> | 
+    <a href="#sqlite3result-construct">SQLITE3RESULT::__CONSTRUCT</a> | 
+    <a href="#sqlite3result-fetcharray">SQLITE3RESULT::FETCHARRAY</a> | 
+    <a href="#sqlite3result-finalize">SQLITE3RESULT::FINALIZE</a> | 
+    <a href="#sqlite3result-numcolumns">SQLITE3RESULT::NUMCOLUMNS</a> | 
+    <a href="#sqlite3result-reset">SQLITE3RESULT::RESET</a>
   </p> 
 </nav>
 
-<h4 id="introduction">Introduction</h4>
-<h4 id="dependencies">Dependencies</h4>
-<h4 id="installation">Installation</h4>
-<h4 id="sqlite3-class">SQLite3 — The SQLite3 Class</h4>
-<h4 id="sqlite3-backup">SQLite3::backup</h4>
-<h4 id="sqlite3-busytimeout">SQLite3::busyTimeout</h4>
-<h4 id="sqlite3-changes">SQLite3::changes</h4>
-<h4 id="sqlite3-close">SQLite3::close</h4>
-<h4 id="sqlite3-construct">SQLite3::__construct</h4>
-<h4 id="sqlite3-createaggregate">SQLite3::createAggregate</h4>
-<h4 id="sqlite3-createcollation">SQLite3::createCollation</h4>
-<h4 id="sqlite3-createfunction">SQLite3::createFunction</h4>
-<h4 id="sqlite3-enableexceptions">SQLite3::enableExceptions</h4>
-<h4 id="sqlite3-escapestring">SQLite3::escapeString</h4>
-<h4 id="sqlite3-exec">SQLite3::exec</h4>
-<h4 id="sqlite3-lasterrorcode">SQLite3::lastErrorCode</h4>
-<h4 id="sqlite3-lasterrormsg">SQLite3::lastErrorMsg</h4>
-<h4 id="sqlite3-lastinsertrowid">SQLite3::lastInsertRowID</h4>
-<h4 id="sqlite3-loadextension">SQLite3::loadExtension</h4>
-<h4 id="sqlite3-open">SQLite3::open</h4>
-<h4 id="sqlite3-openblob">SQLite3::openBlob</h4>
-<h4 id="sqlite3-prepare">SQLite3::prepare</h4>
-<h4 id="sqlite3-query">SQLite3::query</h4>
-<h4 id="sqlite3-querysingle">SQLite3::querySingle</h4>
-<h4 id="sqlite3-setauthorizer">SQLite3::setAuthorizer</h4>
-<h4 id="sqlite3-version">SQLite3::version</h4>
-<h4 id="sqlite3exception-class">SQLite3Exception — The SQLite3Exception Class</h4>
-<h4 id="sqlite3stmt-class">SQLite3Stmt — The SQLite3Stmt Class</h4>
-<h4 id="sqlite3stmt-bindparam">SQLite3Stmt::bindParam</h4>
-<h4 id="sqlite3stmt-bindvalue">SQLite3Stmt::bindValue</h4>
-<h4 id="sqlite3stmt-clear">SQLite3Stmt::clear</h4>
-<h4 id="sqlite3stmt-close">SQLite3Stmt::close</h4>
-<h4 id="sqlite3stmt-construct">SQLite3Stmt::__construct</h4>
-<h4 id="sqlite3stmt-execute">SQLite3Stmt::execute</h4>
-<h4 id="sqlite3stmt-getsql">SQLite3Stmt::getSQL</h4>
-<h4 id="sqlite3stmt-paramcount">SQLite3Stmt::paramCount</h4>
-<h4 id="sqlite3stmt-readonly">SQLite3Stmt::readOnly</h4>
-<h4 id="sqlite3stmt-reset">SQLite3Stmt::reset</h4>
-<h4 id="sqlite3result-class">SQLite3Result — The SQLite3Result Class</h4>
-<h4 id="sqlite3result-columnname">SQLite3Result::columnName</h4>
-<h4 id="sqlite3result-columntype">SQLite3Result::columnType</h4>
-<h4 id="sqlite3result-construct">SQLite3Result::__construct</h4>
-<h4 id="sqlite3result-fetcharray">SQLite3Result::fetchArray</h4>
-<h4 id="sqlite3result-finalize">SQLite3Result::finalize</h4>
-<h4 id="sqlite3result-numcolumns">SQLite3Result::numColumns</h4>
-<h4 id="sqlite3result-reset">SQLite3Result::reset</h4>
+
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="sqlite3-class">SQLITE3 — THE SQLITE3 CLASS</h4>
+<h4 id="sqlite3-backup">SQLITE3::BACKUP</h4>
+<h4 id="sqlite3-busytimeout">SQLITE3::BUSYTIMEOUT</h4>
+<h4 id="sqlite3-changes">SQLITE3::CHANGES</h4>
+<h4 id="sqlite3-close">SQLITE3::CLOSE</h4>
+<h4 id="sqlite3-construct">SQLITE3::__CONSTRUCT</h4>
+<h4 id="sqlite3-createaggregate">SQLITE3::CREATEAGGREGATE</h4>
+<h4 id="sqlite3-createcollation">SQLITE3::CREATECOLLATION</h4>
+<h4 id="sqlite3-createfunction">SQLITE3::CREATEFUNCTION</h4>
+<h4 id="sqlite3-enableexceptions">SQLITE3::ENABLEEXCEPTIONS</h4>
+<h4 id="sqlite3-escapestring">SQLITE3::ESCAPESTRING</h4>
+<h4 id="sqlite3-exec">SQLITE3::EXEC</h4>
+<h4 id="sqlite3-lasterrorcode">SQLITE3::LASTERRORCODE</h4>
+<h4 id="sqlite3-lasterrormsg">SQLITE3::LASTERRORMSG</h4>
+<h4 id="sqlite3-lastinsertrowid">SQLITE3::LASTINSERTROWID</h4>
+<h4 id="sqlite3-loadextension">SQLITE3::LOADEXTENSION</h4>
+<h4 id="sqlite3-open">SQLITE3::OPEN</h4>
+<h4 id="sqlite3-openblob">SQLITE3::OPENBLOB</h4>
+<h4 id="sqlite3-prepare">SQLITE3::PREPARE</h4>
+<h4 id="sqlite3-query">SQLITE3::QUERY</h4>
+<h4 id="sqlite3-querysingle">SQLITE3::QUERYSINGLE</h4>
+<h4 id="sqlite3-setauthorizer">SQLITE3::SETAUTHORIZER</h4>
+<h4 id="sqlite3-version">SQLITE3::VERSION</h4>
+<h4 id="sqlite3exception-class">SQLITE3EXCEPTION — THE SQLITE3EXCEPTION CLASS</h4>
+<h4 id="sqlite3stmt-class">SQLITE3STMT — THE SQLITE3STMT CLASS</h4>
+<h4 id="sqlite3stmt-bindparam">SQLITE3STMT::BINDPARAM</h4>
+<h4 id="sqlite3stmt-bindvalue">SQLITE3STMT::BINDVALUE</h4>
+<h4 id="sqlite3stmt-clear">SQLITE3STMT::CLEAR</h4>
+<h4 id="sqlite3stmt-close">SQLITE3STMT::CLOSE</h4>
+<h4 id="sqlite3stmt-construct">SQLITE3STMT::__CONSTRUCT</h4>
+<h4 id="sqlite3stmt-execute">SQLITE3STMT::EXECUTE</h4>
+<h4 id="sqlite3stmt-getsql">SQLITE3STMT::GETSQL</h4>
+<h4 id="sqlite3stmt-paramcount">SQLITE3STMT::PARAMCOUNT</h4>
+<h4 id="sqlite3stmt-readonly">SQLITE3STMT::READONLY</h4>
+<h4 id="sqlite3stmt-reset">SQLITE3STMT::RESET</h4>
+<h4 id="sqlite3result-class">SQLITE3RESULT — THE SQLITE3RESULT CLASS</h4>
+<h4 id="sqlite3result-columnname">SQLITE3RESULT::COLUMNNAME</h4>
+<h4 id="sqlite3result-columntype">SQLITE3RESULT::COLUMNTYPE</h4>
+<h4 id="sqlite3result-construct">SQLITE3RESULT::__CONSTRUCT</h4>
+<h4 id="sqlite3result-fetcharray">SQLITE3RESULT::FETCHARRAY</h4>
+<h4 id="sqlite3result-finalize">SQLITE3RESULT::FINALIZE</h4>
+<h4 id="sqlite3result-numcolumns">SQLITE3RESULT::NUMCOLUMNS</h4>
+<h4 id="sqlite3result-reset">SQLITE3RESULT::RESET</h4>
 
 
 <h4 id="sqlsrv">SQLSRV</h4>
