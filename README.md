@@ -13011,7 +13011,7 @@
 
 <h4 id="swoole">SWOOLE</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
       <a href="#introduction">INTRODUCTION</a> |
@@ -13579,7 +13579,7 @@
 
 <h4 id="tidy">TIDY</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -13676,7 +13676,7 @@
 
 <h4 id="tokenizer">TOKENIZER</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -13707,7 +13707,7 @@
 
 <h4 id="urls">URLS</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -13741,7 +13741,7 @@
 
 <h4 id="v8js">V8JS</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -13780,7 +13780,7 @@
 
 <h4 id="yaml">YAML</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -13812,7 +13812,7 @@
 <h4 id="yaf">YAF</h4>
 
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">INTRODUCTION</a> |
@@ -14395,7 +14395,7 @@
 
 <h4 id="yaconf">YACONF</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -14416,7 +14416,7 @@
 
 <h4 id="taint">TAINT</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -14442,7 +14442,7 @@
 <h4 id="data-structures">DATA STRUCTURES</h4>
 
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
 <a href="#introduction">INTRODUCTION</a> |
@@ -14798,7 +14798,7 @@
 
 <h4 id="var-representation">VAR_REPRESENTATION</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -14813,7 +14813,7 @@
 
 <h3 id="other-services">OTHER SERVICES</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#curl">CURL</a> |
@@ -14843,7 +14843,7 @@
 
 <h4 id="curl">CURL</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">INTRODUCTION</a> |
@@ -14956,7 +14956,7 @@
 
 
 <!-- NAV -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#introduction">Introduction</a> |
@@ -15314,7 +15314,7 @@
 <h4 id="ftp">FTP</h4>
 
 <!-- NAV -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
     <a href="#ftp">FTP</a> |
@@ -15401,7 +15401,7 @@
 
 <h4 id="gearman">Gearman</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -15650,7 +15650,7 @@
 
 <h4 id="ldap">LDAP</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -15816,7 +15816,7 @@
 
 <h4 id="memcache">Memcache</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -15875,7 +15875,7 @@
 
 <h4 id="memcached">Memcached</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16011,7 +16011,7 @@
 
 <h4 id="mqseries">MQSeries</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16055,7 +16055,7 @@
 
 <h4 id="network">Network</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16143,7 +16143,7 @@
 
 <h4 id="rrd">RRD</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16217,7 +16217,7 @@
 
 <h4 id="scoutapm">ScoutAPM</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16237,7 +16237,7 @@
 
 <h4 id="snmp">SNMP</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16323,7 +16323,7 @@
 
 <h4 id="sockets">Sockets</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16421,7 +16421,7 @@
 
 <h4 id="ssh2">SSH2</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16505,7 +16505,7 @@
 
 <h4 id="stomp">Stomp</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16565,7 +16565,7 @@
 
 <h4 id="svm">SVM</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16615,7 +16615,7 @@
 
 <h4 id="svn">SVN</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16727,7 +16727,7 @@
 
 <h4 id="tcp">TCP</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16743,7 +16743,7 @@
 
 <h4 id="varnish">Varnish</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16819,7 +16819,7 @@
 
 <h4 id="yaz">YAZ</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16885,7 +16885,7 @@
 
 <h4 id="zeromq">0MQ Messaging API</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -16981,7 +16981,7 @@
 
 <h4 id="zookeeper">ZooKeeper</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -17069,7 +17069,7 @@
 
 <h3 id="search-engine-extensions">SEARCH ENGINE EXTENSIONS</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -17858,7 +17858,7 @@
 
 <h3 id="server-specific-extensions">SERVER SPECIFIC EXTENSIONS</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#apache">Apache</a>
@@ -17868,7 +17868,7 @@
 
 <h4 id="apache">Apache</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -17904,7 +17904,7 @@
 
 <h4 id="fastcgi_process_manager">FastCGI Process Manager</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -17927,7 +17927,7 @@
 
 <h3 id="session-extensions">SESSION EXTENSIONS</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -18011,7 +18011,7 @@
 
 <h3 id="text-processing">TEXT PROCESSING</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#commonmark">CommonMark</a>
@@ -18024,7 +18024,7 @@
 
 <h4 id="commonmark">CommonMark</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
   <a href="#introduction">Introduction</a>
@@ -18150,10 +18150,10 @@
 
 <h4 id="parle">Parle</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation-configuration">Installation/Configuration</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
@@ -18229,7 +18229,7 @@
     <li><a href="#parle-errorinfo">Parle\ErrorInfo</a></li>
     <li><a href="#parle-lexerexception">Parle\LexerException</a></li>
     <li><a href="#parle-parserexception">Parle\ParserException</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -18319,10 +18319,10 @@
 <h4 id="pcre">PCRE</h4>
 
 <!-- Navigation -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#pcre-expressions">PCRE Expressions</a></li>
@@ -18340,7 +18340,7 @@
     <li><a href="#preg-replace-callback">preg_replace_callback</a></li>
     <li><a href="#preg-replace-callback-array">preg_replace_callback_array</a></li>
     <li><a href="#preg-split">preg_split</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -18367,17 +18367,17 @@
 <h4 id="ssdeep">ssdeep</h4>
 
 <!-- Navigation -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#ssdeep-fuzzy-compare">ssdeep_fuzzy_compare</a></li>
     <li><a href="#ssdeep-fuzzy-hash">ssdeep_fuzzy_hash</a></li>
     <li><a href="#ssdeep-fuzzy-hash-filename">ssdeep_fuzzy_hash_filename</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -18392,10 +18392,10 @@
 
 <h4 id="strings">Strings</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation-configuration">Installation/Configuration</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -18506,7 +18506,7 @@
     <li><a href="#vprintf">vprintf</a></li>
     <li><a href="#vsprintf">vsprintf</a></li>
     <li><a href="#wordwrap">wordwrap</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -18626,10 +18626,10 @@
 
 <h3 id="variable-and-type-related-extensions">VARIABLE AND TYPE RELATED EXTENSIONS</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#arrays">Arrays</a></li>
     <li><a href="#classes-objects">Classes/Objects</a></li>
     <li><a href="#ctype">Ctype</a></li>
@@ -18638,16 +18638,16 @@
     <li><a href="#quickhash">Quickhash</a></li>
     <li><a href="#reflection">Reflection</a></li>
     <li><a href="#variable-handling">Variable Handling</a></li>
-  </ul>
+  
 </p>
 </nav>
 
 <h4 id="arrays">Arrays</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#predefined-constants">Predefined Constants</a></li>
     <li><a href="#array-sorting">Array Sorting</a></li>
@@ -18738,7 +18738,7 @@
     <li><a href="#uasort">uasort</a></li>
     <li><a href="#uksort">uksort</a></li>
     <li><a href="#usort">usort</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -18835,10 +18835,10 @@
 
 <h4 id="classes-objects">Classes/Objects</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introducao">Introdução</a></li>
     <li><a href="#exemplos">Exemplos</a></li>
     <li><a href="#__autoload">__autoload</a></li>
@@ -18861,7 +18861,7 @@
     <li><a href="#method_exists">method_exists</a></li>
     <li><a href="#property_exists">property_exists</a></li>
     <li><a href="#trait_exists">trait_exists</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -18891,10 +18891,10 @@
 
 <h4 id="ctype">Ctype</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introducao">Introdução</a></li>
     <li><a href="#dependencias">Dependências</a></li>
     <li><a href="#instalacao">Instalação</a></li>
@@ -18910,7 +18910,7 @@
     <li><a href="#ctype_space">ctype_space</a></li>
     <li><a href="#ctype_upper">ctype_upper</a></li>
     <li><a href="#ctype_xdigit">ctype_xdigit</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -18933,10 +18933,10 @@
 
 <h4 id="filter">Filter</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#validation">Validation</a></li>
@@ -18949,7 +18949,7 @@
     <li><a href="#filter_list">filter_list</a></li>
     <li><a href="#filter_var">filter_var</a></li>
     <li><a href="#filter_var_array">filter_var_array</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -18969,10 +18969,10 @@
 
 <h4 id="function-handling">Function Handling</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#call_user_func">call_user_func</a></li>
     <li><a href="#call_user_func_array">call_user_func_array</a></li>
@@ -18987,7 +18987,7 @@
     <li><a href="#register_shutdown_function">register_shutdown_function</a></li>
     <li><a href="#register_tick_function">register_tick_function</a></li>
     <li><a href="#unregister_tick_function">unregister_tick_function</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -19009,10 +19009,10 @@
 
 <h4 id="quickhash">Quickhash</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -19065,7 +19065,7 @@
     <li><a href="#quickhashintstringhash-savetostring">QuickHashIntStringHash::saveToString</a></li>
     <li><a href="#quickhashintstringhash-set">QuickHashIntStringHash::set</a></li>
     <li><a href="#quickhashintstringhash-update">QuickHashIntStringHash::update</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -19129,10 +19129,10 @@
 
 <h4 id="reflection">Reflection</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#examples">Examples</a></li>
     <li><a href="#extending">Extending</a></li>
@@ -19446,7 +19446,7 @@
   <a href="#reflector-export">Reflector::export</a><br>
   <a href="#reflectionexception">ReflectionException</a><br>
   <a href="#propertyhooktype">PropertyHookType</a>
-  </ul>
+  
 </p>
 </nav>
 
@@ -19767,10 +19767,10 @@
 
 <h4 id="variable-handling">Variable Handling</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#runtime-configuration">Runtime Configuration</a></li>
@@ -19811,7 +19811,7 @@
     <li><a href="#unset">unset</a></li>
     <li><a href="#var_dump">var_dump</a></li>
     <li><a href="#var_export">var_export</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -19858,24 +19858,24 @@
 
 <h3 id="web-services">WEB SERVICES</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#oauth">OAuth</a></li>
     <li><a href="#soap">SOAP</a></li>
     <li><a href="#yar">Yar</a></li>
     <li><a href="#xml-rpc">XML-RPC</a></li>
-  </ul>
+  
 </p>
 </nav>
 
 <h4 id="oauth">OAuth</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#runtime-configuration">Runtime Configuration</a></li>
@@ -19916,7 +19916,7 @@
     <li><a href="#unset">unset</a></li>
     <li><a href="#var_dump">var_dump</a></li>
     <li><a href="#var_export">var_export</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -19964,10 +19964,10 @@
 
 <h4 id="soap">SOAP</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -20008,7 +20008,7 @@
     <li><a href="#soapparam___construct">SoapParam::__construct</a></li>
     <li><a href="#soapvar">SoapVar</a></li>
     <li><a href="#soapvar___construct">SoapVar::__construct</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -20056,10 +20056,10 @@
 
 <h4 id="yar">Yar</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -20078,7 +20078,7 @@
     <li><a href="#yar_server_exception_getType">Yar_Server_Exception::getType</a></li>
     <li><a href="#yar_client_exception">Yar_Client_Exception</a></li>
     <li><a href="#yar_client_exception_getType">Yar_Client_Exception::getType</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -20104,10 +20104,10 @@
 
 <h4 id="xml-rpc">XML-RPC</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -20125,7 +20125,7 @@
     <li><a href="#xmlrpc_server_register_introspection_callback">xmlrpc_server_register_introspection_callback</a></li>
     <li><a href="#xmlrpc_server_register_method">xmlrpc_server_register_method</a></li>
     <li><a href="#xmlrpc_set_type">xmlrpc_set_type</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -20150,13 +20150,13 @@
 
 <h3 id="windows-only-extensions">WINDOWS ONLY EXTENSIONS</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#com">COM</a></li>
     <li><a href="#win32service">win32service</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -20171,10 +20171,10 @@ soon...
 
 <h3 id="xml-manipulation">XML MANIPULATION</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#dom">DOM</a></li>
     <li><a href="#libxml">libxml</a></li>
     <li><a href="#simplexml">SimpleXML</a></li>
@@ -20184,16 +20184,16 @@ soon...
     <li><a href="#xmlreader">XMLReader</a></li>
     <li><a href="#xmlwriter">XMLWriter</a></li>
     <li><a href="#xsl">XSL</a></li>
-  </ul>
+  
 </p>
 </nav>
 
 <h4 id="dom">DOM</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -20411,7 +20411,7 @@ soon...
     <li><a href="#DomXPath">Dom\XPath</a></li>
     <li><a href="#dom_import_simplexml">dom_import_simplexml</a></li>
     <li><a href="#Dom-import_simplexml">Dom\import_simplexml</a></li>
-  </ul>
+  
 </p>
 </nav>
 
@@ -20636,10 +20636,10 @@ soon...
 
 <h4 id="libxml">libxml</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-    <ul>
+    
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#installation-php7.4-and-above">Installation for PHP >= 7.4</a></li>
@@ -20653,7 +20653,7 @@ soon...
         <li><a href="#libxml-set-external-entity-loader">libxml_set_external_entity_loader</a></li>
         <li><a href="#libxml-set-streams-context">libxml_set_streams_context</a></li>
         <li><a href="#libxml-use-internal-errors">libxml_use_internal_errors</a></li>
-    </ul>
+    
         </p>
 </nav>
 
@@ -20674,10 +20674,10 @@ soon...
 
 <h4 id="simplexml">SimpleXML</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-    <ul>
+    
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -20707,7 +20707,7 @@ soon...
         <li><a href="#simplexml-import-dom">simplexml_import_dom</a></li>
         <li><a href="#simplexml-load-file">simplexml_load_file</a></li>
         <li><a href="#simplexml-load-string">simplexml_load_string</a></li>
-    </ul>
+    
 </p>
 </nav>
 
@@ -20745,10 +20745,10 @@ soon...
 <h4 id="wddx">WDDX</h4>
 
 <!-- Navigation -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-    <ul>
+    
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -20758,7 +20758,7 @@ soon...
         <li><a href="#wddx-packet-start">wddx_packet_start</a></li>
         <li><a href="#wddx-serialize-value">wddx_serialize_value</a></li>
         <li><a href="#wddx-serialize-vars">wddx_serialize_vars</a></li>
-    </ul>
+    
 </p>
 </nav>
 
@@ -20776,10 +20776,10 @@ soon...
 <h4 id="xmldiff">XMLDiff</h4>
 
 <!-- Navigation -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-    <ul>
+    
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -20796,7 +20796,7 @@ soon...
         <li><a href="#xmldiff-file">XMLDiff\File</a></li>
         <li><a href="#xmldiff-file-diff">XMLDiff\File::diff</a></li>
         <li><a href="#xmldiff-file-merge">XMLDiff\File::merge</a></li>
-    </ul>
+    
 </p>
 </nav>
 
@@ -20822,10 +20822,10 @@ soon...
 <h4 id="xml-parser">XML Parser</h4>
 
 <!-- Navigation -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-    <ul>
+    
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -20860,7 +20860,7 @@ soon...
         <li><a href="#xml-set-start-namespace-decl-handler">xml_set_start_namespace_decl_handler</a></li>
         <li><a href="#xml-set-unparsed-entity-decl-handler">xml_set_unparsed_entity_decl_handler</a></li>
         <li><a href="#xmlparser">XMLParser</a></li>
-    </ul>
+    
 </p>
 </nav>
 
@@ -20904,10 +20904,10 @@ soon...
 <h4 id="xmlreader">XMLReader</h4>
 
 <!-- Navigation -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-    <ul>
+    
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -20940,7 +20940,7 @@ soon...
         <li><a href="#xmlreader-setrelaxngschemasource">XMLReader::setRelaxNGSchemaSource</a></li>
         <li><a href="#xmlreader-setschema">XMLReader::setSchema</a></li>
         <li><a href="#xmlreader-xml">XMLReader::XML</a></li>
-    </ul>
+    
 </p>
 </nav>
 
@@ -20982,10 +20982,10 @@ soon...
 <h4 id="xmlwriter">XMLWriter</h4>
 
 <!-- Navigation -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-    <ul>
+    
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -21038,7 +21038,7 @@ soon...
         <li><a href="#xmlwriter-writeelementns">XMLWriter::writeElementNs</a></li>
         <li><a href="#xmlwriter-writepi">XMLWriter::writePi</a></li>
         <li><a href="#xmlwriter-writeraw">XMLWriter::writeRaw</a></li>
-    </ul>
+    
 </p>
 </nav>
 
@@ -21100,10 +21100,10 @@ soon...
 <h4 id="xsl">XSL</h4>
 
 <!-- Navigation -->
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-    <ul>
+    
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -21125,7 +21125,7 @@ soon...
         <li><a href="#xsltprocessor-transformtodoc">XSLTProcessor::transformToDoc</a></li>
         <li><a href="#xsltprocessor-transformtourl">XSLTProcessor::transformToURI</a></li>
         <li><a href="#xsltprocessor-transformtoxml">XSLTProcessor::transformToXml</a></li>
-    </ul>
+    
 </p>
 </nav>
 
@@ -21157,21 +21157,21 @@ soon...
 
 <h3 id="gui-extensions">GUI EXTENSIONS</h3>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#ui">UI</a></li>
-  </ul>
+  
 </p>
 </nav>
 
 <h4 id="ui">UI</h4>
 
-<nav>
+<nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
-  <ul>
+  
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -21423,7 +21423,7 @@ soon...
     <li><a href="#ui-key">UI\Key</a></li>
     <li><a href="#ui-exception-invalidargument">UI\Exception\InvalidArgumentException</a></li>
     <li><a href="#ui-exception-runtime">UI\Exception\RuntimeException</a></li>
-  </ul>
+  
 </p>
 </nav>
 
