@@ -13580,6 +13580,8 @@
 <h4 id="tidy">TIDY</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">INTRODUCTION</a> |
     <a href="#dependencies">DEPENDENCIES</a> |
     <a href="#installation">INSTALLATION</a> |
@@ -13624,6 +13626,7 @@
     <a href="#tidy_error_count">TIDY_ERROR_COUNT</a> |
     <a href="#tidy_get_output">TIDY_GET_OUTPUT</a> |
     <a href="#tidy_warning_count">TIDY_WARNING_COUNT</a>
+    </p>
 </nav>
 
 <h4 id="introduction">INTRODUCTION</h4>
@@ -13674,6 +13677,8 @@
 <h4 id="tokenizer">TOKENIZER</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">INTRODUCTION</a> |
     <a href="#installation">INSTALLATION</a> |
     <a href="#phptoken_class">PHPTOKEN — THE PHPTOKEN CLASS</a> |
@@ -13685,6 +13690,7 @@
     <a href="#phptoken_tokenize">PHPTOKEN::TOKENIZE</a> |
     <a href="#token_get_all">TOKEN_GET_ALL</a> |
     <a href="#token_name">TOKEN_NAME</a>
+    </p>
 </nav>
 
 <h4 id="introduction">INTRODUCTION</h4>
@@ -13702,6 +13708,8 @@
 <h4 id="urls">URLS</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">INTRODUCTION</a> |
     <a href="#base64_decode">BASE64_DECODE</a> |
     <a href="#base64_encode">BASE64_ENCODE</a> |
@@ -13713,6 +13721,7 @@
     <a href="#rawurlencode">RAWURLENCODE</a> |
     <a href="#urldecode">URLDECODE</a> |
     <a href="#urlencode">URLENCODE</a>
+    </p>
 </nav>
 
 <h4 id="introduction">INTRODUCTION</h4>
@@ -13733,6 +13742,8 @@
 <h4 id="v8js">V8JS</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">INTRODUCTION</a> |
     <a href="#dependencies">DEPENDENCIES</a> |
     <a href="#installation">INSTALLATION</a> |
@@ -13748,6 +13759,7 @@
     <a href="#v8jsexception_getJsLineNumber">V8JSEXCEPTION::GETJSLINENUMBER</a> |
     <a href="#v8jsexception_getJsSourceLine">V8JSEXCEPTION::GETJSSOURCELINE</a> |
     <a href="#v8jsexception_getJsTrace">V8JSEXCEPTION::GETJSTRACE</a>
+    </p>
 </nav>
 
 <h4 id="introduction">INTRODUCTION</h4>
@@ -13769,6 +13781,8 @@
 <h4 id="yaml">YAML</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">INTRODUCTION</a> |
     <a href="#dependencies">DEPENDENCIES</a> |
     <a href="#installation">INSTALLATION</a> |
@@ -13780,6 +13794,7 @@
     <a href="#yaml_parse">YAML_PARSE</a> |
     <a href="#yaml_parse_file">YAML_PARSE_FILE</a> |
     <a href="#yaml_parse_url">YAML_PARSE_URL</a>
+    </p>
 </nav>
 
 <h4 id="introduction">INTRODUCTION</h4>
@@ -13798,289 +13813,292 @@
 
 
 <nav>
-    <a href="#introduction">Introduction</a> |
-    <a href="#installation">Installation</a> |
-    <a href="#runtime_configuration">Runtime Configuration</a> |
-    <a href="#yaf_application">Yaf_Application</a> |
-    <a href="#yaf_application_app">Yaf_Application::app</a> |
-    <a href="#yaf_application_bootstrap">Yaf_Application::bootstrap</a> |
-    <a href="#yaf_application_clear_last_error">Yaf_Application::clearLastError</a> |
-    <a href="#yaf_application_construct">Yaf_Application::__construct</a> |
-    <a href="#yaf_application_destruct">Yaf_Application::__destruct</a> |
-    <a href="#yaf_application_environ">Yaf_Application::environ</a> |
-    <a href="#yaf_application_execute">Yaf_Application::execute</a> |
-    <a href="#yaf_application_get_app_directory">Yaf_Application::getAppDirectory</a> |
-    <a href="#yaf_application_get_config">Yaf_Application::getConfig</a> |
-    <a href="#yaf_application_get_dispatcher">Yaf_Application::getDispatcher</a> |
-    <a href="#yaf_application_get_last_error_msg">Yaf_Application::getLastErrorMsg</a> |
-    <a href="#yaf_application_get_last_error_no">Yaf_Application::getLastErrorNo</a> |
-    <a href="#yaf_application_get_modules">Yaf_Application::getModules</a> |
-    <a href="#yaf_application_run">Yaf_Application::run</a> |
-    <a href="#yaf_application_set_app_directory">Yaf_Application::setAppDirectory</a> |
-    <a href="#yaf_bootstrap_abstract">Yaf_Bootstrap_Abstract</a> |
-    <a href="#yaf_dispatcher">Yaf_Dispatcher</a> |
-    <a href="#yaf_dispatcher_auto_render">Yaf_Dispatcher::autoRender</a> |
-    <a href="#yaf_dispatcher_catch_exception">Yaf_Dispatcher::catchException</a> |
-    <a href="#yaf_dispatcher_construct">Yaf_Dispatcher::__construct</a> |
-    <a href="#yaf_dispatcher_disable_view">Yaf_Dispatcher::disableView</a> |
-    <a href="#yaf_dispatcher_dispatch">Yaf_Dispatcher::dispatch</a> |
-    <a href="#yaf_dispatcher_enable_view">Yaf_Dispatcher::enableView</a> |
-    <a href="#yaf_dispatcher_flush_instantly">Yaf_Dispatcher::flushInstantly</a> |
-    <a href="#yaf_dispatcher_get_application">Yaf_Dispatcher::getApplication</a> |
-    <a href="#yaf_dispatcher_get_default_action">Yaf_Dispatcher::getDefaultAction</a> |
-    <a href="#yaf_dispatcher_get_default_controller">Yaf_Dispatcher::getDefaultController</a> |
-    <a href="#yaf_dispatcher_get_default_module">Yaf_Dispatcher::getDefaultModule</a> |
-    <a href="#yaf_dispatcher_get_instance">Yaf_Dispatcher::getInstance</a> |
-    <a href="#yaf_dispatcher_get_request">Yaf_Dispatcher::getRequest</a> |
-    <a href="#yaf_dispatcher_get_router">Yaf_Dispatcher::getRouter</a> |
-    <a href="#yaf_dispatcher_init_view">Yaf_Dispatcher::initView</a> |
-    <a href="#yaf_dispatcher_register_plugin">Yaf_Dispatcher::registerPlugin</a> |
-    <a href="#yaf_dispatcher_return_response">Yaf_Dispatcher::returnResponse</a> |
-    <a href="#yaf_dispatcher_set_default_action">Yaf_Dispatcher::setDefaultAction</a> |
-    <a href="#yaf_dispatcher_set_default_controller">Yaf_Dispatcher::setDefaultController</a> |
-    <a href="#yaf_dispatcher_set_default_module">Yaf_Dispatcher::setDefaultModule</a> |
-    <a href="#yaf_dispatcher_set_error_handler">Yaf_Dispatcher::setErrorHandler</a> |
-    <a href="#yaf_dispatcher_set_request">Yaf_Dispatcher::setRequest</a> |
-    <a href="#yaf_dispatcher_set_view">Yaf_Dispatcher::setView</a> |
-    <a href="#yaf_dispatcher_throw_exception">Yaf_Dispatcher::throwException</a> |
-    <a href="#yaf_config_abstract">Yaf_Config_Abstract</a> |
-    <a href="#yaf_config_abstract_get">Yaf_Config_Abstract::get</a> |
-    <a href="#yaf_config_abstract_readonly">Yaf_Config_Abstract::readonly</a> |
-    <a href="#yaf_config_abstract_set">Yaf_Config_Abstract::set</a> |
-    <a href="#yaf_config_abstract_to_array">Yaf_Config_Abstract::toArray</a> |
-    <a href="#yaf_config_ini">Yaf_Config_Ini</a> |
-    <a href="#yaf_config_ini_construct">Yaf_Config_Ini::__construct</a> |
-    <a href="#yaf_config_ini_count">Yaf_Config_Ini::count</a> |
-    <a href="#yaf_config_ini_current">Yaf_Config_Ini::current</a> |
-    <a href="#yaf_config_ini_get">Yaf_Config_Ini::__get</a> |
-    <a href="#yaf_config_ini_isset">Yaf_Config_Ini::__isset</a> |
-    <a href="#yaf_config_ini_key">Yaf_Config_Ini::key</a> |
-    <a href="#yaf_config_ini_next">Yaf_Config_Ini::next</a> |
-    <a href="#yaf_config_ini_offset_exists">Yaf_Config_Ini::offsetExists</a> |
-    <a href="#yaf_config_ini_offset_get">Yaf_Config_Ini::offsetGet</a> |
-    <a href="#yaf_config_ini_offset_set">Yaf_Config_Ini::offsetSet</a> |
-    <a href="#yaf_config_ini_offset_unset">Yaf_Config_Ini::offsetUnset</a> |
-    <a href="#yaf_config_ini_readonly">Yaf_Config_Ini::readonly</a> |
-    <a href="#yaf_config_ini_rewind">Yaf_Config_Ini::rewind</a> |
-    <a href="#yaf_config_ini_set">Yaf_Config_Ini::__set</a>
-      <a href="#yaf_config_ini_to_array">Yaf_Config_Ini::toArray</a> |
-    <a href="#yaf_config_ini_valid">Yaf_Config_Ini::valid</a> |
-    <a href="#yaf_config_simple">Yaf_Config_Simple</a> |
-    <a href="#yaf_config_simple_construct">Yaf_Config_Simple::__construct</a> |
-    <a href="#yaf_config_simple_count">Yaf_Config_Simple::count</a> |
-    <a href="#yaf_config_simple_current">Yaf_Config_Simple::current</a> |
-    <a href="#yaf_config_simple_get">Yaf_Config_Simple::__get</a> |
-    <a href="#yaf_config_simple_isset">Yaf_Config_Simple::__isset</a> |
-    <a href="#yaf_config_simple_key">Yaf_Config_Simple::key</a> |
-    <a href="#yaf_config_simple_next">Yaf_Config_Simple::next</a> |
-    <a href="#yaf_config_simple_offset_exists">Yaf_Config_Simple::offsetExists</a> |
-    <a href="#yaf_config_simple_offset_get">Yaf_Config_Simple::offsetGet</a> |
-    <a href="#yaf_config_simple_offset_set">Yaf_Config_Simple::offsetSet</a> |
-    <a href="#yaf_config_simple_offset_unset">Yaf_Config_Simple::offsetUnset</a> |
-    <a href="#yaf_config_simple_readonly">Yaf_Config_Simple::readonly</a> |
-    <a href="#yaf_config_simple_rewind">Yaf_Config_Simple::rewind</a> |
-    <a href="#yaf_config_simple_set">Yaf_Config_Simple::__set</a> |
-    <a href="#yaf_config_simple_to_array">Yaf_Config_Simple::toArray</a> |
-    <a href="#yaf_config_simple_valid">Yaf_Config_Simple::valid</a> |
-    <a href="#yaf_controller_abstract">Yaf_Controller_Abstract</a> |
-    <a href="#yaf_controller_abstract_construct">Yaf_Controller_Abstract::__construct</a> |
-    <a href="#yaf_controller_abstract_display">Yaf_Controller_Abstract::display</a> |
-    <a href="#yaf_controller_abstract_forward">Yaf_Controller_Abstract::forward</a> |
-    <a href="#yaf_controller_abstract_get_invoke_arg">Yaf_Controller_Abstract::getInvokeArg</a> |
-    <a href="#yaf_controller_abstract_get_invoke_args">Yaf_Controller_Abstract::getInvokeArgs</a> |
-    <a href="#yaf_controller_abstract_get_module_name">Yaf_Controller_Abstract::getModuleName</a> |
-    <a href="#yaf_controller_abstract_get_name">Yaf_Controller_Abstract::getName</a> |
-    <a href="#yaf_controller_abstract_get_request">Yaf_Controller_Abstract::getRequest</a> |
-    <a href="#yaf_controller_abstract_get_response">Yaf_Controller_Abstract::getResponse</a> |
-    <a href="#yaf_controller_abstract_get_view">Yaf_Controller_Abstract::getView</a> |
-    <a href="#yaf_controller_abstract_get_viewpath">Yaf_Controller_Abstract::getViewpath</a> |
-    <a href="#yaf_controller_abstract_init">Yaf_Controller_Abstract::init</a> |
-    <a href="#yaf_controller_abstract_init_view">Yaf_Controller_Abstract::initView</a> |
-    <a href="#yaf_controller_abstract_redirect">Yaf_Controller_Abstract::redirect</a> |
-    <a href="#yaf_controller_abstract_render">Yaf_Controller_Abstract::render</a> |
-    <a href="#yaf_controller_abstract_set_viewpath">Yaf_Controller_Abstract::setViewpath</a> |
-    <a href="#yaf_action_abstract">Yaf_Action_Abstract</a> |
-    <a href="#yaf_action_abstract_execute">Yaf_Action_Abstract::execute</a> |
-    <a href="#yaf_action_abstract_get_controller">Yaf_Action_Abstract::getController</a> |
-    <a href="#yaf_action_abstract_get_controller_name">Yaf_Action_Abstract::getControllerName</a> |
-    <a href="#yaf_view_interface">Yaf_View_Interface</a> |
-    <a href="#yaf_view_interface_assign">Yaf_View_Interface::assign</a> |
-    <a href="#yaf_view_interface_display">Yaf_View_Interface::display</a> |
-    <a href="#yaf_view_interface_get_script_path">Yaf_View_Interface::getScriptPath</a> |
-    <a href="#yaf_view_interface_render">Yaf_View_Interface::render</a> |
-    <a href="#yaf_view_interface_set_script_path">Yaf_View_Interface::setScriptPath</a> |
-    <a href="#yaf_view_simple">Yaf_View_Simple</a> |
-    <a href="#yaf_view_simple_assign">Yaf_View_Simple::assign</a> |
-    <a href="#yaf_view_simple_assign_ref">Yaf_View_Simple::assignRef</a> |
-    <a href="#yaf_view_simple_clear">Yaf_View_Simple::clear</a> |
-    <a href="#yaf_view_simple_construct">Yaf_View_Simple::__construct</a> |
-    <a href="#yaf_view_simple_display">Yaf_View_Simple::display</a> |
-    <a href="#yaf_view_simple_eval">Yaf_View_Simple::eval</a> |
-    <a href="#yaf_view_simple_get">Yaf_View_Simple::__get</a> |
-    <a href="#yaf_view_simple_get_script_path">Yaf_View_Simple::getScriptPath</a> |
-    <a href="#yaf_view_simple_isset">Yaf_View_Simple::__isset</a> |
-    <a href="#yaf_view_simple_render">Yaf_View_Simple::render</a> |
-    <a href="#yaf_view_simple_set">Yaf_View_Simple::__set</a> |
-    <a href="#yaf_view_simple_set_script_path">Yaf_View_Simple::setScriptPath</a> |
-    <a href="#yaf_loader">Yaf_Loader</a> |
-    <a href="#yaf_loader_autoload">Yaf_Loader::autoload</a> |
-    <a href="#yaf_loader_clear_local_namespace">Yaf_Loader::clearLocalNamespace</a> |
-    <a href="#yaf_loader_construct">Yaf_Loader::__construct</a> |
-    <a href="#yaf_loader_get_instance">Yaf_Loader::getInstance</a> |
-    <a href="#yaf_loader_get_library_path">Yaf_Loader::getLibraryPath</a> |
-    <a href="#yaf_loader_get_local_namespace">Yaf_Loader::getLocalNamespace</a> |
-    <a href="#yaf_loader_get_namespace_path">Yaf_Loader::getNamespacePath</a> |
-    <a href="#yaf_loader_import">Yaf_Loader::import</a> |
-    <a href="#yaf_loader_is_local_name">Yaf_Loader::isLocalName</a> |
-    <a href="#yaf_loader_register_local_namespace">Yaf_Loader::registerLocalNamespace</a> |
-    <a href="#yaf_loader_register_namespace">Yaf_Loader::registerNamespace</a> |
-    <a href="#yaf_loader_set_library_path">Yaf_Loader::setLibraryPath</a> |
-    <a href="#yaf_plugin_abstract">Yaf_Plugin_Abstract</a> |
-    <a href="#yaf_plugin_abstract_dispatch_loop_shutdown">Yaf_Plugin_Abstract::dispatchLoopShutdown</a> |
-    <a href="#yaf_plugin_abstract_dispatch_loop_startup">Yaf_Plugin_Abstract::dispatchLoopStartup</a> |
-    <a href="#yaf_plugin_abstract_post_dispatch">Yaf_Plugin_Abstract::postDispatch</a> |
-    <a href="#yaf_plugin_abstract_pre_dispatch">Yaf_Plugin_Abstract::preDispatch</a> |
-    <a href="#yaf_plugin_abstract_pre_response">Yaf_Plugin_Abstract::preResponse</a> |
-    <a href="#yaf_plugin_abstract_router_shutdown">Yaf_Plugin_Abstract::routerShutdown</a> |
-    <a href="#yaf_plugin_abstract_router_startup">Yaf_Plugin_Abstract::routerStartup</a> |
-    <a href="#yaf_registry">Yaf_Registry</a> |
-    <a href="#yaf_registry_construct">Yaf_Registry::__construct</a> |
-    <a href="#yaf_registry_del">Yaf_Registry::del</a> |
-    <a href="#yaf_registry_get">Yaf_Registry::get</a> |
-    <a href="#yaf_registry_has">Yaf_Registry::has</a> |
-    <a href="#yaf_registry_set">Yaf_Registry::set</a> |
-    <a href="#yaf_request_abstract">Yaf_Request_Abstract</a> |
-    <a href="#yaf_request_abstract_clear_params">Yaf_Request_Abstract::clearParams</a> |
-    <a href="#yaf_request_abstract_get_action_name">Yaf_Request_Abstract::getActionName</a> |
-    <a href="#yaf_request_abstract_get_base_uri">Yaf_Request_Abstract::getBaseUri</a> |
-    <a href="#yaf_request_abstract_get_controller_name">Yaf_Request_Abstract::getControllerName</a> |
-    <a href="#yaf_request_abstract_get_env">Yaf_Request_Abstract::getEnv</a> |
-    <a href="#yaf_request_abstract_get_exception">Yaf_Request_Abstract::getException</a> |
-    <a href="#yaf_request_abstract_get_language">Yaf_Request_Abstract::getLanguage</a> |
-    <a href="#yaf_request_abstract_get_method">Yaf_Request_Abstract::getMethod</a> |
-    <a href="#yaf_request_abstract_get_module_name">Yaf_Request_Abstract::getModuleName</a> |
-    <a href="#yaf_request_abstract_get_param">Yaf_Request_Abstract::getParam</a> |
-    <a href="#yaf_request_abstract_get_params">Yaf_Request_Abstract::getParams</a> |
-    <a href="#yaf_request_abstract_get_request_uri">Yaf_Request_Abstract::getRequestUri</a> |
-    <a href="#yaf_request_abstract_get_server">Yaf_Request_Abstract::getServer</a> |
-    <a href="#yaf_request_abstract_is_cli">Yaf_Request_Abstract::isCli</a>
-    <a href="#yaf_request_abstract_is_dispatched">Yaf_Request_Abstract::isDispatched</a> |
-    <a href="#yaf_request_abstract_is_get">Yaf_Request_Abstract::isGet</a> |
-    <a href="#yaf_request_abstract_is_head">Yaf_Request_Abstract::isHead</a> |
-    <a href="#yaf_request_abstract_is_options">Yaf_Request_Abstract::isOptions</a> |
-    <a href="#yaf_request_abstract_is_post">Yaf_Request_Abstract::isPost</a> |
-    <a href="#yaf_request_abstract_is_put">Yaf_Request_Abstract::isPut</a> |
-    <a href="#yaf_request_abstract_is_routed">Yaf_Request_Abstract::isRouted</a> |
-    <a href="#yaf_request_abstract_is_xml_http_request">Yaf_Request_Abstract::isXmlHttpRequest</a> |
-    <a href="#yaf_request_abstract_set_action_name">Yaf_Request_Abstract::setActionName</a> |
-    <a href="#yaf_request_abstract_set_base_uri">Yaf_Request_Abstract::setBaseUri</a> |
-    <a href="#yaf_request_abstract_set_controller_name">Yaf_Request_Abstract::setControllerName</a> |
-    <a href="#yaf_request_abstract_set_dispatched">Yaf_Request_Abstract::setDispatched</a> |
-    <a href="#yaf_request_abstract_set_module_name">Yaf_Request_Abstract::setModuleName</a> |
-    <a href="#yaf_request_abstract_set_param">Yaf_Request_Abstract::setParam</a> |
-    <a href="#yaf_request_abstract_set_request_uri">Yaf_Request_Abstract::setRequestUri</a> |
-    <a href="#yaf_request_abstract_set_routed">Yaf_Request_Abstract::setRouted</a> |
-    <a href="#yaf_request_http">Yaf_Request_Http</a> |
-    <a href="#yaf_request_http_construct">Yaf_Request_Http::__construct</a> |
-    <a href="#yaf_request_http_get">Yaf_Request_Http::get</a> |
-    <a href="#yaf_request_http_get_cookie">Yaf_Request_Http::getCookie</a> |
-    <a href="#yaf_request_http_get_files">Yaf_Request_Http::getFiles</a> |
-    <a href="#yaf_request_http_get_post">Yaf_Request_Http::getPost</a> |
-    <a href="#yaf_request_http_get_query">Yaf_Request_Http::getQuery</a> |
-    <a href="#yaf_request_http_get_raw">Yaf_Request_Http::getRaw</a> |
-    <a href="#yaf_request_http_get_request">Yaf_Request_Http::getRequest</a> |
-    <a href="#yaf_request_http_is_xml_http_request">Yaf_Request_Http::isXmlHttpRequest</a> |
-    <a href="#yaf_request_simple">Yaf_Request_Simple</a> |
-    <a href="#yaf_request_simple_construct">Yaf_Request_Simple::__construct</a> |
-    <a href="#yaf_request_simple_get">Yaf_Request_Simple::get</a> |
-    <a href="#yaf_request_simple_get_cookie">Yaf_Request_Simple::getCookie</a> |
-    <a href="#yaf_request_simple_get_files">Yaf_Request_Simple::getFiles</a> |
-    <a href="#yaf_request_simple_get_post">Yaf_Request_Simple::getPost</a> |
-    <a href="#yaf_request_simple_get_query">Yaf_Request_Simple::getQuery</a> |
-    <a href="#yaf_request_simple_get_request">Yaf_Request_Simple::getRequest</a> |
-    <a href="#yaf_request_simple_is_xml_http_request">Yaf_Request_Simple::isXmlHttpRequest</a> |
-    <a href="#yaf_response_abstract">Yaf_Response_Abstract</a> |
-    <a href="#yaf_response_abstract_append_body">Yaf_Response_Abstract::appendBody</a> |
-    <a href="#yaf_response_abstract_clear_body">Yaf_Response_Abstract::clearBody</a> |
-    <a href="#yaf_response_abstract_clear_headers">Yaf_Response_Abstract::clearHeaders</a> |
-    <a href="#yaf_response_abstract_construct">Yaf_Response_Abstract::__construct</a> |
-    <a href="#yaf_response_abstract_destruct">Yaf_Response_Abstract::__destruct</a> |
-    <a href="#yaf_response_abstract_get_body">Yaf_Response_Abstract::getBody</a> |
-    <a href="#yaf_response_abstract_get_header">Yaf_Response_Abstract::getHeader</a> |
-    <a href="#yaf_response_abstract_prepend_body">Yaf_Response_Abstract::prependBody</a> |
-    <a href="#yaf_response_abstract_response">Yaf_Response_Abstract::response</a> |
-    <a href="#yaf_response_abstract_set_all_headers">Yaf_Response_Abstract::setAllHeaders</a> |
-    <a href="#yaf_response_abstract_set_body">Yaf_Response_Abstract::setBody</a> |
-    <a href="#yaf_response_abstract_set_header">Yaf_Response_Abstract::setHeader</a> |
-    <a href="#yaf_response_abstract_set_redirect">Yaf_Response_Abstract::setRedirect</a> |
-    <a href="#yaf_response_abstract_to_string">Yaf_Response_Abstract::__toString</a> |
-    <a href="#yaf_route_interface">Yaf_Route_Interface</a> |
-    <a href="#yaf_route_interface_assemble">Yaf_Route_Interface::assemble</a> |
-    <a href="#yaf_route_interface_route">Yaf_Route_Interface::route</a> |
-    <a href="#yaf_route_map">Yaf_Route_Map</a> |
-    <a href="#yaf_route_map_assemble">Yaf_Route_Map::assemble</a> |
-    <a href="#yaf_route_map_construct">Yaf_Route_Map::__construct</a> |
-    <a href="#yaf_route_map_route">Yaf_Route_Map::route</a> |
-    <a href="#yaf_route_regex">Yaf_Route_Regex</a> |
-    <a href="#yaf_route_regex_assemble">Yaf_Route_Regex::assemble</a> |
-    <a href="#yaf_route_regex_construct">Yaf_Route_Regex::__construct</a> |
-    <a href="#yaf_route_regex_route">Yaf_Route_Regex::route</a> |
-    <a href="#yaf_route_rewrite">Yaf_Route_Rewrite</a> |
-    <a href="#yaf_route_rewrite_assemble">Yaf_Route_Rewrite::assemble</a> |
-    <a href="#yaf_route_rewrite_construct">Yaf_Route_Rewrite::__construct</a> |
-    <a href="#yaf_route_rewrite_route">Yaf_Route_Rewrite::route</a> |
-    <a href="#yaf_router">Yaf_Router</a> |
-    <a href="#yaf_router_add_config">Yaf_Router::addConfig</a> |
-    <a href="#yaf_router_add_route">Yaf_Router::addRoute</a> |
-    <a href="#yaf_router_construct">Yaf_Router::__construct</a> |
-    <a href="#yaf_router_get_current_route">Yaf_Router::getCurrentRoute</a> |
-    <a href="#yaf_router_get_route">Yaf_Router::getRoute</a> |
-    <a href="#yaf_router_get_routes">Yaf_Router::getRoutes</a> |
-    <a href="#yaf_router_route">Yaf_Router::route</a> |
-    <a href="#yaf_route_simple">Yaf_Route_Simple</a> |
-    <a href="#yaf_route_simple_assemble">Yaf_Route_Simple::assemble</a>
-    <a href="#yaf_route_simple_construct">Yaf_Route_Simple::__construct</a> |
-    <a href="#yaf_route_simple_route">Yaf_Route_Simple::route</a> |
-    <a href="#yaf_route_static">Yaf_Route_Static</a> |
-    <a href="#yaf_route_static_assemble">Yaf_Route_Static::assemble</a> |
-    <a href="#yaf_route_static_match">Yaf_Route_Static::match</a> |
-    <a href="#yaf_route_static_route">Yaf_Route_Static::route</a> |
-    <a href="#yaf_route_supervar">Yaf_Route_Supervar</a> |
-    <a href="#yaf_route_supervar_assemble">Yaf_Route_Supervar::assemble</a> |
-    <a href="#yaf_route_supervar_construct">Yaf_Route_Supervar::__construct</a> |
-    <a href="#yaf_route_supervar_route">Yaf_Route_Supervar::route</a> |
-    <a href="#yaf_session">Yaf_Session</a> |
-    <a href="#yaf_session_construct">Yaf_Session::__construct</a> |
-    <a href="#yaf_session_count">Yaf_Session::count</a> |
-    <a href="#yaf_session_current">Yaf_Session::current</a> |
-    <a href="#yaf_session_del">Yaf_Session::del</a> |
-    <a href="#yaf_session_get">Yaf_Session::__get</a> |
-    <a href="#yaf_session_get_instance">Yaf_Session::getInstance</a> |
-    <a href="#yaf_session_has">Yaf_Session::has</a> |
-    <a href="#yaf_session_isset">Yaf_Session::__isset</a> |
-    <a href="#yaf_session_key">Yaf_Session::key</a> |
-    <a href="#yaf_session_next">Yaf_Session::next</a> |
-    <a href="#yaf_session_offset_exists">Yaf_Session::offsetExists</a> |
-    <a href="#yaf_session_offset_get">Yaf_Session::offsetGet</a> |
-    <a href="#yaf_session_offset_set">Yaf_Session::offsetSet</a> |
-    <a href="#yaf_session_offset_unset">Yaf_Session::offsetUnset</a> |
-    <a href="#yaf_session_rewind">Yaf_Session::rewind</a> |
-    <a href="#yaf_session_set">Yaf_Session::__set</a> |
-    <a href="#yaf_session_start">Yaf_Session::start</a> |
-    <a href="#yaf_session_unset">Yaf_Session::__unset</a> |
-    <a href="#yaf_session_valid">Yaf_Session::valid</a> |
-    <a href="#yaf_exception">Yaf_Exception</a> |
-    <a href="#yaf_exception_construct">Yaf_Exception::__construct</a> |
-    <a href="#yaf_exception_get_previous">Yaf_Exception::getPrevious</a> |
-    <a href="#yaf_exception_typeerror">Yaf_Exception_TypeError</a> |
-    <a href="#yaf_exception_startuperror">Yaf_Exception_StartupError</a> |
-    <a href="#yaf_exception_dispatchfailed">Yaf_Exception_DispatchFailed</a> |
-    <a href="#yaf_exception_routerfailed">Yaf_Exception_RouterFailed</a> |
-    <a href="#yaf_exception_loadfailed">Yaf_Exception_LoadFailed</a> |
-    <a href="#yaf_exception_loadfailed_module">Yaf_Exception_LoadFailed_Module</a> |
-    <a href="#yaf_exception_loadfailed_controller">Yaf_Exception_LoadFailed_Controller</a> |
-    <a href="#yaf_exception_loadfailed_action">Yaf_Exception_LoadFailed_Action</a> |
-    <a href="#yaf_exception_loadfailed_view">Yaf_Exception_LoadFailed_View</a>
+    <h4>NAVIGATION</h4>
+    <p>
+  <a href="#introduction">INTRODUCTION</a> |
+  <a href="#installation">INSTALLATION</a> |
+  <a href="#runtime_configuration">RUNTIME CONFIGURATION</a> |
+  <a href="#yaf_application">YAF_APPLICATION</a> |
+  <a href="#yaf_application_app">YAF_APPLICATION::APP</a> |
+  <a href="#yaf_application_bootstrap">YAF_APPLICATION::BOOTSTRAP</a> |
+  <a href="#yaf_application_clear_last_error">YAF_APPLICATION::CLEARLASTERROR</a> |
+  <a href="#yaf_application_construct">YAF_APPLICATION::__CONSTRUCT</a> |
+  <a href="#yaf_application_destruct">YAF_APPLICATION::__DESTRUCT</a> |
+  <a href="#yaf_application_environ">YAF_APPLICATION::ENVIRON</a> |
+  <a href="#yaf_application_execute">YAF_APPLICATION::EXECUTE</a> |
+  <a href="#yaf_application_get_app_directory">YAF_APPLICATION::GETAPPDIRECTORY</a> |
+  <a href="#yaf_application_get_config">YAF_APPLICATION::GETCONFIG</a> |
+  <a href="#yaf_application_get_dispatcher">YAF_APPLICATION::GETDISPATCHER</a> |
+  <a href="#yaf_application_get_last_error_msg">YAF_APPLICATION::GETLASTERROMSG</a> |
+  <a href="#yaf_application_get_last_error_no">YAF_APPLICATION::GETLASTERRORNO</a> |
+  <a href="#yaf_application_get_modules">YAF_APPLICATION::GETMODULES</a> |
+  <a href="#yaf_application_run">YAF_APPLICATION::RUN</a> |
+  <a href="#yaf_application_set_app_directory">YAF_APPLICATION::SETAPPDIRECTORY</a> |
+  <a href="#yaf_bootstrap_abstract">YAF_BOOTSTRAP_ABSTRACT</a> |
+  <a href="#yaf_dispatcher">YAF_DISPATCHER</a> |
+  <a href="#yaf_dispatcher_auto_render">YAF_DISPATCHER::AUTORENDER</a> |
+  <a href="#yaf_dispatcher_catch_exception">YAF_DISPATCHER::CATCHEXCEPTION</a> |
+  <a href="#yaf_dispatcher_construct">YAF_DISPATCHER::__CONSTRUCT</a> |
+  <a href="#yaf_dispatcher_disable_view">YAF_DISPATCHER::DISABLEVIEW</a> |
+  <a href="#yaf_dispatcher_dispatch">YAF_DISPATCHER::DISPATCH</a> |
+  <a href="#yaf_dispatcher_enable_view">YAF_DISPATCHER::ENABLEVIEW</a> |
+  <a href="#yaf_dispatcher_flush_instantly">YAF_DISPATCHER::FLUSHINSTANTLY</a> |
+  <a href="#yaf_dispatcher_get_application">YAF_DISPATCHER::GETAPPLICATION</a> |
+  <a href="#yaf_dispatcher_get_default_action">YAF_DISPATCHER::GETDEFAULTACTION</a> |
+  <a href="#yaf_dispatcher_get_default_controller">YAF_DISPATCHER::GETDEFAULTCONTROLLER</a> |
+  <a href="#yaf_dispatcher_get_default_module">YAF_DISPATCHER::GETDEFAULTMODULE</a> |
+  <a href="#yaf_dispatcher_get_instance">YAF_DISPATCHER::GETINSTANCE</a> |
+  <a href="#yaf_dispatcher_get_request">YAF_DISPATCHER::GETREQUEST</a> |
+  <a href="#yaf_dispatcher_get_router">YAF_DISPATCHER::GETROUTER</a> |
+  <a href="#yaf_dispatcher_init_view">YAF_DISPATCHER::INITVIEW</a> |
+  <a href="#yaf_dispatcher_register_plugin">YAF_DISPATCHER::REGISTERPLUGIN</a> |
+  <a href="#yaf_dispatcher_return_response">YAF_DISPATCHER::RETURNRESPONSE</a> |
+  <a href="#yaf_dispatcher_set_default_action">YAF_DISPATCHER::SETDEFAULTACTION</a> |
+  <a href="#yaf_dispatcher_set_default_controller">YAF_DISPATCHER::SETDEFAULTCONTROLLER</a> |
+  <a href="#yaf_dispatcher_set_default_module">YAF_DISPATCHER::SETDEFAULTMODULE</a> |
+  <a href="#yaf_dispatcher_set_error_handler">YAF_DISPATCHER::SETERRORHANDLER</a> |
+  <a href="#yaf_dispatcher_set_request">YAF_DISPATCHER::SETREQUEST</a> |
+  <a href="#yaf_dispatcher_set_view">YAF_DISPATCHER::SETVIEW</a> |
+  <a href="#yaf_dispatcher_throw_exception">YAF_DISPATCHER::THROWEXCEPTION</a> |
+  <a href="#yaf_config_abstract">YAF_CONFIG_ABSTRACT</a> |
+  <a href="#yaf_config_abstract_get">YAF_CONFIG_ABSTRACT::GET</a> |
+  <a href="#yaf_config_abstract_readonly">YAF_CONFIG_ABSTRACT::READONLY</a> |
+  <a href="#yaf_config_abstract_set">YAF_CONFIG_ABSTRACT::SET</a> |
+  <a href="#yaf_config_abstract_to_array">YAF_CONFIG_ABSTRACT::TOARRAY</a> |
+  <a href="#yaf_config_ini">YAF_CONFIG_INI</a> |
+  <a href="#yaf_config_ini_construct">YAF_CONFIG_INI::__CONSTRUCT</a> |
+  <a href="#yaf_config_ini_count">YAF_CONFIG_INI::COUNT</a> |
+  <a href="#yaf_config_ini_current">YAF_CONFIG_INI::CURRENT</a> |
+  <a href="#yaf_config_ini_get">YAF_CONFIG_INI::__GET</a> |
+  <a href="#yaf_config_ini_isset">YAF_CONFIG_INI::__ISSET</a> |
+  <a href="#yaf_config_ini_key">YAF_CONFIG_INI::KEY</a> |
+  <a href="#yaf_config_ini_next">YAF_CONFIG_INI::NEXT</a> |
+  <a href="#yaf_config_ini_offset_exists">YAF_CONFIG_INI::OFFSETEXISTS</a> |
+  <a href="#yaf_config_ini_offset_get">YAF_CONFIG_INI::OFFSETGET</a> |
+  <a href="#yaf_config_ini_offset_set">YAF_CONFIG_INI::OFFSETSET</a> |
+  <a href="#yaf_config_ini_offset_unset">YAF_CONFIG_INI::OFFSETUNSET</a> |
+  <a href="#yaf_config_ini_readonly">YAF_CONFIG_INI::READONLY</a> |
+  <a href="#yaf_config_ini_rewind">YAF_CONFIG_INI::REWIND</a> |
+  <a href="#yaf_config_ini_set">YAF_CONFIG_INI::__SET</a>
+  <a href="#yaf_config_ini_to_array">YAF_CONFIG_INI::TOARRAY</a> |
+  <a href="#yaf_config_ini_valid">YAF_CONFIG_INI::VALID</a> |
+  <a href="#yaf_config_simple">YAF_CONFIG_SIMPLE</a> |
+  <a href="#yaf_config_simple_construct">YAF_CONFIG_SIMPLE::__CONSTRUCT</a> |
+  <a href="#yaf_config_simple_count">YAF_CONFIG_SIMPLE::COUNT</a> |
+  <a href="#yaf_config_simple_current">YAF_CONFIG_SIMPLE::CURRENT</a> |
+  <a href="#yaf_config_simple_get">YAF_CONFIG_SIMPLE::__GET</a> |
+  <a href="#yaf_config_simple_isset">YAF_CONFIG_SIMPLE::__ISSET</a> |
+  <a href="#yaf_config_simple_key">YAF_CONFIG_SIMPLE::KEY</a> |
+  <a href="#yaf_config_simple_next">YAF_CONFIG_SIMPLE::NEXT</a> |
+  <a href="#yaf_config_simple_offset_exists">YAF_CONFIG_SIMPLE::OFFSETEXISTS</a> |
+  <a href="#yaf_config_simple_offset_get">YAF_CONFIG_SIMPLE::OFFSETGET</a> |
+  <a href="#yaf_config_simple_offset_set">YAF_CONFIG_SIMPLE::OFFSETSET</a> |
+  <a href="#yaf_config_simple_offset_unset">YAF_CONFIG_SIMPLE::OFFSETUNSET</a> |
+  <a href="#yaf_config_simple_readonly">YAF_CONFIG_SIMPLE::READONLY</a> |
+  <a href="#yaf_config_simple_rewind">YAF_CONFIG_SIMPLE::REWIND</a> |
+  <a href="#yaf_config_simple_set">YAF_CONFIG_SIMPLE::__SET</a> |
+  <a href="#yaf_config_simple_to_array">YAF_CONFIG_SIMPLE::TOARRAY</a> |
+  <a href="#yaf_config_simple_valid">YAF_CONFIG_SIMPLE::VALID</a> |
+  <a href="#yaf_controller_abstract">YAF_CONTROLLER_ABSTRACT</a> |
+  <a href="#yaf_controller_abstract_construct">YAF_CONTROLLER_ABSTRACT::__CONSTRUCT</a> |
+  <a href="#yaf_controller_abstract_display">YAF_CONTROLLER_ABSTRACT::DISPLAY</a> |
+  <a href="#yaf_controller_abstract_forward">YAF_CONTROLLER_ABSTRACT::FORWARD</a> |
+  <a href="#yaf_controller_abstract_get_invoke_arg">YAF_CONTROLLER_ABSTRACT::GETINVOKEARG</a> |
+  <a href="#yaf_controller_abstract_get_invoke_args">YAF_CONTROLLER_ABSTRACT::GETINVOKEARGS</a> |
+  <a href="#yaf_controller_abstract_get_module_name">YAF_CONTROLLER_ABSTRACT::GETMODULENAME</a> |
+  <a href="#yaf_controller_abstract_get_name">YAF_CONTROLLER_ABSTRACT::GETNAME</a> |
+  <a href="#yaf_controller_abstract_get_request">YAF_CONTROLLER_ABSTRACT::GETREQUEST</a> |
+  <a href="#yaf_controller_abstract_get_response">YAF_CONTROLLER_ABSTRACT::GETRESPONSE</a> |
+  <a href="#yaf_controller_abstract_get_view">YAF_CONTROLLER_ABSTRACT::GETVIEW</a> |
+  <a href="#yaf_controller_abstract_get_viewpath">YAF_CONTROLLER_ABSTRACT::GETVIEWPATH</a> |
+  <a href="#yaf_controller_abstract_init">YAF_CONTROLLER_ABSTRACT::INIT</a> |
+  <a href="#yaf_controller_abstract_init_view">YAF_CONTROLLER_ABSTRACT::INITVIEW</a> |
+  <a href="#yaf_controller_abstract_redirect">YAF_CONTROLLER_ABSTRACT::REDIRECT</a> |
+  <a href="#yaf_controller_abstract_render">YAF_CONTROLLER_ABSTRACT::RENDER</a> |
+  <a href="#yaf_controller_abstract_set_viewpath">YAF_CONTROLLER_ABSTRACT::SETVIEWPATH</a> |
+  <a href="#yaf_action_abstract">YAF_ACTION_ABSTRACT</a> |
+  <a href="#yaf_action_abstract_execute">YAF_ACTION_ABSTRACT::EXECUTE</a> |
+  <a href="#yaf_action_abstract_get_controller">YAF_ACTION_ABSTRACT::GETCONTROLLER</a> |
+  <a href="#yaf_action_abstract_get_controller_name">YAF_ACTION_ABSTRACT::GETCONTROLLERNAME</a> |
+  <a href="#yaf_view_interface">YAF_VIEW_INTERFACE</a> |
+  <a href="#yaf_view_interface_assign">YAF_VIEW_INTERFACE::ASSIGN</a> |
+  <a href="#yaf_view_interface_display">YAF_VIEW_INTERFACE::DISPLAY</a> |
+  <a href="#yaf_view_interface_get_script_path">YAF_VIEW_INTERFACE::GETSCRIPTPATH</a> |
+  <a href="#yaf_view_interface_render">YAF_VIEW_INTERFACE::RENDER</a> |
+  <a href="#yaf_view_interface_set_script_path">YAF_VIEW_INTERFACE::SETSCRIPTPATH</a> |
+  <a href="#yaf_view_simple">YAF_VIEW_SIMPLE</a> |
+  <a href="#yaf_view_simple_assign">YAF_VIEW_SIMPLE::ASSIGN</a> |
+  <a href="#yaf_view_simple_assign_ref">YAF_VIEW_SIMPLE::ASSIGNREF</a> |
+  <a href="#yaf_view_simple_clear">YAF_VIEW_SIMPLE::CLEAR</a> |
+  <a href="#yaf_view_simple_construct">YAF_VIEW_SIMPLE::__CONSTRUCT</a> |
+  <a href="#yaf_view_simple_display">YAF_VIEW_SIMPLE::DISPLAY</a> |
+  <a href="#yaf_view_simple_eval">YAF_VIEW_SIMPLE::EVAL</a> |
+  <a href="#yaf_view_simple_get">YAF_VIEW_SIMPLE::__GET</a> |
+  <a href="#yaf_view_simple_get_script_path">YAF_VIEW_SIMPLE::GETSCRIPTPATH</a> |
+  <a href="#yaf_view_simple_isset">YAF_VIEW_SIMPLE::__ISSET</a> |
+  <a href="#yaf_view_simple_render">YAF_VIEW_SIMPLE::RENDER</a> |
+  <a href="#yaf_view_simple_set">YAF_VIEW_SIMPLE::__SET</a> |
+  <a href="#yaf_view_simple_set_script_path">YAF_VIEW_SIMPLE::SETSCRIPTPATH</a> |
+  <a href="#yaf_loader">YAF_LOADER</a> |
+  <a href="#yaf_loader_autoload">YAF_LOADER::AUTOLOAD</a> |
+  <a href="#yaf_loader_clear_local_namespace">YAF_LOADER::CLEARLOCALNAMESPACE</a> |
+  <a href="#yaf_loader_construct">YAF_LOADER::__CONSTRUCT</a> |
+  <a href="#yaf_loader_get_instance">YAF_LOADER::GETINSTANCE</a> |
+  <a href="#yaf_loader_get_library_path">YAF_LOADER::GETLIBRARYPATH</a> |
+  <a href="#yaf_loader_get_local_namespace">YAF_LOADER::GETLOCALNAMESPACE</a> |
+  <a href="#yaf_loader_get_namespace_path">YAF_LOADER::GETNAMESPACEPATH</a> |
+  <a href="#yaf_loader_import">YAF_LOADER::IMPORT</a> |
+  <a href="#yaf_loader_is_local_name">YAF_LOADER::ISLOCALNAME</a> |
+  <a href="#yaf_loader_register_local_namespace">YAF_LOADER::REGISTERLOCALNAMESPACE</a> |
+  <a href="#yaf_loader_register_namespace">YAF_LOADER::REGISTERNAMESPACE</a> |
+  <a href="#yaf_loader_set_library_path">YAF_LOADER::SETLIBRARYPATH</a> |
+  <a href="#yaf_plugin_abstract">YAF_PLUGIN_ABSTRACT</a> |
+  <a href="#yaf_plugin_abstract_dispatch_loop_shutdown">YAF_PLUGIN_ABSTRACT::DISPATCHLOOPSHUTDOWN</a> |
+  <a href="#yaf_plugin_abstract_dispatch_loop_startup">YAF_PLUGIN_ABSTRACT::DISPATCHLOOPSTARTUP</a> |
+  <a href="#yaf_plugin_abstract_post_dispatch">YAF_PLUGIN_ABSTRACT::POSTDISPATCH</a> |
+  <a href="#yaf_plugin_abstract_pre_dispatch">YAF_PLUGIN_ABSTRACT::PREDISPATCH</a> |
+  <a href="#yaf_plugin_abstract_pre_response">YAF_PLUGIN_ABSTRACT::PRERESPONSE</a> |
+  <a href="#yaf_plugin_abstract_router_shutdown">YAF_PLUGIN_ABSTRACT::ROUTERSHUTDOWN</a> |
+  <a href="#yaf_plugin_abstract_router_startup">YAF_PLUGIN_ABSTRACT::ROUTERSTARTUP</a> |
+  <a href="#yaf_registry">YAF_REGISTRY</a> |
+  <a href="#yaf_registry_construct">YAF_REGISTRY::__CONSTRUCT</a> |
+  <a href="#yaf_registry_del">YAF_REGISTRY::DEL</a> |
+  <a href="#yaf_registry_get">YAF_REGISTRY::GET</a> |
+  <a href="#yaf_registry_has">YAF_REGISTRY::HAS</a> |
+  <a href="#yaf_registry_set">YAF_REGISTRY::SET</a> |
+  <a href="#yaf_request_abstract">YAF_REQUEST_ABSTRACT</a> |
+  <a href="#yaf_request_abstract_clear_params">YAF_REQUEST_ABSTRACT::CLEARPARAMS</a> |
+  <a href="#yaf_request_abstract_get_action_name">YAF_REQUEST_ABSTRACT::GETACTIONNAME</a> |
+  <a href="#yaf_request_abstract_get_base_uri">YAF_REQUEST_ABSTRACT::GETBASEURI</a> |
+  <a href="#yaf_request_abstract_get_controller_name">YAF_REQUEST_ABSTRACT::GETCONTROLLERNAME</a> |
+  <a href="#yaf_request_abstract_get_env">YAF_REQUEST_ABSTRACT::GETENV</a> |
+  <a href="#yaf_request_abstract_get_exception">YAF_REQUEST_ABSTRACT::GETEXCEPTION</a> |
+  <a href="#yaf_request_abstract_get_language">YAF_REQUEST_ABSTRACT::GETLANGUAGE</a> |
+  <a href="#yaf_request_abstract_get_method">YAF_REQUEST_ABSTRACT::GETMETHOD</a> |
+  <a href="#yaf_request_abstract_get_module_name">YAF_REQUEST_ABSTRACT::GETMODULENAME</a> |
+  <a href="#yaf_request_abstract_get_param">YAF_REQUEST_ABSTRACT::GETPARAM</a> |
+  <a href="#yaf_request_abstract_get_params">YAF_REQUEST_ABSTRACT::GETPARAMS</a> |
+  <a href="#yaf_request_abstract_get_request_uri">YAF_REQUEST_ABSTRACT::GETREQUESTURI</a> |
+  <a href="#yaf_request_abstract_get_server">YAF_REQUEST_ABSTRACT::GETSERVER</a> |
+  <a href="#yaf_request_abstract_is_cli">YAF_REQUEST_ABSTRACT::ISCLI</a> |
+  <a href="#yaf_request_abstract_is_dispatched">YAF_REQUEST_ABSTRACT::ISDISPATCHED</a> |
+  <a href="#yaf_request_abstract_is_get">YAF_REQUEST_ABSTRACT::ISGET</a> |
+  <a href="#yaf_request_abstract_is_head">YAF_REQUEST_ABSTRACT::ISHEAD</a> |
+  <a href="#yaf_request_abstract_is_options">YAF_REQUEST_ABSTRACT::ISOPTIONS</a> |
+  <a href="#yaf_request_abstract_is_post">YAF_REQUEST_ABSTRACT::ISPOST</a> |
+  <a href="#yaf_request_abstract_is_put">YAF_REQUEST_ABSTRACT::ISPUT</a> |
+  <a href="#yaf_request_abstract_is_routed">YAF_REQUEST_ABSTRACT::ISRouted</a> |
+  <a href="#yaf_request_abstract_is_xml_http_request">YAF_REQUEST_ABSTRACT::ISXMLHTTPREQUEST</a> |
+  <a href="#yaf_request_abstract_set_action_name">YAF_REQUEST_ABSTRACT::SETACTIONNAME</a> |
+  <a href="#yaf_request_abstract_set_base_uri">YAF_REQUEST_ABSTRACT::SETBASEURI</a> |
+  <a href="#yaf_request_abstract_set_controller_name">YAF_REQUEST_ABSTRACT::SETCONTROLLERNAME</a>
+  <a href="#yaf_request_abstract_set_dispatched">YAF_REQUEST_ABSTRACT::SETDISPATCHED</a> |
+  <a href="#yaf_request_abstract_set_module_name">YAF_REQUEST_ABSTRACT::SETMODULENAME</a> |
+  <a href="#yaf_request_abstract_set_param">YAF_REQUEST_ABSTRACT::SETPARAM</a> |
+  <a href="#yaf_request_abstract_set_request_uri">YAF_REQUEST_ABSTRACT::SETREQUESTURI</a> |
+  <a href="#yaf_request_abstract_set_routed">YAF_REQUEST_ABSTRACT::SETRouted</a> |
+  <a href="#yaf_request_http">YAF_REQUEST_HTTP</a> |
+  <a href="#yaf_request_http_construct">YAF_REQUEST_HTTP::__CONSTRUCT</a> |
+  <a href="#yaf_request_http_get">YAF_REQUEST_HTTP::GET</a> |
+  <a href="#yaf_request_http_get_cookie">YAF_REQUEST_HTTP::GETCOOKIE</a> |
+  <a href="#yaf_request_http_get_files">YAF_REQUEST_HTTP::GETFILES</a> |
+  <a href="#yaf_request_http_get_post">YAF_REQUEST_HTTP::GETPOST</a> |
+  <a href="#yaf_request_http_get_query">YAF_REQUEST_HTTP::GETQUERY</a> |
+  <a href="#yaf_request_http_get_raw">YAF_REQUEST_HTTP::GETRAW</a> |
+  <a href="#yaf_request_http_get_request">YAF_REQUEST_HTTP::GETREQUEST</a> |
+  <a href="#yaf_request_http_is_xml_http_request">YAF_REQUEST_HTTP::ISXMLHTTPREQUEST</a> |
+  <a href="#yaf_request_simple">YAF_REQUEST_SIMPLE</a> |
+  <a href="#yaf_request_simple_construct">YAF_REQUEST_SIMPLE::__CONSTRUCT</a> |
+  <a href="#yaf_request_simple_get">YAF_REQUEST_SIMPLE::GET</a> |
+  <a href="#yaf_request_simple_get_cookie">YAF_REQUEST_SIMPLE::GETCOOKIE</a> |
+  <a href="#yaf_request_simple_get_files">YAF_REQUEST_SIMPLE::GETFILES</a> |
+  <a href="#yaf_request_simple_get_post">YAF_REQUEST_SIMPLE::GETPOST</a> |
+  <a href="#yaf_request_simple_get_query">YAF_REQUEST_SIMPLE::GETQUERY</a> |
+  <a href="#yaf_request_simple_get_request">YAF_REQUEST_SIMPLE::GETREQUEST</a> |
+  <a href="#yaf_request_simple_is_xml_http_request">YAF_REQUEST_SIMPLE::ISXMLHTTPREQUEST</a> |
+  <a href="#yaf_response_abstract">YAF_RESPONSE_ABSTRACT</a> |
+  <a href="#yaf_response_abstract_append_body">YAF_RESPONSE_ABSTRACT::APPENDBODY</a> |
+  <a href="#yaf_response_abstract_clear_body">YAF_RESPONSE_ABSTRACT::CLEARBODY</a> |
+  <a href="#yaf_response_abstract_clear_headers">YAF_RESPONSE_ABSTRACT::CLEARHEADERS</a> |
+  <a href="#yaf_response_abstract_construct">YAF_RESPONSE_ABSTRACT::__CONSTRUCT</a> |
+  <a href="#yaf_response_abstract_destruct">YAF_RESPONSE_ABSTRACT::__DESTRUCT</a> |
+  <a href="#yaf_response_abstract_get_body">YAF_RESPONSE_ABSTRACT::GETBODY</a> |
+  <a href="#yaf_response_abstract_get_header">YAF_RESPONSE_ABSTRACT::GETHEADER</a> |
+  <a href="#yaf_response_abstract_prepend_body">YAF_RESPONSE_ABSTRACT::PREPENDBODY</a> |
+  <a href="#yaf_response_abstract_response">YAF_RESPONSE_ABSTRACT::RESPONSE</a> |
+  <a href="#yaf_response_abstract_set_all_headers">YAF_RESPONSE_ABSTRACT::SETALLHEADERS</a> |
+  <a href="#yaf_response_abstract_set_body">YAF_RESPONSE_ABSTRACT::SETBODY</a> |
+  <a href="#yaf_response_abstract_set_header">YAF_RESPONSE_ABSTRACT::SETHEADER</a> |
+  <a href="#yaf_response_abstract_set_redirect">YAF_RESPONSE_ABSTRACT::SETREDIRECT</a> |
+  <a href="#yaf_response_abstract_to_string">YAF_RESPONSE_ABSTRACT::__TOSTRING</a> |
+  <a href="#yaf_route_interface">YAF_ROUTE_INTERFACE</a> |
+  <a href="#yaf_route_interface_assemble">YAF_ROUTE_INTERFACE::ASSEMBLE</a> |
+  <a href="#yaf_route_interface_route">YAF_ROUTE_INTERFACE::ROUTE</a> |
+  <a href="#yaf_route_map">YAF_ROUTE_MAP</a> |
+  <a href="#yaf_route_map_assemble">YAF_ROUTE_MAP::ASSEMBLE</a> |
+  <a href="#yaf_route_map_construct">YAF_ROUTE_MAP::__CONSTRUCT</a> |
+  <a href="#yaf_route_map_route">YAF_ROUTE_MAP::ROUTE</a> |
+  <a href="#yaf_route_regex">YAF_ROUTE_REGEX</a> |
+  <a href="#yaf_route_regex_assemble">YAF_ROUTE_REGEX::ASSEMBLE</a> |
+  <a href="#yaf_route_regex_construct">YAF_ROUTE_REGEX::__CONSTRUCT</a> |
+  <a href="#yaf_route_regex_route">YAF_ROUTE_REGEX::ROUTE</a> |
+  <a href="#yaf_route_rewrite">YAF_ROUTE_REWRITE</a> |
+  <a href="#yaf_route_rewrite_assemble">YAF_ROUTE_REWRITE::ASSEMBLE</a> |
+  <a href="#yaf_route_rewrite_construct">YAF_ROUTE_REWRITE::__CONSTRUCT</a> |
+  <a href="#yaf_route_rewrite_route">YAF_ROUTE_REWRITE::ROUTE</a> |
+  <a href="#yaf_router">YAF_ROUTER</a> |
+  <a href="#yaf_router_add_config">YAF_ROUTER::ADDCONFIG</a> |
+  <a href="#yaf_router_add_route">YAF_ROUTER::ADDROUTE</a> |
+  <a href="#yaf_router_construct">YAF_ROUTER::__CONSTRUCT</a> |
+  <a href="#yaf_router_get_current_route">YAF_ROUTER::GETCURRENTRoute</a> |
+  <a href="#yaf_router_get_route">YAF_ROUTER::GETROUTE</a> |
+  <a href="#yaf_router_get_routes">YAF_ROUTER::GETROUTES</a> |
+  <a href="#yaf_router_route">YAF_ROUTER::ROUTE</a> |
+  <a href="#yaf_route_simple">YAF_ROUTE_SIMPLE</a> |
+  <a href="#yaf_route_simple_assemble">YAF_ROUTE_SIMPLE::ASSEMBLE</a> |
+  <a href="#yaf_route_simple_construct">YAF_ROUTE_SIMPLE::__CONSTRUCT</a> |
+  <a href="#yaf_route_simple_route">YAF_ROUTE_SIMPLE::ROUTE</a> |
+  <a href="#yaf_route_static">YAF_ROUTE_STATIC</a> |
+  <a href="#yaf_route_static_assemble">YAF_ROUTE_STATIC::ASSEMBLE</a> |
+  <a href="#yaf_route_static_match">YAF_ROUTE_STATIC::MATCH</a> |
+  <a href="#yaf_route_static_route">YAF_ROUTE_STATIC::ROUTE</a> |
+  <a href="#yaf_route_supervar">YAF_ROUTE_SUPERVAR</a> |
+  <a href="#yaf_route_supervar_assemble">YAF_ROUTE_SUPERVAR::ASSEMBLE</a> |
+  <a href="#yaf_route_supervar_construct">YAF_ROUTE_SUPERVAR::__CONSTRUCT</a> |
+  <a href="#yaf_route_supervar_route">YAF_ROUTE_SUPERVAR::ROUTE</a> |
+  <a href="#yaf_session">YAF_SESSION</a> |
+  <a href="#yaf_session_construct">YAF_SESSION::__CONSTRUCT</a> |
+  <a href="#yaf_session_count">YAF_SESSION::COUNT</a> |
+  <a href="#yaf_session_current">YAF_SESSION::CURRENT</a> |
+  <a href="#yaf_session_del">YAF_SESSION::DEL</a> |
+  <a href="#yaf_session_get">YAF_SESSION::__GET</a> |
+  <a href="#yaf_session_get_instance">YAF_SESSION::GETINSTANCE</a> |
+  <a href="#yaf_session_has">YAF_SESSION::HAS</a> |
+  <a href="#yaf_session_isset">YAF_SESSION::__ISSET</a> |
+  <a href="#yaf_session_key">YAF_SESSION::KEY</a> |
+  <a href="#yaf_session_next">YAF_SESSION::NEXT</a> |
+  <a href="#yaf_session_offset_exists">YAF_SESSION::OFFSETEXISTS</a> |
+  <a href="#yaf_session_offset_get">YAF_SESSION::OFFSETGET</a> |
+  <a href="#yaf_session_offset_set">YAF_SESSION::OFFSETSET</a> |
+  <a href="#yaf_session_offset_unset">YAF_SESSION::OFFSETUNSET</a> |
+  <a href="#yaf_session_rewind">YAF_SESSION::REWIND</a> |
+  <a href="#yaf_session_set">YAF_SESSION::__SET</a> |
+  <a href="#yaf_session_start">YAF_SESSION::START</a> |
+  <a href="#yaf_session_unset">YAF_SESSION::__UNSET</a> |
+  <a href="#yaf_session_valid">YAF_SESSION::VALID</a> |
+  <a href="#yaf_exception">YAF_EXCEPTION</a> |
+  <a href="#yaf_exception_construct">YAF_EXCEPTION::__CONSTRUCT</a> |
+  <a href="#yaf_exception_get_previous">YAF_EXCEPTION::GETPREVIOUS</a> |
+  <a href="#yaf_exception_typeerror">YAF_EXCEPTION_TYPEERROR</a> |
+  <a href="#yaf_exception_startuperror">YAF_EXCEPTION_STARTUPERROR</a> |
+  <a href="#yaf_exception_dispatchfailed">YAF_EXCEPTION_DISPATCHFAILED</a> |
+  <a href="#yaf_exception_routerfailed">YAF_EXCEPTION_ROUTERFAILED</a> |
+  <a href="#yaf_exception_loadfailed">YAF_EXCEPTION_LOADFAILED</a> |
+  <a href="#yaf_exception_loadfailed_module">YAF_EXCEPTION_LOADFAILED_MODULE</a> |
+  <a href="#yaf_exception_loadfailed_controller">YAF_EXCEPTION_LOADFAILED_CONTROLLER</a> |
+  <a href="#yaf_exception_loadfailed_action">YAF_EXCEPTION_LOADFAILED_ACTION</a> |
+  <a href="#yaf_exception_loadfailed_view">YAF_EXCEPTION_LOADFAILED_VIEW</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -14370,12 +14388,15 @@
 <h4 id="yaconf">Yaconf</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">Introduction</a> |
     <a href="#dependencies">Dependencies</a> |
     <a href="#installation">Installation</a> |
     <a href="#yaconf">Yaconf</a> |
     <a href="#yaconf_get">Yaconf::get</a> |
     <a href="#yaconf_has">Yaconf::has</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -14390,6 +14411,8 @@
 <h4 id="taint">Taint</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">Introduction</a> |
     <a href="#installation">Installation</a> |
     <a href="#spread_tainted_functions">Functions and instructions that will spread the tainted mark of a tainted string</a> |
@@ -14398,6 +14421,7 @@
     <a href="#is_tainted">is_tainted</a> |
     <a href="#taint">taint</a> |
     <a href="#untaint">untaint</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -14414,6 +14438,8 @@
 <h4 id="data-structures">Data Structures</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">Introduction</a> |
     <a href="#dependencies">Dependencies</a> |
     <a href="#installation">Installation</a> |
@@ -14586,6 +14612,7 @@
     <a href="#ds_priorityqueue_pop">Ds\PriorityQueue::pop</a> |
     <a href="#ds_priorityqueue_push">Ds\PriorityQueue::push</a> |
     <a href="#ds_priorityqueue_toarray">Ds\PriorityQueue::toArray</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -14764,9 +14791,12 @@
 <h4 id="var-representation">var_representation</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">Introduction</a> |
     <a href="#installation">Installation</a> |
     <a href="#var_representation">var_representation</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -14778,6 +14808,8 @@
 <h3 id="other-services">OTHER SERVICES</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#curl">cURL</a> |
     <a href="#event">Event</a> |
     <a href="#ftp">FTP</a> |
@@ -14800,11 +14832,14 @@
     <a href="#yaz">YAZ</a> |
     <a href="#zeromq">0MQ Messaging API</a> |
     <a href="#zookeeper">ZooKeeper</a>
+    </p>
 </nav>
 
 <h4 id="curl">cURL</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">Introduction</a> |
     <a href="#dependencies">Dependencies</a> |
     <a href="#installation">Installation</a> |
@@ -14855,6 +14890,7 @@
     <a href="#curlfile-setpostfilename">CURLFile::setPostFilename</a> |
     <a href="#curlstringfile">CURLStringFile</a> |
     <a href="#curlstringfile-construct">CURLStringFile::__construct</a>
+    </p>
 </nav>
 
 
@@ -14914,6 +14950,8 @@
 
 <!-- NAV -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#introduction">Introduction</a> |
     <a href="#dependencies">Dependencies</a> |
     <a href="#installation">Installation</a> |
@@ -15087,6 +15125,7 @@
     <a href="#eventutil-setsocketoption">EventUtil::setSocketOption</a> |
     <a href="#eventutil-sslrp">EventUtil::sslRandPoll</a> |
     <a href="#eventexception">EventException</a>
+    </p>
 </nav>
 
 <!-- H4 -->
@@ -15269,6 +15308,8 @@
 
 <!-- NAV -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <a href="#ftp">FTP</a> |
     <a href="#ftp-alloc">ftp_alloc</a> |
     <a href="#ftp-append">ftp_append</a> |
@@ -15307,6 +15348,7 @@
     <a href="#ftp-ssl-connect">ftp_ssl_connect</a> |
     <a href="#ftp-systype">ftp_systype</a> |
     <a href="#ftp-connection">FTP\Connection</a>
+    </p>
 </nav>
 
 <!-- H4 -->
@@ -15353,6 +15395,8 @@
 <h4 id="gearman">Gearman</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#installation-configuration">Installation/Configuration</a>
   <a href="#dependencies">Dependencies</a>
@@ -15470,6 +15514,7 @@
   <a href="#gearmanworker-wait">GearmanWorker::wait</a>
   <a href="#gearmanworker-work">GearmanWorker::work</a>
   <a href="#gearmanexception">GearmanException</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -15599,6 +15644,8 @@
 <h4 id="ldap">LDAP</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#installation-configuration">Installation/Configuration</a>
   <a href="#dependencies">Dependencies</a>
@@ -15677,6 +15724,7 @@
   <a href="#ldap-connection">LDAP\Connection</a>
   <a href="#ldap-result">LDAP\Result</a>
   <a href="#ldap-resultentry">LDAP\ResultEntry</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -15762,6 +15810,8 @@
 <h4 id="memcache">Memcache</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -15786,6 +15836,7 @@
   <a href="#memcache-setserverparams">Memcache::setServerParams</a>
   <a href="#memcache-functions">Memcache Functions</a>
   <a href="#memcache-debug">memcache_debug</a>
+    </p>
 </nav>
 
 
@@ -15818,6 +15869,8 @@
 <h4 id="memcached">Memcached</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -15881,6 +15934,7 @@
   <a href="#memcached-touch">Memcached::touch</a>
   <a href="#memcached-touchbykey">Memcached::touchByKey</a>
   <a href="#memcachedexception">MemcachedException</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -15951,6 +16005,8 @@
 <h4 id="mqseries">MQSeries</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -15968,6 +16024,7 @@
   <a href="#mqseries-put1">mqseries_put1</a>
   <a href="#mqseries-set">mqseries_set</a>
   <a href="#mqseries-strerror">mqseries_strerror</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -15992,6 +16049,8 @@
 <h4 id="network">Network</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#checkdnsrr">checkdnsrr</a>
@@ -16031,6 +16090,7 @@
   <a href="#socket-set-blocking">socket_set_blocking</a>
   <a href="#socket-set-timeout">socket_set_timeout</a>
   <a href="#syslog">syslog</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16077,6 +16137,8 @@
 <h4 id="rrd">RRD</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16109,6 +16171,7 @@
   <a href="#rrdupdater">RRDUpdater</a>
   <a href="#rrdupdater-construct">RRDUpdater::__construct</a>
   <a href="#rrdupdater-update">RRDUpdater::update</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16148,11 +16211,14 @@
 <h4 id="scoutapm">ScoutAPM</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
   <a href="#scoutapm-get-calls">scoutapm_get_calls</a>
   <a href="#scoutapm-list-instrumented-functions">scoutapm_list_instrumented_functions</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16165,6 +16231,8 @@
 <h4 id="snmp">SNMP</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16203,6 +16271,7 @@
   <a href="#snmp-setsecurity">SNMP::setSecurity</a>
   <a href="#snmp-walk-method">SNMP::walk</a>
   <a href="#snmpexception">SNMPException</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16248,6 +16317,8 @@
 <h4 id="sockets">Sockets</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#installation">Installation</a>
   <a href="#socket-accept">socket_accept</a>
@@ -16292,6 +16363,7 @@
   <a href="#socket-wsaprotocol-info-release">socket_wsaprotocol_info_release</a>
   <a href="#socket-class">Socket</a>
   <a href="#addressinfo-class">AddressInfo</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16343,6 +16415,8 @@
 <h4 id="ssh2">SSH2</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16380,6 +16454,7 @@
   <a href="#ssh2-sftp-unlink">ssh2_sftp_unlink</a>
   <a href="#ssh2-shell">ssh2_shell</a>
   <a href="#ssh2-tunnel">ssh2_tunnel</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16424,6 +16499,8 @@
 <h4 id="stomp">Stomp</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16449,6 +16526,7 @@
   <a href="#stompframe-construct">StompFrame::__construct</a>
   <a href="#stompexception-class">StompException</a>
   <a href="#stompexception-get-details">StompException::getDetails</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16481,6 +16559,8 @@
 <h4 id="svm">SVM</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16501,6 +16581,7 @@
   <a href="#svmmodel-predict">SVMModel::predict</a>
   <a href="#svmmodel-predict-probability">SVMModel::predict_probability</a>
   <a href="#svmmodel-save">SVMModel::save</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16528,6 +16609,8 @@
 <h4 id="svn">SVN</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16579,6 +16662,7 @@
   <a href="#svn-revert">svn_revert</a>
   <a href="#svn-status">svn_status</a>
   <a href="#svn-update">svn_update</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16637,9 +16721,12 @@
 <h4 id="tcp">TCP</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#installation">Installation</a>
   <a href="#tcpwrap-check">tcpwrap_check</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16650,6 +16737,8 @@
 <h4 id="varnish">Varnish</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16683,6 +16772,7 @@
   <a href="#varnishlog-construct">VarnishLog::__construct</a>
   <a href="#varnishlog-getline">VarnishLog::getLine</a>
   <a href="#varnishlog-gettagname">VarnishLog::getTagName</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16723,6 +16813,8 @@
 <h4 id="yaz">YAZ</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16751,6 +16843,7 @@
   <a href="#yaz-sort">yaz_sort</a>
   <a href="#yaz-syntax">yaz_syntax</a>
   <a href="#yaz-wait">yaz_wait</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16786,6 +16879,8 @@
 <h4 id="zeromq">0MQ Messaging API</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16829,6 +16924,7 @@
   <a href="#zmqdevice-setidletimeout">ZMQDevice::setIdleTimeout</a>
   <a href="#zmqdevice-settimercallback">ZMQDevice::setTimerCallback</a>
   <a href="#zmqdevice-settimertimeout">ZMQDevice::setTimerTimeout</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16879,6 +16975,8 @@
 <h4 id="zookeeper">ZooKeeper</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -16917,6 +17015,7 @@
   <a href="#zookeepernonodeexception">ZookeeperNoNodeException</a>
   <a href="#zookeeperoperationtimeoutexception">ZookeeperOperationTimeoutException</a>
   <a href="#zookeepersessionexception">ZookeeperSessionException</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -16964,6 +17063,8 @@
 <h3 id="search-engine-extensions">SEARCH ENGINE EXTENSIONS</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#installation-configuration">Installation/Configuration</a>
   <a href="#dependencies">Dependencies</a>
@@ -17353,7 +17454,7 @@
 <a href="#solrillegalargumentexception">SolrIllegalArgumentException</a>
 <a href="#solrillegaloperationexception">SolrIllegalOperationException</a>
 <a href="#solrmissingmandatoryparameterexception">SolrMissingMandatoryParameterException</a>
-
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -17751,13 +17852,18 @@
 <h3 id="server-specific-extensions">SERVER SPECIFIC EXTENSIONS</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#apache">Apache</a>
   <a href="#fastcgi_process_manager">FastCGI Process Manager</a>
+    </p>
 </nav>
 
 <h4 id="apache">Apache</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#installation">Installation</a>
   <a href="#apache_child_terminate">apache_child_terminate</a>
@@ -17771,6 +17877,7 @@
   <a href="#apache_setenv">apache_setenv</a>
   <a href="#getallheaders">getallheaders</a>
   <a href="#virtual">virtual</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -17791,12 +17898,15 @@
 <h4 id="fastcgi_process_manager">FastCGI Process Manager</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#installation">Installation</a>
   <a href="#observability">Observability</a>
   <a href="#status_page">Status Page</a>
   <a href="#fastcgi_finish_request">fastcgi_finish_request</a>
   <a href="#fpm_get_status">fpm_get_status</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -17811,6 +17921,8 @@
 <h3 id="session-extensions">SESSION EXTENSIONS</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -17848,6 +17960,7 @@
   <a href="#sessionhandlerinterface">SessionHandlerInterface</a>
   <a href="#sessionidinterface">SessionIdInterface</a>
   <a href="#sessionupdatetimestamphandlerinterface">SessionUpdateTimestampHandlerInterface</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -17892,16 +18005,21 @@
 <h3 id="text-processing">TEXT PROCESSING</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#commonmark">CommonMark</a>
   <a href="#parle">Parle</a>
   <a href="#pcre">PCRE</a>
   <a href="#ssdeep">ssdeep</a>
   <a href="#strings">Strings</a>
+    </p>
 </nav>
 
 <h4 id="commonmark">CommonMark</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <a href="#introduction">Introduction</a>
   <a href="#dependencies">Dependencies</a>
   <a href="#installation">Installation</a>
@@ -17960,6 +18078,7 @@
   <a href="#commonmark_render_latex">CommonMark\Render\Latex</a>
   <a href="#commonmark_render_man">CommonMark\Render\Man</a>
   <a href="#commonmark_render_xml">CommonMark\Render\XML</a>
+    </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -18025,6 +18144,8 @@
 <h4 id="parle">Parle</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation-configuration">Installation/Configuration</a></li>
@@ -18102,6 +18223,7 @@
     <li><a href="#parle-lexerexception">Parle\LexerException</a></li>
     <li><a href="#parle-parserexception">Parle\ParserException</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -18191,6 +18313,8 @@
 
 <!-- Navigation -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -18210,6 +18334,7 @@
     <li><a href="#preg-replace-callback-array">preg_replace_callback_array</a></li>
     <li><a href="#preg-split">preg_split</a></li>
   </ul>
+</p>
 </nav>
 
 <!-- Content with h4 -->
@@ -18236,6 +18361,8 @@
 
 <!-- Navigation -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
@@ -18244,6 +18371,7 @@
     <li><a href="#ssdeep-fuzzy-hash">ssdeep_fuzzy_hash</a></li>
     <li><a href="#ssdeep-fuzzy-hash-filename">ssdeep_fuzzy_hash_filename</a></li>
   </ul>
+</p>
 </nav>
 
 <!-- Content with h4 -->
@@ -18258,6 +18386,8 @@
 <h4 id="strings">Strings</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation-configuration">Installation/Configuration</a></li>
@@ -18370,6 +18500,7 @@
     <li><a href="#vsprintf">vsprintf</a></li>
     <li><a href="#wordwrap">wordwrap</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -18489,6 +18620,8 @@
 <h3 id="variable-and-type-related-extensions">VARIABLE AND TYPE RELATED EXTENSIONS</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#arrays">Arrays</a></li>
     <li><a href="#classes-objects">Classes/Objects</a></li>
@@ -18499,11 +18632,14 @@
     <li><a href="#reflection">Reflection</a></li>
     <li><a href="#variable-handling">Variable Handling</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="arrays">Arrays</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#predefined-constants">Predefined Constants</a></li>
@@ -18596,6 +18732,7 @@
     <li><a href="#uksort">uksort</a></li>
     <li><a href="#usort">usort</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -18692,6 +18829,8 @@
 <h4 id="classes-objects">Classes/Objects</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introducao">Introdução</a></li>
     <li><a href="#exemplos">Exemplos</a></li>
@@ -18716,6 +18855,7 @@
     <li><a href="#property_exists">property_exists</a></li>
     <li><a href="#trait_exists">trait_exists</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introducao">Introdução</h4>
@@ -18745,6 +18885,8 @@
 <h4 id="ctype">Ctype</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introducao">Introdução</a></li>
     <li><a href="#dependencias">Dependências</a></li>
@@ -18762,6 +18904,7 @@
     <li><a href="#ctype_upper">ctype_upper</a></li>
     <li><a href="#ctype_xdigit">ctype_xdigit</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introducao">Introdução</h4>
@@ -18784,6 +18927,8 @@
 <h4 id="filter">Filter</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -18798,6 +18943,7 @@
     <li><a href="#filter_var">filter_var</a></li>
     <li><a href="#filter_var_array">filter_var_array</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -18817,6 +18963,8 @@
 <h4 id="function-handling">Function Handling</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#call_user_func">call_user_func</a></li>
@@ -18833,6 +18981,7 @@
     <li><a href="#register_tick_function">register_tick_function</a></li>
     <li><a href="#unregister_tick_function">unregister_tick_function</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -18854,11 +19003,12 @@
 <h4 id="quickhash">Quickhash</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#installation">Installation</a></li>
-
     <li><a href="#quickhashintset">QuickHashIntSet</a></li>
     <li><a href="#quickhashintset-add">QuickHashIntSet::add</a></li>
     <li><a href="#quickhashintset-__construct">QuickHashIntSet::__construct</a></li>
@@ -18869,7 +19019,6 @@
     <li><a href="#quickhashintset-loadfromstring">QuickHashIntSet::loadFromString</a></li>
     <li><a href="#quickhashintset-savetofile">QuickHashIntSet::saveToFile</a></li>
     <li><a href="#quickhashintset-savetostring">QuickHashIntSet::saveToString</a></li>
-
     <li><a href="#quickhashinthash">QuickHashIntHash</a></li>
     <li><a href="#quickhashinthash-add">QuickHashIntHash::add</a></li>
     <li><a href="#quickhashinthash-__construct">QuickHashIntHash::__construct</a></li>
@@ -18883,7 +19032,6 @@
     <li><a href="#quickhashinthash-savetostring">QuickHashIntHash::saveToString</a></li>
     <li><a href="#quickhashinthash-set">QuickHashIntHash::set</a></li>
     <li><a href="#quickhashinthash-update">QuickHashIntHash::update</a></li>
-
     <li><a href="#quickhashstringinthash">QuickHashStringIntHash</a></li>
     <li><a href="#quickhashstringinthash-add">QuickHashStringIntHash::add</a></li>
     <li><a href="#quickhashstringinthash-__construct">QuickHashStringIntHash::__construct</a></li>
@@ -18897,7 +19045,6 @@
     <li><a href="#quickhashstringinthash-savetostring">QuickHashStringIntHash::saveToString</a></li>
     <li><a href="#quickhashstringinthash-set">QuickHashStringIntHash::set</a></li>
     <li><a href="#quickhashstringinthash-update">QuickHashStringIntHash::update</a></li>
-
     <li><a href="#quickhashintstringhash">QuickHashIntStringHash</a></li>
     <li><a href="#quickhashintstringhash-add">QuickHashIntStringHash::add</a></li>
     <li><a href="#quickhashintstringhash-__construct">QuickHashIntStringHash::__construct</a></li>
@@ -18912,6 +19059,7 @@
     <li><a href="#quickhashintstringhash-set">QuickHashIntStringHash::set</a></li>
     <li><a href="#quickhashintstringhash-update">QuickHashIntStringHash::update</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -18975,6 +19123,8 @@
 <h4 id="reflection">Reflection</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#examples">Examples</a></li>
@@ -19290,6 +19440,7 @@
   <a href="#reflectionexception">ReflectionException</a><br>
   <a href="#propertyhooktype">PropertyHookType</a>
   </ul>
+</p>
 </nav>
 
 <h4><a href="#introduction">Introduction</a></h4>
@@ -19610,6 +19761,8 @@
 <h4 id="variable-handling">Variable Handling</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -19652,6 +19805,7 @@
     <li><a href="#var_dump">var_dump</a></li>
     <li><a href="#var_export">var_export</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -19698,17 +19852,22 @@
 <h3 id="web-services">WEB SERVICES</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#oauth">OAuth</a></li>
     <li><a href="#soap">SOAP</a></li>
     <li><a href="#yar">Yar</a></li>
     <li><a href="#xml-rpc">XML-RPC</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="oauth">OAuth</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -19751,6 +19910,7 @@
     <li><a href="#var_dump">var_dump</a></li>
     <li><a href="#var_export">var_export</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -19798,6 +19958,8 @@
 <h4 id="soap">SOAP</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
@@ -19840,6 +20002,7 @@
     <li><a href="#soapvar">SoapVar</a></li>
     <li><a href="#soapvar___construct">SoapVar::__construct</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -19887,6 +20050,8 @@
 <h4 id="yar">Yar</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
@@ -19907,6 +20072,7 @@
     <li><a href="#yar_client_exception">Yar_Client_Exception</a></li>
     <li><a href="#yar_client_exception_getType">Yar_Client_Exception::getType</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -19932,6 +20098,8 @@
 <h4 id="xml-rpc">XML-RPC</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
@@ -19951,6 +20119,7 @@
     <li><a href="#xmlrpc_server_register_method">xmlrpc_server_register_method</a></li>
     <li><a href="#xmlrpc_set_type">xmlrpc_set_type</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -19975,10 +20144,13 @@
 <h3 id="windows-only-extensions">WINDOWS ONLY EXTENSIONS</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#com">COM</a></li>
     <li><a href="#win32service">win32service</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="com">COM</h4>
@@ -19993,6 +20165,8 @@ soon...
 <h3 id="xml-manipulation">XML MANIPULATION</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#dom">DOM</a></li>
     <li><a href="#libxml">libxml</a></li>
@@ -20004,11 +20178,14 @@ soon...
     <li><a href="#xmlwriter">XMLWriter</a></li>
     <li><a href="#xsl">XSL</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="dom">DOM</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
@@ -20228,6 +20405,7 @@ soon...
     <li><a href="#dom_import_simplexml">dom_import_simplexml</a></li>
     <li><a href="#Dom-import_simplexml">Dom\import_simplexml</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -20452,6 +20630,8 @@ soon...
 <h4 id="libxml">libxml</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
@@ -20467,6 +20647,7 @@ soon...
         <li><a href="#libxml-set-streams-context">libxml_set_streams_context</a></li>
         <li><a href="#libxml-use-internal-errors">libxml_use_internal_errors</a></li>
     </ul>
+        </p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -20487,6 +20668,8 @@ soon...
 <h4 id="simplexml">SimpleXML</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
@@ -20518,6 +20701,7 @@ soon...
         <li><a href="#simplexml-load-file">simplexml_load_file</a></li>
         <li><a href="#simplexml-load-string">simplexml_load_string</a></li>
     </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
@@ -20555,6 +20739,8 @@ soon...
 
 <!-- Navigation -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
@@ -20566,6 +20752,7 @@ soon...
         <li><a href="#wddx-serialize-value">wddx_serialize_value</a></li>
         <li><a href="#wddx-serialize-vars">wddx_serialize_vars</a></li>
     </ul>
+</p>
 </nav>
 
 <!-- H4 headings -->
@@ -20583,6 +20770,8 @@ soon...
 
 <!-- Navigation -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
@@ -20601,6 +20790,7 @@ soon...
         <li><a href="#xmldiff-file-diff">XMLDiff\File::diff</a></li>
         <li><a href="#xmldiff-file-merge">XMLDiff\File::merge</a></li>
     </ul>
+</p>
 </nav>
 
 <!-- H4 headings -->
@@ -20626,6 +20816,8 @@ soon...
 
 <!-- Navigation -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
@@ -20662,6 +20854,7 @@ soon...
         <li><a href="#xml-set-unparsed-entity-decl-handler">xml_set_unparsed_entity_decl_handler</a></li>
         <li><a href="#xmlparser">XMLParser</a></li>
     </ul>
+</p>
 </nav>
 
 <!-- H4 headings -->
@@ -20705,6 +20898,8 @@ soon...
 
 <!-- Navigation -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
@@ -20739,6 +20934,7 @@ soon...
         <li><a href="#xmlreader-setschema">XMLReader::setSchema</a></li>
         <li><a href="#xmlreader-xml">XMLReader::XML</a></li>
     </ul>
+</p>
 </nav>
 
 <!-- H4 headings -->
@@ -20780,6 +20976,8 @@ soon...
 
 <!-- Navigation -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
@@ -20834,6 +21032,7 @@ soon...
         <li><a href="#xmlwriter-writepi">XMLWriter::writePi</a></li>
         <li><a href="#xmlwriter-writeraw">XMLWriter::writeRaw</a></li>
     </ul>
+</p>
 </nav>
 
 <!-- H4 headings -->
@@ -20895,6 +21094,8 @@ soon...
 
 <!-- Navigation -->
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
@@ -20918,6 +21119,7 @@ soon...
         <li><a href="#xsltprocessor-transformtourl">XSLTProcessor::transformToURI</a></li>
         <li><a href="#xsltprocessor-transformtoxml">XSLTProcessor::transformToXml</a></li>
     </ul>
+</p>
 </nav>
 
 <!-- H4 headings -->
@@ -20949,14 +21151,19 @@ soon...
 <h3 id="gui-extensions">GUI EXTENSIONS</h3>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#ui">UI</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="ui">UI</h4>
 
 <nav>
+    <h4>NAVIGATION</h4>
+    <p>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#dependencies">Dependencies</a></li>
@@ -21210,6 +21417,7 @@ soon...
     <li><a href="#ui-exception-invalidargument">UI\Exception\InvalidArgumentException</a></li>
     <li><a href="#ui-exception-runtime">UI\Exception\RuntimeException</a></li>
   </ul>
+</p>
 </nav>
 
 <h4 id="introduction">Introduction</h4>
