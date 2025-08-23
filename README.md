@@ -20146,11 +20146,203 @@
 
 <h4 id="com">COM</h4>
 
-SOON...
+<nav>
+  <h4>NAVIGATION</h4>
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#errors-and-exception-handling">ERRORS AND EXCEPTION HANDLING</a> |
+    <a href="#for-each">FOR EACH</a> |
+    <a href="#arrays-and-com-properties">ARRAYS AND COM PROPERTIES</a> |
+    <a href="#com">COM</a> |
+    <a href="#com-construct">COM::__CONSTRUCT</a> |
+    <a href="#dotnet">DOTNET</a> |
+    <a href="#dotnet-construct">DOTNET::__CONSTRUCT</a> |
+    <a href="#variant">VARIANT</a> |
+    <a href="#variant-construct">VARIANT::__CONSTRUCT</a> |
+    <a href="#compersisthelper">COMPERSISTHELPER</a> |
+    <a href="#compersisthelper-construct">COMPERSISTHELPER::__CONSTRUCT</a> |
+    <a href="#compersisthelper-getcurfilename">COMPERSISTHELPER::GETCURFILENAME</a> |
+    <a href="#compersisthelper-getmaxstreamsize">COMPERSISTHELPER::GETMAXSTREAMSIZE</a> |
+    <a href="#compersisthelper-initnew">COMPERSISTHELPER::INITNEW</a> |
+    <a href="#compersisthelper-loadfromfile">COMPERSISTHELPER::LOADFROMFILE</a> |
+    <a href="#compersisthelper-loadfromstream">COMPERSISTHELPER::LOADFROMSTREAM</a> |
+    <a href="#compersisthelper-savetofile">COMPERSISTHELPER::SAVETOFILE</a> |
+    <a href="#compersisthelper-savetostream">COMPERSISTHELPER::SAVETOSTREAM</a> |
+    <a href="#com_exception">COM_EXCEPTION</a> |
+    <a href="#com_safearray_proxy">COM_SAFEARRAY_PROXY</a> |
+    <a href="#com_create_guid">COM_CREATE_GUID</a> |
+    <a href="#com_event_sink">COM_EVENT_SINK</a> |
+    <a href="#com_get_active_object">COM_GET_ACTIVE_OBJECT</a> |
+    <a href="#com_load_typelib">COM_LOAD_TYPELIB</a> |
+    <a href="#com_message_pump">COM_MESSAGE_PUMP</a> |
+    <a href="#com_print_typeinfo">COM_PRINT_TYPEINFO</a> |
+    <a href="#variant_abs">VARIANT_ABS</a> |
+    <a href="#variant_add">VARIANT_ADD</a> |
+    <a href="#variant_and">VARIANT_AND</a> |
+    <a href="#variant_cast">VARIANT_CAST</a> |
+    <a href="#variant_cat">VARIANT_CAT</a> |
+    <a href="#variant_cmp">VARIANT_CMP</a> |
+    <a href="#variant_date_from_timestamp">VARIANT_DATE_FROM_TIMESTAMP</a> |
+    <a href="#variant_date_to_timestamp">VARIANT_DATE_TO_TIMESTAMP</a> |
+    <a href="#variant_div">VARIANT_DIV</a> |
+    <a href="#variant_eqv">VARIANT_EQV</a> |
+    <a href="#variant_fix">VARIANT_FIX</a> |
+    <a href="#variant_get_type">VARIANT_GET_TYPE</a> |
+    <a href="#variant_idiv">VARIANT_IDIV</a> |
+    <a href="#variant_imp">VARIANT_IMP</a> |
+    <a href="#variant_int">VARIANT_INT</a> |
+    <a href="#variant_mod">VARIANT_MOD</a> |
+    <a href="#variant_mul">VARIANT_MUL</a> |
+    <a href="#variant_neg">VARIANT_NEG</a> |
+    <a href="#variant_not">VARIANT_NOT</a> |
+    <a href="#variant_or">VARIANT_OR</a> |
+    <a href="#variant_pow">VARIANT_POW</a> |
+    <a href="#variant_round">VARIANT_ROUND</a> |
+    <a href="#variant_set">VARIANT_SET</a> |
+    <a href="#variant_set_type">VARIANT_SET_TYPE</a> |
+    <a href="#variant_sub">VARIANT_SUB</a> |
+    <a href="#variant_xor">VARIANT_XOR</a>
+  </p>
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="errors-and-exception-handling">ERRORS AND EXCEPTION HANDLING</h4>
+<h4 id="for-each">FOR EACH</h4>
+<h4 id="arrays-and-com-properties">ARRAYS AND COM PROPERTIES</h4>
+<h4 id="com">COM</h4>
+<h4 id="com-construct">COM::__CONSTRUCT</h4>
+<h4 id="dotnet">DOTNET</h4>
+<h4 id="dotnet-construct">DOTNET::__CONSTRUCT</h4>
+<h4 id="variant">VARIANT</h4>
+<h4 id="variant-construct">VARIANT::__CONSTRUCT</h4>
+<h4 id="compersisthelper">COMPERSISTHELPER</h4>
+<h4 id="compersisthelper-construct">COMPERSISTHELPER::__CONSTRUCT</h4>
+<h4 id="compersisthelper-getcurfilename">COMPERSISTHELPER::GETCURFILENAME</h4>
+<h4 id="compersisthelper-getmaxstreamsize">COMPERSISTHELPER::GETMAXSTREAMSIZE</h4>
+<h4 id="compersisthelper-initnew">COMPERSISTHELPER::INITNEW</h4>
+<h4 id="compersisthelper-loadfromfile">COMPERSISTHELPER::LOADFROMFILE</h4>
+<h4 id="compersisthelper-loadfromstream">COMPERSISTHELPER::LOADFROMSTREAM</h4>
+<h4 id="compersisthelper-savetofile">COMPERSISTHELPER::SAVETOFILE</h4>
+<h4 id="compersisthelper-savetostream">COMPERSISTHELPER::SAVETOSTREAM</h4>
+<h4 id="com_exception">COM_EXCEPTION</h4>
+<h4 id="com_safearray_proxy">COM_SAFEARRAY_PROXY</h4>
+<h4 id="com_create_guid">COM_CREATE_GUID</h4>
+<h4 id="com_event_sink">COM_EVENT_SINK</h4>
+<h4 id="com_get_active_object">COM_GET_ACTIVE_OBJECT</h4>
+<h4 id="com_load_typelib">COM_LOAD_TYPELIB</h4>
+<h4 id="com_message_pump">COM_MESSAGE_PUMP</h4>
+<h4 id="com_print_typeinfo">COM_PRINT_TYPEINFO</h4>
+<h4 id="variant_abs">VARIANT_ABS</h4>
+<h4 id="variant_add">VARIANT_ADD</h4>
+<h4 id="variant_and">VARIANT_AND</h4>
+<h4 id="variant_cast">VARIANT_CAST</h4>
+<h4 id="variant_cat">VARIANT_CAT</h4>
+<h4 id="variant_cmp">VARIANT_CMP</h4>
+<h4 id="variant_date_from_timestamp">VARIANT_DATE_FROM_TIMESTAMP</h4>
+<h4 id="variant_date_to_timestamp">VARIANT_DATE_TO_TIMESTAMP</h4>
+<h4 id="variant_div">VARIANT_DIV</h4>
+<h4 id="variant_eqv">VARIANT_EQV</h4>
+<h4 id="variant_fix">VARIANT_FIX</h4>
+<h4 id="variant_get_type">VARIANT_GET_TYPE</h4>
+<h4 id="variant_idiv">VARIANT_IDIV</h4>
+<h4 id="variant_imp">VARIANT_IMP</h4>
+<h4 id="variant_int">VARIANT_INT</h4>
+<h4 id="variant_mod">VARIANT_MOD</h4>
+<h4 id="variant_mul">VARIANT_MUL</h4>
+<h4 id="variant_neg">VARIANT_NEG</h4>
+<h4 id="variant_not">VARIANT_NOT</h4>
+<h4 id="variant_or">VARIANT_OR</h4>
+<h4 id="variant_pow">VARIANT_POW</h4>
+<h4 id="variant_round">VARIANT_ROUND</h4>
+<h4 id="variant_set">VARIANT_SET</h4>
+<h4 id="variant_set_type">VARIANT_SET_TYPE</h4>
+<h4 id="variant_sub">VARIANT_SUB</h4>
+<h4 id="variant_xor">VARIANT_XOR</h4>
+
 
 <h4 id="win32service">WIN32SERVICE</h4>
 
-.
+<nav>
+  <h4>NAVIGATION</h4>
+  <p>
+    <a href="#introduction">INTRODUCTION</a> |
+    <a href="#dependencies">DEPENDENCIES</a> |
+    <a href="#installation">INSTALLATION</a> |
+    <a href="#security-consideration">SECURITY CONSIDERATION</a> |
+    <a href="#win32serviceexception">WIN32SERVICEEXCEPTION</a> |
+    <a href="#win32service-rightinfo">WIN32SERVICE\RIGHTINFO</a> |
+    <a href="#win32service-rightinfo-construct">WIN32SERVICE\RIGHTINFO::__CONSTRUCT</a> |
+    <a href="#win32service-rightinfo-getdomain">WIN32SERVICE\RIGHTINFO::GETDOMAIN</a> |
+    <a href="#win32service-rightinfo-getfullusername">WIN32SERVICE\RIGHTINFO::GETFULLUSERNAME</a> |
+    <a href="#win32service-rightinfo-getrights">WIN32SERVICE\RIGHTINFO::GETRIGHTS</a> |
+    <a href="#win32service-rightinfo-getusername">WIN32SERVICE\RIGHTINFO::GETUSERNAME</a> |
+    <a href="#win32service-rightinfo-isdenyaccess">WIN32SERVICE\RIGHTINFO::ISDENYACCESS</a> |
+    <a href="#win32service-rightinfo-isgrantaccess">WIN32SERVICE\RIGHTINFO::ISGRANTACCESS</a> |
+    <a href="#examples">EXAMPLES</a> |
+    <a href="#win32_add_right_access_service">WIN32_ADD_RIGHT_ACCESS_SERVICE</a> |
+    <a href="#win32_add_service_env_var">WIN32_ADD_SERVICE_ENV_VAR</a> |
+    <a href="#win32_continue_service">WIN32_CONTINUE_SERVICE</a> |
+    <a href="#win32_create_service">WIN32_CREATE_SERVICE</a> |
+    <a href="#win32_delete_service">WIN32_DELETE_SERVICE</a> |
+    <a href="#win32_get_last_control_message">WIN32_GET_LAST_CONTROL_MESSAGE</a> |
+    <a href="#win32_get_service_env_vars">WIN32_GET_SERVICE_ENV_VARS</a> |
+    <a href="#win32_pause_service">WIN32_PAUSE_SERVICE</a> |
+    <a href="#win32_query_service_status">WIN32_QUERY_SERVICE_STATUS</a> |
+    <a href="#win32_read_all_rights_access_service">WIN32_READ_ALL_RIGHTS_ACCESS_SERVICE</a> |
+    <a href="#win32_read_right_access_service">WIN32_READ_RIGHT_ACCESS_SERVICE</a> |
+    <a href="#win32_remove_right_access_service">WIN32_REMOVE_RIGHT_ACCESS_SERVICE</a> |
+    <a href="#win32_remove_service_env_var">WIN32_REMOVE_SERVICE_ENV_VAR</a> |
+    <a href="#win32_send_custom_control">WIN32_SEND_CUSTOM_CONTROL</a> |
+    <a href="#win32_set_service_exit_code">WIN32_SET_SERVICE_EXIT_CODE</a> |
+    <a href="#win32_set_service_exit_mode">WIN32_SET_SERVICE_EXIT_MODE</a> |
+    <a href="#win32_set_service_pause_resume_state">WIN32_SET_SERVICE_PAUSE_RESUME_STATE</a> |
+    <a href="#win32_set_service_status">WIN32_SET_SERVICE_STATUS</a> |
+    <a href="#win32_start_service">WIN32_START_SERVICE</a> |
+    <a href="#win32_start_service_ctrl_dispatcher">WIN32_START_SERVICE_CTRL_DISPATCHER</a> |
+    <a href="#win32_stop_service">WIN32_STOP_SERVICE</a>
+  </p>
+</nav>
+
+<h4 id="introduction">INTRODUCTION</h4>
+<h4 id="dependencies">DEPENDENCIES</h4>
+<h4 id="installation">INSTALLATION</h4>
+<h4 id="security-consideration">SECURITY CONSIDERATION</h4>
+<h4 id="win32serviceexception">WIN32SERVICEEXCEPTION</h4>
+<h4 id="win32service-rightinfo">WIN32SERVICE\RIGHTINFO</h4>
+<h4 id="win32service-rightinfo-construct">WIN32SERVICE\RIGHTINFO::__CONSTRUCT</h4>
+<h4 id="win32service-rightinfo-getdomain">WIN32SERVICE\RIGHTINFO::GETDOMAIN</h4>
+<h4 id="win32service-rightinfo-getfullusername">WIN32SERVICE\RIGHTINFO::GETFULLUSERNAME</h4>
+<h4 id="win32service-rightinfo-getrights">WIN32SERVICE\RIGHTINFO::GETRIGHTS</h4>
+<h4 id="win32service-rightinfo-getusername">WIN32SERVICE\RIGHTINFO::GETUSERNAME</h4>
+<h4 id="win32service-rightinfo-isdenyaccess">WIN32SERVICE\RIGHTINFO::ISDENYACCESS</h4>
+<h4 id="win32service-rightinfo-isgrantaccess">WIN32SERVICE\RIGHTINFO::ISGRANTACCESS</h4>
+<h4 id="examples">EXAMPLES</h4>
+<h4 id="win32_add_right_access_service">WIN32_ADD_RIGHT_ACCESS_SERVICE</h4>
+<h4 id="win32_add_service_env_var">WIN32_ADD_SERVICE_ENV_VAR</h4>
+<h4 id="win32_continue_service">WIN32_CONTINUE_SERVICE</h4>
+<h4 id="win32_create_service">WIN32_CREATE_SERVICE</h4>
+<h4 id="win32_delete_service">WIN32_DELETE_SERVICE</h4>
+<h4 id="win32_get_last_control_message">WIN32_GET_LAST_CONTROL_MESSAGE</h4>
+<h4 id="win32_get_service_env_vars">WIN32_GET_SERVICE_ENV_VARS</h4>
+<h4 id="win32_pause_service">WIN32_PAUSE_SERVICE</h4>
+<h4 id="win32_query_service_status">WIN32_QUERY_SERVICE_STATUS</h4>
+<h4 id="win32_read_all_rights_access_service">WIN32_READ_ALL_RIGHTS_ACCESS_SERVICE</h4>
+<h4 id="win32_read_right_access_service">WIN32_READ_RIGHT_ACCESS_SERVICE</h4>
+<h4 id="win32_remove_right_access_service">WIN32_REMOVE_RIGHT_ACCESS_SERVICE</h4>
+<h4 id="win32_remove_service_env_var">WIN32_REMOVE_SERVICE_ENV_VAR</h4>
+<h4 id="win32_send_custom_control">WIN32_SEND_CUSTOM_CONTROL</h4>
+<h4 id="win32_set_service_exit_code">WIN32_SET_SERVICE_EXIT_CODE</h4>
+<h4 id="win32_set_service_exit_mode">WIN32_SET_SERVICE_EXIT_MODE</h4>
+<h4 id="win32_set_service_pause_resume_state">WIN32_SET_SERVICE_PAUSE_RESUME_STATE</h4>
+<h4 id="win32_set_service_status">WIN32_SET_SERVICE_STATUS</h4>
+<h4 id="win32_start_service">WIN32_START_SERVICE</h4>
+<h4 id="win32_start_service_ctrl_dispatcher">WIN32_START_SERVICE_CTRL_DISPATCHER</h4>
+<h4 id="win32_stop_service">WIN32_STOP_SERVICE</h4>
+
 
 <h3 id="xml-manipulation">XML MANIPULATION</h3>
 
@@ -20514,9 +20706,6 @@ SOON...
 <h4 id="domnode-isequalnode">DOMNODE::ISEQUALNODE</h4>
 <h4 id="domnode-issamenode">DOMNODE::ISSAMENODE</h4>
 <h4 id="domnode-issupported">DOMNODE::ISSUPPORTED</h4>
-
-
-
 <h4 id="domnode-lookupnamespaceuri">DOMNODE::LOOKUPNAMESPACEURI</h4>
 <h4 id="domnode-lookupprefix">DOMNODE::LOOKUPPREFIX</h4>
 <h4 id="domnode-normalize">DOMNODE::NORMALIZE</h4>
@@ -20905,7 +21094,6 @@ SOON...
     </p>
 </nav>
 
-<!-- H4 HEADINGS -->
 <h4 id="introduction">INTRODUCTION</h4>
 <h4 id="dependencies">DEPENDENCIES</h4>
 <h4 id="installation">INSTALLATION</h4>
@@ -20941,7 +21129,6 @@ SOON...
 
 <h4 id="xmlwriter">XMLWRITER</h4>
 
-<!-- NAVIGATION -->
 <nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
@@ -21055,7 +21242,6 @@ SOON...
 
 <h4 id="xsl">XSL</h4>
 
-<!-- NAVIGATION -->
 <nav align="center"> 
     <h4>NAVIGATION</h4>
     <p>
@@ -21212,9 +21398,6 @@ SOON...
 <a href="#ui-controls-button-onclick">UI\CONTROLS\BUTTON::ONCLICK</a> |
 <a href="#ui-controls-button-settext">UI\CONTROLS\BUTTON::SETTEXT</a> |
 <a href="#ui-controls-colorbutton">UI\CONTROLS\COLORBUTTON</a> |
-
-
-
 <a href="#ui-controls-colorbutton-getcolor">UI\CONTROLS\COLORBUTTON::GETCOLOR</a> |
 <a href="#ui-controls-colorbutton-onchange">UI\CONTROLS\COLORBUTTON::ONCHANGE</a> |
 <a href="#ui-controls-colorbutton-setcolor">UI\CONTROLS\COLORBUTTON::SETCOLOR</a> |
@@ -21320,8 +21503,6 @@ SOON...
 <a href="#ui-draw-matrix-translate">UI\DRAW\MATRIX::TRANSLATE</a> |
 <a href="#ui-draw-color">UI\DRAW\COLOR</a> |
 <a href="#ui-draw-color-construct">UI\DRAW\COLOR::__CONSTRUCT</a> |
-
-    
 <a href="#ui-draw-color-getchannel">UI\DRAW\COLOR::GETCHANNEL</a> |
 <a href="#ui-draw-color-setchannel">UI\DRAW\COLOR::SETCHANNEL</a> |
 <a href="#ui-draw-stroke">UI\DRAW\STROKE</a> |
@@ -21376,8 +21557,6 @@ SOON...
 <a href="#ui-key">UI\KEY</a> |
 <a href="#ui-exception-invalidargument">UI\EXCEPTION\INVALIDARGUMENTEXCEPTION</a> |
 <a href="#ui-exception-runtime">UI\EXCEPTION\RUNTIMEEXCEPTION</a> |
-
-  
 </p>
 </nav>
 
@@ -21459,9 +21638,6 @@ SOON...
 <h4 id="ui-controls-tab-hasmargin">UI\CONTROLS\TAB::HASMARGIN</h4>
 <h4 id="ui-controls-tab-insertat">UI\CONTROLS\TAB::INSERTAT</h4>
 <h4 id="ui-controls-tab-pages">UI\CONTROLS\TAB::PAGES</h4>
-
-
-
 <h4 id="ui-controls-tab-setmargin">UI\CONTROLS\TAB::SETMARGIN</h4>
 <h4 id="ui-controls-check">UI\CONTROLS\CHECK</h4>
 <h4 id="ui-controls-check-construct">UI\CONTROLS\CHECK::__CONSTRUCT</h4>
@@ -21644,7 +21820,7 @@ SOON...
 <p>Feel free to explore the examples, analyze the explanations, and adapt the concepts to your own projects or studies. By mastering the fundamentals and exploring real use cases, you can significantly improve your backend development skills, logic building, and problem-solving abilities.</p>
 
 <p>For more detailed and official references, visit the official PHP documentation: 
-<a href="https://www.php.net/docs.php" target="_blank" rel="noopener noreferrer">https://www.php.net/docs.php</a> |
+<a href="https://www.php.net/docs.php" target="_blank" rel="noopener noreferrer">https://www.php.net/docs.php</a>
 </p>
 
 
