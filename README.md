@@ -41,38 +41,43 @@
 </nav>
 
 <h3 id="general-considerations">GENERAL CONSIDERATIONS</h3>
+
 .
 
 <h3 id="installation-linux">INSTALLATION ON LINUX</h3>
+
 .
 
 <h3 id="installation-macos">INSTALLATION ON MACOS</h3>
+
 .
 
 <h3 id="installation-windows">INSTALLATION ON WINDOWS</h3>
+
 .
 
 <h3 id="installation-cloud-computing">INSTALLATION ON CLOUD COMPUTING</h3>
+
 .
 
 <h3 id="installation-composer">INSTALLATION OF COMPOSER</h3>
+
 .
 
 <h3 id="your-first-page">YOUR FIRST PAGE</h3>
+
 .
 
 <h3 id="mixing-php-html">MIXING PHP WITH HTML</h3>
+
 .
 
 <h3 id="first-simple-form">FIRST SIMPLE FORM WITH RETURN</h3>
+
 .
-
-
-
 
 <h2 id="language-reference">LANGUAGE REFERENCE</h2>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -114,22 +119,24 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="php-tags">PHP TAGS</h4>
+
 .
 
 <h4 id="escaping-html">ESCAPING HTML</h4>
+
 .
 
 <h4 id="statement-separation">STATEMENT SEPARATION</h4>
+
 .
 
 <h4 id="comments">COMMENTS</h4>
+
 .
 
 <h3 id="types">TYPES</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -157,74 +164,94 @@
   </p> 
 </nav>
 
-<!-- Sections -->
+
 <h4 id="introduction">INTRODUCTION</h4>
+
 .
 
 <h4 id="type-system">TYPE SYSTEM</h4>
+
 .
 
 <h4 id="null">NULL</h4>
+
 .
 
 <h4 id="booleans">BOOLEANS</h4>
+
 .
 
 <h4 id="integers">INTEGERS</h4>
+
 .
 
 <h4 id="float-point-numbers">FLOAT POINT NUMBERS</h4>
+
 .
 
 <h4 id="string">STRING</h4>
+
 .
 
 <h4 id="numeric-string">NUMERIC STRING</h4>
+
 .
 
 <h4 id="arrays">ARRAYS</h4>
+
 .
 
 <h4 id="objects">OBJECTS</h4>
+
 .
 
 <h4 id="enumerations">ENUMERATIONS</h4>
+
 .
 
 <h4 id="resources">RESOURCES</h4>
+
 .
 
 <h4 id="callbacks-callables">CALLBACKS / CALLABLES</h4>
+
 .
 
 <h4 id="mixed">MIXED</h4>
+
 .
 
 <h4 id="void">VOID</h4>
+
 .
 
 <h4 id="never">NEVER</h4>
+
 .
 
 <h4 id="relative-class-types">RELATIVE CLASS TYPES</h4>
+
 .
 
 <h4 id="singleton-types">SINGLETON TYPES</h4>
+
 .
 
 <h4 id="iterables">ITERABLES</h4>
+
 .
 
 <h4 id="type-declarations">TYPE DECLARATIONS</h4>
+
 .
 
 <h4 id="type-juggling">TYPE JUGGLING</h4>
+
 .
 
 
 <h3 id="variables">VARIABLES</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -235,24 +262,25 @@
   </p> 
 </nav>
 
-<!-- Sections -->
+
 <h4 id="basics">BASICS</h4>
+
 .
 
 <h4 id="predefined-variables-superglobals">PREDEFINED VARIABLES (SUPERGLOBALS)</h4>
+
 .
 
 <h4 id="variable-scope">VARIABLE SCOPE</h4>
+
 .
 
 <h4 id="external-source-variables">VARIABLES FROM EXTERNAL SOURCES</h4>
+
 .
-
-
 
 <h3 id="constants">CONSTANTS</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -262,16 +290,17 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="syntax">SYNTAX</h4>
+
 .
 
 <h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
+
 .
 
 <h4 id="magic-constants">MAGIC CONSTANTS</h4>
-.
 
+.
 
 <h3 id="expressions">EXPRESSIONS</h3>
 
@@ -279,7 +308,6 @@
 
 <h3 id="operators">OPERATORS</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -298,47 +326,56 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="operator-precedence">OPERATOR PRECEDENCE</h4>
+
 .
 
 <h4 id="arithmetic-operators">ARITHMETIC</h4>
+
 .
 
 <h4 id="increment-decrement">INCREMENT AND DECREMENT</h4>
+
 .
 
 <h4 id="assignment-operators">ASSIGNMENT</h4>
+
 .
 
 <h4 id="binary-operators">BINARY</h4>
+
 .
 
 <h4 id="comparison-operators">COMPARISON</h4>
+
 .
 
 <h4 id="error-control">ERROR CONTROL</h4>
+
 .
 
 <h4 id="execution-operators">EXECUTION</h4>
+
 .
 
 <h4 id="logical-operators">LOGICAL</h4>
+
 .
 
 <h4 id="string-operators">STRING</h4>
+
 .
 
 <h4 id="array-operators">ARRAYS</h4>
+
 .
 
 <h4 id="type-operators">TYPE</h4>
-.
 
+.
 
 <h3 id="control-structures">CONTROL STRUCTURES</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -365,7 +402,7 @@
   </p> 
 </nav>
 
-<!-- Sections -->
+
 <h4 id="introduction">INTRODUCTION</h4>
 .
 
@@ -429,7 +466,7 @@
 
 <h3 id="functions">FUNCTIONS</h3>
 
-<!-- Navigation -->
+
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -444,7 +481,7 @@
   </p> 
 </nav>
 
-<!-- Sections -->
+
 <h4 id="user-defined-functions">USER-DEFINED FUNCTIONS</h4>
 .
 
@@ -472,7 +509,7 @@
 
 <h3 id="classes-objects">CLASSES AND OBJECTS</h3>
 
-<!-- Navigation -->
+
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -505,7 +542,7 @@
   </p> 
 </nav>
 
-<!-- Sections -->
+
 <h4 id="basics">BASICS</h4>
 .
 
@@ -587,7 +624,7 @@
 
 <h3 id="namespaces">NAMESPACES</h3>
 
-<!-- Navigation -->
+
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -605,7 +642,7 @@
   </p> 
 </nav>
 
-<!-- Sections -->
+
 <h4 id="overview">OVERVIEW</h4>
 .
 
@@ -642,7 +679,7 @@
 
 <h3 id="enumerations">ENUMERATIONS</h3>
 
-<!-- Navigation -->
+
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -660,7 +697,7 @@
   </p> 
 </nav>
 
-<!-- Sections -->
+
 <h4 id="overview-enumerations">OVERVIEW OF ENUMERATIONS</h4>
 .
 
@@ -705,11 +742,10 @@
 
 <h3 id="fibers">FIBERS</h3>
 
-
+.
 
 <h3 id="generators">GENERATORS</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -719,7 +755,6 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="overview-generators">OVERVIEW</h4>
 .
 
@@ -732,7 +767,6 @@
 
 <h3 id="attributes">ATTRIBUTES</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -743,7 +777,6 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="overview-attributes">OVERVIEW</h4>
 .
 
@@ -759,7 +792,6 @@
 
 <h3 id="references">REFERENCES</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -771,7 +803,6 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="what-references-do">WHAT REFERENCES DO?</h4>
 .
 
@@ -790,7 +821,6 @@
 
 <h3 id="predefined-variables">PREDEFINED VARIABLES</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -811,7 +841,6 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="superglobals">SUPERGLOBALS</h4>
 .
 
@@ -858,7 +887,6 @@
 
 <h3 id="predefined-exceptions">PREDEFINED EXCEPTIONS</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -880,7 +908,6 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="exception">EXCEPTION</h4>
 .
 
@@ -929,7 +956,6 @@
 
 <h3 id="predefined-interfaces-classes">PREDEFINED INTERFACES AND CLASSES</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -955,7 +981,6 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="traversable-interface">TRAVERSABLE INTERFACE</h4>
 .
 
@@ -1029,7 +1054,6 @@
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="attribute-attribute">ATTRIBUTE ATTRIBUTE</h4>
 .
 
