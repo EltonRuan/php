@@ -28,7 +28,6 @@
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
-    <a href="#general-considerations">GENERAL CONSIDERATIONS</a> |  
     <a href="#installation-linux">INSTALLATION ON LINUX</a> |  
     <a href="#installation-macos">INSTALLATION ON MACOS</a> |  
     <a href="#installation-windows">INSTALLATION ON WINDOWS</a> |  
@@ -39,10 +38,6 @@
     <a href="#first-simple-form">FIRST SIMPLE FORM WITH RETURN</a> |
   </p> 
 </nav>
-
-<h3 id="general-considerations">GENERAL CONSIDERATIONS</h3>
-
-.
 
 <h3 id="installation-linux">INSTALLATION ON LINUX</h3>
 
@@ -140,7 +135,6 @@
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
-    <a href="#introduction">INTRODUCTION</a> |  
     <a href="#type-system">TYPE SYSTEM</a> |  
     <a href="#null">NULL</a> |  
     <a href="#booleans">BOOLEANS</a> |  
@@ -163,11 +157,6 @@
     <a href="#type-juggling">TYPE JUGGLING</a> |
   </p> 
 </nav>
-
-
-<h4 id="introduction">INTRODUCTION</h4>
-
-.
 
 <h4 id="type-system">TYPE SYSTEM</h4>
 
@@ -255,17 +244,12 @@
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
-    <a href="#basics">BASICS</a> |  
     <a href="#predefined-variables-superglobals">PREDEFINED VARIABLES (SUPERGLOBALS)</a> |  
     <a href="#variable-scope">VARIABLE SCOPE</a> |  
     <a href="#external-source-variables">VARIABLES FROM EXTERNAL SOURCES</a> |
   </p> 
 </nav>
 
-
-<h4 id="basics">BASICS</h4>
-
-.
 
 <h4 id="predefined-variables-superglobals">PREDEFINED VARIABLES (SUPERGLOBALS)</h4>
 
@@ -379,7 +363,6 @@
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
-    <a href="#introduction">INTRODUCTION</a> |  
     <a href="#if">IF</a> |  
     <a href="#else">ELSE</a> |  
     <a href="#elseif-else-if">ELSEIF / ELSE IF</a> |  
@@ -402,9 +385,6 @@
   </p> 
 </nav>
 
-
-<h4 id="introduction">INTRODUCTION</h4>
-.
 
 <h4 id="if">IF</h4>
 .
@@ -513,7 +493,6 @@
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
-    <a href="#basics">BASICS</a> |  
     <a href="#properties">PROPERTIES</a> |  
     <a href="#property-hooks">PROPERTY HOOKS</a> |  
     <a href="#class-constants">CLASS CONSTANTS</a> |  
@@ -541,10 +520,6 @@
     <a href="#oop-changelog">OOP CHANGELOG</a> |
   </p> 
 </nav>
-
-
-<h4 id="basics">BASICS</h4>
-.
 
 <h4 id="properties">PROPERTIES</h4>
 .
@@ -628,7 +603,6 @@
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
-    <a href="#overview">OVERVIEW</a> |  
     <a href="#namespaces">NAMESPACES</a> |  
     <a href="#sub-namespaces">SUB-NAMESPACES</a> |  
     <a href="#multiple-namespaces-in-one-file">DEFINING MULTIPLE NAMESPACES IN ONE FILE</a> |  
@@ -641,10 +615,6 @@
     <a href="#name-resolution-rules">NAME RESOLUTION RULES</a> |
   </p> 
 </nav>
-
-
-<h4 id="overview">OVERVIEW</h4>
-.
 
 <h4 id="namespaces">NAMESPACES</h4>
 .
