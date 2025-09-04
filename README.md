@@ -16,7 +16,32 @@
 
 <h2 id="about-this-project">ABOUT</h2>
 
-.
+<p>
+  This guide was created to centralize and organize essential information about 
+  <strong>PHP</strong>, serving both beginners taking their first steps and experienced 
+  developers who want to review concepts or dive deeper into best practices.
+</p>
+
+<p>
+  The goal is to present PHP in a <strong>practical, concise, and well-documented</strong> way, 
+  covering everything from environment setup to advanced topics such as security, 
+  database integration, and design patterns.
+</p>
+
+<h3>Main Goals</h3>
+<ul>
+  <li><strong>Practical documentation:</strong> gather code snippets, real-world examples, and detailed explanations.</li>
+  <li><strong>Organization:</strong> provide a clear structure where each section addresses a specific aspect of PHP.</li>
+  <li><strong>Quick reference:</strong> serve as a reliable resource for daily development.</li>
+  <li><strong>Best practices:</strong> highlight modern techniques for writing clean, secure, and scalable code.</li>
+</ul>
+
+<h3>Target Audience</h3>
+<ul>
+  <li><strong>PHP beginners</strong> who want to learn from the ground up.</li>
+  <li><strong>Intermediate developers</strong> looking to review fundamentals and improve coding practices.</li>
+  <li><strong>Advanced professionals</strong> who need a fast and reliable reference for everyday use.</li>
+</ul>
 
 <h2 id="what-is-php">WHAT IS PHP?</h2>
 
