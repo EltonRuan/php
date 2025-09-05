@@ -45,7 +45,13 @@
 
 <h2 id="what-is-php">WHAT IS PHP?</h2>
 
-.
+<p><strong>PHP</strong> (Hypertext Preprocessor) is a widely used open-source scripting language designed especially for web development. It is embedded in HTML and executed on the server side, meaning that the code is processed on the server before the result is sent to the client’s browser.</p>
+
+<p>One of PHP’s main strengths is its simplicity and flexibility. It allows developers to quickly build dynamic and interactive web pages, connect to databases, handle forms, manage sessions, and perform many other common web development tasks efficiently.</p>
+
+<p>PHP is platform-independent, compatible with almost all major operating systems (Windows, Linux, macOS) and works with most popular web servers, such as Apache and Nginx. It also integrates seamlessly with various databases, especially <strong>MySQL</strong>, making it a strong choice for creating data-driven applications.</p>
+
+<p>Due to its widespread use, PHP powers millions of websites worldwide, including some of the most popular platforms like WordPress, Drupal, and Joomla.</p>
 
 <h2 id="installation">INSTALLATION</h2>
 
