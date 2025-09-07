@@ -72,7 +72,7 @@
 
 <h3 id="installation-linux">INSTALLATION ON LINUX</h3>
 
-.
+..
 
 <h3 id="installation-macos">INSTALLATION ON MACOS</h3>
 
