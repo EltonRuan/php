@@ -71,12 +71,68 @@
 </nav>
 
 <h3 id="installation-linux">INSTALLATION ON LINUX</h3>
+<p>
+PHP can be installed on Linux using the system's package manager or by compiling it from source. 
+Most modern Linux distributions include PHP packages in their repositories.
+</p>
 
-..
+<h4>Using Package Manager</h4>
+<p>
+For Debian-based distributions (e.g., Ubuntu), you can install PHP by running:
+</p>
+<pre><code>sudo apt update
+sudo apt install php</code></pre>
+
+<p>
+For Red Hat-based distributions (e.g., Fedora, CentOS, Rocky Linux), use:
+</p>
+<pre><code>sudo dnf install php</code></pre>
+
+<p>
+After installation, verify the PHP version with:
+</p>
+<pre><code>php -v</code></pre>
+
+<h4>Compiling from Source</h4>
+<p>
+Alternatively, you can download the latest stable PHP source code from the 
+<a href="https://www.php.net/downloads" target="_blank">official PHP downloads page</a> and build it manually.
+</p>
+<pre><code>tar -xvf php-x.y.z.tar.gz
+cd php-x.y.z
+./configure
+make
+sudo make install</code></pre>
+
+<hr>
 
 <h3 id="installation-macos">INSTALLATION ON MACOS</h3>
+<p>
+On macOS, PHP can be installed using package managers such as Homebrew, or by compiling it from source.
+</p>
 
-.
+<h4>Using Homebrew</h4>
+<p>
+If you have <a href="https://brew.sh" target="_blank">Homebrew</a> installed, run the following command:
+</p>
+<pre><code>brew install php</code></pre>
+
+<p>
+Once installed, you can check the installed version with:
+</p>
+<pre><code>php -v</code></pre>
+
+<h4>Compiling from Source</h4>
+<p>
+Just like on Linux, PHP can also be compiled from source on macOS. Download the latest release from the 
+<a href="https://www.php.net/downloads" target="_blank">official site</a> and follow the same compilation steps:
+</p>
+<pre><code>tar -xvf php-x.y.z.tar.gz
+cd php-x.y.z
+./configure
+make
+sudo make install</code></pre>
+
 
 <h3 id="installation-windows">INSTALLATION ON WINDOWS</h3>
 
