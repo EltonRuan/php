@@ -136,7 +136,52 @@ sudo make install</code></pre>
 
 <h3 id="installation-windows">INSTALLATION ON WINDOWS</h3>
 
-.
+<p>To install PHP on Windows, follow the steps below:</p>
+
+<ol>
+  <li>
+    <strong>Download PHP:</strong>
+    <p>Go to the official PHP website at 
+      <a href="https://windows.php.net/download/" target="_blank">windows.php.net</a> 
+      and download the latest stable version of PHP for Windows.
+    </p>
+  </li>
+  
+  <li>
+    <strong>Extract the Files:</strong>
+    <p>Unzip the downloaded file to a folder of your choice, for example:
+      <code>C:\php</code>.
+    </p>
+  </li>
+  
+  <li>
+    <strong>Configure PHP:</strong>
+    <p>Rename <code>php.ini-development</code> to <code>php.ini</code> and edit it to
+      adjust settings like extensions and time zone.</p>
+  </li>
+  
+  <li>
+    <strong>Add PHP to the System PATH:</strong>
+    <p>Open the <em>System Environment Variables</em> and add the PHP folder path
+      (e.g., <code>C:\php</code>) to the <code>PATH</code> variable.
+    </p>
+  </li>
+  
+  <li>
+    <strong>Verify Installation:</strong>
+    <p>Open the Command Prompt and run:</p>
+    <pre><code>php -v</code></pre>
+    <p>You should see the PHP version installed.</p>
+  </li>
+  
+  <li>
+    <strong>Optional - Integrate with a Web Server:</strong>
+    <p>You can use PHP with Apache or Nginx. For local testing, you can also run:</p>
+    <pre><code>php -S localhost:8000</code></pre>
+    <p>This will start PHP's built-in development server.</p>
+  </li>
+</ol>
+
 
 <h3 id="installation-cloud-computing">INSTALLATION ON CLOUD COMPUTING</h3>
 
