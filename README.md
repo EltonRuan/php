@@ -184,8 +184,45 @@ sudo make install</code></pre>
 
 
 <h3 id="installation-cloud-computing">INSTALLATION ON CLOUD COMPUTING</h3>
+<p>
+PHP can also be installed and configured in cloud computing environments such as AWS, Google Cloud Platform (GCP), 
+and Microsoft Azure. The installation method depends on the chosen service and infrastructure type (e.g., virtual machines, containers, or managed services).
+</p>
 
-.
+<h4>Using Virtual Machines</h4>
+<p>
+When deploying PHP on a virtual machine in the cloud (e.g., AWS EC2, Google Compute Engine, or Azure VM), 
+the installation process is the same as installing PHP on a local Linux or Windows system.
+</p>
+<pre><code># Example on Ubuntu VM
+sudo apt update
+sudo apt install php
+php -v</code></pre>
+
+<h4>Using Containers</h4>
+<p>
+Cloud providers support containerized environments such as Docker and Kubernetes. 
+The official PHP Docker images are available on <a href="https://hub.docker.com/_/php" target="_blank">Docker Hub</a>.
+</p>
+<pre><code># Example with Docker
+docker pull php:8.3-cli
+docker run -it --rm php:8.3-cli php -v</code></pre>
+
+<h4>Using Managed Services</h4>
+<p>
+Some platforms provide managed environments that include PHP support without requiring manual installation. 
+Examples include:
+</p>
+<ul>
+  <li><strong>AWS Elastic Beanstalk</strong> &mdash; Supports PHP platforms natively.</li>
+  <li><strong>Google App Engine</strong> &mdash; Provides a runtime environment for PHP applications.</li>
+  <li><strong>Azure App Service</strong> &mdash; Offers built-in PHP versions for web apps.</li>
+</ul>
+
+<p>
+In these environments, you typically configure your application files and deployment settings, and the platform handles the PHP runtime automatically.
+</p>
+
 
 <h3 id="installation-composer">INSTALLATION OF COMPOSER</h3>
 
