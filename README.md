@@ -225,8 +225,45 @@ In these environments, you typically configure your application files and deploy
 
 
 <h3 id="installation-composer">INSTALLATION OF COMPOSER</h3>
+<p>
+Composer is the recommended dependency manager for PHP. It allows you to manage libraries, frameworks, and packages in your projects easily.
+</p>
 
-.
+<h4>Linux and macOS</h4>
+<p>
+To install Composer globally on Linux or macOS, run the following commands:
+</p>
+<pre><code>php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+sudo mv composer.phar /usr/local/bin/composer
+php -r "unlink('composer-setup.php');"</code></pre>
+
+<p>
+Once installed, you can check the Composer version with:
+</p>
+<pre><code>composer --version</code></pre>
+
+<h4>Windows</h4>
+<p>
+On Windows, Composer provides an installer available at 
+<a href="https://getcomposer.org/Composer-Setup.exe" target="_blank">getcomposer.org/Composer-Setup.exe</a>.
+Download and run the installer, which will configure PHP and set Composer globally in your system path.
+</p>
+
+<p>
+After installation, open the Command Prompt and verify the installation with:
+</p>
+<pre><code>composer --version</code></pre>
+
+<h4>Docker</h4>
+<p>
+Composer can also be used with Docker without installing it directly on the host machine:
+</p>
+<pre><code>docker run --rm -it -v $(pwd):/app composer install</code></pre>
+
+<p>
+This command mounts the current directory into the container and executes Composer inside it.
+</p>
 
 <h3 id="your-first-page">YOUR FIRST PAGE</h3>
 
