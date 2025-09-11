@@ -266,8 +266,40 @@ This command mounts the current directory into the container and executes Compos
 </p>
 
 <h3 id="your-first-page">YOUR FIRST PAGE</h3>
+<p>
+Now that PHP is installed, let's create your first PHP page.  
+Open your favorite text editor (such as VS Code, Sublime Text, or Notepad++) and create a new file named <code>index.php</code>.
+</p>
 
-.
+<p>
+Add the following simple PHP code inside the file:
+</p>
+
+<pre><code>&lt;?php
+echo "Hello, World! This is my first PHP page.";
+?&gt;
+</code></pre>
+
+<p>
+Save the file in the root directory of your local server.  
+For example:
+</p>
+
+<ul>
+  <li><strong>Windows (XAMPP/WAMP):</strong> <code>C:\xampp\htdocs\index.php</code></li>
+  <li><strong>Linux (Apache):</strong> <code>/var/www/html/index.php</code></li>
+</ul>
+
+<p>
+Finally, open your web browser and visit:
+</p>
+
+<pre><code>http://localhost/index.php</code></pre>
+
+<p>
+If everything is set up correctly, you should see the message <em>"Hello, World! This is my first PHP page."</em> displayed in your browser.
+</p>
+
 
 <h3 id="mixing-php-html">MIXING PHP WITH HTML</h3>
 
