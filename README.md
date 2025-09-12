@@ -302,8 +302,37 @@ If everything is set up correctly, you should see the message <em>"Hello, World!
 
 
 <h3 id="mixing-php-html">MIXING PHP WITH HTML</h3>
+<p>
+One of the most powerful features of PHP is that it can be easily mixed with HTML.  
+This allows you to create dynamic web pages by embedding PHP code directly inside HTML tags.
+</p>
 
-.
+<p>For example, create a file called <code>page.php</code> and add the following code:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Mixing PHP with HTML&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome!&lt;/h1&gt;
+
+    &lt;p&gt;Today is: &lt;?php echo date("l, F j, Y"); ?&gt;&lt;/p&gt;
+
+    &lt;p&gt;This page was generated using PHP and HTML together.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>
+In this example, the static HTML provides the page structure, while the PHP code inside <code>&lt;?php ?&gt;</code>  
+is executed on the server and inserts the current date dynamically into the page.
+</p>
+
+<p>
+When you open <code>http://localhost/page.php</code> in your browser, you’ll see both the HTML and the PHP output combined into one seamless page.
+</p>
+
 
 <h3 id="first-simple-form">FIRST SIMPLE FORM WITH RETURN</h3>
 
