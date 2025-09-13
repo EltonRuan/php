@@ -335,8 +335,50 @@ When you open <code>http://localhost/page.php</code> in your browser, you’ll s
 
 
 <h3 id="first-simple-form">FIRST SIMPLE FORM WITH RETURN</h3>
+<p>
+PHP is often used to handle forms, making it possible to collect user input and process it on the server.  
+Let’s build a very simple example: a form where the user types their name and the page returns a personalized greeting.
+</p>
 
-.
+<p>Create a file called <code>form.php</code> and add the following code:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;First Simple Form&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Enter Your Name&lt;/h1&gt;
+
+&lt;form method="post" action=""&gt;
+    &lt;input type="text" name="username" placeholder="Type your name"&gt;
+    &lt;input type="submit" value="Send"&gt;
+&lt;/form&gt;
+
+&lt;?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST["username"]);
+    echo "&lt;p&gt;Hello, " . $name . "! Welcome to PHP forms.&lt;/p&gt;";
+}
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>
+Here’s what happens:
+</p>
+<ul>
+  <li>The user types their name into the input field.</li>
+  <li>When the form is submitted, the data is sent to the same page using the <code>POST</code> method.</li>
+  <li>PHP receives the input and displays a custom greeting message back to the user.</li>
+</ul>
+
+<p>
+This is your first simple interaction between HTML (the form) and PHP (the processing).
+</p>
 
 <h2 id="language-reference">LANGUAGE REFERENCE</h2>
 
