@@ -495,8 +495,40 @@ Now the browser will display the text as: <code>&lt;b&gt;Hello!&lt;/b&gt;</code>
 <p><strong>Tip:</strong> Always escape user input when displaying it, to prevent unwanted HTML or JavaScript from being executed in your page (this also protects against XSS attacks).</p>
 
 <h4 id="statement-separation">STATEMENT SEPARATION</h4>
+<p>
+In PHP, each instruction (called a <em>statement</em>) must be properly separated so the interpreter knows where one statement ends and the next begins.  
+The most common way to separate statements is with a semicolon (<code>;</code>).
+</p>
 
-.
+<p>Example:</p>
+
+<pre><code>&lt;?php
+echo "This is the first statement.";
+echo "This is the second statement.";
+?&gt;
+</code></pre>
+
+<p>
+Without the semicolon, PHP would not know where the first <code>echo</code> ends, and this would cause a syntax error.  
+The only exception is when you have a single PHP statement at the very end of a PHP block — the semicolon is optional, but it’s a best practice to always include it.
+</p>
+
+<pre><code>&lt;?php
+echo "Hello, World!"
+?&gt;
+</code></pre>
+
+<p>
+Although the example above works, it’s recommended to write it as:
+</p>
+
+<pre><code>&lt;?php
+echo "Hello, World!";
+?&gt;
+</code></pre>
+
+<p><strong>Tip:</strong> Always end your statements with <code>;</code> to keep your code clean and to avoid errors when adding more instructions later.</p>
+
 
 <h4 id="comments">COMMENTS</h4>
 
