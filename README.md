@@ -531,8 +531,39 @@ echo "Hello, World!";
 
 
 <h4 id="comments">COMMENTS</h4>
+<p>
+Comments in PHP are pieces of text ignored by the interpreter.  
+They are useful for documenting your code, explaining logic, or leaving notes for yourself or other developers.  
+Comments do not affect the execution of the program.
+</p>
 
-.
+<p>There are two types of comments in PHP:</p>
+
+<h5>1. Single-line comments</h5>
+<p>You can use <code>//</code> or <code>#</code> to create a comment on a single line.</p>
+
+<pre><code>&lt;?php
+// This is a single-line comment
+echo "Hello, World!"; # This is also a single-line comment
+?&gt;
+</code></pre>
+
+<h5>2. Multi-line comments</h5>
+<p>If you need to write longer explanations, you can use <code>/* ... */</code> to span multiple lines.</p>
+
+<pre><code>&lt;?php
+/*
+   This is a multi-line comment.
+   It can cover several lines.
+   Useful for detailed notes.
+*/
+echo "Hello again!";
+?&gt;
+</code></pre>
+
+<p><strong>Tip:</strong> Use comments to make your code easier to understand, but avoid over-commenting obvious code.  
+Good comments explain <em>why</em> something is done, not just <em>what</em> is being done.</p>
+
 
 <h3 id="types">TYPES</h3>
 
