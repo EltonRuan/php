@@ -594,8 +594,66 @@ Good comments explain <em>why</em> something is done, not just <em>what</em> is 
 </nav>
 
 <h4 id="type-system">TYPE SYSTEM</h4>
+<p>
+PHP uses a <strong>dynamic type system</strong>, which means you don’t need to declare the type of a variable explicitly.  
+The type is assigned automatically based on the value stored in the variable.
+</p>
 
-.
+<p>For example:</p>
+
+<pre><code>&lt;?php
+$number = 42;        // integer
+$price  = 19.99;     // float (decimal number)
+$name   = "Alice";   // string
+$isOk   = true;      // boolean
+?&gt;
+</code></pre>
+
+<p>
+In this example, PHP automatically detects that <code>$number</code> is an integer, <code>$price</code> is a float, <code>$name</code> is a string, and <code>$isOk</code> is a boolean.
+</p>
+
+<h5>Type Conversion</h5>
+<p>
+PHP will automatically convert types when needed (this is called <em>type juggling</em>).
+</p>
+
+<pre><code>&lt;?php
+$age = "30";      // string
+$result = $age + 5; // PHP converts "30" to integer
+echo $result;      // Output: 35
+?&gt;
+</code></pre>
+
+<h5>Type Casting</h5>
+<p>
+You can also force a variable into a specific type (known as <em>casting</em>).
+</p>
+
+<pre><code>&lt;?php
+$value = "100";
+$intValue = (int) $value;   // cast to integer
+$floatValue = (float) $value; // cast to float
+?&gt;
+</code></pre>
+
+<h5>Strict Types (Optional)</h5>
+<p>
+Since PHP 7, you can enable <strong>strict typing</strong> at the top of a file with:
+</p>
+
+<pre><code>&lt;?php
+declare(strict_types=1);
+?&gt;
+</code></pre>
+
+<p>
+This makes PHP more predictable, because it won’t automatically convert between types in function arguments and return values.  
+Instead, it will throw an error if the types don’t match.
+</p>
+
+<p><strong>Summary:</strong> PHP is dynamically typed by default, but you can use type hints and strict types to make your code safer and easier to maintain.</p>
+
 
 <h4 id="null">NULL</h4>
 
