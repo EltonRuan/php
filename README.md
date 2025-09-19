@@ -656,8 +656,47 @@ Instead, it will throw an error if the types don’t match.
 
 
 <h4 id="null">NULL</h4>
+<p>
+In PHP, <code>NULL</code> is a special data type that represents a variable with no value.  
+It means that the variable has been declared, but it does not currently contain any data.
+</p>
 
-.
+<p>A variable is considered <code>NULL</code> if:</p>
+<ul>
+  <li>It has been assigned the constant <code>NULL</code>.</li>
+  <li>It has not yet been assigned any value.</li>
+  <li>It has been unset with the <code>unset()</code> function.</li>
+</ul>
+
+<p>Example:</p>
+
+<pre><code>&lt;?php
+$var1 = NULL;        // explicitly set to NULL
+$var2;               // no value assigned, also NULL
+$var3 = "Hello";
+unset($var3);        // variable removed, now NULL
+
+var_dump($var1);
+var_dump($var2);
+var_dump($var3);
+?&gt;
+</code></pre>
+
+<p>
+The output will confirm that all three variables are <code>NULL</code>.
+</p>
+
+<p><strong>Tip:</strong> You can check if a variable is <code>NULL</code> using the <code>is_null()</code> function, or by comparing it directly with <code>NULL</code>.</p>
+
+<pre><code>&lt;?php
+$test = NULL;
+
+if (is_null($test)) {
+    echo "The variable is NULL.";
+}
+?&gt;
+</code></pre>
+
 
 <h4 id="booleans">BOOLEANS</h4>
 
