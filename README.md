@@ -699,8 +699,60 @@ if (is_null($test)) {
 
 
 <h4 id="booleans">BOOLEANS</h4>
+<p>
+A <strong>boolean</strong> is the simplest data type in PHP.  
+It represents only two possible values: <code>true</code> or <code>false</code>.
+</p>
 
-.
+<p>Example:</p>
+
+<pre><code>&lt;?php
+$isActive = true;
+$isLoggedIn = false;
+
+var_dump($isActive);   // bool(true)
+var_dump($isLoggedIn); // bool(false)
+?&gt;
+</code></pre>
+
+<h5>Booleans in Conditions</h5>
+<p>
+Booleans are commonly used in <code>if</code> statements and loops to control program flow.
+</p>
+
+<pre><code>&lt;?php
+$isAdmin = true;
+
+if ($isAdmin) {
+    echo "Welcome, administrator!";
+} else {
+    echo "Access denied.";
+}
+?&gt;
+</code></pre>
+
+<h5>Truthy and Falsy Values</h5>
+<p>
+When a non-boolean value is used in a condition, PHP automatically converts it to a boolean:
+</p>
+
+<ul>
+  <li>Values considered <strong>false</strong>: <code>false</code>, <code>0</code>, <code>0.0</code>, <code>""</code> (empty string), <code>"0"</code>, <code>[]</code> (empty array), <code>NULL</code>.</li>
+  <li>All other values are considered <strong>true</strong>.</li>
+</ul>
+
+<pre><code>&lt;?php
+if (0) {
+    echo "This will not run.";
+}
+
+if ("Hello") {
+    echo "This will run, because the string is not empty.";
+}
+?&gt;
+</code></pre>
+
+<p><strong>Tip:</strong> Use booleans to make your code more readable and logical when checking conditions.</p>
 
 <h4 id="integers">INTEGERS</h4>
 
