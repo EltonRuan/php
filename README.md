@@ -755,8 +755,50 @@ if ("Hello") {
 <p><strong>Tip:</strong> Use booleans to make your code more readable and logical when checking conditions.</p>
 
 <h4 id="integers">INTEGERS</h4>
+<p>
+An <strong>integer</strong> is a whole number (positive, negative, or zero) without any decimal part.  
+In PHP, integers can be written in different number systems: decimal, hexadecimal, octal, and binary.
+</p>
 
-.
+<h5>Examples:</h5>
+
+<pre><code>&lt;?php
+$a = 42;       // decimal (base 10)
+$b = -7;       // negative integer
+$c = 0x2A;     // hexadecimal (base 16) = 42
+$d = 0755;     // octal (base 8)
+$e = 0b101010; // binary (base 2) = 42
+
+var_dump($a, $b, $c, $d, $e);
+?&gt;
+</code></pre>
+
+<h5>Integer Size</h5>
+<p>
+The size of an integer depends on the platform (usually 32-bit or 64-bit).  
+You can check the maximum and minimum supported values with the predefined constants:
+</p>
+
+<pre><code>&lt;?php
+echo PHP_INT_MAX;  // maximum integer value
+echo PHP_INT_MIN;  // minimum integer value
+echo PHP_INT_SIZE; // size in bytes
+?&gt;
+</code></pre>
+
+<h5>Type Casting</h5>
+<p>
+You can convert other types into integers using casting:
+</p>
+
+<pre><code>&lt;?php
+$val = "123.45";
+$intVal = (int) $val;   // 123
+var_dump($intVal);
+?&gt;
+</code></pre>
+
+<p><strong>Note:</strong> If the value is outside the allowed range, PHP automatically converts it into a <code>float</code>.</p>
 
 <h4 id="float-point-numbers">FLOAT POINT NUMBERS</h4>
 
