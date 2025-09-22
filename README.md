@@ -801,8 +801,65 @@ var_dump($intVal);
 <p><strong>Note:</strong> If the value is outside the allowed range, PHP automatically converts it into a <code>float</code>.</p>
 
 <h4 id="float-point-numbers">FLOAT POINT NUMBERS</h4>
+<p>
+A <strong>float</strong> (also called floating-point number) is a number that has a decimal point or is written in exponential form.  
+Floats are used whenever you need to represent fractions or very large/small numbers.
+</p>
 
-.
+<h5>Examples:</h5>
+
+<pre><code>&lt;?php
+$a = 3.14;       // simple decimal
+$b = -0.99;      // negative float
+$c = 2.5e3;      // exponential notation (2.5 × 10³ = 2500)
+$d = 7E-4;       // exponential notation (7 × 10⁻⁴ = 0.0007)
+
+var_dump($a, $b, $c, $d);
+?&gt;
+</code></pre>
+
+<h5>Precision</h5>
+<p>
+Floats in PHP have limited precision (typically 14–15 decimal digits on most systems).  
+This means small rounding errors can occur in calculations.
+</p>
+
+<pre><code>&lt;?php
+$x = 0.1 + 0.2;
+var_dump($x); // 0.30000000000000004
+?&gt;
+</code></pre>
+
+<p>
+Because of this, floats should not be compared directly using <code>==</code>.  
+Instead, compare the difference within a small tolerance.
+</p>
+
+<pre><code>&lt;?php
+$a = 0.1 + 0.2;
+$b = 0.3;
+
+if (abs($a - $b) &lt; 0.00001) {
+    echo "They are equal within tolerance.";
+}
+?&gt;
+</code></pre>
+
+<h5>Useful Functions</h5>
+<ul>
+  <li><code>round($num, $precision)</code> – rounds to the specified number of decimals.</li>
+  <li><code>floor($num)</code> – rounds down.</li>
+  <li><code>ceil($num)</code> – rounds up.</li>
+  <li><code>number_format($num, $decimals)</code> – formats a number with grouped thousands and decimals.</li>
+</ul>
+
+<pre><code>&lt;?php
+echo round(3.14159, 2);       // 3.14
+echo floor(3.9);              // 3
+echo ceil(3.1);               // 4
+echo number_format(1234.567, 2); // 1,234.57
+?&gt;
+</code></pre>
 
 <h4 id="string">STRING</h4>
 
