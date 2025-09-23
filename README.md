@@ -862,8 +862,63 @@ echo number_format(1234.567, 2); // 1,234.57
 </code></pre>
 
 <h4 id="string">STRING</h4>
+<p>
+A <strong>string</strong> is a sequence of characters, such as text, numbers, or symbols, enclosed in quotes.  
+In PHP, strings can be created using single quotes (<code>'</code>) or double quotes (<code>"</code>).
+</p>
 
-.
+<h5>Single vs Double Quotes</h5>
+<ul>
+  <li><strong>Single quotes</strong>: the content is taken literally (variables are not expanded).</li>
+  <li><strong>Double quotes</strong>: variables and escape sequences (like <code>\n</code>) are interpreted.</li>
+</ul>
+
+<pre><code>&lt;?php
+$name = "Alice";
+
+$single = 'Hello $name';   // literal: Hello $name
+$double = "Hello $name";   // variable expanded: Hello Alice
+
+echo $single;
+echo "&lt;br&gt;";
+echo $double;
+?&gt;
+</code></pre>
+
+<h5>Concatenation</h5>
+<p>
+Strings can be combined using the dot operator (<code>.</code>).
+</p>
+
+<pre><code>&lt;?php
+$first = "Hello";
+$second = "World";
+
+echo $first . " " . $second; // Hello World
+?&gt;
+</code></pre>
+
+<h5>Useful String Functions</h5>
+<ul>
+  <li><code>strlen($str)</code> – returns the length of a string.</li>
+  <li><code>strtoupper($str)</code> / <code>strtolower($str)</code> – converts to upper/lowercase.</li>
+  <li><code>substr($str, $start, $length)</code> – extracts part of a string.</li>
+  <li><code>str_replace($search, $replace, $str)</code> – replaces text inside a string.</li>
+  <li><code>strpos($str, $needle)</code> – finds the position of the first occurrence of text.</li>
+</ul>
+
+<pre><code>&lt;?php
+$text = "PHP is awesome!";
+
+echo strlen($text);            // 15
+echo strtoupper($text);        // PHP IS AWESOME!
+echo substr($text, 0, 3);      // PHP
+echo str_replace("awesome", "great", $text); // PHP is great!
+echo strpos($text, "is");      // 4
+?&gt;
+</code></pre>
+
+<p><strong>Tip:</strong> Strings are one of the most common data types in PHP, and mastering string functions will make text processing much easier.</p>
 
 <h4 id="numeric-string">NUMERIC STRING</h4>
 
