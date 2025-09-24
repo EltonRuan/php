@@ -921,8 +921,56 @@ echo strpos($text, "is");      // 4
 <p><strong>Tip:</strong> Strings are one of the most common data types in PHP, and mastering string functions will make text processing much easier.</p>
 
 <h4 id="numeric-string">NUMERIC STRING</h4>
+<p>
+A <strong>numeric string</strong> is a string that contains numbers, which PHP can interpret as integers or floats when needed.  
+PHP automatically converts numeric strings to numbers in mathematical operations.
+</p>
 
-.
+<h5>Examples:</h5>
+
+<pre><code>&lt;?php
+$a = "42";       // numeric string
+$b = "3.14";     // numeric string with decimal
+$c = $a + 10;    // PHP converts "42" to integer
+$d = $b * 2;     // PHP converts "3.14" to float
+
+var_dump($a, $b, $c, $d);
+?&gt;
+</code></pre>
+
+<p>Output:</p>
+<pre><code>
+string(2) "42"
+string(4) "3.14"
+int(52)
+float(6.28)
+</code></pre>
+
+<h5>Non-Numeric Strings</h5>
+<p>
+If a string does not start with numbers, PHP will treat it as <code>0</code> in numeric operations.
+</p>
+
+<pre><code>&lt;?php
+$x = "hello" + 5;   // "hello" is not numeric
+var_dump($x);       // int(5)
+?&gt;
+</code></pre>
+
+<h5>Checking Numeric Strings</h5>
+<p>
+You can check if a string is numeric with <code>is_numeric()</code>.
+</p>
+
+<pre><code>&lt;?php
+var_dump(is_numeric("123"));   // true
+var_dump(is_numeric("3.14"));  // true
+var_dump(is_numeric("hello")); // false
+?&gt;
+</code></pre>
+
+<p><strong>Tip:</strong> Be careful when using numeric strings, especially when dealing with user input, because PHP’s automatic type conversion may lead to unexpected results.</p>
+
 
 <h4 id="arrays">ARRAYS</h4>
 
