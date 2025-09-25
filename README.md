@@ -973,8 +973,78 @@ var_dump(is_numeric("hello")); // false
 
 
 <h4 id="arrays">ARRAYS</h4>
+<p>
+An <strong>array</strong> is a special variable that can hold multiple values under a single name.  
+Arrays are one of the most powerful features of PHP, allowing you to organize and manipulate data efficiently.
+</p>
 
-.
+<h5>1. Indexed Arrays</h5>
+<p>Arrays with numeric indexes starting from 0:</p>
+
+<pre><code>&lt;?php
+$fruits = array("Apple", "Banana", "Cherry");
+echo $fruits[0]; // Apple
+echo $fruits[2]; // Cherry
+?&gt;
+</code></pre>
+
+<p>Since PHP 5.4, you can also use the short array syntax:</p>
+
+<pre><code>&lt;?php
+$fruits = ["Apple", "Banana", "Cherry"];
+?&gt;
+</code></pre>
+
+<h5>2. Associative Arrays</h5>
+<p>Arrays where keys are strings:</p>
+
+<pre><code>&lt;?php
+$person = [
+    "name" => "Alice",
+    "age" => 25,
+    "city" => "New York"
+];
+
+echo $person["name"]; // Alice
+echo $person["age"];  // 25
+?&gt;
+</code></pre>
+
+<h5>3. Multidimensional Arrays</h5>
+<p>Arrays that contain other arrays:</p>
+
+<pre><code>&lt;?php
+$matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+echo $matrix[0][2]; // 3
+echo $matrix[2][1]; // 8
+?&gt;
+</code></pre>
+
+<h5>Useful Array Functions</h5>
+<ul>
+  <li><code>count($array)</code> – returns the number of elements.</li>
+  <li><code>array_push($array, $value)</code> – adds a value at the end.</li>
+  <li><code>array_pop($array)</code> – removes the last element.</li>
+  <li><code>array_keys($array)</code> – returns all keys.</li>
+  <li><code>array_values($array)</code> – returns all values.</li>
+</ul>
+
+<pre><code>&lt;?php
+$numbers = [1, 2, 3];
+array_push($numbers, 4); // [1,2,3,4]
+array_pop($numbers);      // [1,2,3]
+var_dump(array_keys($person));   // ["name","age","city"]
+var_dump(array_values($person)); // ["Alice",25,"New York"]
+?&gt;
+</code></pre>
+
+<p><strong>Tip:</strong> Arrays are versatile and widely used in PHP. Learning to manipulate them effectively is essential for working with complex data.</p>
+
 
 <h4 id="objects">OBJECTS</h4>
 
