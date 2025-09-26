@@ -1047,8 +1047,75 @@ var_dump(array_values($person)); // ["Alice",25,"New York"]
 
 
 <h4 id="objects">OBJECTS</h4>
+<p>
+In PHP, an <strong>object</strong> is a data type that allows you to store both data (properties) and behavior (methods) together.  
+Objects are instances of <em>classes</em>, which define the blueprint for how the object should look and behave.
+</p>
 
-.
+<h5>Defining a Class</h5>
+<p>You create a class using the <code>class</code> keyword:</p>
+
+<pre><code>&lt;?php
+class Person {
+    public $name;
+    public $age;
+
+    public function sayHello() {
+        return "Hello, my name is " . $this-&gt;name;
+    }
+}
+?&gt;
+</code></pre>
+
+<h5>Creating an Object</h5>
+<p>Once a class is defined, you can create objects (instances) of that class:</p>
+
+<pre><code>&lt;?php
+$person1 = new Person();
+$person1-&gt;name = "Alice";
+$person1-&gt;age = 25;
+
+echo $person1-&gt;sayHello(); // Hello, my name is Alice
+?&gt;
+</code></pre>
+
+<h5>Constructors</h5>
+<p>
+You can use a constructor (<code>__construct</code>) to initialize properties automatically when creating an object.
+</p>
+
+<pre><code>&lt;?php
+class Car {
+    public $brand;
+    public $year;
+
+    public function __construct($brand, $year) {
+        $this-&gt;brand = $brand;
+        $this-&gt;year = $year;
+    }
+}
+
+$car1 = new Car("Toyota", 2020);
+echo $car1-&gt;brand; // Toyota
+?&gt;
+</code></pre>
+
+<h5>Object Functions</h5>
+<ul>
+  <li><code>get_class($obj)</code> – returns the class name of an object.</li>
+  <li><code>property_exists($obj, $prop)</code> – checks if a property exists.</li>
+  <li><code>method_exists($obj, $method)</code> – checks if a method exists.</li>
+</ul>
+
+<pre><code>&lt;?php
+var_dump(get_class($person1));          // "Person"
+var_dump(property_exists($person1, "age")); // true
+var_dump(method_exists($person1, "sayHello")); // true
+?&gt;
+</code></pre>
+
+<p><strong>Tip:</strong> Objects are fundamental to <em>Object-Oriented Programming (OOP)</em> in PHP, making code more reusable, modular, and easier to maintain.</p>
+
 
 <h4 id="enumerations">ENUMERATIONS</h4>
 
