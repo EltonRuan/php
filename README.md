@@ -1119,7 +1119,7 @@ var_dump(method_exists($person1, "sayHello")); // true
 
 <h4 id="enumerations">ENUMERATIONS</h4>
 
-.
+..
 
 <h4 id="resources">RESOURCES</h4>
 
