@@ -1119,7 +1119,103 @@ var_dump(method_exists($person1, "sayHello")); // true
 
 <h4 id="enumerations">ENUMERATIONS</h4>
 
-..
+<p>
+Enumerations, or <strong>Enums</strong>, were introduced in <strong>PHP 8.1</strong> as a way to define a fixed set of possible values for a variable.
+They provide better type safety and code readability compared to using plain constants.
+</p>
+
+<h5>1. Basic Enumeration</h5>
+<pre><code class="language-php">
+<?php
+enum Status {
+    case Pending;
+    case Approved;
+    case Rejected;
+}
+
+$status = Status::Approved;
+
+echo $status->name; // Outputs: Approved
+?>
+</code></pre>
+
+<p>
+In this example, the <code>Status</code> enum defines three possible cases: <code>Pending</code>, <code>Approved</code>, and <code>Rejected</code>.
+The <code>name</code> property returns the case name as a string.
+</p>
+
+<h5>2. Backed Enumerations</h5>
+<pre><code class="language-php">
+<?php
+enum UserRole: string {
+    case Admin = 'admin';
+    case Editor = 'editor';
+    case Viewer = 'viewer';
+}
+
+$role = UserRole::Admin;
+
+echo $role->value; // Outputs: admin
+?>
+</code></pre>
+
+<p>
+Backed enums associate a scalar value (string or integer) with each case, allowing for easier database storage or data comparison.
+</p>
+
+<h5>3. Methods Inside Enums</h5>
+<pre><code class="language-php">
+<?php
+enum LogLevel: string {
+    case Info = 'info';
+    case Warning = 'warning';
+    case Error = 'error';
+
+    public function label(): string {
+        return match($this) {
+            self::Info => 'Information',
+            self::Warning => 'Warning Message',
+            self::Error => 'Error Message',
+        };
+    }
+}
+
+echo LogLevel::Error->label(); // Outputs: Error Message
+?>
+</code></pre>
+
+<p>
+Enums can contain methods and even implement interfaces, allowing logic to be encapsulated directly within the enum.
+</p>
+
+<h5>4. Enums in Functions</h5>
+<pre><code class="language-php">
+<?php
+function handleStatus(Status $status): void {
+    switch ($status) {
+        case Status::Pending:
+            echo 'Waiting for approval...';
+            break;
+        case Status::Approved:
+            echo 'Approved!';
+            break;
+        case Status::Rejected:
+            echo 'Rejected.';
+            break;
+    }
+}
+
+handleStatus(Status::Pending);
+?>
+</code></pre>
+
+<h5>Summary</h5>
+<ul>
+    <li>Introduced in PHP 8.1.</li>
+    <li>Provide a type-safe way to represent constant values.</li>
+    <li>Can be pure (no values) or backed (string/int values).</li>
+    <li>Support methods and interface implementation.</li>
+</ul>
 
 <h4 id="resources">RESOURCES</h4>
 
