@@ -1219,7 +1219,84 @@ handleStatus(Status::Pending);
 
 <h4 id="resources">RESOURCES</h4>
 
-.
+<p>
+In PHP, <strong>resources</strong> are special variables that hold references to external entities.  
+They are not actual data types like strings or integers, but rather pointers to system-level objects — such as file handlers, database connections, or image streams.  
+Resources are created and managed by specific PHP extensions.
+</p>
+
+<h5>1. Common Examples of Resources</h5>
+<pre><code class="language-php">
+<?php
+// File resource
+$file = fopen("example.txt", "r");
+var_dump($file); 
+// Output: resource(3) of type (stream)
+
+// Database connection resource (MySQLi)
+$conn = mysqli_connect("localhost", "root", "", "testdb");
+var_dump($conn); 
+// Output: object(mysqli)#1 (not a resource in newer PHP versions, but historically was)
+
+// Image resource (GD Library)
+$image = imagecreate(100, 100);
+var_dump($image); 
+// Output: resource(5) of type (gd)
+?>
+</code></pre>
+
+<p>
+Each of these examples creates a different type of resource.  
+You can check the type of a resource with the <code>get_resource_type()</code> function.
+</p>
+
+<h5>2. Checking Resource Type</h5>
+<pre><code class="language-php">
+<?php
+$file = fopen("example.txt", "r");
+echo get_resource_type($file); 
+// Output: stream
+?>
+</code></pre>
+
+<h5>3. Releasing Resources</h5>
+<pre><code class="language-php">
+<?php
+$file = fopen("example.txt", "r");
+
+// Work with the file here...
+
+// Always close resources after use
+fclose($file);
+?>
+</code></pre>
+
+<p>
+Resources should always be released after use to prevent memory leaks or unnecessary system resource consumption.  
+Functions like <code>fclose()</code>, <code>mysqli_close()</code>, and <code>imagedestroy()</code> are used for cleanup.
+</p>
+
+<h5>4. Resource ID and Casting</h5>
+<pre><code class="language-php">
+<?php
+$file = fopen("example.txt", "r");
+echo (int) $file; // Outputs the resource ID (integer)
+?>
+</code></pre>
+
+<p>
+When cast to an integer, a resource returns its unique identifier.  
+However, this number should not be relied upon for logic — it is primarily for debugging purposes.
+</p>
+
+<h5>Summary</h5>
+<ul>
+    <li>Resources are references to external system entities (like files, sockets, databases, etc.).</li>
+    <li>They are created by specific PHP functions and managed internally.</li>
+    <li>Always release resources after use to avoid memory leaks.</li>
+    <li>Use <code>get_resource_type()</code> to identify the resource type.</li>
+</ul>
+
 
 <h4 id="callbacks-callables">CALLBACKS / CALLABLES</h4>
 
