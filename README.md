@@ -1300,7 +1300,135 @@ However, this number should not be relied upon for logic — it is primarily for
 
 <h4 id="callbacks-callables">CALLBACKS / CALLABLES</h4>
 
-.
+<p>
+In PHP, <strong>callbacks</strong> or <strong>callables</strong> refer to functions, methods, or objects that can be invoked dynamically.  
+They are often used when passing a function as an argument to another function — for example, in array operations, event handlers, or custom logic.
+</p>
+
+<h5>1. Basic Callback Function</h5>
+<pre><code class="language-php">
+<?php
+function greet($name) {
+    return "Hello, $name!";
+}
+
+function processUser($callback, $userName) {
+    echo $callback($userName);
+}
+
+processUser('greet', 'Elton');
+// Output: Hello, Elton!
+?>
+</code></pre>
+
+<p>
+Here, the string <code>'greet'</code> represents the name of a function, which is passed as a <strong>callback</strong> to another function.
+</p>
+
+<h5>2. Using Anonymous Functions as Callbacks</h5>
+<pre><code class="language-php">
+<?php
+$numbers = [1, 2, 3, 4, 5];
+
+$squared = array_map(function($n) {
+    return $n * $n;
+}, $numbers);
+
+print_r($squared);
+// Output: Array ( [0] => 1 [1] => 4 [2] => 9 [3] => 16 [4] => 25 )
+?>
+</code></pre>
+
+<p>
+Anonymous functions (closures) are commonly used as callbacks when the function logic is short or only needed once.
+</p>
+
+<h5>3. Callback to a Class Method</h5>
+<pre><code class="language-php">
+<?php
+class MathOperations {
+    public static function double($n) {
+        return $n * 2;
+    }
+}
+
+$numbers = [1, 2, 3];
+
+$result = array_map(['MathOperations', 'double'], $numbers);
+
+print_r($result);
+// Output: Array ( [0] => 2 [1] => 4 [2] => 6 )
+?>
+</code></pre>
+
+<p>
+Static methods can be referenced as callbacks using an array syntax: <code>['ClassName', 'methodName']</code>.
+</p>
+
+<h5>4. Callback to an Object Method</h5>
+<pre><code class="language-php">
+<?php
+class Greeting {
+    public function sayHello($name) {
+        return \"Hello, $name!\";
+    }
+}
+
+$greet = new Greeting();
+$callback = [$greet, 'sayHello'];
+
+echo call_user_func($callback, 'Elton');
+// Output: Hello, Elton!
+?>
+</code></pre>
+
+<p>
+Object methods can also be used as callbacks by passing an array containing the object and method name.
+</p>
+
+<h5>5. Validating a Callable</h5>
+<pre><code class="language-php">
+<?php
+function myCallback() {
+    echo \"Callback executed!\";
+}
+
+if (is_callable('myCallback')) {
+    myCallback();
+} else {
+    echo \"Not a valid callback.\";
+}
+?>
+</code></pre>
+
+<p>
+The <code>is_callable()</code> function checks whether a given value can be called as a function before executing it.
+</p>
+
+<h5>6. Using <code>call_user_func()</code> and <code>call_user_func_array()</code></h5>
+<pre><code class="language-php">
+<?php
+function multiply($a, $b) {
+    return $a * $b;
+}
+
+echo call_user_func('multiply', 3, 5); // Outputs: 15
+
+echo call_user_func_array('multiply', [4, 6]); // Outputs: 24
+?>
+</code></pre>
+
+<p>
+These functions are useful when dynamically invoking callables, especially with variable argument lists.
+</p>
+
+<h5>Summary</h5>
+<ul>
+    <li>Callbacks (callables) are functions, methods, or closures that can be invoked dynamically.</li>
+    <li>They can be defined as strings, arrays, or anonymous functions.</li>
+    <li>Use <code>is_callable()</code> to verify if a variable is callable.</li>
+    <li><code>call_user_func()</code> and <code>call_user_func_array()</code> are used to execute callbacks dynamically.</li>
+</ul>
 
 <h4 id="mixed">MIXED</h4>
 
