@@ -1432,7 +1432,109 @@ These functions are useful when dynamically invoking callables, especially with 
 
 <h4 id="mixed">MIXED</h4>
 
-.
+<p>
+In PHP, the <strong>mixed</strong> type indicates that a value can be of multiple different types.  
+It was introduced as a union type shorthand to represent any value that can be accepted or returned by a function.  
+The <code>mixed</code> type is useful when a function can work with various types of data or when flexibility is required.
+</p>
+
+<h5>1. What the <code>mixed</code> Type Includes</h5>
+<p>
+The <code>mixed</code> type may include any of the following types:
+</p>
+<ul>
+    <li><code>int</code></li>
+    <li><code>float</code></li>
+    <li><code>string</code></li>
+    <li><code>bool</code></li>
+    <li><code>array</code></li>
+    <li><code>object</code></li>
+    <li><code>callable</code></li>
+    <li><code>null</code></li>
+</ul>
+
+<h5>2. Function Example with <code>mixed</code> Parameter</h5>
+<pre><code class="language-php">
+<?php
+function displayValue(mixed $value): void {
+    if (is_array($value)) {
+        echo "Array: " . json_encode($value);
+    } elseif (is_object($value)) {
+        echo "Object of class: " . get_class($value);
+    } else {
+        echo "Value: " . var_export($value, true);
+    }
+}
+
+displayValue("Hello");
+displayValue(42);
+displayValue([1, 2, 3]);
+?>
+</code></pre>
+
+<p>
+This function can accept <em>any</em> type of input — strings, numbers, arrays, objects, etc.  
+It is ideal when designing generic functions or API handlers.
+</p>
+
+<h5>3. Function Returning <code>mixed</code></h5>
+<pre><code class="language-php">
+<?php
+function getData(int $type): mixed {
+    return match ($type) {
+        1 => "A string value",
+        2 => 123,
+        3 => [1, 2, 3],
+        default => null,
+    };
+}
+
+var_dump(getData(1)); // string
+var_dump(getData(2)); // int
+var_dump(getData(3)); // array
+var_dump(getData(4)); // null
+?>
+</code></pre>
+
+<p>
+Declaring a <code>mixed</code> return type means that the function may return values of different types depending on conditions.
+</p>
+
+<h5>4. Comparison with <code>union types</code></h5>
+<pre><code class="language-php">
+<?php
+// Using a union type (PHP 8.0+)
+function parseData(int|string $data): void {
+    echo "Data: $data";
+}
+
+// Using mixed (PHP 8.0+)
+function parseAnything(mixed $data): void {
+    echo "Data: " . var_export($data, true);
+}
+?>
+</code></pre>
+
+<p>
+Union types define a limited set of possible types (like <code>int|string</code>),  
+whereas <code>mixed</code> allows for <em>any type</em> of value.
+</p>
+
+<h5>5. When to Use <code>mixed</code></h5>
+<ul>
+    <li>When a function can accept or return multiple different data types.</li>
+    <li>When building general-purpose libraries or utilities.</li>
+    <li>When handling dynamic data (e.g., JSON, API inputs, user-generated content).</li>
+</ul>
+
+<h5>Summary</h5>
+<ul>
+    <li><code>mixed</code> represents any possible PHP type (scalar, object, array, etc.).</li>
+    <li>Useful for generic functions that deal with variable input/output types.</li>
+    <li>Can be used as both a parameter type and a return type.</li>
+    <li>Introduced officially in PHP 8.0.</li>
+</ul>
+
 
 <h4 id="void">VOID</h4>
 
