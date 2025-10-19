@@ -1538,7 +1538,103 @@ whereas <code>mixed</code> allows for <em>any type</em> of value.
 
 <h4 id="void">VOID</h4>
 
-.
+<p>
+In PHP, the <strong>void</strong> return type is used to indicate that a function does <em>not</em> return any value.  
+It was introduced in <strong>PHP 7.1</strong> to improve code clarity and enforce stricter type declarations.  
+When a function is declared with <code>: void</code>, it must not return any value — not even <code>null</code>.
+</p>
+
+<h5>1. Basic Example of <code>void</code></h5>
+<pre><code class="language-php">
+<?php
+function sayHello(): void {
+    echo "Hello, World!";
+}
+
+sayHello(); // Output: Hello, World!
+?>
+</code></pre>
+
+<p>
+This function performs an action (printing text) but does not return any value.  
+Attempting to use <code>return</code> with a value will trigger a <strong>Fatal Error</strong>.
+</p>
+
+<h5>2. Invalid Use of <code>void</code></h5>
+<pre><code class="language-php">
+<?php
+function invalidExample(): void {
+    return 42; // ❌ Fatal error: A void function must not return a value
+}
+?>
+</code></pre>
+
+<p>
+Functions with the <code>void</code> return type cannot return a value.  
+However, using <code>return;</code> alone to exit the function early is allowed.
+</p>
+
+<h5>3. Valid Early Return</h5>
+<pre><code class="language-php">
+<?php
+function printIfPositive(int $number): void {
+    if ($number <= 0) {
+        return; // ✅ Allowed
+    }
+
+    echo "Positive number: $number";
+}
+
+printIfPositive(5);  // Output: Positive number: 5
+printIfPositive(-3); // Output: (nothing)
+?>
+</code></pre>
+
+<p>
+You can use <code>return;</code> without a value in a <code>void</code> function to end execution early.
+</p>
+
+<h5>4. Practical Use Case</h5>
+<pre><code class="language-php">
+<?php
+function logMessage(string $message): void {
+    $date = date('Y-m-d H:i:s');
+    file_put_contents('log.txt', "[$date] $message" . PHP_EOL, FILE_APPEND);
+}
+
+logMessage("System started");
+logMessage("User logged in");
+?>
+</code></pre>
+
+<p>
+The <code>void</code> type is often used for functions that perform side effects — such as logging, outputting data, or modifying files — without needing to return anything.
+</p>
+
+<h5>5. Interaction with <code>return</code> Type Checking</h5>
+<pre><code class="language-php">
+<?php
+declare(strict_types=1);
+
+function example(): void {
+    // No return value is expected or allowed here
+}
+?>
+</code></pre>
+
+<p>
+With strict typing enabled, PHP enforces that a <code>void</code> function must not return a value.  
+This ensures better code discipline and reduces unintended return behaviors.
+</p>
+
+<h5>Summary</h5>
+<ul>
+    <li><code>void</code> indicates a function does not return any value.</li>
+    <li>Introduced in PHP 7.1.</li>
+    <li><code>return;</code> (without a value) is allowed, but <code>return &lt;value&gt;;</code> is not.</li>
+    <li>Commonly used for functions that perform actions (e.g., logging, printing, updating data).</li>
+</ul>
+
 
 <h4 id="never">NEVER</h4>
 
