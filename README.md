@@ -1755,7 +1755,161 @@ This is a common real-world use case — using <code>never</code> for functions 
 
 <h4 id="relative-class-types">RELATIVE CLASS TYPES</h4>
 
-.
+<p>
+In PHP, <strong>relative class types</strong> refer to special keywords that allow you to reference the current class or related classes in an object-oriented context.  
+These keywords are: <code>self</code>, <code>static</code>, and <code>parent</code>.  
+They are used to define or access properties, methods, or constants within a class hierarchy.
+</p>
+
+<h5>1. <code>self</code> Keyword</h5>
+<p>
+The <code>self</code> keyword refers to the class where it is written.  
+It is often used to access static properties, constants, or methods inside the same class.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Example {
+    const VERSION = "1.0";
+
+    public static function getVersion(): string {
+        return self::VERSION; // Refers to Example::VERSION
+    }
+}
+
+echo Example::getVersion(); // Output: 1.0
+?>
+</code></pre>
+
+<p>
+<code>self</code> is bound to the class it’s defined in — not the one from which it’s called.  
+That means it does not respect inheritance when overridden in child classes.
+</p>
+
+<h5>2. <code>parent</code> Keyword</h5>
+<p>
+The <code>parent</code> keyword is used to access members (methods or constructors) from a parent class.  
+It is mainly used when extending classes and you want to reuse or extend the behavior of the parent class.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Base {
+    public function showMessage() {
+        echo "Message from Base class";
+    }
+}
+
+class Derived extends Base {
+    public function showMessage() {
+        parent::showMessage(); // Calls the method from Base
+        echo " + Message from Derived class";
+    }
+}
+
+$obj = new Derived();
+$obj->showMessage(); 
+// Output: Message from Base class + Message from Derived class
+?>
+</code></pre>
+
+<p>
+<code>parent</code> is used to call or reference elements from the immediate superclass of the current class.
+</p>
+
+<h5>3. <code>static</code> Keyword (Late Static Binding)</h5>
+<p>
+The <code>static</code> keyword, when used for static access, allows <em>late static binding</em> — meaning it refers to the class that was actually called at runtime, not where it was originally defined.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Base {
+    public static function who() {
+        echo _CLASS_;
+    }
+
+    public static function callWho() {
+        static::who(); // Late static binding
+    }
+}
+
+class Child extends Base {
+    public static function who() {
+        echo _CLASS_;
+    }
+}
+
+Base::callWho();  // Output: Base
+Child::callWho(); // Output: Child
+?>
+</code></pre>
+
+<p>
+Unlike <code>self</code>, which is bound to the class where it’s written, <code>static</code> is bound to the class that was actually invoked at runtime.  
+This makes it powerful for inheritance and reusable design patterns.
+</p>
+
+<h5>4. Comparing <code>self</code> vs <code>static</code></h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Feature</th>
+        <th><code>self</code></th>
+        <th><code>static</code></th>
+    </tr>
+    <tr>
+        <td>Binding Type</td>
+        <td>Early (compile-time)</td>
+        <td>Late (runtime)</td>
+    </tr>
+    <tr>
+        <td>Inheritance Behavior</td>
+        <td>Does not change in subclasses</td>
+        <td>Changes depending on the called class</td>
+    </tr>
+    <tr>
+        <td>Usage</td>
+        <td>Accessing constants, static methods, or properties within the same class</td>
+        <td>Useful for overridden static methods or inheritance hierarchies</td>
+    </tr>
+</table>
+
+<h5>5. Combined Example</h5>
+<pre><code class="language-php">
+<?php
+class Animal {
+    public static function identify(): void {
+        echo "Animal";
+    }
+
+    public static function makeSound(): void {
+        static::identify(); // Late static binding
+        echo " makes a sound." . PHP_EOL;
+    }
+}
+
+class Dog extends Animal {
+    public static function identify(): void {
+        echo "Dog";
+    }
+}
+
+Animal::makeSound(); // Output: Animal makes a sound.
+Dog::makeSound();    // Output: Dog makes a sound.
+?>
+</code></pre>
+
+<p>
+This example shows how <code>static</code> adapts to the class that calls the method, while <code>self</code> would always refer to the base class (<code>Animal</code>).
+</p>
+
+<h5>Summary</h5>
+<ul>
+    <li><code>self</code> — Refers to the class where it’s defined (early binding).</li>
+    <li><code>parent</code> — Refers to the immediate parent class (used for inheritance).</li>
+    <li><code>static</code> — Refers to the class that was called at runtime (late static binding).</li>
+    <li>Useful for inheritance, polymorphism, and reusable class design.</li>
+</ul>
 
 <h4 id="singleton-types">SINGLETON TYPES</h4>
 
