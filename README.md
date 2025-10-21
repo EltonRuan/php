@@ -1638,7 +1638,120 @@ This ensures better code discipline and reduces unintended return behaviors.
 
 <h4 id="never">NEVER</h4>
 
-.
+<p>
+In PHP, the <strong>never</strong> return type represents a function that <em>never returns a value</em> because it either terminates the script (e.g., with <code>exit()</code> or <code>die()</code>) or throws an exception.  
+It was introduced in <strong>PHP 8.1</strong> to provide better type safety for functions that are guaranteed not to return control to the caller.
+</p>
+
+<h5>1. Basic Example of <code>never</code></h5>
+<pre><code class="language-php">
+<?php
+function stopExecution(): never {
+    echo "Terminating the script...";
+    exit(); // The script stops here
+}
+
+stopExecution();
+
+echo "This will never be executed.";
+?>
+</code></pre>
+
+<p>
+Because the function uses <code>exit()</code>, the program stops executing, and control never returns to the caller.  
+Any code after the call is unreachable.
+</p>
+
+<h5>2. Using <code>never</code> with Exceptions</h5>
+<pre><code class="language-php">
+<?php
+function throwError(string $message): never {
+    throw new Exception($message);
+}
+
+try {
+    throwError("A critical error occurred!");
+} catch (Exception $e) {
+    echo $e->getMessage(); // Output: A critical error occurred!
+}
+?>
+</code></pre>
+
+<p>
+A function with a <code>never</code> return type can also throw an exception — since once an exception is thrown, the function does not return normally.
+</p>
+
+<h5>3. Invalid Use of <code>never</code></h5>
+<pre><code class="language-php">
+<?php
+function invalidExample(): never {
+    return; // ❌ Fatal error: A never-returning function must not return
+}
+?>
+</code></pre>
+
+<p>
+Functions declared with <code>never</code> must not return any value — not even <code>return;</code>.  
+They must always terminate execution or throw an exception.
+</p>
+
+<h5>4. Practical Example – Error Handling</h5>
+<pre><code class="language-php">
+<?php
+function criticalFailure(string $reason): never {
+    echo "Critical failure: $reason" . PHP_EOL;
+    exit(1); // Exit with status code 1 (error)
+}
+
+function processData(array $data): void {
+    if (empty($data)) {
+        criticalFailure("No data provided!");
+    }
+
+    echo "Processing data..." . PHP_EOL;
+}
+
+processData([]); // Triggers critical failure and stops execution
+?>
+</code></pre>
+
+<p>
+This is a common real-world use case — using <code>never</code> for functions that handle fatal conditions or unrecoverable states.
+</p>
+
+<h5>5. <code>never</code> vs <code>void</code></h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Feature</th>
+        <th><code>void</code></th>
+        <th><code>never</code></th>
+    </tr>
+    <tr>
+        <td>Returns a value?</td>
+        <td>No</td>
+        <td>Never returns (execution stops)</td>
+    </tr>
+    <tr>
+        <td>Allows <code>return;</code>?</td>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Example usage</td>
+        <td>Logging, output, updating data</td>
+        <td>Fatal errors, exceptions, script termination</td>
+    </tr>
+</table>
+
+<h5>Summary</h5>
+<ul>
+    <li><code>never</code> indicates a function that never returns to the caller.</li>
+    <li>Introduced in PHP 8.1.</li>
+    <li>Used when the function always throws an exception or terminates the script.</li>
+    <li>Cannot use <code>return</code> or return any value.</li>
+    <li>Useful for error handling, fatal conditions, and exit functions.</li>
+</ul>
+
 
 <h4 id="relative-class-types">RELATIVE CLASS TYPES</h4>
 
