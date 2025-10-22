@@ -1913,7 +1913,167 @@ This example shows how <code>static</code> adapts to the class that calls the me
 
 <h4 id="singleton-types">SINGLETON TYPES</h4>
 
-.
+<p>
+In PHP, the term <strong>Singleton Types</strong> refers to the concept of a class that ensures only <em>one instance</em> of itself can exist during the runtime of a program.  
+This is achieved through the <strong>Singleton Design Pattern</strong>.  
+It is not a formal PHP type (like <code>int</code> or <code>string</code>), but rather an <em>object-oriented pattern</em> used to manage global access to a single, shared instance.
+</p>
+
+<h5>1. Purpose of the Singleton Pattern</h5>
+<p>
+The Singleton pattern is useful when you need exactly one instance of a class to coordinate actions across the system — such as database connections, configuration managers, or logging systems.
+</p>
+
+<h5>2. Basic Implementation</h5>
+<pre><code class="language-php">
+<?php
+class Singleton {
+    private static ?Singleton $instance = null;
+
+    // Private constructor prevents direct instantiation
+    private function __construct() {
+        echo "New instance created." . PHP_EOL;
+    }
+
+    // Prevent cloning
+    private function __clone() {}
+
+    // Prevent unserialization
+    private function __wakeup() {}
+
+    // Static method to get the single instance
+    public static function getInstance(): Singleton {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+}
+
+// Usage
+$object1 = Singleton::getInstance();
+$object2 = Singleton::getInstance();
+
+var_dump($object1 === $object2); // true
+?>
+</code></pre>
+
+<p>
+Here, both variables reference the same instance.  
+The class ensures that only one object can ever be created, controlling access via <code>getInstance()</code>.
+</p>
+
+<h5>3. Explanation of Key Elements</h5>
+<ul>
+    <li><strong>Private constructor</strong> — Prevents creating new instances with <code>new</code>.</li>
+    <li><strong>Static property</strong> — Holds the single instance reference.</li>
+    <li><strong>Static method</strong> — Provides controlled access to the instance.</li>
+    <li><strong>Private clone and wakeup</strong> — Prevents duplication via cloning or serialization.</li>
+</ul>
+
+<h5>4. Example with Configuration Manager</h5>
+<pre><code class="language-php">
+<?php
+class Config {
+    private static ?Config $instance = null;
+    private array $settings = [];
+
+    private function __construct() {
+        $this->settings = [
+            'app_name' => 'MyApp',
+            'version' => '1.0',
+        ];
+    }
+
+    public static function getInstance(): Config {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function get(string $key): mixed {
+        return $this->settings[$key] ?? null;
+    }
+
+    public function set(string $key, mixed $value): void {
+        $this->settings[$key] = $value;
+    }
+}
+
+// Usage
+$config = Config::getInstance();
+echo $config->get('app_name'); // Output: MyApp
+
+$config->set('version', '2.0');
+echo $config->get('version');  // Output: 2.0
+?>
+</code></pre>
+
+<p>
+This shows a real-world scenario where a <code>Singleton</code> manages global configuration settings accessible throughout the system.
+</p>
+
+<h5>5. Singleton in Inheritance (Using <code>static</code>)</h5>
+<pre><code class="language-php">
+<?php
+class BaseSingleton {
+    protected static ?self $instance = null;
+
+    public static function getInstance(): static {
+        if (static::$instance === null) {
+            static::$instance = new static();
+        }
+        return static::$instance;
+    }
+}
+
+class Logger extends BaseSingleton {
+    public function log(string $message): void {
+        echo "[LOG] $message" . PHP_EOL;
+    }
+}
+
+$logger1 = Logger::getInstance();
+$logger2 = Logger::getInstance();
+
+$logger1->log("System initialized.");
+var_dump($logger1 === $logger2); // true
+?>
+</code></pre>
+
+<p>
+By using <code>static</code> instead of <code>self</code>, this version supports inheritance, allowing each subclass to have its own unique singleton instance.
+</p>
+
+<h5>6. Advantages and Disadvantages</h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Advantages</th>
+        <th>Disadvantages</th>
+    </tr>
+    <tr>
+        <td>Ensures only one instance exists in memory.</td>
+        <td>Can make testing and mocking more difficult.</td>
+    </tr>
+    <tr>
+        <td>Provides a global point of access to shared resources.</td>
+        <td>Can introduce hidden dependencies between classes.</td>
+    </tr>
+    <tr>
+        <td>Reduces redundant object creation.</td>
+        <td>May lead to tightly coupled code if overused.</td>
+    </tr>
+</table>
+
+<h5>Summary</h5>
+<ul>
+    <li><strong>Singleton</strong> ensures only one instance of a class exists throughout the program.</li>
+    <li>Implemented using a private constructor, static instance, and static accessor method.</li>
+    <li>Useful for shared resources like database connections, loggers, or configuration objects.</li>
+    <li>Should be used sparingly to avoid code coupling and testing issues.</li>
+</ul>
+
 
 <h4 id="iterables">ITERABLES</h4>
 
