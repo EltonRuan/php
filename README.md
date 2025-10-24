@@ -2077,7 +2077,153 @@ By using <code>static</code> instead of <code>self</code>, this version supports
 
 <h4 id="iterables">ITERABLES</h4>
 
-.
+<p>
+In PHP, the <strong>iterable</strong> type represents any value that can be looped over with a <code>foreach</code> statement.  
+This includes both <strong>arrays</strong> and any object that implements the <code>Traversable</code> interface (such as <code>Iterator</code> or <code>Generator</code>).
+</p>
+
+<p>
+The <code>iterable</code> type was introduced in <strong>PHP 7.1</strong> and is primarily used for function arguments and return types when you want to accept or return any “loopable” data structure.
+</p>
+
+<h5>1. Basic Example of Iterable Type</h5>
+<pre><code class="language-php">
+<?php
+function printItems(iterable $items): void {
+    foreach ($items as $item) {
+        echo $item . PHP_EOL;
+    }
+}
+
+// Using an array
+printItems(["apple", "banana", "orange"]);
+
+// Using a Generator
+function generateNumbers(): iterable {
+    for ($i = 1; $i <= 3; $i++) {
+        yield $i;
+    }
+}
+
+printItems(generateNumbers());
+?>
+</code></pre>
+
+<p>
+In this example, both an array and a generator are accepted by the <code>printItems()</code> function because both are iterable.
+</p>
+
+<h5>2. Accepting or Returning Iterable Values</h5>
+<p>
+You can also declare functions that return <code>iterable</code> values.  
+This allows flexibility when returning arrays or generators from the same function.
+</p>
+
+<pre><code class="language-php">
+<?php
+function getData(bool $useGenerator): iterable {
+    if ($useGenerator) {
+        yield "PHP";
+        yield "Python";
+        yield "JavaScript";
+    } else {
+        return ["PHP", "Python", "JavaScript"];
+    }
+}
+
+// Both usages are valid:
+foreach (getData(true) as $lang) {
+    echo $lang . PHP_EOL;
+}
+
+foreach (getData(false) as $lang) {
+    echo $lang . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>3. Iterables with Objects</h5>
+<p>
+Any object that implements the <code>Iterator</code> or <code>IteratorAggregate</code> interface is considered iterable.
+</p>
+
+<pre><code class="language-php">
+<?php
+class MyCollection implements IteratorAggregate {
+    private array $items;
+
+    public function __construct(array $items) {
+        $this->items = $items;
+    }
+
+    public function getIterator(): Traversable {
+        return new ArrayIterator($this->items);
+    }
+}
+
+$collection = new MyCollection(["red", "green", "blue"]);
+foreach ($collection as $color) {
+    echo $color . PHP_EOL;
+}
+?>
+</code></pre>
+
+<p>
+Here, <code>MyCollection</code> implements <code>IteratorAggregate</code> and returns an <code>ArrayIterator</code>, making it compatible with <code>foreach</code> and any function that expects an <code>iterable</code>.
+</p>
+
+<h5>4. Combining Iterable with Other Type Hints</h5>
+<p>
+The <code>iterable</code> type can be combined with generics-like comments for documentation or static analysis, though PHP does not natively enforce generic typing.
+</p>
+
+<pre><code class="language-php">
+<?php
+/**
+ * @param iterable&lt;int, string&gt; $data
+ */
+function process(iterable $data): void {
+    foreach ($data as $key => $value) {
+        echo "$key => $value" . PHP_EOL;
+    }
+}
+
+process(["a", "b", "c"]);
+?>
+</code></pre>
+
+<h5>5. Checking if a Variable is Iterable</h5>
+<p>
+PHP provides the function <code>is_iterable()</code> to verify if a variable can be iterated over.
+</p>
+
+<pre><code class="language-php">
+<?php
+$values = [1, 2, 3];
+$object = new ArrayIterator($values);
+$string = "Hello";
+
+var_dump(is_iterable($values)); // true
+var_dump(is_iterable($object)); // true
+var_dump(is_iterable($string)); // false
+?>
+</code></pre>
+
+<h5>6. Advantages of Using Iterable</h5>
+<ul>
+    <li>Provides flexibility to accept arrays, generators, and traversable objects in one type declaration.</li>
+    <li>Improves function reusability and type safety.</li>
+    <li>Makes code more generic and compatible with streaming data.</li>
+</ul>
+
+<h5>7. Summary</h5>
+<ul>
+    <li><strong>iterable</strong> is a pseudo-type that includes <code>array</code> and <code>Traversable</code> objects.</li>
+    <li>Introduced in PHP 7.1 for type hinting function arguments and return types.</li>
+    <li>Useful for working with loops, generators, and data collections uniformly.</li>
+    <li>Use <code>is_iterable()</code> to check if a variable supports iteration.</li>
+</ul>
+
 
 <h4 id="type-declarations">TYPE DECLARATIONS</h4>
 
