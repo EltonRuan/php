@@ -2227,11 +2227,393 @@ var_dump(is_iterable($string)); // false
 
 <h4 id="type-declarations">TYPE DECLARATIONS</h4>
 
-.
+<p>
+In PHP, <strong>Type Declarations</strong> (also known as <em>type hints</em>) allow you to specify the expected data types of function parameters, return values, and class properties.  
+They help improve code reliability, maintainability, and make debugging easier by enforcing that only values of the correct type are passed or returned.
+</p>
+
+<h5>1. Basic Syntax</h5>
+<p>
+A type declaration is placed before the parameter name or return type in a function definition.
+</p>
+
+<pre><code class="language-php">
+<?php
+function sum(int $a, int $b): int {
+    return $a + $b;
+}
+
+echo sum(5, 10); // 15
+?>
+</code></pre>
+
+<p>
+Here, the parameters <code>$a</code> and <code>$b</code> must be integers, and the function must return an integer.
+</p>
+
+<h5>2. Supported Types</h5>
+<p>PHP supports several categories of type declarations:</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Category</th>
+        <th>Examples</th>
+        <th>Notes</th>
+    </tr>
+    <tr>
+        <td>Scalar Types</td>
+        <td><code>int</code>, <code>float</code>, <code>string</code>, <code>bool</code></td>
+        <td>Basic data types.</td>
+    </tr>
+    <tr>
+        <td>Compound Types</td>
+        <td><code>array</code>, <code>object</code>, <code>callable</code>, <code>iterable</code></td>
+        <td>For complex or callable structures.</td>
+    </tr>
+    <tr>
+        <td>Special Types</td>
+        <td><code>mixed</code>, <code>void</code>, <code>never</code></td>
+        <td>For flexible, no-return, or non-returning functions.</td>
+    </tr>
+    <tr>
+        <td>Class / Interface Types</td>
+        <td><code>MyClass</code>, <code>SomeInterface</code></td>
+        <td>Restrict parameters to specific class instances or interface implementers.</td>
+    </tr>
+    <tr>
+        <td>Nullable Types</td>
+        <td><code>?int</code>, <code>?string</code></td>
+        <td>Allow both the type and <code>null</code>.</td>
+    </tr>
+    <tr>
+        <td>Union Types</td>
+        <td><code>int|float</code></td>
+        <td>Allow multiple types (PHP 8.0+).</td>
+    </tr>
+    <tr>
+        <td>Intersection Types</td>
+        <td><code>A&B</code></td>
+        <td>Require all specified types (PHP 8.1+).</td>
+    </tr>
+</table>
+
+<h5>3. Strict Typing</h5>
+<p>
+By default, PHP automatically converts data types when necessary (“weak typing”).  
+To enforce exact type matching, use <code>declare(strict_types=1);</code> at the top of a PHP file.
+</p>
+
+<pre><code class="language-php">
+<?php
+declare(strict_types=1);
+
+function multiply(int $x, int $y): int {
+    return $x * $y;
+}
+
+echo multiply(5, 2); // 10
+echo multiply(5.5, 2.2); // TypeError in strict mode
+?>
+</code></pre>
+
+<p>
+With strict mode enabled, passing <code>float</code> values to a function expecting <code>int</code> will trigger a <code>TypeError</code>.
+</p>
+
+<h5>4. Nullable Types</h5>
+<p>
+You can allow a parameter or return value to be <code>null</code> by prefixing the type with a question mark (<code>?</code>).
+</p>
+
+<pre><code class="language-php">
+<?php
+function greet(?string $name): string {
+    return $name ? "Hello, $name!" : "Hello, Guest!";
+}
+
+echo greet("Elton"); // Hello, Elton!
+echo greet(null);    // Hello, Guest!
+?>
+</code></pre>
+
+<h5>5. Union Types (PHP 8.0+)</h5>
+<p>
+Union types allow a parameter or return type to accept multiple specific types.
+</p>
+
+<pre><code class="language-php">
+<?php
+function formatValue(int|float|string $value): string {
+    return "Value: " . $value;
+}
+
+echo formatValue(10);     // Value: 10
+echo formatValue(5.75);   // Value: 5.75
+echo formatValue("PHP");  // Value: PHP
+?>
+</code></pre>
+
+<h5>6. Intersection Types (PHP 8.1+)</h5>
+<p>
+Intersection types require that a value must implement multiple interfaces at once.
+</p>
+
+<pre><code class="language-php">
+<?php
+interface A { public function doA(): void; }
+interface B { public function doB(): void; }
+
+class C implements A, B {
+    public function doA(): void {}
+    public function doB(): void {}
+}
+
+function process(A&B $obj): void {
+    echo "Object implements both A and B.";
+}
+
+process(new C());
+?>
+</code></pre>
+
+<h5>7. Typed Properties (PHP 7.4+)</h5>
+<p>
+Class properties can also have declared types, ensuring only the correct type of value can be assigned.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+    public int $age;
+    public ?string $email = null;
+}
+
+$user = new User();
+$user->name = "Elton";
+$user->age = 21;
+$user->email = "elton@example.com";
+?>
+</code></pre>
+
+<h5>8. Void and Never Return Types</h5>
+<p>
+A function declared with <code>void</code> must not return a value, while a function declared with <code>never</code> must not return at all (typically ends execution).
+</p>
+
+<pre><code class="language-php">
+<?php
+function logMessage(string $message): void {
+    echo "[LOG] $message" . PHP_EOL;
+}
+
+function terminate(string $reason): never {
+    die("Terminating: $reason");
+}
+?>
+</code></pre>
+
+<h5>9. Example Combining Multiple Features</h5>
+<pre><code class="language-php">
+<?php
+declare(strict_types=1);
+
+class Calculator {
+    public function add(int|float $a, int|float $b): float {
+        return $a + $b;
+    }
+
+    public function divide(float $a, float $b): ?float {
+        return $b !== 0 ? $a / $b : null;
+    }
+}
+
+$calc = new Calculator();
+
+echo $calc->add(5, 10.5);     // 15.5
+var_dump($calc->divide(10, 0)); // null
+?>
+</code></pre>
+
+<h5>10. Summary</h5>
+<ul>
+    <li>Type declarations define expected parameter, return, or property types.</li>
+    <li>Enable <code>strict_types=1</code> for strict type enforcement.</li>
+    <li>Support scalar, compound, special, class, union, and intersection types.</li>
+    <li>Improve code reliability, documentation, and maintainability.</li>
+</ul>
+
 
 <h4 id="type-juggling">TYPE JUGGLING</h4>
 
-.
+<p>
+In PHP, <strong>Type Juggling</strong> refers to the automatic conversion of a variable from one data type to another as needed during script execution.  
+Because PHP is a <em>dynamically typed</em> language, variables can change types depending on how they are used — this process is also known as <em>type coercion</em> or <em>type casting</em>.
+</p>
+
+<h5>1. What is Type Juggling?</h5>
+<p>
+Type juggling happens automatically when PHP evaluates expressions involving mixed data types.  
+For example, when a string is added to a number, PHP converts the string into a number before performing the addition.
+</p>
+
+<pre><code class="language-php">
+<?php
+$number = 10;
+$string = "5";
+
+$result = $number + $string; // string "5" is converted to int(5)
+echo $result; // 15
+?>
+</code></pre>
+
+<p>
+Here, PHP automatically converts the string <code>"5"</code> into an integer before adding it to <code>10</code>.
+</p>
+
+<h5>2. Common Type Juggling Conversions</h5>
+<p>
+PHP automatically converts between these data types in common scenarios:
+</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Scenario</th>
+        <th>Conversion</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td>String to Integer</td>
+        <td>When a string is used in a numeric context.</td>
+        <td><code>"100" + 20 → 120</code></td>
+    </tr>
+    <tr>
+        <td>Integer to String</td>
+        <td>When concatenating with a string.</td>
+        <td><code>5 . " apples" → "5 apples"</code></td>
+    </tr>
+    <tr>
+        <td>Boolean Conversion</td>
+        <td>When used in conditions or logical expressions.</td>
+        <td><code>if (0) → false</code>, <code>if ("Hello") → true</code></td>
+    </tr>
+    <tr>
+        <td>Array to String</td>
+        <td>When echoing an array (not recommended).</td>
+        <td><code>echo [1, 2]; // Notice: Array to string conversion</code></td>
+    </tr>
+</table>
+
+<h5>3. Examples of Automatic Conversions</h5>
+
+<pre><code class="language-php">
+<?php
+echo "10" + 5;     // 15 (string "10" converted to integer)
+echo "10 apples" + 5; // 15 ("apples" is ignored after numeric part)
+echo "apples" + 5; // 5 (no numeric value found → 0)
+echo 5 . 5;        // "55" (string concatenation)
+?>
+</code></pre>
+
+<p>
+PHP evaluates the left operand and determines how to coerce it into the right type depending on the operator used.
+</p>
+
+<h5>4. Boolean Type Juggling</h5>
+<p>
+PHP converts values to <code>bool</code> when used in conditional statements.  
+The following values evaluate to <strong>false</strong>:
+</p>
+
+<ul>
+    <li><code>false</code></li>
+    <li><code>0</code> (int) or <code>0.0</code> (float)</li>
+    <li><code>""</code> (empty string) or <code>"0"</code></li>
+    <li><code>[]</code> (empty array)</li>
+    <li><code>null</code></li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+$values = [0, "0", "", [], null, "PHP"];
+
+foreach ($values as $v) {
+    echo var_export((bool)$v, true) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<p>
+This script prints the boolean conversion of various values, showing which are considered true or false.
+</p>
+
+<h5>5. Loose vs Strict Comparisons</h5>
+<p>
+PHP uses two types of comparison operators:
+</p>
+<ul>
+    <li><strong>Loose comparison (<code>==</code>)</strong> — allows type juggling.</li>
+    <li><strong>Strict comparison (<code>===</code>)</strong> — checks both value and type.</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+var_dump(0 == "0");     // true (types converted)
+var_dump(0 === "0");    // false (different types)
+var_dump(false == "0"); // true (both coerced to false)
+var_dump(false === "0"); // false
+?>
+</code></pre>
+
+<p>
+Loose comparisons can cause unexpected results due to automatic type juggling, especially with <code>0</code>, <code>""</code>, or <code>false</code>.
+</p>
+
+<h5>6. Preventing Type Juggling Issues</h5>
+<p>
+To avoid errors caused by implicit type conversions:
+</p>
+<ul>
+    <li>Use <code>===</code> and <code>!==</code> for strict comparisons.</li>
+    <li>Enable <code>declare(strict_types=1);</code> for function argument and return types.</li>
+    <li>Manually cast variables to the intended type.</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+declare(strict_types=1);
+
+function add(int $a, int $b): int {
+    return $a + $b;
+}
+
+echo add(5, (int)"10"); // Explicit cast, no juggling
+?>
+</code></pre>
+
+<h5>7. Explicit Type Casting</h5>
+<p>
+You can manually convert between types using casting operators.
+</p>
+
+<pre><code class="language-php">
+<?php
+$val = "123";
+
+var_dump((int)$val);    // int(123)
+var_dump((float)$val);  // float(123)
+var_dump((bool)$val);   // bool(true)
+var_dump((array)$val);  // array(1) { [0] => string(3) "123" }
+?>
+</code></pre>
+
+<h5>8. Summary</h5>
+<ul>
+    <li><strong>Type Juggling</strong> means PHP automatically converts variable types based on context.</li>
+    <li>It makes PHP flexible but can cause subtle bugs with comparisons and arithmetic.</li>
+    <li>Use <code>===</code> and <code>!==</code> for type-safe comparisons.</li>
+    <li>Enable <code>strict_types</code> and use explicit casting for safer, predictable behavior.</li>
+</ul>
 
 
 <h3 id="variables">VARIABLES</h3>
