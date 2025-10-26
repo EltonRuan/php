@@ -2630,7 +2630,200 @@ var_dump((array)$val);  // array(1) { [0] => string(3) "123" }
 
 <h4 id="predefined-variables-superglobals">PREDEFINED VARIABLES (SUPERGLOBALS)</h4>
 
-.
+<p>
+In PHP, <strong>Superglobals</strong> are built-in variables that are available in all scopes — that is, you can access them from any function, class, or file without needing to use <code>global</code>.  
+They are automatically populated by the PHP runtime and are commonly used to handle user input, environment information, and server data.
+</p>
+
+<h5>1. What Are Superglobals?</h5>
+<p>
+Superglobals are special predefined variables that hold important information such as form data, cookies, sessions, and server configuration.  
+They are always accessible, regardless of scope.
+</p>
+
+<p>All superglobal variables in PHP begin with a <code>$_</code> prefix and are written in uppercase.</p>
+
+<h5>2. List of Superglobals</h5>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Variable</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>$_GLOBALS</code></td>
+        <td>References all global variables in the script.</td>
+    </tr>
+    <tr>
+        <td><code>$_SERVER</code></td>
+        <td>Contains information about the server and execution environment.</td>
+    </tr>
+    <tr>
+        <td><code>$_GET</code></td>
+        <td>Contains variables passed to the current script via the URL query string (HTTP GET method).</td>
+    </tr>
+    <tr>
+        <td><code>$_POST</code></td>
+        <td>Contains variables passed to the current script via the HTTP POST method.</td>
+    </tr>
+    <tr>
+        <td><code>$_FILES</code></td>
+        <td>Contains information about uploaded files.</td>
+    </tr>
+    <tr>
+        <td><code>$_COOKIE</code></td>
+        <td>Contains values of cookies sent by the client browser.</td>
+    </tr>
+    <tr>
+        <td><code>$_SESSION</code></td>
+        <td>Stores data across multiple page requests for a single user session.</td>
+    </tr>
+    <tr>
+        <td><code>$_REQUEST</code></td>
+        <td>Contains merged data from <code>$_GET</code>, <code>$_POST</code>, and <code>$_COOKIE</code>.</td>
+    </tr>
+    <tr>
+        <td><code>$_ENV</code></td>
+        <td>Contains environment variables passed to the current script.</td>
+    </tr>
+</table>
+
+<h5>3. Examples of Usage</h5>
+
+<h6>Example 1: Using <code>$_GET</code></h6>
+<p>
+Used to retrieve data sent via the URL query string (e.g., <code>example.php?name=Elton&age=21</code>).
+</p>
+
+<pre><code class="language-php">
+<?php
+if (isset($_GET['name'])) {
+    echo "Hello, " . htmlspecialchars($_GET['name']) . "!";
+}
+?>
+</code></pre>
+
+<h6>Example 2: Using <code>$_POST</code></h6>
+<p>
+Used to handle data submitted via HTML forms using the POST method.
+</p>
+
+<pre><code class="language-php">
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? 'Guest';
+    echo "Welcome, " . htmlspecialchars($username);
+}
+?>
+</code></pre>
+
+<h6>Example 3: Using <code>$_FILES</code></h6>
+<p>
+Used for handling file uploads.
+</p>
+
+<pre><code class="language-php">
+<?php
+if (isset($_FILES['file'])) {
+    $fileName = $_FILES['file']['name'];
+    $fileTmp  = $_FILES['file']['tmp_name'];
+    move_uploaded_file($fileTmp, "uploads/" . $fileName);
+    echo "Uploaded: " . htmlspecialchars($fileName);
+}
+?>
+</code></pre>
+
+<h6>Example 4: Using <code>$_COOKIE</code> and <code>$_SESSION</code></h6>
+
+<pre><code class="language-php">
+<?php
+// COOKIE Example
+setcookie("user", "Elton", time() + 3600);
+if (isset($_COOKIE['user'])) {
+    echo "Cookie value: " . $_COOKIE['user'];
+}
+
+// SESSION Example
+session_start();
+$_SESSION['id'] = 123;
+echo "Session ID: " . $_SESSION['id'];
+?>
+</code></pre>
+
+<h6>Example 5: Using <code>$_SERVER</code></h6>
+<p>
+Provides server and request-related information.
+</p>
+
+<pre><code class="language-php">
+<?php
+echo "Server Name: " . $_SERVER['SERVER_NAME'] . PHP_EOL;
+echo "Request Method: " . $_SERVER['REQUEST_METHOD'] . PHP_EOL;
+echo "Client IP: " . $_SERVER['REMOTE_ADDR'] . PHP_EOL;
+?>
+</code></pre>
+
+<h6>Example 6: Using <code>$_GLOBALS</code></h6>
+<p>
+Accesses global variables from within a function.
+</p>
+
+<pre><code class="language-php">
+<?php
+$number = 10;
+
+function doubleNumber() {
+    $GLOBALS['number'] *= 2;
+}
+
+doubleNumber();
+echo $number; // 20
+?>
+</code></pre>
+
+<h6>Example 7: Using <code>$_ENV</code></h6>
+<p>
+Used to access environment variables defined in the system or configuration.
+</p>
+
+<pre><code class="language-php">
+<?php
+echo getenv("PATH"); // Accesses system PATH variable
+?>
+</code></pre>
+
+<h5>4. Superglobal Scope</h5>
+<p>
+Superglobals are accessible in all scopes without the <code>global</code> keyword:
+</p>
+
+<pre><code class="language-php">
+<?php
+$name = "Elton";
+
+function showName() {
+    echo $GLOBALS['name']; // Accessible globally
+}
+
+showName();
+?>
+</code></pre>
+
+<h5>5. Security Considerations</h5>
+<ul>
+    <li>Always <strong>sanitize</strong> input from <code>$_GET</code>, <code>$_POST</code>, or <code>$_REQUEST</code> to prevent XSS and SQL injection.</li>
+    <li>Do not rely on <code>$_REQUEST</code> when precision between GET/POST is needed.</li>
+    <li>Use <code>htmlspecialchars()</code> or <code>filter_input()</code> for safer output.</li>
+</ul>
+
+<h5>6. Summary</h5>
+<ul>
+    <li>Superglobals are predefined global variables accessible anywhere in PHP.</li>
+    <li>Used for handling form data, cookies, sessions, environment variables, and server info.</li>
+    <li>They start with <code>$_</code> and are always available in any scope.</li>
+    <li>Always sanitize user input to maintain application security.</li>
+</ul>
+
 
 <h4 id="variable-scope">VARIABLE SCOPE</h4>
 
