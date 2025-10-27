@@ -2827,7 +2827,235 @@ showName();
 
 <h4 id="variable-scope">VARIABLE SCOPE</h4>
 
-.
+<p>
+In PHP, <strong>variable scope</strong> defines where a variable can be accessed or modified within a program.  
+Understanding scope is crucial for writing organized and predictable code.
+</p>
+
+<h5>1. Types of Variable Scope</h5>
+
+<p>
+There are four main types of variable scope in PHP:
+</p>
+
+<ul>
+    <li><strong>Local Scope</strong> – Variables declared inside a function are only accessible within that function.</li>
+    <li><strong>Global Scope</strong> – Variables declared outside of any function are global and accessible anywhere using <code>global</code> or <code>$GLOBALS</code>.</li>
+    <li><strong>Static Scope</strong> – Variables declared with the <code>static</code> keyword preserve their value between function calls.</li>
+    <li><strong>Function Parameter Scope</strong> – Variables passed as parameters to a function exist only within that function.</li>
+</ul>
+
+<hr>
+
+<h5>2. Local Scope</h5>
+<p>
+A variable declared inside a function is considered <strong>local</strong>.  
+It cannot be accessed outside of that function.
+</p>
+
+<pre><code class="language-php">
+<?php
+function testLocal() {
+    $x = 10; // Local scope
+    echo "Inside function: $x";
+}
+
+testLocal();
+// echo $x; // ❌ Error: Undefined variable $x
+?>
+</code></pre>
+
+<p><strong>Output:</strong> Inside function: 10</p>
+
+<hr>
+
+<h5>3. Global Scope</h5>
+<p>
+A variable declared outside of any function has <strong>global scope</strong>.  
+However, it is not accessible directly inside functions unless explicitly declared as <code>global</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+$x = 50; // Global variable
+
+function testGlobal() {
+    global $x; // Access global variable
+    echo "Accessing global variable: $x";
+}
+
+testGlobal();
+?>
+</code></pre>
+
+<p><strong>Output:</strong> Accessing global variable: 50</p>
+
+<h6>Accessing Global Variables Using <code>$GLOBALS</code></h6>
+<p>
+Alternatively, you can access global variables using the <code>$GLOBALS</code> superglobal array.
+</p>
+
+<pre><code class="language-php">
+<?php
+$y = 100;
+
+function testGlobalArray() {
+    echo "Access using GLOBALS: " . $GLOBALS['y'];
+}
+
+testGlobalArray();
+?>
+</code></pre>
+
+<p><strong>Output:</strong> Access using GLOBALS: 100</p>
+
+<hr>
+
+<h5>4. Static Scope</h5>
+<p>
+When a variable is declared as <code>static</code> inside a function, its value persists across multiple calls to that function.
+</p>
+
+<pre><code class="language-php">
+<?php
+function counter() {
+    static $count = 0; // Initialized only once
+    $count++;
+    echo "Count: $count<br>";
+}
+
+counter(); // Count: 1
+counter(); // Count: 2
+counter(); // Count: 3
+?>
+</code></pre>
+
+<p>
+This is useful when you need to maintain a function’s internal state without using global variables.
+</p>
+
+<hr>
+
+<h5>5. Function Parameter Scope</h5>
+<p>
+Variables passed as parameters to a function are local to that function.  
+Their values are copied into new local variables unless passed by reference.
+</p>
+
+<pre><code class="language-php">
+<?php
+function greet($name) {
+    echo "Hello, $name!";
+}
+
+greet("Elton");
+// echo $name; // ❌ Error: Undefined variable $name
+?>
+</code></pre>
+
+<h6>Passing by Reference</h6>
+<p>
+If you pass a variable by reference using <code>&</code>, the original variable outside the function is modified.
+</p>
+
+<pre><code class="language-php">
+<?php
+function addOne(&$number) {
+    $number++;
+}
+
+$value = 5;
+addOne($value);
+echo $value; // 6
+?>
+</code></pre>
+
+<hr>
+
+<h5>6. Variable Scope Summary</h5>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Scope Type</th>
+        <th>Declared In</th>
+        <th>Accessible From</th>
+        <th>Keyword/Access</th>
+    </tr>
+    <tr>
+        <td>Local</td>
+        <td>Inside a function</td>
+        <td>Only within that function</td>
+        <td>—</td>
+    </tr>
+    <tr>
+        <td>Global</td>
+        <td>Outside any function</td>
+        <td>Inside functions via <code>global</code> or <code>$GLOBALS</code></td>
+        <td><code>global</code> or <code>$GLOBALS</code></td>
+    </tr>
+    <tr>
+        <td>Static</td>
+        <td>Inside a function (with <code>static</code>)</td>
+        <td>Same function across multiple calls</td>
+        <td><code>static</code></td>
+    </tr>
+    <tr>
+        <td>Parameter</td>
+        <td>As function arguments</td>
+        <td>Inside that specific function</td>
+        <td>—</td>
+    </tr>
+</table>
+
+<hr>
+
+<h5>7. Best Practices</h5>
+<ul>
+    <li>❌ Avoid excessive use of <code>global</code> variables — they make code harder to maintain.</li>
+    <li>✅ Prefer <strong>function parameters</strong> and <strong>return values</strong> for data exchange.</li>
+    <li>✅ Use <code>static</code> variables when a function needs to “remember” data between calls.</li>
+    <li>✅ Use <code>$GLOBALS</code> carefully, mainly for legacy code.</li>
+</ul>
+
+<hr>
+
+<h5>8. Example: Combining Scopes</h5>
+
+<pre><code class="language-php">
+<?php
+$counter = 0; // Global
+
+function increment() {
+    global $counter;   // Access global
+    static $calls = 0; // Retains value
+    $counter++;
+    $calls++;
+    echo "Global counter: $counter | Function calls: $calls<br>";
+}
+
+increment();
+increment();
+increment();
+?>
+</code></pre>
+
+<p><strong>Output:</strong></p>
+<pre>
+Global counter: 1 | Function calls: 1
+Global counter: 2 | Function calls: 2
+Global counter: 3 | Function calls: 3
+</pre>
+
+<hr>
+
+<h5>9. Conclusion</h5>
+<ul>
+    <li>PHP variables have different lifetimes and accessibility depending on their scope.</li>
+    <li>Functions create their own local scope by default.</li>
+    <li>Use <code>global</code> and <code>static</code> carefully to control variable visibility.</li>
+    <li>Understanding scope helps prevent unintended variable overwriting and logic errors.</li>
+</ul>
+
 
 <h4 id="external-source-variables">VARIABLES FROM EXTERNAL SOURCES</h4>
 
