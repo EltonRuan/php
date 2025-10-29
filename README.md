@@ -3074,7 +3074,210 @@ Global counter: 3 | Function calls: 3
 
 <h4 id="syntax">SYNTAX</h4>
 
-.
+<p>
+In PHP, <strong>constants</strong> are identifiers (names) that hold values which cannot be changed during the execution of a script.  
+They are commonly used to store fixed configuration values such as database credentials, file paths, or version numbers.
+</p>
+
+<hr>
+
+<h5>1. Declaring Constants</h5>
+<p>
+Constants can be declared using two main methods:
+</p>
+
+<ul>
+    <li><code>define()</code> – The traditional function used to create constants.</li>
+    <li><code>const</code> – The keyword used within classes or in the global scope.</li>
+</ul>
+
+<h6>Using <code>define()</code>:</h6>
+<pre><code class="language-php">
+<?php
+define("SITE_NAME", "MyWebsite");
+define("MAX_USERS", 100);
+
+echo SITE_NAME;  // Output: MyWebsite
+echo MAX_USERS;  // Output: 100
+?>
+</code></pre>
+
+<h6>Using <code>const</code>:</h6>
+<pre><code class="language-php">
+<?php
+const VERSION = "1.0.0";
+const DEBUG_MODE = true;
+
+echo VERSION;      // Output: 1.0.0
+echo DEBUG_MODE;   // Output: 1
+?>
+</code></pre>
+
+<p>
+The <code>const</code> keyword is evaluated at compile time and is therefore slightly faster than <code>define()</code>.  
+However, <code>const</code> cannot be used inside conditional statements.
+</p>
+
+<hr>
+
+<h5>2. Rules for Constant Names</h5>
+<ul>
+    <li>Constant names are usually written in uppercase letters by convention.</li>
+    <li>They cannot start with a number.</li>
+    <li>They do not require a <code>$</code> sign like variables.</li>
+    <li>They are automatically <strong>global</strong> across the entire script.</li>
+</ul>
+
+<h6>Example:</h6>
+<pre><code class="language-php">
+<?php
+define("APP_NAME", "ChatGPT Assistant");
+echo APP_NAME;
+
+// Invalid examples
+// define("1CONSTANT", "Error"); // ❌ Invalid name
+// echo $APP_NAME; // ❌ Constants are not accessed with $
+?>
+</code></pre>
+
+<hr>
+
+<h5>3. Case Sensitivity</h5>
+<p>
+By default, constant names are <strong>case-sensitive</strong>.  
+However, you can make them case-insensitive by passing <code>true</code> as the third parameter of <code>define()</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+define("LANGUAGE", "PHP", true); // Case-insensitive constant
+echo LANGUAGE;   // Output: PHP
+echo language;   // Output: PHP
+?>
+</code></pre>
+
+<p><strong>Note:</strong> Case-insensitive constants are deprecated in modern PHP versions (8.0+). Avoid using this feature.</p>
+
+<hr>
+
+<h5>4. Constants inside Classes</h5>
+<p>
+Constants can be declared inside classes using the <code>const</code> keyword.  
+They are accessed using the <code>::</code> scope resolution operator.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Config {
+    const HOST = "localhost";
+    const PORT = 3306;
+}
+
+echo Config::HOST; // Output: localhost
+echo Config::PORT; // Output: 3306
+?>
+</code></pre>
+
+<p>
+Class constants are useful for defining configuration values or static identifiers within object-oriented programming.
+</p>
+
+<hr>
+
+<h5>5. Magic Constants</h5>
+<p>
+PHP also provides several built-in <strong>magic constants</strong> that change depending on where they are used.  
+They are written with double underscores (<code>__</code>).
+</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Constant</th>
+        <th>Description</th>
+        <th>Example Output</th>
+    </tr>
+    <tr>
+        <td><code>__LINE__</code></td>
+        <td>Current line number in the file</td>
+        <td>15</td>
+    </tr>
+    <tr>
+        <td><code>__FILE__</code></td>
+        <td>Full path and filename of the current file</td>
+        <td>/var/www/html/index.php</td>
+    </tr>
+    <tr>
+        <td><code>__DIR__</code></td>
+        <td>Directory of the current file</td>
+        <td>/var/www/html</td>
+    </tr>
+    <tr>
+        <td><code>__FUNCTION__</code></td>
+        <td>Name of the current function</td>
+        <td>myFunction</td>
+    </tr>
+    <tr>
+        <td><code>__CLASS__</code></td>
+        <td>Name of the current class</td>
+        <td>MyClass</td>
+    </tr>
+    <tr>
+        <td><code>__METHOD__</code></td>
+        <td>Name of the current class method</td>
+        <td>MyClass::myMethod</td>
+    </tr>
+    <tr>
+        <td><code>__NAMESPACE__</code></td>
+        <td>Current namespace name</td>
+        <td>App\Controllers</td>
+    </tr>
+</table>
+
+<pre><code class="language-php">
+<?php
+echo __FILE__ . PHP_EOL; // Outputs the full path of this file
+echo __LINE__ . PHP_EOL; // Outputs current line number
+?>
+</code></pre>
+
+<hr>
+
+<h5>6. Checking if a Constant Exists</h5>
+<p>
+You can check whether a constant has been defined using the <code>defined()</code> function.
+</p>
+
+<pre><code class="language-php">
+<?php
+define("APP_ENV", "production");
+
+if (defined("APP_ENV")) {
+    echo "The constant APP_ENV exists!";
+}
+?>
+</code></pre>
+
+<hr>
+
+<h5>7. Best Practices</h5>
+<ul>
+    <li>✅ Use uppercase letters for constant names.</li>
+    <li>✅ Prefer <code>const</code> inside classes or when defining fixed values at the top level.</li>
+    <li>✅ Use <code>define()</code> when defining constants conditionally or dynamically.</li>
+    <li>❌ Avoid case-insensitive constants (deprecated).</li>
+</ul>
+
+<hr>
+
+<h5>8. Summary</h5>
+<ul>
+    <li>Constants are immutable — their value cannot change once defined.</li>
+    <li>Declared with <code>define()</code> or <code>const</code>.</li>
+    <li>Accessible globally without the <code>$</code> symbol.</li>
+    <li>Useful for configuration, identifiers, and fixed references.</li>
+    <li>PHP provides several built-in <strong>magic constants</strong> for contextual information.</li>
+</ul>
+
 
 <h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
 
