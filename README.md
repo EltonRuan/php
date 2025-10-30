@@ -3281,7 +3281,236 @@ if (defined("APP_ENV")) {
 
 <h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
 
-.
+<p>
+PHP provides a number of <strong>predefined constants</strong> that are always available in every script.  
+These constants are automatically set by PHP and can be used to get information about the PHP environment, system configuration, and runtime context.
+</p>
+
+<hr>
+
+<h5>1. General Predefined Constants</h5>
+
+<p>
+These constants are built into PHP itself and provide details about the PHP version and configuration.
+</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Constant</th>
+        <th>Description</th>
+        <th>Example Output</th>
+    </tr>
+    <tr>
+        <td><code>PHP_VERSION</code></td>
+        <td>Current PHP version</td>
+        <td>8.2.12</td>
+    </tr>
+    <tr>
+        <td><code>PHP_MAJOR_VERSION</code></td>
+        <td>PHP major version number</td>
+        <td>8</td>
+    </tr>
+    <tr>
+        <td><code>PHP_MINOR_VERSION</code></td>
+        <td>PHP minor version number</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td><code>PHP_RELEASE_VERSION</code></td>
+        <td>PHP release number</td>
+        <td>12</td>
+    </tr>
+    <tr>
+        <td><code>PHP_VERSION_ID</code></td>
+        <td>Combined version ID (e.g., 80212 for PHP 8.2.12)</td>
+        <td>80212</td>
+    </tr>
+    <tr>
+        <td><code>PHP_OS</code></td>
+        <td>Operating system PHP was built on</td>
+        <td>Linux</td>
+    </tr>
+    <tr>
+        <td><code>PHP_SAPI</code></td>
+        <td>Server API (e.g., cli, apache2handler, fpm-fcgi)</td>
+        <td>cli</td>
+    </tr>
+    <tr>
+        <td><code>PHP_EOL</code></td>
+        <td>End-of-line character for the current platform</td>
+        <td>\n (Linux) or \r\n (Windows)</td>
+    </tr>
+    <tr>
+        <td><code>DIRECTORY_SEPARATOR</code></td>
+        <td>Directory separator used by the OS</td>
+        <td>/ (Linux) or \\ (Windows)</td>
+    </tr>
+    <tr>
+        <td><code>PATH_SEPARATOR</code></td>
+        <td>Separator used in PATH environment variable</td>
+        <td>: (Linux) or ; (Windows)</td>
+    </tr>
+    <tr>
+        <td><code>DEFAULT_INCLUDE_PATH</code></td>
+        <td>Default include path for PHP</td>
+        <td>/usr/local/lib/php</td>
+    </tr>
+</table>
+
+<h6>Example:</h6>
+<pre><code class="language-php">
+<?php
+echo "PHP Version: " . PHP_VERSION . PHP_EOL;
+echo "Operating System: " . PHP_OS . PHP_EOL;
+echo "Server API: " . PHP_SAPI . PHP_EOL;
+?>
+</code></pre>
+
+<hr>
+
+<h5>2. Magic Constants</h5>
+
+<p>
+In addition to general constants, PHP includes a set of <strong>magic constants</strong> whose values change depending on where they are used.
+</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Constant</th>
+        <th>Description</th>
+        <th>Example Output</th>
+    </tr>
+    <tr>
+        <td><code>__LINE__</code></td>
+        <td>Current line number in the script</td>
+        <td>15</td>
+    </tr>
+    <tr>
+        <td><code>__FILE__</code></td>
+        <td>Full path and filename of the current file</td>
+        <td>/var/www/html/index.php</td>
+    </tr>
+    <tr>
+        <td><code>__DIR__</code></td>
+        <td>Directory of the current file</td>
+        <td>/var/www/html</td>
+    </tr>
+    <tr>
+        <td><code>__FUNCTION__</code></td>
+        <td>Name of the current function</td>
+        <td>myFunction</td>
+    </tr>
+    <tr>
+        <td><code>__CLASS__</code></td>
+        <td>Name of the current class</td>
+        <td>MyClass</td>
+    </tr>
+    <tr>
+        <td><code>__METHOD__</code></td>
+        <td>Name of the current class method</td>
+        <td>MyClass::myMethod</td>
+    </tr>
+    <tr>
+        <td><code>__TRAIT__</code></td>
+        <td>Name of the current trait</td>
+        <td>MyTrait</td>
+    </tr>
+    <tr>
+        <td><code>__NAMESPACE__</code></td>
+        <td>Current namespace</td>
+        <td>App\Controllers</td>
+    </tr>
+</table>
+
+<h6>Example:</h6>
+<pre><code class="language-php">
+<?php
+echo "File: " . __FILE__ . PHP_EOL;
+echo "Line: " . __LINE__ . PHP_EOL;
+
+function showInfo() {
+    echo "Function: " . __FUNCTION__ . PHP_EOL;
+}
+
+showInfo();
+?>
+</code></pre>
+
+<hr>
+
+<h5>3. PHP Extension and Environment Constants</h5>
+
+<p>
+Some PHP extensions and environments automatically define their own constants.  
+These constants provide version information or configuration details specific to that extension.
+</p>
+
+<h6>Examples:</h6>
+<pre><code class="language-php">
+<?php
+echo "PHP_INT_MAX: " . PHP_INT_MAX . PHP_EOL;   // Maximum integer value
+echo "PHP_FLOAT_MAX: " . PHP_FLOAT_MAX . PHP_EOL; // Maximum float value
+echo "UPLOAD_MAX_FILESIZE: " . ini_get('upload_max_filesize') . PHP_EOL; // From php.ini
+?>
+</code></pre>
+
+<p>
+Other examples include:
+</p>
+
+<ul>
+    <li><code>PHP_INT_SIZE</code> – Size of an integer in bytes.</li>
+    <li><code>PHP_FLOAT_DIG</code> – Number of decimal digits that can be rounded into a float and back.</li>
+    <li><code>PHP_OS_FAMILY</code> – Family of the operating system (e.g., “Windows”, “Linux”, “BSD”).</li>
+</ul>
+
+<hr>
+
+<h5>4. Example: Displaying All Defined Constants</h5>
+
+<p>
+You can use <code>get_defined_constants()</code> to list all constants currently available in PHP, including user-defined and system constants.
+</p>
+
+<pre><code class="language-php">
+<?php
+$constants = get_defined_constants(true);
+print_r($constants['Core']); // Lists all core PHP constants
+?>
+</code></pre>
+
+<hr>
+
+<h5>5. Best Practices</h5>
+
+<ul>
+    <li>✅ Use predefined constants to check environment details (e.g., PHP version, OS type).</li>
+    <li>✅ Use <code>PHP_VERSION_ID</code> for version comparisons in conditional logic.</li>
+    <li>❌ Avoid redefining or overriding built-in constants.</li>
+</ul>
+
+<h6>Version Comparison Example:</h6>
+<pre><code class="language-php">
+<?php
+if (PHP_VERSION_ID >= 80000) {
+    echo "Running PHP 8 or higher.";
+} else {
+    echo "Older PHP version detected.";
+}
+?>
+</code></pre>
+
+<hr>
+
+<h5>6. Summary</h5>
+
+<ul>
+    <li>Predefined constants provide system and environment information.</li>
+    <li>Magic constants like <code>__FILE__</code> and <code>__LINE__</code> depend on the execution context.</li>
+    <li>Use <code>get_defined_constants()</code> to inspect all constants available in your environment.</li>
+    <li>They are automatically available and cannot be modified during runtime.</li>
+</ul>
+
 
 <h4 id="magic-constants">MAGIC CONSTANTS</h4>
 
