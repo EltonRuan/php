@@ -3514,7 +3514,192 @@ if (PHP_VERSION_ID >= 80000) {
 
 <h4 id="magic-constants">MAGIC CONSTANTS</h4>
 
-.
+<p>
+In PHP, <strong>magic constants</strong> are predefined constants whose values change depending on where they are used in the code.  
+They are extremely useful for debugging, logging, and dynamically retrieving information about files, classes, methods, and namespaces at runtime.
+</p>
+
+<hr>
+
+<h5>1. Overview</h5>
+
+<p>
+Unlike normal constants, magic constants are defined automatically by PHP and cannot be changed or overridden.  
+Their values depend on the location in which they are used — for example, inside a class, function, or file.
+</p>
+
+<p>
+All magic constants start and end with double underscores (<code>__</code>), and they are case-insensitive.
+</p>
+
+<hr>
+
+<h5>2. List of Magic Constants</h5>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Constant</th>
+        <th>Description</th>
+        <th>Example Output</th>
+    </tr>
+    <tr>
+        <td><code>__LINE__</code></td>
+        <td>Returns the current line number of the file where it is used.</td>
+        <td>42</td>
+    </tr>
+    <tr>
+        <td><code>__FILE__</code></td>
+        <td>Returns the full path and filename of the file where it is used.</td>
+        <td>/var/www/html/index.php</td>
+    </tr>
+    <tr>
+        <td><code>__DIR__</code></td>
+        <td>Returns the directory of the file. Equivalent to <code>dirname(__FILE__)</code>.</td>
+        <td>/var/www/html</td>
+    </tr>
+    <tr>
+        <td><code>__FUNCTION__</code></td>
+        <td>Returns the name of the current function.</td>
+        <td>getUserData</td>
+    </tr>
+    <tr>
+        <td><code>__CLASS__</code></td>
+        <td>Returns the name of the current class, including its namespace (if any).</td>
+        <td>App\Models\User</td>
+    </tr>
+    <tr>
+        <td><code>__TRAIT__</code></td>
+        <td>Returns the name of the current trait.</td>
+        <td>LoggerTrait</td>
+    </tr>
+    <tr>
+        <td><code>__METHOD__</code></td>
+        <td>Returns the name of the current class method (includes the class name).</td>
+        <td>User::save</td>
+    </tr>
+    <tr>
+        <td><code>__NAMESPACE__</code></td>
+        <td>Returns the name of the current namespace.</td>
+        <td>App\Controllers</td>
+    </tr>
+</table>
+
+<hr>
+
+<h5>3. Examples</h5>
+
+<h6>Example 1 – Basic Usage</h6>
+<pre><code class="language-php">
+<?php
+echo "This line is: " . __LINE__ . PHP_EOL;
+echo "This file is: " . __FILE__ . PHP_EOL;
+echo "This directory is: " . __DIR__ . PHP_EOL;
+?>
+</code></pre>
+
+<h6>Example 2 – Inside a Function</h6>
+<pre><code class="language-php">
+<?php
+function showFunctionInfo() {
+    echo "Function name: " . __FUNCTION__ . PHP_EOL;
+    echo "Defined in file: " . __FILE__ . PHP_EOL;
+}
+showFunctionInfo();
+?>
+</code></pre>
+
+<h6>Example 3 – Inside a Class</h6>
+<pre><code class="language-php">
+<?php
+class Example {
+    public function display() {
+        echo "Class: " . __CLASS__ . PHP_EOL;
+        echo "Method: " . __METHOD__ . PHP_EOL;
+        echo "Namespace: " . __NAMESPACE__ . PHP_EOL;
+    }
+}
+
+namespace App\Models;
+
+class User {
+    public function info() {
+        echo "Class: " . __CLASS__ . PHP_EOL;
+        echo "Method: " . __METHOD__ . PHP_EOL;
+        echo "Namespace: " . __NAMESPACE__ . PHP_EOL;
+    }
+}
+
+$user = new User();
+$user->info();
+?>
+</code></pre>
+
+<hr>
+
+<h5>4. Using <code>__TRAIT__</code></h5>
+
+<p>
+Traits can also use magic constants to identify themselves.  
+This is particularly helpful when building reusable components or debugging shared code behavior.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait LoggerTrait {
+    public function log($message) {
+        echo "[" . __TRAIT__ . "] " . $message . PHP_EOL;
+    }
+}
+
+class AppLogger {
+    use LoggerTrait;
+}
+
+$logger = new AppLogger();
+$logger->log("System started.");
+?>
+</code></pre>
+
+<hr>
+
+<h5>5. Dynamic Information with Magic Constants</h5>
+
+<p>
+Magic constants are often used in frameworks and libraries to dynamically identify file paths, namespaces, and context without hardcoding them.
+</p>
+
+<h6>Example – Logging File and Line Automatically</h6>
+<pre><code class="language-php">
+<?php
+function debugLog($message) {
+    echo "[DEBUG] {$message} (File: " . __FILE__ . " | Line: " . __LINE__ . ")" . PHP_EOL;
+}
+
+debugLog("Variable not found");
+?>
+</code></pre>
+
+Output:
+<pre><code>
+[DEBUG] Variable not found (File: /var/www/html/debug.php | Line: 3)
+</code></pre>
+
+<hr>
+
+<h5>6. Summary</h5>
+
+<ul>
+    <li>Magic constants are predefined and automatically provided by PHP.</li>
+    <li>Their values depend on where they are used (file, class, function, etc.).</li>
+    <li>They are commonly used for debugging, logging, and dynamic metadata retrieval.</li>
+    <li>All magic constants are case-insensitive but conventionally written in uppercase.</li>
+</ul>
+
+<h6>Best Practice:</h6>
+<p>
+Use magic constants like <code>__FILE__</code>, <code>__LINE__</code>, and <code>__METHOD__</code> in logs or error messages to make debugging easier.
+</p>
+
 
 <h3 id="expressions">EXPRESSIONS</h3>
 
