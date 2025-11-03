@@ -3703,7 +3703,218 @@ Use magic constants like <code>__FILE__</code>, <code>__LINE__</code>, and <code
 
 <h3 id="expressions">EXPRESSIONS</h3>
 
-.
+<p>
+In PHP, an <strong>expression</strong> is anything that can be evaluated to produce a value.  
+Expressions form the foundation of nearly all PHP statements — variables, function calls, arithmetic operations, and even control structures all rely on expressions.
+</p>
+
+<hr>
+
+<h5>1. What Is an Expression?</h5>
+
+<p>
+An expression is a combination of values, variables, operators, and functions that PHP can evaluate to produce a result.  
+Every expression has a value — even assignments and function calls return something.
+</p>
+
+<h6>Examples:</h6>
+<pre><code class="language-php">
+<?php
+$a = 10;              // Assignment expression
+$b = $a * 2;          // Arithmetic expression (evaluates to 20)
+$c = strlen("PHP");   // Function call expression (evaluates to 3)
+$d = $a + $b + $c;    // Complex expression
+?>
+</code></pre>
+
+<hr>
+
+<h5>2. Expression vs. Statement</h5>
+
+<p>
+A <strong>statement</strong> is a complete instruction that performs an action (like assigning a value or printing output).  
+An <strong>expression</strong> is part of a statement that produces a value.
+</p>
+
+<pre><code class="language-php">
+<?php
+// Expression inside a statement
+echo 2 + 3;   // "2 + 3" is an expression, "echo" is the statement
+?>
+</code></pre>
+
+<hr>
+
+<h5>3. Types of Expressions</h5>
+
+<h6>3.1 Arithmetic Expressions</h6>
+<p>
+Arithmetic expressions perform mathematical operations on numeric values.
+</p>
+<pre><code class="language-php">
+<?php
+$x = 5;
+$y = 2;
+$result = ($x * $y) + 3; // Evaluates to 13
+?>
+</code></pre>
+
+<h6>3.2 String Expressions</h6>
+<p>
+String expressions combine or manipulate text values using concatenation or interpolation.
+</p>
+<pre><code class="language-php">
+<?php
+$name = "Elton";
+$message = "Hello, " . $name . "!";   // Concatenation
+echo $message; // Output: Hello, Elton!
+
+$greeting = "Hello, $name!";          // Interpolation
+echo $greeting; // Output: Hello, Elton!
+?>
+</code></pre>
+
+<h6>3.3 Boolean Expressions</h6>
+<p>
+Boolean expressions evaluate to <code>true</code> or <code>false</code> and are commonly used in conditional statements.
+</p>
+<pre><code class="language-php">
+<?php
+$isAdult = ($age >= 18);
+$isLogged = ($user !== null);
+?>
+</code></pre>
+
+<h6>3.4 Assignment Expressions</h6>
+<p>
+Assignment expressions assign a value to a variable and also return the assigned value.
+</p>
+<pre><code class="language-php">
+<?php
+$total = ($a = 5) + 3; // $a = 5, then total = 8
+?>
+</code></pre>
+
+<h6>3.5 Function Call Expressions</h6>
+<p>
+Function calls are also expressions because they return values.
+</p>
+<pre><code class="language-php">
+<?php
+function add($a, $b) {
+    return $a + $b;
+}
+
+$sum = add(10, 5); // Evaluates to 15
+?>
+</code></pre>
+
+<h6>3.6 Conditional (Ternary) Expressions</h6>
+<p>
+The ternary operator is a shorthand for <code>if</code>/<code>else</code> expressions.
+</p>
+<pre><code class="language-php">
+<?php
+$age = 20;
+$status = ($age >= 18) ? "Adult" : "Minor";
+echo $status; // Output: Adult
+?>
+</code></pre>
+
+<h6>3.7 Null Coalescing Expressions</h6>
+<p>
+The null coalescing operator (<code>??</code>) returns the first operand that is not <code>null</code>.
+</p>
+<pre><code class="language-php">
+<?php
+$username = $_GET['user'] ?? 'Guest';
+echo $username; // If 'user' is not defined, prints "Guest"
+?>
+</code></pre>
+
+<hr>
+
+<h5>4. Operator Precedence and Evaluation</h5>
+
+<p>
+PHP evaluates expressions based on <strong>operator precedence</strong> — the order in which operators are applied.  
+Parentheses <code>()</code> can be used to override this order.
+</p>
+
+<pre><code class="language-php">
+<?php
+$result = 2 + 3 * 4;   // Evaluates to 14 (multiplication first)
+$result = (2 + 3) * 4; // Evaluates to 20 (parentheses override precedence)
+?>
+</code></pre>
+
+<hr>
+
+<h5>5. Chained and Nested Expressions</h5>
+
+<p>
+Expressions can be nested or chained together to form more complex operations.
+</p>
+
+<pre><code class="language-php">
+<?php
+echo strtoupper(trim(" php ")); // trim() → strtoupper() → echo
+?>
+</code></pre>
+
+<hr>
+
+<h5>6. Expression in Control Structures</h5>
+
+<p>
+Expressions are frequently used in control structures to determine program flow.
+</p>
+
+<pre><code class="language-php">
+<?php
+if (($age = 25) > 18) {
+    echo "Access granted";
+}
+?>
+</code></pre>
+
+<hr>
+
+<h5>7. Expression Blocks with `match`</h5>
+
+<p>
+Starting from PHP 8, <code>match</code> expressions return a value, unlike traditional <code>switch</code> statements.
+</p>
+
+<pre><code class="language-php">
+<?php
+$status = match($httpCode) {
+    200 => 'OK',
+    404 => 'Not Found',
+    500 => 'Server Error',
+    default => 'Unknown',
+};
+
+echo $status;
+?>
+</code></pre>
+
+<hr>
+
+<h5>8. Summary</h5>
+
+<ul>
+    <li>Every expression in PHP produces a value.</li>
+    <li>Expressions can be simple (like <code>5 + 3</code>) or complex (like <code>add(2, multiply(3, 4))</code>).</li>
+    <li>Statements often contain one or more expressions.</li>
+    <li>Operator precedence determines evaluation order, but parentheses can override it.</li>
+    <li>Expressions are fundamental to PHP syntax, logic, and flow control.</li>
+</ul>
+
+<h6>Tip:</h6>
+<p>
+Think of expressions as <em>building blocks</em> of PHP — everything from condition checks to function calls is an expression.
+</p>
 
 <h3 id="operators">OPERATORS</h3>
 
