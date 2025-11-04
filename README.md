@@ -3938,7 +3938,267 @@ Think of expressions as <em>building blocks</em> of PHP — everything from cond
 
 <h4 id="operator-precedence">OPERATOR PRECEDENCE</h4>
 
-.
+<p>
+In PHP, <strong>operator precedence</strong> determines the order in which parts of an expression are evaluated when multiple operators appear together.  
+Understanding precedence helps you predict how PHP interprets complex expressions and ensures that calculations and logic execute as intended.
+</p>
+
+<hr>
+
+<h5>1. What Is Operator Precedence?</h5>
+
+<p>
+When an expression contains multiple operators, PHP decides which operation to perform first based on each operator’s <em>precedence</em> (priority level).  
+Operators with higher precedence are evaluated before those with lower precedence.
+</p>
+
+<h6>Example:</h6>
+<pre><code class="language-php">
+<?php
+echo 2 + 3 * 4; // Output: 14, because * has higher precedence than +
+?>
+</code></pre>
+
+<p>
+To change the natural order, you can use parentheses <code>()</code> to group expressions.
+</p>
+
+<pre><code class="language-php">
+<?php
+echo (2 + 3) * 4; // Output: 20
+?>
+</code></pre>
+
+<hr>
+
+<h5>2. What Is Operator Associativity?</h5>
+
+<p>
+If two operators have the same precedence, PHP decides which one to evaluate first based on <strong>associativity</strong>.  
+Associativity can be either <em>left-to-right</em> or <em>right-to-left</em>.
+</p>
+
+<h6>Example:</h6>
+<pre><code class="language-php">
+<?php
+echo 10 - 5 - 2; // Left-to-right associativity → (10 - 5) - 2 = 3
+
+$a = $b = $c = 5; // Right-to-left associativity → $c = 5, then $b = 5, then $a = 5
+?>
+</code></pre>
+
+<hr>
+
+<h5>3. Operator Precedence Table</h5>
+
+<p>
+Below is a simplified list of operators, ordered from <strong>highest</strong> to <strong>lowest</strong> precedence:
+</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Precedence Level</th>
+        <th>Operators</th>
+        <th>Associativity</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td><code>clone</code>, <code>new</code></td>
+        <td>Right-to-left</td>
+        <td>Object creation and cloning</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td><code>[]</code>, <code>()</code></td>
+        <td>Left-to-right</td>
+        <td>Array access, function call</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td><code>**</code></td>
+        <td>Right-to-left</td>
+        <td>Exponentiation</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td><code>!</code>, <code>~</code>, <code>++</code>, <code>--</code>, <code>+</code>, <code>-</code> (unary)</td>
+        <td>Right-to-left</td>
+        <td>Unary operations</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td><code>*</code>, <code>/</code>, <code>%</code></td>
+        <td>Left-to-right</td>
+        <td>Multiplication, division, modulus</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td><code>+</code>, <code>-</code>, <code>.</code></td>
+        <td>Left-to-right</td>
+        <td>Addition, subtraction, string concatenation</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td><code>&lt;&lt;</code>, <code>&gt;&gt;</code></td>
+        <td>Left-to-right</td>
+        <td>Bitwise shift</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;=&gt;</code></td>
+        <td>Left-to-right</td>
+        <td>Comparison operators</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td><code>==</code>, <code>!=</code>, <code>===</code>, <code>!==</code></td>
+        <td>Left-to-right</td>
+        <td>Equality and identity comparison</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td><code>&amp;</code></td>
+        <td>Left-to-right</td>
+        <td>Bitwise AND</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td><code>^</code></td>
+        <td>Left-to-right</td>
+        <td>Bitwise XOR</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td><code>|</code></td>
+        <td>Left-to-right</td>
+        <td>Bitwise OR</td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td><code>&amp;&amp;</code></td>
+        <td>Left-to-right</td>
+        <td>Logical AND</td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td><code>||</code></td>
+        <td>Left-to-right</td>
+        <td>Logical OR</td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td><code>??</code></td>
+        <td>Left-to-right</td>
+        <td>Null coalescing</td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td><code>? :</code></td>
+        <td>Right-to-left</td>
+        <td>Ternary conditional</td>
+    </tr>
+    <tr>
+        <td>17</td>
+        <td><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>.=</code>, <code>**=</code>, etc.</td>
+        <td>Right-to-left</td>
+        <td>Assignment operators</td>
+    </tr>
+    <tr>
+        <td>18</td>
+        <td><code>and</code></td>
+        <td>Left-to-right</td>
+        <td>Logical AND (low precedence)</td>
+    </tr>
+    <tr>
+        <td>19</td>
+        <td><code>xor</code></td>
+        <td>Left-to-right</td>
+        <td>Logical XOR (low precedence)</td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td><code>or</code></td>
+        <td>Left-to-right</td>
+        <td>Logical OR (low precedence)</td>
+    </tr>
+</table>
+
+<hr>
+
+<h5>4. Examples of Precedence in Action</h5>
+
+<h6>Example 1 – Arithmetic Operators</h6>
+<pre><code class="language-php">
+<?php
+$result = 2 + 3 * 4; // 14, because * runs before +
+echo $result;
+?>
+</code></pre>
+
+<h6>Example 2 – Logical Operators</h6>
+<pre><code class="language-php">
+<?php
+$a = true;
+$b = false;
+$c = true;
+
+echo $a || $b && $c ? 'Yes' : 'No'; // && runs before ||
+?>
+</code></pre>
+
+<h6>Example 3 – Assignment and Arithmetic</h6>
+<pre><code class="language-php">
+<?php
+$x = $y = 5 + 3; // Right-to-left associativity → $y = 8, then $x = 8
+echo $x;
+?>
+</code></pre>
+
+<h6>Example 4 – Using Parentheses to Control Precedence</h6>
+<pre><code class="language-php">
+<?php
+$result = (2 + 3) * (4 + 1); // Parentheses override default precedence
+echo $result; // Output: 25
+?>
+</code></pre>
+
+<hr>
+
+<h5>5. Common Pitfalls</h5>
+
+<ul>
+    <li>Mixing <code>and</code> / <code>or</code> with <code>&amp;&amp;</code> / <code>||</code> can cause unexpected results because of different precedence levels.</li>
+    <li>Always use parentheses in complex logical expressions to make intent clear.</li>
+</ul>
+
+<h6>Example of Unexpected Behavior:</h6>
+<pre><code class="language-php">
+<?php
+$var = true || false;  // Interpreted as ($var = true) || false
+var_dump($var);        // bool(true)
+
+$var = true or false;  // Interpreted as ($var = true) or false
+var_dump($var);        // bool(true), but $var actually holds true (not the result of OR)
+?>
+</code></pre>
+
+<hr>
+
+<h5>6. Summary</h5>
+
+<ul>
+    <li>Operator precedence determines which operations are evaluated first.</li>
+    <li>Operators with the same precedence follow a defined associativity (left-to-right or right-to-left).</li>
+    <li>Parentheses should be used to clarify complex expressions and avoid logic errors.</li>
+    <li>Logical keywords (<code>and</code>, <code>or</code>, <code>xor</code>) have lower precedence than symbolic operators (<code>&amp;&amp;</code>, <code>||</code>).</li>
+</ul>
+
+<h6>Tip:</h6>
+<p>
+When in doubt, use parentheses <code>()</code> — it makes your code clearer and prevents subtle bugs.
+</p>
+
 
 <h4 id="arithmetic-operators">ARITHMETIC</h4>
 
