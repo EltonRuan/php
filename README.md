@@ -4202,7 +4202,130 @@ When in doubt, use parentheses <code>()</code> — it makes your code clearer an
 
 <h4 id="arithmetic-operators">ARITHMETIC</h4>
 
-.
+<p>
+Arithmetic operators in PHP are used to perform mathematical calculations on numerical values.  
+They can operate on integers or floating-point numbers, and the result depends on the operands involved.  
+These operators follow standard mathematical rules of precedence.
+</p>
+
+<h5>1. List of Arithmetic Operators</h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Operator</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td><code>+</code></td>
+        <td>Addition</td>
+        <td>Adds two values.</td>
+        <td><code>$a + $b</code></td>
+    </tr>
+    <tr>
+        <td><code>-</code></td>
+        <td>Subtraction</td>
+        <td>Subtracts one value from another.</td>
+        <td><code>$a - $b</code></td>
+    </tr>
+    <tr>
+        <td><code>*</code></td>
+        <td>Multiplication</td>
+        <td>Multiplies two values.</td>
+        <td><code>$a * $b</code></td>
+    </tr>
+    <tr>
+        <td><code>/</code></td>
+        <td>Division</td>
+        <td>Divides one value by another.</td>
+        <td><code>$a / $b</code></td>
+    </tr>
+    <tr>
+        <td><code>%</code></td>
+        <td>Modulus</td>
+        <td>Returns the remainder of division.</td>
+        <td><code>$a % $b</code></td>
+    </tr>
+    <tr>
+        <td><code>**</code></td>
+        <td>Exponentiation</td>
+        <td>Raises one value to the power of another.</td>
+        <td><code>$a ** $b</code></td>
+    </tr>
+</table>
+
+<h5>2. Basic Examples</h5>
+<pre><code class="language-php">
+<?php
+$a = 10;
+$b = 3;
+
+echo $a + $b; // 13 (Addition)
+echo $a - $b; // 7  (Subtraction)
+echo $a * $b; // 30 (Multiplication)
+echo $a / $b; // 3.333... (Division)
+echo $a % $b; // 1  (Remainder)
+echo $a ** $b; // 1000 (Exponentiation)
+?>
+</code></pre>
+
+<h5>3. Division and Float Behavior</h5>
+<pre><code class="language-php">
+<?php
+echo 10 / 2; // 5
+echo 7 / 2;  // 3.5 - PHP automatically converts to float if needed
+?>
+</code></pre>
+
+<p>
+When dividing integers that do not divide evenly, PHP automatically promotes the result to a floating-point number.
+</p>
+
+<h5>4. Modulus and Negative Numbers</h5>
+<pre><code class="language-php">
+<?php
+echo 10 % 3;   // 1
+echo -10 % 3;  // -1
+echo 10 % -3;  // 1
+?>
+</code></pre>
+
+<p>
+The sign of the result follows the sign of the dividend (the first operand).
+</p>
+
+<h5>5. Exponentiation Operator (<code>**</code>)</h5>
+<pre><code class="language-php">
+<?php
+echo 2 ** 3;   // 8
+echo 4 ** 0.5; // 2 (square root)
+?>
+</code></pre>
+
+<p>
+The exponentiation operator allows both integer and floating-point exponents, similar to <code>pow()</code>.
+</p>
+
+<h5>6. Combined Example</h5>
+<pre><code class="language-php">
+<?php
+$a = 5;
+$b = 2;
+
+$result = ($a + $b) * ($a - $b) ** $b;
+echo $result; // ((5 + 2) * (5 - 2)^2) = 7 * 9 = 63
+?>
+</code></pre>
+
+<h5>Summary</h5>
+<ul>
+    <li>Arithmetic operators handle basic mathematical operations.</li>
+    <li>Division always produces a float if not divisible evenly.</li>
+    <li>Modulus (<code>%</code>) returns the remainder, keeping the dividend's sign.</li>
+    <li>Exponentiation (<code>**</code>) is right-associative (evaluated from right to left).</li>
+    <li>Operator precedence affects the order of evaluation.</li>
+</ul>
+
 
 <h4 id="increment-decrement">INCREMENT AND DECREMENT</h4>
 
