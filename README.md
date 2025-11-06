@@ -4329,7 +4329,143 @@ echo $result; // ((5 + 2) * (5 - 2)^2) = 7 * 9 = 63
 
 <h4 id="increment-decrement">INCREMENT AND DECREMENT</h4>
 
-.
+<p>
+Increment and decrement operators in PHP are used to increase or decrease a variable's value by one.  
+They are commonly used in loops, counters, and simple arithmetic operations.  
+PHP supports both <strong>pre</strong> and <strong>post</strong> versions of these operators.
+</p>
+
+<h5>1. Increment and Decrement Operators</h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Operator</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>++$var</code></td>
+        <td>Pre-increment</td>
+        <td>Increments <code>$var</code> by one, then returns the new value.</td>
+    </tr>
+    <tr>
+        <td><code>$var++</code></td>
+        <td>Post-increment</td>
+        <td>Returns the current value of <code>$var</code>, then increments it by one.</td>
+    </tr>
+    <tr>
+        <td><code>--$var</code></td>
+        <td>Pre-decrement</td>
+        <td>Decrements <code>$var</code> by one, then returns the new value.</td>
+    </tr>
+    <tr>
+        <td><code>$var--</code></td>
+        <td>Post-decrement</td>
+        <td>Returns the current value of <code>$var</code>, then decrements it by one.</td>
+    </tr>
+</table>
+
+<h5>2. Basic Examples</h5>
+<pre><code class="language-php">
+<?php
+$a = 5;
+
+echo ++$a; // 6 (pre-increment: adds 1 before returning)
+echo $a;   // 6
+
+$a = 5;
+echo $a++; // 5 (post-increment: returns first, then adds 1)
+echo $a;   // 6
+
+$a = 5;
+echo --$a; // 4 (pre-decrement)
+echo $a;   // 4
+
+$a = 5;
+echo $a--; // 5 (post-decrement)
+echo $a;   // 4
+?>
+</code></pre>
+
+<h5>3. Difference Between Pre and Post Operations</h5>
+<pre><code class="language-php">
+<?php
+$a = 3;
+
+echo ++$a; // Output: 4
+echo $a;   // Output: 4
+
+$a = 3;
+
+echo $a++; // Output: 3
+echo $a;   // Output: 4
+?>
+</code></pre>
+
+<p>
+In <strong>pre</strong> operations, the variable is updated before being used.  
+In <strong>post</strong> operations, the variable is used first, then updated.
+</p>
+
+<h5>4. Incrementing and Decrementing Strings</h5>
+<pre><code class="language-php">
+<?php
+$str = 'A';
+echo ++$str; // B
+
+$str = 'Z';
+echo ++$str; // AA
+
+$num = '9';
+echo ++$num; // 10
+
+$mix = 'A9';
+echo ++$mix; // B0
+?>
+</code></pre>
+
+<p>
+When applied to strings, <code>++</code> follows alphanumeric order:
+<ul>
+    <li>Letters increment alphabetically (A → B, Z → AA).</li>
+    <li>Numbers in strings increment numerically.</li>
+    <li>Decrement (<code>--</code>) does not work on strings.</li>
+</ul>
+</p>
+
+<h5>5. Using Increment and Decrement in Loops</h5>
+<pre><code class="language-php">
+<?php
+for ($i = 1; $i <= 5; $i++) {
+    echo "Iteration $i<br>";
+}
+?>
+</code></pre>
+
+<p>
+Increment and decrement operators are especially useful in loops like <code>for</code>, <code>while</code>, and <code>do-while</code>.
+</p>
+
+<h5>6. Complex Example with Post and Pre Mix</h5>
+<pre><code class="language-php">
+<?php
+$a = 5;
+$b = $a++ + ++$a; 
+// Step 1: $a++ returns 5, then $a becomes 6
+// Step 2: ++$a increments to 7, then returns 7
+// Step 3: $b = 5 + 7 = 12
+echo "a = $a, b = $b"; // a = 7, b = 12
+?>
+</code></pre>
+
+<h5>Summary</h5>
+<ul>
+    <li><code>++</code> increases a variable by one; <code>--</code> decreases it by one.</li>
+    <li>Pre (<code>++$var</code>) changes the value before using it.</li>
+    <li>Post (<code>$var++</code>) changes the value after using it.</li>
+    <li>Only <code>++</code> works with strings; <code>--</code> does not.</li>
+    <li>Commonly used in loops, counters, and iterative operations.</li>
+</ul>
+
 
 <h4 id="assignment-operators">ASSIGNMENT</h4>
 
