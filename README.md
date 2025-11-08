@@ -4469,7 +4469,181 @@ echo "a = $a, b = $b"; // a = 7, b = 12
 
 <h4 id="assignment-operators">ASSIGNMENT</h4>
 
-.
+<p>
+Assignment operators in PHP are used to assign values to variables.  
+The most basic form is the <code>=</code> operator, but PHP also provides several compound assignment operators that combine arithmetic or bitwise operations with assignment.  
+These operators make code shorter and easier to read.
+</p>
+
+<h5>1. Basic Assignment Operator</h5>
+<pre><code class="language-php">
+<?php
+$a = 10; // Assigns the value 10 to $a
+$b = $a; // Assigns the value of $a (10) to $b
+
+echo $a; // 10
+echo $b; // 10
+?>
+</code></pre>
+
+<p>
+The <code>=</code> operator assigns the value on the right-hand side to the variable on the left-hand side.  
+The assignment is by value unless the variable is explicitly assigned by reference.
+</p>
+
+<h5>2. Assignment by Reference</h5>
+<pre><code class="language-php">
+<?php
+$a = 5;
+$b =& $a; // $b references $a
+
+$b = 10;
+echo $a; // 10 - both point to the same memory reference
+?>
+</code></pre>
+
+<p>
+Using <code>&</code> makes two variables reference the same memory location — changing one will affect the other.
+</p>
+
+<h5>3. Compound Assignment Operators</h5>
+<p>
+Compound operators perform an operation and assign the result in one step.  
+These are shorthand versions of longer expressions.
+</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Operator</th>
+        <th>Example</th>
+        <th>Equivalent To</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>+=</code></td>
+        <td><code>$a += $b;</code></td>
+        <td><code>$a = $a + $b;</code></td>
+        <td>Add and assign</td>
+    </tr>
+    <tr>
+        <td><code>-=</code></td>
+        <td><code>$a -= $b;</code></td>
+        <td><code>$a = $a - $b;</code></td>
+        <td>Subtract and assign</td>
+    </tr>
+    <tr>
+        <td><code>*=</code></td>
+        <td><code>$a *= $b;</code></td>
+        <td><code>$a = $a * $b;</code></td>
+        <td>Multiply and assign</td>
+    </tr>
+    <tr>
+        <td><code>/=</code></td>
+        <td><code>$a /= $b;</code></td>
+        <td><code>$a = $a / $b;</code></td>
+        <td>Divide and assign</td>
+    </tr>
+    <tr>
+        <td><code>%=</code></td>
+        <td><code>$a %= $b;</code></td>
+        <td><code>$a = $a % $b;</code></td>
+        <td>Modulus and assign</td>
+    </tr>
+    <tr>
+        <td><code>.=</code></td>
+        <td><code>$str .= " world";</code></td>
+        <td><code>$str = $str . " world";</code></td>
+        <td>Concatenate and assign (for strings)</td>
+    </tr>
+    <tr>
+        <td><code>**=</code></td>
+        <td><code>$a **= 3;</code></td>
+        <td><code>$a = $a ** 3;</code></td>
+        <td>Exponentiation and assign</td>
+    </tr>
+</table>
+
+<h5>4. Examples of Compound Assignments</h5>
+<pre><code class="language-php">
+<?php
+$a = 10;
+$b = 3;
+
+$a += $b; // $a = 13
+$a -= $b; // $a = 10
+$a *= $b; // $a = 30
+$a /= $b; // $a = 10
+$a %= $b; // $a = 1
+
+$str = "Hello";
+$str .= " World!"; // $str = "Hello World!"
+?>
+</code></pre>
+
+<h5>5. Bitwise Assignment Operators</h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Operator</th>
+        <th>Example</th>
+        <th>Equivalent To</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>&=</code></td>
+        <td><code>$a &= $b;</code></td>
+        <td><code>$a = $a & $b;</code></td>
+        <td>Bitwise AND and assign</td>
+    </tr>
+    <tr>
+        <td><code>|=</code></td>
+        <td><code>$a |= $b;</code></td>
+        <td><code>$a = $a | $b;</code></td>
+        <td>Bitwise OR and assign</td>
+    </tr>
+    <tr>
+        <td><code>^=</code></td>
+        <td><code>$a ^= $b;</code></td>
+        <td><code>$a = $a ^ $b;</code></td>
+        <td>Bitwise XOR and assign</td>
+    </tr>
+    <tr>
+        <td><code>&lt;&lt;=</code></td>
+        <td><code>$a &lt;&lt;= 1;</code></td>
+        <td><code>$a = $a &lt;&lt; 1;</code></td>
+        <td>Left shift and assign</td>
+    </tr>
+    <tr>
+        <td><code>&gt;&gt;=</code></td>
+        <td><code>$a &gt;&gt;= 1;</code></td>
+        <td><code>$a = $a &gt;&gt; 1;</code></td>
+        <td>Right shift and assign</td>
+    </tr>
+</table>
+
+<h5>6. Combined Example</h5>
+<pre><code class="language-php">
+<?php
+$a = 4;
+$b = 2;
+
+$a += $b; // 6
+$a *= $b; // 12
+$a /= $b; // 6
+$a %= $b; // 0
+
+echo $a; // 0
+?>
+</code></pre>
+
+<h5>7. Important Notes</h5>
+<ul>
+    <li>Assignment is performed from right to left.</li>
+    <li>Compound operators automatically perform type conversion when necessary.</li>
+    <li>Using <code>&</code> creates a reference, not a copy.</li>
+    <li><code>.=</code> is specifically for string concatenation.</li>
+    <li>Bitwise assignment is often used for flags and low-level binary operations.</li>
+</ul>
+
 
 <h4 id="binary-operators">BINARY</h4>
 
