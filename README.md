@@ -4647,7 +4647,201 @@ echo $a; // 0
 
 <h4 id="binary-operators">BINARY</h4>
 
-.
+<p>
+Binary operators in PHP operate on the <strong>binary representation</strong> of integers — manipulating bits directly.  
+They are commonly used in low-level programming, cryptography, data compression, permissions, and performance-critical logic.
+</p>
+
+<h5>1. List of Binary (Bitwise) Operators</h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Operator</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td><code>&</code></td>
+        <td>AND</td>
+        <td>Compares each bit; sets the bit to 1 if both are 1.</td>
+        <td><code>$a & $b</code></td>
+    </tr>
+    <tr>
+        <td><code>|</code></td>
+        <td>OR</td>
+        <td>Compares each bit; sets the bit to 1 if either is 1.</td>
+        <td><code>$a | $b</code></td>
+    </tr>
+    <tr>
+        <td><code>^</code></td>
+        <td>XOR</td>
+        <td>Compares each bit; sets the bit to 1 if only one is 1.</td>
+        <td><code>$a ^ $b</code></td>
+    </tr>
+    <tr>
+        <td><code>~</code></td>
+        <td>NOT</td>
+        <td>Inverts all bits (turns 1s into 0s and 0s into 1s).</td>
+        <td><code>~$a</code></td>
+    </tr>
+    <tr>
+        <td><code>&lt;&lt;</code></td>
+        <td>Left Shift</td>
+        <td>Shifts bits to the left; fills with zeros on the right.</td>
+        <td><code>$a &lt;&lt; 1</code></td>
+    </tr>
+    <tr>
+        <td><code>&gt;&gt;</code></td>
+        <td>Right Shift</td>
+        <td>Shifts bits to the right; discards shifted bits.</td>
+        <td><code>$a &gt;&gt; 1</code></td>
+    </tr>
+</table>
+
+<h5>2. Example: Basic Bitwise Operations</h5>
+<pre><code class="language-php">
+<?php
+$a = 6;  // binary: 110
+$b = 3;  // binary: 011
+
+echo $a & $b; // 2 (010)
+echo $a | $b; // 7 (111)
+echo $a ^ $b; // 5 (101)
+echo ~$a;     // -7 (inverts all bits)
+?>
+</code></pre>
+
+<h5>3. Explanation of Bitwise Results</h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Operation</th>
+        <th>$a (6)</th>
+        <th>$b (3)</th>
+        <th>Result</th>
+        <th>Binary</th>
+    </tr>
+    <tr>
+        <td><code>$a & $b</code></td>
+        <td>110</td>
+        <td>011</td>
+        <td>2</td>
+        <td>010</td>
+    </tr>
+    <tr>
+        <td><code>$a | $b</code></td>
+        <td>110</td>
+        <td>011</td>
+        <td>7</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td><code>$a ^ $b</code></td>
+        <td>110</td>
+        <td>011</td>
+        <td>5</td>
+        <td>101</td>
+    </tr>
+</table>
+
+<h5>4. Bitwise NOT (~)</h5>
+<pre><code class="language-php">
+<?php
+$a = 6;
+echo ~$a; // -7
+?>
+</code></pre>
+
+<p>
+The <code>~</code> operator inverts all bits.  
+In PHP (which uses signed integers), this results in a negative number, following the two’s complement representation.
+</p>
+
+<h5>5. Bit Shifting</h5>
+<pre><code class="language-php">
+<?php
+$a = 3; // binary: 11
+
+echo $a << 1; // 6 (110)
+echo $a >> 1; // 1 (1)
+?>
+</code></pre>
+
+<p>
+Shifting bits to the left multiplies by two, while shifting to the right divides by two (for positive integers).
+</p>
+
+<h5>6. Practical Example – Permissions (Flags)</h5>
+<pre><code class="language-php">
+<?php
+// Example: Permission flags
+define('READ',   1); // 001
+define('WRITE',  2); // 010
+define('DELETE', 4); // 100
+
+$userPermissions = READ | WRITE; // 001 | 010 = 011 (3)
+
+// Check if user can write
+if ($userPermissions & WRITE) {
+    echo "User can write<br>";
+}
+
+// Add delete permission
+$userPermissions |= DELETE; // 011 | 100 = 111
+
+// Remove read permission
+$userPermissions &= ~READ; // 111 & ~001 = 110
+
+echo "Current permissions: $userPermissions"; // 6
+?>
+</code></pre>
+
+<p>
+This approach is commonly used to handle <strong>access rights</strong> or <strong>configuration flags</strong> efficiently using bitwise logic.
+</p>
+
+<h5>7. Bitwise Assignment Operators</h5>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+        <th>Operator</th>
+        <th>Example</th>
+        <th>Equivalent To</th>
+    </tr>
+    <tr>
+        <td><code>&=</code></td>
+        <td><code>$a &= $b;</code></td>
+        <td><code>$a = $a & $b;</code></td>
+    </tr>
+    <tr>
+        <td><code>|=</code></td>
+        <td><code>$a |= $b;</code></td>
+        <td><code>$a = $a | $b;</code></td>
+    </tr>
+    <tr>
+        <td><code>^=</code></td>
+        <td><code>$a ^= $b;</code></td>
+        <td><code>$a = $a ^ $b;</code></td>
+    </tr>
+    <tr>
+        <td><code>&lt;&lt;=</code></td>
+        <td><code>$a &lt;&lt;= 1;</code></td>
+        <td><code>$a = $a &lt;&lt; 1;</code></td>
+    </tr>
+    <tr>
+        <td><code>&gt;&gt;=</code></td>
+        <td><code>$a &gt;&gt;= 1;</code></td>
+        <td><code>$a = $a &gt;&gt; 1;</code></td>
+    </tr>
+</table>
+
+<h5>Summary</h5>
+<ul>
+    <li>Binary (bitwise) operators work directly on bits of integer values.</li>
+    <li><code>&</code>, <code>|</code>, and <code>^</code> are used for bit comparisons.</li>
+    <li><code>~</code> inverts all bits, often resulting in a negative number.</li>
+    <li><code>&lt;&lt;</code> and <code>&gt;&gt;</code> shift bits left or right, multiplying or dividing by powers of two.</li>
+    <li>Useful for managing flags, permissions, and binary data efficiently.</li>
+</ul>
+
 
 <h4 id="comparison-operators">COMPARISON</h4>
 
