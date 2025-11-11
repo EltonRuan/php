@@ -4843,9 +4843,62 @@ This approach is commonly used to handle <strong>access rights</strong> or <stro
 </ul>
 
 
-<h4 id="comparison-operators">COMPARISON</h4>
+<?php
+/**
+ * # COMPARISON OPERATORS
+ *
+ * Comparison operators in PHP are used to compare two values.
+ * The result of a comparison is always a boolean value: `true` or `false`.
+ *
+ * ## Common Comparison Operators
+ *
+ * | Operator | Description                     | Example               | Result  |
+ * |-----------|---------------------------------|-----------------------|----------|
+ * | `==`      | Equal to                        | `$a == $b`            | true if $a is equal to $b |
+ * | `===`     | Identical (equal + same type)   | `$a === $b`           | true if $a and $b are equal and of the same type |
+ * | `!=`      | Not equal to                    | `$a != $b`            | true if $a is not equal to $b |
+ * | `<>`      | Not equal to (alternative)      | `$a <> $b`            | true if $a is not equal to $b |
+ * | `!==`     | Not identical                   | `$a !== $b`           | true if $a and $b are not identical |
+ * | `>`       | Greater than                    | `$a > $b`             | true if $a is greater than $b |
+ * | `<`       | Less than                       | `$a < $b`             | true if $a is less than $b |
+ * | `>=`      | Greater than or equal to        | `$a >= $b`            | true if $a is greater than or equal to $b |
+ * | `<=`      | Less than or equal to           | `$a <= $b`            | true if $a is less than or equal to $b |
+ * | `<=>`     | Spaceship operator (PHP 7+)     | `$a <=> $b`           | -1, 0, or 1 |
+ *
+ * The `<=>` operator (spaceship) returns:
+ *  - `-1` if `$a` is less than `$b`
+ *  - `0`  if `$a` is equal to `$b`
+ *  - `1`  if `$a` is greater than `$b`
+ */
 
-.
+// Example 1: Equality and Identity
+$a = 5;
+$b = "5";
+
+var_dump($a == $b);   // true  (same value)
+var_dump($a === $b);  // false (different types)
+
+// Example 2: Inequality and Non-identity
+var_dump($a != $b);   // false
+var_dump($a !== $b);  // true
+
+// Example 3: Greater and Less Than
+$x = 10;
+$y = 20;
+
+var_dump($x > $y);    // false
+var_dump($x < $y);    // true
+var_dump($x <= 10);   // true
+var_dump($x >= 10);   // true
+
+// Example 4: Spaceship Operator
+echo $x <=> $y;  // -1 (since 10 < 20)
+echo "\n";
+echo $y <=> $x;  // 1  (since 20 > 10)
+echo "\n";
+echo $x <=> 10;  // 0  (since 10 == 10)
+?>
+
 
 <h4 id="error-control">ERROR CONTROL</h4>
 
