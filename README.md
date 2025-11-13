@@ -4966,9 +4966,57 @@ try {
 ?>
 
 
-<h4 id="execution-operators">EXECUTION</h4>
+<?php
+/**
+ * # EXECUTION OPERATORS
+ *
+ * PHP provides a special operator — the **execution operator** — represented by backticks (`` ` ``).
+ * Anything placed between backticks is executed as a shell command, and the output is returned as a string.
+ *
+ * ## Syntax
+ * ```php
+ * $output = `command`;
+ * ```
+ * - Executes the command as if it were typed in a terminal.
+ * - Returns the command’s output as a string.
+ *
+ * ⚠️ **Security Warning:**
+ * Never use this operator with untrusted user input! It can lead to **command injection vulnerabilities**.
+ *
+ * ## Example 1: Executing a simple shell command
+ */
 
-.
+// Runs the 'ls' or 'dir' command depending on the system
+$output = `ls`; // On Windows, you might use `dir`
+echo "Directory listing:\n";
+echo $output;
+
+/**
+ * ## Example 2: Capturing output from system commands
+ */
+$currentUser = `whoami`;
+echo "\nCurrent user: " . trim($currentUser) . "\n";
+
+/**
+ * ## Example 3: Using variables carefully
+ */
+$directory = "documents";
+// DO NOT DO THIS if $directory comes from user input
+$output = `ls $directory`;
+echo "\nFiles in '$directory':\n";
+echo $output;
+
+/**
+ * ✅ Best Practices:
+ * - Use `shell_exec()` or `exec()` if you need more control.
+ * - Always sanitize and validate any input passed to system commands.
+ * - Avoid using execution operators in web applications unless absolutely necessary.
+ */
+
+// Example with shell_exec() (equivalent but safer in code readability)
+$uptime = shell_exec("uptime");
+echo "\nSystem uptime:\n" . $uptime;
+?>
 
 <h4 id="logical-operators">LOGICAL</h4>
 
