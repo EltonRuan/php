@@ -5018,9 +5018,80 @@ $uptime = shell_exec("uptime");
 echo "\nSystem uptime:\n" . $uptime;
 ?>
 
-<h4 id="logical-operators">LOGICAL</h4>
+<?php
+/**
+ * # LOGICAL OPERATORS
+ *
+ * Logical operators are used to combine conditional expressions and control the flow of logic
+ * in PHP programs. They return boolean values (`true` or `false`) depending on the result of the logic.
+ *
+ * ## Common Logical Operators
+ *
+ * | Operator | Name            | Example             | Result Description |
+ * |-----------|-----------------|---------------------|--------------------|
+ * | `and`     | Logical AND     | `$a and $b`         | true if both $a and $b are true |
+ * | `&&`      | Logical AND     | `$a && $b`          | true if both $a and $b are true |
+ * | `or`      | Logical OR      | `$a or $b`          | true if either $a or $b is true |
+ * | `||`      | Logical OR      | `$a || $b`          | true if either $a or $b is true |
+ * | `xor`     | Logical XOR     | `$a xor $b`         | true if only one of $a or $b is true |
+ * | `!`       | Logical NOT     | `!$a`               | true if $a is false |
+ *
+ * ⚙️ Note:
+ * - `and` and `or` have **lower precedence** than `&&` and `||`.
+ *   This means they behave differently when combined with assignments.
+ */
 
-.
+// Example 1: Basic logical operations
+$a = true;
+$b = false;
+
+var_dump($a && $b);  // false
+var_dump($a || $b);  // true
+var_dump(!$a);       // false
+var_dump($a xor $b); // true
+
+/**
+ * Example 2: Difference between `and` and `&&`
+ */
+$result1 = false || true;   // `||` has higher precedence than assignment
+$result2 = false or true;   // `or` has lower precedence than assignment
+
+var_dump($result1); // true
+var_dump($result2); // false — because `or` is evaluated after assignment
+
+/**
+ * Example 3: Using logical operators in conditions
+ */
+$age = 20;
+$hasID = true;
+
+if ($age >= 18 && $hasID) {
+    echo "Access granted.\n";
+} else {
+    echo "Access denied.\n";
+}
+
+/**
+ * Example 4: Logical XOR (exclusive OR)
+ * True only if one, and only one, condition is true.
+ */
+$isWeekend = true;
+$isHoliday = false;
+
+if ($isWeekend xor $isHoliday) {
+    echo "You have a day off!\n";
+} else {
+    echo "It's a normal workday.\n";
+}
+
+/**
+ * ✅ Best Practices:
+ * - Use `&&` and `||` for predictable operator precedence.
+ * - Avoid mixing `and`/`or` with assignment unless you fully understand precedence rules.
+ * - Always use parentheses for clarity in complex logical expressions.
+ */
+?>
+
 
 <h4 id="string-operators">STRING</h4>
 
