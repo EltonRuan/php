@@ -5093,9 +5093,72 @@ if ($isWeekend xor $isHoliday) {
 ?>
 
 
-<h4 id="string-operators">STRING</h4>
+<?php
+/**
+ * # STRING OPERATORS
+ *
+ * PHP provides two operators for handling string concatenation.
+ * These operators allow you to combine text values efficiently.
+ *
+ * ## Available String Operators
+ *
+ * | Operator | Name                   | Example     | Description |
+ * |----------|------------------------|-------------|-------------|
+ * | `.`      | Concatenation          | `$a . $b`   | Joins two strings together |
+ * | `.=`     | Concatenation assignment | `$a .= $b` | Appends a string to an existing variable |
+ */
 
-.
+/////////////////////////////////////////////
+// Example 1: Basic Concatenation (.)
+/////////////////////////////////////////////
+
+$firstName = "Elton";
+$lastName  = "Ruan";
+
+$fullName = $firstName . " " . $lastName;
+
+echo $fullName . "\n"; // Elton Ruan
+
+
+/////////////////////////////////////////////
+// Example 2: Concatenation Assignment (.=)
+/////////////////////////////////////////////
+
+$message = "Hello";
+$message .= ", world!";
+$message .= " Welcome to PHP.";
+
+echo $message . "\n";
+// Output: Hello, world! Welcome to PHP.
+
+
+/////////////////////////////////////////////
+// Example 3: Concatenating Mixed Values
+/////////////////////////////////////////////
+
+$age = 19;
+echo "Your name is " . $fullName . " and you are " . $age . " years old.\n";
+
+
+/////////////////////////////////////////////
+// Example 4: Building HTML Strings
+/////////////////////////////////////////////
+
+$title = "My Website";
+$header = "<h1>" . $title . "</h1>";
+
+echo $header;
+
+
+/**
+ * ## Tips
+ * - Use `.` for concatenating strings.
+ * - Use `.=` to append text to an existing variable.
+ * - The `+=` operator does NOT work for strings.
+ * - For heavy concatenation inside loops, consider using arrays and `implode()` for performance.
+ */
+?>
+
 
 <h4 id="array-operators">ARRAYS</h4>
 
