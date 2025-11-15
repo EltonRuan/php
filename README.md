@@ -5160,9 +5160,89 @@ echo $header;
 ?>
 
 
-<h4 id="array-operators">ARRAYS</h4>
+<?php
+/**
+ * # ARRAY OPERATORS
+ *
+ * PHP provides several operators specifically for comparing and combining arrays.
+ * These operators allow you to merge arrays, compare their values, and check equality.
+ *
+ * ## Available Array Operators
+ *
+ * | Operator | Name              | Example        | Description |
+ * |----------|-------------------|----------------|-------------|
+ * | `+`      | Union             | `$a + $b`      | Combines arrays; values from the left array are preserved if keys overlap |
+ * | `==`     | Equality          | `$a == $b`     | Checks if two arrays have the same key/value pairs (order does not matter) |
+ * | `===`    | Identity          | `$a === $b`    | Checks if arrays are identical (same keys, same values, same order, same types) |
+ * | `!=`     | Inequality        | `$a != $b`     | Checks if two arrays are not equal |
+ * | `<>`     | Inequality        | `$a <> $b`     | Same as `!=` |
+ * | `!==`    | Non-identity      | `$a !== $b`    | Checks if arrays are not identical |
+ */
 
-.
+/////////////////////////////////////////////
+// Example 1: Array Union (+)
+/////////////////////////////////////////////
+
+$a = ["name" => "Elton", "age" => 19];
+$b = ["age" => 25, "country" => "Brazil"];
+
+$result = $a + $b;
+
+print_r($result);
+/*
+Array
+(
+    [name] => Elton
+    [age] => 19   // preserved from $a because keys collide
+    [country] => Brazil
+)
+*/
+
+
+/////////////////////////////////////////////
+// Example 2: Equality (==)
+/////////////////////////////////////////////
+
+$x = ["a" => 1, "b" => 2];
+$y = ["b" => 2, "a" => 1];
+
+var_dump($x == $y); // true (order does not matter)
+
+
+/////////////////////////////////////////////
+// Example 3: Identity (===)
+/////////////////////////////////////////////
+
+$m = ["a" => 1, "b" => 2];
+$n = ["b" => 2, "a" => 1];
+
+var_dump($m === $n); // false (order is different)
+
+
+/////////////////////////////////////////////
+// Example 4: Inequality (!= and <>)
+/////////////////////////////////////////////
+
+var_dump($x != $y); // false
+var_dump($x <> $y); // false
+
+
+/////////////////////////////////////////////
+// Example 5: Non-identity (!==)
+/////////////////////////////////////////////
+
+var_dump($m !== $n); // true
+
+
+/**
+ * ## Notes
+ * - The union operator (`+`) preserves keys from the *left* array when duplicates exist.
+ * - Use `==` for comparing content without considering order.
+ * - Use `===` for strict comparison where order and types must match exactly.
+ * - `!=` and `<>` both perform the same inequality check.
+ */
+?>
+
 
 <h4 id="type-operators">TYPE</h4>
 
