@@ -5246,7 +5246,64 @@ var_dump($m !== $n); // true
 
 <h4 id="type-operators">TYPE</h4>
 
-.
+<p>
+  Type operators in PHP allow developers to inspect, compare, and validate variable types.  
+  They are essential for ensuring type safety and avoiding unexpected behavior.
+</p>
+
+<h5>1. <code>instanceof</code></h5>
+<p>
+  Checks whether an object is an instance of a specific class, a subclass, or an interface.
+</p>
+
+<pre><code class="language-php">
+class Vehicle {}
+class Car extends Vehicle {}
+
+$car = new Car();
+
+var_dump($car instanceof Car);      // true
+var_dump($car instanceof Vehicle);  // true
+var_dump($car instanceof stdClass); // false
+</code></pre>
+
+<h5>2. <code>gettype()</code></h5>
+<p>Returns the type of a variable as a string.</p>
+
+<pre><code class="language-php">
+echo gettype(123);     // "integer"
+echo gettype("Hello"); // "string"
+echo gettype(3.14);    // "double"
+</code></pre>
+
+<h5>3. <code>is_*()</code> Functions</h5>
+<p>
+  A set of built-in functions used to check if a variable is of a specific type.
+</p>
+
+<pre><code class="language-php">
+is_int(10);       // true  
+is_string("Hi");  // true  
+is_array([1,2]);  // true  
+is_bool(false);   // true  
+</code></pre>
+
+<h5>Common <code>is_*()</code> Functions</h5>
+<ul>
+  <li><code>is_int()</code> — Checks for integer</li>
+  <li><code>is_float()</code> — Checks for float</li>
+  <li><code>is_string()</code> — Checks for string</li>
+  <li><code>is_bool()</code> — Checks for boolean</li>
+  <li><code>is_array()</code> — Checks for array</li>
+  <li><code>is_object()</code> — Checks for object</li>
+  <li><code>is_null()</code> — Checks for null</li>
+</ul>
+
+<p>
+  These type operators and functions help improve code reliability by ensuring variables  
+  and objects are of the expected type before they are used.
+</p>
+
 
 <h3 id="control-structures">CONTROL STRUCTURES</h3>
 
