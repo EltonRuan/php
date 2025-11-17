@@ -5334,7 +5334,33 @@ is_bool(false);   // true
 
 
 <h4 id="if">IF</h4>
-.
+
+<p>
+  The <code>if</code> statement is used to run a block of code only when a given condition is true.
+  It is the simplest and most essential conditional structure in PHP.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+if (condition) {
+    // Code executed only if the condition is true
+}
+</code></pre>
+
+<h5>Example</h5>
+
+<pre><code class="language-php">
+$number = 10;
+
+if ($number > 5) {
+    echo "The number is greater than 5.";
+}
+</code></pre>
+
+<p>
+  Use <code>if</code> when you need to check a condition and execute code only when that condition is met.
+</p>
 
 <h4 id="else">ELSE</h4>
 .
