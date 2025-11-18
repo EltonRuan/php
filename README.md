@@ -5363,7 +5363,38 @@ if ($number > 5) {
 </p>
 
 <h4 id="else">ELSE</h4>
-.
+
+<p>
+  The <code>else</code> statement is used together with <code>if</code> to execute an alternative block of code  
+  when the <code>if</code> condition is false.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+if (condition) {
+    // Code executed if the condition is true
+} else {
+    // Code executed if the condition is false
+}
+</code></pre>
+
+<h5>Example</h5>
+
+<pre><code class="language-php">
+$age = 16;
+
+if ($age >= 18) {
+    echo "You are an adult.";
+} else {
+    echo "You are a minor.";
+}
+</code></pre>
+
+<p>
+  Use <code>else</code> when you want an alternative action whenever the initial condition is not satisfied.
+</p>
+
 
 <h4 id="elseif-else-if">ELSEIF / ELSE IF</h4>
 .
