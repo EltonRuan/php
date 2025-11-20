@@ -5397,7 +5397,52 @@ if ($age >= 18) {
 
 
 <h4 id="elseif-else-if">ELSEIF / ELSE IF</h4>
-.
+
+<p>
+  The <code>elseif</code> (or <code>else if</code>) statement allows you to check multiple sequential conditions
+  after an initial <code>if</code> test.  
+  It is used when you need more than one possible path of execution.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+if (condition1) {
+    // Code executed if condition1 is true
+} elseif (condition2) {
+    // Code executed if condition2 is true
+} else {
+    // Code executed if none of the conditions are true
+}
+</code></pre>
+
+<h5><code>elseif</code> vs <code>else if</code></h5>
+
+<p>
+  Both forms work the same way in PHP.  
+  <code>elseif</code> is slightly faster and preferred in most coding standards,  
+  while <code>else if</code> is treated as <code>else</code> + a new <code>if</code>.
+</p>
+
+<h5>Example</h5>
+
+<pre><code class="language-php">
+$hour = 15;
+
+if ($hour < 12) {
+    echo "Good morning!";
+} elseif ($hour < 18) {
+    echo "Good afternoon!";
+} else {
+    echo "Good evening!";
+}
+</code></pre>
+
+<p>
+  Use <code>elseif</code> or <code>else if</code> when you need multiple conditions  
+  and different outcomes depending on the evaluated value.
+</p>
+
 
 <h4 id="alternative-syntax">ALTERNATIVE SYNTAX</h4>
 .
