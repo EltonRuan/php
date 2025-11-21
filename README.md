@@ -5445,7 +5445,44 @@ if ($hour < 12) {
 
 
 <h4 id="alternative-syntax">ALTERNATIVE SYNTAX</h4>
-.
+
+<p>
+  The alternative syntax for control structures in PHP is primarily used in templates  
+  or files that mix PHP with HTML.  
+  Instead of using braces <code>{ }</code>, this syntax uses colons <code>:</code> and ending statements like <code>endif;</code>.
+</p>
+
+<h5>IF / ELSEIF / ELSE – Alternative Syntax</h5>
+
+<pre><code class="language-php">
+<?php if ($hour < 12): ?>
+    Good morning!
+<?php elseif ($hour < 18): ?>
+    Good afternoon!
+<?php else: ?>
+    Good evening!
+<?php endif; ?>
+</code></pre>
+
+<h5>Example Inside HTML</h5>
+
+<pre><code class="language-php">
+<ul>
+<?php if (!empty($items)): ?>
+    <?php foreach ($items as $item): ?>
+        <li><?= $item ?></li>
+    <?php endforeach; ?>
+<?php else: ?>
+    <li>No items found.</li>
+<?php endif; ?>
+</ul>
+</code></pre>
+
+<p>
+  This syntax improves readability in template-based environments  
+  and is commonly used in frameworks like Laravel, WordPress, and plain PHP mixed with HTML.
+</p>
+
 
 <h4 id="while">WHILE</h4>
 .
