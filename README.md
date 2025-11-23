@@ -5516,8 +5516,37 @@ while ($count <= 5) {
 </p>
 
 
-<h4 id="do-while">DO-WHILE</h4>
-.
+<h4 id="while">WHILE</h4>
+
+<p>
+  The <code>while</code> loop executes a block of code repeatedly as long as a specified condition remains true.  
+  It is commonly used when the number of iterations is not known in advance.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+while (condition) {
+    // Code executed repeatedly while the condition is true
+}
+</code></pre>
+
+<h5>Example</h5>
+
+<pre><code class="language-php">
+$count = 1;
+
+while ($count <= 5) {
+    echo "Count: $count\n";
+    $count++;
+}
+</code></pre>
+
+<p>
+  Use a <code>while</code> loop when you want to repeat something  
+  based on a condition that will eventually become false.
+</p>
+
 
 <h4 id="for">FOR</h4>
 .
