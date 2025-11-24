@@ -5549,7 +5549,32 @@ while ($count <= 5) {
 
 
 <h4 id="for">FOR</h4>
-.
+
+<p>
+  The <code>for</code> loop is used when you know in advance how many times a block of code should run.  
+  It consists of three expressions: initialization, condition, and increment/decrement.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+for (initial; condition; increment) {
+    // Code executed on each iteration
+}
+</code></pre>
+
+<h5>Example</h5>
+
+<pre><code class="language-php">
+for ($i = 1; $i <= 5; $i++) {
+    echo "Number: $i\n";
+}
+</code></pre>
+
+<p>
+  The <code>for</code> loop is ideal for counting loops or when iterating a known range of values.
+</p>
+
 
 <h4 id="foreach">FOREACH</h4>
 .
