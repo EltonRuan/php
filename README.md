@@ -5577,7 +5577,57 @@ for ($i = 1; $i <= 5; $i++) {
 
 
 <h4 id="foreach">FOREACH</h4>
-.
+
+<p>
+  The <code>foreach</code> loop is specifically designed for iterating over arrays and objects.  
+  It provides a simple and readable way to access each element without needing indexes or counters.
+</p>
+
+<h5>Basic Syntax — Values Only</h5>
+
+<pre><code class="language-php">
+foreach ($array as $value) {
+    // Code executed for each element
+}
+</code></pre>
+
+<h5>Basic Syntax — Keys and Values</h5>
+
+<pre><code class="language-php">
+foreach ($array as $key => $value) {
+    // Code executed for each key/value pair
+}
+</code></pre>
+
+<h5>Example with Array</h5>
+
+<pre><code class="language-php">
+$fruits = ["Apple", "Banana", "Orange"];
+
+foreach ($fruits as $fruit) {
+    echo $fruit . "\n";
+}
+</code></pre>
+
+<h5>Example with Keys</h5>
+
+<pre><code class="language-php">
+$person = [
+    "name" => "Elton",
+    "age"  => 19,
+    "city" => "Jacareí"
+];
+
+foreach ($person as $key => $value) {
+    echo "$key: $value\n";
+}
+</code></pre>
+
+<p>
+  Use <code>foreach</code> when working with arrays or iterable structures  
+  to simplify and cleanly access each item in the collection.
+</p>
+
 
 <h4 id="break">BREAK</h4>
 .
