@@ -5630,7 +5630,66 @@ foreach ($person as $key => $value) {
 
 
 <h4 id="break">BREAK</h4>
-.
+
+<p>
+  The <code>break</code> statement is used to immediately exit a loop or switch structure.  
+  It stops the current iteration process entirely and continues executing the code after the loop or switch.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+break;
+</code></pre>
+
+<h5>Example with <code>for</code> Loop</h5>
+
+<pre><code class="language-php">
+for ($i = 1; $i <= 10; $i++) {
+    if ($i === 5) {
+        break; // Exit the loop when $i reaches 5
+    }
+    echo $i . "\n";
+}
+</code></pre>
+
+<h5>Example with <code>while</code> Loop</h5>
+
+<pre><code class="language-php">
+$count = 1;
+
+while (true) {
+    if ($count > 3) {
+        break; // Stop the loop
+    }
+    echo "Count: $count\n";
+    $count++;
+}
+</code></pre>
+
+<h5>Example with <code>switch</code></h5>
+
+<pre><code class="language-php">
+$option = 2;
+
+switch ($option) {
+    case 1:
+        echo "Option 1 selected";
+        break;
+    case 2:
+        echo "Option 2 selected";
+        break;
+    default:
+        echo "Unknown option";
+        break;
+}
+</code></pre>
+
+<p>
+  Use <code>break</code> when you need to stop execution inside loops or switch blocks  
+  before they naturally complete.
+</p>
+
 
 <h4 id="continue">CONTINUE</h4>
 .
