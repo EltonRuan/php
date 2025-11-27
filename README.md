@@ -5692,7 +5692,45 @@ switch ($option) {
 
 
 <h4 id="continue">CONTINUE</h4>
-.
+<p>
+  The <code>continue</code> statement is used inside loops to skip the rest of the code in the current iteration and move directly to the next cycle of the loop.
+</p>
+
+<h5>Example in JavaScript</h5>
+<pre><code class="language-js">
+for (let i = 1; i <= 10; i++) {
+  if (i === 5) {
+    continue;
+  }
+  console.log(i);
+}
+</code></pre>
+
+<p>
+  In this example, when <code>i</code> equals 5, the loop skips the <code>console.log()</code> and continues with the next iteration.
+</p>
+
+<h5>Example in Java</h5>
+<pre><code class="language-java">
+for (int i = 1; i <= 10; i++) {
+    if (i == 5) {
+        continue;
+    }
+    System.out.println(i);
+}
+</code></pre>
+
+<p>
+  The behavior is the same: the number 5 is ignored while the loop continues running normally.
+</p>
+
+<h5>When to use <code>continue</code>?</h5>
+<ul>
+  <li>To skip specific values inside a loop</li>
+  <li>To avoid executing part of the loop based on a condition</li>
+  <li>To improve readability by avoiding deeply nested conditions</li>
+</ul>
+
 
 <h4 id="switch">SWITCH</h4>
 .
