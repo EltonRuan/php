@@ -5733,7 +5733,52 @@ for (int i = 1; i <= 10; i++) {
 
 
 <h4 id="switch">SWITCH</h4>
-.
+<p>
+  The <code>switch</code> statement is used to execute different blocks of code based on the value of an expression. 
+  It provides a cleaner alternative to multiple <code>if...else if</code> conditions.
+</p>
+
+<h5>Example in JavaScript</h5>
+<pre><code class="language-js">
+const color = "blue";
+
+switch (color) {
+  case "red":
+    console.log("The color is red.");
+    break;
+  case "blue":
+    console.log("The color is blue.");
+    break;
+  case "green":
+    console.log("The color is green.");
+    break;
+  default:
+    console.log("Unknown color.");
+}
+</code></pre>
+
+<h5>Example in Java</h5>
+<pre><code class="language-java">
+String day = "MON";
+
+switch (day) {
+    case "MON":
+        System.out.println("Monday");
+        break;
+    case "TUE":
+        System.out.println("Tuesday");
+        break;
+    case "WED":
+        System.out.println("Wednesday");
+        break;
+    default:
+        System.out.println("Invalid day");
+}
+</code></pre>
+
+<p>
+  The <code>break</code> statement prevents code from falling through to the next case, while <code>default</code> runs when no cases match the value.
+</p>
 
 <h4 id="match">MATCH</h4>
 .
