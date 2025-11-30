@@ -5781,7 +5781,29 @@ switch (day) {
 </p>
 
 <h4 id="match">MATCH</h4>
-.
+<p>
+  The <code>match</code> expression (available in languages like PHP 8+) is a structured and concise way to compare a value against multiple conditions. 
+  Unlike <code>switch</code>, <code>match</code> is expression-based: it returns a value, requires exact matches, and does not allow fall-through.
+</p>
+
+<h5>Example in PHP</h5>
+<pre><code class="language-php">
+$status = 200;
+
+$message = match ($status) {
+    200 => "OK",
+    404 => "Not Found",
+    500 => "Server Error",
+    default => "Unknown Status"
+};
+
+echo $message; // Output: OK
+</code></pre>
+
+<p>
+  The <code>match</code> expression evaluates conditions strictly and returns the result directly, making the code cleaner and more predictable compared to <code>switch</code>.
+</p>
+
 
 <h4 id="declare">DECLARE</h4>
 .
