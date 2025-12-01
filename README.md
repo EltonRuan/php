@@ -5806,7 +5806,53 @@ echo $message; // Output: OK
 
 
 <h4 id="declare">DECLARE</h4>
-.
+<p>
+  The <code>declare</code> construct is used to set execution directives for a block of code. 
+  It allows the programmer to modify certain engine behaviors for specific sections of the script.
+</p>
+
+<h5>Common Declarations</h5>
+<ul>
+  <li><strong>ticks</strong> — Executes a tick handler every N statements.</li>
+  <li><strong>encoding</strong> — Defines the script's encoding (deprecated in recent PHP versions).</li>
+  <li><strong>strict_types</strong> — Enables strict typing mode for function calls and return types.</li>
+</ul>
+
+<h5>Examples</h5>
+
+<h6>Strict Types</h6>
+<pre><code class="language-php">
+<?php
+declare(strict_types=1);
+
+function sum(int $a, int $b) {
+    return $a + $b;
+}
+
+echo sum(10, "5"); 
+// Error in strict mode: string is not converted to int
+?>
+</code></pre>
+
+<h6>Ticks</h6>
+<pre><code class="language-php">
+<?php
+declare(ticks=1);
+
+register_tick_function(function () {
+    echo "Tick executed\n";
+});
+
+for ($i = 0; $i < 3; $i++) {
+    // Each loop triggers a tick
+}
+?>
+</code></pre>
+
+<p>
+  The <code>declare</code> directive is mostly used for strict typing and tick handling, making it a specialized tool for controlling script behavior.
+</p>
+
 
 <h4 id="return">RETURN</h4>
 .
