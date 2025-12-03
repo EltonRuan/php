@@ -5855,7 +5855,73 @@ for ($i = 0; $i < 3; $i++) {
 
 
 <h4 id="return">RETURN</h4>
-.
+<p>
+  The <code>return</code> statement is used to end the execution of a function and optionally send a value back to the caller.  
+  If no value is provided, the function returns <code>null</code> by default.
+</p>
+
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+function add($a, $b) {
+    return $a + $b;
+}
+
+echo add(5, 3); // Outputs: 8
+?>
+</code></pre>
+
+<h5>Returning Without a Value</h5>
+<pre><code class="language-php">
+<?php
+function test() {
+    return; // Ends the function, returns null
+}
+
+var_dump(test()); // NULL
+?>
+</code></pre>
+
+<h5>Returning Arrays</h5>
+<pre><code class="language-php">
+<?php
+function getUser() {
+    return [
+        "name" => "Elton",
+        "role" => "Developer"
+    ];
+}
+
+$user = getUser();
+echo $user["name"]; // Elton
+?>
+</code></pre>
+
+<h5>Returning by Reference</h5>
+<p>
+  A function can also return a reference using <code>&</code>, allowing the caller to modify the original variable.
+</p>
+
+<pre><code class="language-php">
+<?php
+$value = 10;
+
+function &getValue() {
+    global $value;
+    return $value;
+}
+
+$ref =& getValue();
+$ref = 99;
+
+echo $value; // 99 — original value changed
+?>
+</code></pre>
+
+<p>
+  The <code>return</code> keyword is essential for controlling function output, structuring logic, and managing data flow within PHP programs.
+</p>
+
 
 <h4 id="require">REQUIRE</h4>
 .
