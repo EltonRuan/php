@@ -5924,7 +5924,48 @@ echo $value; // 99 — original value changed
 
 
 <h4 id="require">REQUIRE</h4>
-.
+<p>
+  The <code>require</code> statement is used to include and evaluate a specified file during script execution.  
+  If the file cannot be loaded, <strong>PHP stops execution and throws a fatal error</strong>.  
+  This makes <code>require</code> ideal for loading essential files your application cannot run without.
+</p>
+
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+require "config.php";
+
+echo $dbHost; // Uses variables from config.php
+?>
+</code></pre>
+
+<h5>Fatal Error on Failure</h5>
+<pre><code class="language-php">
+<?php
+require "missing.php"; 
+// Fatal error: Failed opening required 'missing.php'
+?>
+</code></pre>
+
+<h5>Using require_once</h5>
+<p>
+  Use <code>require_once</code> to ensure the file is included only a single time,  
+  preventing duplicate function declarations, classes, or repeated logic.
+</p>
+
+<pre><code class="language-php">
+<?php
+require_once "helpers.php";
+require_once "helpers.php"; 
+// Loaded only once
+?>
+</code></pre>
+
+<p>
+  The <code>require</code> statement is typically used for configuration files, database connections, libraries,  
+  and any resources that are mandatory for the system to operate properly.
+</p>
+
 
 <h4 id="include">INCLUDE</h4>
 .
