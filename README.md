@@ -5968,7 +5968,50 @@ require_once "helpers.php";
 
 
 <h4 id="include">INCLUDE</h4>
-.
+<p>
+  The <code>include</code> statement is used to load and evaluate a specified file during script execution.  
+  Unlike <code>require</code>, if the file cannot be found or loaded, <strong>PHP emits a warning but continues executing the script</strong>.  
+  This makes <code>include</code> suitable for optional files or non-critical components.
+</p>
+
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+include "header.php";
+
+echo "Page content goes here.";
+?>
+</code></pre>
+
+<h5>Warning on Failure (Execution Continues)</h5>
+<pre><code class="language-php">
+<?php
+include "missing.php";
+// Warning: Failed to include 'missing.php'
+// Script continues running
+echo "This still runs.";
+?>
+</code></pre>
+
+<h5>Using include_once</h5>
+<p>
+  Use <code>include_once</code> to ensure the file is included only once,  
+  preventing duplicate declarations or repeated logic.
+</p>
+
+<pre><code class="language-php">
+<?php
+include_once "menu.php";
+include_once "menu.php";
+// Loaded only once
+?>
+</code></pre>
+
+<p>
+  The <code>include</code> statement is commonly used for loading UI components, templates, partials,  
+  or non-essential files that improve the structure of your application but are not required for it to run.
+</p>
+
 
 <h4 id="require_once">REQUIRE_ONCE</h4>
 
