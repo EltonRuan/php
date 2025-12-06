@@ -6014,8 +6014,53 @@ include_once "menu.php";
 
 
 <h4 id="require_once">REQUIRE_ONCE</h4>
+<p>
+  The <code>require_once</code> statement includes and evaluates a specified file,  
+  but only if it has not been included before.  
+  If the file is missing or cannot be loaded, <strong>PHP stops execution with a fatal error</strong>.  
+  This makes <code>require_once</code> ideal for essential files that must be loaded exactly once.
+</p>
 
-.
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+require_once "config.php";
+require_once "config.php"; // Will not load again
+?>
+</code></pre>
+
+<h5>Fatal Error on Failure</h5>
+<pre><code class="language-php">
+<?php
+require_once "missing.php";
+// Fatal error: Failed opening required 'missing.php'
+?>
+</code></pre>
+
+<h5>Preventing Duplicate Declarations</h5>
+<p>
+  Using <code>require_once</code> is useful when including files containing:
+</p>
+<ul>
+  <li>Functions</li>
+  <li>Classes</li>
+  <li>Configuration settings</li>
+  <li>Initialization logic</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+require_once "UserController.php";
+require_once "UserController.php"; 
+// Class is loaded only a single time
+?>
+</code></pre>
+
+<p>
+  The <code>require_once</code> statement improves stability by avoiding duplicate loads  
+  while ensuring critical files are always present for the application to run.
+</p>
+
 
 <h4 id="include_once">INCLUDE_ONCE</h4>
 .
