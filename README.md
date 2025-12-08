@@ -6063,7 +6063,45 @@ require_once "UserController.php";
 
 
 <h4 id="include_once">INCLUDE_ONCE</h4>
-.
+<p>
+  The <code>include_once</code> statement includes and evaluates a file,  
+  but only if it has not been included previously.  
+  If the file cannot be found, PHP generates a <strong>warning</strong>, but the script continues running.  
+  This makes <code>include_once</code> suitable for optional files that should not be loaded more than once.
+</p>
+
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+include_once "sidebar.php";
+include_once "sidebar.php"; 
+// File is included only once
+?>
+</code></pre>
+
+<h5>Warning on Failure (Execution Continues)</h5>
+<pre><code class="language-php">
+<?php
+include_once "missing.php";
+// Warning: Failed to include 'missing.php'
+// Script continues
+echo "The script continues running.";
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Reusable UI components (menus, headers, footers)</li>
+  <li>Helper functions</li>
+  <li>Optional module files</li>
+  <li>Non-critical configuration files</li>
+</ul>
+
+<p>
+  The <code>include_once</code> statement helps prevent duplicate imports  
+  while maintaining script execution even when the file is missing.
+</p>
+
 
 <h4 id="goto">GOTO</h4>
 .
