@@ -6104,8 +6104,52 @@ echo "The script continues running.";
 
 
 <h4 id="goto">GOTO</h4>
-.
+<p>
+  The <code>goto</code> statement provides a way to jump to another section of the program using a labeled target.  
+  While it can make code harder to read and maintain, it may be useful in very specific cases such as breaking out of deeply nested structures.
+</p>
 
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+goto jump;
+
+echo "This will be skipped.";
+
+jump:
+echo "Execution continues from here.";
+?>
+</code></pre>
+
+<h5>Using goto to Exit Nested Loops</h5>
+<pre><code class="language-php">
+<?php
+for ($i = 0; $i < 3; $i++) {
+    for ($j = 0; $j < 3; $j++) {
+
+        if ($i === 1 && $j === 1) {
+            goto endLoops;
+        }
+
+        echo "i=$i, j=$j\n";
+    }
+}
+
+endLoops:
+echo "Exited nested loops.";
+?>
+</code></pre>
+
+<h5>Restrictions</h5>
+<ul>
+  <li>You cannot jump into a loop, switch, or function.</li>
+  <li>You can only jump to labels within the same file and scope.</li>
+</ul>
+
+<p>
+  Although <code>goto</code> exists in PHP, it is rarely recommended for everyday programming,  
+  as structured control flow (loops, functions, conditionals) is almost always clearer and safer.
+</p>
 
 <h3 id="functions">FUNCTIONS</h3>
 
