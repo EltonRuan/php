@@ -6170,7 +6170,57 @@ echo "Exited nested loops.";
 
 
 <h4 id="user-defined-functions">USER-DEFINED FUNCTIONS</h4>
-.
+<p>
+  User-defined functions are blocks of code that you can create to perform specific tasks.  
+  They allow you to organize your code, reduce repetition, and improve readability.
+</p>
+
+<h5>Basic Syntax</h5>
+<pre><code class="language-php">
+function functionName($parameter1, $parameter2) {
+    // Code to execute
+    return $result; // Optional
+}
+</code></pre>
+
+<h5>Example</h5>
+<pre><code class="language-php">
+<?php
+function greet($name) {
+    return "Hello, $name!";
+}
+
+echo greet("Elton"); // Outputs: Hello, Elton!
+?>
+</code></pre>
+
+<h5>Function Without Parameters</h5>
+<pre><code class="language-php">
+<?php
+function sayHello() {
+    echo "Hello!";
+}
+
+sayHello(); // Outputs: Hello!
+?>
+</code></pre>
+
+<h5>Function Without Return Value</h5>
+<pre><code class="language-php">
+<?php
+function printMessage($msg) {
+    echo $msg;
+}
+
+printMessage("This is a message."); // Outputs: This is a message.
+?>
+</code></pre>
+
+<p>
+  User-defined functions are essential for creating modular, reusable, and maintainable PHP code.  
+  They can accept parameters, return values, and even call other functions.
+</p>
+
 
 <h4 id="function-parameters-arguments">FUNCTION PARAMETERS AND ARGUMENTS</h4>
 .
