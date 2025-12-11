@@ -6223,7 +6223,67 @@ printMessage("This is a message."); // Outputs: This is a message.
 
 
 <h4 id="function-parameters-arguments">FUNCTION PARAMETERS AND ARGUMENTS</h4>
-.
+
+<p>
+  Function parameters and arguments allow you to pass data into a function so it can operate on it.  
+  Parameters are the variables listed in the function definition, while arguments are the actual values passed when the function is called.
+</p>
+
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+function greet($name) {  // $name is a parameter
+    echo "Hello, $name!";
+}
+
+greet("Elton"); // "Elton" is an argument
+?>
+</code></pre>
+
+<h5>Multiple Parameters</h5>
+<pre><code class="language-php">
+<?php
+function add($a, $b) {
+    return $a + $b;
+}
+
+echo add(5, 10); // Outputs: 15
+?>
+</code></pre>
+
+<h5>Default Parameter Values</h5>
+<pre><code class="language-php">
+<?php
+function welcome($name = "Guest") {
+    echo "Welcome, $name!";
+}
+
+welcome();            // Outputs: Welcome, Guest!
+welcome("Elton");     // Outputs: Welcome, Elton!
+?>
+</code></pre>
+
+<h5>Passing Arguments by Reference</h5>
+<p>
+  When passing by reference, the function can modify the original variable.
+</p>
+
+<pre><code class="language-php">
+<?php
+function doubleValue(&$num) { // & means pass by reference
+    $num = $num * 2;
+}
+
+$value = 5;
+doubleValue($value);
+echo $value; // Outputs: 10
+?>
+</code></pre>
+
+<p>
+  Using parameters and arguments makes functions flexible and reusable by allowing different inputs to produce different outcomes.
+</p>
+
 
 <h4 id="returning-values">RETURNING VALUES</h4>
 .
