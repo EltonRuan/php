@@ -6286,7 +6286,69 @@ echo $value; // Outputs: 10
 
 
 <h4 id="returning-values">RETURNING VALUES</h4>
-.
+
+<p>
+  In PHP, functions can return a value using the <code>return</code> statement.  
+  Returning values allows a function to send data back to the part of the program where it was called.
+</p>
+
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+function add($a, $b) {
+    return $a + $b;
+}
+
+$result = add(3, 7);
+echo $result; // Outputs: 10
+?>
+</code></pre>
+
+<h5>Returning Strings</h5>
+<pre><code class="language-php">
+<?php
+function getMessage() {
+    return "This is a returned message.";
+}
+
+echo getMessage();
+?>
+</code></pre>
+
+<h5>Returning Arrays</h5>
+<pre><code class="language-php">
+<?php
+function getCoordinates() {
+    return [10, 20];
+}
+
+list($x, $y) = getCoordinates();
+echo "X: $x, Y: $y"; // Outputs: X: 10, Y: 20
+?>
+</code></pre>
+
+<h5>Returning Early</h5>
+<p>
+  A function can stop execution at any point using <code>return</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+function checkAge($age) {
+    if ($age < 18) {
+        return "Underage";
+    }
+    return "Adult";
+}
+
+echo checkAge(16); // Outputs: Underage
+?>
+</code></pre>
+
+<p>
+  The <code>return</code> statement is optional; if omitted, the function returns <code>null</code> by default.
+</p>
+
 
 <h4 id="variable-functions">VARIABLE FUNCTIONS</h4>
 .
