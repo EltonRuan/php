@@ -6351,7 +6351,65 @@ echo checkAge(16); // Outputs: Underage
 
 
 <h4 id="variable-functions">VARIABLE FUNCTIONS</h4>
-.
+
+<p>
+  Variable functions allow a function to be called using the value of a variable.  
+  This feature makes it possible to determine which function to execute at runtime.
+</p>
+
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+function sayHello() {
+    echo "Hello!";
+}
+
+function sayGoodbye() {
+    echo "Goodbye!";
+}
+
+$functionName = "sayHello";
+$functionName(); // Calls sayHello()
+?>
+</code></pre>
+
+<h5>Dynamic Function Selection</h5>
+<pre><code class="language-php">
+<?php
+function add($a, $b) {
+    return $a + $b;
+}
+
+function multiply($a, $b) {
+    return $a * $b;
+}
+
+$operation = "multiply";
+echo $operation(5, 3); // Outputs: 15
+?>
+</code></pre>
+
+<h5>Using with Object Methods</h5>
+<pre><code class="language-php">
+<?php
+class Calculator {
+    public function subtract($a, $b) {
+        return $a - $b;
+    }
+}
+
+$method = "subtract";
+$calc = new Calculator();
+
+echo $calc->$method(10, 4); // Outputs: 6
+?>
+</code></pre>
+
+<p>
+  Variable functions are useful for callbacks, dynamic execution, and flexible program design,  
+  but they should be used carefully to avoid calling unintended functions.
+</p>
+
 
 <h4 id="internal-functions">INTERNAL FUNCTIONS</h4>
 .
