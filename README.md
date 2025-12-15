@@ -6412,7 +6412,54 @@ echo $calc->$method(10, 4); // Outputs: 6
 
 
 <h4 id="internal-functions">INTERNAL FUNCTIONS</h4>
-.
+
+<p>
+  Internal functions are built-in functions provided by PHP itself.  
+  They are available by default and are used to perform common tasks such as string manipulation,
+  array handling, math operations, file system access, and more.
+</p>
+
+<h5>Examples of Common Internal Functions</h5>
+
+<h6>String Functions</h6>
+<pre><code class="language-php">
+<?php
+echo strlen("Hello");        // 5
+echo strtoupper("php");     // PHP
+?>
+</code></pre>
+
+<h6>Array Functions</h6>
+<pre><code class="language-php">
+<?php
+$numbers = [1, 2, 3, 4];
+
+print_r(array_reverse($numbers));
+?>
+</code></pre>
+
+<h6>Math Functions</h6>
+<pre><code class="language-php">
+<?php
+echo abs(-10);   // 10
+echo sqrt(16);   // 4
+?>
+</code></pre>
+
+<h6>File System Functions</h6>
+<pre><code class="language-php">
+<?php
+if (file_exists("data.txt")) {
+    echo "File found";
+}
+?>
+</code></pre>
+
+<p>
+  Internal functions are optimized, well-tested, and essential for efficient PHP development.  
+  They eliminate the need to rewrite common logic and help keep code clean and reliable.
+</p>
+
 
 <h4 id="anonymous-functions">ANONYMOUS FUNCTIONS</h4>
 .
