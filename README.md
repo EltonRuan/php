@@ -6514,8 +6514,57 @@ $callback(); // Outputs: Welcome
 </p>
 
 
-<h4 id="arrow-functions">ARROW FUNCTIONS</h4>
-.
+<h4 id="anonymous-functions">ANONYMOUS FUNCTIONS</h4>
+
+<p>
+  Anonymous functions, also known as closures, are functions without a specified name.  
+  They are commonly used as callbacks, assigned to variables, or passed as arguments to other functions.
+</p>
+
+<h5>Basic Example</h5>
+<pre><code class="language-php">
+<?php
+$greet = function ($name) {
+    return "Hello, $name!";
+};
+
+echo $greet("Elton");
+?>
+</code></pre>
+
+<h5>Using Anonymous Functions as Callbacks</h5>
+<pre><code class="language-php">
+<?php
+$numbers = [1, 2, 3, 4];
+
+$result = array_map(function ($n) {
+    return $n * 2;
+}, $numbers);
+
+print_r($result);
+?>
+</code></pre>
+
+<h5>Using the <code>use</code> Keyword</h5>
+<p>
+  Anonymous functions can inherit variables from the parent scope using the <code>use</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+$message = "Welcome";
+
+$callback = function () use ($message) {
+    echo $message;
+};
+
+$callback(); // Outputs: Welcome
+?>
+</code></pre>
+
+<p>
+  Anonymous functions provide flexibility and are widely used in modern PHP for functional programming patterns and callbacks.
+</p>
 
 <h4 id="first-class-callables-syntax">FIRST-CLASS CALLABLES SYNTAX</h4>
 .
