@@ -6567,7 +6567,60 @@ $callback(); // Outputs: Welcome
 </p>
 
 <h4 id="first-class-callables-syntax">FIRST-CLASS CALLABLES SYNTAX</h4>
-.
+
+<p>
+  First-class callable syntax allows functions, methods, and closures to be referenced
+  as values without immediately invoking them. This feature makes it easier to pass
+  callables around in a clean and readable way.
+</p>
+
+<h5>Referencing a Function</h5>
+<pre><code class="language-php">
+<?php
+function sayHello() {
+    return "Hello!";
+}
+
+$callable = sayHello(...);
+echo $callable();
+?>
+</code></pre>
+
+<h5>Referencing an Object Method</h5>
+<pre><code class="language-php">
+<?php
+class Greeter {
+    public function greet($name) {
+        return "Hello, $name!";
+    }
+}
+
+$greeter = new Greeter();
+$callable = $greeter->greet(...);
+
+echo $callable("Elton");
+?>
+</code></pre>
+
+<h5>Referencing a Static Method</h5>
+<pre><code class="language-php">
+<?php
+class MathUtils {
+    public static function sum($a, $b) {
+        return $a + $b;
+    }
+}
+
+$callable = MathUtils::sum(...);
+echo $callable(5, 3);
+?>
+</code></pre>
+
+<p>
+  First-class callables improve code readability and consistency by providing
+  a modern, expressive way to work with callable references in PHP.
+</p>
+
 
 
 <h3 id="classes-objects">CLASSES AND OBJECTS</h3>
