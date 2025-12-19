@@ -6621,8 +6621,6 @@ echo $callable(5, 3);
   a modern, expressive way to work with callable references in PHP.
 </p>
 
-
-
 <h3 id="classes-objects">CLASSES AND OBJECTS</h3>
 
 
@@ -6658,7 +6656,57 @@ echo $callable(5, 3);
 </nav>
 
 <h4 id="properties">PROPERTIES</h4>
-.
+
+<p>
+  Properties are variables defined inside a class.  
+  They represent the data or state of an object and can store values such as numbers, strings, arrays, or even other objects.
+</p>
+
+<h5>Defining Properties</h5>
+<pre><code class="language-php">
+<?php
+class User {
+    public $name;
+    public $age;
+}
+?>
+</code></pre>
+
+<h5>Accessing Properties</h5>
+<pre><code class="language-php">
+<?php
+$user = new User();
+$user->name = "Elton";
+$user->age = 19;
+
+echo $user->name; // Elton
+?>
+</code></pre>
+
+<h5>Property Visibility</h5>
+<p>
+  Properties can have different visibility levels that control where they can be accessed:
+</p>
+<ul>
+  <li><strong>public</strong> — Accessible from anywhere</li>
+  <li><strong>protected</strong> — Accessible within the class and its subclasses</li>
+  <li><strong>private</strong> — Accessible only within the class itself</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class Account {
+    public $owner;
+    protected $balance;
+    private $pin;
+}
+?>
+</code></pre>
+
+<p>
+  Properties are fundamental to object-oriented programming, allowing objects to hold and manage their own data.
+</p>
+
 
 <h4 id="property-hooks">PROPERTY HOOKS</h4>
 .
