@@ -6709,7 +6709,74 @@ class Account {
 
 
 <h4 id="property-hooks">PROPERTY HOOKS</h4>
-.
+
+<p>
+  Property hooks are a modern PHP feature that allow you to run logic automatically
+  when a property is read or written.  
+  They provide a clean alternative to traditional getters and setters.
+</p>
+
+<h5>Basic Concept</h5>
+<p>
+  With property hooks, you can define behavior directly on a property using
+  <code>get</code> and <code>set</code> blocks.
+</p>
+
+<h5>Example</h5>
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name {
+        get {
+            return strtoupper($this->name);
+        }
+        set {
+            $this->name = trim($value);
+        }
+    }
+}
+
+$user = new User();
+$user->name = " Elton ";
+
+echo $user->name; // ELTON
+?>
+</code></pre>
+
+<h5>Read-Only Hook</h5>
+<pre><code class="language-php">
+<?php
+class Product {
+    public float $price {
+        get {
+            return $this->price;
+        }
+    }
+}
+?>
+</code></pre>
+
+<h5>Write-Only Hook</h5>
+<pre><code class="language-php">
+<?php
+class Logger {
+    public string $message {
+        set {
+            echo "New message: " . $value;
+        }
+    }
+}
+
+$log = new Logger();
+$log->message = "System started";
+?>
+</code></pre>
+
+<p>
+  Property hooks improve encapsulation and readability by keeping property-related
+  logic close to the property itself, reducing boilerplate code.
+</p>
+
 
 <h4 id="class-constants">CLASS CONSTANTS</h4>
 .
