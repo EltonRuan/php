@@ -6779,7 +6779,62 @@ $log->message = "System started";
 
 
 <h4 id="class-constants">CLASS CONSTANTS</h4>
-.
+
+<p>
+  Class constants are values defined inside a class that cannot be changed.  
+  They are useful for storing fixed values related to the class, such as configuration options,
+  status codes, or predefined settings.
+</p>
+
+<h5>Defining Class Constants</h5>
+<pre><code class="language-php">
+<?php
+class Status {
+    public const ACTIVE = 1;
+    public const INACTIVE = 0;
+}
+?>
+</code></pre>
+
+<h5>Accessing Class Constants</h5>
+<p>
+  Class constants are accessed using the scope resolution operator <code>::</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+echo Status::ACTIVE;   // 1
+echo Status::INACTIVE; // 0
+?>
+</code></pre>
+
+<h5>Using Constants Inside the Class</h5>
+<pre><code class="language-php">
+<?php
+class Role {
+    public const ADMIN = "admin";
+
+    public function getRole() {
+        return self::ADMIN;
+    }
+}
+?>
+</code></pre>
+
+<h5>Visibility of Class Constants</h5>
+<p>
+  Class constants can have visibility modifiers:
+</p>
+<ul>
+  <li><strong>public</strong> — Accessible everywhere</li>
+  <li><strong>protected</strong> — Accessible in the class and subclasses</li>
+  <li><strong>private</strong> — Accessible only within the class</li>
+</ul>
+
+<p>
+  Class constants help maintain consistency and prevent magic values throughout your code.
+</p>
+
 
 <h4 id="class-autoloading">CLASS AUTOLOADING</h4>
 .
