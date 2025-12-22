@@ -6837,7 +6837,84 @@ class Role {
 
 
 <h4 id="class-autoloading">CLASS AUTOLOADING</h4>
-.
+
+<p>
+  Class autoloading allows PHP to automatically load class files when they are needed,
+  without requiring manual <code>include</code> or <code>require</code> statements.
+  This makes code cleaner, more organized, and easier to maintain.
+</p>
+
+<h5>Why Use Autoloading?</h5>
+<ul>
+  <li>Eliminates multiple <code>require</code> statements</li>
+  <li>Improves project organization</li>
+  <li>Loads classes only when they are used</li>
+  <li>Essential for modern PHP applications</li>
+</ul>
+
+<h5>Using <code>spl_autoload_register</code></h5>
+<pre><code class="language-php">
+<?php
+spl_autoload_register(function ($class) {
+    require_once 'classes/' . $class . '.php';
+});
+?>
+</code></pre>
+
+<p>
+  When a class is instantiated, PHP will automatically look for the corresponding file.
+</p>
+
+<pre><code class="language-php">
+<?php
+$user = new User(); // loads classes/User.php automatically
+?>
+</code></pre>
+
+<h5>Autoloading with Namespaces</h5>
+<pre><code class="language-php">
+<?php
+spl_autoload_register(function ($class) {
+    $path = str_replace('\\', '/', $class);
+    require_once $path . '.php';
+});
+?>
+</code></pre>
+
+<h5>PSR-4 Standard (Recommended)</h5>
+<p>
+  PSR-4 is a widely adopted autoloading standard used by Composer.
+</p>
+
+<pre><code class="language-php">
+<?php
+// composer.json
+{
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}
+?>
+</code></pre>
+
+<p>
+  After running <code>composer dump-autoload</code>, classes are loaded automatically.
+</p>
+
+<h5>Example File Structure</h5>
+<pre><code>
+src/
+ └── App/
+     └── Controllers/
+         └── UserController.php
+</code></pre>
+
+<p>
+  Class autoloading is a fundamental concept for building scalable and professional PHP applications.
+</p>
+
 
 <h4 id="constructors-destructors">CONSTRUCTORS AND DESTRUCTORS</h4>
 .
