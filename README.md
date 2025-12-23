@@ -6917,7 +6917,67 @@ src/
 
 
 <h4 id="constructors-destructors">CONSTRUCTORS AND DESTRUCTORS</h4>
-.
+
+<p>
+  Constructors and destructors are special methods in a class that are automatically
+  executed when an object is created or destroyed.  
+  They are commonly used to initialize and clean up object resources.
+</p>
+
+<h5>Constructor</h5>
+<p>
+  A constructor is defined using the <code>__construct()</code> method and runs when a new object is instantiated.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
+}
+
+$user = new User("Elton");
+echo $user->name;
+?>
+</code></pre>
+
+<h5>Destructor</h5>
+<p>
+  A destructor is defined using the <code>__destruct()</code> method and runs when the object is destroyed
+  or when the script execution ends.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Connection {
+    public function __construct() {
+        echo "Connection opened\n";
+    }
+
+    public function __destruct() {
+        echo "Connection closed\n";
+    }
+}
+
+$conn = new Connection();
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Initializing object properties</li>
+  <li>Opening database or file connections</li>
+  <li>Releasing resources and memory</li>
+</ul>
+
+<p>
+  Constructors and destructors help manage the lifecycle of objects and ensure
+  proper setup and cleanup in object-oriented PHP.
+</p>
+
 
 <h4 id="visibility">VISIBILITY</h4>
 .
