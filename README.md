@@ -6980,7 +6980,87 @@ $conn = new Connection();
 
 
 <h4 id="visibility">VISIBILITY</h4>
-.
+
+<p>
+  Visibility defines how class properties and methods can be accessed.
+  PHP provides three visibility levels: <strong>public</strong>, <strong>protected</strong>,
+  and <strong>private</strong>.
+</p>
+
+<h5>Public</h5>
+<p>
+  Members declared as <code>public</code> can be accessed from anywhere.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+
+    public function showName() {
+        return $this->name;
+    }
+}
+
+$user = new User();
+$user->name = "Elton";
+echo $user->showName();
+?>
+</code></pre>
+
+<h5>Protected</h5>
+<p>
+  Members declared as <code>protected</code> can be accessed only within the class itself
+  and by child (inherited) classes.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Person {
+    protected string $email;
+}
+
+class User extends Person {
+    public function setEmail(string $email) {
+        $this->email = $email;
+    }
+}
+?>
+</code></pre>
+
+<h5>Private</h5>
+<p>
+  Members declared as <code>private</code> can be accessed only within the class where they are declared.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Account {
+    private float $balance = 0;
+
+    public function deposit(float $value) {
+        $this->balance += $value;
+    }
+
+    public function getBalance() {
+        return $this->balance;
+    }
+}
+?>
+</code></pre>
+
+<h5>Visibility Summary</h5>
+<ul>
+  <li><strong>public</strong>: Accessible from anywhere</li>
+  <li><strong>protected</strong>: Accessible in the class and child classes</li>
+  <li><strong>private</strong>: Accessible only in the same class</li>
+</ul>
+
+<p>
+  Using proper visibility improves encapsulation, security, and code organization
+  in object-oriented PHP.
+</p>
+
 
 <h4 id="object-inheritance">OBJECT INHERITANCE</h4>
 .
