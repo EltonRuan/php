@@ -7063,7 +7063,101 @@ class Account {
 
 
 <h4 id="object-inheritance">OBJECT INHERITANCE</h4>
-.
+
+<p>
+  Object inheritance allows a class to inherit properties and methods from another class.
+  The class being inherited from is called the <strong>parent (base) class</strong>,
+  and the class that inherits is called the <strong>child (derived) class</strong>.
+</p>
+
+<p>
+  In PHP, inheritance is implemented using the <code>extends</code> keyword.
+</p>
+
+<h5>Basic Inheritance Example</h5>
+<pre><code class="language-php">
+<?php
+class Animal {
+    protected string $name;
+
+    public function setName(string $name) {
+        $this->name = $name;
+    }
+
+    public function speak() {
+        return "The animal makes a sound.";
+    }
+}
+
+class Dog extends Animal {
+    public function speak() {
+        return "The dog barks.";
+    }
+}
+
+$dog = new Dog();
+$dog->setName("Rex");
+echo $dog->speak();
+?>
+</code></pre>
+
+<h5>Method Overriding</h5>
+<p>
+  A child class can redefine a method inherited from the parent class.
+  This is known as <strong>method overriding</strong>.
+</p>
+
+<p>
+  The parent method can still be accessed using the <code>parent::</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Vehicle {
+    public function move() {
+        return "The vehicle is moving.";
+    }
+}
+
+class Car extends Vehicle {
+    public function move() {
+        return parent::move() . " It drives on roads.";
+    }
+}
+?>
+</code></pre>
+
+<h5>Access Control and Inheritance</h5>
+<ul>
+  <li><strong>public</strong> members are inherited and accessible everywhere</li>
+  <li><strong>protected</strong> members are inherited and accessible in child classes</li>
+  <li><strong>private</strong> members are not accessible in child classes</li>
+</ul>
+
+<h5>Final Classes and Methods</h5>
+<p>
+  The <code>final</code> keyword prevents inheritance or method overriding.
+</p>
+
+<pre><code class="language-php">
+<?php
+final class SecureClass {
+    // This class cannot be inherited
+}
+
+class Example {
+    final public function test() {
+        // This method cannot be overridden
+    }
+}
+?>
+</code></pre>
+
+<p>
+  Object inheritance promotes code reuse, extensibility, and cleaner
+  object-oriented design in PHP.
+</p>
+
 
 <h4 id="scope-resolution-operator">SCOPE RESOLUTION OPERATOR (::)</h4>
 .
