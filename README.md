@@ -7160,7 +7160,83 @@ class Example {
 
 
 <h4 id="scope-resolution-operator">SCOPE RESOLUTION OPERATOR (::)</h4>
-.
+
+<p>
+  The scope resolution operator <code>::</code> is used to access
+  <strong>class constants</strong>, <strong>static properties</strong>,
+  and <strong>static methods</strong> without creating an instance of a class.
+</p>
+
+<h5>Accessing Class Constants</h5>
+<pre><code class="language-php">
+<?php
+class Config {
+    public const APP_NAME = "My Application";
+}
+
+echo Config::APP_NAME;
+?>
+</code></pre>
+
+<h5>Accessing Static Properties</h5>
+<pre><code class="language-php">
+<?php
+class Counter {
+    public static int $count = 0;
+}
+
+Counter::$count++;
+echo Counter::$count;
+?>
+</code></pre>
+
+<h5>Accessing Static Methods</h5>
+<pre><code class="language-php">
+<?php
+class MathUtils {
+    public static function sum(int $a, int $b): int {
+        return $a + $b;
+    }
+}
+
+echo MathUtils::sum(5, 3);
+?>
+</code></pre>
+
+<h5>Using <code>self::</code>, <code>parent::</code>, and <code>static::</code></h5>
+<ul>
+  <li><code>self::</code> refers to the current class</li>
+  <li><code>parent::</code> refers to the parent class</li>
+  <li><code>static::</code> uses late static binding (called class at runtime)</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class Base {
+    public static function who() {
+        return "Base";
+    }
+
+    public static function test() {
+        return static::who();
+    }
+}
+
+class Child extends Base {
+    public static function who() {
+        return "Child";
+    }
+}
+
+echo Child::test(); // Outputs: Child
+?>
+</code></pre>
+
+<p>
+  The scope resolution operator is essential for working with static members
+  and understanding inheritance behavior in object-oriented PHP.
+</p>
+
 
 <h4 id="static-keyword">STATIC KEYWORD</h4>
 .
