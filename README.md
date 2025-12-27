@@ -7239,7 +7239,95 @@ echo Child::test(); // Outputs: Child
 
 
 <h4 id="static-keyword">STATIC KEYWORD</h4>
-.
+
+<p>
+  The <code>static</code> keyword in PHP is used to declare
+  <strong>properties</strong>, <strong>methods</strong>, and
+  <strong>local variables</strong> that belong to the class itself,
+  rather than to a specific object instance.
+</p>
+
+<h5>Static Properties</h5>
+<p>
+  Static properties are shared among all instances of a class and can be
+  accessed without creating an object.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Counter {
+    public static int $count = 0;
+}
+
+Counter::$count++;
+Counter::$count++;
+
+echo Counter::$count; // 2
+?>
+</code></pre>
+
+<h5>Static Methods</h5>
+<p>
+  Static methods can be called directly from the class and cannot use
+  <code>$this</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+class MathHelper {
+    public static function multiply(int $a, int $b): int {
+        return $a * $b;
+    }
+}
+
+echo MathHelper::multiply(4, 5); // 20
+?>
+</code></pre>
+
+<h5>Static Keyword in Local Variables</h5>
+<p>
+  When used inside a function, <code>static</code> preserves the variable value
+  between function calls.
+</p>
+
+<pre><code class="language-php">
+<?php
+function counter() {
+    static $number = 0;
+    $number++;
+    return $number;
+}
+
+echo counter(); // 1
+echo counter(); // 2
+echo counter(); // 3
+?>
+</code></pre>
+
+<h5>Accessing Static Members</h5>
+<p>
+  Static members are accessed using the scope resolution operator <code>::</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Example {
+    public static string $message = "Hello World";
+
+    public static function showMessage(): string {
+        return self::$message;
+    }
+}
+
+echo Example::showMessage();
+?>
+</code></pre>
+
+<p>
+  The <code>static</code> keyword is useful for utility classes, shared state,
+  counters, configuration values, and methods that do not depend on object data.
+</p>
+
 
 <h4 id="class-abstraction">CLASS ABSTRACTION</h4>
 .
