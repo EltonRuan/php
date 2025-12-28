@@ -7330,7 +7330,76 @@ echo Example::showMessage();
 
 
 <h4 id="class-abstraction">CLASS ABSTRACTION</h4>
-.
+
+<p>
+  Class abstraction in PHP is achieved using the <code>abstract</code> keyword.
+  An abstract class cannot be instantiated and is designed to be extended by
+  other classes.
+</p>
+
+<h5>Abstract Classes</h5>
+<p>
+  Abstract classes may contain abstract methods (without implementation) and
+  concrete methods (with implementation).
+</p>
+
+<pre><code class="language-php">
+<?php
+abstract class Shape {
+    protected string $color;
+
+    public function __construct(string $color) {
+        $this->color = $color;
+    }
+
+    abstract public function getArea(): float;
+
+    public function getColor(): string {
+        return $this->color;
+    }
+}
+?>
+</code></pre>
+
+<h5>Implementing Abstract Methods</h5>
+<p>
+  Any class that extends an abstract class must implement all abstract methods.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Rectangle extends Shape {
+    private float $width;
+    private float $height;
+
+    public function __construct(float $width, float $height, string $color) {
+        parent::__construct($color);
+        $this->width = $width;
+        $this->height = $height;
+    }
+
+    public function getArea(): float {
+        return $this->width * $this->height;
+    }
+}
+
+$rect = new Rectangle(5, 3, "blue");
+echo $rect->getArea();
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li>Abstract classes cannot be instantiated</li>
+  <li>They can define common behavior for child classes</li>
+  <li>Abstract methods enforce implementation in subclasses</li>
+</ul>
+
+<p>
+  Class abstraction is useful for defining base structures, enforcing contracts,
+  and promoting clean and maintainable object-oriented design in PHP.
+</p>
+
 
 <h4 id="object-interfaces">OBJECT INTERFACES</h4>
 .
