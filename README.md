@@ -7402,7 +7402,100 @@ echo $rect->getArea();
 
 
 <h4 id="object-interfaces">OBJECT INTERFACES</h4>
-.
+
+<p>
+  Object interfaces in PHP define a contract that classes must follow.
+  An interface specifies which methods a class must implement, without
+  providing the method implementations.
+</p>
+
+<h5>Defining an Interface</h5>
+<p>
+  Interfaces are declared using the <code>interface</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+interface LoggerInterface {
+    public function log(string $message): void;
+}
+?>
+</code></pre>
+
+<h5>Implementing an Interface</h5>
+<p>
+  A class implements an interface using the <code>implements</code> keyword
+  and must define all interface methods.
+</p>
+
+<pre><code class="language-php">
+<?php
+class FileLogger implements LoggerInterface {
+    public function log(string $message): void {
+        echo "Log: " . $message;
+    }
+}
+
+$logger = new FileLogger();
+$logger->log("System started");
+?>
+</code></pre>
+
+<h5>Multiple Interfaces</h5>
+<p>
+  A class can implement multiple interfaces, separated by commas.
+</p>
+
+<pre><code class="language-php">
+<?php
+interface Readable {
+    public function read(): string;
+}
+
+interface Writable {
+    public function write(string $data): void;
+}
+
+class Document implements Readable, Writable {
+    public function read(): string {
+        return "Document content";
+    }
+
+    public function write(string $data): void {
+        echo "Writing: " . $data;
+    }
+}
+?>
+</code></pre>
+
+<h5>Interface Constants</h5>
+<p>
+  Interfaces can define constants, which are implicitly public.
+</p>
+
+<pre><code class="language-php">
+<?php
+interface Status {
+    public const ACTIVE = 1;
+    public const INACTIVE = 0;
+}
+
+echo Status::ACTIVE;
+?>
+</code></pre>
+
+<h5>Key Rules</h5>
+<ul>
+  <li>Interfaces cannot contain properties</li>
+  <li>All interface methods must be public</li>
+  <li>A class can implement multiple interfaces</li>
+</ul>
+
+<p>
+  Interfaces are essential for defining consistent APIs, enabling polymorphism,
+  and improving flexibility and testability in PHP applications.
+</p>
+
 
 <h4 id="traits">TRAITS</h4>
 .
