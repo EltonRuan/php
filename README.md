@@ -7498,7 +7498,121 @@ echo Status::ACTIVE;
 
 
 <h4 id="traits">TRAITS</h4>
-.
+
+<p>
+  Traits in PHP are a mechanism for code reuse in single inheritance languages.
+  They allow developers to include reusable methods and properties in multiple
+  classes without using inheritance.
+</p>
+
+<h5>Defining a Trait</h5>
+<p>
+  Traits are declared using the <code>trait</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait LoggerTrait {
+    public function log(string $message): void {
+        echo "[LOG] " . $message;
+    }
+}
+?>
+</code></pre>
+
+<h5>Using a Trait</h5>
+<p>
+  A class can use one or more traits with the <code>use</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+class UserService {
+    use LoggerTrait;
+
+    public function createUser(): void {
+        $this->log("User created");
+    }
+}
+
+$service = new UserService();
+$service->createUser();
+?>
+</code></pre>
+
+<h5>Using Multiple Traits</h5>
+<p>
+  Multiple traits can be used in a single class.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait TimestampTrait {
+    public function now(): string {
+        return date("Y-m-d H:i:s");
+    }
+}
+
+class Post {
+    use LoggerTrait, TimestampTrait;
+}
+?>
+</code></pre>
+
+<h5>Method Conflict Resolution</h5>
+<p>
+  If two traits define methods with the same name, conflicts must be resolved
+  explicitly.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait A {
+    public function sayHello() {
+        echo "Hello from A";
+    }
+}
+
+trait B {
+    public function sayHello() {
+        echo "Hello from B";
+    }
+}
+
+class Example {
+    use A, B {
+        A::sayHello insteadof B;
+        B::sayHello as sayHelloFromB;
+    }
+}
+
+$e = new Example();
+$e->sayHello();        // Hello from A
+$e->sayHelloFromB();  // Hello from B
+?>
+</code></pre>
+
+<h5>Traits with Properties</h5>
+<p>
+  Traits may also define properties that become part of the class.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait CounterTrait {
+    protected int $count = 0;
+
+    public function increment(): void {
+        $this->count++;
+    }
+}
+?>
+</code></pre>
+
+<p>
+  Traits help reduce code duplication, improve maintainability, and provide
+  flexible composition of behaviors in PHP applications.
+</p>
 
 <h4 id="anonymous-classes">ANONYMOUS CLASSES</h4>
 .
