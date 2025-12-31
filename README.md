@@ -7615,7 +7615,101 @@ trait CounterTrait {
 </p>
 
 <h4 id="anonymous-classes">ANONYMOUS CLASSES</h4>
-.
+
+<p>
+  Anonymous classes in PHP allow you to create class instances without
+  explicitly defining a named class. They are useful for simple, one-time
+  implementations and help reduce boilerplate code.
+</p>
+
+<h5>Basic Anonymous Class</h5>
+<p>
+  An anonymous class is created using the <code>new class</code> syntax.
+</p>
+
+<pre><code class="language-php">
+<?php
+$object = new class {
+    public function sayHello(): string {
+        return "Hello from an anonymous class";
+    }
+};
+
+echo $object->sayHello();
+?>
+</code></pre>
+
+<h5>Anonymous Class with Constructor</h5>
+<p>
+  Anonymous classes can define constructors and accept parameters.
+</p>
+
+<pre><code class="language-php">
+<?php
+$logger = new class("System") {
+    private string $name;
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
+
+    public function log(string $message): string {
+        return "[" . $this->name . "] " . $message;
+    }
+};
+
+echo $logger->log("Started");
+?>
+</code></pre>
+
+<h5>Extending a Class</h5>
+<p>
+  Anonymous classes can extend existing classes.
+</p>
+
+<pre><code class="language-php">
+<?php
+abstract class BaseLogger {
+    abstract public function log(string $message): string;
+}
+
+$logger = new class extends BaseLogger {
+    public function log(string $message): string {
+        return "Log: " . $message;
+    }
+};
+
+echo $logger->log("Running");
+?>
+</code></pre>
+
+<h5>Implementing Interfaces</h5>
+<p>
+  Anonymous classes can implement one or more interfaces.
+</p>
+
+<pre><code class="language-php">
+<?php
+interface Formatter {
+    public function format(string $text): string;
+}
+
+$formatter = new class implements Formatter {
+    public function format(string $text): string {
+        return strtoupper($text);
+    }
+};
+
+echo $formatter->format("php");
+?>
+</code></pre>
+
+<p>
+  Anonymous classes are ideal for short-lived objects, test doubles,
+  callbacks, and simple implementations where defining a full class
+  would be unnecessary.
+</p>
+
 
 <h4 id="overloading">OVERLOADING</h4>
 .
