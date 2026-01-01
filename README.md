@@ -7712,7 +7712,90 @@ echo $formatter->format("php");
 
 
 <h4 id="overloading">OVERLOADING</h4>
-.
+
+<p>
+  Overloading in PHP refers to the dynamic handling of
+  <strong>properties</strong> and <strong>methods</strong> that are not
+  explicitly defined or are inaccessible in a class.
+  It is implemented using special magic methods.
+</p>
+
+<h5>Property Overloading</h5>
+<p>
+  Property overloading allows you to control how inaccessible or undefined
+  properties are accessed or modified.
+</p>
+
+<ul>
+  <li><code>__get()</code> – triggered when reading an undefined or inaccessible property</li>
+  <li><code>__set()</code> – triggered when writing to an undefined or inaccessible property</li>
+  <li><code>__isset()</code> – triggered by <code>isset()</code> or <code>empty()</code></li>
+  <li><code>__unset()</code> – triggered when unsetting a property</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class User {
+    private array $data = [];
+
+    public function __get(string $name) {
+        return $this->data[$name] ?? null;
+    }
+
+    public function __set(string $name, $value): void {
+        $this->data[$name] = $value;
+    }
+}
+
+$user = new User();
+$user->name = "Elton";
+echo $user->name;
+?>
+</code></pre>
+
+<h5>Method Overloading</h5>
+<p>
+  Method overloading handles calls to undefined or inaccessible methods.
+</p>
+
+<ul>
+  <li><code>__call()</code> – triggered when calling a non-existing object method</li>
+  <li><code>__callStatic()</code> – triggered when calling a non-existing static method</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class Calculator {
+    public function __call(string $name, array $arguments) {
+        if ($name === "add") {
+            return array_sum($arguments);
+        }
+    }
+
+    public static function __callStatic(string $name, array $arguments) {
+        if ($name === "multiply") {
+            return array_product($arguments);
+        }
+    }
+}
+
+echo (new Calculator())->add(2, 3, 4);      // 9
+echo Calculator::multiply(2, 3, 4);         // 24
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+<ul>
+  <li>Overloading in PHP is different from traditional method overloading in other languages</li>
+  <li>It relies on magic methods, not multiple method signatures</li>
+  <li>Used mainly for dynamic APIs and flexible object access</li>
+</ul>
+
+<p>
+  Overloading provides powerful flexibility, but it should be used carefully
+  to avoid reducing code clarity and maintainability.
+</p>
+
 
 <h4 id="object-iteration">OBJECT ITERATION</h4>
 .
