@@ -7798,7 +7798,110 @@ echo Calculator::multiply(2, 3, 4);         // 24
 
 
 <h4 id="object-iteration">OBJECT ITERATION</h4>
-.
+
+<p>
+  Object iteration in PHP allows you to loop through an object's accessible
+  properties using iteration constructs such as <code>foreach</code>.
+  This behavior can be customized by implementing specific interfaces.
+</p>
+
+<h5>Default Object Iteration</h5>
+<p>
+  By default, <code>foreach</code> iterates over an object's public properties.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name = "Elton";
+    public string $email = "elton@example.com";
+}
+
+$user = new User();
+
+foreach ($user as $key => $value) {
+    echo "$key: $value\n";
+}
+?>
+</code></pre>
+
+<h5>Iterator Interface</h5>
+<p>
+  Implementing the <code>Iterator</code> interface allows full control over
+  how an object is iterated.
+</p>
+
+<pre><code class="language-php">
+<?php
+class NumberCollection implements Iterator {
+    private array $numbers = [10, 20, 30];
+    private int $position = 0;
+
+    public function current(): mixed {
+        return $this->numbers[$this->position];
+    }
+
+    public function key(): mixed {
+        return $this->position;
+    }
+
+    public function next(): void {
+        $this->position++;
+    }
+
+    public function rewind(): void {
+        $this->position = 0;
+    }
+
+    public function valid(): bool {
+        return isset($this->numbers[$this->position]);
+    }
+}
+
+$collection = new NumberCollection();
+
+foreach ($collection as $key => $value) {
+    echo "$key => $value\n";
+}
+?>
+</code></pre>
+
+<h5>IteratorAggregate Interface</h5>
+<p>
+  The <code>IteratorAggregate</code> interface provides a simpler way to make
+  objects iterable by returning an iterator.
+</p>
+
+<pre><code class="language-php">
+<?php
+class DataSet implements IteratorAggregate {
+    private array $items = ["A", "B", "C"];
+
+    public function getIterator(): Traversable {
+        return new ArrayIterator($this->items);
+    }
+}
+
+$data = new DataSet();
+
+foreach ($data as $item) {
+    echo $item;
+}
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+<ul>
+  <li><code>foreach</code> iterates over public properties by default</li>
+  <li><code>Iterator</code> gives full control over iteration behavior</li>
+  <li><code>IteratorAggregate</code> simplifies object iteration</li>
+</ul>
+
+<p>
+  Object iteration is useful when working with collections, data objects,
+  and custom data structures in a clean and consistent way.
+</p>
+
 
 <h4 id="magic-methods">MAGIC METHODS</h4>
 .
