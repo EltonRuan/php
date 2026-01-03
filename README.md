@@ -7904,7 +7904,125 @@ foreach ($data as $item) {
 
 
 <h4 id="magic-methods">MAGIC METHODS</h4>
-.
+
+<p>
+  Magic methods in PHP are special methods that are automatically triggered
+  in response to certain actions performed on an object. They provide powerful
+  hooks into the object lifecycle and behavior.
+</p>
+
+<h5>Constructor and Destructor</h5>
+<ul>
+  <li><code>__construct()</code> – called when an object is created</li>
+  <li><code>__destruct()</code> – called when an object is destroyed</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class Resource {
+    public function __construct() {
+        echo "Object created";
+    }
+
+    public function __destruct() {
+        echo "Object destroyed";
+    }
+}
+?>
+</code></pre>
+
+<h5>Property Overloading</h5>
+<ul>
+  <li><code>__get()</code></li>
+  <li><code>__set()</code></li>
+  <li><code>__isset()</code></li>
+  <li><code>__unset()</code></li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class Data {
+    private array $values = [];
+
+    public function __get(string $name) {
+        return $this->values[$name] ?? null;
+    }
+
+    public function __set(string $name, $value): void {
+        $this->values[$name] = $value;
+    }
+}
+?>
+</code></pre>
+
+<h5>Method Overloading</h5>
+<ul>
+  <li><code>__call()</code> – called for inaccessible object methods</li>
+  <li><code>__callStatic()</code> – called for inaccessible static methods</li>
+</ul>
+
+<h5>Object Serialization</h5>
+<ul>
+  <li><code>__sleep()</code> – executed before serialization</li>
+  <li><code>__wakeup()</code> – executed after unserialization</li>
+  <li><code>__serialize()</code> – modern serialization control</li>
+  <li><code>__unserialize()</code> – modern unserialization control</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class SessionData {
+    public function __serialize(): array {
+        return ['time' => time()];
+    }
+
+    public function __unserialize(array $data): void {
+        echo $data['time'];
+    }
+}
+?>
+</code></pre>
+
+<h5>Object Casting and Debugging</h5>
+<ul>
+  <li><code>__toString()</code> – object used as string</li>
+  <li><code>__debugInfo()</code> – custom debug output</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public function __toString(): string {
+        return "User object";
+    }
+}
+?>
+</code></pre>
+
+<h5>Invocation and Cloning</h5>
+<ul>
+  <li><code>__invoke()</code> – object called as a function</li>
+  <li><code>__clone()</code> – object cloning behavior</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class Greeter {
+    public function __invoke(string $name): string {
+        return "Hello " . $name;
+    }
+}
+
+$greet = new Greeter();
+echo $greet("Elton");
+?>
+</code></pre>
+
+<p>
+  Magic methods enable flexible and dynamic object behavior, but they should
+  be used carefully to maintain readability and predictable code structure.
+</p>
+
 
 <h4 id="final">FINAL</h4>
 .
