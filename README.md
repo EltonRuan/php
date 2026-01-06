@@ -8025,7 +8025,62 @@ echo $greet("Elton");
 
 
 <h4 id="final">FINAL</h4>
-.
+
+<p>
+  The <code>final</code> keyword in PHP is used to prevent
+  <strong>class inheritance</strong> and <strong>method overriding</strong>.
+  It enforces strict behavior in object-oriented design.
+</p>
+
+<h5>Final Classes</h5>
+<p>
+  A final class cannot be extended by another class.
+</p>
+
+<pre><code class="language-php">
+<?php
+final class DatabaseConnection {
+    public function connect(): string {
+        return "Connected";
+    }
+}
+
+// This will cause a fatal error
+// class MyConnection extends DatabaseConnection {}
+?>
+</code></pre>
+
+<h5>Final Methods</h5>
+<p>
+  A final method cannot be overridden in child classes.
+</p>
+
+<pre><code class="language-php">
+<?php
+class BaseService {
+    final public function execute(): string {
+        return "Executing base logic";
+    }
+}
+
+class ChildService extends BaseService {
+    // This will cause a fatal error
+    // public function execute() {}
+}
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li>Final classes cannot be inherited</li>
+  <li>Final methods cannot be overridden</li>
+  <li>Used to protect critical logic</li>
+</ul>
+
+<p>
+  The <code>final</code> keyword is commonly used for security, performance
+  optimization, and to preserve intended class behavior in PHP applications.
+</p>
 
 <h4 id="cloning-objects">CLONING OBJECTS</h4>
 .
