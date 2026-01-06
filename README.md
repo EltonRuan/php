@@ -8083,7 +8083,108 @@ class ChildService extends BaseService {
 </p>
 
 <h4 id="cloning-objects">CLONING OBJECTS</h4>
-.
+
+<p>
+  Cloning objects in PHP creates a copy of an existing object.
+  By default, PHP performs a <strong>shallow copy</strong>, meaning that
+  object properties are copied by reference unless explicitly handled.
+</p>
+
+<h5>Basic Object Cloning</h5>
+<p>
+  Objects are cloned using the <code>clone</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
+}
+
+$user1 = new User("Elton");
+$user2 = clone $user1;
+
+$user2->name = "John";
+
+echo $user1->name; // Elton
+echo $user2->name; // John
+?>
+</code></pre>
+
+<h5>The <code>__clone()</code> Magic Method</h5>
+<p>
+  The <code>__clone()</code> method is automatically called after an object
+  is cloned. It allows you to customize the cloning behavior.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Profile {
+    public string $username;
+
+    public function __clone() {
+        $this->username = $this->username . "_copy";
+    }
+}
+
+$p1 = new Profile();
+$p1->username = "elton";
+
+$p2 = clone $p1;
+
+echo $p2->username; // elton_copy
+?>
+</code></pre>
+
+<h5>Deep Copy Example</h5>
+<p>
+  To perform a deep copy, you must explicitly clone nested objects.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Address {
+    public string $city;
+}
+
+class Person {
+    public string $name;
+    public Address $address;
+
+    public function __clone() {
+        $this->address = clone $this->address;
+    }
+}
+
+$person1 = new Person();
+$person1->name = "Elton";
+$person1->address = new Address();
+$person1->address->city = "São Paulo";
+
+$person2 = clone $person1;
+$person2->address->city = "Rio";
+
+echo $person1->address->city; // São Paulo
+echo $person2->address->city; // Rio
+?>
+</code></pre>
+
+<h5>Key Notes</h5>
+<ul>
+  <li><code>clone</code> creates a new object instance</li>
+  <li><code>__clone()</code> customizes cloning behavior</li>
+  <li>Nested objects require manual cloning for deep copies</li>
+</ul>
+
+<p>
+  Object cloning is useful when you need independent copies of objects
+  without affecting the original instance.
+</p>
+
 
 <h4 id="comparing-objects">COMPARING OBJECTS</h4>
 .
