@@ -8187,7 +8187,95 @@ echo $person2->address->city; // Rio
 
 
 <h4 id="comparing-objects">COMPARING OBJECTS</h4>
-.
+
+<p>
+  Comparing objects in PHP can be done in different ways depending on
+  whether you want to compare their <strong>identity</strong> or their
+  <strong>state (values)</strong>.
+</p>
+
+<h5>Equality Comparison (<code>==</code>)</h5>
+<p>
+  The <code>==</code> operator checks if two objects have the same
+  properties and values and are instances of the same class.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+}
+
+$user1 = new User();
+$user1->name = "Elton";
+
+$user2 = new User();
+$user2->name = "Elton";
+
+var_dump($user1 == $user2); // true
+?>
+</code></pre>
+
+<h5>Identity Comparison (<code>===</code>)</h5>
+<p>
+  The <code>===</code> operator checks if two variables reference
+  the exact same object instance.
+</p>
+
+<pre><code class="language-php">
+<?php
+$user3 = $user1;
+
+var_dump($user1 === $user2); // false
+var_dump($user1 === $user3); // true
+?>
+</code></pre>
+
+<h5>Comparing Objects of Different Classes</h5>
+<p>
+  Objects of different classes are never considered equal.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Admin {}
+
+$admin = new Admin();
+
+var_dump($user1 == $admin); // false
+?>
+</code></pre>
+
+<h5>Custom Comparison Logic</h5>
+<p>
+  PHP does not support operator overloading for comparisons, but you can
+  implement custom comparison logic using methods.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Product {
+    public function equals(Product $other): bool {
+        return $this->id === $other->id;
+    }
+
+    public int $id;
+}
+?>
+</code></pre>
+
+<h5>Key Differences</h5>
+<ul>
+  <li><code>==</code> compares object values</li>
+  <li><code>===</code> compares object references</li>
+  <li>Different classes are never equal</li>
+</ul>
+
+<p>
+  Understanding object comparison is important when working with identity,
+  caching, collections, and object-oriented logic in PHP.
+</p>
+
 
 <h4 id="late-static-bindings">LATE STATIC BINDINGS</h4>
 .
