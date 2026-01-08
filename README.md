@@ -8278,7 +8278,89 @@ class Product {
 
 
 <h4 id="late-static-bindings">LATE STATIC BINDINGS</h4>
-.
+
+<p>
+  Late Static Binding (LSB) in PHP allows static method calls to be resolved
+  at runtime instead of compile time. This enables correct behavior in
+  class inheritance when using static methods.
+</p>
+
+<h5>The Problem with <code>self::</code></h5>
+<p>
+  The <code>self::</code> keyword is bound to the class where the method
+  is originally defined, not the class that is calling it.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Base {
+    public static function who(): string {
+        return "Base";
+    }
+
+    public static function test(): string {
+        return self::who();
+    }
+}
+
+class Child extends Base {
+    public static function who(): string {
+        return "Child";
+    }
+}
+
+echo Child::test(); // Base
+?>
+</code></pre>
+
+<h5>Using <code>static::</code> (Late Static Binding)</h5>
+<p>
+  The <code>static::</code> keyword resolves the class at runtime,
+  allowing overridden methods to be called correctly.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Base {
+    public static function who(): string {
+        return "Base";
+    }
+
+    public static function test(): string {
+        return static::who();
+    }
+}
+
+class Child extends Base {
+    public static function who(): string {
+        return "Child";
+    }
+}
+
+echo Child::test(); // Child
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li><code>static::</code> enables runtime binding</li>
+  <li>Works only in static context</li>
+  <li>Essential for correct inheritance behavior</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Factory methods</li>
+  <li>Fluent interfaces</li>
+  <li>Static polymorphism</li>
+</ul>
+
+<p>
+  Late Static Binding is a core concept for advanced object-oriented
+  programming in PHP, ensuring flexibility and correctness in
+  inherited static behavior.
+</p>
+
 
 <h4 id="objects-and-references">OBJECTS AND REFERENCES</h4>
 .
