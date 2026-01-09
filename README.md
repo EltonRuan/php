@@ -8363,7 +8363,95 @@ echo Child::test(); // Child
 
 
 <h4 id="objects-and-references">OBJECTS AND REFERENCES</h4>
-.
+
+<p>
+  In PHP, objects are handled by reference by default. This means that
+  variables assigned to an object do not contain the object itself,
+  but a reference (handle) to it.
+</p>
+
+<h5>Assigning Objects</h5>
+<p>
+  When you assign an object to another variable, both variables point
+  to the same object instance.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+}
+
+$user1 = new User();
+$user1->name = "Elton";
+
+$user2 = $user1;
+$user2->name = "John";
+
+echo $user1->name; // John
+?>
+</code></pre>
+
+<h5>Passing Objects to Functions</h5>
+<p>
+  Objects passed to functions are also passed by reference to the same
+  instance.
+</p>
+
+<pre><code class="language-php">
+<?php
+function renameUser(User $user): void {
+    $user->name = "Changed";
+}
+
+renameUser($user1);
+echo $user1->name; // Changed
+?>
+</code></pre>
+
+<h5>Using the Reference Operator (<code>&amp;</code>)</h5>
+<p>
+  Explicit references are rarely needed with objects, but they can be
+  used when reassigning variables.
+</p>
+
+<pre><code class="language-php">
+<?php
+$user3 =& $user1;
+$user3->name = "Reference";
+
+echo $user1->name; // Reference
+?>
+</code></pre>
+
+<h5>Cloning vs Referencing</h5>
+<p>
+  To create a new object instance instead of a reference, use
+  <code>clone</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+$user4 = clone $user1;
+$user4->name = "Clone";
+
+echo $user1->name; // Reference
+echo $user4->name; // Clone
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+<ul>
+  <li>Objects are passed by reference by default</li>
+  <li>Multiple variables can reference the same object</li>
+  <li><code>clone</code> creates a separate instance</li>
+</ul>
+
+<p>
+  Understanding objects and references is essential to avoid unintended
+  side effects and to manage object state correctly in PHP.
+</p>
+
 
 <h4 id="object-serialization">OBJECT SERIALIZATION - OBJECTS IN SESSIONS</h4>
 .
