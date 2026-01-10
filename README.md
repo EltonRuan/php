@@ -8453,8 +8453,105 @@ echo $user4->name; // Clone
 </p>
 
 
-<h4 id="object-serialization">OBJECT SERIALIZATION - OBJECTS IN SESSIONS</h4>
-.
+<h4 id="object-serialization">OBJECT SERIALIZATION – OBJECTS IN SESSIONS</h4>
+
+<p>
+  Object serialization in PHP is the process of converting an object into
+  a storable format so it can be saved and later restored. This is commonly
+  used when storing objects in sessions.
+</p>
+
+<h5>Basic Serialization</h5>
+<p>
+  PHP provides the <code>serialize()</code> and <code>unserialize()</code>
+  functions to convert objects to and from a string representation.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+}
+
+$user = new User();
+$user->name = "Elton";
+
+$data = serialize($user);
+$restoredUser = unserialize($data);
+
+echo $restoredUser->name;
+?>
+</code></pre>
+
+<h5>Storing Objects in Sessions</h5>
+<p>
+  Serialized objects can be safely stored in PHP sessions.
+</p>
+
+<pre><code class="language-php">
+<?php
+session_start();
+
+class Cart {
+    public array $items = [];
+}
+
+$_SESSION['cart'] = new Cart();
+?>
+</code></pre>
+
+<h5>Restoring Objects from Sessions</h5>
+<p>
+  When a session is restored, PHP automatically unserializes stored objects.
+  The class definition must be available.
+</p>
+
+<pre><code class="language-php">
+<?php
+session_start();
+
+$cart = $_SESSION['cart'];
+echo count($cart->items);
+?>
+</code></pre>
+
+<h5>Serialization Control with Magic Methods</h5>
+<ul>
+  <li><code>__sleep()</code> – selects properties to serialize</li>
+  <li><code>__wakeup()</code> – reinitializes the object</li>
+  <li><code>__serialize()</code> – modern serialization control</li>
+  <li><code>__unserialize()</code> – modern unserialization control</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class SessionUser {
+    private string $token;
+
+    public function __serialize(): array {
+        return ['token' => $this->token];
+    }
+
+    public function __unserialize(array $data): void {
+        $this->token = $data['token'];
+    }
+}
+?>
+</code></pre>
+
+<h5>Important Considerations</h5>
+<ul>
+  <li>Class definitions must be loaded before unserialization</li>
+  <li>Resources and closures cannot be serialized</li>
+  <li>Be careful with security when unserializing external data</li>
+</ul>
+
+<p>
+  Object serialization is essential for session handling, caching, and
+  persistence in PHP, but it must be used carefully to avoid errors and
+  security vulnerabilities.
+</p>
+
 
 <h4 id="covariance-contravariance">COVARIANCE AND CONTRAVARIANCE</h4>
 .
