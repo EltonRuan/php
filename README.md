@@ -8554,7 +8554,92 @@ class SessionUser {
 
 
 <h4 id="covariance-contravariance">COVARIANCE AND CONTRAVARIANCE</h4>
-.
+
+<p>
+  Covariance and contravariance in PHP define how type declarations behave
+  when overriding methods in child classes. They improve type safety while
+  allowing flexible inheritance.
+</p>
+
+<h5>Covariance (Return Types)</h5>
+<p>
+  Covariance allows a child class to return a more specific type than the
+  one declared in the parent class method.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Animal {}
+
+class Dog extends Animal {}
+
+class Shelter {
+    public function adopt(): Animal {
+        return new Animal();
+    }
+}
+
+class DogShelter extends Shelter {
+    public function adopt(): Dog {
+        return new Dog();
+    }
+}
+?>
+</code></pre>
+
+<h5>Contravariance (Parameter Types)</h5>
+<p>
+  Contravariance allows a child class to accept a more generic (less specific)
+  parameter type than the one defined in the parent class.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Food {}
+class Meat extends Food {}
+
+class Feeder {
+    public function feed(Meat $food): void {}
+}
+
+class AnimalFeeder extends Feeder {
+    public function feed(Food $food): void {}
+}
+?>
+</code></pre>
+
+<h5>Rules and Constraints</h5>
+<ul>
+  <li>Return types can be covariant (more specific)</li>
+  <li>Parameter types can be contravariant (more generic)</li>
+  <li>Visibility cannot be reduced in overridden methods</li>
+  <li>Types must remain compatible</li>
+</ul>
+
+<h5>Interface Implementation</h5>
+<p>
+  Covariance and contravariance also apply when implementing interfaces.
+</p>
+
+<pre><code class="language-php">
+<?php
+interface Repository {
+    public function find(): Animal;
+}
+
+class DogRepository implements Repository {
+    public function find(): Dog {
+        return new Dog();
+    }
+}
+?>
+</code></pre>
+
+<p>
+  Covariance and contravariance help enforce strong typing in object-oriented
+  PHP while preserving extensibility and clean inheritance hierarchies.
+</p>
+
 
 <h4 id="slow-objects">SLOW OBJECTS</h4>
 .
