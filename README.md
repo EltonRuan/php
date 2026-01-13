@@ -8642,7 +8642,77 @@ class DogRepository implements Repository {
 
 
 <h4 id="slow-objects">SLOW OBJECTS</h4>
-.
+
+<p>
+  Slow objects in PHP refer to object designs or usage patterns that negatively
+  impact application performance. While objects provide structure and
+  maintainability, improper use can introduce unnecessary overhead.
+</p>
+
+<h5>Common Causes of Slow Objects</h5>
+<ul>
+  <li>Excessive object instantiation</li>
+  <li>Deep inheritance hierarchies</li>
+  <li>Heavy use of magic methods</li>
+  <li>Overuse of getters and setters</li>
+  <li>Complex constructors</li>
+</ul>
+
+<h5>Expensive Object Creation</h5>
+<p>
+  Creating many objects in loops or frequently executed code can slow down
+  performance.
+</p>
+
+<pre><code class="language-php">
+<?php
+for ($i = 0; $i < 100000; $i++) {
+    $obj = new stdClass();
+}
+?>
+</code></pre>
+
+<h5>Magic Methods Overhead</h5>
+<p>
+  Magic methods such as <code>__get()</code> and <code>__call()</code> add
+  runtime overhead and should be avoided in performance-critical code.
+</p>
+
+<pre><code class="language-php">
+<?php
+class SlowAccess {
+    public function __get($name) {
+        return "value";
+    }
+}
+?>
+</code></pre>
+
+<h5>Deep Inheritance Chains</h5>
+<p>
+  Long inheritance chains increase method resolution time and reduce clarity.
+</p>
+
+<h5>Performance Optimization Tips</h5>
+<ul>
+  <li>Prefer simple data structures when possible</li>
+  <li>Use <code>final</code> classes and methods where appropriate</li>
+  <li>Avoid unnecessary object creation</li>
+  <li>Cache heavy objects or results</li>
+  <li>Profile before optimizing</li>
+</ul>
+
+<h5>When Objects Are Not the Problem</h5>
+<p>
+  In most real-world applications, I/O operations, database queries,
+  and network calls are far more expensive than object usage.
+</p>
+
+<p>
+  Understanding and avoiding slow object patterns helps build performant,
+  scalable PHP applications without sacrificing clean design.
+</p>
+
 
 <h4 id="oop-changelog">OOP CHANGELOG</h4>
 .
