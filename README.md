@@ -8715,7 +8715,77 @@ class SlowAccess {
 
 
 <h4 id="oop-changelog">OOP CHANGELOG</h4>
-.
+
+<p>
+  The OOP changelog summarizes important object-oriented programming
+  features and improvements introduced across different PHP versions.
+  Understanding these changes helps ensure compatibility and modern
+  best practices.
+</p>
+
+<h5>PHP 5.x</h5>
+<ul>
+  <li>Introduction of a full OOP model</li>
+  <li>Visibility keywords: <code>public</code>, <code>protected</code>, <code>private</code></li>
+  <li>Abstract classes and interfaces</li>
+  <li>Magic methods such as <code>__construct()</code> and <code>__autoload()</code></li>
+  <li>Exception handling with <code>try / catch</code></li>
+</ul>
+
+<h5>PHP 7.0</h5>
+<ul>
+  <li>Scalar type declarations</li>
+  <li>Return type declarations</li>
+  <li>Anonymous classes</li>
+  <li>Improved engine performance (PHPNG)</li>
+</ul>
+
+<h5>PHP 7.1</h5>
+<ul>
+  <li>Nullable types (<code>?Type</code>)</li>
+  <li>Void return type (<code>void</code>)</li>
+  <li>Iterable pseudo-type</li>
+  <li>Class constant visibility</li>
+</ul>
+
+<h5>PHP 7.4</h5>
+<ul>
+  <li>Typed properties</li>
+  <li>Arrow functions</li>
+  <li>Improved covariance and contravariance</li>
+</ul>
+
+<h5>PHP 8.0</h5>
+<ul>
+  <li>Constructor property promotion</li>
+  <li>Named arguments</li>
+  <li>Union types</li>
+  <li><code>match</code> expression</li>
+  <li>Attributes (annotations)</li>
+</ul>
+
+<h5>PHP 8.1</h5>
+<ul>
+  <li>Enumerations (Enums)</li>
+  <li><code>readonly</code> properties</li>
+  <li>First-class callable syntax</li>
+  <li>Intersection types</li>
+</ul>
+
+<h5>PHP 8.2+</h5>
+<ul>
+  <li><code>readonly</code> classes</li>
+  <li>Deprecated dynamic properties</li>
+  <li>Improved type system consistency</li>
+</ul>
+
+<h5>Key Takeaway</h5>
+<p>
+  PHP’s OOP features have evolved significantly, offering stronger typing,
+  better performance, and more expressive syntax. Staying up to date ensures
+  cleaner, safer, and more maintainable object-oriented code.
+</p>
+
 
 
 <h3 id="namespaces">NAMESPACES</h3>
