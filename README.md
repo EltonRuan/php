@@ -8808,7 +8808,108 @@ class SlowAccess {
 </nav>
 
 <h4 id="namespaces">NAMESPACES</h4>
-.
+
+<p>
+  Namespaces in PHP are used to organize code and prevent name collisions
+  between classes, interfaces, functions, and constants.
+  They are especially useful in large applications and libraries.
+</p>
+
+<h5>Defining a Namespace</h5>
+<p>
+  A namespace is declared at the top of a PHP file using the
+  <code>namespace</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Models;
+
+class User {
+    public string $name;
+}
+?>
+</code></pre>
+
+<h5>Using Namespaced Classes</h5>
+<p>
+  Namespaced elements can be accessed using their fully qualified name.
+</p>
+
+<pre><code class="language-php">
+<?php
+$user = new App\Models\User();
+?>
+</code></pre>
+
+<h5>Importing with <code>use</code></h5>
+<p>
+  The <code>use</code> keyword allows importing namespaces or specific classes
+  to simplify usage.
+</p>
+
+<pre><code class="language-php">
+<?php
+use App\Models\User;
+
+$user = new User();
+?>
+</code></pre>
+
+<h5>Aliasing</h5>
+<p>
+  Aliases can be created to avoid name conflicts.
+</p>
+
+<pre><code class="language-php">
+<?php
+use App\Models\User as AppUser;
+
+$appUser = new AppUser();
+?>
+</code></pre>
+
+<h5>Namespaces for Functions and Constants</h5>
+<p>
+  Namespaces can also contain functions and constants.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace Utils;
+
+function helper(): string {
+    return "Helper function";
+}
+
+const VERSION = "1.0.0";
+?>
+</code></pre>
+
+<h5>Global Namespace</h5>
+<p>
+  Code without a namespace belongs to the global namespace.
+  The global namespace can be accessed using a leading backslash.
+</p>
+
+<pre><code class="language-php">
+<?php
+$date = new \DateTime();
+?>
+</code></pre>
+
+<h5>Key Benefits</h5>
+<ul>
+  <li>Avoids naming conflicts</li>
+  <li>Improves code organization</li>
+  <li>Essential for autoloading and modern PHP projects</li>
+</ul>
+
+<p>
+  Namespaces are a fundamental part of modern PHP development and are
+  widely used in frameworks and Composer-based applications.
+</p>
+
 
 <h4 id="sub-namespaces">SUB-NAMESPACES</h4>
 .
