@@ -8912,7 +8912,85 @@ $date = new \DateTime();
 
 
 <h4 id="sub-namespaces">SUB-NAMESPACES</h4>
-.
+
+<p>
+  Sub-namespaces in PHP are used to further organize code within a main
+  namespace. They help structure large applications by grouping related
+  classes, interfaces, functions, and constants.
+</p>
+
+<h5>Defining Sub-Namespaces</h5>
+<p>
+  Sub-namespaces are defined using a backslash (<code>\</code>) separator.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Controllers\Admin;
+
+class DashboardController {
+    public function index(): string {
+        return "Admin Dashboard";
+    }
+}
+?>
+</code></pre>
+
+<h5>Using Classes from Sub-Namespaces</h5>
+<p>
+  Classes in sub-namespaces can be accessed using their fully qualified name.
+</p>
+
+<pre><code class="language-php">
+<?php
+$controller = new App\Controllers\Admin\DashboardController();
+?>
+</code></pre>
+
+<h5>Importing Sub-Namespaces with <code>use</code></h5>
+<p>
+  Sub-namespaced classes can be imported to simplify code.
+</p>
+
+<pre><code class="language-php">
+<?php
+use App\Controllers\Admin\DashboardController;
+
+$controller = new DashboardController();
+?>
+</code></pre>
+
+<h5>Namespace Hierarchy Example</h5>
+<pre><code class="language-php">
+<?php
+namespace App\Services;
+
+class UserService {}
+
+namespace App\Services\Auth;
+
+class AuthService {}
+?>
+</code></pre>
+
+<h5>Relationship to Directory Structure</h5>
+<p>
+  While not required, sub-namespaces commonly mirror the directory
+  structure when using autoloaders such as Composer (PSR-4).
+</p>
+
+<h5>Key Points</h5>
+<ul>
+  <li>Sub-namespaces improve code organization</li>
+  <li>They reduce naming conflicts</li>
+  <li>They scale well in large applications</li>
+</ul>
+
+<p>
+  Sub-namespaces are essential for building modular, readable, and
+  maintainable PHP applications.
+</p>
+
 
 <h4 id="multiple-namespaces-in-one-file">DEFINING MULTIPLE NAMESPACES IN ONE FILE</h4>
 .
