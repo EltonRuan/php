@@ -8993,7 +8993,81 @@ class AuthService {}
 
 
 <h4 id="multiple-namespaces-in-one-file">DEFINING MULTIPLE NAMESPACES IN ONE FILE</h4>
-.
+
+<p>
+  PHP allows defining multiple namespaces within a single file.
+  This feature is mainly used for legacy code, special cases,
+  or grouping related declarations.
+</p>
+
+<h5>Sequential Namespace Declarations</h5>
+<p>
+  Each namespace applies only to the code that follows it.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Models;
+
+class User {}
+
+namespace App\Services;
+
+class UserService {}
+?>
+</code></pre>
+
+<h5>Bracketed Namespace Syntax</h5>
+<p>
+  The bracketed syntax clearly separates namespace blocks and is
+  recommended when using multiple namespaces in the same file.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Models {
+    class User {}
+}
+
+namespace App\Services {
+    class UserService {}
+}
+?>
+</code></pre>
+
+<h5>Global Namespace in the Same File</h5>
+<p>
+  You can explicitly define code in the global namespace using
+  an empty namespace declaration.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Models {
+    class Product {}
+}
+
+namespace {
+    function helper(): string {
+        return "Global helper";
+    }
+}
+?>
+</code></pre>
+
+<h5>Important Rules</h5>
+<ul>
+  <li>Namespace declarations must appear at the top of the file</li>
+  <li>No code may precede a namespace declaration (except <code>declare</code>)</li>
+  <li>Bracketed and unbracketed syntaxes should not be mixed</li>
+</ul>
+
+<p>
+  Defining multiple namespaces in one file is supported, but for
+  readability and maintainability, it is generally recommended
+  to use one namespace per file.
+</p>
+
 
 <h4 id="basics">BASICS</h4>
 .
