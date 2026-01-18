@@ -9070,7 +9070,96 @@ namespace {
 
 
 <h4 id="basics">BASICS</h4>
-.
+
+<p>
+  The basics of namespaces in PHP focus on how names are resolved and
+  how code is organized to avoid naming conflicts.
+</p>
+
+<h5>Why Namespaces Exist</h5>
+<p>
+  Namespaces prevent collisions between classes, functions, and constants
+  that share the same name across different libraries or parts of an application.
+</p>
+
+<h5>Basic Namespace Declaration</h5>
+<p>
+  A namespace is declared at the beginning of a PHP file.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+class Logger {}
+?>
+</code></pre>
+
+<h5>Accessing Namespaced Elements</h5>
+<p>
+  There are three common ways to reference namespaced elements:
+</p>
+
+<ul>
+  <li><strong>Fully Qualified Name</strong></li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+$logger = new \App\Logger();
+?>
+</code></pre>
+
+<ul>
+  <li><strong>Qualified Name</strong></li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+$logger = new Logger();
+?>
+</code></pre>
+
+<ul>
+  <li><strong>Imported Name</strong></li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+use App\Logger;
+
+$logger = new Logger();
+?>
+</code></pre>
+
+<h5>Namespace Resolution Rules</h5>
+<ul>
+  <li>Unqualified names are resolved within the current namespace</li>
+  <li>Qualified names are resolved relative to the current namespace</li>
+  <li>Fully qualified names always start with <code>\</code></li>
+</ul>
+
+<h5>Namespaces and Built-in Classes</h5>
+<p>
+  PHP core classes exist in the global namespace and must be referenced
+  with a leading backslash when inside a namespace.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+$date = new \DateTime();
+?>
+</code></pre>
+
+<p>
+  Understanding these basics is essential for writing clean,
+  conflict-free, and modern PHP code.
+</p>
+
 
 <h4 id="namespaces-and-dynamic-language-features">NAMESPACES AND DYNAMIC LANGUAGE FEATURES</h4>
 .
