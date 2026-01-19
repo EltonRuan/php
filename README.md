@@ -9162,7 +9162,110 @@ $date = new \DateTime();
 
 
 <h4 id="namespaces-and-dynamic-language-features">NAMESPACES AND DYNAMIC LANGUAGE FEATURES</h4>
-.
+
+<p>
+  When working with namespaces in PHP, some dynamic language features
+  behave differently depending on how names are resolved at runtime.
+</p>
+
+<h5>Dynamic Name Resolution</h5>
+<p>
+  Dynamic features such as variable class names, function names, and
+  constant names are resolved at runtime and are <strong>not</strong>
+  automatically prefixed with the current namespace.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+$className = 'Logger';
+$logger = new $className(); // Looks for App\Logger? No — looks in global scope
+?>
+</code></pre>
+
+<p>
+  To correctly reference a namespaced class dynamically, you must use
+  the fully qualified name.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+$className = __NAMESPACE__ . '\Logger';
+$logger = new $className();
+?>
+</code></pre>
+
+<h5>Dynamic Functions</h5>
+<p>
+  The same rule applies to dynamically called functions.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace Utils;
+
+$func = 'helper';
+$func(); // Calls global helper(), not Utils\helper()
+?>
+</code></pre>
+
+<p>
+  Correct usage with namespace:
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace Utils;
+
+$func = __NAMESPACE__ . '\helper';
+$func();
+?>
+</code></pre>
+
+<h5>Dynamic Constants</h5>
+<p>
+  Constants accessed dynamically also require full qualification.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace Config;
+
+define('Config\VERSION', '1.0.0');
+
+$const = __NAMESPACE__ . '\VERSION';
+echo constant($const);
+?>
+</code></pre>
+
+<h5>Reflection and Namespaces</h5>
+<p>
+  Reflection APIs expect fully qualified names when inspecting classes,
+  methods, or functions inside namespaces.
+</p>
+
+<pre><code class="language-php">
+<?php
+$reflection = new ReflectionClass(\App\Logger::class);
+?>
+</code></pre>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always use fully qualified names with dynamic features</li>
+  <li>Use <code>__NAMESPACE__</code> to build names safely</li>
+  <li>Prefer <code>::class</code> for class references when possible</li>
+  <li>Avoid unnecessary dynamic calls when static references are clearer</li>
+</ul>
+
+<p>
+  Understanding how namespaces interact with dynamic language features
+  helps prevent subtle bugs and ensures predictable behavior in PHP applications.
+</p>
+
 
 <h4 id="namespace-keyword-and-namespace-constant">NAMESPACE KEYWORD AND _NAMESPACE_</h4>
 .
