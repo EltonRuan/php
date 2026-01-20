@@ -9267,8 +9267,96 @@ $reflection = new ReflectionClass(\App\Logger::class);
 </p>
 
 
-<h4 id="namespace-keyword-and-namespace-constant">NAMESPACE KEYWORD AND _NAMESPACE_</h4>
-.
+<h4 id="namespace-keyword-and-namespace-constant">NAMESPACE KEYWORD AND __NAMESPACE__</h4>
+
+<p>
+  PHP provides the <code>namespace</code> keyword and the
+  <code>__NAMESPACE__</code> magic constant to define and work with namespaces
+  in a clear and predictable way.
+</p>
+
+<h5>The <code>namespace</code> Keyword</h5>
+<p>
+  The <code>namespace</code> keyword is used to declare a namespace at the top
+  of a PHP file. It groups related classes, functions, and constants, helping
+  avoid name collisions.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Services;
+
+class Mailer {
+    public function send() {
+        // ...
+    }
+}
+?>
+</code></pre>
+
+<p>
+  Everything declared after the <code>namespace</code> statement belongs to that
+  namespace unless otherwise specified.
+</p>
+
+<h5>The <code>__NAMESPACE__</code> Magic Constant</h5>
+<p>
+  <code>__NAMESPACE__</code> contains the name of the current namespace as a
+  string. If no namespace is defined, it returns an empty string.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Services;
+
+echo __NAMESPACE__; // Outputs: App\Services
+?>
+</code></pre>
+
+<h5>Using <code>__NAMESPACE__</code> for Dynamic References</h5>
+<p>
+  The <code>__NAMESPACE__</code> constant is especially useful when building
+  fully qualified names dynamically.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Services;
+
+$class = __NAMESPACE__ . '\Mailer';
+$mailer = new $class();
+?>
+</code></pre>
+
+<h5>Global Namespace</h5>
+<p>
+  Code without a namespace declaration lives in the global namespace.
+  To explicitly reference global classes or functions from within a namespace,
+  prefix them with a backslash (<code>\</code>).
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+$date = new \DateTime(); // Global DateTime class
+?>
+</code></pre>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Declare the namespace at the very top of the file</li>
+  <li>Use <code>__NAMESPACE__</code> for safe dynamic name construction</li>
+  <li>Use fully qualified names or imports (<code>use</code>) for clarity</li>
+  <li>Avoid mixing global and namespaced code unnecessarily</li>
+</ul>
+
+<p>
+  Proper use of the <code>namespace</code> keyword and the
+  <code>__NAMESPACE__</code> constant is essential for writing clean,
+  maintainable, and collision-free PHP code.
+</p>
+
 
 <h4 id="aliasing-and-importing">ALIASING AND IMPORTING</h4>
 .
