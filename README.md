@@ -9359,7 +9359,101 @@ $date = new \DateTime(); // Global DateTime class
 
 
 <h4 id="aliasing-and-importing">ALIASING AND IMPORTING</h4>
-.
+
+<p>
+  PHP allows importing and aliasing classes, interfaces, traits, functions, and
+  constants from namespaces using the <code>use</code> keyword. This improves
+  readability and avoids repetitive fully qualified names.
+</p>
+
+<h5>Importing Classes</h5>
+<p>
+  Classes from other namespaces can be imported to be used without their full
+  namespace path.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Controllers;
+
+use App\Services\Mailer;
+
+$mailer = new Mailer();
+?>
+</code></pre>
+
+<h5>Aliasing Classes</h5>
+<p>
+  When two classes have the same name or a shorter name is desired, aliases can
+  be created using the <code>as</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App\Controllers;
+
+use App\Services\Mailer as ServiceMailer;
+use App\Utils\Mailer as UtilsMailer;
+
+$serviceMailer = new ServiceMailer();
+$utilsMailer = new UtilsMailer();
+?>
+</code></pre>
+
+<h5>Importing Functions</h5>
+<p>
+  Functions can also be imported explicitly using <code>use function</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+use function App\Helpers\formatDate;
+
+echo formatDate('2026-01-01');
+?>
+</code></pre>
+
+<h5>Importing Constants</h5>
+<p>
+  Constants are imported using <code>use const</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+use const App\Config\APP_ENV;
+
+echo APP_ENV;
+?>
+</code></pre>
+
+<h5>Multiple Imports</h5>
+<p>
+  Multiple imports can be declared in a single <code>use</code> statement.
+</p>
+
+<pre><code class="language-php">
+<?php
+use App\Services\{Mailer, Logger, Cache};
+?>
+</code></pre>
+
+<h5>Rules and Notes</h5>
+<ul>
+  <li><code>use</code> statements must appear after the namespace declaration</li>
+  <li>Aliasing helps resolve naming conflicts</li>
+  <li>Imports apply only to the file where they are declared</li>
+  <li>Fully qualified names can always be used as an alternative</li>
+</ul>
+
+<p>
+  Aliasing and importing are essential tools for organizing large PHP
+  applications and keeping code clean, readable, and maintainable.
+</p>
+
 
 <h4 id="global-namespace">GLOBAL NAMESPACE</h4>
 .
