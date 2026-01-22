@@ -9456,7 +9456,89 @@ use App\Services\{Mailer, Logger, Cache};
 
 
 <h4 id="global-namespace">GLOBAL NAMESPACE</h4>
-.
+
+<p>
+  The global namespace is the default namespace in PHP. Any code that is not
+  explicitly declared inside a namespace belongs to the global namespace.
+</p>
+
+<h5>Global Namespace Basics</h5>
+<p>
+  When no <code>namespace</code> statement is present, classes, functions, and
+  constants are defined in the global namespace.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    // Global namespace class
+}
+
+function helper() {
+    // Global namespace function
+}
+?>
+</code></pre>
+
+<h5>Accessing Global Namespace from a Namespace</h5>
+<p>
+  To reference elements from the global namespace inside a namespaced file, a
+  leading backslash (<code>\</code>) must be used.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+$user = new \User();      // Global class
+$time = new \DateTime(); // Built-in global class
+?>
+</code></pre>
+
+<h5>Built-in Global Classes and Functions</h5>
+<p>
+  Many PHP built-in classes and functions, such as <code>DateTime</code>,
+  <code>Exception</code>, and <code>strlen()</code>, exist in the global
+  namespace.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+echo \strlen("PHP"); // Calls global function
+?>
+</code></pre>
+
+<h5>Importing vs Global Resolution</h5>
+<p>
+  Instead of using fully qualified names, global classes can also be imported
+  using the <code>use</code> statement.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+use DateTime;
+
+$date = new DateTime();
+?>
+</code></pre>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use namespaces to avoid name collisions</li>
+  <li>Explicitly reference global classes with <code>\</code> when needed</li>
+  <li>Avoid defining application classes in the global namespace</li>
+  <li>Keep the global namespace for PHP built-in elements</li>
+</ul>
+
+<p>
+  Understanding the global namespace is essential for working correctly with
+  namespaces and avoiding unexpected name resolution issues in PHP.
+</p>
+
 
 <h4 id="accessing-global-namespace">ACCESSING THE GLOBAL NAMESPACE</h4>
 .
