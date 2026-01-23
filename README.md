@@ -9541,7 +9541,88 @@ $date = new DateTime();
 
 
 <h4 id="accessing-global-namespace">ACCESSING THE GLOBAL NAMESPACE</h4>
-.
+
+<p>
+  When working inside a namespace, PHP provides several ways to access classes,
+  functions, and constants that belong to the global namespace.
+</p>
+
+<h5>Using the Leading Backslash</h5>
+<p>
+  The simplest way to access the global namespace is by prefixing the name with
+  a backslash (<code>\</code>). This tells PHP to resolve the symbol from the
+  global scope.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+$dt = new \DateTime();
+echo \strlen("Hello");
+?>
+</code></pre>
+
+<h5>Accessing Global Constants</h5>
+<p>
+  Global constants can also be accessed using a leading backslash.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+echo \PHP_VERSION;
+?>
+</code></pre>
+
+<h5>Using the <code>use</code> Statement</h5>
+<p>
+  Global classes, functions, and constants may be imported to simplify usage
+  and improve readability.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+use DateTime;
+use function strlen;
+use const PHP_VERSION;
+
+$dt = new DateTime();
+echo strlen("World");
+echo PHP_VERSION;
+?>
+</code></pre>
+
+<h5>Fallback Resolution for Functions and Constants</h5>
+<p>
+  If a function or constant is not found in the current namespace, PHP will
+  automatically fall back to the global namespace.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+echo strlen("PHP"); // Falls back to global strlen()
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+<ul>
+  <li>Classes do <strong>not</strong> use fallback resolution</li>
+  <li>Always use <code>\</code> or <code>use</code> for global classes</li>
+  <li>Fallback applies only to functions and constants</li>
+  <li>Explicit access improves clarity and performance</li>
+</ul>
+
+<p>
+  Properly accessing the global namespace ensures correct name resolution and
+  prevents subtle bugs in namespaced PHP applications.
+</p>
+
 
 <h4 id="name-resolution-rules">NAME RESOLUTION RULES</h4>
 .
