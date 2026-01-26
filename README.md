@@ -9625,7 +9625,108 @@ echo strlen("PHP"); // Falls back to global strlen()
 
 
 <h4 id="name-resolution-rules">NAME RESOLUTION RULES</h4>
-.
+
+<p>
+  PHP follows specific name resolution rules to determine how classes,
+  functions, and constants are resolved when namespaces are in use.
+  Understanding these rules helps avoid ambiguity and unexpected behavior.
+</p>
+
+<h5>Unqualified Names</h5>
+<p>
+  An unqualified name has no namespace prefix. PHP resolves it relative to the
+  current namespace.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+class Logger {}
+
+new Logger(); // Resolves to App\Logger
+?>
+</code></pre>
+
+<h5>Qualified Names</h5>
+<p>
+  A qualified name contains a namespace prefix but does not start with a
+  backslash. It is resolved relative to the current namespace.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+new Utils\Helper(); // Resolves to App\Utils\Helper
+?>
+</code></pre>
+
+<h5>Fully Qualified Names</h5>
+<p>
+  A fully qualified name starts with a backslash (<code>\</code>) and is always
+  resolved from the global namespace.
+</p>
+
+<pre><code class="language-php">
+<?php
+new \App\Utils\Helper();
+?>
+</code></pre>
+
+<h5>Import Resolution (<code>use</code>)</h5>
+<p>
+  Imported names take precedence over local resolution rules.
+</p>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+use App\Services\Mailer;
+
+new Mailer(); // Resolves to App\Services\Mailer
+?>
+</code></pre>
+
+<h5>Function and Constant Resolution</h5>
+<p>
+  Function and constant names follow a special resolution order.
+</p>
+<ol>
+  <li>Current namespace</li>
+  <li>Imported symbols</li>
+  <li>Global namespace (fallback)</li>
+</ol>
+
+<pre><code class="language-php">
+<?php
+namespace App;
+
+echo strlen("Test"); // Falls back to global strlen()
+?>
+</code></pre>
+
+<h5>Class Resolution Rules</h5>
+<ul>
+  <li>Classes do not use fallback resolution</li>
+  <li>Unqualified class names are resolved in the current namespace</li>
+  <li>Use <code>use</code> or fully qualified names for global classes</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use fully qualified names when clarity is critical</li>
+  <li>Import commonly used classes with <code>use</code></li>
+  <li>Avoid relying on fallback resolution</li>
+  <li>Be explicit to prevent naming conflicts</li>
+</ul>
+
+<p>
+  Mastering name resolution rules is essential for writing predictable,
+  maintainable PHP code in namespaced applications.
+</p>
+
 
 
 <h3 id="enumerations">ENUMERATIONS</h3>
