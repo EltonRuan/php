@@ -9751,7 +9751,99 @@ echo strlen("Test"); // Falls back to global strlen()
 
 
 <h4 id="overview-enumerations">OVERVIEW OF ENUMERATIONS</h4>
-.
+
+<p>
+  Enumerations (Enums) were introduced in PHP 8.1 to provide a safe and
+  structured way to define a fixed set of possible values. They are especially
+  useful for representing states, types, or categories in a type-safe manner.
+</p>
+
+<h5>What Are Enums?</h5>
+<p>
+  An enum is a special type that restricts a variable to one of a predefined
+  set of values. Unlike constants, enums are first-class language constructs
+  and integrate directly with type declarations.
+</p>
+
+<h5>Basic Enum Declaration</h5>
+<p>
+  Enums are declared using the <code>enum</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Status {
+    case Pending;
+    case Approved;
+    case Rejected;
+}
+?>
+</code></pre>
+
+<h5>Using Enums</h5>
+<p>
+  Enum cases are accessed using the scope resolution operator (<code>::</code>).
+</p>
+
+<pre><code class="language-php">
+<?php
+$status = Status::Approved;
+
+if ($status === Status::Approved) {
+    echo "Approved";
+}
+?>
+</code></pre>
+
+<h5>Backed Enums</h5>
+<p>
+  Enums can be backed by scalar values (<code>int</code> or <code>string</code>),
+  allowing easy conversion to and from primitive types.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Role: string {
+    case Admin = 'admin';
+    case User = 'user';
+}
+?>
+</code></pre>
+
+<h5>Enum Methods</h5>
+<p>
+  Enums can contain methods, enabling behavior to be attached to enum values.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Status {
+    case Active;
+    case Inactive;
+
+    public function label(): string {
+        return match ($this) {
+            self::Active => 'Active',
+            self::Inactive => 'Inactive',
+        };
+    }
+}
+?>
+</code></pre>
+
+<h5>Benefits of Enums</h5>
+<ul>
+  <li>Type safety and validation by design</li>
+  <li>Improved readability and maintainability</li>
+  <li>Prevention of invalid values</li>
+  <li>Better IDE support and refactoring</li>
+</ul>
+
+<p>
+  Enums provide a modern, robust alternative to constants and magic values,
+  making PHP code clearer and less error-prone.
+</p>
+
 
 <h4 id="basic-enumerations">BASIC ENUMERATIONS</h4>
 .
