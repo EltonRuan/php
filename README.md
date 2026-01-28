@@ -9846,7 +9846,88 @@ enum Status {
 
 
 <h4 id="basic-enumerations">BASIC ENUMERATIONS</h4>
-.
+
+<p>
+  Basic enumerations in PHP define a fixed set of named values without
+  associated scalar data. These enums are ideal for representing simple,
+  well-defined states or options.
+</p>
+
+<h5>Declaring a Basic Enum</h5>
+<p>
+  A basic enum is declared using the <code>enum</code> keyword followed by
+  one or more <code>case</code> definitions.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Direction {
+    case North;
+    case South;
+    case East;
+    case West;
+}
+?>
+</code></pre>
+
+<h5>Using Enum Cases</h5>
+<p>
+  Enum cases are accessed using the scope resolution operator
+  (<code>::</code>).
+</p>
+
+<pre><code class="language-php">
+<?php
+$direction = Direction::North;
+
+if ($direction === Direction::North) {
+    echo "Heading north";
+}
+?>
+</code></pre>
+
+<h5>Type Safety</h5>
+<p>
+  Enums enforce strict type safety. A variable typed as an enum can only
+  contain one of its defined cases.
+</p>
+
+<pre><code class="language-php">
+<?php
+function move(Direction $direction): void {
+    // Only valid Direction cases are allowed
+}
+
+move(Direction::East);
+?>
+</code></pre>
+
+<h5>Comparing Enum Cases</h5>
+<p>
+  Enum cases are compared by identity using the strict comparison operator
+  (<code>===</code>).
+</p>
+
+<pre><code class="language-php">
+<?php
+Direction::North === Direction::North; // true
+Direction::North === Direction::South; // false
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li>No scalar backing values</li>
+  <li>Cases are single, unique instances</li>
+  <li>Comparable by identity</li>
+  <li>Ideal for simple state modeling</li>
+</ul>
+
+<p>
+  Basic enumerations provide a clean and expressive way to model fixed choices
+  while avoiding the pitfalls of magic strings or integers.
+</p>
+
 
 <h4 id="backed-enumerations">BACKED ENUMERATIONS</h4>
 .
