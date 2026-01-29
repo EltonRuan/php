@@ -9930,7 +9930,87 @@ Direction::North === Direction::South; // false
 
 
 <h4 id="backed-enumerations">BACKED ENUMERATIONS</h4>
-.
+
+<p>
+  Backed enumerations in PHP are enums that are associated with scalar values.
+  Each enum case is backed by either an <code>int</code> or a <code>string</code>,
+  making them useful for storage, serialization, and interoperability with
+  external systems.
+</p>
+
+<h5>Declaring a Backed Enum</h5>
+<p>
+  A backed enum is declared by specifying a scalar type after the enum name.
+  All cases must define a unique backing value.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Status: string {
+    case Pending  = 'pending';
+    case Approved = 'approved';
+    case Rejected = 'rejected';
+}
+?>
+</code></pre>
+
+<h5>Accessing Backing Values</h5>
+<p>
+  The backing value of an enum case can be accessed using the
+  <code>value</code> property.
+</p>
+
+<pre><code class="language-php">
+<?php
+echo Status::Approved->value; // approved
+?>
+</code></pre>
+
+<h5>Creating Enums from Values</h5>
+<p>
+  Backed enums provide built-in methods to convert scalar values into enum
+  cases.
+</p>
+
+<ul>
+  <li><code>from()</code> — Throws an error if the value is invalid</li>
+  <li><code>tryFrom()</code> — Returns <code>null</code> if the value is invalid</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+$status = Status::from('approved');
+$status = Status::tryFrom('unknown'); // null
+?>
+</code></pre>
+
+<h5>Type Safety with Persistence</h5>
+<p>
+  Backed enums are commonly used with databases and APIs, where scalar values
+  are required but type safety should still be preserved.
+</p>
+
+<pre><code class="language-php">
+<?php
+function setStatus(Status $status): void {
+    saveToDatabase($status->value);
+}
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li>Backed by <code>int</code> or <code>string</code> values</li>
+  <li>Each backing value must be unique</li>
+  <li>Easy conversion between enums and scalars</li>
+  <li>Ideal for persistence and external integrations</li>
+</ul>
+
+<p>
+  Backed enumerations combine the safety of enums with the practicality of
+  scalar values, making them a powerful feature for modern PHP applications.
+</p>
+
 
 <h4 id="enumeration-methods">ENUMERATION METHODS</h4>
 .
