@@ -10013,7 +10013,85 @@ function setStatus(Status $status): void {
 
 
 <h4 id="enumeration-methods">ENUMERATION METHODS</h4>
-.
+
+<p>
+  Enumerations in PHP can include methods, allowing behavior to be attached
+  directly to enum cases. This makes enums more powerful and expressive
+  than simple constants.
+</p>
+
+<h5>Defining Methods in Enums</h5>
+<p>
+  Methods are declared inside the enum body and can use the <code>$this</code>
+  keyword to refer to the current enum case.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Status {
+    case Pending;
+    case Approved;
+    case Rejected;
+
+    public function label(): string {
+        return match($this) {
+            self::Pending  => 'Pending Approval',
+            self::Approved => 'Approved',
+            self::Rejected => 'Rejected',
+        };
+    }
+}
+?>
+</code></pre>
+
+<h5>Calling Enum Methods</h5>
+<p>
+  Enum methods are called on individual enum cases.
+</p>
+
+<pre><code class="language-php">
+<?php
+echo Status::Approved->label(); // Outputs: Approved
+?>
+</code></pre>
+
+<h5>Methods in Backed Enums</h5>
+<p>
+  Backed enums can also have methods that use the <code>value</code> property
+  in their logic.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Role: string {
+    case Admin = 'admin';
+    case User  = 'user';
+
+    public function isAdmin(): bool {
+        return $this === self::Admin;
+    }
+}
+
+$role = Role::Admin;
+if ($role->isAdmin()) {
+    echo "User is admin";
+}
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+<ul>
+  <li>Enum methods provide encapsulated behavior for enum cases</li>
+  <li>Use <code>$this</code> to refer to the current case</li>
+  <li>Backed enums can leverage the <code>value</code> property</li>
+  <li>Methods improve readability and maintainability</li>
+</ul>
+
+<p>
+  Enumeration methods allow enums to be not just data holders, but also
+  objects with behavior, making them a modern and robust feature in PHP.
+</p>
+
 
 <h4 id="static-enumeration-methods">STATIC ENUMERATION METHODS</h4>
 .
