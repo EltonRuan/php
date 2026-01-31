@@ -10094,7 +10094,99 @@ if ($role->isAdmin()) {
 
 
 <h4 id="static-enumeration-methods">STATIC ENUMERATION METHODS</h4>
-.
+
+<p>
+  Static enumeration methods are methods defined on an enum that are called
+  on the enum itself, rather than on a specific enum case. They are commonly
+  used for utility logic, factories, and helpers related to the enumeration.
+</p>
+
+<h5>Defining Static Methods in Enums</h5>
+<p>
+  Static methods are declared using the <code>static</code> keyword inside
+  the enum body.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Status {
+    case Pending;
+    case Approved;
+    case Rejected;
+
+    public static function values(): array {
+        return [
+            self::Pending,
+            self::Approved,
+            self::Rejected,
+        ];
+    }
+}
+?>
+</code></pre>
+
+<h5>Calling Static Enum Methods</h5>
+<p>
+  Static enum methods are called directly on the enum name.
+</p>
+
+<pre><code class="language-php">
+<?php
+$allStatuses = Status::values();
+?>
+</code></pre>
+
+<h5>Using Built-in Static Methods</h5>
+<p>
+  PHP provides built-in static methods for enums:
+</p>
+
+<ul>
+  <li><code>cases()</code> — Returns an array of all enum cases</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+$cases = Status::cases();
+?>
+</code></pre>
+
+<h5>Factory Methods</h5>
+<p>
+  Static methods are often used to create or resolve enum cases from custom
+  logic.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Role: string {
+    case Admin = 'admin';
+    case User  = 'user';
+
+    public static function fromLabel(string $label): ?self {
+        return match (strtolower($label)) {
+            'admin' => self::Admin,
+            'user'  => self::User,
+            default => null,
+        };
+    }
+}
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li>Called on the enum, not on a case</li>
+  <li>Useful for utilities and factories</li>
+  <li>Can return enum cases or related data</li>
+  <li>Built-in support via <code>cases()</code></li>
+</ul>
+
+<p>
+  Static enumeration methods help centralize enum-related logic, keeping
+  code organized, expressive, and easy to maintain.
+</p>
+
 
 <h4 id="enumeration-constants">ENUMERATION CONSTANTS</h4>
 .
