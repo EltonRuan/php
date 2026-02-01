@@ -10189,7 +10189,98 @@ enum Role: string {
 
 
 <h4 id="enumeration-constants">ENUMERATION CONSTANTS</h4>
-.
+
+<p>
+  Enumeration constants are implicit constants automatically created for each
+  case defined in an enum. Every enum case acts as a constant instance of the
+  enum type.
+</p>
+
+<h5>Enum Cases as Constants</h5>
+<p>
+  Each case in an enum is a constant and can be accessed using the
+  <code>EnumName::CaseName</code> syntax.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Status {
+    case Pending;
+    case Approved;
+    case Rejected;
+}
+
+$status = Status::Pending;
+?>
+</code></pre>
+
+<h5>Immutability</h5>
+<p>
+  Enumeration constants are immutable. An enum case cannot be modified or
+  instantiated manually.
+</p>
+
+<pre><code class="language-php">
+<?php
+// Invalid: enum cases cannot be changed
+// Status::Pending = 'new value';
+?>
+</code></pre>
+
+<h5>Uniqueness of Enum Constants</h5>
+<p>
+  Each enum case exists as a single instance (singleton-like behavior).
+  Comparisons can safely be done using strict comparison.
+</p>
+
+<pre><code class="language-php">
+<?php
+var_dump(Status::Pending === Status::Pending); // true
+?>
+</code></pre>
+
+<h5>Constants in Backed Enums</h5>
+<p>
+  In backed enums, each constant is associated with a scalar backing value,
+  accessible through the <code>value</code> property.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Role: string {
+    case Admin = 'admin';
+    case User  = 'user';
+}
+
+echo Role::Admin->value; // admin
+?>
+</code></pre>
+
+<h5>Accessing All Enum Constants</h5>
+<p>
+  All enumeration constants can be retrieved using the built-in
+  <code>cases()</code> method.
+</p>
+
+<pre><code class="language-php">
+<?php
+$allCases = Status::cases();
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li>Each enum case is a constant</li>
+  <li>Enum constants are immutable</li>
+  <li>Single instance per case</li>
+  <li>Type-safe alternative to class constants</li>
+</ul>
+
+<p>
+  Enumeration constants provide a safe, expressive, and structured way to
+  represent fixed sets of values in PHP.
+</p>
+
 
 <h4 id="traits">TRAITS</h4>
 .
