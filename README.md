@@ -10283,7 +10283,122 @@ $allCases = Status::cases();
 
 
 <h4 id="traits">TRAITS</h4>
-.
+
+<p>
+  Traits are a mechanism for code reuse in PHP. They allow you to group
+  methods and properties that can be reused across multiple classes,
+  without using inheritance.
+</p>
+
+<h5>Defining a Trait</h5>
+<p>
+  A trait is declared using the <code>trait</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait LoggerTrait {
+    public function log(string $message): void {
+        echo "[LOG] " . $message;
+    }
+}
+?>
+</code></pre>
+
+<h5>Using a Trait in a Class</h5>
+<p>
+  Traits are included in a class using the <code>use</code> keyword.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    use LoggerTrait;
+}
+
+$user = new User();
+$user->log("User created");
+?>
+</code></pre>
+
+<h5>Multiple Traits</h5>
+<p>
+  A class can use multiple traits at the same time.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait TimestampTrait {
+    public function createdAt(): string {
+        return date('Y-m-d H:i:s');
+    }
+}
+
+class Post {
+    use LoggerTrait, TimestampTrait;
+}
+?>
+</code></pre>
+
+<h5>Conflict Resolution</h5>
+<p>
+  If multiple traits define methods with the same name, conflicts must be
+  resolved explicitly.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait A {
+    public function hello() {
+        echo "Hello from A";
+    }
+}
+
+trait B {
+    public function hello() {
+        echo "Hello from B";
+    }
+}
+
+class Example {
+    use A, B {
+        A::hello insteadof B;
+        B::hello as helloFromB;
+    }
+}
+?>
+</code></pre>
+
+<h5>Traits with Properties</h5>
+<p>
+  Traits can also define properties that will be included in the class.
+</p>
+
+<pre><code class="language-php">
+<?php
+trait CounterTrait {
+    protected int $count = 0;
+
+    public function increment(): void {
+        $this->count++;
+    }
+}
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li>Enable horizontal code reuse</li>
+  <li>Do not support instantiation</li>
+  <li>Can include methods and properties</li>
+  <li>Help avoid deep inheritance hierarchies</li>
+</ul>
+
+<p>
+  Traits provide a flexible way to share functionality between classes while
+  keeping code organized and maintainable.
+</p>
+
 
 <h4 id="enumeration-values-in-constant-expressions">ENUMERATION VALUES IN CONSTANT EXPRESSIONS</h4>
 .
