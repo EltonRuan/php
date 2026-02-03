@@ -10400,8 +10400,83 @@ trait CounterTrait {
 </p>
 
 
-<h4 id="enumeration-values-in-constant-expressions">ENUMERATION VALUES IN CONSTANT EXPRESSIONS</h4>
-.
+<h4 id="enumeration-values-in-constant-expressions">
+  ENUMERATION VALUES IN CONSTANT EXPRESSIONS
+</h4>
+
+<p>
+  Enumeration values can be used in constant expressions in PHP, allowing enums
+  to be referenced in places where compile-time constants are required.
+</p>
+
+<h5>Using Enums in Constant Expressions</h5>
+<p>
+  Enum cases themselves are objects, but their backing values (in backed enums)
+  can be used in constant expressions.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Status: int {
+    case Draft = 0;
+    case Published = 1;
+}
+
+const DEFAULT_STATUS = Status::Draft->value;
+?>
+</code></pre>
+
+<h5>Class Constants with Enum Values</h5>
+<p>
+  Enum backing values may be assigned to class constants.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Article {
+    public const STATUS = Status::Published->value;
+}
+?>
+</code></pre>
+
+<h5>Limitations</h5>
+<p>
+  Pure enum cases (non-backed enums) cannot be used directly in constant
+  expressions because they are objects.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Mode {
+    case On;
+    case Off;
+}
+
+// Invalid in constant expressions
+// const DEFAULT_MODE = Mode::On;
+?>
+</code></pre>
+
+<h5>Where Constant Expressions Are Used</h5>
+<ul>
+  <li>Global constants</li>
+  <li>Class constants</li>
+  <li>Default property values</li>
+  <li>Default parameter values (when scalar)</li>
+</ul>
+
+<h5>Key Notes</h5>
+<ul>
+  <li>Only backed enum <code>value</code> can be used</li>
+  <li>Enum cases themselves are runtime objects</li>
+  <li>Improves type safety while keeping constants usable</li>
+</ul>
+
+<p>
+  Using enumeration values in constant expressions helps combine the safety of
+  enums with the performance and predictability of constants.
+</p>
+
 
 <h4 id="object-differences">OBJECT DIFFERENCES</h4>
 .
