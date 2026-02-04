@@ -10479,7 +10479,80 @@ enum Mode {
 
 
 <h4 id="object-differences">OBJECT DIFFERENCES</h4>
-.
+
+<p>
+  Object differences in PHP describe how two objects are compared and how their
+  internal states are evaluated when checking for equality or identity.
+</p>
+
+<h5>Loose Comparison (==)</h5>
+<p>
+  When using the <code>==</code> operator, PHP compares objects by checking:
+</p>
+<ul>
+  <li>If both objects are instances of the same class</li>
+  <li>If all their properties have equal values</li>
+</ul>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+}
+
+$a = new User();
+$a->name = "Elton";
+
+$b = new User();
+$b->name = "Elton";
+
+var_dump($a == $b); // true
+?>
+</code></pre>
+
+<h5>Strict Comparison (===)</h5>
+<p>
+  The <code>===</code> operator checks if both variables reference the
+  <strong>same object instance</strong>.
+</p>
+
+<pre><code class="language-php">
+<?php
+$c = $a;
+var_dump($a === $c); // true
+var_dump($a === $b); // false
+?>
+</code></pre>
+
+<h5>Comparing Object Differences</h5>
+<p>
+  PHP does not provide a built-in operator to directly compute object
+  differences, but differences can be identified by comparing properties.
+</p>
+
+<pre><code class="language-php">
+<?php
+$diff = array_diff_assoc(
+    get_object_vars($a),
+    get_object_vars($b)
+);
+
+var_dump($diff); // empty array
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li><code>==</code> compares object values</li>
+  <li><code>===</code> compares object references</li>
+  <li>Property visibility affects comparison</li>
+</ul>
+
+<p>
+  Understanding object differences is essential when handling equality,
+  cloning, and state comparison in PHP applications.
+</p>
+
 
 <h4 id="value-listing">VALUE LISTING</h4>
 .
