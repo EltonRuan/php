@@ -10555,7 +10555,74 @@ var_dump($diff); // empty array
 
 
 <h4 id="value-listing">VALUE LISTING</h4>
-.
+
+<p>
+  Value listing refers to the ability to retrieve all possible values or cases
+  defined in an enumeration. In PHP, this is commonly used with <code>enum</code>
+  types to iterate over or validate allowed values.
+</p>
+
+<h5>Listing Enum Cases</h5>
+<p>
+  PHP provides the built-in <code>cases()</code> method to return all enum cases.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Status {
+    case Draft;
+    case Published;
+    case Archived;
+}
+
+$cases = Status::cases();
+?>
+</code></pre>
+
+<h5>Iterating Over Values</h5>
+<p>
+  You can loop through enum cases to access their names or values.
+</p>
+
+<pre><code class="language-php">
+<?php
+foreach (Status::cases() as $status) {
+    echo $status->name . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Backed Enum Value Listing</h5>
+<p>
+  For backed enums, you can access the scalar value using the <code>value</code>
+  property.
+</p>
+
+<pre><code class="language-php">
+<?php
+enum Role: string {
+    case Admin = 'admin';
+    case User = 'user';
+}
+
+$values = array_map(
+    fn($role) => $role->value,
+    Role::cases()
+);
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Validation of allowed inputs</li>
+  <li>Generating select options in forms</li>
+  <li>Configuration and state management</li>
+</ul>
+
+<p>
+  Value listing makes enums predictable, type-safe, and easy to work with across
+  an application.
+</p>
 
 <h4 id="serialization">SERIALIZATION</h4>
 .
