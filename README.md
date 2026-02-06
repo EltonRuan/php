@@ -10625,7 +10625,94 @@ $values = array_map(
 </p>
 
 <h4 id="serialization">SERIALIZATION</h4>
-.
+
+<p>
+  Serialization is the process of converting data structures or objects into a
+  storable or transmittable format. In PHP, serialized data can be saved to files,
+  databases, sessions, or sent over a network and later restored.
+</p>
+
+<h5>Basic Serialization</h5>
+<p>
+  PHP provides the <code>serialize()</code> function to convert a value into a
+  serialized string, and <code>unserialize()</code> to restore it.
+</p>
+
+<pre><code class="language-php">
+<?php
+$data = ['name' => 'John', 'age' => 30];
+
+$serialized = serialize($data);
+$restored = unserialize($serialized);
+?>
+</code></pre>
+
+<h5>Object Serialization</h5>
+<p>
+  Objects can also be serialized. By default, all accessible properties are
+  included in the serialized representation.
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+    public int $age;
+}
+
+$user = new User();
+$user->name = 'Alice';
+$user->age = 25;
+
+$serialized = serialize($user);
+?>
+</code></pre>
+
+<h5>Custom Serialization</h5>
+<p>
+  Classes may define <code>__serialize()</code> and <code>__unserialize()</code>
+  methods to control how data is serialized and restored.
+</p>
+
+<pre><code class="language-php">
+<?php
+class SecureData {
+    private string $secret;
+
+    public function __construct(string $secret) {
+        $this->secret = $secret;
+    }
+
+    public function __serialize(): array {
+        return ['secret' => base64_encode($this->secret)];
+    }
+
+    public function __unserialize(array $data): void {
+        $this->secret = base64_decode($data['secret']);
+    }
+}
+?>
+</code></pre>
+
+<h5>Serialization in Sessions</h5>
+<p>
+  PHP sessions automatically serialize stored values. Objects stored in
+  <code>$_SESSION</code> must have their class definitions available when the
+  session is restored.
+</p>
+
+<h5>Security Considerations</h5>
+<ul>
+  <li>Avoid unserializing untrusted data</li>
+  <li>Use allowed classes with <code>unserialize()</code> when possible</li>
+  <li>Consider JSON as a safer alternative for data exchange</li>
+</ul>
+
+<p>
+  Serialization is powerful for persistence and transport, but it must be used
+  carefully to avoid security and compatibility issues.
+</p>
+
 
 
 <h3 id="errors">ERRORS</h3>
