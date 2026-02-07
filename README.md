@@ -10717,7 +10717,100 @@ class SecureData {
 
 <h3 id="errors">ERRORS</h3>
 
-.
+<p>
+  Errors in PHP represent problems that occur during script execution.
+  They range from minor notices to fatal errors that stop the script entirely.
+  Understanding how PHP handles errors is essential for debugging and writing
+  robust applications.
+</p>
+
+<h4>Types of Errors</h4>
+<ul>
+  <li><strong>Parse Errors</strong> – Syntax errors detected before execution</li>
+  <li><strong>Fatal Errors</strong> – Critical errors that halt script execution</li>
+  <li><strong>Warnings</strong> – Non-fatal errors; script continues running</li>
+  <li><strong>Notices</strong> – Informational messages about potential issues</li>
+  <li><strong>Deprecated</strong> – Features that will be removed in future versions</li>
+</ul>
+
+<h4>Error Levels</h4>
+<p>
+  PHP defines error constants that represent different error types, such as:
+</p>
+
+<ul>
+  <li><code>E_ERROR</code></li>
+  <li><code>E_WARNING</code></li>
+  <li><code>E_NOTICE</code></li>
+  <li><code>E_DEPRECATED</code></li>
+  <li><code>E_ALL</code></li>
+</ul>
+
+<h4>Displaying Errors</h4>
+<p>
+  Error display can be configured using <code>php.ini</code> or at runtime:
+</p>
+
+<pre><code class="language-php">
+<?php
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+?>
+</code></pre>
+
+<h4>Error Logging</h4>
+<p>
+  Instead of displaying errors to users, they should be logged for debugging:
+</p>
+
+<pre><code class="language-php">
+<?php
+ini_set('log_errors', '1');
+ini_set('error_log', '/path/to/error.log');
+?>
+</code></pre>
+
+<h4>Triggering Errors</h4>
+<p>
+  PHP allows manually triggering errors using <code>trigger_error()</code>:
+</p>
+
+<pre><code class="language-php">
+<?php
+trigger_error('Custom warning message', E_USER_WARNING);
+?>
+</code></pre>
+
+<h4>Errors vs Exceptions</h4>
+<p>
+  Modern PHP distinguishes between errors and exceptions. Many fatal errors
+  are now represented by the <code>Error</code> class and can be caught using
+  <code>try/catch</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+try {
+    undefinedFunction();
+} catch (Error $e) {
+    echo $e->getMessage();
+}
+?>
+</code></pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li>Never display errors in production</li>
+  <li>Always log errors for later analysis</li>
+  <li>Use strict error reporting during development</li>
+  <li>Handle recoverable errors gracefully</li>
+</ul>
+
+<p>
+  Proper error handling improves application stability, security, and
+  maintainability.
+</p>
+
 
 <h3 id="exceptions">EXCEPTIONS</h3>
 
