@@ -10814,7 +10814,118 @@ try {
 
 <h3 id="exceptions">EXCEPTIONS</h3>
 
-.
+<p>
+  Exceptions in PHP are used to handle errors in a structured and controlled way.
+  Unlike traditional errors, exceptions allow the program to interrupt normal
+  execution and transfer control to a dedicated handling block.
+</p>
+
+<h4>What Is an Exception?</h4>
+<p>
+  An exception is an object that represents an exceptional condition (an error)
+  that occurs during the execution of a program. Exceptions are thrown and must
+  be caught, otherwise they will result in a fatal error.
+</p>
+
+<h4>Throwing Exceptions</h4>
+<p>
+  Exceptions are thrown using the <code>throw</code> keyword:
+</p>
+
+<pre><code class="language-php">
+<?php
+if ($age &lt; 18) {
+    throw new Exception("Access denied: age must be 18 or older.");
+}
+?>
+</code></pre>
+
+<h4>Try, Catch and Finally</h4>
+<p>
+  Exceptions are handled using <code>try</code>, <code>catch</code>, and optionally
+  <code>finally</code> blocks:
+</p>
+
+<pre><code class="language-php">
+<?php
+try {
+    riskyOperation();
+} catch (Exception $e) {
+    echo $e->getMessage();
+} finally {
+    echo "This block always executes.";
+}
+?>
+</code></pre>
+
+<h4>Multiple Catch Blocks</h4>
+<p>
+  Different exception types can be handled separately:
+</p>
+
+<pre><code class="language-php">
+<?php
+try {
+    processData();
+} catch (InvalidArgumentException $e) {
+    echo "Invalid argument";
+} catch (Exception $e) {
+    echo "General error";
+}
+?>
+</code></pre>
+
+<h4>Custom Exceptions</h4>
+<p>
+  You can define your own exception classes by extending <code>Exception</code>:
+</p>
+
+<pre><code class="language-php">
+<?php
+class ValidationException extends Exception {}
+
+throw new ValidationException("Validation failed");
+?>
+</code></pre>
+
+<h4>Exception Properties and Methods</h4>
+<ul>
+  <li><code>getMessage()</code> – Error message</li>
+  <li><code>getCode()</code> – Error code</li>
+  <li><code>getFile()</code> – File where exception was thrown</li>
+  <li><code>getLine()</code> – Line number</li>
+  <li><code>getTrace()</code> – Stack trace</li>
+</ul>
+
+<h4>Exceptions vs Errors</h4>
+<p>
+  In modern PHP versions, both <code>Exception</code> and <code>Error</code>
+  implement the <code>Throwable</code> interface, allowing them to be caught together:
+</p>
+
+<pre><code class="language-php">
+<?php
+try {
+    executeCriticalCode();
+} catch (Throwable $e) {
+    echo $e->getMessage();
+}
+?>
+</code></pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li>Use exceptions for exceptional situations, not normal control flow</li>
+  <li>Catch exceptions at the appropriate level</li>
+  <li>Create custom exceptions for domain-specific errors</li>
+  <li>Always log uncaught exceptions</li>
+</ul>
+
+<p>
+  Proper use of exceptions leads to cleaner code, better error handling, and
+  more maintainable applications.
+</p>
+
 
 <h3 id="fibers">FIBERS</h3>
 
