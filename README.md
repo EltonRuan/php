@@ -10929,7 +10929,118 @@ try {
 
 <h3 id="fibers">FIBERS</h3>
 
-.
+<p>
+  Fibers are a low-level concurrency primitive introduced in PHP 8.1.
+  They allow developers to pause and resume execution of code at specific points,
+  enabling cooperative multitasking without relying on threads or external extensions.
+</p>
+
+<h4>What Is a Fiber?</h4>
+<p>
+  A Fiber is an object that represents a resumable execution context.
+  Unlike generators, fibers can be suspended from anywhere in the call stack
+  and later resumed, making them suitable for async frameworks and event loops.
+</p>
+
+<h4>Creating a Fiber</h4>
+<p>
+  Fibers are created by instantiating the <code>Fiber</code> class with a callable:
+</p>
+
+<pre><code class="language-php">
+<?php
+$fiber = new Fiber(function (): void {
+    echo "Fiber started\n";
+    Fiber::suspend();
+    echo "Fiber resumed\n";
+});
+?>
+</code></pre>
+
+<h4>Starting and Resuming a Fiber</h4>
+<p>
+  A fiber must be explicitly started and can be resumed after suspension:
+</p>
+
+<pre><code class="language-php">
+<?php
+$fiber->start();
+echo "Back to main code\n";
+$fiber->resume();
+?>
+</code></pre>
+
+<h4>Suspending Execution</h4>
+<p>
+  The <code>Fiber::suspend()</code> method pauses execution and optionally returns
+  a value to the caller:
+</p>
+
+<pre><code class="language-php">
+<?php
+$fiber = new Fiber(function () {
+    $value = Fiber::suspend("paused");
+    echo "Received: {$value}";
+});
+
+$result = $fiber->start();
+$fiber->resume("resumed");
+?>
+</code></pre>
+
+<h4>Fiber States</h4>
+<p>
+  A fiber can be in one of the following states:
+</p>
+<ul>
+  <li><strong>Not started</strong> – Created but not yet executed</li>
+  <li><strong>Running</strong> – Currently executing</li>
+  <li><strong>Suspended</strong> – Paused at a suspension point</li>
+  <li><strong>Terminated</strong> – Finished execution</li>
+</ul>
+
+<h4>Checking Fiber Status</h4>
+<p>
+  The <code>Fiber</code> class provides methods to inspect its state:
+</p>
+
+<pre><code class="language-php">
+<?php
+$fiber->isStarted();
+$fiber->isSuspended();
+$fiber->isRunning();
+$fiber->isTerminated();
+?>
+</code></pre>
+
+<h4>Fibers vs Generators</h4>
+<p>
+  While generators use <code>yield</code> and follow a linear execution model,
+  fibers allow suspension at any depth of the call stack.
+  This makes fibers more flexible for implementing async/await patterns.
+</p>
+
+<h4>Use Cases</h4>
+<ul>
+  <li>Async frameworks and event loops</li>
+  <li>Non-blocking I/O abstractions</li>
+  <li>Cooperative multitasking</li>
+  <li>Coroutines and schedulers</li>
+</ul>
+
+<h4>Important Notes</h4>
+<ul>
+  <li>Fibers do not provide parallelism by themselves</li>
+  <li>They must be managed by a scheduler or event loop</li>
+  <li>Errors inside a fiber are thrown when it is resumed</li>
+</ul>
+
+<p>
+  Fibers form the foundation for modern asynchronous PHP libraries,
+  offering powerful control over execution flow while remaining lightweight
+  and explicit.
+</p>
+
 
 <h3 id="generators">GENERATORS</h3>
 
