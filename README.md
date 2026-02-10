@@ -11054,7 +11054,75 @@ $fiber->isTerminated();
 </nav>
 
 <h4 id="overview-generators">OVERVIEW</h4>
-.
+
+<p>
+  Generators in PHP provide a simple and efficient way to iterate over data
+  without loading the entire dataset into memory. They allow functions to
+  yield values one at a time, pausing execution between each value.
+</p>
+
+<h5>What Is a Generator?</h5>
+<p>
+  A generator is a special type of function that returns an object implementing
+  the <code>Generator</code> interface. Instead of returning a single value,
+  a generator can yield multiple values over time.
+</p>
+
+<h5>Basic Generator Syntax</h5>
+<p>
+  Generators use the <code>yield</code> keyword to produce values.
+</p>
+
+<pre><code class="language-php">
+<?php
+function countUp(int $max): Generator {
+    for ($i = 1; $i &lt;= $max; $i++) {
+        yield $i;
+    }
+}
+?>
+</code></pre>
+
+<h5>Iterating Over a Generator</h5>
+<p>
+  Generators are typically consumed using <code>foreach</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+foreach (countUp(3) as $number) {
+    echo $number;
+}
+?>
+</code></pre>
+
+<h5>Key Benefits</h5>
+<ul>
+  <li>Low memory usage</li>
+  <li>Lazy evaluation</li>
+  <li>Improved performance for large datasets</li>
+  <li>Clean and readable iteration logic</li>
+</ul>
+
+<h5>Generators vs Arrays</h5>
+<p>
+  Unlike arrays, generators do not store all values in memory at once.
+  Values are generated only when needed.
+</p>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Processing large files</li>
+  <li>Streaming data</li>
+  <li>Infinite sequences</li>
+  <li>Pipeline-style data processing</li>
+</ul>
+
+<p>
+  Generators are a powerful language feature for building memory-efficient and
+  scalable PHP applications.
+</p>
+
 
 <h4 id="generator-syntax">GENERATOR SYNTAX</h4>
 .
