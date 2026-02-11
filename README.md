@@ -11125,7 +11125,103 @@ foreach (countUp(3) as $number) {
 
 
 <h4 id="generator-syntax">GENERATOR SYNTAX</h4>
-.
+
+<p>
+  Generator syntax in PHP is based on the <code>yield</code> keyword.
+  A function becomes a generator when it contains at least one
+  <code>yield</code> statement.
+</p>
+
+<h5>Basic Syntax</h5>
+<p>
+  A generator function looks like a normal function but uses
+  <code>yield</code> instead of <code>return</code> to produce values.
+</p>
+
+<pre><code class="language-php">
+<?php
+function countToThree(): Generator {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+?>
+</code></pre>
+
+<h5>Iterating Over a Generator</h5>
+<p>
+  Generators are typically used with <code>foreach</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+foreach (countToThree() as $number) {
+    echo $number;
+}
+?>
+</code></pre>
+
+<h5>Yielding Keys and Values</h5>
+<p>
+  Generators can yield both keys and values, similar to arrays.
+</p>
+
+<pre><code class="language-php">
+<?php
+function getUsers(): Generator {
+    yield 1 => "Alice";
+    yield 2 => "Bob";
+}
+?>
+</code></pre>
+
+<h5>Yielding from Another Generator</h5>
+<p>
+  The <code>yield from</code> syntax delegates to another generator
+  or iterable.
+</p>
+
+<pre><code class="language-php">
+<?php
+function numbers(): Generator {
+    yield from [1, 2, 3];
+}
+?>
+</code></pre>
+
+<h5>Returning a Value</h5>
+<p>
+  Generators may use <code>return</code> to provide a final value,
+  which can be accessed using <code>getReturn()</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+function example(): Generator {
+    yield 1;
+    return "done";
+}
+
+$gen = example();
+foreach ($gen as $value) {}
+
+echo $gen->getReturn(); // done
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+<ul>
+  <li><code>yield</code> pauses execution</li>
+  <li>Execution resumes on the next iteration</li>
+  <li>Generators implement the <code>Iterator</code> interface</li>
+  <li>Efficient for large or infinite data sequences</li>
+</ul>
+
+<p>
+  Generator syntax makes it easy to create lazy, memory-efficient
+  iterators with minimal code.
+</p>
+
 
 <h4 id="comparing-generators-iterator-objects">COMPARING GENERATORS WITH ITERATOR OBJECTS</h4>
 .
