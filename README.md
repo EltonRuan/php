@@ -11240,7 +11240,99 @@ echo $gen->getReturn(); // done
 </nav>
 
 <h4 id="overview-attributes">OVERVIEW</h4>
-.
+
+<p>
+  Attributes in PHP (introduced in PHP 8.0) provide a structured and native way
+  to add metadata to classes, methods, properties, constants, and parameters.
+  They replace traditional PHPDoc annotations with a language-level feature.
+</p>
+
+<h5>What Are Attributes?</h5>
+<p>
+  Attributes are special declarations that add metadata to code elements.
+  This metadata can later be accessed at runtime using Reflection.
+</p>
+
+<h5>Basic Syntax</h5>
+<p>
+  Attributes use the <code>#[Attribute]</code> syntax placed above the target
+  declaration.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Example]
+class User {}
+?>
+</code></pre>
+
+<h5>Defining a Custom Attribute</h5>
+<p>
+  Attributes are defined as classes and must be marked with the built-in
+  <code>Attribute</code> attribute.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute]
+class Route {
+    public function __construct(public string $path) {}
+}
+?>
+</code></pre>
+
+<h5>Using Attributes with Arguments</h5>
+<p>
+  Attributes can accept parameters through their constructor.
+</p>
+
+<pre><code class="language-php">
+<?php
+class Controller {
+    #[Route("/home")]
+    public function index() {}
+}
+?>
+</code></pre>
+
+<h5>Reading Attributes with Reflection</h5>
+<p>
+  Attributes are accessed using PHP’s Reflection API.
+</p>
+
+<pre><code class="language-php">
+<?php
+$reflection = new ReflectionMethod(Controller::class, 'index');
+$attributes = $reflection->getAttributes(Route::class);
+
+$route = $attributes[0]->newInstance();
+echo $route->path;
+?>
+</code></pre>
+
+<h5>Where Attributes Can Be Used</h5>
+<ul>
+  <li>Classes</li>
+  <li>Methods</li>
+  <li>Properties</li>
+  <li>Constants</li>
+  <li>Function parameters</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Routing definitions</li>
+  <li>Dependency injection configuration</li>
+  <li>Validation rules</li>
+  <li>ORM mappings</li>
+  <li>Access control metadata</li>
+</ul>
+
+<p>
+  Attributes provide a modern, structured, and type-safe way to attach metadata
+  to PHP code, improving readability and maintainability.
+</p>
+
 
 <h4 id="syntax-attributes">SYNTAX</h4>
 .
