@@ -11335,7 +11335,107 @@ echo $route->path;
 
 
 <h4 id="syntax-attributes">SYNTAX</h4>
-.
+
+<p>
+  Attributes in PHP use the <code>#[...]</code> syntax and are placed directly
+  above the declaration they apply to. They provide structured metadata at the
+  language level.
+</p>
+
+<h5>Basic Attribute Syntax</h5>
+<p>
+  An attribute is written using square brackets prefixed with a hash:
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Example]
+class MyClass {}
+?>
+</code></pre>
+
+<h5>Defining an Attribute Class</h5>
+<p>
+  To define a custom attribute, the class must itself be marked with
+  the built-in <code>Attribute</code> attribute.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute]
+class Example {
+    public function __construct(public string $value) {}
+}
+?>
+</code></pre>
+
+<h5>Passing Arguments</h5>
+<p>
+  Attributes may accept arguments, similar to function calls.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Example("test")]
+class MyClass {}
+?>
+</code></pre>
+
+<h5>Multiple Attributes</h5>
+<p>
+  More than one attribute can be applied to the same declaration.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[First]
+#[Second]
+class MyClass {}
+?>
+</code></pre>
+
+<h5>Attribute Targets</h5>
+<p>
+  Attributes can be restricted to specific targets using flags.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute(Attribute::TARGET_METHOD)]
+class MethodOnly {}
+?>
+</code></pre>
+
+<h5>Valid Targets</h5>
+<ul>
+  <li><code>Attribute::TARGET_CLASS</code></li>
+  <li><code>Attribute::TARGET_METHOD</code></li>
+  <li><code>Attribute::TARGET_PROPERTY</code></li>
+  <li><code>Attribute::TARGET_FUNCTION</code></li>
+  <li><code>Attribute::TARGET_PARAMETER</code></li>
+  <li><code>Attribute::TARGET_CLASS_CONSTANT</code></li>
+</ul>
+
+<h5>Repeating Attributes</h5>
+<p>
+  To allow an attribute to be used multiple times on the same declaration,
+  specify <code>Attribute::IS_REPEATABLE</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute(Attribute::TARGET_METHOD | Attribute::IS_REPEATABLE)]
+class Tag {
+    public function __construct(public string $name) {}
+}
+?>
+</code></pre>
+
+<p>
+  Attribute syntax is concise, structured, and fully integrated into the PHP
+  language, making metadata declaration clear and type-safe.
+</p>
+
 
 <h4 id="reading-attributes-with-reflection-api">READING ATTRIBUTES WITH THE REFLECTION API</h4>
 .
