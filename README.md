@@ -11438,7 +11438,106 @@ class Tag {
 
 
 <h4 id="reading-attributes-with-reflection-api">READING ATTRIBUTES WITH THE REFLECTION API</h4>
-.
+
+<p>
+  Attributes in PHP can be inspected at runtime using the Reflection API.
+  Reflection allows you to analyze classes, methods, properties, parameters,
+  and retrieve their associated attributes.
+</p>
+
+<h5>Getting Attributes from a Class</h5>
+<p>
+  Use <code>ReflectionClass</code> to inspect class-level attributes.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute]
+class Example {
+    public function __construct(public string $value) {}
+}
+
+#[Example("DemoClass")]
+class MyClass {}
+
+$reflection = new ReflectionClass(MyClass::class);
+$attributes = $reflection->getAttributes();
+
+foreach ($attributes as $attribute) {
+    $instance = $attribute->newInstance();
+    echo $instance->value;
+}
+?>
+</code></pre>
+
+<h5>Getting Attributes from a Method</h5>
+
+<pre><code class="language-php">
+<?php
+class Controller {
+    #[Example("index")]
+    public function index() {}
+}
+
+$reflection = new ReflectionMethod(Controller::class, 'index');
+$attributes = $reflection->getAttributes(Example::class);
+
+foreach ($attributes as $attribute) {
+    $instance = $attribute->newInstance();
+    echo $instance->value;
+}
+?>
+</code></pre>
+
+<h5>Getting Attributes from a Property</h5>
+
+<pre><code class="language-php">
+<?php
+class User {
+    #[Example("username")]
+    public string $name;
+}
+
+$reflection = new ReflectionProperty(User::class, 'name');
+$attributes = $reflection->getAttributes();
+
+foreach ($attributes as $attribute) {
+    $instance = $attribute->newInstance();
+    echo $instance->value;
+}
+?>
+</code></pre>
+
+<h5>Filtering by Attribute Class</h5>
+<p>
+  You can pass the attribute class name to <code>getAttributes()</code>
+  to retrieve only specific attributes.
+</p>
+
+<pre><code class="language-php">
+<?php
+$attributes = $reflection->getAttributes(Example::class);
+?>
+</code></pre>
+
+<h5>Working with ReflectionAttribute</h5>
+<p>
+  The <code>getAttributes()</code> method returns an array of
+  <code>ReflectionAttribute</code> objects. These provide:
+</p>
+
+<ul>
+  <li><code>getName()</code> – Attribute class name</li>
+  <li><code>getArguments()</code> – Constructor arguments</li>
+  <li><code>newInstance()</code> – Instantiates the attribute class</li>
+</ul>
+
+<p>
+  By combining attributes with reflection, developers can build flexible
+  systems such as routers, dependency injection containers, validators,
+  and ORM mappers.
+</p>
+
 
 <h4 id="declaring-attribute-classes">DECLARING ATTRIBUTE CLASSES</h4>
 .
