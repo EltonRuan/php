@@ -11540,8 +11540,100 @@ $attributes = $reflection->getAttributes(Example::class);
 
 
 <h4 id="declaring-attribute-classes">DECLARING ATTRIBUTE CLASSES</h4>
-.
 
+<p>
+  In PHP, attribute classes are regular classes that are marked with the built-in
+  <code>#[Attribute]</code> attribute. This special marker tells PHP that the
+  class can be used as an attribute.
+</p>
+
+<h5>Basic Attribute Declaration</h5>
+<p>
+  To declare an attribute class, annotate it with <code>#[Attribute]</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute]
+class Example {
+    public function __construct(public string $value) {}
+}
+?>
+</code></pre>
+
+<p>
+  Once declared, the attribute can be applied to supported code elements.
+</p>
+
+<h5>Specifying Attribute Targets</h5>
+<p>
+  You can restrict where an attribute can be used by passing target flags
+  to <code>Attribute</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute(Attribute::TARGET_METHOD)]
+class MethodOnly {}
+?>
+</code></pre>
+
+<h5>Multiple Targets</h5>
+<p>
+  Multiple targets can be combined using the bitwise OR operator (<code>|</code>).
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute(
+    Attribute::TARGET_CLASS |
+    Attribute::TARGET_METHOD
+)]
+class ClassOrMethod {}
+?>
+</code></pre>
+
+<h5>Repeatable Attributes</h5>
+<p>
+  To allow an attribute to be used multiple times on the same declaration,
+  include the <code>Attribute::IS_REPEATABLE</code> flag.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute(
+    Attribute::TARGET_METHOD |
+    Attribute::IS_REPEATABLE
+)]
+class Tag {
+    public function __construct(public string $name) {}
+}
+?>
+</code></pre>
+
+<h5>Constructor Arguments</h5>
+<p>
+  Attribute classes commonly define a constructor to accept arguments.
+  These arguments are provided when the attribute is used.
+</p>
+
+<pre><code class="language-php">
+<?php
+#[Attribute]
+class Route {
+    public function __construct(
+        public string $path,
+        public string $method = 'GET'
+    ) {}
+}
+?>
+</code></pre>
+
+<p>
+  Attribute classes behave like normal PHP classes — they can contain
+  properties, methods, and logic — but their primary purpose is to hold
+  structured metadata.
+</p>
 
 <h3 id="references">REFERENCES</h3>
 
