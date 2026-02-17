@@ -11649,7 +11649,106 @@ class Route {
 </nav>
 
 <h4 id="what-references-do">WHAT REFERENCES DO?</h4>
-.
+
+<p>
+  In PHP, references allow two variables to refer to the same value.
+  Instead of copying data, a reference creates an alias to an existing variable.
+  This means changes made through one variable affect the other.
+</p>
+
+<h5>Assigning by Reference</h5>
+<p>
+  Use the ampersand (<code>&amp;</code>) to assign by reference.
+</p>
+
+<pre><code class="language-php">
+<?php
+$a = 10;
+$b =& $a;
+
+$b = 20;
+
+echo $a; // 20
+?>
+</code></pre>
+
+<p>
+  Here, <code>$b</code> is not a copy of <code>$a</code>;
+  both variables point to the same value.
+</p>
+
+<h5>Passing Arguments by Reference</h5>
+<p>
+  Function parameters can be passed by reference.
+</p>
+
+<pre><code class="language-php">
+<?php
+function increment(&amp;$number) {
+    $number++;
+}
+
+$value = 5;
+increment($value);
+
+echo $value; // 6
+?>
+</code></pre>
+
+<p>
+  The function modifies the original variable directly.
+</p>
+
+<h5>Returning by Reference</h5>
+<p>
+  Functions can also return references.
+</p>
+
+<pre><code class="language-php">
+<?php
+function &amp;getValue() {
+    static $value = 0;
+    return $value;
+}
+
+$ref =& getValue();
+$ref = 100;
+
+echo getValue(); // 100
+?>
+</code></pre>
+
+<h5>References with Arrays</h5>
+<p>
+  References are often used when iterating over arrays to modify elements.
+</p>
+
+<pre><code class="language-php">
+<?php
+$numbers = [1, 2, 3];
+
+foreach ($numbers as &amp;$number) {
+    $number *= 2;
+}
+unset($number);
+
+print_r($numbers);
+// [2, 4, 6]
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+<ul>
+  <li>References do not create pointers like in C; they create aliases.</li>
+  <li>Unsetting one reference does not destroy the value if another reference exists.</li>
+  <li>Be careful when using references in loops — always <code>unset()</code> the loop variable afterward.</li>
+</ul>
+
+<p>
+  References provide a way to work with shared data efficiently,
+  but they should be used carefully to avoid unexpected side effects.
+</p>
+
 
 <h4 id="passing-by-reference">PASSING BY REFERENCE</h4>
 .
