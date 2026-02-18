@@ -11751,7 +11751,92 @@ print_r($numbers);
 
 
 <h4 id="passing-by-reference">PASSING BY REFERENCE</h4>
-.
+
+<p>
+  In PHP, passing by reference allows a function to modify the original
+  variable instead of working on a copy. This is done by adding an
+  ampersand (<code>&amp;</code>) before the parameter name in the function definition.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+function addTen(&amp;$number) {
+    $number += 10;
+}
+
+$value = 5;
+addTen($value);
+
+echo $value; // 15
+?>
+</code></pre>
+
+<p>
+  Because <code>$number</code> is passed by reference, changes inside the
+  function directly affect <code>$value</code>.
+</p>
+
+<h5>Passing Arrays by Reference</h5>
+
+<pre><code class="language-php">
+<?php
+function doubleValues(&amp;$array) {
+    foreach ($array as &amp;$item) {
+        $item *= 2;
+    }
+    unset($item);
+}
+
+$data = [1, 2, 3];
+doubleValues($data);
+
+print_r($data);
+// [2, 4, 6]
+?>
+</code></pre>
+
+<p>
+  This allows efficient modification of large arrays without copying them.
+</p>
+
+<h5>Type Declarations with References</h5>
+
+<pre><code class="language-php">
+<?php
+function updateCount(int &amp;$count): void {
+    $count++;
+}
+?>
+</code></pre>
+
+<p>
+  References work normally with type declarations and return types.
+</p>
+
+<h5>Restrictions</h5>
+<ul>
+  <li>You must pass a variable — not a literal or expression.</li>
+  <li>This will cause an error:
+    <pre><code class="language-php">
+addTen(5); // Invalid
+</code></pre>
+  </li>
+</ul>
+
+<h5>When to Use Passing by Reference</h5>
+<ul>
+  <li>When a function needs to modify the caller’s variable.</li>
+  <li>To avoid copying large data structures.</li>
+  <li>When maintaining state across function calls.</li>
+</ul>
+
+<p>
+  While powerful, passing by reference should be used carefully,
+  as it can make code harder to understand and debug due to side effects.
+</p>
+
 
 <h4 id="returning-references">RETURNING REFERENCES</h4>
 .
