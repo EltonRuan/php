@@ -11839,7 +11839,99 @@ addTen(5); // Invalid
 
 
 <h4 id="returning-references">RETURNING REFERENCES</h4>
-.
+
+<p>
+  PHP also allows functions to <strong>return references</strong>.
+  This means the function does not return a copy of a value, but a reference
+  to the original variable itself.
+</p>
+
+<p>
+  To return by reference, place an ampersand (<code>&amp;</code>) before the
+  function name in its declaration.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+<?php
+function &amp;getValue() {
+    static $value = 10;
+    return $value;
+}
+
+$ref =&amp; getValue();
+$ref = 20;
+
+echo getValue(); // 20
+?>
+</code></pre>
+
+<p>
+  In this example:
+</p>
+<ul>
+  <li>The function returns a reference to <code>$value</code>.</li>
+  <li><code>$ref</code> becomes an alias of the same variable.</li>
+  <li>Changing <code>$ref</code> changes the original variable.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    The function declaration must include <code>&amp;</code>:
+    <pre><code class="language-php">
+function &amp;example() { ... }
+</code></pre>
+  </li>
+  <li>
+    The assignment must also use <code>&amp;=</code> to capture the reference:
+    <pre><code class="language-php">
+$var =&amp; example();
+</code></pre>
+  </li>
+  <li>
+    Returning a reference to a non-variable expression is not allowed.
+  </li>
+</ul>
+
+<h5>Returning Object Properties by Reference</h5>
+
+<pre><code class="language-php">
+<?php
+class Container {
+    private $data = [];
+
+    public function &amp;get($key) {
+        return $this->data[$key];
+    }
+}
+
+$obj = new Container();
+$ref =&amp; $obj->get('count');
+$ref = 5;
+?>
+</code></pre>
+
+<p>
+  This allows direct modification of internal properties. However,
+  it can break encapsulation and should be used carefully.
+</p>
+
+<h5>When to Use Returning References</h5>
+
+<ul>
+  <li>When building internal state managers.</li>
+  <li>When implementing container-like classes.</li>
+  <li>Rarely in modern PHP — typically only for advanced use cases.</li>
+</ul>
+
+<p>
+  Returning references is an advanced feature. In most cases,
+  returning values normally is safer and clearer.
+</p>
+
 
 <h4 id="destroying-references">DESTROYING REFERENCES</h4>
 .
