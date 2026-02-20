@@ -11934,7 +11934,103 @@ $ref = 5;
 
 
 <h4 id="destroying-references">DESTROYING REFERENCES</h4>
-.
+
+<p>
+  In PHP, destroying a reference means breaking the link between variables
+  that point to the same value. This is typically done using the
+  <code>unset()</code> function.
+</p>
+
+<h5>Unsetting a Reference</h5>
+
+<pre><code class="language-php">
+<?php
+$a = 10;
+$b =&amp; $a;
+
+unset($b);
+
+$a = 20;
+
+echo $a; // 20
+// $b is no longer defined
+?>
+</code></pre>
+
+<p>
+  When <code>unset($b)</code> is called:
+</p>
+<ul>
+  <li>The reference between <code>$a</code> and <code>$b</code> is removed.</li>
+  <li>The original value remains as long as another variable still references it.</li>
+</ul>
+
+<h5>Unsetting One of Multiple References</h5>
+
+<pre><code class="language-php">
+<?php
+$x = 5;
+$y =&amp; $x;
+$z =&amp; $x;
+
+unset($y);
+
+$z = 100;
+
+echo $x; // 100
+?>
+</code></pre>
+
+<p>
+  Only the specific variable is destroyed — the shared value remains
+  if other references still exist.
+</p>
+
+<h5>Breaking References in foreach</h5>
+
+<p>
+  When iterating by reference, it is important to unset the loop variable
+  afterward to avoid unintended side effects.
+</p>
+
+<pre><code class="language-php">
+<?php
+$array = [1, 2, 3];
+
+foreach ($array as &amp;$value) {
+    $value *= 2;
+}
+
+unset($value); // Break reference
+
+?>
+</code></pre>
+
+<p>
+  Without <code>unset($value)</code>, the variable may still reference the
+  last element of the array.
+</p>
+
+<h5>Garbage Collection and References</h5>
+
+<ul>
+  <li>PHP uses reference counting for memory management.</li>
+  <li>When no variables reference a value, it becomes eligible for cleanup.</li>
+  <li>Unsetting a variable decreases the reference count.</li>
+</ul>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li><code>unset()</code> breaks a reference.</li>
+  <li>It does not destroy the value if other references exist.</li>
+  <li>Always unset loop references after <code>foreach</code> by reference.</li>
+</ul>
+
+<p>
+  Properly destroying references helps prevent subtle bugs and
+  unintended data modifications.
+</p>
 
 <h4 id="demonstrating-references">DEMONSTRATING REFERENCES</h4>
 .
