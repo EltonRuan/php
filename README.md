@@ -12033,8 +12033,114 @@ unset($value); // Break reference
 </p>
 
 <h4 id="demonstrating-references">DEMONSTRATING REFERENCES</h4>
-.
 
+<p>
+  References in PHP allow multiple variables to point to the same value.
+  This section demonstrates how references behave in different scenarios.
+</p>
+
+<h5>Basic Variable Reference</h5>
+
+<pre><code class="language-php">
+<?php
+$a = 10;
+$b =&amp; $a;
+
+$b = 50;
+
+echo $a; // 50
+?>
+</code></pre>
+
+<p>
+  Here, <code>$b</code> becomes an alias of <code>$a</code>. Changing one
+  affects the other.
+</p>
+
+<h5>Breaking the Reference</h5>
+
+<pre><code class="language-php">
+<?php
+$a = 10;
+$b =&amp; $a;
+
+unset($b);
+
+$a = 30;
+
+echo $a; // 30
+?>
+</code></pre>
+
+<p>
+  After <code>unset($b)</code>, the reference is removed.
+</p>
+
+<h5>Reference in Functions</h5>
+
+<pre><code class="language-php">
+<?php
+function multiplyByTwo(&amp;$value) {
+    $value *= 2;
+}
+
+$number = 5;
+multiplyByTwo($number);
+
+echo $number; // 10
+?>
+</code></pre>
+
+<p>
+  The function modifies the original variable directly.
+</p>
+
+<h5>References in Arrays (foreach)</h5>
+
+<pre><code class="language-php">
+<?php
+$data = [1, 2, 3];
+
+foreach ($data as &amp;$item) {
+    $item += 1;
+}
+
+unset($item);
+
+print_r($data);
+// [2, 3, 4]
+?>
+</code></pre>
+
+<p>
+  Always use <code>unset()</code> after looping by reference to avoid
+  unexpected behavior.
+</p>
+
+<h5>Reference vs Copy</h5>
+
+<pre><code class="language-php">
+<?php
+$x = 100;
+$y = $x;     // copy
+$z =&amp; $x;    // reference
+
+$y = 200;
+$z = 300;
+
+echo $x; // 300
+?>
+</code></pre>
+
+<ul>
+  <li><code>$y</code> is an independent copy.</li>
+  <li><code>$z</code> is linked to <code>$x</code>.</li>
+</ul>
+
+<p>
+  These examples demonstrate how references share state between variables,
+  making them powerful but potentially risky if not used carefully.
+</p>
 
 <h3 id="predefined-variables">PREDEFINED VARIABLES</h3>
 
