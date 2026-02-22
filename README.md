@@ -12165,7 +12165,81 @@ echo $x; // 300
 </nav>
 
 <h4 id="superglobals">SUPERGLOBALS</h4>
-.
+
+<p>
+  Superglobals are built-in PHP variables that are always accessible,
+  regardless of scope. They are automatically available in all functions,
+  methods, and scripts without needing the <code>global</code> keyword.
+</p>
+
+<h5>List of PHP Superglobals</h5>
+
+<ul>
+  <li><code>$_GET</code> – Data sent via URL query string</li>
+  <li><code>$_POST</code> – Data sent via HTTP POST</li>
+  <li><code>$_REQUEST</code> – Combined GET, POST, and COOKIE data</li>
+  <li><code>$_SERVER</code> – Server and execution environment information</li>
+  <li><code>$_FILES</code> – Uploaded file information</li>
+  <li><code>$_COOKIE</code> – HTTP cookies</li>
+  <li><code>$_SESSION</code> – Session variables</li>
+  <li><code>$_ENV</code> – Environment variables</li>
+  <li><code>$GLOBALS</code> – All global variables</li>
+</ul>
+
+<h5>Accessing Superglobals</h5>
+
+<pre><code class="language-php">
+<?php
+echo $_GET['name'] ?? 'Guest';
+?>
+</code></pre>
+
+<p>
+  Superglobals can be accessed inside functions without declaring them global.
+</p>
+
+<pre><code class="language-php">
+<?php
+function getUserAgent() {
+    return $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
+}
+?>
+</code></pre>
+
+<h5>Using $_POST</h5>
+
+<pre><code class="language-php">
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+}
+?>
+</code></pre>
+
+<h5>Working with Sessions</h5>
+
+<pre><code class="language-php">
+<?php
+session_start();
+
+$_SESSION['user'] = 'Elton';
+
+echo $_SESSION['user'];
+?>
+</code></pre>
+
+<h5>Security Considerations</h5>
+
+<ul>
+  <li>Always validate and sanitize user input.</li>
+  <li>Never trust data from <code>$_GET</code>, <code>$_POST</code>, or <code>$_REQUEST</code>.</li>
+  <li>Use filtering functions like <code>filter_input()</code> when possible.</li>
+</ul>
+
+<p>
+  Superglobals provide access to request data and environment details,
+  making them essential for web applications.
+</p>
 
 <h4 id="globals">GLOBALS</h4>
 .
