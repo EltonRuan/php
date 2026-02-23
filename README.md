@@ -12242,7 +12242,113 @@ echo $_SESSION['user'];
 </p>
 
 <h4 id="globals">GLOBALS</h4>
-.
+
+<p>
+  <code>$GLOBALS</code> is a PHP superglobal array that contains all global
+  variables available in the current script. Each global variable is stored
+  in the array using its variable name as the key.
+</p>
+
+<h5>Basic Concept</h5>
+
+<pre><code class="language-php">
+<?php
+$name = "Elton";
+
+function greet() {
+    echo $GLOBALS['name'];
+}
+
+greet(); // Elton
+?>
+</code></pre>
+
+<p>
+  Even though <code>$name</code> is defined outside the function,
+  it can be accessed inside using <code>$GLOBALS</code>.
+</p>
+
+<h5>How It Works</h5>
+
+<p>
+  When you declare a global variable:
+</p>
+
+<pre><code class="language-php">
+<?php
+$age = 25;
+?>
+</code></pre>
+
+<p>
+  It becomes available as:
+</p>
+
+<pre><code class="language-php">
+<?php
+echo $GLOBALS['age']; // 25
+?>
+</code></pre>
+
+<h5>Modifying Global Variables</h5>
+
+<pre><code class="language-php">
+<?php
+$count = 1;
+
+function increment() {
+    $GLOBALS['count']++;
+}
+
+increment();
+echo $count; // 2
+?>
+</code></pre>
+
+<p>
+  Changes made through <code>$GLOBALS</code> affect the original variable.
+</p>
+
+<h5>$GLOBALS vs global Keyword</h5>
+
+<p>
+  Using the <code>global</code> keyword inside a function:
+</p>
+
+<pre><code class="language-php">
+<?php
+$total = 10;
+
+function add() {
+    global $total;
+    $total += 5;
+}
+?>
+</code></pre>
+
+<p>
+  This is similar to:
+</p>
+
+<pre><code class="language-php">
+<?php
+$total += 5; // via $GLOBALS inside function
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li><code>$GLOBALS</code> is always available in all scopes.</li>
+  <li>Keys in <code>$GLOBALS</code> correspond to variable names.</li>
+  <li>Overusing global state can make code harder to maintain.</li>
+</ul>
+
+<p>
+  While <code>$GLOBALS</code> provides powerful access to global variables,
+  modern PHP applications typically prefer dependency injection or
+  controlled state management instead of relying heavily on globals.
+</p>
 
 <h4 id="server">$_SERVER</h4>
 .
