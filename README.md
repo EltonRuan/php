@@ -12351,7 +12351,65 @@ $total += 5; // via $GLOBALS inside function
 </p>
 
 <h4 id="server">$_SERVER</h4>
-.
+
+<p>
+  <code>$_SERVER</code> is a PHP superglobal array that contains information
+  about headers, paths, script locations, and the execution environment.
+  It is automatically populated by the web server.
+</p>
+
+<h5>Commonly Used $_SERVER Keys</h5>
+
+<ul>
+  <li><code>$_SERVER['PHP_SELF']</code> – Current script filename</li>
+  <li><code>$_SERVER['SERVER_NAME']</code> – Hostname of the server</li>
+  <li><code>$_SERVER['HTTP_HOST']</code> – Host header from the request</li>
+  <li><code>$_SERVER['REQUEST_METHOD']</code> – HTTP method (GET, POST, etc.)</li>
+  <li><code>$_SERVER['REQUEST_URI']</code> – Requested URI</li>
+  <li><code>$_SERVER['REMOTE_ADDR']</code> – Client IP address</li>
+  <li><code>$_SERVER['HTTP_USER_AGENT']</code> – Browser user agent</li>
+  <li><code>$_SERVER['DOCUMENT_ROOT']</code> – Document root directory</li>
+</ul>
+
+<h5>Example: Detecting Request Method</h5>
+
+<pre><code class="language-php">
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo "Form submitted via POST";
+}
+?>
+</code></pre>
+
+<h5>Example: Getting the Current URL</h5>
+
+<pre><code class="language-php">
+<?php
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+echo $url;
+?>
+</code></pre>
+
+<h5>Example: Getting Client IP</h5>
+
+<pre><code class="language-php">
+<?php
+echo $_SERVER['REMOTE_ADDR'] ?? 'IP not available';
+?>
+</code></pre>
+
+<h5>Security Considerations</h5>
+
+<ul>
+  <li>Values in <code>$_SERVER</code> can be manipulated in some cases (e.g., headers).</li>
+  <li>Do not blindly trust <code>HTTP_HOST</code> or <code>HTTP_USER_AGENT</code>.</li>
+  <li>Always validate and sanitize data before using it.</li>
+</ul>
+
+<p>
+  <code>$_SERVER</code> is essential for handling requests, routing,
+  debugging, and understanding the runtime environment of a PHP application.
+</p>
 
 <h4 id="get">$_GET</h4>
 .
