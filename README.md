@@ -12412,7 +12412,77 @@ echo $_SERVER['REMOTE_ADDR'] ?? 'IP not available';
 </p>
 
 <h4 id="get">$_GET</h4>
-.
+
+<p>
+  <code>$_GET</code> is a PHP superglobal array used to collect data sent
+  via the URL query string. It is commonly used for retrieving parameters
+  from forms submitted with the <code>GET</code> method or from links.
+</p>
+
+<h5>Example URL</h5>
+
+<pre><code>
+http://example.com/index.php?name=Elton&amp;age=25
+</code></pre>
+
+<p>
+  The values can be accessed like this:
+</p>
+
+<pre><code class="language-php">
+<?php
+echo $_GET['name']; // Elton
+echo $_GET['age'];  // 25
+?>
+</code></pre>
+
+<h5>Basic Form Example (GET Method)</h5>
+
+<pre><code class="language-html">
+<form method="get" action="">
+    <input type="text" name="username">
+    <button type="submit">Send</button>
+</form>
+</code></pre>
+
+<pre><code class="language-php">
+<?php
+$username = $_GET['username'] ?? '';
+echo $username;
+?>
+</code></pre>
+
+<h5>Checking if a Parameter Exists</h5>
+
+<pre><code class="language-php">
+<?php
+if (isset($_GET['page'])) {
+    echo "Page: " . $_GET['page'];
+}
+?>
+</code></pre>
+
+<h5>Using Null Coalescing Operator</h5>
+
+<pre><code class="language-php">
+<?php
+$page = $_GET['page'] ?? 1;
+?>
+</code></pre>
+
+<h5>Security Considerations</h5>
+
+<ul>
+  <li>Data in <code>$_GET</code> is visible in the URL.</li>
+  <li>Never trust user input directly.</li>
+  <li>Always validate and sanitize values before using them.</li>
+  <li>Use <code>filter_input(INPUT_GET, 'name')</code> for safer handling.</li>
+</ul>
+
+<p>
+  <code>$_GET</code> is ideal for non-sensitive data such as pagination,
+  filters, search terms, and URL parameters.
+</p>
 
 <h4 id="post">$_POST</h4>
 .
