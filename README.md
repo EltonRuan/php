@@ -12485,7 +12485,72 @@ $page = $_GET['page'] ?? 1;
 </p>
 
 <h4 id="post">$_POST</h4>
-.
+
+<p>
+  <code>$_POST</code> is a PHP superglobal array used to collect data
+  sent via the HTTP <code>POST</code> method. It is commonly used for
+  form submissions where data should not appear in the URL.
+</p>
+
+<h5>Basic Form Example (POST Method)</h5>
+
+<pre><code class="language-html">
+<form method="post" action="">
+    <input type="text" name="email">
+    <button type="submit">Send</button>
+</form>
+</code></pre>
+
+<h5>Accessing POST Data</h5>
+
+<pre><code class="language-php">
+<?php
+$email = $_POST['email'] ?? '';
+echo $email;
+?>
+</code></pre>
+
+<h5>Checking Request Method</h5>
+
+<pre><code class="language-php">
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    echo "Submitted: " . $email;
+}
+?>
+</code></pre>
+
+<h5>Handling Multiple Fields</h5>
+
+<pre><code class="language-php">
+<?php
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
+?>
+</code></pre>
+
+<h5>Security Considerations</h5>
+
+<ul>
+  <li>Data is not visible in the URL, but it is still not secure by default.</li>
+  <li>Always validate and sanitize user input.</li>
+  <li>Use <code>filter_input(INPUT_POST, 'field')</code> for safer input handling.</li>
+  <li>Use HTTPS to protect sensitive data.</li>
+</ul>
+
+<h5>When to Use $_POST</h5>
+
+<ul>
+  <li>Submitting forms with sensitive information (passwords, emails).</li>
+  <li>Sending large amounts of data.</li>
+  <li>Creating or updating resources.</li>
+</ul>
+
+<p>
+  <code>$_POST</code> is essential for handling form submissions
+  and sending structured data to the server in web applications.
+</p>
 
 <h4 id="files">$_FILES</h4>
 .
