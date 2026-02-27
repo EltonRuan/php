@@ -12553,7 +12553,105 @@ $password = $_POST['password'] ?? '';
 </p>
 
 <h4 id="files">$_FILES</h4>
-.
+
+<p>
+  <code>$_FILES</code> is a PHP superglobal array used to handle file uploads
+  sent via an HTML form with <code>method="post"</code> and
+  <code>enctype="multipart/form-data"</code>.
+</p>
+
+<h5>Basic Upload Form</h5>
+
+<pre><code class="language-html">
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="document">
+    <button type="submit">Upload</button>
+</form>
+</code></pre>
+
+<h5>Structure of $_FILES</h5>
+
+<p>
+  When a file is uploaded, <code>$_FILES['document']</code> contains:
+</p>
+
+<ul>
+  <li><code>name</code> – Original file name</li>
+  <li><code>type</code> – MIME type</li>
+  <li><code>tmp_name</code> – Temporary file path on the server</li>
+  <li><code>error</code> – Upload error code</li>
+  <li><code>size</code> – File size in bytes</li>
+</ul>
+
+<h5>Basic File Handling Example</h5>
+
+<pre><code class="language-php">
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if ($_FILES['document']['error'] === UPLOAD_ERR_OK) {
+
+        $tmpPath = $_FILES['document']['tmp_name'];
+        $fileName = $_FILES['document']['name'];
+
+        move_uploaded_file($tmpPath, "uploads/" . $fileName);
+
+        echo "File uploaded successfully!";
+    }
+}
+?>
+</code></pre>
+
+<h5>Handling Upload Errors</h5>
+
+<pre><code class="language-php">
+<?php
+switch ($_FILES['document']['error']) {
+    case UPLOAD_ERR_OK:
+        echo "Upload successful";
+        break;
+    case UPLOAD_ERR_NO_FILE:
+        echo "No file sent";
+        break;
+    case UPLOAD_ERR_INI_SIZE:
+    case UPLOAD_ERR_FORM_SIZE:
+        echo "File too large";
+        break;
+    default:
+        echo "Unknown error";
+}
+?>
+</code></pre>
+
+<h5>Multiple File Upload</h5>
+
+<pre><code class="language-html">
+<input type="file" name="photos[]" multiple>
+</code></pre>
+
+<pre><code class="language-php">
+<?php
+foreach ($_FILES['photos']['tmp_name'] as $key => $tmpName) {
+    $fileName = $_FILES['photos']['name'][$key];
+    move_uploaded_file($tmpName, "uploads/" . $fileName);
+}
+?>
+</code></pre>
+
+<h5>Security Best Practices</h5>
+
+<ul>
+  <li>Validate file type and extension.</li>
+  <li>Limit file size.</li>
+  <li>Rename files before saving.</li>
+  <li>Store uploads outside the public directory when possible.</li>
+  <li>Never trust <code>$_FILES['type']</code> — validate manually.</li>
+</ul>
+
+<p>
+  <code>$_FILES</code> is essential for handling user uploads safely and
+  efficiently in PHP applications.
+</p>
 
 <h4 id="request">$_REQUEST</h4>
 .
