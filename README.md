@@ -12654,7 +12654,87 @@ foreach ($_FILES['photos']['tmp_name'] as $key => $tmpName) {
 </p>
 
 <h4 id="request">$_REQUEST</h4>
-.
+
+<p>
+  <code>$_REQUEST</code> is a PHP superglobal array that provides access to
+  user input data sent via <code>$_GET</code>, <code>$_POST</code>, and
+  <code>$_COOKIE</code>. It acts as a combined input source.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$name = $_REQUEST['name'] ?? 'Guest';
+echo $name;
+?>
+</code></pre>
+
+<p>
+  The value of <code>name</code> could come from:
+</p>
+
+<ul>
+  <li>A URL parameter (GET)</li>
+  <li>A form submitted via POST</li>
+  <li>A cookie value</li>
+</ul>
+
+<h5>Example with GET</h5>
+
+<pre><code>
+http://example.com/index.php?name=Elton
+</code></pre>
+
+<pre><code class="language-php">
+<?php
+echo $_REQUEST['name']; // Elton
+?>
+</code></pre>
+
+<h5>Example with POST</h5>
+
+<pre><code class="language-html">
+<form method="post">
+    <input type="text" name="name">
+    <button type="submit">Send</button>
+</form>
+</code></pre>
+
+<pre><code class="language-php">
+<?php
+echo $_REQUEST['name'] ?? '';
+?>
+</code></pre>
+
+<h5>Request Order</h5>
+
+<p>
+  The order in which PHP merges variables into <code>$_REQUEST</code>
+  is controlled by the <code>request_order</code> directive in
+  <code>php.ini</code>. A common configuration is:
+</p>
+
+<pre><code>
+request_order = "GPC"
+</code></pre>
+
+<p>
+  Meaning: GET → POST → COOKIE.
+</p>
+
+<h5>Security Considerations</h5>
+
+<ul>
+  <li>It may be unclear whether the value came from GET or POST.</li>
+  <li>Cookies may override GET or POST values depending on configuration.</li>
+  <li>Prefer using <code>$_GET</code> or <code>$_POST</code> explicitly in production code.</li>
+</ul>
+
+<p>
+  While <code>$_REQUEST</code> is convenient, explicit input handling
+  is generally safer and more maintainable.
+</p>
 
 <h4 id="session">$_SESSION</h4>
 .
