@@ -12737,7 +12737,87 @@ request_order = "GPC"
 </p>
 
 <h4 id="session">$_SESSION</h4>
-.
+
+<p>
+  <code>$_SESSION</code> is a PHP superglobal array used to store data
+  across multiple page requests for the same user. Session data is stored
+  on the server and linked to the user through a session ID.
+</p>
+
+<h5>Starting a Session</h5>
+
+<p>
+  Before using <code>$_SESSION</code>, you must start the session:
+</p>
+
+<pre><code class="language-php">
+<?php
+session_start();
+?>
+</code></pre>
+
+<h5>Storing Session Data</h5>
+
+<pre><code class="language-php">
+<?php
+session_start();
+
+$_SESSION['user'] = 'Elton';
+$_SESSION['role'] = 'admin';
+?>
+</code></pre>
+
+<h5>Accessing Session Data</h5>
+
+<pre><code class="language-php">
+<?php
+session_start();
+
+echo $_SESSION['user'] ?? 'Guest';
+?>
+</code></pre>
+
+<h5>Removing Session Variables</h5>
+
+<pre><code class="language-php">
+<?php
+session_start();
+
+unset($_SESSION['role']);
+?>
+</code></pre>
+
+<h5>Destroying the Session</h5>
+
+<pre><code class="language-php">
+<?php
+session_start();
+
+session_destroy();
+?>
+</code></pre>
+
+<h5>How Sessions Work</h5>
+
+<ul>
+  <li>When <code>session_start()</code> is called, PHP creates or resumes a session.</li>
+  <li>A unique session ID is stored in a cookie (usually <code>PHPSESSID</code>).</li>
+  <li>Session data is stored on the server (default: temporary files).</li>
+</ul>
+
+<h5>Security Best Practices</h5>
+
+<ul>
+  <li>Always call <code>session_start()</code> before output.</li>
+  <li>Regenerate session IDs after login using <code>session_regenerate_id()</code>.</li>
+  <li>Use HTTPS to protect session cookies.</li>
+  <li>Set <code>session.cookie_httponly</code> and <code>session.cookie_secure</code> in production.</li>
+</ul>
+
+<p>
+  <code>$_SESSION</code> is essential for authentication systems,
+  user state management, and persistent data across requests.
+</p>
 
 <h4 id="env">$_ENV</h4>
 .
