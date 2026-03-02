@@ -12820,7 +12820,91 @@ session_destroy();
 </p>
 
 <h4 id="env">$_ENV</h4>
-.
+
+<p>
+  <code>$_ENV</code> is a PHP superglobal array that contains environment
+  variables provided by the operating system or the web server.
+  These variables are typically used to configure applications.
+</p>
+
+<h5>Accessing Environment Variables</h5>
+
+<pre><code class="language-php">
+<?php
+echo $_ENV['APP_ENV'] ?? 'production';
+?>
+</code></pre>
+
+<p>
+  Environment variables are usually defined in:
+</p>
+
+<ul>
+  <li>The system environment (Linux, Windows, etc.)</li>
+  <li>Web server configuration (Apache, Nginx)</li>
+  <li><code>.env</code> files (commonly used in modern frameworks)</li>
+</ul>
+
+<h5>Using getenv()</h5>
+
+<p>
+  You can also access environment variables using <code>getenv()</code>:
+</p>
+
+<pre><code class="language-php">
+<?php
+$env = getenv('APP_ENV');
+echo $env;
+?>
+</code></pre>
+
+<h5>Setting Environment Variables (Example)</h5>
+
+<p><strong>Linux/macOS:</strong></p>
+
+<pre><code>
+export APP_ENV=development
+</code></pre>
+
+<p><strong>Windows (PowerShell):</strong></p>
+
+<pre><code>
+setx APP_ENV development
+</code></pre>
+
+<h5>Important Configuration</h5>
+
+<p>
+  The availability of <code>$_ENV</code> depends on the
+  <code>variables_order</code> setting in <code>php.ini</code>.
+  It must include the letter <code>E</code>:
+</p>
+
+<pre><code>
+variables_order = "EGPCS"
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Database credentials</li>
+  <li>API keys</li>
+  <li>Application environment (development, staging, production)</li>
+  <li>Feature flags</li>
+</ul>
+
+<h5>Security Best Practices</h5>
+
+<ul>
+  <li>Never commit sensitive environment values to version control.</li>
+  <li>Use environment variables instead of hardcoding secrets.</li>
+  <li>Restrict server access to protect configuration data.</li>
+</ul>
+
+<p>
+  <code>$_ENV</code> helps separate configuration from application logic,
+  making applications more secure and easier to manage across environments.
+</p>
 
 <h4 id="cookie">$_COOKIE</h4>
 .
