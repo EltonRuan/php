@@ -12907,7 +12907,84 @@ variables_order = "EGPCS"
 </p>
 
 <h4 id="cookie">$_COOKIE</h4>
-.
+
+<p>
+  <code>$_COOKIE</code> is a PHP superglobal array used to access cookies
+  sent by the client (browser). Cookies store small pieces of data on the
+  user's device and are automatically sent with each request to the server.
+</p>
+
+<h5>Creating a Cookie</h5>
+
+<pre><code class="language-php">
+<?php
+setcookie("user", "Elton", time() + 3600, "/");
+?>
+</code></pre>
+
+<ul>
+  <li><strong>user</strong> – Cookie name</li>
+  <li><strong>Elton</strong> – Cookie value</li>
+  <li><strong>time() + 3600</strong> – Expiration time (1 hour)</li>
+  <li><strong>"/"</strong> – Available throughout the domain</li>
+</ul>
+
+<p>
+  ⚠️ <code>setcookie()</code> must be called before any HTML output.
+</p>
+
+<h5>Accessing a Cookie</h5>
+
+<pre><code class="language-php">
+<?php
+echo $_COOKIE['user'] ?? 'Guest';
+?>
+</code></pre>
+
+<h5>Deleting a Cookie</h5>
+
+<pre><code class="language-php">
+<?php
+setcookie("user", "", time() - 3600, "/");
+?>
+</code></pre>
+
+<h5>Secure Cookie Example</h5>
+
+<pre><code class="language-php">
+<?php
+setcookie("token", "abc123", [
+    'expires' => time() + 3600,
+    'path' => '/',
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
+?>
+</code></pre>
+
+<h5>How Cookies Work</h5>
+
+<ul>
+  <li>The server sends a cookie using <code>setcookie()</code>.</li>
+  <li>The browser stores it locally.</li>
+  <li>The browser automatically sends it back in future requests.</li>
+  <li>PHP makes it available in <code>$_COOKIE</code>.</li>
+</ul>
+
+<h5>Security Best Practices</h5>
+
+<ul>
+  <li>Never store sensitive data directly in cookies.</li>
+  <li>Use <code>secure</code> and <code>httponly</code> flags.</li>
+  <li>Prefer storing session identifiers instead of raw user data.</li>
+  <li>Always validate cookie values before using them.</li>
+</ul>
+
+<p>
+  <code>$_COOKIE</code> is commonly used for preferences, session tracking,
+  and persistent login features in PHP applications.
+</p>
 
 <h4 id="http-response-header">$HTTP_RESPONSE_HEADER</h4>
 .
