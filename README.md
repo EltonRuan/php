@@ -12986,8 +12986,77 @@ setcookie("token", "abc123", [
   and persistent login features in PHP applications.
 </p>
 
-<h4 id="http-response-header">$HTTP_RESPONSE_HEADER</h4>
-.
+<h4 id="http-response-header">$http_response_header</h4>
+
+<p>
+  <code>$http_response_header</code> is a special PHP variable that contains
+  the HTTP response headers returned by a remote server when using
+  functions such as <code>file_get_contents()</code> to perform HTTP requests.
+</p>
+
+<p>
+  Unlike superglobals, this variable is automatically created in the
+  local scope after an HTTP request is made using PHP's stream wrappers.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$response = file_get_contents("https://example.com");
+
+print_r($http_response_header);
+?>
+</code></pre>
+
+<p>
+  After calling <code>file_get_contents()</code>, the variable
+  <code>$http_response_header</code> contains an array of response headers.
+</p>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Array
+(
+    [0] => HTTP/1.1 200 OK
+    [1] => Date: Mon, 01 Jan 2025 12:00:00 GMT
+    [2] => Content-Type: text/html; charset=UTF-8
+    [3] => Connection: close
+)
+</code></pre>
+
+<h5>Accessing Specific Headers</h5>
+
+<pre><code class="language-php">
+<?php
+file_get_contents("https://example.com");
+
+$statusLine = $http_response_header[0] ?? '';
+echo $statusLine;
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>It is only available after an HTTP request using stream functions.</li>
+  <li>It exists in the local scope where the request was executed.</li>
+  <li>It is not a superglobal.</li>
+  <li>It works when <code>allow_url_fopen</code> is enabled.</li>
+</ul>
+
+<h5>Alternative (cURL)</h5>
+
+<p>
+  For more advanced HTTP handling, many developers prefer using cURL,
+  which provides greater control over headers and responses.
+</p>
+
+<p>
+  <code>$http_response_header</code> is useful for simple HTTP requests
+  when you need to inspect response status and headers without using cURL.
+</p>
 
 <h4 id="argc">$ARGC</h4>
 .
