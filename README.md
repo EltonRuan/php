@@ -13058,8 +13058,79 @@ echo $statusLine;
   when you need to inspect response status and headers without using cURL.
 </p>
 
-<h4 id="argc">$ARGC</h4>
-.
+<h4 id="argc">$argc</h4>
+
+<p>
+  <code>$argc</code> is a special PHP variable that contains the number
+  of command-line arguments passed to a script when it is executed from
+  the command line interface (CLI).
+</p>
+
+<p>
+  It is commonly used together with <code>$argv</code>, which holds
+  the actual list of arguments.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+echo "Total arguments: " . $argc;
+?>
+</code></pre>
+
+<h5>Running the Script</h5>
+
+<pre><code>
+php script.php one two three
+</code></pre>
+
+<p>
+  Output:
+</p>
+
+<pre><code>
+Total arguments: 4
+</code></pre>
+
+<p>
+  The count includes the script name itself as the first argument.
+</p>
+
+<h5>Using $argc with $argv</h5>
+
+<pre><code class="language-php">
+<?php
+echo "Argument count: $argc\n";
+
+for ($i = 0; $i < $argc; $i++) {
+    echo "Argument $i: " . $argv[$i] . "\n";
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Argument count: 3
+Argument 0: script.php
+Argument 1: hello
+Argument 2: world
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Available only in PHP CLI scripts.</li>
+  <li>The script filename is always counted as the first argument.</li>
+  <li>Works together with <code>$argv</code>.</li>
+  <li>Not available in typical web server execution.</li>
+</ul>
+
+<p>
+  <code>$argc</code> is useful when building command-line tools,
+  automation scripts, and developer utilities in PHP.
+</p>
 
 <h4 id="argv">$ARGV</h4>
 .
