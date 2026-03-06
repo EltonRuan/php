@@ -13132,8 +13132,81 @@ Argument 2: world
   automation scripts, and developer utilities in PHP.
 </p>
 
-<h4 id="argv">$ARGV</h4>
-.
+<h4 id="argv">$argv</h4>
+
+<p>
+  <code>$argv</code> is a PHP variable that contains an array of command-line
+  arguments passed to a script when it is executed using the PHP CLI
+  (Command Line Interface).
+</p>
+
+<p>
+  Each argument passed to the script is stored as an element in the
+  <code>$argv</code> array.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+print_r($argv);
+?>
+</code></pre>
+
+<h5>Running the Script</h5>
+
+<pre><code>
+php script.php hello world
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Array
+(
+    [0] => script.php
+    [1] => hello
+    [2] => world
+)
+</code></pre>
+
+<ul>
+  <li><strong>$argv[0]</strong> – The script name</li>
+  <li><strong>$argv[1]</strong> – First argument</li>
+  <li><strong>$argv[2]</strong> – Second argument</li>
+</ul>
+
+<h5>Iterating Through Arguments</h5>
+
+<pre><code class="language-php">
+<?php
+foreach ($argv as $index => $value) {
+    echo "Argument $index: $value\n";
+}
+?>
+</code></pre>
+
+<h5>Using $argv with $argc</h5>
+
+<pre><code class="language-php">
+<?php
+echo "Total arguments: $argc\n";
+echo "First argument: " . ($argv[1] ?? 'none');
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Available only when running PHP scripts via CLI.</li>
+  <li>Works together with <code>$argc</code>, which stores the argument count.</li>
+  <li>Not typically available in web server environments.</li>
+</ul>
+
+<p>
+  <code>$argv</code> is useful for building command-line tools,
+  automation scripts, and utility programs in PHP.
+</p>
 
 <h4 id="php-errormsg">$PHP_ERRORMSG</h4>
 .
