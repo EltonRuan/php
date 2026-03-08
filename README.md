@@ -13275,8 +13275,98 @@ file_get_contents(missing_file.txt): Failed to open stream: No such file or dire
   </p> 
 </nav>
 
-<h4 id="exception">EXCEPTION</h4>
-.
+<h4 id="exception">Exception</h4>
+
+<p>
+  An <strong>Exception</strong> in PHP is an object that represents an error or unexpected event
+  that occurs during the execution of a program. Exceptions allow developers to handle errors
+  in a structured and controlled way.
+</p>
+
+<p>
+  PHP provides a built-in <code>Exception</code> class that can be used to throw and catch
+  exceptions when something goes wrong.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+try {
+    // Code that may cause an exception
+} catch (Exception $e) {
+    // Code to handle the exception
+}
+</code></pre>
+
+<h5>Throwing an Exception</h5>
+
+<pre><code class="language-php">
+<?php
+function checkNumber($number) {
+    if ($number < 10) {
+        throw new Exception("Number must be 10 or greater");
+    }
+    return true;
+}
+
+try {
+    checkNumber(5);
+} catch (Exception $e) {
+    echo "Exception caught: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Exception caught: Number must be 10 or greater
+</code></pre>
+
+<h5>Using Multiple Catch Blocks</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    throw new Exception("Something went wrong");
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Exception Methods</h5>
+
+<ul>
+  <li><code>getMessage()</code> – Returns the exception message</li>
+  <li><code>getCode()</code> – Returns the exception code</li>
+  <li><code>getFile()</code> – Returns the file where the exception occurred</li>
+  <li><code>getLine()</code> – Returns the line number of the exception</li>
+  <li><code>getTrace()</code> – Returns the stack trace</li>
+</ul>
+
+<h5>Using Finally</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    echo "Trying...";
+} catch (Exception $e) {
+    echo $e->getMessage();
+} finally {
+    echo " Done.";
+}
+?>
+</code></pre>
+
+<p>
+  The <code>finally</code> block is always executed whether an exception is thrown or not.
+</p>
+
+<p>
+  Exceptions help make PHP applications more reliable by separating error handling
+  from normal program logic.
+</p>
 
 <h4 id="errorexception">ERROREXCEPTION</h4>
 .
