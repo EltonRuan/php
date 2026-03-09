@@ -13368,8 +13368,79 @@ try {
   from normal program logic.
 </p>
 
-<h4 id="errorexception">ERROREXCEPTION</h4>
-.
+<h4 id="errorexception">ErrorException</h4>
+
+<p>
+  <strong>ErrorException</strong> is a built-in PHP class that converts traditional PHP errors
+  into exceptions. It extends the <code>Exception</code> class and allows errors to be handled
+  using the exception handling system.
+</p>
+
+<p>
+  This is useful because standard PHP errors normally do not stop execution and are not
+  caught by <code>try...catch</code> blocks. By converting errors into <code>ErrorException</code>,
+  they can be handled like normal exceptions.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Exception
+      └── ErrorException
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+function errorHandler($severity, $message, $file, $line) {
+    throw new ErrorException($message, 0, $severity, $file, $line);
+}
+
+set_error_handler("errorHandler");
+
+try {
+    echo $undefined_variable;
+} catch (ErrorException $e) {
+    echo "Error caught: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Error caught: Undefined variable
+</code></pre>
+
+<h5>Constructor Syntax</h5>
+
+<pre><code class="language-php">
+ErrorException(
+    string $message = "",
+    int $code = 0,
+    int $severity = E_ERROR,
+    string $filename = __FILE__,
+    int $line = __LINE__,
+    ?Throwable $previous = null
+)
+</code></pre>
+
+<h5>Important Methods</h5>
+
+<ul>
+  <li><code>getMessage()</code> – Returns the error message</li>
+  <li><code>getCode()</code> – Returns the error code</li>
+  <li><code>getFile()</code> – Returns the file where the error occurred</li>
+  <li><code>getLine()</code> – Returns the line number</li>
+  <li><code>getSeverity()</code> – Returns the error severity level</li>
+</ul>
+
+<p>
+  Using <code>ErrorException</code> allows developers to create more consistent and
+  centralized error handling in PHP applications.
+</p>
 
 <h4 id="closedgeneratorexception">CLOSEDGENERATOREXCEPTION</h4>
 .
