@@ -13442,8 +13442,90 @@ ErrorException(
   centralized error handling in PHP applications.
 </p>
 
-<h4 id="closedgeneratorexception">CLOSEDGENERATOREXCEPTION</h4>
-.
+<h4 id="closedgeneratorexception">ClosedGeneratorException</h4>
+
+<p>
+  <strong>ClosedGeneratorException</strong> is a built-in PHP exception that is
+  thrown when attempting to retrieve a value from a generator that has already
+  finished execution.
+</p>
+
+<p>
+  This exception occurs when methods such as <code>Generator::getReturn()</code>
+  or certain generator operations are called after the generator has been closed
+  or exhausted.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Exception
+      └── ClosedGeneratorException
+</code></pre>
+
+<h5>Basic Generator Example</h5>
+
+<pre><code class="language-php">
+<?php
+function numbers() {
+    yield 1;
+    yield 2;
+}
+
+$gen = numbers();
+
+foreach ($gen as $value) {
+    echo $value;
+}
+
+$gen->next(); // Generator already finished
+?>
+</code></pre>
+
+<h5>Example with getReturn()</h5>
+
+<pre><code class="language-php">
+<?php
+function example() {
+    yield 1;
+    return 10;
+}
+
+$gen = example();
+
+foreach ($gen as $value) {
+    echo $value;
+}
+
+echo $gen->getReturn(); // Works only after generator finishes
+?>
+</code></pre>
+
+<h5>When It Occurs</h5>
+
+<ul>
+  <li>Accessing generator values after completion</li>
+  <li>Calling generator methods in an invalid state</li>
+  <li>Improper handling of generator return values</li>
+</ul>
+
+<h5>Handling the Exception</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    $gen->next();
+} catch (ClosedGeneratorException $e) {
+    echo "Generator is already closed.";
+}
+?>
+</code></pre>
+
+<p>
+  <code>ClosedGeneratorException</code> helps ensure that generators
+  are used correctly and prevents invalid operations on completed generators.
+</p>
 
 <h4 id="error">ERROR</h4>
 .
