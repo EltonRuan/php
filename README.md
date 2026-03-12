@@ -13527,8 +13527,75 @@ try {
   are used correctly and prevents invalid operations on completed generators.
 </p>
 
-<h4 id="error">ERROR</h4>
-.
+<h4 id="error">Error</h4>
+
+<p>
+  <strong>Error</strong> is a built-in PHP class that represents serious problems
+  that occur during script execution. Unlike traditional PHP warnings or notices,
+  <code>Error</code> objects can be caught using the exception handling system.
+</p>
+
+<p>
+  The <code>Error</code> class was introduced in PHP 7 as part of the unified
+  error handling system that implements the <code>Throwable</code> interface.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ ├── Exception
+ └── Error
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    undefinedFunction();
+} catch (Error $e) {
+    echo "Error caught: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Error caught: Call to undefined function undefinedFunction()
+</code></pre>
+
+<h5>Common Error Types</h5>
+
+<ul>
+  <li><code>TypeError</code> – Invalid data type passed to a function</li>
+  <li><code>ParseError</code> – Syntax error in the code</li>
+  <li><code>ArgumentCountError</code> – Incorrect number of function arguments</li>
+  <li><code>ArithmeticError</code> – Arithmetic calculation errors</li>
+</ul>
+
+<h5>Handling Errors with Throwable</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    someFunction();
+} catch (Throwable $e) {
+    echo "Something went wrong: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<p>
+  Catching <code>Throwable</code> allows both <code>Exception</code> and
+  <code>Error</code> objects to be handled in the same block.
+</p>
+
+<p>
+  The <code>Error</code> class helps PHP provide more consistent
+  and modern error handling similar to other programming languages.
+</p>
 
 <h4 id="argumentcounterror">ARGUMENTCOUNTERROR</h4>
 .
