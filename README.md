@@ -13598,7 +13598,84 @@ try {
 </p>
 
 <h4 id="argumentcounterror">ARGUMENTCOUNTERROR</h4>
-.
+
+<p>
+  <strong>ArgumentCountError</strong> is a PHP error thrown when a function
+  or method receives the wrong number of arguments.
+</p>
+
+<p>
+  It usually occurs when too few parameters are passed to a function that
+  requires them, or when an internal function receives more arguments than
+  expected.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── TypeError
+           └── ArgumentCountError
+</code></pre>
+
+<h5>Example: Too Few Arguments</h5>
+
+<pre><code class="language-php">
+<?php
+function greet($name) {
+    echo "Hello, $name";
+}
+
+greet();
+?>
+</code></pre>
+
+<p>
+  This will trigger an <code>ArgumentCountError</code> because the
+  <code>$name</code> parameter is required but was not provided.
+</p>
+
+<h5>Handling the Error</h5>
+
+<pre><code class="language-php">
+<?php
+function greet($name) {
+    echo "Hello, $name";
+}
+
+try {
+    greet();
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example: Too Many Arguments</h5>
+
+<pre><code class="language-php">
+<?php
+function sum($a, $b) {
+    return $a + $b;
+}
+
+sum(1, 2, 3);
+?>
+</code></pre>
+
+<h5>Common Causes</h5>
+
+<ul>
+  <li>Calling a function without the required parameters</li>
+  <li>Passing extra arguments to internal PHP functions</li>
+  <li>Incorrect method calls in classes</li>
+</ul>
+
+<p>
+  <code>ArgumentCountError</code> helps ensure functions are called with
+  the correct number of parameters, improving code reliability.
+</p>
 
 <h4 id="arithmeterror">ARITHMETICERROR</h4>
 .
