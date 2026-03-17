@@ -13678,7 +13678,75 @@ sum(1, 2, 3);
 </p>
 
 <h4 id="arithmeterror">ARITHMETICERROR</h4>
-.
+
+<p>
+  <strong>ArithmeticError</strong> is a built-in PHP error that occurs when
+  an arithmetic operation fails or produces an invalid result.
+</p>
+
+<p>
+  It is part of PHP’s error hierarchy introduced in PHP 7 and extends the
+  <code>Error</code> class. It is commonly associated with low-level math
+  issues such as division problems or integer overflow.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── ArithmeticError
+</code></pre>
+
+<h5>Common Related Errors</h5>
+
+<ul>
+  <li><code>DivisionByZeroError</code> – Division by zero</li>
+  <li><code>OverflowError</code> – Numeric overflow in some contexts</li>
+</ul>
+
+<h5>Example: Division by Zero</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    $result = intdiv(10, 0);
+} catch (ArithmeticError $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Error: Division by zero
+</code></pre>
+
+<h5>Handling ArithmeticError</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    $value = intdiv(5, 0);
+} catch (ArithmeticError $e) {
+    echo "Arithmetic problem: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>When It Occurs</h5>
+
+<ul>
+  <li>Invalid mathematical operations</li>
+  <li>Division by zero using certain functions</li>
+  <li>Overflow in numeric calculations</li>
+</ul>
+
+<p>
+  <code>ArithmeticError</code> allows developers to safely handle critical
+  mathematical errors and prevent application crashes.
+</p>
 
 <h4 id="assertionerror">ASSERTIONERROR</h4>
 .
