@@ -13824,7 +13824,81 @@ Assertion failed: assert(2 > 5)
 </p>
 
 <h4 id="divisionbyzeroerror">DIVISIONBYZEROERROR</h4>
-.
+
+<p>
+  <strong>DivisionByZeroError</strong> is a PHP error that occurs when an
+  attempt is made to divide a number by zero.
+</p>
+
+<p>
+  It is part of PHP’s modern error system (introduced in PHP 7) and extends
+  the <code>ArithmeticError</code> class.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── ArithmeticError
+           └── DivisionByZeroError
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$result = intdiv(10, 0);
+?>
+</code></pre>
+
+<p>
+  This will throw a <code>DivisionByZeroError</code>.
+</p>
+
+<h5>Handling the Error</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    $result = intdiv(10, 0);
+} catch (DivisionByZeroError $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Error: Division by zero
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Occurs with functions like <code>intdiv()</code>.</li>
+  <li>In standard division (<code>/</code>), PHP may emit a warning instead of throwing an error (depending on version/config).</li>
+  <li>Should always be handled to avoid application crashes.</li>
+</ul>
+
+<h5>Best Practice</h5>
+
+<pre><code class="language-php">
+<?php
+function safeDivide($a, $b) {
+    if ($b === 0) {
+        return null; // or throw custom exception
+    }
+    return $a / $b;
+}
+?>
+</code></pre>
+
+<p>
+  <code>DivisionByZeroError</code> ensures safer mathematical operations
+  by preventing invalid divisions at runtime.
+</p>
 
 <h4 id="compileerror">COMPILEERROR</h4>
 .
