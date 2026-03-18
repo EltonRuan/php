@@ -13749,7 +13749,79 @@ try {
 </p>
 
 <h4 id="assertionerror">ASSERTIONERROR</h4>
-.
+
+<p>
+  <strong>AssertionError</strong> is a PHP error that is thrown when an
+  <code>assert()</code> statement fails. It indicates that a condition
+  expected to be true has evaluated to false.
+</p>
+
+<p>
+  It is part of PHP’s modern error handling system and extends the
+  <code>Error</code> class.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── AssertionError
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+assert(1 === 2);
+?>
+</code></pre>
+
+<p>
+  If assertions are enabled and configured to throw exceptions,
+  this will trigger an <code>AssertionError</code>.
+</p>
+
+<h5>Using Assertions with Exceptions</h5>
+
+<pre><code class="language-php">
+<?php
+assert_options(ASSERT_EXCEPTION, 1);
+
+try {
+    assert(2 > 5);
+} catch (AssertionError $e) {
+    echo "Assertion failed: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Assertion failed: assert(2 > 5)
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Debugging assumptions in code</li>
+  <li>Validating internal states</li>
+  <li>Testing conditions during development</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Assertions can be disabled in production environments.</li>
+  <li>Controlled via <code>php.ini</code> settings like <code>zend.assertions</code>.</li>
+  <li>Not intended for user input validation.</li>
+</ul>
+
+<p>
+  <code>AssertionError</code> helps developers catch logical mistakes
+  early during development and testing.
+</p>
 
 <h4 id="divisionbyzeroerror">DIVISIONBYZEROERROR</h4>
 .
