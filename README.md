@@ -13901,7 +13901,70 @@ function safeDivide($a, $b) {
 </p>
 
 <h4 id="compileerror">COMPILEERROR</h4>
-.
+
+<p>
+  <strong>CompileError</strong> is a PHP error that occurs during the compilation
+  phase of a script. It indicates problems that prevent the code from being
+  properly compiled before execution.
+</p>
+
+<p>
+  It is part of PHP’s error hierarchy introduced in PHP 7 and extends the
+  <code>Error</code> class.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── CompileError
+</code></pre>
+
+<h5>Common Causes</h5>
+
+<ul>
+  <li>Syntax errors in included or required files</li>
+  <li>Invalid code structure detected at compile time</li>
+  <li>Issues in evaluated code (e.g., <code>eval()</code>)</li>
+</ul>
+
+<h5>Example (eval)</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    eval('echo "Hello"'); // Missing semicolon
+} catch (CompileError $e) {
+    echo "Compile error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Compile error: syntax error, unexpected end of file
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Occurs before the script is fully executed.</li>
+  <li>Most compile errors stop execution immediately.</li>
+  <li>Not all compile-time errors are catchable, especially outside <code>eval()</code>.</li>
+</ul>
+
+<h5>Related Errors</h5>
+
+<ul>
+  <li><code>ParseError</code> – Syntax errors in code</li>
+</ul>
+
+<p>
+  <code>CompileError</code> helps identify issues that prevent PHP code
+  from being successfully compiled and executed.
+</p>
 
 <h4 id="parseerror">PARSEERROR</h4>
 .
