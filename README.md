@@ -13967,7 +13967,74 @@ Compile error: syntax error, unexpected end of file
 </p>
 
 <h4 id="parseerror">PARSEERROR</h4>
-.
+
+<p>
+  <strong>ParseError</strong> is a PHP error that occurs when the interpreter
+  encounters a syntax error while parsing the code.
+</p>
+
+<p>
+  It is thrown during the compilation phase (before execution) and extends
+  the <code>CompileError</code> class.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── CompileError
+           └── ParseError
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+echo "Hello World"
+?>
+</code></pre>
+
+<p>
+  Missing a semicolon will trigger a <code>ParseError</code>.
+</p>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Parse error: syntax error, unexpected end of file
+</code></pre>
+
+<h5>Handling ParseError</h5>
+
+<p>
+  Normally, parse errors stop execution and cannot be caught. However,
+  when using <code>eval()</code>, they can be handled:
+</p>
+
+<pre><code class="language-php">
+<?php
+try {
+    eval('echo "Hello"'); // Missing semicolon
+} catch (ParseError $e) {
+    echo "Parse error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Common Causes</h5>
+
+<ul>
+  <li>Missing semicolons (<code>;</code>)</li>
+  <li>Unclosed brackets or parentheses</li>
+  <li>Invalid syntax or keywords</li>
+  <li>Incorrect string formatting</li>
+</ul>
+
+<p>
+  <code>ParseError</code> helps identify syntax issues early,
+  preventing invalid code from running.
+</p>
 
 <h4 id="typeerror">TYPEERROR</h4>
 .
