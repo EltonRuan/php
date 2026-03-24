@@ -14037,7 +14037,81 @@ try {
 </p>
 
 <h4 id="typeerror">TYPEERROR</h4>
-.
+
+<p>
+  <strong>TypeError</strong> is a PHP error that occurs when a value of an
+  incorrect type is passed to a function, returned from a function, or assigned
+  where a specific type is required.
+</p>
+
+<p>
+  It is part of PHP’s modern error handling system (introduced in PHP 7)
+  and extends the <code>Error</code> class.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── TypeError
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+function sum(int $a, int $b) {
+    return $a + $b;
+}
+
+sum(5, "10"); // Invalid type
+?>
+</code></pre>
+
+<p>
+  This will throw a <code>TypeError</code> because a string was passed
+  where an integer was expected (depending on strict types).
+</p>
+
+<h5>Strict Types Example</h5>
+
+<pre><code class="language-php">
+<?php
+declare(strict_types=1);
+
+function multiply(int $a, int $b): int {
+    return $a * $b;
+}
+
+multiply(2, "3"); // Throws TypeError
+?>
+</code></pre>
+
+<h5>Handling TypeError</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    sum(5, "10");
+} catch (TypeError $e) {
+    echo "Type error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Common Causes</h5>
+
+<ul>
+  <li>Passing wrong data types to functions</li>
+  <li>Returning incorrect types from functions</li>
+  <li>Violating type declarations in parameters or properties</li>
+</ul>
+
+<p>
+  <code>TypeError</code> improves code reliability by enforcing strict
+  type rules and preventing unexpected behavior.
+</p>
 
 <h4 id="valueerror">VALUEERROR</h4>
 .
