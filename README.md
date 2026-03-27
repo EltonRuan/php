@@ -14114,7 +14114,73 @@ try {
 </p>
 
 <h4 id="valueerror">VALUEERROR</h4>
-.
+
+<p>
+  <strong>ValueError</strong> is a PHP error that occurs when a function
+  receives a value of the correct type, but the value itself is invalid.
+</p>
+
+<p>
+  It was introduced in PHP 8 and extends the <code>Error</code> class.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── ValueError
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+strpos("Hello", "");
+?>
+</code></pre>
+
+<p>
+  This may throw a <code>ValueError</code> because the search string is empty
+  in contexts where it is not allowed.
+</p>
+
+<h5>Another Example</h5>
+
+<pre><code class="language-php">
+<?php
+range(1, 10, 0);
+?>
+</code></pre>
+
+<p>
+  This throws a <code>ValueError</code> because the step cannot be zero.
+</p>
+
+<h5>Handling ValueError</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    range(1, 10, 0);
+} catch (ValueError $e) {
+    echo "Value error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Common Causes</h5>
+
+<ul>
+  <li>Invalid argument values passed to functions</li>
+  <li>Out-of-range numbers</li>
+  <li>Empty or malformed inputs</li>
+</ul>
+
+<p>
+  <code>ValueError</code> helps enforce valid input values,
+  even when the data type itself is correct.
+</p>
 
 <h4 id="unhandledmatcheror">UNHANDLEDMATCHERROR</h4>
 .
