@@ -14183,7 +14183,90 @@ try {
 </p>
 
 <h4 id="unhandledmatcheror">UNHANDLEDMATCHERROR</h4>
-.
+
+<p>
+  <strong>UnhandledMatchError</strong> is a PHP error that occurs when a
+  <code>match</code> expression does not handle all possible values and no
+  matching case is found.
+</p>
+
+<p>
+  It was introduced in PHP 8 and extends the <code>Error</code> class.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── UnhandledMatchError
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$value = 3;
+
+$result = match ($value) {
+    1 => 'One',
+    2 => 'Two',
+};
+
+echo $result;
+?>
+</code></pre>
+
+<p>
+  Since <code>3</code> is not handled, PHP throws an
+  <code>UnhandledMatchError</code>.
+</p>
+
+<h5>Handling the Error</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    $value = 3;
+
+    $result = match ($value) {
+        1 => 'One',
+        2 => 'Two',
+    };
+} catch (UnhandledMatchError $e) {
+    echo "No match found!";
+}
+?>
+</code></pre>
+
+<h5>Using Default Case (Best Practice)</h5>
+
+<pre><code class="language-php">
+<?php
+$value = 3;
+
+$result = match ($value) {
+    1 => 'One',
+    2 => 'Two',
+    default => 'Unknown',
+};
+
+echo $result;
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li><code>match</code> must be exhaustive (cover all cases).</li>
+  <li>If no case matches and no <code>default</code> is provided, an error is thrown.</li>
+  <li>Use <code>default</code> to avoid <code>UnhandledMatchError</code>.</li>
+</ul>
+
+<p>
+  <code>UnhandledMatchError</code> ensures safer and more predictable
+  control flow when using <code>match</code> expressions.
+</p>
 
 <h4 id="fibererror">FIBERERROR</h4>
 .
