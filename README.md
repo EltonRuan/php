@@ -14269,7 +14269,72 @@ echo $result;
 </p>
 
 <h4 id="fibererror">FIBERERROR</h4>
-.
+
+<p>
+  <strong>FiberError</strong> is a PHP error that occurs when an invalid
+  operation is performed on a <code>Fiber</code>.
+</p>
+
+<p>
+  It was introduced in PHP 8.1 along with Fibers, which provide a way to
+  implement cooperative multitasking (similar to coroutines).
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+Throwable
+ └── Error
+      └── FiberError
+</code></pre>
+
+<h5>When It Occurs</h5>
+
+<ul>
+  <li>Resuming a fiber that has already finished</li>
+  <li>Suspending a fiber outside of a fiber context</li>
+  <li>Starting a fiber more than once</li>
+  <li>Performing invalid state transitions</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$fiber = new Fiber(function () {
+    Fiber::suspend("Paused");
+});
+
+$fiber->start();
+$fiber->resume(); // OK
+$fiber->resume(); // Error: already completed
+?>
+</code></pre>
+
+<h5>Handling FiberError</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    $fiber->resume();
+} catch (FiberError $e) {
+    echo "Fiber error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Key Concepts About Fibers</h5>
+
+<ul>
+  <li>Fibers allow pausing and resuming execution.</li>
+  <li>They are useful for async-like behavior in PHP.</li>
+  <li>They must follow strict lifecycle rules.</li>
+</ul>
+
+<p>
+  <code>FiberError</code> ensures that fibers are used correctly and helps
+  prevent invalid execution states in asynchronous workflows.
+</p>
 
 <h4 id="requestparsebodyexception">REQUESTPARSEBODYEXCEPTION</h4>
 .
