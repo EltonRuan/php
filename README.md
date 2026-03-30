@@ -14337,7 +14337,78 @@ try {
 </p>
 
 <h4 id="requestparsebodyexception">REQUESTPARSEBODYEXCEPTION</h4>
-.
+
+<p>
+  <strong>RequestParseBodyException</strong> is not a native PHP error or exception.
+  It is typically a <strong>custom exception</strong> used in frameworks or applications
+  to indicate a failure when parsing the request body.
+</p>
+
+<p>
+  This kind of exception is commonly used when handling HTTP requests,
+  especially when working with JSON, XML, or form data.
+</p>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Invalid JSON in request body</li>
+  <li>Malformed XML or payload</li>
+  <li>Missing required fields in request data</li>
+  <li>Incorrect content type</li>
+</ul>
+
+<h5>Example Scenario (JSON Parsing)</h5>
+
+<pre><code class="language-php">
+<?php
+class RequestParseBodyException extends Exception {}
+
+function parseJsonBody($input) {
+    $data = json_decode($input, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new RequestParseBodyException("Invalid JSON body");
+    }
+
+    return $data;
+}
+
+try {
+    $body = '{ invalid json }';
+    parseJsonBody($body);
+} catch (RequestParseBodyException $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Error: Invalid JSON body
+</code></pre>
+
+<h5>Custom Exception Declaration</h5>
+
+<pre><code class="language-php">
+<?php
+class RequestParseBodyException extends Exception {}
+?>
+</code></pre>
+
+<h5>Why Use It?</h5>
+
+<ul>
+  <li>Provides clearer error semantics</li>
+  <li>Separates parsing errors from other exceptions</li>
+  <li>Improves API error handling</li>
+</ul>
+
+<p>
+  <code>RequestParseBodyException</code> is useful in APIs and backend systems
+  to standardize how invalid request payloads are handled.
+</p>
 
 
 <h3 id="predefined-interfaces-classes">PREDEFINED INTERFACES AND CLASSES</h3>
