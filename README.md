@@ -14439,7 +14439,95 @@ class RequestParseBodyException extends Exception {}
 </nav>
 
 <h4 id="traversable-interface">TRAVERSABLE INTERFACE</h4>
-.
+
+<p>
+  <strong>Traversable</strong> is a built-in PHP interface that marks a class
+  as being iterable, meaning it can be used in a <code>foreach</code> loop.
+</p>
+
+<p>
+  It is an internal interface and cannot be implemented directly by user-defined
+  classes. Instead, it is implemented by other interfaces like
+  <code>Iterator</code> and <code>IteratorAggregate</code>.
+</p>
+
+<h5>Interface Hierarchy</h5>
+
+<pre><code>
+Traversable
+ ├── Iterator
+ └── IteratorAggregate
+</code></pre>
+
+<h5>Using Iterator (Direct Implementation)</h5>
+
+<pre><code class="language-php">
+<?php
+class MyCollection implements Iterator {
+    private $items = [1, 2, 3];
+    private $position = 0;
+
+    public function current() {
+        return $this->items[$this->position];
+    }
+
+    public function key() {
+        return $this->position;
+    }
+
+    public function next(): void {
+        $this->position++;
+    }
+
+    public function rewind(): void {
+        $this->position = 0;
+    }
+
+    public function valid(): bool {
+        return isset($this->items[$this->position]);
+    }
+}
+
+$collection = new MyCollection();
+
+foreach ($collection as $item) {
+    echo $item;
+}
+?>
+</code></pre>
+
+<h5>Using IteratorAggregate</h5>
+
+<pre><code class="language-php">
+<?php
+class MyCollection implements IteratorAggregate {
+    private $items = [1, 2, 3];
+
+    public function getIterator(): Traversable {
+        return new ArrayIterator($this->items);
+    }
+}
+
+$collection = new MyCollection();
+
+foreach ($collection as $item) {
+    echo $item;
+}
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li><code>Traversable</code> itself cannot be implemented directly.</li>
+  <li>Use <code>Iterator</code> for full control over iteration.</li>
+  <li>Use <code>IteratorAggregate</code> for simpler implementations.</li>
+</ul>
+
+<p>
+  The <code>Traversable</code> interface is fundamental for enabling objects
+  to behave like arrays in loops, making custom data structures iterable.
+</p>
 
 <h4 id="iterator-interface">ITERATOR INTERFACE</h4>
 .
