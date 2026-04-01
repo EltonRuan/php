@@ -14530,7 +14530,87 @@ foreach ($collection as $item) {
 </p>
 
 <h4 id="iterator-interface">ITERATOR INTERFACE</h4>
-.
+
+<p>
+  <strong>Iterator</strong> is a built-in PHP interface that allows objects
+  to be iterated using a <code>foreach</code> loop. It provides full control
+  over how iteration is performed.
+</p>
+
+<p>
+  Classes that implement <code>Iterator</code> must define five methods that
+  control the iteration process.
+</p>
+
+<h5>Required Methods</h5>
+
+<ul>
+  <li><code>current()</code> – Returns the current element</li>
+  <li><code>key()</code> – Returns the current key</li>
+  <li><code>next()</code> – Moves to the next element</li>
+  <li><code>rewind()</code> – Resets the pointer to the beginning</li>
+  <li><code>valid()</code> – Checks if the current position is valid</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class Counter implements Iterator {
+    private $position = 0;
+    private $limit = 3;
+
+    public function current() {
+        return $this->position;
+    }
+
+    public function key() {
+        return $this->position;
+    }
+
+    public function next(): void {
+        $this->position++;
+    }
+
+    public function rewind(): void {
+        $this->position = 0;
+    }
+
+    public function valid(): bool {
+        return $this->position < $this->limit;
+    }
+}
+
+$counter = new Counter();
+
+foreach ($counter as $key => $value) {
+    echo "$key => $value\n";
+}
+?>
+</code></pre>
+
+<h5>How Iteration Works</h5>
+
+<ol>
+  <li><code>rewind()</code> is called at the start</li>
+  <li><code>valid()</code> checks if iteration should continue</li>
+  <li><code>current()</code> returns the value</li>
+  <li><code>key()</code> returns the key</li>
+  <li><code>next()</code> advances to the next item</li>
+</ol>
+
+<h5>When to Use Iterator</h5>
+
+<ul>
+  <li>When you need full control over iteration logic</li>
+  <li>When building custom data structures</li>
+  <li>When lazy-loading or streaming data</li>
+</ul>
+
+<p>
+  The <code>Iterator</code> interface gives precise control over how objects
+  behave during iteration, making it a powerful tool for advanced PHP usage.
+</p>
 
 <h4 id="iteratoraggregate-interface">ITERATORAGGREGATE INTERFACE</h4>
 .
