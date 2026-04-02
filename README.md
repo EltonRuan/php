@@ -14613,7 +14613,79 @@ foreach ($counter as $key => $value) {
 </p>
 
 <h4 id="iteratoraggregate-interface">ITERATORAGGREGATE INTERFACE</h4>
-.
+
+<p>
+  <strong>IteratorAggregate</strong> is a PHP interface that allows a class
+  to be iterable by returning an external iterator instead of implementing
+  all iteration logic itself.
+</p>
+
+<p>
+  It is a simpler alternative to the <code>Iterator</code> interface when you
+  want to delegate iteration to another object.
+</p>
+
+<h5>Required Method</h5>
+
+<ul>
+  <li><code>getIterator()</code> – Must return an object that implements <code>Traversable</code></li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class MyCollection implements IteratorAggregate {
+    private $items = [10, 20, 30];
+
+    public function getIterator(): Traversable {
+        return new ArrayIterator($this->items);
+    }
+}
+
+$collection = new MyCollection();
+
+foreach ($collection as $item) {
+    echo $item . "\n";
+}
+?>
+</code></pre>
+
+<h5>Using a Generator</h5>
+
+<pre><code class="language-php">
+<?php
+class MyCollection implements IteratorAggregate {
+    private $items = [1, 2, 3];
+
+    public function getIterator(): Traversable {
+        foreach ($this->items as $item) {
+            yield $item;
+        }
+    }
+}
+?>
+</code></pre>
+
+<h5>IteratorAggregate vs Iterator</h5>
+
+<ul>
+  <li><strong>Iterator</strong> – You control all iteration methods manually</li>
+  <li><strong>IteratorAggregate</strong> – You return an existing iterator</li>
+</ul>
+
+<h5>When to Use IteratorAggregate</h5>
+
+<ul>
+  <li>When you want simpler implementation</li>
+  <li>When you already have an array or iterable structure</li>
+  <li>When delegating iteration logic to another class</li>
+</ul>
+
+<p>
+  <code>IteratorAggregate</code> is ideal for most use cases where custom
+  iteration behavior is not needed, making code cleaner and easier to maintain.
+</p>
 
 <h4 id="internaliterator-class">INTERNALITERATOR CLASS</h4>
 .
