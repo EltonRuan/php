@@ -14688,7 +14688,70 @@ class MyCollection implements IteratorAggregate {
 </p>
 
 <h4 id="internaliterator-class">INTERNALITERATOR CLASS</h4>
-.
+
+<p>
+  <strong>InternalIterator</strong> is not an official PHP userland class,
+  but rather a concept referring to iterators implemented internally by PHP
+  (written in C) instead of user-defined classes.
+</p>
+
+<p>
+  These iterators are part of PHP’s core and extensions, and they implement
+  interfaces like <code>Iterator</code> or <code>Traversable</code>.
+</p>
+
+<h5>Examples of Internal Iterators</h5>
+
+<ul>
+  <li><code>ArrayIterator</code></li>
+  <li><code>DirectoryIterator</code></li>
+  <li><code>FilesystemIterator</code></li>
+  <li><code>RecursiveArrayIterator</code></li>
+</ul>
+
+<h5>Example Using ArrayIterator</h5>
+
+<pre><code class="language-php">
+<?php
+$iterator = new ArrayIterator([1, 2, 3]);
+
+foreach ($iterator as $value) {
+    echo $value . "\n";
+}
+?>
+</code></pre>
+
+<h5>Example Using DirectoryIterator</h5>
+
+<pre><code class="language-php">
+<?php
+$dir = new DirectoryIterator(".");
+
+foreach ($dir as $file) {
+    echo $file->getFilename() . "\n";
+}
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+
+<ul>
+  <li>Implemented in PHP core (not user-defined)</li>
+  <li>Highly optimized for performance</li>
+  <li>Used for built-in data structures and resources</li>
+</ul>
+
+<h5>Internal vs Userland Iterators</h5>
+
+<ul>
+  <li><strong>Internal Iterators</strong> – Built into PHP (faster, optimized)</li>
+  <li><strong>Userland Iterators</strong> – Created using <code>Iterator</code> or <code>IteratorAggregate</code></li>
+</ul>
+
+<p>
+  Internal iterators provide efficient and ready-to-use iteration mechanisms
+  for common tasks like working with arrays, files, and directories.
+</p>
 
 <h4 id="throwable-class">THROWABLE CLASS</h4>
 .
