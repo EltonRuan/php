@@ -14754,7 +14754,77 @@ foreach ($dir as $file) {
 </p>
 
 <h4 id="throwable-class">THROWABLE CLASS</h4>
-.
+
+<p>
+  <strong>Throwable</strong> is a built-in PHP interface that represents
+  anything that can be thrown using the <code>throw</code> statement.
+</p>
+
+<p>
+  It serves as the base type for both <code>Exception</code> and
+  <code>Error</code>, allowing unified error and exception handling.
+</p>
+
+<h5>Hierarchy</h5>
+
+<pre><code>
+Throwable
+ ├── Exception
+ └── Error
+</code></pre>
+
+<h5>Basic Usage</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    throw new Exception("Something went wrong");
+} catch (Throwable $e) {
+    echo $e->getMessage();
+}
+?>
+</code></pre>
+
+<p>
+  Catching <code>Throwable</code> ensures that both exceptions and errors
+  are handled in a single block.
+</p>
+
+<h5>Common Methods</h5>
+
+<ul>
+  <li><code>getMessage()</code> – Error/exception message</li>
+  <li><code>getCode()</code> – Error/exception code</li>
+  <li><code>getFile()</code> – File where it occurred</li>
+  <li><code>getLine()</code> – Line number</li>
+  <li><code>getTrace()</code> – Stack trace</li>
+</ul>
+
+<h5>Custom Exceptions</h5>
+
+<p>
+  You cannot implement <code>Throwable</code> directly. Instead,
+  extend <code>Exception</code>:
+</p>
+
+<pre><code class="language-php">
+<?php
+class MyException extends Exception {}
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li><code>Throwable</code> is an interface, not a class.</li>
+  <li>Cannot be implemented directly by user classes.</li>
+  <li>Used to catch all throwable errors and exceptions.</li>
+</ul>
+
+<p>
+  <code>Throwable</code> provides a unified way to handle all types of
+  runtime problems in modern PHP.
+</p>
 
 <h4 id="countable-interface">COUNTABLE INTERFACE</h4>
 .
