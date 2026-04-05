@@ -14827,7 +14827,66 @@ class MyException extends Exception {}
 </p>
 
 <h4 id="countable-interface">COUNTABLE INTERFACE</h4>
-.
+
+<p>
+  <strong>Countable</strong> is a built-in PHP interface that allows an object
+  to be used with the <code>count()</code> function.
+</p>
+
+<p>
+  Classes that implement <code>Countable</code> must define the
+  <code>count()</code> method, which returns the number of elements in the object.
+</p>
+
+<h5>Required Method</h5>
+
+<ul>
+  <li><code>count(): int</code> – Returns the number of elements</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class Cart implements Countable {
+    private $items = [];
+
+    public function add($item) {
+        $this->items[] = $item;
+    }
+
+    public function count(): int {
+        return count($this->items);
+    }
+}
+
+$cart = new Cart();
+$cart->add("Product A");
+$cart->add("Product B");
+
+echo count($cart); // 2
+?>
+</code></pre>
+
+<h5>Without Countable</h5>
+
+<p>
+  If a class does not implement <code>Countable</code>, calling
+  <code>count()</code> on it may result in an error (in newer PHP versions).
+</p>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Enables objects to behave like arrays with <code>count()</code></li>
+  <li>Must return an integer</li>
+  <li>Useful for collections, lists, and containers</li>
+</ul>
+
+<p>
+  The <code>Countable</code> interface is essential for making custom objects
+  compatible with PHP’s native counting functions.
+</p>
 
 <h4 id="arrayaccess-interface">ARRAYACCESS INTERFACE</h4>
 .
