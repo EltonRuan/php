@@ -14889,7 +14889,84 @@ echo count($cart); // 2
 </p>
 
 <h4 id="arrayaccess-interface">ARRAYACCESS INTERFACE</h4>
-.
+
+<p>
+  <strong>ArrayAccess</strong> is a PHP interface that allows an object to be
+  accessed using array syntax (e.g., <code>$obj['key']</code>).
+</p>
+
+<p>
+  By implementing this interface, you can make objects behave like arrays
+  for reading, writing, checking, and unsetting values.
+</p>
+
+<h5>Required Methods</h5>
+
+<ul>
+  <li><code>offsetExists($offset): bool</code> – Checks if a key exists</li>
+  <li><code>offsetGet($offset): mixed</code> – Retrieves a value</li>
+  <li><code>offsetSet($offset, $value): void</code> – Sets a value</li>
+  <li><code>offsetUnset($offset): void</code> – Removes a value</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class MyArray implements ArrayAccess {
+    private $container = [];
+
+    public function offsetExists($offset): bool {
+        return isset($this->container[$offset]);
+    }
+
+    public function offsetGet($offset): mixed {
+        return $this->container[$offset] ?? null;
+    }
+
+    public function offsetSet($offset, $value): void {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    public function offsetUnset($offset): void {
+        unset($this->container[$offset]);
+    }
+}
+
+$obj = new MyArray();
+
+$obj['name'] = 'Elton';
+echo $obj['name']; // Elton
+
+isset($obj['name']); // true
+unset($obj['name']);
+?>
+</code></pre>
+
+<h5>Key Features</h5>
+
+<ul>
+  <li>Enables array-like access to object data</li>
+  <li>Works with <code>isset()</code> and <code>unset()</code></li>
+  <li>Supports dynamic keys</li>
+</ul>
+
+<h5>When to Use</h5>
+
+<ul>
+  <li>Creating collection or container objects</li>
+  <li>Building flexible data structures</li>
+  <li>Enhancing object usability with array syntax</li>
+</ul>
+
+<p>
+  <code>ArrayAccess</code> makes objects more intuitive by allowing them
+  to behave like arrays while maintaining object-oriented design.
+</p>
 
 <h4 id="serializable-interface">SERIALIZABLE INTERFACE</h4>
 .
