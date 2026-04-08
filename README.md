@@ -15059,7 +15059,100 @@ class User {
 </p>
 
 <h4 id="closure-class">CLOSURE CLASS</h4>
-.
+
+<p>
+  <strong>Closure</strong> is a built-in PHP class used to represent anonymous
+  functions (also known as lambdas). It allows functions to be created without
+  a specified name.
+</p>
+
+<p>
+  Closures are commonly used for callbacks, middleware, and functional-style
+  programming.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$greet = function ($name) {
+    return "Hello, $name";
+};
+
+echo $greet("Elton");
+?>
+</code></pre>
+
+<h5>Using Variables from Outer Scope</h5>
+
+<p>
+  Closures can import variables using the <code>use</code> keyword:
+</p>
+
+<pre><code class="language-php">
+<?php
+$message = "Hi";
+
+$greet = function ($name) use ($message) {
+    return "$message, $name";
+};
+
+echo $greet("Elton");
+?>
+</code></pre>
+
+<h5>By Reference</h5>
+
+<pre><code class="language-php">
+<?php
+$count = 0;
+
+$increment = function () use (&$count) {
+    $count++;
+};
+
+$increment();
+echo $count; // 1
+?>
+</code></pre>
+
+<h5>Type Hinting with Closure</h5>
+
+<pre><code class="language-php">
+<?php
+function runTask(Closure $task) {
+    return $task();
+}
+
+runTask(function () {
+    return "Task executed";
+});
+?>
+</code></pre>
+
+<h5>Arrow Functions (Short Closures)</h5>
+
+<pre><code class="language-php">
+<?php
+$sum = fn($a, $b) => $a + $b;
+
+echo $sum(2, 3); // 5
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Closures are instances of the <code>Closure</code> class</li>
+  <li>They can capture variables from the outer scope</li>
+  <li>Useful for callbacks and functional programming</li>
+  <li>Arrow functions provide a shorter syntax</li>
+</ul>
+
+<p>
+  The <code>Closure</code> class is essential for writing flexible,
+  reusable, and expressive PHP code.
+</p>
 
 <h4 id="stdclass-class">STDCLASS CLASS</h4>
 .
