@@ -14969,7 +14969,94 @@ unset($obj['name']);
 </p>
 
 <h4 id="serializable-interface">SERIALIZABLE INTERFACE</h4>
-.
+
+<p>
+  <strong>Serializable</strong> is a PHP interface that allows objects to define
+  their own custom serialization and unserialization behavior.
+</p>
+
+<p>
+  It provides more control over how an object is converted to a string and
+  restored back into an object.
+</p>
+
+<p>
+  ⚠️ <strong>Deprecated as of PHP 8.1</strong> — it is recommended to use
+  <code>__serialize()</code> and <code>__unserialize()</code> magic methods instead.
+</p>
+
+<h5>Required Methods</h5>
+
+<ul>
+  <li><code>serialize(): string</code> – Returns a serialized representation</li>
+  <li><code>unserialize(string $data): void</code> – Restores object state</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class User implements Serializable {
+    private $name;
+    private $email;
+
+    public function __construct($name, $email) {
+        $this->name = $name;
+        $this->email = $email;
+    }
+
+    public function serialize(): string {
+        return serialize([
+            'name' => $this->name,
+            'email' => $this->email
+        ]);
+    }
+
+    public function unserialize($data): void {
+        $values = unserialize($data);
+        $this->name = $values['name'];
+        $this->email = $values['email'];
+    }
+}
+?>
+</code></pre>
+
+<h5>Modern Alternative (Recommended)</h5>
+
+<pre><code class="language-php">
+<?php
+class User {
+    private $name;
+    private $email;
+
+    public function __serialize(): array {
+        return [
+            'name' => $this->name,
+            'email' => $this->email
+        ];
+    }
+
+    public function __unserialize(array $data): void {
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+    }
+}
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Gives full control over serialization process</li>
+  <li>Deprecated in favor of modern magic methods</li>
+  <li>Used when storing objects (sessions, cache, files)</li>
+</ul>
+
+<p>
+  While <code>Serializable</code> was useful for custom serialization logic,
+  modern PHP favors <code>__serialize()</code> and <code>__unserialize()</code>
+  for better safety and clarity.
+</p>
 
 <h4 id="closure-class">CLOSURE CLASS</h4>
 .
