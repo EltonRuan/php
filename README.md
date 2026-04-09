@@ -15155,7 +15155,75 @@ echo $sum(2, 3); // 5
 </p>
 
 <h4 id="stdclass-class">STDCLASS CLASS</h4>
-.
+
+<p>
+  <strong>stdClass</strong> is a built-in PHP class used to create generic
+  empty objects. It is commonly used when casting arrays to objects or when
+  working with dynamic data.
+</p>
+
+<p>
+  It has no predefined methods or properties, allowing you to add properties
+  dynamically.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$obj = new stdClass();
+
+$obj->name = "Elton";
+$obj->age = 25;
+
+echo $obj->name; // Elton
+?>
+</code></pre>
+
+<h5>Creating Object from Array</h5>
+
+<pre><code class="language-php">
+<?php
+$data = ['name' => 'Elton', 'age' => 25];
+
+$obj = (object) $data;
+
+echo $obj->age; // 25
+?>
+</code></pre>
+
+<h5>Using json_decode()</h5>
+
+<pre><code class="language-php">
+<?php
+$json = '{"name":"Elton","age":25}';
+
+$obj = json_decode($json);
+
+echo $obj->name; // Elton
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+
+<ul>
+  <li>No methods or predefined structure</li>
+  <li>Dynamic properties can be added at runtime</li>
+  <li>Used internally by PHP in various functions</li>
+</ul>
+
+<h5>When to Use stdClass</h5>
+
+<ul>
+  <li>Quick and simple object creation</li>
+  <li>Handling dynamic or unknown data structures</li>
+  <li>Working with JSON or external APIs</li>
+</ul>
+
+<p>
+  <code>stdClass</code> is a lightweight and flexible way to work with
+  object-like data in PHP without defining a custom class.
+</p>
 
 <h4 id="generator-class">GENERATOR CLASS</h4>
 .
