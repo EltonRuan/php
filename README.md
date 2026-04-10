@@ -15226,7 +15226,102 @@ echo $obj->name; // Elton
 </p>
 
 <h4 id="generator-class">GENERATOR CLASS</h4>
-.
+
+<p>
+  <strong>Generator</strong> is a built-in PHP class used to represent
+  generator functions created with the <code>yield</code> keyword.
+</p>
+
+<p>
+  Generators allow you to iterate over data without creating large arrays
+  in memory, making them highly efficient for handling large datasets.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+function numbers() {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+
+$gen = numbers();
+
+foreach ($gen as $value) {
+    echo $value . "\n";
+}
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+
+<ul>
+  <li><code>yield</code> pauses execution and returns a value</li>
+  <li>Execution resumes from where it stopped on the next iteration</li>
+  <li>No need to store all values in memory</li>
+</ul>
+
+<h5>Returning Values</h5>
+
+<pre><code class="language-php">
+<?php
+function example() {
+    yield 1;
+    yield 2;
+    return 100;
+}
+
+$gen = example();
+
+foreach ($gen as $value) {
+    echo $value;
+}
+
+echo $gen->getReturn(); // 100
+?>
+</code></pre>
+
+<h5>Sending Values to Generator</h5>
+
+<pre><code class="language-php">
+<?php
+function counter() {
+    $value = yield 1;
+    echo $value;
+}
+
+$gen = counter();
+$gen->current(); // start generator
+$gen->send("Hello");
+?>
+</code></pre>
+
+<h5>Key Methods</h5>
+
+<ul>
+  <li><code>current()</code> – Gets current value</li>
+  <li><code>key()</code> – Gets current key</li>
+  <li><code>next()</code> – Moves to next value</li>
+  <li><code>rewind()</code> – Rewinds generator</li>
+  <li><code>valid()</code> – Checks if valid</li>
+  <li><code>send()</code> – Sends value into generator</li>
+  <li><code>getReturn()</code> – Gets return value</li>
+</ul>
+
+<h5>When to Use Generators</h5>
+
+<ul>
+  <li>Processing large datasets</li>
+  <li>Streaming data</li>
+  <li>Lazy evaluation</li>
+</ul>
+
+<p>
+  The <code>Generator</code> class enables memory-efficient iteration
+  and is a powerful feature for modern PHP applications.
+</p>
 
 <h4 id="fiber-class">FIBER CLASS</h4>
 .
