@@ -15324,7 +15324,85 @@ $gen->send("Hello");
 </p>
 
 <h4 id="fiber-class">FIBER CLASS</h4>
-.
+
+<p>
+  <strong>Fiber</strong> is a built-in PHP class that provides support for
+  cooperative multitasking. It allows functions to be paused and resumed,
+  enabling asynchronous-like behavior in PHP.
+</p>
+
+<p>
+  Introduced in PHP 8.1, Fibers are similar to coroutines and are useful
+  for building async frameworks, schedulers, and non-blocking applications.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$fiber = new Fiber(function () {
+    echo "Start\n";
+    $value = Fiber::suspend("Paused");
+    echo "Resumed with: $value\n";
+});
+
+echo $fiber->start(); // Start + Paused
+$fiber->resume("Hello");
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+
+<ul>
+  <li><code>start()</code> – Starts the fiber execution</li>
+  <li><code>suspend()</code> – Pauses execution and returns a value</li>
+  <li><code>resume()</code> – Resumes execution with a value</li>
+</ul>
+
+<h5>Lifecycle States</h5>
+
+<ul>
+  <li><strong>Created</strong> – Fiber is initialized</li>
+  <li><strong>Running</strong> – Fiber is executing</li>
+  <li><strong>Suspended</strong> – Execution paused</li>
+  <li><strong>Terminated</strong> – Execution finished</li>
+</ul>
+
+<h5>Handling Errors</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    $fiber->resume();
+} catch (FiberError $e) {
+    echo "Fiber error: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Key Methods</h5>
+
+<ul>
+  <li><code>start()</code></li>
+  <li><code>resume()</code></li>
+  <li><code>throw()</code> – Throws exception into the fiber</li>
+  <li><code>isStarted()</code></li>
+  <li><code>isSuspended()</code></li>
+  <li><code>isTerminated()</code></li>
+</ul>
+
+<h5>When to Use Fibers</h5>
+
+<ul>
+  <li>Async programming</li>
+  <li>Task scheduling</li>
+  <li>Non-blocking I/O operations</li>
+</ul>
+
+<p>
+  The <code>Fiber</code> class enables advanced control over execution flow,
+  making it possible to build asynchronous systems in PHP.
+</p>
 
 <h4 id="weakreference-class">WEAKREFERENCE CLASS</h4>
 .
