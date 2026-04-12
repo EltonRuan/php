@@ -15405,7 +15405,65 @@ try {
 </p>
 
 <h4 id="weakreference-class">WEAKREFERENCE CLASS</h4>
-.
+
+<p>
+  <strong>WeakReference</strong> is a built-in PHP class that allows you to
+  create a weak reference to an object without preventing it from being
+  garbage collected.
+</p>
+
+<p>
+  Unlike normal references, a weak reference does not increase the reference
+  count of an object. This means the object can still be destroyed when there
+  are no strong references left.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public $name = "Elton";
+}
+
+$obj = new User();
+$weakRef = WeakReference::create($obj);
+
+var_dump($weakRef->get()); // object(User)
+
+unset($obj);
+
+var_dump($weakRef->get()); // null
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+
+<ul>
+  <li><code>WeakReference::create($object)</code> – Creates a weak reference</li>
+  <li><code>get()</code> – Returns the object if it still exists, or <code>null</code> if it was destroyed</li>
+</ul>
+
+<h5>Use Cases</h5>
+
+<ul>
+  <li>Cache systems</li>
+  <li>Avoiding memory leaks</li>
+  <li>Observing objects without owning them</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Only works with objects (not primitive types)</li>
+  <li>Object may disappear at any time if no strong references exist</li>
+  <li>Requires PHP 7.4+</li>
+</ul>
+
+<p>
+  <code>WeakReference</code> is useful for advanced memory management
+  scenarios where you need to reference objects without controlling their lifecycle.
+</p>
 
 <h4 id="weakmap-class">WEAKMAP CLASS</h4>
 .
