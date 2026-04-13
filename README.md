@@ -15466,7 +15466,82 @@ var_dump($weakRef->get()); // null
 </p>
 
 <h4 id="weakmap-class">WEAKMAP CLASS</h4>
-.
+
+<p>
+  <strong>WeakMap</strong> is a built-in PHP class that stores key-value pairs
+  where the keys are objects, and the references to those objects are weak.
+</p>
+
+<p>
+  This means that if an object used as a key is no longer referenced elsewhere,
+  it will be automatically removed from the <code>WeakMap</code> by the
+  garbage collector.
+</p>
+
+<p>
+  It was introduced in PHP 8.0 and is useful for associating data with objects
+  without preventing their destruction.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public $name;
+}
+
+$map = new WeakMap();
+
+$user = new User();
+$user->name = "Elton";
+
+$map[$user] = "Active";
+
+echo $map[$user]; // Active
+
+unset($user);
+
+// At this point, the entry is automatically removed
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+
+<ul>
+  <li>Keys must be objects</li>
+  <li>Values can be any type</li>
+  <li>Entries are removed when the key object is garbage collected</li>
+</ul>
+
+<h5>Key Methods</h5>
+
+<ul>
+  <li><code>offsetSet($object, $value)</code></li>
+  <li><code>offsetGet($object)</code></li>
+  <li><code>offsetExists($object)</code></li>
+  <li><code>offsetUnset($object)</code></li>
+</ul>
+
+<h5>Use Cases</h5>
+
+<ul>
+  <li>Attaching metadata to objects</li>
+  <li>Caching without memory leaks</li>
+  <li>Tracking object state externally</li>
+</ul>
+
+<h5>WeakMap vs Array</h5>
+
+<ul>
+  <li><strong>WeakMap</strong> – Does not prevent object destruction</li>
+  <li><strong>Array</strong> – Keeps strong references (prevents GC)</li>
+</ul>
+
+<p>
+  <code>WeakMap</code> is ideal for advanced scenarios where you need to
+  associate data with objects without affecting their lifecycle.
+</p>
 
 <h4 id="stringable-interface">STRINGABLE INTERFACE</h4>
 .
