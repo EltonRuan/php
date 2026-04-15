@@ -15544,7 +15544,68 @@ unset($user);
 </p>
 
 <h4 id="stringable-interface">STRINGABLE INTERFACE</h4>
-.
+
+<p>
+  <strong>Stringable</strong> is a PHP interface that indicates an object
+  can be converted to a string.
+</p>
+
+<p>
+  Introduced in PHP 8, any class that implements the
+  <code>__toString()</code> magic method automatically implements
+  <code>Stringable</code>.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class Product {
+    private $name = "Notebook";
+
+    public function __toString(): string {
+        return $this->name;
+    }
+}
+
+$product = new Product();
+
+echo $product; // Notebook
+?>
+</code></pre>
+
+<h5>Type Hinting</h5>
+
+<pre><code class="language-php">
+<?php
+function display(Stringable $value) {
+    echo $value;
+}
+?>
+</code></pre>
+
+<h5>Using with Union Types</h5>
+
+<pre><code class="language-php">
+<?php
+function output(string|Stringable $value) {
+    echo $value;
+}
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+
+<ul>
+  <li>Automatically applied when <code>__toString()</code> is defined</li>
+  <li>Allows objects to be used in string context</li>
+  <li>Improves type safety in function parameters</li>
+</ul>
+
+<p>
+  The <code>Stringable</code> interface makes it easier to work with objects
+  that need to be represented as text in a clean and type-safe way.
+</p>
 
 <h4 id="unitenum-interface">UNITENUM INTERFACE</h4>
 .
