@@ -15669,7 +15669,78 @@ Rejected
 </p>
 
 <h4 id="backedenum-interface">BACKEDENUM INTERFACE</h4>
-.
+
+<p>
+  <strong>BackedEnum</strong> is a built-in PHP interface automatically implemented
+  by enums that have scalar values (also called "backed enums").
+</p>
+
+<p>
+  These enums associate each case with a value of type <code>int</code> or
+  <code>string</code>, allowing easy conversion between the enum and its value.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code>
+UnitEnum
+ └── BackedEnum
+</code></pre>
+
+<h5>Key Methods</h5>
+
+<ul>
+  <li><code>from(int|string $value): static</code> – Returns enum case or throws error</li>
+  <li><code>tryFrom(int|string $value): ?static</code> – Returns enum case or <code>null</code></li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+enum Status: string {
+    case Pending = 'P';
+    case Approved = 'A';
+    case Rejected = 'R';
+}
+
+$status = Status::from('A');
+
+echo $status->name;  // Approved
+echo $status->value; // A
+?>
+</code></pre>
+
+<h5>Using tryFrom()</h5>
+
+<pre><code class="language-php">
+<?php
+$status = Status::tryFrom('X');
+
+var_dump($status); // null
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+
+<ul>
+  <li>Only works with <code>int</code> or <code>string</code> values</li>
+  <li>Provides safe conversion between values and enum cases</li>
+  <li>Useful for database and API integrations</li>
+</ul>
+
+<h5>When to Use</h5>
+
+<ul>
+  <li>Mapping database values to enums</li>
+  <li>Handling API responses</li>
+  <li>Ensuring strict value constraints</li>
+</ul>
+
+<p>
+  The <code>BackedEnum</code> interface enhances enums by linking them to
+  real values, making them practical for real-world applications.
+</p>
 
 <h4 id="sensitiveparametervalue-class">SENSITIVEPARAMETERVALUE CLASS</h4>
 .
