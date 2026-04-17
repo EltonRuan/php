@@ -15608,7 +15608,65 @@ function output(string|Stringable $value) {
 </p>
 
 <h4 id="unitenum-interface">UNITENUM INTERFACE</h4>
-.
+
+<p>
+  <strong>UnitEnum</strong> is a built-in PHP interface automatically implemented
+  by all <strong>enumerations (enums)</strong> that do not have associated values
+  (also known as "pure enums").
+</p>
+
+<p>
+  It provides a standard way to access all possible cases of an enum.
+</p>
+
+<h5>Key Method</h5>
+
+<ul>
+  <li><code>cases(): array</code> – Returns all enum cases</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+enum Status {
+    case Pending;
+    case Approved;
+    case Rejected;
+}
+
+foreach (Status::cases() as $case) {
+    echo $case->name . "\n";
+}
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Pending
+Approved
+Rejected
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Implemented automatically by all enums</li>
+  <li>Cannot be implemented manually by classes</li>
+  <li>Used only for enums without backing values</li>
+</ul>
+
+<h5>Related Interface</h5>
+
+<ul>
+  <li><code>BackedEnum</code> – For enums with scalar values (int or string)</li>
+</ul>
+
+<p>
+  The <code>UnitEnum</code> interface provides a simple and consistent way
+  to work with enum cases in PHP.
+</p>
 
 <h4 id="backedenum-interface">BACKEDENUM INTERFACE</h4>
 .
