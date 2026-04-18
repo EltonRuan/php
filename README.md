@@ -15743,7 +15743,76 @@ var_dump($status); // null
 </p>
 
 <h4 id="sensitiveparametervalue-class">SENSITIVEPARAMETERVALUE CLASS</h4>
-.
+
+<p>
+  <strong>SensitiveParameterValue</strong> is a PHP class used to wrap
+  sensitive data so that it is protected from being exposed in stack traces
+  or error outputs.
+</p>
+
+<p>
+  It is part of PHP’s security improvements (introduced in PHP 8.2) and is
+  typically used together with the <code>#[SensitiveParameter]</code> attribute.
+</p>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Prevent leaking sensitive data (e.g., passwords, tokens)</li>
+  <li>Hide values in stack traces and debugging output</li>
+  <li>Improve application security</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+function login(#[SensitiveParameter] $password) {
+    throw new Exception("Login failed");
+}
+
+try {
+    login("my-secret-password");
+} catch (Exception $e) {
+    echo $e;
+}
+?>
+</code></pre>
+
+<p>
+  In the stack trace, the password will be replaced with a
+  <code>SensitiveParameterValue</code> object instead of showing the real value.
+</p>
+
+<h5>Manual Usage</h5>
+
+<pre><code class="language-php">
+<?php
+$value = new SensitiveParameterValue("secret");
+
+var_dump($value);
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+object(SensitiveParameterValue)#1 (0) {
+}
+</code></pre>
+
+<h5>Key Characteristics</h5>
+
+<ul>
+  <li>Hides actual values in debug output</li>
+  <li>Works with attributes for automatic protection</li>
+  <li>Enhances security in logs and error handling</li>
+</ul>
+
+<p>
+  <code>SensitiveParameterValue</code> is essential for protecting sensitive
+  information in modern PHP applications.
+</p>
 
 <h4 id="php-incomplete-class">__PHP_INCOMPLETE_CLASS</h4>
 .
