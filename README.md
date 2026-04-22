@@ -15815,12 +15815,87 @@ object(SensitiveParameterValue)#1 (0) {
 </p>
 
 <h4 id="php-incomplete-class">__PHP_INCOMPLETE_CLASS</h4>
-.
 
+<p>
+  <strong>__PHP_Incomplete_Class</strong> is a special internal PHP class that
+  is created when an object cannot be fully unserialized.
+</p>
+
+<p>
+  This typically happens when the original class definition is not available
+  (e.g., missing include, autoload failure) at the time of
+  <code>unserialize()</code>.
+</p>
+
+<h5>When It Occurs</h5>
+
+<ul>
+  <li>Class definition is not loaded before <code>unserialize()</code></li>
+  <li>Missing or incorrect autoloader</li>
+  <li>Class was removed or renamed</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public $name = "Elton";
+}
+
+$serialized = serialize(new User());
+
+// Simulate missing class (e.g., different file without class definition)
+$data = unserialize($serialized);
+
+var_dump($data);
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+object(__PHP_Incomplete_Class)#1 (2) {
+  ["__PHP_Incomplete_Class_Name"]=>
+  string(4) "User"
+  ["name"]=>
+  string(5) "Elton"
+}
+</code></pre>
+
+<h5>Accessing Data</h5>
+
+<p>
+  Properties can still be accessed, but the object is not fully functional:
+</p>
+
+<pre><code class="language-php">
+<?php
+echo $data->name;
+?>
+</code></pre>
+
+<h5>How to Avoid</h5>
+
+<ul>
+  <li>Ensure class definitions are loaded before <code>unserialize()</code></li>
+  <li>Use autoloaders (e.g., Composer)</li>
+  <li>Avoid unserializing untrusted data</li>
+</ul>
+
+<h5>Security Note</h5>
+
+<p>
+  Unserializing data from untrusted sources can lead to security vulnerabilities.
+</p>
+
+<p>
+  <code>__PHP_Incomplete_Class</code> acts as a fallback when PHP cannot
+  reconstruct the original object properly.
+</p>
 
 <h3 id="predefined-attributes">PREDEFINED ATTRIBUTES</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
