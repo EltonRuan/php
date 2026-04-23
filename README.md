@@ -15909,7 +15909,89 @@ echo $data->name;
 </nav>
 
 <h4 id="attribute-attribute">ATTRIBUTE ATTRIBUTE</h4>
-.
+
+<p>
+  <strong>Attribute</strong> is a built-in PHP class used to define custom
+  attributes (also known as annotations or metadata) in PHP.
+</p>
+
+<p>
+  Introduced in PHP 8, attributes allow you to attach structured metadata
+  to classes, methods, properties, parameters, and more.
+</p>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Add metadata to code elements</li>
+  <li>Enable declarative programming</li>
+  <li>Support frameworks (routing, validation, ORM, etc.)</li>
+</ul>
+
+<h5>Declaring an Attribute Class</h5>
+
+<pre><code class="language-php">
+<?php
+#[Attribute]
+class Route {
+    public function __construct(public string $path) {}
+}
+?>
+</code></pre>
+
+<h5>Using an Attribute</h5>
+
+<pre><code class="language-php">
+<?php
+class Controller {
+    #[Route("/home")]
+    public function index() {
+        echo "Home page";
+    }
+}
+?>
+</code></pre>
+
+<h5>Reading Attributes (Reflection)</h5>
+
+<pre><code class="language-php">
+<?php
+$method = new ReflectionMethod(Controller::class, 'index');
+$attributes = $method->getAttributes(Route::class);
+
+$route = $attributes[0]->newInstance();
+echo $route->path; // /home
+?>
+</code></pre>
+
+<h5>Attribute Targets</h5>
+
+<pre><code class="language-php">
+<?php
+#[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_CLASS)]
+class Example {}
+?>
+</code></pre>
+
+<ul>
+  <li><code>TARGET_CLASS</code></li>
+  <li><code>TARGET_METHOD</code></li>
+  <li><code>TARGET_PROPERTY</code></li>
+  <li><code>TARGET_PARAMETER</code></li>
+</ul>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Defined using <code>#[...]</code> syntax</li>
+  <li>Require the <code>Attribute</code> class</li>
+  <li>Accessed via Reflection API</li>
+</ul>
+
+<p>
+  The <code>Attribute</code> class enables modern, structured metadata
+  handling in PHP, replacing traditional docblock annotations.
+</p>
 
 <h4 id="attribute-allowdynamicproperties">ALLOWDYNAMICPROPERTIES ATTRIBUTE</h4>
 .
