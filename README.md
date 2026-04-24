@@ -15994,7 +15994,77 @@ class Example {}
 </p>
 
 <h4 id="attribute-allowdynamicproperties">ALLOWDYNAMICPROPERTIES ATTRIBUTE</h4>
-.
+
+<p>
+  <strong>AllowDynamicProperties</strong> is a PHP attribute that allows a class
+  to use dynamic properties (i.e., properties that are not explicitly declared
+  in the class).
+</p>
+
+<p>
+  It was introduced in PHP 8.2 to provide backward compatibility, since
+  dynamic properties are deprecated by default.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+#[AllowDynamicProperties]
+class User {}
+
+$user = new User();
+$user->name = "Elton"; // Allowed
+
+echo $user->name;
+?>
+</code></pre>
+
+<h5>Without the Attribute</h5>
+
+<pre><code class="language-php">
+<?php
+class User {}
+
+$user = new User();
+$user->name = "Elton"; // Deprecated in PHP 8.2
+?>
+</code></pre>
+
+<h5>Why It Exists</h5>
+
+<ul>
+  <li>Maintain compatibility with legacy code</li>
+  <li>Avoid deprecation warnings in PHP 8.2+</li>
+</ul>
+
+<h5>Best Practice</h5>
+
+<p>
+  Instead of relying on dynamic properties, it is recommended to explicitly
+  declare class properties:
+</p>
+
+<pre><code class="language-php">
+<?php
+class User {
+    public string $name;
+}
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Introduced in PHP 8.2</li>
+  <li>Suppresses dynamic property deprecation warnings</li>
+  <li>Should be used sparingly</li>
+</ul>
+
+<p>
+  <code>AllowDynamicProperties</code> is mainly intended for legacy support,
+  encouraging developers to adopt stricter and safer class designs.
+</p>
 
 <h4 id="attribute-deprecated">DEPRECATED ATTRIBUTE</h4>
 .
