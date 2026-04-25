@@ -16067,7 +16067,75 @@ class User {
 </p>
 
 <h4 id="attribute-deprecated">DEPRECATED ATTRIBUTE</h4>
-.
+
+<p>
+  <strong>Deprecated</strong> is a PHP attribute used to mark code elements
+  (such as functions, methods, or classes) as deprecated, meaning they should
+  no longer be used and may be removed in future versions.
+</p>
+
+<p>
+  It was introduced in PHP 8.2 as part of the native attribute system.
+</p>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Warn developers about outdated code</li>
+  <li>Encourage migration to newer alternatives</li>
+  <li>Improve code maintenance and evolution</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+#[Deprecated]
+function oldFunction() {
+    return "This is old";
+}
+?>
+</code></pre>
+
+<h5>Example with Message</h5>
+
+<pre><code class="language-php">
+<?php
+#[Deprecated("Use newFunction() instead")]
+function oldFunction() {}
+
+function newFunction() {}
+?>
+</code></pre>
+
+<h5>Example with Version</h5>
+
+<pre><code class="language-php">
+<?php
+#[Deprecated(since: "1.2", message: "Use newFunction()")]
+function oldFunction() {}
+?>
+</code></pre>
+
+<h5>Key Features</h5>
+
+<ul>
+  <li>Can include a custom message</li>
+  <li>Can specify the version when deprecated</li>
+  <li>Helps tools and IDEs detect deprecated code</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Does not automatically prevent execution</li>
+  <li>Acts as metadata for developers and tools</li>
+</ul>
+
+<p>
+  The <code>Deprecated</code> attribute is a modern way to signal that certain
+  parts of the codebase should no longer be used.
+</p>
 
 <h4 id="attribute-override">OVERRIDE ATTRIBUTE</h4>
 .
