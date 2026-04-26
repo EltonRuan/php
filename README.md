@@ -16138,7 +16138,74 @@ function oldFunction() {}
 </p>
 
 <h4 id="attribute-override">OVERRIDE ATTRIBUTE</h4>
-.
+
+<p>
+  <strong>Override</strong> is a PHP attribute used to indicate that a method
+  is intended to override a method from a parent class or implement a method
+  from an interface.
+</p>
+
+<p>
+  It was introduced in PHP 8.3 to improve code safety and clarity.
+</p>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Ensure a method actually overrides a parent method</li>
+  <li>Prevent accidental method mismatches</li>
+  <li>Improve code readability and maintainability</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class ParentClass {
+    public function greet() {
+        return "Hello";
+    }
+}
+
+class ChildClass extends ParentClass {
+    #[Override]
+    public function greet() {
+        return "Hi";
+    }
+}
+?>
+</code></pre>
+
+<h5>Invalid Override Example</h5>
+
+<pre><code class="language-php">
+<?php
+class ParentClass {}
+
+class ChildClass extends ParentClass {
+    #[Override]
+    public function greet() {} // Error: no method to override
+}
+?>
+</code></pre>
+
+<p>
+  In this case, PHP will throw an error because there is no matching method
+  in the parent class.
+</p>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Only works on methods</li>
+  <li>Throws an error if no parent method exists</li>
+  <li>Helps catch bugs early</li>
+</ul>
+
+<p>
+  The <code>Override</code> attribute ensures that method overriding is
+  intentional and correctly implemented.
+</p>
 
 <h4 id="attribute-returntypewillchange">RETURNTYPEWILLCHANGE ATTRIBUTE</h4>
 .
