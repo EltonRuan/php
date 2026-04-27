@@ -16208,7 +16208,91 @@ class ChildClass extends ParentClass {
 </p>
 
 <h4 id="attribute-returntypewillchange">RETURNTYPEWILLCHANGE ATTRIBUTE</h4>
-.
+
+<p>
+  <strong>ReturnTypeWillChange</strong> is a PHP attribute used to suppress
+  deprecation warnings related to missing return types in methods that will
+  have a return type in future PHP versions.
+</p>
+
+<p>
+  It is mainly intended for backward compatibility when implementing internal
+  interfaces (like <code>ArrayAccess</code>, <code>Iterator</code>, etc.)
+  before adding proper return type declarations.
+</p>
+
+<h5>Why It Exists</h5>
+
+<ul>
+  <li>PHP 8+ enforces stricter return types</li>
+  <li>Legacy code may not yet declare return types</li>
+  <li>This attribute avoids deprecation warnings temporarily</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+class MyCollection implements Iterator {
+    private $items = [1, 2, 3];
+    private $position = 0;
+
+    #[ReturnTypeWillChange]
+    public function current() {
+        return $this->items[$this->position];
+    }
+
+    #[ReturnTypeWillChange]
+    public function key() {
+        return $this->position;
+    }
+
+    #[ReturnTypeWillChange]
+    public function next() {
+        $this->position++;
+    }
+
+    #[ReturnTypeWillChange]
+    public function rewind() {
+        $this->position = 0;
+    }
+
+    #[ReturnTypeWillChange]
+    public function valid() {
+        return isset($this->items[$this->position]);
+    }
+}
+?>
+</code></pre>
+
+<h5>Best Practice (Modern Code)</h5>
+
+<p>
+  Instead of using this attribute, it is recommended to declare proper return types:
+</p>
+
+<pre><code class="language-php">
+<?php
+public function current(): mixed {}
+public function key(): mixed {}
+public function next(): void {}
+public function rewind(): void {}
+public function valid(): bool {}
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Introduced in PHP 8.1</li>
+  <li>Used for temporary backward compatibility</li>
+  <li>Should be removed once proper types are added</li>
+</ul>
+
+<p>
+  <code>ReturnTypeWillChange</code> is a transitional tool to help migrate
+  legacy code to modern PHP standards.
+</p>
 
 <h4 id="attribute-sensitiveparameter">SENSITIVEPARAMETER ATTRIBUTE</h4>
 .
