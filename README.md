@@ -16295,7 +16295,72 @@ public function valid(): bool {}
 </p>
 
 <h4 id="attribute-sensitiveparameter">SENSITIVEPARAMETER ATTRIBUTE</h4>
-.
+
+<p>
+  <strong>SensitiveParameter</strong> is a PHP attribute used to mark function
+  or method parameters as sensitive, preventing their values from being exposed
+  in stack traces and error messages.
+</p>
+
+<p>
+  It was introduced in PHP 8.2 as part of improvements to application security.
+</p>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Protect sensitive data (passwords, tokens, secrets)</li>
+  <li>Avoid leaking values in logs and error output</li>
+  <li>Improve security in debugging scenarios</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+function login(string $username, #[SensitiveParameter] string $password) {
+    throw new Exception("Login failed");
+}
+
+try {
+    login("elton", "my-secret-password");
+} catch (Exception $e) {
+    echo $e;
+}
+?>
+</code></pre>
+
+<p>
+  In the stack trace, the password will not be displayed. Instead,
+  it will be replaced with a <code>SensitiveParameterValue</code> object.
+</p>
+
+<h5>Without the Attribute</h5>
+
+<p>
+  Sensitive values may appear in stack traces:
+</p>
+
+<pre><code class="language-php">
+<?php
+function login($username, $password) {
+    throw new Exception("Login failed");
+}
+?>
+</code></pre>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Applies to function and method parameters</li>
+  <li>Automatically hides values in debug output</li>
+  <li>Works with <code>SensitiveParameterValue</code></li>
+</ul>
+
+<p>
+  The <code>SensitiveParameter</code> attribute is essential for building
+  secure PHP applications by protecting confidential data.
+</p>
 
 
 <h3 id="context-options-parameters">CONTEXT OPTIONS AND PARAMETERS</h3>
