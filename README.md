@@ -16365,7 +16365,6 @@ function login($username, $password) {
 
 <h3 id="context-options-parameters">CONTEXT OPTIONS AND PARAMETERS</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -16380,9 +16379,94 @@ function login($username, $password) {
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="socket-context-options">SOCKET CONTEXT OPTIONS</h4>
-.
+
+<p>
+  <strong>Socket context options</strong> in PHP are configuration settings used
+  with stream contexts to control the behavior of network connections such as
+  TCP, UDP, and Unix sockets.
+</p>
+
+<p>
+  They are commonly used with functions like <code>stream_context_create()</code>,
+  <code>fopen()</code>, <code>file_get_contents()</code>, and other stream-based
+  operations.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'socket' => [
+        'bindto' => '0.0.0.0:0',
+    ]
+]);
+
+$fp = stream_socket_client(
+    "tcp://example.com:80",
+    $errno,
+    $errstr,
+    30,
+    STREAM_CLIENT_CONNECT,
+    $context
+);
+?>
+</code></pre>
+
+<h5>Common Socket Options</h5>
+
+<ul>
+  <li><code>bindto</code> – Specify local IP and port to bind</li>
+  <li><code>backlog</code> – Maximum number of pending connections (server)</li>
+  <li><code>so_reuseport</code> – Allow reuse of local ports</li>
+  <li><code>ipv6_v6only</code> – Restrict IPv6 sockets to IPv6 only</li>
+</ul>
+
+<h5>Example: Binding to Specific IP</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'socket' => [
+        'bindto' => '192.168.1.100:0'
+    ]
+]);
+?>
+</code></pre>
+
+<h5>Example: Server Socket</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'socket' => [
+        'backlog' => 10
+    ]
+]);
+
+$server = stream_socket_server(
+    "tcp://0.0.0.0:8080",
+    $errno,
+    $errstr,
+    STREAM_SERVER_BIND | STREAM_SERVER_LISTEN,
+    $context
+);
+?>
+</code></pre>
+
+<h5>When to Use</h5>
+
+<ul>
+  <li>Custom network configurations</li>
+  <li>Controlling client/server socket behavior</li>
+  <li>Advanced networking applications</li>
+</ul>
+
+<p>
+  Socket context options provide fine-grained control over network operations,
+  making them essential for advanced PHP networking tasks.
+</p>
 
 <h4 id="http-context-options">HTTP CONTEXT OPTIONS</h4>
 .
