@@ -16469,7 +16469,95 @@ $server = stream_socket_server(
 </p>
 
 <h4 id="http-context-options">HTTP CONTEXT OPTIONS</h4>
-.
+
+<p>
+  <strong>HTTP context options</strong> in PHP are settings used with
+  <code>stream_context_create()</code> to customize HTTP requests made by
+  functions like <code>file_get_contents()</code>, <code>fopen()</code>,
+  and other stream-based operations.
+</p>
+
+<p>
+  They allow control over request methods, headers, timeouts, body content,
+  and more.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'http' => [
+        'method'  => 'GET',
+        'header'  => "User-Agent: MyApp\r\n",
+        'timeout' => 10
+    ]
+]);
+
+$response = file_get_contents("https://example.com", false, $context);
+?>
+</code></pre>
+
+<h5>Common HTTP Options</h5>
+
+<ul>
+  <li><code>method</code> – HTTP method (GET, POST, PUT, DELETE)</li>
+  <li><code>header</code> – Custom request headers</li>
+  <li><code>content</code> – Request body (used with POST/PUT)</li>
+  <li><code>timeout</code> – Timeout in seconds</li>
+  <li><code>ignore_errors</code> – Fetch content even on HTTP errors</li>
+  <li><code>protocol_version</code> – HTTP version (1.0 or 1.1)</li>
+</ul>
+
+<h5>Example: POST Request</h5>
+
+<pre><code class="language-php">
+<?php
+$data = http_build_query([
+    'name' => 'Elton',
+    'email' => 'elton@email.com'
+]);
+
+$context = stream_context_create([
+    'http' => [
+        'method'  => 'POST',
+        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        'content' => $data
+    ]
+]);
+
+$response = file_get_contents("https://example.com/api", false, $context);
+?>
+</code></pre>
+
+<h5>Example: JSON Request</h5>
+
+<pre><code class="language-php">
+<?php
+$data = json_encode(['name' => 'Elton']);
+
+$context = stream_context_create([
+    'http' => [
+        'method'  => 'POST',
+        'header'  => "Content-Type: application/json\r\n",
+        'content' => $data
+    ]
+]);
+?>
+</code></pre>
+
+<h5>When to Use</h5>
+
+<ul>
+  <li>Custom API requests</li>
+  <li>Setting headers and authentication</li>
+  <li>Controlling request behavior</li>
+</ul>
+
+<p>
+  HTTP context options provide a flexible way to customize HTTP requests
+  directly within PHP without external libraries.
+</p>
 
 <h4 id="ftp-context-options">FTP CONTEXT OPTIONS</h4>
 .
