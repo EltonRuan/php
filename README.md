@@ -16560,7 +16560,90 @@ $context = stream_context_create([
 </p>
 
 <h4 id="ftp-context-options">FTP CONTEXT OPTIONS</h4>
-.
+
+<p>
+  <strong>FTP context options</strong> in PHP are settings used with
+  <code>stream_context_create()</code> to configure FTP connections when using
+  functions like <code>fopen()</code>, <code>file_get_contents()</code>, and
+  other stream-based operations.
+</p>
+
+<p>
+  They allow control over authentication, passive mode, timeouts, and other
+  FTP-specific behaviors.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'ftp' => [
+        'overwrite' => true
+    ]
+]);
+
+file_put_contents(
+    "ftp://user:pass@example.com/file.txt",
+    "Hello FTP",
+    0,
+    $context
+);
+?>
+</code></pre>
+
+<h5>Common FTP Options</h5>
+
+<ul>
+  <li><code>overwrite</code> – Allow overwriting existing files</li>
+  <li><code>resume_pos</code> – Resume transfer from a specific position</li>
+  <li><code>proxy</code> – Use an FTP proxy</li>
+</ul>
+
+<h5>Example: Enable Overwrite</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'ftp' => [
+        'overwrite' => true
+    ]
+]);
+?>
+</code></pre>
+
+<h5>Example: Resume Upload</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'ftp' => [
+        'resume_pos' => 1024
+    ]
+]);
+?>
+</code></pre>
+
+<h5>When to Use</h5>
+
+<ul>
+  <li>Uploading or downloading files via FTP</li>
+  <li>Controlling file transfer behavior</li>
+  <li>Working with remote file systems</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Credentials are usually included in the URL</li>
+  <li>FTP is not secure (consider FTPS or SFTP)</li>
+  <li>Requires proper PHP stream wrapper support</li>
+</ul>
+
+<p>
+  FTP context options provide flexibility when working with remote file
+  transfers directly in PHP.
+</p>
 
 <h4 id="ssl-context-options">SSL CONTEXT OPTIONS</h4>
 .
