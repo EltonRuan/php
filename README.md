@@ -16646,7 +16646,93 @@ $context = stream_context_create([
 </p>
 
 <h4 id="ssl-context-options">SSL CONTEXT OPTIONS</h4>
-.
+
+<p>
+  <strong>SSL context options</strong> in PHP are settings used with
+  <code>stream_context_create()</code> to configure secure connections
+  (SSL/TLS) when using streams such as <code>https://</code>,
+  <code>ssl://</code>, and secure sockets.
+</p>
+
+<p>
+  They allow control over certificate validation, encryption methods,
+  peer verification, and more.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'ssl' => [
+        'verify_peer' => true,
+        'verify_peer_name' => true
+    ]
+]);
+
+$response = file_get_contents("https://example.com", false, $context);
+?>
+</code></pre>
+
+<h5>Common SSL Options</h5>
+
+<ul>
+  <li><code>verify_peer</code> – Verify the SSL certificate</li>
+  <li><code>verify_peer_name</code> – Verify the host name</li>
+  <li><code>allow_self_signed</code> – Allow self-signed certificates</li>
+  <li><code>cafile</code> – Path to a certificate authority file</li>
+  <li><code>capath</code> – Directory containing CA certificates</li>
+  <li><code>local_cert</code> – Path to local certificate file</li>
+  <li><code>local_pk</code> – Path to private key file</li>
+  <li><code>passphrase</code> – Passphrase for private key</li>
+</ul>
+
+<h5>Example: Allow Self-Signed Certificate</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'ssl' => [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+    ]
+]);
+?>
+</code></pre>
+
+<h5>Example: Using Custom CA File</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'ssl' => [
+        'cafile' => '/path/to/cacert.pem'
+    ]
+]);
+?>
+</code></pre>
+
+<h5>When to Use</h5>
+
+<ul>
+  <li>Secure HTTP (HTTPS) requests</li>
+  <li>Encrypted socket communication</li>
+  <li>Custom certificate validation</li>
+</ul>
+
+<h5>Security Best Practices</h5>
+
+<ul>
+  <li>Always enable <code>verify_peer</code> in production</li>
+  <li>Avoid disabling certificate validation</li>
+  <li>Use trusted CA certificates</li>
+</ul>
+
+<p>
+  SSL context options are essential for ensuring secure communication
+  in PHP applications.
+</p>
 
 <h4 id="phar-context-options">PHAR CONTEXT OPTIONS</h4>
 .
