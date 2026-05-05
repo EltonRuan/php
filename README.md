@@ -16735,7 +16735,84 @@ $context = stream_context_create([
 </p>
 
 <h4 id="phar-context-options">PHAR CONTEXT OPTIONS</h4>
-.
+
+<p>
+  <strong>PHAR context options</strong> in PHP are settings used with
+  <code>stream_context_create()</code> to control how PHAR (PHP Archive)
+  files are accessed and handled via stream wrappers.
+</p>
+
+<p>
+  PHAR archives allow bundling entire PHP applications into a single file,
+  and these context options help manage security and behavior when working
+  with them.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'phar' => [
+        'readonly' => true
+    ]
+]);
+
+$data = file_get_contents("phar://archive.phar/file.txt", false, $context);
+?>
+</code></pre>
+
+<h5>Common PHAR Options</h5>
+
+<ul>
+  <li><code>readonly</code> – Prevent write operations inside the archive</li>
+  <li><code>require_hash</code> – Require archive signature verification</li>
+</ul>
+
+<h5>Example: Enforce Read-Only Access</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'phar' => [
+        'readonly' => true
+    ]
+]);
+?>
+</code></pre>
+
+<h5>Example: Require Signature Verification</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'phar' => [
+        'require_hash' => true
+    ]
+]);
+?>
+</code></pre>
+
+<h5>When to Use</h5>
+
+<ul>
+  <li>Working with PHAR archives</li>
+  <li>Controlling access and security of packaged apps</li>
+  <li>Reading files inside archives</li>
+</ul>
+
+<h5>Security Notes</h5>
+
+<ul>
+  <li>Always validate PHAR files from untrusted sources</li>
+  <li>Use <code>require_hash</code> for integrity verification</li>
+  <li>Avoid executing unknown PHAR archives</li>
+</ul>
+
+<p>
+  PHAR context options provide control and security when interacting with
+  PHP archive files through stream operations.
+</p>
 
 <h4 id="context-parameters">CONTEXT PARAMETERS</h4>
 .
