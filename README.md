@@ -16815,7 +16815,93 @@ $context = stream_context_create([
 </p>
 
 <h4 id="context-parameters">CONTEXT PARAMETERS</h4>
-.
+
+<p>
+  <strong>Context parameters</strong> in PHP are additional settings passed to
+  <code>stream_context_create()</code> that control global behavior of a stream,
+  independent of specific wrappers like <code>http</code>, <code>ftp</code>,
+  or <code>ssl</code>.
+</p>
+
+<p>
+  They are defined under the <code>params</code> key and apply to the entire
+  stream context.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create(
+    [], // wrapper options
+    [
+        'notification' => function (
+            $code,
+            $severity,
+            $message,
+            $message_code,
+            $bytes_transferred,
+            $bytes_max
+        ) {
+            echo "Transferred: $bytes_transferred / $bytes_max\n";
+        }
+    ]
+);
+
+file_get_contents("https://example.com", false, $context);
+?>
+</code></pre>
+
+<h5>Common Context Parameters</h5>
+
+<ul>
+  <li><code>notification</code> – Callback for stream events (progress, errors)</li>
+  <li><code>options</code> – Default options (rarely used)</li>
+</ul>
+
+<h5>Notification Callback Example</h5>
+
+<pre><code class="language-php">
+<?php
+function progress(
+    $code,
+    $severity,
+    $message,
+    $message_code,
+    $bytes_transferred,
+    $bytes_max
+) {
+    if ($bytes_max > 0) {
+        echo ($bytes_transferred / $bytes_max) * 100 . "%\n";
+    }
+}
+
+$context = stream_context_create([], [
+    'notification' => 'progress'
+]);
+?>
+</code></pre>
+
+<h5>When to Use</h5>
+
+<ul>
+  <li>Tracking download/upload progress</li>
+  <li>Handling stream-level events</li>
+  <li>Customizing global stream behavior</li>
+</ul>
+
+<h5>Key Points</h5>
+
+<ul>
+  <li>Defined separately from wrapper-specific options</li>
+  <li>Applies to the entire stream context</li>
+  <li>Useful for advanced stream handling</li>
+</ul>
+
+<p>
+  Context parameters provide a way to hook into and control the lifecycle
+  of stream operations in PHP.
+</p>
 
 <h4 id="zip-context-options">ZIP CONTEXT OPTIONS</h4>
 .
