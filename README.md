@@ -16904,7 +16904,73 @@ $context = stream_context_create([], [
 </p>
 
 <h4 id="zip-context-options">ZIP CONTEXT OPTIONS</h4>
-.
+
+<p>
+  <strong>ZIP context options</strong> in PHP are settings used with stream
+  contexts when working with ZIP archives through PHP stream wrappers.
+</p>
+
+<p>
+  ZIP archives can be accessed using the <code>zip://</code> stream wrapper,
+  allowing files inside archives to be read like regular files.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$contents = file_get_contents(
+    "zip://archive.zip#file.txt"
+);
+
+echo $contents;
+?>
+</code></pre>
+
+<p>
+  Unlike wrappers such as <code>http</code> or <code>ssl</code>, the ZIP wrapper
+  has very limited or no dedicated context options in most PHP versions.
+</p>
+
+<h5>Working with ZIP Archives</h5>
+
+<pre><code class="language-php">
+<?php
+$zip = new ZipArchive();
+
+if ($zip->open('archive.zip') === true) {
+    echo $zip->getFromName('file.txt');
+    $zip->close();
+}
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Reading files inside ZIP archives</li>
+  <li>Accessing packaged resources</li>
+  <li>Handling compressed file storage</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>The <code>zip://</code> wrapper mainly supports read operations</li>
+  <li>No widely used dedicated ZIP context options exist</li>
+  <li>For advanced ZIP management, use the <code>ZipArchive</code> class</li>
+</ul>
+
+<h5>ZIP Wrapper Syntax</h5>
+
+<pre><code>
+zip://archive.zip#path/inside/file.txt
+</code></pre>
+
+<p>
+  ZIP stream support in PHP provides convenient access to compressed files,
+  while advanced archive manipulation is handled by <code>ZipArchive</code>.
+</p>
 
 <h4 id="zlib-context-options">ZLIB CONTEXT OPTIONS</h4>
 .
