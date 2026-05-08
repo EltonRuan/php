@@ -16973,7 +16973,88 @@ zip://archive.zip#path/inside/file.txt
 </p>
 
 <h4 id="zlib-context-options">ZLIB CONTEXT OPTIONS</h4>
-.
+
+<p>
+  <strong>Zlib context options</strong> in PHP are settings used with stream
+  contexts when working with compressed data streams using the
+  <code>zlib://</code> wrapper.
+</p>
+
+<p>
+  The Zlib extension allows transparent reading and writing of compressed
+  files such as GZIP streams.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$data = file_get_contents("compress.zlib://file.gz");
+
+echo $data;
+?>
+</code></pre>
+
+<p>
+  In many cases, the Zlib wrapper works automatically and does not require
+  explicit context options.
+</p>
+
+<h5>Using Stream Context</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([]);
+
+$fp = fopen(
+    "compress.zlib://file.gz",
+    "rb",
+    false,
+    $context
+);
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Reading GZIP-compressed files</li>
+  <li>Writing compressed output</li>
+  <li>Handling compressed data streams</li>
+</ul>
+
+<h5>Example: Writing Compressed Data</h5>
+
+<pre><code class="language-php">
+<?php
+file_put_contents(
+    "compress.zlib://output.gz",
+    "Compressed content"
+);
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Zlib wrappers usually require minimal configuration</li>
+  <li>No major dedicated Zlib context options are commonly used</li>
+  <li>Compression behavior is mostly controlled by stream mode and wrapper</li>
+</ul>
+
+<h5>Related Functions</h5>
+
+<ul>
+  <li><code>gzopen()</code></li>
+  <li><code>gzread()</code></li>
+  <li><code>gzwrite()</code></li>
+  <li><code>gzcompress()</code></li>
+</ul>
+
+<p>
+  Zlib stream support provides convenient access to compressed data,
+  making file handling more efficient in PHP applications.
+</p>
 
 
 <h3 id="supported-protocols-packagers">SUPPORTED PROTOCOLS AND PACKAGERS</h3>
