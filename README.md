@@ -17059,7 +17059,6 @@ file_put_contents(
 
 <h3 id="supported-protocols-packagers">SUPPORTED PROTOCOLS AND PACKAGERS</h3>
 
-<!-- Navigation -->
 <nav align="center"> 
   <h3>NAVIGATION</h2> 
   <p>
@@ -17078,9 +17077,92 @@ file_put_contents(
   </p> 
 </nav>
 
-<!-- Sections -->
 <h4 id="file-protocol">FILE://</h4>
-.
+
+<p>
+  <strong>file://</strong> is a built-in PHP stream wrapper used to access
+  files and directories on the local filesystem.
+</p>
+
+<p>
+  It belongs to the section <strong>Supported Protocols and Wrappers</strong>,
+  which defines the protocols PHP can use with stream functions such as
+  <code>fopen()</code>, <code>file_get_contents()</code>, and
+  <code>include</code>.
+</p>
+
+<h5>Protocol Type</h5>
+
+<ul>
+  <li><strong>Wrapper Name:</strong> <code>file://</code></li>
+  <li><strong>Access Type:</strong> Local filesystem</li>
+  <li><strong>Read Support:</strong> Yes</li>
+  <li><strong>Write Support:</strong> Yes</li>
+  <li><strong>Allow URL fopen:</strong> Not required</li>
+</ul>
+
+<h5>Basic Syntax</h5>
+
+<pre><code>
+file:///path/to/file.txt
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "file:///tmp/example.txt"
+);
+
+echo $content;
+?>
+</code></pre>
+
+<h5>Implicit Usage</h5>
+
+<p>
+  PHP automatically uses the <code>file://</code> wrapper when no protocol
+  is specified:
+</p>
+
+<pre><code class="language-php">
+<?php
+echo file_get_contents("example.txt");
+?>
+</code></pre>
+
+<h5>Directory Example</h5>
+
+<pre><code class="language-php">
+<?php
+$files = scandir("file:///var/www/");
+print_r($files);
+?>
+</code></pre>
+
+<h5>Common Functions</h5>
+
+<ul>
+  <li><code>fopen()</code></li>
+  <li><code>file_get_contents()</code></li>
+  <li><code>file_put_contents()</code></li>
+  <li><code>copy()</code></li>
+  <li><code>rename()</code></li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Default wrapper for local files</li>
+  <li>Supports relative and absolute paths</li>
+  <li>Respects operating system file permissions</li>
+</ul>
+
+<p>
+  The <code>file://</code> wrapper is the primary protocol used for interacting
+  with the local filesystem in PHP.
+</p>
 
 <h4 id="http-https-protocols">HTTP://  HTTPS://</h4>
 .
