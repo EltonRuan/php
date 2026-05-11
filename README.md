@@ -17164,8 +17164,103 @@ print_r($files);
   with the local filesystem in PHP.
 </p>
 
-<h4 id="http-https-protocols">HTTP://  HTTPS://</h4>
-.
+<h4 id="http-https-protocols">HTTP:// HTTPS://</h4>
+
+<p>
+  <strong>http://</strong> and <strong>https://</strong> are PHP stream wrappers
+  used to access web resources over the HTTP and HTTPS protocols.
+</p>
+
+<p>
+  They are part of PHP’s <strong>Supported Protocols and Wrappers</strong>
+  system and can be used with functions like
+  <code>fopen()</code>, <code>file_get_contents()</code>,
+  and <code>include</code> (if enabled).
+</p>
+
+<h5>Protocol Types</h5>
+
+<ul>
+  <li><strong>http://</strong> – Standard HyperText Transfer Protocol</li>
+  <li><strong>https://</strong> – Secure HTTP using SSL/TLS encryption</li>
+</ul>
+
+<h5>Features</h5>
+
+<ul>
+  <li>Read remote web content</li>
+  <li>Send HTTP requests</li>
+  <li>Support custom headers and methods</li>
+  <li>HTTPS provides encrypted communication</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "https://example.com"
+);
+
+echo $content;
+?>
+</code></pre>
+
+<h5>Using fopen()</h5>
+
+<pre><code class="language-php">
+<?php
+$handle = fopen(
+    "http://example.com",
+    "r"
+);
+
+while (!feof($handle)) {
+    echo fgets($handle);
+}
+
+fclose($handle);
+?>
+</code></pre>
+
+<h5>Using HTTP Context Options</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'http' => [
+        'method' => 'GET',
+        'header' => "User-Agent: MyApp\r\n"
+    ]
+]);
+
+$response = file_get_contents(
+    "https://example.com",
+    false,
+    $context
+);
+?>
+</code></pre>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li><code>allow_url_fopen</code> must be enabled in <code>php.ini</code></li>
+  <li>Internet access is required</li>
+</ul>
+
+<h5>Security Notes</h5>
+
+<ul>
+  <li>Prefer <code>https://</code> whenever possible</li>
+  <li>Validate remote content before processing</li>
+  <li>Avoid including untrusted remote files</li>
+</ul>
+
+<p>
+  The <code>http://</code> and <code>https://</code> wrappers allow PHP
+  applications to interact directly with web resources and APIs.
+</p>
 
 <h4 id="ftp-ftps-protocols">FTP://   FTPS://</h4>
 .
