@@ -17262,8 +17262,106 @@ $response = file_get_contents(
   applications to interact directly with web resources and APIs.
 </p>
 
-<h4 id="ftp-ftps-protocols">FTP://   FTPS://</h4>
-.
+<h4 id="ftp-ftps-protocols">FTP:// FTPS://</h4>
+
+<p>
+  <strong>ftp://</strong> and <strong>ftps://</strong> are PHP stream wrappers
+  used to access remote files through the FTP and secure FTPS protocols.
+</p>
+
+<p>
+  They are part of PHP’s <strong>Supported Protocols and Wrappers</strong>
+  system and can be used with functions like
+  <code>fopen()</code>, <code>file_get_contents()</code>,
+  and <code>file_put_contents()</code>.
+</p>
+
+<h5>Protocol Types</h5>
+
+<ul>
+  <li><strong>ftp://</strong> – Standard File Transfer Protocol</li>
+  <li><strong>ftps://</strong> – FTP over SSL/TLS (secure FTP)</li>
+</ul>
+
+<h5>Features</h5>
+
+<ul>
+  <li>Upload and download remote files</li>
+  <li>Read file contents from FTP servers</li>
+  <li>Secure encrypted communication with FTPS</li>
+</ul>
+
+<h5>Basic FTP Example</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "ftp://user:password@example.com/file.txt"
+);
+
+echo $content;
+?>
+</code></pre>
+
+<h5>Uploading a File</h5>
+
+<pre><code class="language-php">
+<?php
+file_put_contents(
+    "ftp://user:password@example.com/upload.txt",
+    "Hello FTP"
+);
+?>
+</code></pre>
+
+<h5>Using FTPS</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "ftps://user:password@example.com/file.txt"
+);
+?>
+</code></pre>
+
+<h5>Using FTP Context Options</h5>
+
+<pre><code class="language-php">
+<?php
+$context = stream_context_create([
+    'ftp' => [
+        'overwrite' => true
+    ]
+]);
+
+file_put_contents(
+    "ftp://user:password@example.com/file.txt",
+    "New Content",
+    0,
+    $context
+);
+?>
+</code></pre>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li><code>allow_url_fopen</code> must be enabled</li>
+  <li>FTP extension support may be required</li>
+</ul>
+
+<h5>Security Notes</h5>
+
+<ul>
+  <li><code>ftp://</code> is not encrypted</li>
+  <li>Prefer <code>ftps://</code> for secure transfers</li>
+  <li>Avoid exposing credentials in source code</li>
+</ul>
+
+<p>
+  The <code>ftp://</code> and <code>ftps://</code> wrappers allow PHP
+  applications to transfer files between local and remote servers.
+</p>
 
 <h4 id="php-protocol">PHP://</h4>
 .
