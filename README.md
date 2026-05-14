@@ -17449,8 +17449,97 @@ echo "You typed: " . $input;
   input/output operations and internal data streams in PHP.
 </p>
 
-<h4 id="zlib-bzip2-zip-protocols">ZLIB://  BZIP2://   ZIP://</h4>
-.
+<h4 id="zlib-bzip2-zip-protocols">ZLIB:// BZIP2:// ZIP://</h4>
+
+<p>
+  <strong>zlib://</strong>, <strong>bzip2://</strong>, and
+  <strong>zip://</strong> are PHP stream wrappers used for working with
+  compressed files and archives.
+</p>
+
+<p>
+  They are part of PHP’s <strong>Supported Protocols and Wrappers</strong>
+  system and allow compressed resources to be accessed like regular streams.
+</p>
+
+<h5>Protocol Types</h5>
+
+<ul>
+  <li><strong>zlib://</strong> – Handles GZIP-compressed streams</li>
+  <li><strong>bzip2://</strong> – Handles BZIP2-compressed streams</li>
+  <li><strong>zip://</strong> – Accesses files inside ZIP archives</li>
+</ul>
+
+<h5>ZLIB:// Example</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "compress.zlib://file.gz"
+);
+
+echo $content;
+?>
+</code></pre>
+
+<h5>BZIP2:// Example</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "compress.bzip2://file.bz2"
+);
+
+echo $content;
+?>
+</code></pre>
+
+<h5>ZIP:// Example</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "zip://archive.zip#document.txt"
+);
+
+echo $content;
+?>
+</code></pre>
+
+<h5>ZIP Wrapper Syntax</h5>
+
+<pre><code>
+zip://archive.zip#path/to/file.txt
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Reading compressed files</li>
+  <li>Accessing archived resources</li>
+  <li>Reducing storage and transfer size</li>
+</ul>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li>Zlib extension for <code>zlib://</code></li>
+  <li>Bzip2 extension for <code>bzip2://</code></li>
+  <li>Zip extension for <code>zip://</code></li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li><code>zip://</code> mainly supports reading files inside archives</li>
+  <li>For advanced ZIP manipulation, use <code>ZipArchive</code></li>
+  <li>Compressed streams improve efficiency for large files</li>
+</ul>
+
+<p>
+  These wrappers provide convenient access to compressed and archived data
+  directly through PHP stream functions.
+</p>
 
 <h4 id="data-protocol">DATA://</h4>
 .
