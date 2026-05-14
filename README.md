@@ -17364,7 +17364,90 @@ file_put_contents(
 </p>
 
 <h4 id="php-protocol">PHP://</h4>
-.
+
+<p>
+  <strong>php://</strong> is a special PHP stream wrapper that provides
+  access to input/output streams, memory streams, filters, and other
+  internal resources.
+</p>
+
+<p>
+  It is part of PHP’s <strong>Supported Protocols and Wrappers</strong>
+  system and is commonly used for handling raw input, output buffering,
+  temporary streams, and CLI interactions.
+</p>
+
+<h5>Common php:// Streams</h5>
+
+<ul>
+  <li><code>php://input</code> – Raw request body</li>
+  <li><code>php://output</code> – Direct output stream</li>
+  <li><code>php://stdin</code> – Standard input (CLI)</li>
+  <li><code>php://stdout</code> – Standard output (CLI)</li>
+  <li><code>php://stderr</code> – Standard error output</li>
+  <li><code>php://memory</code> – In-memory temporary stream</li>
+  <li><code>php://temp</code> – Temporary stream using memory/disk</li>
+</ul>
+
+<h5>Example: Reading Raw POST Data</h5>
+
+<pre><code class="language-php">
+<?php
+$data = file_get_contents("php://input");
+
+echo $data;
+?>
+</code></pre>
+
+<h5>Example: Writing Output</h5>
+
+<pre><code class="language-php">
+<?php
+file_put_contents(
+    "php://output",
+    "Hello World"
+);
+?>
+</code></pre>
+
+<h5>Example: Using Memory Stream</h5>
+
+<pre><code class="language-php">
+<?php
+$stream = fopen("php://memory", "r+");
+
+fwrite($stream, "Temporary data");
+
+rewind($stream);
+
+echo fread($stream, 1024);
+
+fclose($stream);
+?>
+</code></pre>
+
+<h5>Example: CLI Input</h5>
+
+<pre><code class="language-php">
+<?php
+$input = fgets(STDIN);
+
+echo "You typed: " . $input;
+?>
+</code></pre>
+
+<h5>Key Features</h5>
+
+<ul>
+  <li>Provides access to internal PHP streams</li>
+  <li>Useful for APIs, CLI scripts, and buffering</li>
+  <li>Supports temporary memory-based streams</li>
+</ul>
+
+<p>
+  The <code>php://</code> wrapper is a powerful tool for handling low-level
+  input/output operations and internal data streams in PHP.
+</p>
 
 <h4 id="zlib-bzip2-zip-protocols">ZLIB://  BZIP2://   ZIP://</h4>
 .
