@@ -17542,7 +17542,84 @@ zip://archive.zip#path/to/file.txt
 </p>
 
 <h4 id="data-protocol">DATA://</h4>
-.
+
+<p>
+  <strong>data://</strong> is a PHP stream wrapper that allows data to be
+  embedded directly inside a URL using the Data URI scheme.
+</p>
+
+<p>
+  It is part of PHP’s <strong>Supported Protocols and Wrappers</strong>
+  system and is useful for handling inline data without needing external files.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code>
+data://text/plain,HelloWorld
+</code></pre>
+
+<p>
+  The format generally follows:
+</p>
+
+<pre><code>
+data://[mime-type][;base64],data
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+echo file_get_contents(
+    "data://text/plain,Hello PHP"
+);
+?>
+</code></pre>
+
+<h5>Using Base64 Data</h5>
+
+<pre><code class="language-php">
+<?php
+$data = "SGVsbG8gV29ybGQ=";
+
+echo file_get_contents(
+    "data://text/plain;base64," . $data
+);
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+Hello World
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Embedding small data directly in code</li>
+  <li>Testing stream functions</li>
+  <li>Working with inline resources</li>
+</ul>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li><code>allow_url_fopen</code> must be enabled</li>
+</ul>
+
+<h5>Security Notes</h5>
+
+<ul>
+  <li>Validate dynamically generated data URIs</li>
+  <li>Avoid processing untrusted inline content</li>
+</ul>
+
+<p>
+  The <code>data://</code> wrapper provides a simple way to work with inline
+  data streams directly in PHP.
+</p>
 
 <h4 id="glob-protocol">GLOB://</h4>
 .
