@@ -17622,7 +17622,81 @@ Hello World
 </p>
 
 <h4 id="glob-protocol">GLOB://</h4>
-.
+
+<p>
+  <strong>glob://</strong> is a PHP stream wrapper used to search for files
+  and directories using pattern matching (wildcards).
+</p>
+
+<p>
+  It is part of PHP’s <strong>Supported Protocols and Wrappers</strong>
+  system and works similarly to the <code>glob()</code> function.
+</p>
+
+<h5>Supported Wildcards</h5>
+
+<ul>
+  <li><code>*</code> – Matches any number of characters</li>
+  <li><code>?</code> – Matches a single character</li>
+  <li><code>[]</code> – Matches a range of characters</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$iterator = new DirectoryIterator(
+    "glob://*.txt"
+);
+
+foreach ($iterator as $file) {
+    echo $file->getFilename() . "\n";
+}
+?>
+</code></pre>
+
+<h5>Example: Matching Images</h5>
+
+<pre><code class="language-php">
+<?php
+$iterator = new DirectoryIterator(
+    "glob://images/*.jpg"
+);
+
+foreach ($iterator as $file) {
+    echo $file->getPathname() . "\n";
+}
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Searching files by extension</li>
+  <li>Filtering directory contents</li>
+  <li>Batch file processing</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Read-only wrapper</li>
+  <li>Mainly used with iterators like <code>DirectoryIterator</code></li>
+  <li>Does not support writing operations</li>
+</ul>
+
+<h5>Related Function</h5>
+
+<pre><code class="language-php">
+<?php
+$files = glob("*.txt");
+?>
+</code></pre>
+
+<p>
+  The <code>glob://</code> wrapper provides a convenient way to work with
+  wildcard-based filesystem searches in PHP.
+</p>
 
 <h4 id="phar-protocol">PHAR://</h4>
 .
