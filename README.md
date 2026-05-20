@@ -17699,7 +17699,89 @@ $files = glob("*.txt");
 </p>
 
 <h4 id="phar-protocol">PHAR://</h4>
-.
+
+<p>
+  <strong>phar://</strong> is a PHP stream wrapper used to access files inside
+  PHAR (PHP Archive) packages.
+</p>
+
+<p>
+  PHAR archives allow entire PHP applications and libraries to be bundled into
+  a single file, similar to Java JAR files.
+</p>
+
+<p>
+  The <code>phar://</code> wrapper is part of PHP’s
+  <strong>Supported Protocols and Wrappers</strong> system and allows archive
+  contents to be accessed like normal filesystem paths.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code>
+phar://archive.phar/path/to/file.php
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "phar://app.phar/config.json"
+);
+
+echo $content;
+?>
+</code></pre>
+
+<h5>Including Files from PHAR</h5>
+
+<pre><code class="language-php">
+<?php
+include "phar://app.phar/index.php";
+?>
+</code></pre>
+
+<h5>Creating a PHAR Archive</h5>
+
+<pre><code class="language-php">
+<?php
+$phar = new Phar('app.phar');
+
+$phar->addFile('index.php');
+$phar->addFile('config.php');
+
+$phar->setStub($phar->createDefaultStub('index.php'));
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Packaging PHP applications</li>
+  <li>Distributing command-line tools</li>
+  <li>Bundling libraries into single files</li>
+</ul>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li>PHAR extension enabled</li>
+  <li><code>phar.readonly = Off</code> to create archives</li>
+</ul>
+
+<h5>Security Notes</h5>
+
+<ul>
+  <li>Do not execute untrusted PHAR files</li>
+  <li>Use signatures and hash verification</li>
+  <li>PHAR deserialization can introduce vulnerabilities</li>
+</ul>
+
+<p>
+  The <code>phar://</code> wrapper provides a convenient way to package and
+  access PHP applications as portable archive files.
+</p>
 
 <h4 id="ssh2-protocol">SSH2://</h4>
 .
