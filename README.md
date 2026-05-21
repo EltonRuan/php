@@ -17784,7 +17784,108 @@ $phar->setStub($phar->createDefaultStub('index.php'));
 </p>
 
 <h4 id="ssh2-protocol">SSH2://</h4>
-.
+
+<p>
+  <strong>ssh2://</strong> is a PHP stream wrapper used to communicate with
+  remote systems over the SSH2 protocol.
+</p>
+
+<p>
+  It allows secure access to remote files, command execution, and encrypted
+  communication using SSH.
+</p>
+
+<p>
+  The <code>ssh2://</code> wrapper is part of PHP’s
+  <strong>Supported Protocols and Wrappers</strong> system and requires the
+  SSH2 extension.
+</p>
+
+<h5>Features</h5>
+
+<ul>
+  <li>Secure remote file access</li>
+  <li>Encrypted communication</li>
+  <li>Remote command execution</li>
+  <li>SFTP support</li>
+</ul>
+
+<h5>Basic Connection Example</h5>
+
+<pre><code class="language-php">
+<?php
+$connection = ssh2_connect('example.com', 22);
+
+ssh2_auth_password(
+    $connection,
+    'username',
+    'password'
+);
+?>
+</code></pre>
+
+<h5>Reading a Remote File</h5>
+
+<pre><code class="language-php">
+<?php
+$stream = fopen(
+    "ssh2.sftp://$sftp/home/user/file.txt",
+    'r'
+);
+
+echo stream_get_contents($stream);
+
+fclose($stream);
+?>
+</code></pre>
+
+<h5>Executing Remote Commands</h5>
+
+<pre><code class="language-php">
+<?php
+$stream = ssh2_exec(
+    $connection,
+    'ls -la'
+);
+
+stream_set_blocking($stream, true);
+
+echo stream_get_contents($stream);
+?>
+</code></pre>
+
+<h5>Using SFTP</h5>
+
+<pre><code class="language-php">
+<?php
+$sftp = ssh2_sftp($connection);
+
+file_put_contents(
+    "ssh2.sftp://$sftp/home/user/test.txt",
+    "Hello SSH2"
+);
+?>
+</code></pre>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li>SSH2 PECL extension installed</li>
+  <li>SSH server access</li>
+</ul>
+
+<h5>Security Notes</h5>
+
+<ul>
+  <li>Prefer SSH keys over passwords</li>
+  <li>Validate host authenticity</li>
+  <li>Avoid exposing credentials in code</li>
+</ul>
+
+<p>
+  The <code>ssh2://</code> wrapper enables secure remote communication and
+  file operations directly from PHP applications.
+</p>
 
 <h4 id="rar-protocol">RAR://</h4>
 .
