@@ -17970,7 +17970,77 @@ echo $entry->getStream();
 </p>
 
 <h4 id="ogg-protocol">OGG://</h4>
-.
+
+<p>
+  <strong>ogg://</strong> is a PHP stream wrapper used to access and process
+  OGG/Vorbis audio streams.
+</p>
+
+<p>
+  It is part of PHP’s <strong>Supported Protocols and Wrappers</strong>
+  system and requires support for the OGG/Vorbis extension.
+</p>
+
+<p>
+  The wrapper allows audio metadata and stream data to be accessed through
+  standard PHP stream functions.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code>
+ogg://file.ogg
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$stream = fopen("ogg://music.ogg", "r");
+
+while (!feof($stream)) {
+    echo fread($stream, 1024);
+}
+
+fclose($stream);
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Reading OGG audio streams</li>
+  <li>Accessing audio metadata</li>
+  <li>Streaming multimedia content</li>
+</ul>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li>OGG/Vorbis extension support</li>
+  <li>Compatible PHP multimedia libraries</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Rarely used in modern PHP applications</li>
+  <li>Support depends on external extensions</li>
+  <li>Mainly intended for multimedia processing</li>
+</ul>
+
+<h5>Alternative Approaches</h5>
+
+<ul>
+  <li>FFmpeg integrations</li>
+  <li>External media processing libraries</li>
+  <li>Dedicated streaming servers</li>
+</ul>
+
+<p>
+  The <code>ogg://</code> wrapper provides access to OGG audio streams,
+  enabling multimedia handling within PHP applications.
+</p>
 
 <h4 id="expect-protocol">EXPECT://</h4>
 .
