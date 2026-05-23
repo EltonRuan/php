@@ -17888,7 +17888,86 @@ file_put_contents(
 </p>
 
 <h4 id="rar-protocol">RAR://</h4>
-.
+
+<p>
+  <strong>rar://</strong> is a PHP stream wrapper used to access files inside
+  RAR compressed archives.
+</p>
+
+<p>
+  It is part of PHP’s <strong>Supported Protocols and Wrappers</strong>
+  system and requires the PECL RAR extension.
+</p>
+
+<p>
+  The wrapper allows files within a RAR archive to be accessed like regular
+  filesystem resources.
+</p>
+
+<h5>Basic Syntax</h5>
+
+<pre><code>
+rar://archive.rar#path/to/file.txt
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$content = file_get_contents(
+    "rar://files.rar#document.txt"
+);
+
+echo $content;
+?>
+</code></pre>
+
+<h5>Using the RarArchive Class</h5>
+
+<pre><code class="language-php">
+<?php
+$rar = RarArchive::open("files.rar");
+
+$entry = $rar->getEntry("document.txt");
+
+echo $entry->getStream();
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Reading files inside RAR archives</li>
+  <li>Accessing compressed resources</li>
+  <li>Handling packaged data</li>
+</ul>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li>PECL RAR extension installed</li>
+  <li>RAR support enabled in PHP</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Mainly supports read operations</li>
+  <li>Does not provide advanced archive editing</li>
+  <li>Use dedicated RAR classes for more control</li>
+</ul>
+
+<h5>Security Notes</h5>
+
+<ul>
+  <li>Validate archive contents before processing</li>
+  <li>Avoid extracting untrusted files blindly</li>
+</ul>
+
+<p>
+  The <code>rar://</code> wrapper allows PHP applications to conveniently
+  access files stored inside RAR archives.
+</p>
 
 <h4 id="ogg-protocol">OGG://</h4>
 .
