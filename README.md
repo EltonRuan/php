@@ -18150,7 +18150,108 @@ fclose($stream);
 </nav>
 
 <h4 id="designing-databases">DESIGNING DATABASES</h4>
-.
+
+<p>
+  <strong>Database design</strong> is the process of organizing data into
+  structured tables, relationships, and rules to ensure efficiency,
+  consistency, scalability, and maintainability.
+</p>
+
+<p>
+  A well-designed database improves performance, reduces redundancy,
+  and helps maintain data integrity.
+</p>
+
+<h5>Main Goals</h5>
+
+<ul>
+  <li>Store data efficiently</li>
+  <li>Reduce duplication</li>
+  <li>Ensure data consistency</li>
+  <li>Improve scalability and performance</li>
+</ul>
+
+<h5>Database Design Process</h5>
+
+<ol>
+  <li>Identify requirements</li>
+  <li>Define entities and relationships</li>
+  <li>Create tables and fields</li>
+  <li>Choose primary and foreign keys</li>
+  <li>Apply normalization</li>
+  <li>Optimize performance</li>
+</ol>
+
+<h5>Basic Example</h5>
+
+<pre><code>
+Users
+-----
+id (PK)
+name
+email
+
+Posts
+-----
+id (PK)
+user_id (FK)
+title
+content
+</code></pre>
+
+<p>
+  In this example:
+</p>
+
+<ul>
+  <li><code>id</code> is the primary key</li>
+  <li><code>user_id</code> is a foreign key referencing Users</li>
+  <li>One user can have many posts</li>
+</ul>
+
+<h5>Primary Concepts</h5>
+
+<ul>
+  <li><strong>Table</strong> – Stores related data</li>
+  <li><strong>Row</strong> – A single record</li>
+  <li><strong>Column</strong> – A data field</li>
+  <li><strong>Primary Key</strong> – Unique identifier</li>
+  <li><strong>Foreign Key</strong> – Relationship between tables</li>
+</ul>
+
+<h5>Normalization</h5>
+
+<p>
+  Normalization is the process of organizing data to minimize redundancy.
+</p>
+
+<ul>
+  <li>1NF – Eliminate repeating groups</li>
+  <li>2NF – Remove partial dependencies</li>
+  <li>3NF – Remove transitive dependencies</li>
+</ul>
+
+<h5>Performance Considerations</h5>
+
+<ul>
+  <li>Create indexes for frequent queries</li>
+  <li>Avoid unnecessary duplication</li>
+  <li>Use appropriate data types</li>
+  <li>Optimize relationships carefully</li>
+</ul>
+
+<h5>Common Relationship Types</h5>
+
+<ul>
+  <li>One-to-One</li>
+  <li>One-to-Many</li>
+  <li>Many-to-Many</li>
+</ul>
+
+<p>
+  Good database design is essential for building reliable, scalable,
+  and maintainable applications.
+</p>
 
 <h4 id="connecting-to-the-database">CONNECTING TO THE DATABASE</h4>
 .
