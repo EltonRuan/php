@@ -18043,7 +18043,90 @@ fclose($stream);
 </p>
 
 <h4 id="expect-protocol">EXPECT://</h4>
-.
+
+<p>
+  <strong>expect://</strong> is a PHP stream wrapper that allows interaction
+  with processes through the Expect extension.
+</p>
+
+<p>
+  It enables PHP scripts to execute external programs and communicate with
+  them programmatically, similar to terminal automation tools.
+</p>
+
+<p>
+  The <code>expect://</code> wrapper is part of PHP’s
+  <strong>Supported Protocols and Wrappers</strong> system and requires the
+  PECL Expect extension.
+</p>
+
+<h5>Features</h5>
+
+<ul>
+  <li>Execute shell commands</li>
+  <li>Automate interactive terminal programs</li>
+  <li>Read and write process streams</li>
+</ul>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$stream = fopen(
+    "expect://ls -la",
+    "r"
+);
+
+echo stream_get_contents($stream);
+
+fclose($stream);
+?>
+</code></pre>
+
+<h5>Interactive Example</h5>
+
+<pre><code class="language-php">
+<?php
+$stream = fopen(
+    "expect://ssh user@example.com",
+    "r+"
+);
+
+fwrite($stream, "password\n");
+
+echo stream_get_contents($stream);
+
+fclose($stream);
+?>
+</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Automating shell tasks</li>
+  <li>Managing remote sessions</li>
+  <li>Testing command-line applications</li>
+</ul>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li>PECL Expect extension installed</li>
+  <li>Underlying Expect/Tcl libraries available</li>
+</ul>
+
+<h5>Security Notes</h5>
+
+<ul>
+  <li>Never execute untrusted input</li>
+  <li>Avoid exposing shell access in web applications</li>
+  <li>Validate all command parameters carefully</li>
+</ul>
+
+<p>
+  The <code>expect://</code> wrapper provides powerful process automation
+  capabilities for advanced PHP scripting tasks.
+</p>
 
 <h2 id="security">SECURITY</h2>
 
