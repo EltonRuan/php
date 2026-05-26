@@ -18254,7 +18254,109 @@ content
 </p>
 
 <h4 id="connecting-to-the-database">CONNECTING TO THE DATABASE</h4>
-.
+
+<p>
+  <strong>Connecting to the database</strong> in PHP means establishing a
+  communication channel between a PHP application and a database server
+  such as MySQL, PostgreSQL, SQLite, or SQL Server.
+</p>
+
+<p>
+  PHP commonly uses <code>PDO</code> (PHP Data Objects) or
+  <code>MySQLi</code> for database connections.
+</p>
+
+<h5>Using PDO (Recommended)</h5>
+
+<p>
+  PDO provides a consistent interface for multiple database systems and
+  supports prepared statements for security.
+</p>
+
+<h5>PDO Connection Example</h5>
+
+<pre><code class="language-php">
+<?php
+$host = "localhost";
+$dbname = "my_database";
+$user = "root";
+$password = "secret";
+
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8",
+        $user,
+        $password
+    );
+
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION
+    );
+
+    echo "Connected successfully";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Using MySQLi</h5>
+
+<pre><code class="language-php">
+<?php
+$conn = new mysqli(
+    "localhost",
+    "root",
+    "secret",
+    "my_database"
+);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+echo "Connected successfully";
+?>
+</code></pre>
+
+<h5>SQLite Example</h5>
+
+<pre><code class="language-php">
+<?php
+try {
+    $pdo = new PDO("sqlite:database.db");
+
+    echo "SQLite connected";
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+?>
+</code></pre>
+
+<h5>Best Practices</h5>
+
+<ul>
+  <li>Use prepared statements</li>
+  <li>Store credentials securely</li>
+  <li>Enable exception handling</li>
+  <li>Use environment variables for sensitive data</li>
+</ul>
+
+<h5>Common Connection Parameters</h5>
+
+<ul>
+  <li><code>host</code> – Database server address</li>
+  <li><code>dbname</code> – Database name</li>
+  <li><code>user</code> – Username</li>
+  <li><code>password</code> – Database password</li>
+  <li><code>charset</code> – Character encoding</li>
+</ul>
+
+<p>
+  Proper database connections are essential for secure and efficient
+  data management in PHP applications.
+</p>
 
 <h4 id="encrypted-storage-model">ENCRYPTED STORAGE MODEL</h4>
 .
