@@ -18359,7 +18359,109 @@ try {
 </p>
 
 <h4 id="encrypted-storage-model">ENCRYPTED STORAGE MODEL</h4>
-.
+
+<p>
+  An <strong>Encrypted Storage Model</strong> is a security approach where
+  stored data is encrypted to protect sensitive information from unauthorized
+  access.
+</p>
+
+<p>
+  In this model, data is transformed into unreadable ciphertext using
+  encryption algorithms and can only be decrypted with the correct key.
+</p>
+
+<h5>Main Goals</h5>
+
+<ul>
+  <li>Protect sensitive information</li>
+  <li>Prevent unauthorized data access</li>
+  <li>Reduce impact of data breaches</li>
+  <li>Ensure confidentiality and compliance</li>
+</ul>
+
+<h5>How It Works</h5>
+
+<ol>
+  <li>Data is collected</li>
+  <li>Encryption algorithm converts plaintext into ciphertext</li>
+  <li>Encrypted data is stored</li>
+  <li>Authorized users decrypt data when needed</li>
+</ol>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$data = "Secret Information";
+
+$key = "my-secret-key";
+
+$encrypted = openssl_encrypt(
+    $data,
+    "AES-256-CBC",
+    $key,
+    0,
+    substr(hash('sha256', $key), 0, 16)
+);
+
+echo $encrypted;
+?>
+</code></pre>
+
+<h5>Decrypting Data</h5>
+
+<pre><code class="language-php">
+<?php
+$decrypted = openssl_decrypt(
+    $encrypted,
+    "AES-256-CBC",
+    $key,
+    0,
+    substr(hash('sha256', $key), 0, 16)
+);
+
+echo $decrypted;
+?>
+</code></pre>
+
+<h5>Types of Encryption</h5>
+
+<ul>
+  <li><strong>Symmetric Encryption</strong> – Same key for encrypt/decrypt</li>
+  <li><strong>Asymmetric Encryption</strong> – Public/private key pair</li>
+</ul>
+
+<h5>Common Algorithms</h5>
+
+<ul>
+  <li>AES</li>
+  <li>RSA</li>
+  <li>ChaCha20</li>
+</ul>
+
+<h5>Best Practices</h5>
+
+<ul>
+  <li>Never store encryption keys with the data</li>
+  <li>Use strong modern algorithms</li>
+  <li>Rotate keys periodically</li>
+  <li>Use secure key management systems</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Password storage (with hashing)</li>
+  <li>Database encryption</li>
+  <li>Secure backups</li>
+  <li>Protecting API credentials</li>
+</ul>
+
+<p>
+  An encrypted storage model is essential for securing sensitive data
+  in modern applications and systems.
+</p>
 
 <h4 id="sql-injection">SQL INJECTION</h4>
 .
