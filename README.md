@@ -18464,7 +18464,108 @@ echo $decrypted;
 </p>
 
 <h4 id="sql-injection">SQL INJECTION</h4>
-.
+<p>
+  <strong>SQL Injection</strong> is one of the most critical and widespread
+  security vulnerabilities in web applications. It occurs when an attacker
+  is able to insert or manipulate SQL queries through user-supplied input,
+  tricking the database into executing unintended commands.
+</p>
+<p>
+  This type of attack can lead to unauthorized data access, data manipulation,
+  authentication bypass, and in severe cases, full system compromise.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>User input is incorporated directly into a SQL query</li>
+  <li>Attacker crafts malicious input containing SQL syntax</li>
+  <li>The database interprets and executes the injected code</li>
+  <li>Attacker gains unintended access or control</li>
+</ol>
+
+<h5>Vulnerable Example</h5>
+<pre><code class="language-php">
+<?php
+// NEVER do this — direct input concatenation
+$username = $_GET['username'];
+$query = "SELECT * FROM users WHERE username = '$username'";
+$result = mysqli_query($conn, $query);
+?>
+</code></pre>
+<p>
+  If the attacker passes <code>' OR '1'='1</code> as input, the query becomes:
+</p>
+<pre><code class="language-sql">
+SELECT * FROM users WHERE username = '' OR '1'='1'
+</code></pre>
+<p>This returns all users, completely bypassing authentication logic.</p>
+
+<h5>Safe Example — Prepared Statements (MySQLi)</h5>
+<pre><code class="language-php">
+<?php
+$username = $_GET['username'];
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
+</code></pre>
+
+<h5>Safe Example — Prepared Statements (PDO)</h5>
+<pre><code class="language-php">
+<?php
+$username = $_GET['username'];
+
+$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+$stmt->execute([':username' => $username]);
+$result = $stmt->fetchAll();
+?>
+</code></pre>
+
+<h5>Types of SQL Injection</h5>
+<ul>
+  <li><strong>Classic (In-band)</strong> – Attacker receives results directly in the response</li>
+  <li><strong>Blind Boolean-based</strong> – Infers data based on true/false application responses</li>
+  <li><strong>Blind Time-based</strong> – Uses database delays (e.g., SLEEP()) to extract information</li>
+  <li><strong>Out-of-band</strong> – Data is exfiltrated through a different channel (e.g., DNS, HTTP)</li>
+  <li><strong>Second-order</strong> – Malicious input is stored and executed later in a different context</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always use prepared statements with parameterized queries</li>
+  <li>Never concatenate user input directly into SQL queries</li>
+  <li>Apply the principle of least privilege to database users</li>
+  <li>Validate and sanitize all user input on the server side</li>
+  <li>Use an ORM (e.g., Eloquent, Doctrine) to abstract raw queries</li>
+  <li>Enable error reporting only in development environments</li>
+  <li>Regularly audit and test your application with security tools</li>
+</ul>
+
+<h5>Common Targets</h5>
+<ul>
+  <li>Login and authentication forms</li>
+  <li>Search fields and filters</li>
+  <li>URL parameters and route variables</li>
+  <li>Order/sort clauses in queries</li>
+  <li>Hidden form fields and cookies</li>
+</ul>
+
+<h5>Potential Impact</h5>
+<ul>
+  <li>Unauthorized access to sensitive data</li>
+  <li>Authentication bypass</li>
+  <li>Data manipulation or deletion</li>
+  <li>Full database compromise</li>
+  <li>In some configurations, remote code execution</li>
+</ul>
+
+<p>
+  SQL Injection is entirely preventable. Adopting prepared statements,
+  input validation, and the principle of least privilege are the
+  foundation of a secure database interaction layer in any PHP application.
+</p>
 
 <h2 id="features">FEATURES</h2>
 
