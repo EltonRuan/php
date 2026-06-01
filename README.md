@@ -18746,7 +18746,155 @@ echo json_encode(['message' => 'Authenticated successfully']);
 </p>
 
 <h4 id="cookies">COOKIES</h4>
-.
+<p>
+  <strong>Cookies</strong> are small pieces of data stored on the client's
+  browser by the server. They are sent automatically with every HTTP request
+  to the same domain, allowing the server to identify returning users and
+  persist state across stateless HTTP connections.
+</p>
+<p>
+  In PHP, cookies are managed through the <code>setcookie()</code> function
+  and accessed via the <code>$_COOKIE</code> superglobal, making them a
+  straightforward mechanism for maintaining user preferences, session tokens,
+  and tracking identifiers.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Server sends a <code>Set-Cookie</code> header in the HTTP response</li>
+  <li>Browser stores the cookie locally</li>
+  <li>On subsequent requests, browser automatically sends the cookie via the <code>Cookie</code> header</li>
+  <li>Server reads and processes the cookie value</li>
+</ol>
+
+<h5>Setting a Cookie</h5>
+<pre><code class="language-php">
+<?php
+// setcookie(name, value, expires, path, domain, secure, httponly)
+setcookie(
+    'username',
+    'john_doe',
+    time() + (86400 * 30), // expires in 30 days
+    '/',                   // available across the entire domain
+    '',                    // current domain
+    true,                  // HTTPS only
+    true                   // not accessible via JavaScript
+);
+?>
+</code></pre>
+
+<h5>Reading a Cookie</h5>
+<pre><code class="language-php">
+<?php
+if (isset($_COOKIE['username'])) {
+    $username = htmlspecialchars($_COOKIE['username']);
+    echo 'Welcome back, ' . $username;
+} else {
+    echo 'No cookie found.';
+}
+?>
+</code></pre>
+
+<h5>Updating a Cookie</h5>
+<pre><code class="language-php">
+<?php
+// Overwrite the existing cookie with a new value and reset expiration
+setcookie(
+    'username',
+    'jane_doe',
+    time() + (86400 * 30),
+    '/',
+    '',
+    true,
+    true
+);
+?>
+</code></pre>
+
+<h5>Deleting a Cookie</h5>
+<pre><code class="language-php">
+<?php
+// Set expiration to a past time to instruct the browser to remove it
+setcookie('username', '', time() - 3600, '/');
+unset($_COOKIE['username']);
+?>
+</code></pre>
+
+<h5>Cookie Parameters Explained</h5>
+<ul>
+  <li><strong>name</strong> – The cookie identifier used to retrieve its value</li>
+  <li><strong>value</strong> – The data stored in the cookie (always a string)</li>
+  <li><strong>expires</strong> – Unix timestamp defining when the cookie expires; 0 means session cookie</li>
+  <li><strong>path</strong> – URL path the cookie is available on; <code>/</code> makes it site-wide</li>
+  <li><strong>domain</strong> – The domain the cookie belongs to (e.g., <code>.example.com</code>)</li>
+  <li><strong>secure</strong> – If <code>true</code>, cookie is only sent over HTTPS connections</li>
+  <li><strong>httponly</strong> – If <code>true</code>, cookie is inaccessible to JavaScript, mitigating XSS risks</li>
+</ul>
+
+<h5>Using the Options Array (PHP 7.3+)</h5>
+<pre><code class="language-php">
+<?php
+setcookie('username', 'john_doe', [
+    'expires'  => time() + (86400 * 30),
+    'path'     => '/',
+    'domain'   => '',
+    'secure'   => true,
+    'httponly' => true,
+    'samesite' => 'Strict' // Lax, Strict, or None
+]);
+?>
+</code></pre>
+
+<h5>SameSite Attribute</h5>
+<ul>
+  <li><strong>Strict</strong> – Cookie is only sent in first-party context; strongest protection against CSRF</li>
+  <li><strong>Lax</strong> – Cookie is sent with top-level navigations and GET requests; balanced approach</li>
+  <li><strong>None</strong> – Cookie is sent in all contexts; requires <code>Secure</code> to be set</li>
+</ul>
+
+<h5>Types of Cookies</h5>
+<ul>
+  <li><strong>Session Cookies</strong> – No expiration set; deleted when the browser is closed</li>
+  <li><strong>Persistent Cookies</strong> – Have an expiration date; stored until they expire or are deleted</li>
+  <li><strong>Secure Cookies</strong> – Transmitted only over HTTPS connections</li>
+  <li><strong>HttpOnly Cookies</strong> – Inaccessible to client-side JavaScript</li>
+  <li><strong>Third-party Cookies</strong> – Set by a domain other than the one being visited</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always set <code>secure</code> and <code>httponly</code> flags for sensitive cookies</li>
+  <li>Never store sensitive data (passwords, raw tokens) directly in cookies</li>
+  <li>Use <code>samesite</code> to protect against Cross-Site Request Forgery (CSRF)</li>
+  <li>Validate and sanitize all cookie values before using them server-side</li>
+  <li>Keep cookie values small — browsers limit cookie size to around 4KB</li>
+  <li>Prefer storing a session ID in the cookie and keeping data server-side</li>
+  <li>Comply with privacy regulations (GDPR, LGPD) when using tracking cookies</li>
+</ul>
+
+<h5>Security Risks</h5>
+<ul>
+  <li><strong>XSS (Cross-Site Scripting)</strong> – Attackers can steal cookies via JavaScript if <code>HttpOnly</code> is not set</li>
+  <li><strong>CSRF (Cross-Site Request Forgery)</strong> – Cookies sent automatically can be exploited; mitigated with <code>SameSite</code></li>
+  <li><strong>Cookie Theft</strong> – Cookies transmitted over HTTP can be intercepted; always use HTTPS</li>
+  <li><strong>Cookie Tampering</strong> – Client-side values can be modified; never trust cookie data blindly</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Storing session identifiers for authentication</li>
+  <li>Remembering user preferences (language, theme, currency)</li>
+  <li>Tracking user behavior for analytics</li>
+  <li>"Remember me" functionality on login forms</li>
+  <li>Shopping cart persistence across visits</li>
+</ul>
+
+<p>
+  Cookies remain a fundamental part of web development, but they must be
+  handled with care. Combining proper flags, HTTPS enforcement, server-side
+  validation, and privacy compliance ensures they are used both securely
+  and responsibly in any PHP application.
+</p>
 
 <h4 id="sessions">SESSIONS</h4>
 .
