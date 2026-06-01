@@ -18582,7 +18582,168 @@ $result = $stmt->fetchAll();
 </nav>
 
 <h4 id="http-authentication-with-php">HTTP AUTHENTICATION WITH PHP</h4>
-.
+<p>
+  <strong>HTTP Authentication</strong> is a mechanism that allows a server
+  to challenge a client to provide credentials before granting access to
+  a protected resource. PHP can interact directly with this process through
+  built-in superglobals and response headers.
+</p>
+<p>
+  It is one of the simplest forms of access control available in web
+  development, commonly used for protecting admin panels, internal tools,
+  or staging environments.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Client sends a request to a protected resource</li>
+  <li>Server responds with <code>401 Unauthorized</code> and a <code>WWW-Authenticate</code> header</li>
+  <li>Browser prompts the user for credentials</li>
+  <li>Client resends the request with an <code>Authorization</code> header</li>
+  <li>Server validates credentials and grants or denies access</li>
+</ol>
+
+<h5>Types of HTTP Authentication</h5>
+<ul>
+  <li><strong>Basic Auth</strong> – Credentials are base64-encoded and sent in the header (requires HTTPS)</li>
+  <li><strong>Digest Auth</strong> – Credentials are hashed before transmission, more secure than Basic</li>
+  <li><strong>Bearer Token</strong> – Token-based approach commonly used with APIs and OAuth 2.0</li>
+</ul>
+
+<h5>Basic Authentication Example</h5>
+<pre><code class="language-php">
+<?php
+if (!isset($_SERVER['PHP_AUTH_USER'])) {
+    header('WWW-Authenticate: Basic realm="Restricted Area"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo 'Access denied.';
+    exit;
+}
+
+$validUser     = 'admin';
+$validPassword = 'secret';
+
+if (
+    $_SERVER['PHP_AUTH_USER'] !== $validUser ||
+    $_SERVER['PHP_AUTH_PW']   !== $validPassword
+) {
+    header('HTTP/1.0 403 Forbidden');
+    echo 'Invalid credentials.';
+    exit;
+}
+
+echo 'Welcome, ' . htmlspecialchars($_SERVER['PHP_AUTH_USER']);
+?>
+</code></pre>
+
+<h5>Digest Authentication Example</h5>
+<pre><code class="language-php">
+<?php
+$realm = 'Restricted Area';
+$users = ['admin' => 'secret'];
+
+if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
+    header('HTTP/1.1 401 Unauthorized');
+    header('WWW-Authenticate: Digest realm="' . $realm .
+        '",qop="auth",nonce="' . uniqid() . '",opaque="' . md5($realm) . '"');
+    echo 'Access denied.';
+    exit;
+}
+
+$data  = http_digest_parse($_SERVER['PHP_AUTH_DIGEST']);
+$user  = $data['username'] ?? '';
+
+if (!isset($users[$user])) {
+    echo 'Invalid credentials.';
+    exit;
+}
+
+$A1       = md5($user . ':' . $realm . ':' . $users[$user]);
+$A2       = md5($_SERVER['REQUEST_METHOD'] . ':' . $data['uri']);
+$expected = md5($A1 . ':' . $data['nonce'] . ':' . $data['nc'] .
+            ':' . $data['cnonce'] . ':' . $data['qop'] . ':' . $A2);
+
+if ($data['response'] !== $expected) {
+    echo 'Authentication failed.';
+    exit;
+}
+
+echo 'Welcome, ' . htmlspecialchars($user);
+
+function http_digest_parse(string $txt): array
+{
+    $needed = ['nonce', 'nc', 'cnonce', 'qop', 'username', 'uri', 'response'];
+    $data   = [];
+
+    foreach ($needed as $key) {
+        if (preg_match('/' . $key . '=(?:([\'"])([^\1]*?)\1|([^\s,]+))/', $txt, $match)) {
+            $data[$key] = $match[2] ?: $match[3];
+        }
+    }
+
+    return $data;
+}
+?>
+</code></pre>
+
+<h5>Bearer Token Example (API Context)</h5>
+<pre><code class="language-php">
+<?php
+$headers       = getallheaders();
+$authorization = $headers['Authorization'] ?? '';
+
+if (!str_starts_with($authorization, 'Bearer ')) {
+    header('HTTP/1.1 401 Unauthorized');
+    echo json_encode(['error' => 'Missing or invalid token']);
+    exit;
+}
+
+$token       = substr($authorization, 7);
+$validTokens = ['my-secure-api-token-123'];
+
+if (!in_array($token, $validTokens, true)) {
+    header('HTTP/1.1 403 Forbidden');
+    echo json_encode(['error' => 'Access denied']);
+    exit;
+}
+
+echo json_encode(['message' => 'Authenticated successfully']);
+?>
+</code></pre>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always use HTTPS — Basic Auth transmits credentials in base64, not encrypted</li>
+  <li>Never hardcode credentials in source code; use environment variables</li>
+  <li>Prefer token-based or session-based authentication for modern applications</li>
+  <li>Use <code>password_hash()</code> and <code>password_verify()</code> when storing user passwords</li>
+  <li>Implement rate limiting to prevent brute-force attacks</li>
+  <li>Set appropriate cache-control headers to avoid credential caching</li>
+  <li>Prefer Digest or Bearer over Basic Auth when possible</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Protecting staging and development environments</li>
+  <li>Securing internal admin panels</li>
+  <li>Simple API authentication for trusted clients</li>
+  <li>Restricting access to maintenance scripts</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Basic Auth offers no protection without HTTPS</li>
+  <li>No built-in logout mechanism in Basic and Digest Auth</li>
+  <li>Not suitable as the sole authentication layer for production applications</li>
+  <li>Browser credential prompts offer poor user experience compared to custom login forms</li>
+</ul>
+
+<p>
+  HTTP Authentication with PHP is a straightforward and effective tool
+  for lightweight access control scenarios. For production-grade applications,
+  it should be combined with HTTPS, secure credential storage, and ideally
+  replaced or supplemented by session-based or token-based authentication systems.
+</p>
 
 <h4 id="cookies">COOKIES</h4>
 .
