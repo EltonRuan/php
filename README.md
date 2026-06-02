@@ -18897,7 +18897,216 @@ setcookie('username', 'john_doe', [
 </p>
 
 <h4 id="sessions">SESSIONS</h4>
-.
+<p>
+  <strong>Sessions</strong> are a server-side mechanism for persisting user
+  data across multiple HTTP requests. Unlike cookies, which store data on
+  the client, sessions store data on the server and associate it with a
+  unique identifier sent to the client, typically via a cookie named
+  <code>PHPSESSID</code>.
+</p>
+<p>
+  PHP provides native session support through built-in functions and the
+  <code>$_SESSION</code> superglobal, making it straightforward to maintain
+  state between requests without exposing sensitive data to the client.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Client makes a request to the server</li>
+  <li>Server starts a session and generates a unique session ID</li>
+  <li>Session ID is sent to the client via a cookie (<code>PHPSESSID</code>)</li>
+  <li>Session data is stored server-side (file, database, memory)</li>
+  <li>On subsequent requests, client sends the session ID cookie</li>
+  <li>Server retrieves and resumes the corresponding session data</li>
+</ol>
+
+<h5>Starting a Session</h5>
+<pre><code class="language-php">
+<?php
+// Must be called before any output is sent to the browser
+session_start();
+
+$_SESSION['username'] = 'john_doe';
+$_SESSION['role']     = 'admin';
+$_SESSION['logged_in'] = true;
+?>
+</code></pre>
+
+<h5>Reading Session Data</h5>
+<pre><code class="language-php">
+<?php
+session_start();
+
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    $username = htmlspecialchars($_SESSION['username']);
+    echo 'Welcome, ' . $username;
+} else {
+    header('Location: /login.php');
+    exit;
+}
+?>
+</code></pre>
+
+<h5>Updating Session Data</h5>
+<pre><code class="language-php">
+<?php
+session_start();
+
+// Simply reassign the key to update its value
+$_SESSION['role'] = 'editor';
+$_SESSION['last_active'] = time();
+?>
+</code></pre>
+
+<h5>Removing Session Data</h5>
+<pre><code class="language-php">
+<?php
+session_start();
+
+// Remove a specific key
+unset($_SESSION['role']);
+
+// Remove all session data
+session_unset();
+?>
+</code></pre>
+
+<h5>Destroying a Session</h5>
+<pre><code class="language-php">
+<?php
+session_start();
+
+// Clear all session variables
+session_unset();
+
+// Destroy the session data on the server
+session_destroy();
+
+// Remove the session cookie from the client
+setcookie(
+    session_name(),
+    '',
+    time() - 3600,
+    '/',
+    '',
+    true,
+    true
+);
+?>
+</code></pre>
+
+<h5>Regenerating the Session ID</h5>
+<pre><code class="language-php">
+<?php
+session_start();
+
+// Regenerate ID after login to prevent session fixation attacks
+session_regenerate_id(true); // true = delete the old session file
+
+$_SESSION['logged_in'] = true;
+$_SESSION['username']  = 'john_doe';
+?>
+</code></pre>
+
+<h5>Configuring Sessions (php.ini or runtime)</h5>
+<pre><code class="language-php">
+<?php
+// Configure before session_start()
+ini_set('session.cookie_secure',   '1');   // HTTPS only
+ini_set('session.cookie_httponly', '1');   // No JavaScript access
+ini_set('session.cookie_samesite', 'Strict');
+ini_set('session.use_strict_mode', '1');   // Reject uninitialized session IDs
+ini_set('session.gc_maxlifetime',  '1800'); // 30 minutes of inactivity
+
+session_start();
+?>
+</code></pre>
+
+<h5>Custom Session Handler</h5>
+<pre><code class="language-php">
+<?php
+// PHP allows you to store sessions in a database or custom storage
+// by implementing the SessionHandlerInterface
+
+class DatabaseSessionHandler implements SessionHandlerInterface
+{
+    public function open(string $path, string $name): bool { return true; }
+    public function close(): bool { return true; }
+
+    public function read(string $id): string
+    {
+        // Retrieve session data from database by session ID
+        return '';
+    }
+
+    public function write(string $id, string $data): bool
+    {
+        // Persist session data to database
+        return true;
+    }
+
+    public function destroy(string $id): bool
+    {
+        // Delete session record from database
+        return true;
+    }
+
+    public function gc(int $max_lifetime): int|false
+    {
+        // Remove expired sessions from database
+        return 0;
+    }
+}
+
+$handler = new DatabaseSessionHandler();
+session_set_save_handler($handler, true);
+session_start();
+?>
+</code></pre>
+
+<h5>Sessions vs Cookies</h5>
+<ul>
+  <li><strong>Storage</strong> – Sessions are stored server-side; cookies are stored client-side</li>
+  <li><strong>Security</strong> – Sessions are more secure as sensitive data never leaves the server</li>
+  <li><strong>Capacity</strong> – Sessions can store larger amounts of data than cookies (4KB limit)</li>
+  <li><strong>Lifetime</strong> – Sessions typically expire when the browser closes or after inactivity; cookies can persist longer</li>
+  <li><strong>Dependency</strong> – Sessions rely on a cookie (or URL parameter) to transmit the session ID</li>
+</ul>
+
+<h5>Security Risks</h5>
+<ul>
+  <li><strong>Session Hijacking</strong> – Attacker steals a valid session ID to impersonate a user</li>
+  <li><strong>Session Fixation</strong> – Attacker forces a known session ID before authentication; mitigated with <code>session_regenerate_id()</code></li>
+  <li><strong>Session Exposure</strong> – Session ID leaked via URL, logs, or referrer headers</li>
+  <li><strong>Insecure Storage</strong> – Default file-based sessions may be readable on shared hosting environments</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always call <code>session_start()</code> before any output</li>
+  <li>Regenerate the session ID after login, privilege changes, or sensitive actions</li>
+  <li>Set <code>cookie_secure</code>, <code>cookie_httponly</code>, and <code>cookie_samesite</code> flags</li>
+  <li>Never expose the session ID in URLs — disable <code>session.use_trans_sid</code></li>
+  <li>Implement session expiration based on inactivity time</li>
+  <li>Store sessions in a database or distributed cache (Redis, Memcached) for scalable applications</li>
+  <li>Validate user context (IP, user agent) to detect potential session hijacking</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>User authentication and access control</li>
+  <li>Shopping cart management in e-commerce applications</li>
+  <li>Multi-step form data persistence</li>
+  <li>Flash messages between redirects</li>
+  <li>Tracking user activity within a visit</li>
+</ul>
+
+<p>
+  Sessions are the cornerstone of stateful web applications in PHP. When
+  configured correctly and combined with proper security measures, they
+  provide a reliable and secure way to manage user state across requests
+  without exposing sensitive data to the client.
+</p>
 
 <h4 id="using-remote-files">USING REMOTE FILES</h4>
 .
