@@ -19303,7 +19303,220 @@ include($page); // Attacker can pass: http://evil.com/malware.php
 </p>
 
 <h4 id="connection-handling">CONNECTION HANDLING</h4>
-.
+<p>
+  <strong>Connection Handling</strong> in PHP refers to the mechanisms that
+  control how the server manages the lifecycle of a client connection during
+  script execution. PHP monitors the state of the connection and provides
+  functions that allow developers to detect disconnections, control script
+  behavior on abort, and ensure critical operations complete regardless of
+  what the client does.
+</p>
+<p>
+  Understanding connection handling is essential for building robust
+  applications that perform long-running tasks, process transactions, or
+  write to files and databases — where an unexpected client disconnection
+  could leave data in an inconsistent state.
+</p>
+
+<h5>Connection States</h5>
+<ul>
+  <li><strong>NORMAL (0)</strong> – Connection is active and script is running as expected</li>
+  <li><strong>ABORTED (1)</strong> – Client disconnected before the script finished</li>
+  <li><strong>TIMEOUT (2)</strong> – Script exceeded the maximum execution time limit</li>
+  <li><strong>ABORTED + TIMEOUT (3)</strong> – Both conditions occurred simultaneously</li>
+</ul>
+
+<h5>Checking Connection Status</h5>
+<pre><code class="language-php">
+<?php
+$status = connection_status();
+
+switch ($status) {
+    case CONNECTION_NORMAL:
+        echo 'Connection is normal.';
+        break;
+    case CONNECTION_ABORTED:
+        echo 'Client disconnected.';
+        break;
+    case CONNECTION_TIMEOUT:
+        echo 'Script timed out.';
+        break;
+    default:
+        echo 'Connection aborted and timed out.';
+}
+?>
+</code></pre>
+
+<h5>Detecting Client Disconnection</h5>
+<pre><code class="language-php">
+<?php
+// connection_aborted() returns 1 if the client disconnected
+for ($i = 0; $i < 100; $i++) {
+    if (connection_aborted()) {
+        error_log('Client disconnected at iteration: ' . $i);
+        break;
+    }
+
+    // Simulate processing
+    sleep(1);
+    echo 'Processing step ' . $i . PHP_EOL;
+    flush();
+}
+?>
+</code></pre>
+
+<h5>Ignoring Client Disconnection</h5>
+<pre><code class="language-php">
+<?php
+// Script continues executing even if the client disconnects
+ignore_user_abort(true);
+
+// Extend execution time for long-running tasks
+set_time_limit(300);
+
+// Example: critical background task that must complete
+processLargeDataExport();
+sendNotificationEmails();
+cleanupTemporaryFiles();
+
+function processLargeDataExport(): void
+{
+    // Long-running operation that must not be interrupted
+}
+?>
+</code></pre>
+
+<h5>Using register_shutdown_function()</h5>
+<pre><code class="language-php">
+<?php
+// Registers a callback that always runs when the script terminates,
+// regardless of how it ends — normally, on abort, or on fatal error
+
+register_shutdown_function(function (): void {
+    $error = error_get_last();
+
+    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR], true)) {
+        error_log('Fatal error: ' . $error['message'] . ' in ' . $error['file']);
+        // Notify, cleanup, or release resources
+    }
+
+    // Always runs — ideal for cleanup logic
+    releaseLocks();
+    closeConnections();
+});
+
+function releaseLocks(): void
+{
+    // Release file locks, semaphores, or queue reservations
+}
+
+function closeConnections(): void
+{
+    // Gracefully close database or socket connections
+}
+?>
+</code></pre>
+
+<h5>Combining Abort Handling with Transactions</h5>
+<pre><code class="language-php">
+<?php
+ignore_user_abort(true);
+
+$pdo = new PDO('mysql:host=localhost;dbname=app', 'user', 'password');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+try {
+    $pdo->beginTransaction();
+
+    $pdo->exec("UPDATE accounts SET balance = balance - 100 WHERE id = 1");
+    $pdo->exec("UPDATE accounts SET balance = balance + 100 WHERE id = 2");
+
+    $pdo->commit();
+} catch (Exception $e) {
+    $pdo->rollBack();
+    error_log('Transaction failed: ' . $e->getMessage());
+}
+?>
+</code></pre>
+
+<h5>Controlling Script Execution Time</h5>
+<pre><code class="language-php">
+<?php
+// Returns the number of seconds the script has been running
+$elapsed = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
+
+// Dynamically extend time limit for intensive tasks
+if ($elapsed > 25) {
+    set_time_limit(60); // Reset the timeout counter
+}
+
+// Setting 0 removes the time limit entirely — use with caution
+set_time_limit(0);
+?>
+</code></pre>
+
+<h5>Background Processing Pattern</h5>
+<pre><code class="language-php">
+<?php
+// Send response to client immediately, continue processing in background
+ignore_user_abort(true);
+set_time_limit(0);
+
+// Close the connection visibly to the client
+header('Content-Length: 0');
+header('Connection: close');
+ob_end_flush();
+flush();
+
+// Client has received the response — continue silently
+session_write_close();
+
+performHeavyBackgroundTask();
+
+function performHeavyBackgroundTask(): void
+{
+    // Generate reports, send emails, process queues, etc.
+}
+?>
+</code></pre>
+
+<h5>Key Functions Reference</h5>
+<ul>
+  <li><strong>connection_status()</strong> – Returns the current connection status as an integer bitmask</li>
+  <li><strong>connection_aborted()</strong> – Returns 1 if the client has disconnected</li>
+  <li><strong>ignore_user_abort()</strong> – Controls whether script execution continues after client disconnection</li>
+  <li><strong>set_time_limit()</strong> – Sets the maximum number of seconds a script is allowed to run</li>
+  <li><strong>register_shutdown_function()</strong> – Registers a callback to execute when the script terminates</li>
+  <li><strong>fastcgi_finish_request()</strong> – Flushes and closes the response in PHP-FPM, allowing background work to continue</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>ignore_user_abort(true)</code> to protect critical operations such as financial transactions</li>
+  <li>Always wrap multi-step database operations in transactions to ensure consistency</li>
+  <li>Register shutdown functions to guarantee cleanup logic always executes</li>
+  <li>Prefer dedicated job queues (Redis, RabbitMQ, Laravel Horizon) over in-process background tasks for scalability</li>
+  <li>Avoid setting <code>set_time_limit(0)</code> globally — apply it only to specific long-running routines</li>
+  <li>Use <code>fastcgi_finish_request()</code> in PHP-FPM environments for cleaner background processing</li>
+  <li>Log disconnections and timeouts to monitor application health and unexpected terminations</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Protecting financial transactions from partial execution</li>
+  <li>Running background tasks after sending a response to the client</li>
+  <li>Generating and exporting large reports or data files</li>
+  <li>Sending bulk emails or notifications asynchronously</li>
+  <li>Releasing locks and cleaning up resources on script termination</li>
+</ul>
+
+<p>
+  Connection handling is a critical but often overlooked aspect of PHP
+  development. Properly managing client disconnections, execution timeouts,
+  and shutdown routines ensures that long-running or sensitive operations
+  complete reliably — maintaining data integrity and application stability
+  even under unexpected conditions.
+</p>
 
 <h4 id="persistent-database-connections">PERSISTENT DATABASE CONNECTIONS</h4>
 .
