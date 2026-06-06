@@ -19519,8 +19519,196 @@ function performHeavyBackgroundTask(): void
 </p>
 
 <h4 id="persistent-database-connections">PERSISTENT DATABASE CONNECTIONS</h4>
-.
+<p>
+  <strong>Persistent Database Connections</strong> are a connection management
+  strategy where PHP reuses an existing database connection across multiple
+  script executions instead of opening and closing a new connection on every
+  request. When a script finishes, the connection is not closed but returned
+  to a pool, ready to be reused by the next request.
+</p>
+<p>
+  This approach aims to reduce the overhead of repeatedly establishing
+  database connections, which involves network handshakes, authentication,
+  and resource allocation — operations that can become a performance
+  bottleneck under high traffic.
+</p>
 
+<h5>How It Works</h5>
+<ol>
+  <li>Script requests a database connection</li>
+  <li>PHP checks if an identical persistent connection already exists for the current process</li>
+  <li>If found, the existing connection is reused without re-authenticating</li>
+  <li>If not found, a new connection is established and marked as persistent</li>
+  <li>When the script ends, the connection is returned to the pool instead of being closed</li>
+  <li>Subsequent requests from the same process reuse the pooled connection</li>
+</ol>
+
+<h5>Persistent Connection with PDO</h5>
+<pre><code class="language-php">
+<?php
+$dsn = 'mysql:host=localhost;dbname=app;charset=utf8mb4';
+
+$options = [
+    PDO::ATTR_PERSISTENT         => true, // Enable persistent connection
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
+
+try {
+    $pdo = new PDO($dsn, 'db_user', 'db_password', $options);
+} catch (PDOException $e) {
+    error_log('Connection failed: ' . $e->getMessage());
+    exit('Database connection error.');
+}
+?>
+</code></pre>
+
+<h5>Persistent Connection with MySQLi</h5>
+<pre><code class="language-php">
+<?php
+// Prefix the hostname with 'p:' to request a persistent connection
+$host     = 'p:localhost';
+$user     = 'db_user';
+$password = 'db_password';
+$database = 'app';
+
+$mysqli = new mysqli($host, $user, $password, $database);
+
+if ($mysqli->connect_error) {
+    error_log('Connection failed: ' . $mysqli->connect_error);
+    exit('Database connection error.');
+}
+?>
+</code></pre>
+
+<h5>Verifying and Recovering a Stale Connection</h5>
+<pre><code class="language-php">
+<?php
+$dsn = 'mysql:host=localhost;dbname=app;charset=utf8mb4';
+
+$options = [
+    PDO::ATTR_PERSISTENT => true,
+    PDO::ATTR_ERRMODE    => PDO::ERRMODE_EXCEPTION,
+];
+
+try {
+    $pdo = new PDO($dsn, 'db_user', 'db_password', $options);
+
+    // Ping the connection to verify it is still alive
+    $pdo->query('SELECT 1');
+} catch (PDOException $e) {
+    // Connection may be stale — reinitialize
+    $pdo = new PDO($dsn, 'db_user', 'db_password', $options);
+}
+?>
+</code></pre>
+
+<h5>Persistent vs Non-Persistent Connections</h5>
+<ul>
+  <li>
+    <strong>Non-Persistent</strong> – A new connection is opened and closed
+    on every script execution. Simpler to manage, predictable state, but
+    higher overhead per request.
+  </li>
+  <li>
+    <strong>Persistent</strong> – Connection is reused across requests within
+    the same process. Lower overhead, but requires careful state management
+    to avoid leaking transactions or session variables between requests.
+  </li>
+</ul>
+
+<h5>Risks and Drawbacks</h5>
+<ul>
+  <li>
+    <strong>Stale Connections</strong> – A reused connection may have timed
+    out or been dropped by the database server, causing errors on the next request
+  </li>
+  <li>
+    <strong>Transaction Leakage</strong> – If a script opens a transaction and
+    terminates abnormally, the uncommitted transaction may persist and block
+    subsequent requests using the same connection
+  </li>
+  <li>
+    <strong>Session Variable Pollution</strong> – Database-level session variables
+    or temporary tables set in one request may carry over to the next
+  </li>
+  <li>
+    <strong>Connection Limit Exhaustion</strong> – Persistent connections are
+    held open per process; under high concurrency they can exhaust the database's
+    maximum connection limit
+  </li>
+  <li>
+    <strong>Incompatibility with PHP-FPM</strong> – In PHP-FPM environments,
+    each worker process holds its own persistent connection, which can multiply
+    the number of open connections significantly
+  </li>
+</ul>
+
+<h5>Cleaning Up State Before Reuse</h5>
+<pre><code class="language-php">
+<?php
+$dsn     = 'mysql:host=localhost;dbname=app;charset=utf8mb4';
+$options = [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+
+$pdo = new PDO($dsn, 'db_user', 'db_password', $options);
+
+// Roll back any uncommitted transaction left by a previous request
+if ($pdo->inTransaction()) {
+    $pdo->rollBack();
+}
+
+// Reset any session-level state set by the previous consumer
+$pdo->exec("SET SESSION sql_mode = 'STRICT_TRANS_TABLES'");
+?>
+</code></pre>
+
+<h5>Modern Alternatives</h5>
+<ul>
+  <li>
+    <strong>Connection Pooling Proxies</strong> – Tools like
+    <strong>ProxySQL</strong> or <strong>PgBouncer</strong> manage connection
+    pooling at the infrastructure level, offering greater control, visibility,
+    and scalability than PHP-level persistent connections
+  </li>
+  <li>
+    <strong>Application-Level Pooling</strong> – Frameworks and ORMs such as
+    Doctrine or Laravel manage connection lifecycle and reuse more safely
+    within the application layer
+  </li>
+  <li>
+    <strong>Async Runtimes</strong> – Platforms like <strong>Swoole</strong>
+    or <strong>RoadRunner</strong> maintain long-lived processes with proper
+    connection pooling built in, making PHP-level persistence less relevant
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Prefer infrastructure-level connection pooling (ProxySQL, PgBouncer) over PHP persistent connections</li>
+  <li>Always roll back open transactions before returning a connection to the pool</li>
+  <li>Validate connection health with a lightweight query before use</li>
+  <li>Monitor the number of open connections to avoid exhausting database limits</li>
+  <li>Reset session-level variables and settings when reusing a connection</li>
+  <li>Avoid persistent connections on shared hosting environments</li>
+  <li>Benchmark before adopting — the overhead of non-persistent connections is often negligible with modern databases</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>High-traffic applications with frequent short database interactions</li>
+  <li>Applications where connection establishment latency is measurable and significant</li>
+  <li>Long-running PHP processes such as CLI daemons or queue workers</li>
+  <li>Legacy environments without access to infrastructure-level connection pooling</li>
+</ul>
+
+<p>
+  Persistent database connections can offer meaningful performance gains in
+  specific scenarios, but they introduce state management complexity that
+  requires careful handling. In most modern PHP applications, infrastructure-level
+  connection pooling tools provide a safer, more scalable, and more observable
+  alternative that achieves the same goals without the associated risks.
+</p>
 
 <h2 id="function-reference">FUNCTION REFERENCE</h2>
 
