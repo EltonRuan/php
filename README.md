@@ -19798,6 +19798,199 @@ $pdo->exec("SET SESSION sql_mode = 'STRICT_TRANS_TABLES'");
 </nav>
 
 <h4 id="apcu_add">APCU_ADD</h4>
+<p>
+  <strong>apcu_add()</strong> is a PHP function that stores a variable in the
+  APCu (Alternative PHP Cache — User) in-memory cache, but only if the given
+  key does not already exist. Unlike <code>apcu_store()</code>, it will never
+  overwrite an existing cached entry, making it inherently safe for
+  write-once or race-condition-sensitive scenarios.
+</p>
+<p>
+  APCu is a shared memory cache available across all requests handled by the
+  same PHP process, making it a fast and lightweight solution for storing
+  frequently accessed data without the need for an external caching service.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a key, a value, and an optional TTL (time to live)</li>
+  <li>APCu checks whether the key already exists in shared memory</li>
+  <li>If the key is absent, the value is stored and the function returns <code>true</code></li>
+  <li>If the key already exists, nothing is written and the function returns <code>false</code></li>
+  <li>Stored entry expires automatically after the TTL, if one was provided</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_add(string|array $key, mixed $value = null, int $ttl = 0): bool|array
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+$stored = apcu_add('config:app', ['debug' => false, 'version' => '2.1.0'], 3600);
+
+if ($stored) {
+    echo 'Value successfully cached.';
+} else {
+    echo 'Key already exists — nothing was overwritten.';
+}
+?>
+</code></pre>
+
+<h5>Storing Multiple Keys at Once</h5>
+<pre><code class="language-php">
+<?php
+// When an array is passed, apcu_add() attempts to store each key/value pair
+// Returns an array of keys that could NOT be stored (already existed)
+$failed = apcu_add([
+    'setting:theme'    => 'dark',
+    'setting:language' => 'en',
+    'setting:timezone' => 'UTC',
+]);
+
+if (empty($failed)) {
+    echo 'All keys cached successfully.';
+} else {
+    echo 'The following keys already existed: ' . implode(', ', array_keys($failed));
+}
+?>
+</code></pre>
+
+<h5>Using TTL (Time To Live)</h5>
+<pre><code class="language-php">
+<?php
+// Value will expire automatically after 60 seconds
+apcu_add('rate_limit:user_42', 0, 60);
+
+// Value persists indefinitely until manually deleted or cache is cleared
+apcu_add('app:install_date', date('Y-m-d'));
+?>
+</code></pre>
+
+<h5>Practical Pattern — Preventing Duplicate Execution</h5>
+<pre><code class="language-php">
+<?php
+// apcu_add() is ideal as a distributed lock primitive
+// Only the first request to acquire the lock will proceed
+
+$lockKey = 'lock:daily_report';
+$ttl     = 300; // Lock expires in 5 minutes as a safety fallback
+
+if (!apcu_add($lockKey, true, $ttl)) {
+    echo 'Process already running. Skipping.';
+    exit;
+}
+
+try {
+    generateDailyReport();
+} finally {
+    apcu_delete($lockKey); // Always release the lock
+}
+
+function generateDailyReport(): void
+{
+    // Expensive operation that should only run once at a time
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Cache Stampede Prevention</h5>
+<pre><code class="language-php">
+<?php
+// Prevents multiple simultaneous requests from rebuilding the same cache entry
+
+function getCachedData(string $key, callable $rebuild, int $ttl = 300): mixed
+{
+    $value = apcu_fetch($key, $success);
+
+    if ($success) {
+        return $value;
+    }
+
+    // Only the first request gets to rebuild; others will hit apcu_add() = false
+    if (apcu_add('rebuilding:' . $key, true, 10)) {
+        $value = $rebuild();
+        apcu_store($key, $value, $ttl);
+        apcu_delete('rebuilding:' . $key);
+    } else {
+        // Another process is rebuilding — return stale or fallback data
+        $value = getStaleOrDefaultData($key);
+    }
+
+    return $value;
+}
+
+function getStaleOrDefaultData(string $key): mixed
+{
+    // Return a safe default or previously persisted value
+    return [];
+}
+?>
+</code></pre>
+
+<h5>apcu_add() vs apcu_store()</h5>
+<ul>
+  <li>
+    <strong>apcu_add()</strong> – Writes only if the key does not exist;
+    safe for write-once and lock patterns; returns <code>false</code> silently
+    if key is already present
+  </li>
+  <li>
+    <strong>apcu_store()</strong> – Always writes, overwriting any existing
+    value for the given key; suitable for cache refresh and update scenarios
+  </li>
+</ul>
+
+<h5>Related APCu Functions</h5>
+<ul>
+  <li><strong>apcu_store()</strong> – Store a value, overwriting if the key exists</li>
+  <li><strong>apcu_fetch()</strong> – Retrieve a cached value by key</li>
+  <li><strong>apcu_exists()</strong> – Check whether a key exists in the cache</li>
+  <li><strong>apcu_delete()</strong> – Remove a specific key from the cache</li>
+  <li><strong>apcu_clear_cache()</strong> – Wipe the entire APCu cache</li>
+  <li><strong>apcu_inc()</strong> – Atomically increment a cached numeric value</li>
+  <li><strong>apcu_dec()</strong> – Atomically decrement a cached numeric value</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>apcu_add()</code> over <code>apcu_store()</code> whenever overwriting must be prevented</li>
+  <li>Always set a TTL to prevent stale entries from persisting indefinitely</li>
+  <li>Use namespaced keys (e.g., <code>user:42:profile</code>) to avoid collisions across modules</li>
+  <li>Always release locks in a <code>finally</code> block to prevent deadlocks on exceptions</li>
+  <li>Remember that APCu is process-local — it is not shared across multiple servers or PHP-FPM pools</li>
+  <li>Do not use APCu as the sole caching layer for distributed or multi-server architectures</li>
+  <li>Prefer Redis or Memcached when cross-server cache consistency is required</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>APCu cache is lost when the PHP process or web server restarts</li>
+  <li>Not shared across different servers — unsuitable for horizontally scaled environments without additional tooling</li>
+  <li>Cache size is limited by the <code>apc.shm_size</code> PHP configuration directive</li>
+  <li>Not available in CLI by default — requires <code>apc.enable_cli=1</code> in php.ini</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Implementing lightweight locking mechanisms to prevent duplicate execution</li>
+  <li>Caching application configuration and feature flags on first load</li>
+  <li>Rate limiting and request throttling at the process level</li>
+  <li>Cache stampede prevention on high-traffic endpoints</li>
+  <li>Storing computed values that are expensive to rebuild on every request</li>
+</ul>
+
+<p>
+  <code>apcu_add()</code> is a precise and intentional caching primitive.
+  Its write-once guarantee makes it uniquely suited for locking, deduplication,
+  and stampede prevention patterns. When combined with proper TTLs, namespaced
+  keys, and an understanding of its process-local nature, it becomes a
+  powerful tool in the PHP performance and concurrency toolkit.
+</p>
+
 <h4 id="apcu_cache_info">APCU_CACHE_INFO</h4>
 <h4 id="apcu_cas">APCU_CAS</h4>
 <h4 id="apcu_clear_cache">APCU_CLEAR_CACHE</h4>
