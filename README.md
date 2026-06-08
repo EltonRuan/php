@@ -19992,6 +19992,187 @@ function getStaleOrDefaultData(string $key): mixed
 </p>
 
 <h4 id="apcu_cache_info">APCU_CACHE_INFO</h4>
+<p>
+  <strong>apcu_cache_info()</strong> is a PHP function that returns detailed
+  diagnostic and statistical information about the current state of the APCu
+  cache. It provides insight into memory usage, hit and miss rates, stored
+  entries, and cache configuration — making it an essential tool for
+  monitoring, debugging, and tuning APCu performance.
+</p>
+<p>
+  The data returned by this function reflects the state of the shared memory
+  segment used by the current PHP process, allowing developers to understand
+  how effectively the cache is being utilized and identify potential issues
+  such as memory exhaustion or low hit ratios.
+</p>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_cache_info(bool $limited = false): array|false
+?>
+</code></pre>
+<p>
+  When <code>$limited</code> is set to <code>true</code>, the function returns
+  only global statistics without the full list of cached entries, which is
+  significantly faster and more appropriate for high-frequency monitoring.
+</p>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+$info = apcu_cache_info();
+
+if ($info === false) {
+    echo 'APCu is not available or not enabled.';
+    exit;
+}
+
+echo 'Cached entries : ' . $info['num_entries']    . PHP_EOL;
+echo 'Cache hits     : ' . $info['num_hits']        . PHP_EOL;
+echo 'Cache misses   : ' . $info['num_misses']      . PHP_EOL;
+echo 'Memory size    : ' . $info['mem_size'] . ' bytes' . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Retrieving Limited (Stats-Only) Info</h5>
+<pre><code class="language-php">
+<?php
+// Passing true skips the entry list — much faster for monitoring purposes
+$info = apcu_cache_info(true);
+
+$hits   = $info['num_hits'];
+$misses = $info['num_misses'];
+$total  = $hits + $misses;
+
+$hitRatio = $total > 0
+    ? round(($hits / $total) * 100, 2)
+    : 0;
+
+echo 'Hit ratio: ' . $hitRatio . '%' . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Inspecting Cached Entries</h5>
+<pre><code class="language-php">
+<?php
+$info = apcu_cache_info();
+
+if (!empty($info['cache_list'])) {
+    foreach ($info['cache_list'] as $entry) {
+        echo 'Key         : ' . $entry['info']         . PHP_EOL;
+        echo 'Size        : ' . $entry['mem_size'] . ' bytes' . PHP_EOL;
+        echo 'Hits        : ' . $entry['num_hits']     . PHP_EOL;
+        echo 'TTL         : ' . $entry['ttl']          . PHP_EOL;
+        echo 'Created at  : ' . date('Y-m-d H:i:s', $entry['creation_time']) . PHP_EOL;
+        echo 'Access time : ' . date('Y-m-d H:i:s', $entry['access_time'])   . PHP_EOL;
+        echo '---'                                                             . PHP_EOL;
+    }
+}
+?>
+</code></pre>
+
+<h5>Monitoring Memory Usage</h5>
+<pre><code class="language-php">
+<?php
+$info   = apcu_cache_info(true);
+$memory = apcu_sma_info();
+
+$totalMemory = $memory['num_seg'] * $memory['seg_size'];
+$freeMemory  = $memory['avail_mem'];
+$usedMemory  = $totalMemory - $freeMemory;
+$usedPercent = round(($usedMemory / $totalMemory) * 100, 2);
+
+echo 'Total memory : ' . number_format($totalMemory / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+echo 'Used memory  : ' . number_format($usedMemory  / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+echo 'Free memory  : ' . number_format($freeMemory  / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+echo 'Usage        : ' . $usedPercent . '%'                                     . PHP_EOL;
+
+if ($usedPercent > 85) {
+    error_log('WARNING: APCu memory usage exceeded 85%');
+}
+?>
+</code></pre>
+
+<h5>Building a Simple Cache Dashboard</h5>
+<pre><code class="language-php">
+<?php
+$info   = apcu_cache_info(true);
+$memory = apcu_sma_info();
+
+$totalMemory = $memory['num_seg'] * $memory['seg_size'];
+$freeMemory  = $memory['avail_mem'];
+
+$hits   = $info['num_hits'];
+$misses = $info['num_misses'];
+$total  = $hits + $misses;
+
+$stats = [
+    'entries'      => $info['num_entries'],
+    'hits'         => $hits,
+    'misses'       => $misses,
+    'hit_ratio'    => $total > 0 ? round(($hits / $total) * 100, 2) : 0,
+    'total_memory' => round($totalMemory / 1024 / 1024, 2) . ' MB',
+    'free_memory'  => round($freeMemory  / 1024 / 1024, 2) . ' MB',
+    'uptime'       => gmdate('H:i:s', time() - $info['start_time']),
+    'php_version'  => PHP_VERSION,
+];
+
+header('Content-Type: application/json');
+echo json_encode($stats, JSON_PRETTY_PRINT);
+?>
+</code></pre>
+
+<h5>Returned Array — Key Fields Reference</h5>
+<ul>
+  <li><strong>num_entries</strong> – Total number of entries currently stored in the cache</li>
+  <li><strong>num_hits</strong> – Total number of successful cache retrievals since startup</li>
+  <li><strong>num_misses</strong> – Total number of failed cache lookups since startup</li>
+  <li><strong>num_inserts</strong> – Total number of values written to the cache</li>
+  <li><strong>num_expunges</strong> – Number of entries removed due to memory pressure</li>
+  <li><strong>mem_size</strong> – Total memory consumed by cached entries in bytes</li>
+  <li><strong>start_time</strong> – Unix timestamp of when the cache was initialized</li>
+  <li><strong>cache_list</strong> – Array of all stored entries with individual metadata (omitted when <code>$limited = true</code>)</li>
+</ul>
+
+<h5>Per-Entry Fields in cache_list</h5>
+<ul>
+  <li><strong>info</strong> – The cache key name</li>
+  <li><strong>mem_size</strong> – Memory consumed by this specific entry in bytes</li>
+  <li><strong>num_hits</strong> – Number of times this entry has been accessed</li>
+  <li><strong>ttl</strong> – Configured time to live in seconds; 0 means no expiration</li>
+  <li><strong>creation_time</strong> – Unix timestamp of when the entry was first stored</li>
+  <li><strong>access_time</strong> – Unix timestamp of the most recent access</li>
+  <li><strong>deletion_time</strong> – Unix timestamp of when the entry was deleted, if applicable</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always pass <code>true</code> in production monitoring to avoid the overhead of enumerating all entries</li>
+  <li>Use hit ratio as a primary health indicator — a ratio below 80% may signal ineffective caching</li>
+  <li>Monitor memory usage proactively and alert when usage exceeds 80–85% of allocated memory</li>
+  <li>Restrict access to cache info endpoints — exposing cache internals can leak sensitive key names and application structure</li>
+  <li>Combine with <code>apcu_sma_info()</code> for a complete picture of memory allocation and fragmentation</li>
+  <li>Integrate cache stats into your application's observability stack (dashboards, alerting, logging)</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Building internal cache monitoring dashboards</li>
+  <li>Diagnosing low cache hit rates and identifying cold or unused keys</li>
+  <li>Detecting memory pressure and cache eviction issues</li>
+  <li>Auditing which keys are stored and how much memory each consumes</li>
+  <li>Exposing cache health metrics to application performance monitoring tools</li>
+</ul>
+
+<p>
+  <code>apcu_cache_info()</code> is the primary observability tool for APCu.
+  Used with <code>apcu_sma_info()</code>, it provides a complete view of cache
+  health, memory consumption, and entry-level statistics. Integrating these
+  metrics into a monitoring pipeline is essential for maintaining a performant
+  and stable caching layer in any PHP application that relies on APCu.
+</p>
+
 <h4 id="apcu_cas">APCU_CAS</h4>
 <h4 id="apcu_clear_cache">APCU_CLEAR_CACHE</h4>
 <h4 id="apcu_dec">APCU_DEC</h4>
