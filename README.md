@@ -20174,6 +20174,233 @@ echo json_encode($stats, JSON_PRETTY_PRINT);
 </p>
 
 <h4 id="apcu_cas">APCU_CAS</h4>
+<p>
+  <strong>apcu_cas()</strong> is a PHP function that performs an atomic
+  <strong>Compare-And-Swap</strong> operation on a cached integer value.
+  It updates the value of an existing cache entry only if its current value
+  matches an expected value — replacing it with a new value in a single,
+  uninterruptible operation.
+</p>
+<p>
+  This atomicity guarantee makes <code>apcu_cas()</code> a precise concurrency
+  primitive, allowing multiple requests to safely coordinate state changes
+  on shared cached values without race conditions or the need for explicit
+  locking mechanisms.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a key, an expected (old) value, and a desired (new) value</li>
+  <li>APCu reads the current value stored under the given key atomically</li>
+  <li>If the current value matches the expected value, it is replaced with the new value</li>
+  <li>If the current value does not match, no change is made</li>
+  <li>Returns <code>true</code> if the swap was performed, <code>false</code> otherwise</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_cas(string $key, int $old, int $new): bool
+?>
+</code></pre>
+<p>
+  Note that <code>apcu_cas()</code> only operates on <strong>integer</strong>
+  values. Attempting to use it on strings, arrays, or non-integer types will
+  return <code>false</code>.
+</p>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('status', 0);
+
+// Attempt to change status from 0 to 1
+$swapped = apcu_cas('status', 0, 1);
+
+if ($swapped) {
+    echo 'Status successfully updated to 1.';
+} else {
+    echo 'Swap failed — current value did not match expected value.';
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — State Machine Transition</h5>
+<pre><code class="language-php">
+<?php
+// Represents a job with defined states:
+// 0 = pending | 1 = processing | 2 = completed | 3 = failed
+
+$jobKey = 'job:1042:status';
+
+apcu_store($jobKey, 0); // Initialize as pending
+
+// Only transition from pending (0) to processing (1) if no other worker claimed it
+if (!apcu_cas($jobKey, 0, 1)) {
+    echo 'Job already claimed by another worker. Skipping.';
+    exit;
+}
+
+try {
+    processJob(1042);
+
+    // Mark as completed only if still in processing state
+    apcu_cas($jobKey, 1, 2);
+} catch (Exception $e) {
+    // Mark as failed only if still in processing state
+    apcu_cas($jobKey, 1, 3);
+    error_log('Job 1042 failed: ' . $e->getMessage());
+}
+
+function processJob(int $id): void
+{
+    // Execute job logic
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Optimistic Locking Counter</h5>
+<pre><code class="language-php">
+<?php
+// Safely increment a counter without overwriting concurrent changes
+
+function incrementCounter(string $key, int $maxRetries = 5): bool
+{
+    for ($attempt = 0; $attempt < $maxRetries; $attempt++) {
+        $current = apcu_fetch($key, $success);
+
+        if (!$success) {
+            // Key does not exist — initialize it
+            apcu_add($key, 1);
+            return true;
+        }
+
+        // Try to atomically swap current value with current + 1
+        if (apcu_cas($key, $current, $current + 1)) {
+            return true;
+        }
+
+        // Another process changed the value — retry
+    }
+
+    error_log('Failed to increment counter after ' . $maxRetries . ' attempts.');
+    return false;
+}
+
+apcu_store('page:views', 0);
+incrementCounter('page:views');
+
+echo 'Views: ' . apcu_fetch('page:views');
+?>
+</code></pre>
+
+<h5>Practical Pattern — Feature Flag Toggle</h5>
+<pre><code class="language-php">
+<?php
+// Atomically enable a feature flag only if it is currently disabled
+
+$flagKey = 'feature:dark_mode';
+
+apcu_add($flagKey, 0); // 0 = disabled, 1 = enabled
+
+$enabled = apcu_cas($flagKey, 0, 1);
+
+if ($enabled) {
+    echo 'Feature flag enabled successfully.';
+} else {
+    echo 'Feature flag was already enabled or not found.';
+}
+?>
+</code></pre>
+
+<h5>Handling CAS Failures with Retry Logic</h5>
+<pre><code class="language-php">
+<?php
+function casWithRetry(string $key, int $newValue, int $maxRetries = 10): bool
+{
+    for ($i = 0; $i < $maxRetries; $i++) {
+        $current = apcu_fetch($key, $success);
+
+        if (!$success) {
+            error_log('Key not found: ' . $key);
+            return false;
+        }
+
+        if ($current === $newValue) {
+            return true; // Already at the desired value
+        }
+
+        if (apcu_cas($key, $current, $newValue)) {
+            return true;
+        }
+
+        // Exponential backoff before retrying
+        usleep(1000 * (2 ** $i));
+    }
+
+    return false;
+}
+?>
+</code></pre>
+
+<h5>apcu_cas() vs Alternatives</h5>
+<ul>
+  <li>
+    <strong>apcu_cas()</strong> – Atomic compare-and-swap on integers; no
+    locking required; fails gracefully when the value has changed; ideal
+    for optimistic concurrency patterns
+  </li>
+  <li>
+    <strong>apcu_inc() / apcu_dec()</strong> – Atomic increment and decrement;
+    simpler but offer no conditional check on the current value before updating
+  </li>
+  <li>
+    <strong>apcu_add() as lock</strong> – Write-once primitive useful for
+    mutual exclusion; less suitable for value-based state transitions
+  </li>
+  <li>
+    <strong>apcu_store()</strong> – Unconditional write; not safe for
+    concurrent updates as it always overwrites regardless of current value
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always initialize the key with <code>apcu_store()</code> or <code>apcu_add()</code> before using <code>apcu_cas()</code></li>
+  <li>Implement retry logic with a bounded attempt limit to handle contention gracefully</li>
+  <li>Use exponential backoff between retries to reduce contention under high concurrency</li>
+  <li>Keep the value domain small and well-defined — integers only, with clear semantic meaning per value</li>
+  <li>Combine with <code>apcu_fetch()</code> to read the current value before attempting a swap</li>
+  <li>Remember that APCu is process-local — <code>apcu_cas()</code> provides no atomicity guarantees across multiple servers</li>
+  <li>For distributed environments, prefer Redis atomic operations such as <code>WATCH</code>, <code>MULTI</code>, or Lua scripts</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Only operates on integer values — non-integer types will cause the function to return <code>false</code></li>
+  <li>Process-local — not suitable for coordinating state across multiple servers or PHP-FPM workers on different machines</li>
+  <li>No built-in retry mechanism — retry logic must be implemented manually</li>
+  <li>High contention scenarios may require many retries, reducing the performance benefit of lock-free design</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Implementing lock-free state machine transitions</li>
+  <li>Safe concurrent counter increments without explicit locks</li>
+  <li>Coordinating job or task claiming between multiple workers</li>
+  <li>Atomic feature flag toggling</li>
+  <li>Optimistic concurrency control for shared cached resources</li>
+</ul>
+
+<p>
+  <code>apcu_cas()</code> is one of the most precise concurrency primitives
+  available in PHP's APCu toolkit. Its atomic compare-and-swap guarantee
+  eliminates entire classes of race conditions without the complexity and
+  overhead of explicit locking. When used with proper retry logic and a clear
+  integer-based state model, it enables safe, high-performance coordination
+  between concurrent requests within the same PHP process.
+</p>
+
 <h4 id="apcu_clear_cache">APCU_CLEAR_CACHE</h4>
 <h4 id="apcu_dec">APCU_DEC</h4>
 <h4 id="apcu_delete">APCU_DELETE</h4>
