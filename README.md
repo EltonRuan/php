@@ -20402,26 +20402,263 @@ function casWithRetry(string $key, int $newValue, int $maxRetries = 10): bool
 </p>
 
 <h4 id="apcu_clear_cache">APCU_CLEAR_CACHE</h4>
+<p>
+  <strong>apcu_clear_cache()</strong> is a PHP function that completely wipes
+  all entries stored in the APCu user cache in a single operation. Once called,
+  every key and its associated value is permanently removed from shared memory,
+  leaving the cache in a clean, empty state.
+</p>
+<p>
+  Unlike targeted deletion functions such as <code>apcu_delete()</code>, which
+  removes individual keys, <code>apcu_clear_cache()</code> is a broad,
+  irreversible operation that affects the entire cache indiscriminately. It
+  should be used deliberately and with a clear understanding of its impact
+  on application performance and state.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function is called with no arguments</li>
+  <li>APCu acquires an exclusive lock on the shared memory segment</li>
+  <li>All stored entries are invalidated and memory is marked as available</li>
+  <li>Lock is released and the cache is ready to accept new entries</li>
+  <li>Returns <code>true</code> on success, <code>false</code> if APCu is unavailable</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_clear_cache(): bool
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+$cleared = apcu_clear_cache();
+
+if ($cleared) {
+    echo 'APCu cache cleared successfully.';
+} else {
+    echo 'Failed to clear APCu cache — APCu may not be available.';
+}
+?>
+</code></pre>
+
+<h5>Clearing Cache After a Deployment</h5>
+<pre><code class="language-php">
+<?php
+// Typically called from a post-deployment hook or CLI script
+// to ensure stale cached data does not persist after a release
+
+function onDeploymentComplete(): void
+{
+    if (!extension_loaded('apcu')) {
+        error_log('APCu extension not loaded — skipping cache clear.');
+        return;
+    }
+
+    if (apcu_clear_cache()) {
+        echo '[Deploy] APCu cache cleared successfully.' . PHP_EOL;
+    } else {
+        echo '[Deploy] Failed to clear APCu cache.' . PHP_EOL;
+    }
+}
+
+onDeploymentComplete();
+?>
+</code></pre>
+
+<h5>Selective Cache Clearing by Prefix</h5>
+<pre><code class="language-php">
+<?php
+// apcu_clear_cache() has no filtering capability
+// Use apcu_delete() with a regex iterator for targeted clearing
+
+function clearCacheByPrefix(string $prefix): int
+{
+    $iterator = new APCUIterator('/^' . preg_quote($prefix, '/') . '/');
+    $count    = 0;
+
+    foreach ($iterator as $entry) {
+        apcu_delete($entry['key']);
+        $count++;
+    }
+
+    return $count;
+}
+
+// Clear only user-related cache entries
+$deleted = clearCacheByPrefix('user:');
+echo 'Cleared ' . $deleted . ' user cache entries.' . PHP_EOL;
+
+// Clear only product-related cache entries
+$deleted = clearCacheByPrefix('product:');
+echo 'Cleared ' . $deleted . ' product cache entries.' . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Guarded Cache Clear Endpoint</h5>
+<pre><code class="language-php">
+<?php
+// Exposing a cache clear endpoint requires strict access control
+
+$validToken  = getenv('CACHE_CLEAR_TOKEN');
+$bearerToken = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+
+if ($bearerToken !== 'Bearer ' . $validToken) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Forbidden']);
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Method not allowed']);
+    exit;
+}
+
+$result = apcu_clear_cache();
+
+http_response_code($result ? 200 : 500);
+echo json_encode([
+    'success' => $result,
+    'cleared_at' => date('Y-m-d H:i:s'),
+]);
+?>
+</code></pre>
+
+<h5>Combining Clear with Cache Warm-Up</h5>
+<pre><code class="language-php">
+<?php
+// After clearing, proactively repopulate critical cache entries
+// to avoid a cold cache performance hit on the first requests
+
+function clearAndWarmUp(): void
+{
+    apcu_clear_cache();
+
+    $criticalEntries = [
+        'config:app'      => loadAppConfig(),
+        'config:features' => loadFeatureFlags(),
+        'config:routes'   => loadRouteDefinitions(),
+    ];
+
+    foreach ($criticalEntries as $key => $value) {
+        apcu_store($key, $value, 3600);
+    }
+
+    echo 'Cache cleared and warmed up successfully.' . PHP_EOL;
+}
+
+function loadAppConfig(): array     { return []; }
+function loadFeatureFlags(): array  { return []; }
+function loadRouteDefinitions(): array { return []; }
+
+clearAndWarmUp();
+?>
+</code></pre>
+
+<h5>CLI Usage Consideration</h5>
+<pre><code class="language-php">
+<?php
+// APCu runs in a separate shared memory segment for CLI
+// Clearing cache from CLI does NOT affect the web server process cache
+
+if (php_sapi_name() === 'cli') {
+    echo 'WARNING: Clearing APCu from CLI only affects the CLI memory segment.' . PHP_EOL;
+    echo 'Web server APCu cache remains unaffected.' . PHP_EOL;
+    exit;
+}
+
+apcu_clear_cache();
+?>
+</code></pre>
+
+<h5>apcu_clear_cache() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_clear_cache()</strong> – Wipes the entire cache in one
+    operation; no filtering; irreversible; affects all keys indiscriminately
+  </li>
+  <li>
+    <strong>apcu_delete()</strong> – Removes a single key or an array of
+    keys; precise and targeted; preferred when only specific entries are stale
+  </li>
+  <li>
+    <strong>apcu_delete(new APCUIterator(...))</strong> – Pattern-based
+    deletion using a regex iterator; combines precision with bulk removal
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Prefer <code>apcu_delete()</code> or <code>APCUIterator</code> for targeted invalidation over a full cache wipe</li>
+  <li>Always protect cache clear endpoints with strong authentication and restrict them to trusted IPs or internal networks</li>
+  <li>Combine cache clearing with a warm-up strategy to prevent a cold cache from degrading performance after a wipe</li>
+  <li>Trigger cache clearing from deployment pipelines rather than exposing it as a runtime HTTP endpoint when possible</li>
+  <li>Log all cache clear events with timestamps and the identity of the caller for auditability</li>
+  <li>Never call <code>apcu_clear_cache()</code> from user-facing request handlers without strict access control</li>
+  <li>Be aware that CLI-triggered cache clears do not affect the web server's APCu memory segment</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Invalidating all cached data after a major application deployment</li>
+  <li>Resetting cache state during development and testing cycles</li>
+  <li>Emergency cache flush when corrupted or inconsistent data is detected</li>
+  <li>Administrative tooling for cache management dashboards</li>
+  <li>Post-migration cleanup after database schema or data changes</li>
+</ul>
+
+<p>
+  <code>apcu_clear_cache()</code> is a powerful but indiscriminate operation
+  that should be treated as a last resort rather than a routine tool. In most
+  scenarios, targeted invalidation through <code>apcu_delete()</code> or
+  pattern-based deletion via <code>APCUIterator</code> is a safer and more
+  performant approach. When a full cache wipe is genuinely necessary, pairing
+  it with a warm-up strategy and proper access controls ensures the application
+  recovers quickly and securely.
+</p>
+
 <h4 id="apcu_dec">APCU_DEC</h4>
+
 <h4 id="apcu_delete">APCU_DELETE</h4>
+
 <h4 id="apcu_enabled">APCU_ENABLED</h4>
+
 <h4 id="apcu_entry">APCU_ENTRY</h4>
+
 <h4 id="apcu_exists">APCU_EXISTS</h4>
+
 <h4 id="apcu_fetch">APCU_FETCH</h4>
+
 <h4 id="apcu_inc">APCU_INC</h4>
+
 <h4 id="apcu_key_info">APCU_KEY_INFO</h4>
+
 <h4 id="apcu_sma_info">APCU_SMA_INFO</h4>
+
 <h4 id="apcu_store">APCU_STORE</h4>
 
 <h4 id="apcuiterator-class">APCUIterator CLASS</h4>
+
 <h4 id="apcuiterator-construct">APCUIterator::__CONSTRUCT</h4>
+
 <h4 id="apcuiterator-current">APCUIterator::CURRENT</h4>
+
 <h4 id="apcuiterator-gettotalcount">APCUIterator::GETTOTALCOUNT</h4>
+
 <h4 id="apcuiterator-gettotalhits">APCUIterator::GETTOTALHITS</h4>
+
 <h4 id="apcuiterator-gettotalsize">APCUIterator::GETTOTALSIZE</h4>
+
 <h4 id="apcuiterator-key">APCUIterator::KEY</h4>
+
 <h4 id="apcuiterator-next">APCUIterator::NEXT</h4>
+
 <h4 id="apcuiterator-rewind">APCUIterator::REWIND</h4>
+
 <h4 id="apcuiterator-valid">APCUIterator::VALID</h4>
 
 
