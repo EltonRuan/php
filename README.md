@@ -20622,7 +20622,268 @@ apcu_clear_cache();
 </p>
 
 <h4 id="apcu_dec">APCU_DEC</h4>
+<p>
+  <strong>apcu_dec()</strong> is a PHP function that atomically decrements
+  a numeric value stored in the APCu cache. The operation is performed as a
+  single, uninterruptible step, ensuring that concurrent requests decrementing
+  the same key will never produce inconsistent results or lost updates.
+</p>
+<p>
+  It is the counterpart to <code>apcu_inc()</code> and shares the same
+  atomicity guarantees, making both functions the preferred choice for
+  managing numeric shared state in APCu without resorting to explicit
+  locking mechanisms.
+</p>
 
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a key, an optional step value, and an optional success flag</li>
+  <li>APCu locates the entry in shared memory and acquires an atomic lock</li>
+  <li>Current value is decremented by the specified step (default is 1)</li>
+  <li>Updated value is written back atomically</li>
+  <li>Returns the new decremented value on success, or <code>false</code> if the key does not exist</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_dec(
+    string $key,
+    int    $step    = 1,
+    bool   &$success = null,
+    int    $ttl     = 0
+): int|false
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('stock:item_99', 50);
+
+$remaining = apcu_dec('stock:item_99');
+
+if ($remaining === false) {
+    echo 'Key not found in cache.';
+} else {
+    echo 'Remaining stock: ' . $remaining;
+}
+?>
+</code></pre>
+
+<h5>Decrementing by a Custom Step</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('credits:user_42', 1000);
+
+// Deduct 25 credits in a single atomic operation
+$remaining = apcu_dec('credits:user_42', 25);
+
+echo 'Remaining credits: ' . $remaining;
+?>
+</code></pre>
+
+<h5>Using the Success Flag</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('quota:api_calls', 100);
+
+$newValue = apcu_dec('quota:api_calls', 1, $success);
+
+if (!$success) {
+    echo 'Decrement failed — key may not exist or APCu is unavailable.';
+    exit;
+}
+
+echo 'Remaining API calls: ' . $newValue;
+?>
+</code></pre>
+
+<h5>Practical Pattern — Rate Limiting</h5>
+<pre><code class="language-php">
+<?php
+function consumeRateLimit(string $userId, int $maxRequests = 100, int $window = 60): bool
+{
+    $key = 'rate:' . $userId;
+
+    // Initialize the counter for this window if it does not exist
+    apcu_add($key, $maxRequests, $window);
+
+    $remaining = apcu_dec($key, 1, $success);
+
+    if (!$success) {
+        // Key expired between add and dec — reinitialize
+        apcu_store($key, $maxRequests - 1, $window);
+        return true;
+    }
+
+    if ($remaining < 0) {
+        // Restore to zero to prevent runaway negative values
+        apcu_cas($key, $remaining, 0);
+        return false;
+    }
+
+    return true;
+}
+
+$userId = 'user_42';
+
+if (!consumeRateLimit($userId)) {
+    http_response_code(429);
+    echo json_encode(['error' => 'Rate limit exceeded. Try again later.']);
+    exit;
+}
+
+echo json_encode(['message' => 'Request accepted.']);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Inventory Management</h5>
+<pre><code class="language-php">
+<?php
+function reserveStock(int $productId, int $quantity = 1): bool
+{
+    $key     = 'stock:product_' . $productId;
+    $current = apcu_fetch($key, $success);
+
+    if (!$success || $current < $quantity) {
+        return false; // Insufficient stock
+    }
+
+    $remaining = apcu_dec($key, $quantity, $decremented);
+
+    if (!$decremented || $remaining < 0) {
+        // Concurrent request may have consumed remaining stock
+        apcu_cas($key, $remaining, 0);
+        return false;
+    }
+
+    return true;
+}
+
+if (reserveStock(productId: 512, quantity: 3)) {
+    echo 'Stock reserved successfully.';
+} else {
+    echo 'Insufficient stock or reservation failed.';
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Concurrency Slot Management</h5>
+<pre><code class="language-php">
+<?php
+// Limit the number of concurrent operations using a slot counter
+
+$slotsKey    = 'slots:pdf_export';
+$maxSlots    = 5;
+$ttl         = 120;
+
+apcu_add($slotsKey, $maxSlots, $ttl);
+
+$available = apcu_dec($slotsKey, 1, $success);
+
+if (!$success || $available < 0) {
+    apcu_cas($slotsKey, $available, 0);
+    http_response_code(503);
+    echo 'Server busy. Please try again shortly.';
+    exit;
+}
+
+try {
+    generatePdfExport();
+} finally {
+    // Always release the slot, even on failure
+    apcu_inc($slotsKey, 1);
+}
+
+function generatePdfExport(): void
+{
+    // Resource-intensive export operation
+}
+?>
+</code></pre>
+
+<h5>Preventing Negative Values</h5>
+<pre><code class="language-php">
+<?php
+// apcu_dec() does not guard against going below zero
+// Always validate or clamp the result after decrementing
+
+function safeDecrement(string $key, int $step = 1): int
+{
+    $newValue = apcu_dec($key, $step, $success);
+
+    if (!$success) {
+        return 0;
+    }
+
+    if ($newValue < 0) {
+        apcu_cas($key, $newValue, 0);
+        return 0;
+    }
+
+    return $newValue;
+}
+?>
+</code></pre>
+
+<h5>apcu_dec() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_dec()</strong> – Atomically decrements a numeric value;
+    returns the new value; does not guard against negative results
+  </li>
+  <li>
+    <strong>apcu_inc()</strong> – Atomically increments a numeric value;
+    counterpart to <code>apcu_dec()</code> with identical signature and behavior
+  </li>
+  <li>
+    <strong>apcu_cas()</strong> – Conditional swap; useful for clamping
+    values or ensuring bounded transitions after a decrement
+  </li>
+  <li>
+    <strong>apcu_store()</strong> – Unconditional write; not atomic in
+    concurrent scenarios; should not be used as a substitute for decrement
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always use the <code>$success</code> reference parameter to detect failures and missing keys</li>
+  <li>Guard against negative values by combining with <code>apcu_cas()</code> or a pre-decrement check</li>
+  <li>Use <code>apcu_add()</code> to initialize the key with a TTL before decrementing to ensure expiration behavior</li>
+  <li>Use namespaced keys (e.g., <code>rate:user_42</code>, <code>stock:product_7</code>) to prevent key collisions</li>
+  <li>Remember that APCu is process-local — <code>apcu_dec()</code> is not atomic across multiple servers</li>
+  <li>For distributed rate limiting or inventory management, prefer Redis with atomic commands such as <code>DECRBY</code></li>
+  <li>Pair with <code>apcu_inc()</code> in <code>finally</code> blocks to release slots or restore counters on failure</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Does not prevent the value from going below zero — boundary enforcement must be implemented manually</li>
+  <li>Returns <code>false</code> if the key does not exist — always initialize before decrementing</li>
+  <li>Process-local — concurrent decrements across multiple servers are not coordinated</li>
+  <li>Not suitable for persistent counters — APCu cache is lost on server or process restart</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Rate limiting and API quota consumption tracking</li>
+  <li>In-memory inventory and stock reservation systems</li>
+  <li>Concurrency slot management for resource-intensive operations</li>
+  <li>Countdown timers and threshold-based triggers</li>
+  <li>Tracking remaining attempts for authentication or retry logic</li>
+</ul>
+
+<p>
+  <code>apcu_dec()</code> is a precise and performant primitive for managing
+  shared numeric state under concurrency. Its atomic guarantee eliminates
+  race conditions that would arise from a read-modify-write cycle using
+  <code>apcu_fetch()</code> and <code>apcu_store()</code>. When combined
+  with boundary checks, proper initialization, and awareness of its
+  process-local scope, it becomes a reliable building block for rate
+  limiting, inventory control, and concurrency management in PHP applications.
+</p>
 <h4 id="apcu_delete">APCU_DELETE</h4>
 
 <h4 id="apcu_enabled">APCU_ENABLED</h4>
