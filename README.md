@@ -20884,7 +20884,228 @@ function safeDecrement(string $key, int $step = 1): int
   process-local scope, it becomes a reliable building block for rate
   limiting, inventory control, and concurrency management in PHP applications.
 </p>
+
 <h4 id="apcu_delete">APCU_DELETE</h4>
+<p>
+  <strong>apcu_delete()</strong> is a PHP function that removes one or more
+  entries from the APCu cache by key. Unlike <code>apcu_clear_cache()</code>,
+  which wipes the entire cache indiscriminately, <code>apcu_delete()</code>
+  performs targeted, precise invalidation — making it the standard tool for
+  removing stale or outdated entries without affecting the rest of the cache.
+</p>
+<p>
+  The function supports multiple input formats: a single key, an array of
+  keys, or an <code>APCUIterator</code> instance for pattern-based bulk
+  deletion, offering flexibility for both simple and complex invalidation
+  scenarios.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a key, an array of keys, or an iterator</li>
+  <li>APCu locates the corresponding entry (or entries) in shared memory</li>
+  <li>Matching entries are removed and their memory is released</li>
+  <li>Returns <code>true</code>/<code>false</code> for a single key, or an array of keys that failed to delete for batch operations</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_delete(string|array|APCUIterator $key): bool|array
+?>
+</code></pre>
+
+<h5>Deleting a Single Key</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('user:42:profile', ['name' => 'John Doe']);
+
+$deleted = apcu_delete('user:42:profile');
+
+if ($deleted) {
+    echo 'Cache entry removed successfully.';
+} else {
+    echo 'Key not found or already removed.';
+}
+?>
+</code></pre>
+
+<h5>Deleting Multiple Keys at Once</h5>
+<pre><code class="language-php">
+<?php
+$keysToDelete = [
+    'user:42:profile',
+    'user:42:permissions',
+    'user:42:preferences',
+];
+
+// Returns an array of keys that COULD NOT be deleted (not found)
+$failed = apcu_delete($keysToDelete);
+
+if (empty($failed)) {
+    echo 'All keys deleted successfully.';
+} else {
+    echo 'The following keys were not found: ' . implode(', ', $failed);
+}
+?>
+</code></pre>
+
+<h5>Pattern-Based Deletion with APCUIterator</h5>
+<pre><code class="language-php">
+<?php
+// Delete all keys matching a regex pattern
+// Useful for invalidating an entire namespace, e.g. all cache entries for user 42
+
+$iterator = new APCUIterator('/^user:42:/');
+$deleted  = apcu_delete($iterator);
+
+echo 'Deleted ' . $deleted . ' entries for user 42.';
+?>
+</code></pre>
+
+<h5>Practical Pattern — Cache Invalidation on Update</h5>
+<pre><code class="language-php">
+<?php
+function updateUserProfile(int $userId, array $data): void
+{
+    // Persist changes to the database
+    saveUserToDatabase($userId, $data);
+
+    // Invalidate all cached representations of this user
+    $iterator = new APCUIterator('/^user:' . $userId . ':/');
+    apcu_delete($iterator);
+}
+
+function saveUserToDatabase(int $userId, array $data): void
+{
+    // Database update logic
+}
+
+updateUserProfile(42, ['name' => 'Jane Doe']);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Conditional Deletion</h5>
+<pre><code class="language-php">
+<?php
+// Delete a cached entry only if it has expired logically
+// (e.g., based on an embedded timestamp, not just APCu's TTL)
+
+function invalidateIfStale(string $key, int $maxAge): bool
+{
+    $entry = apcu_fetch($key, $success);
+
+    if (!$success) {
+        return false; // Already absent
+    }
+
+    if (isset($entry['cached_at']) && (time() - $entry['cached_at']) > $maxAge) {
+        return apcu_delete($key);
+    }
+
+    return false;
+}
+
+if (invalidateIfStale('report:monthly', 3600)) {
+    echo 'Stale report cache invalidated.';
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Releasing Locks and Slots</h5>
+<pre><code class="language-php">
+<?php
+// apcu_delete() is commonly used to release locks acquired with apcu_add()
+
+$lockKey = 'lock:export_job';
+
+if (!apcu_add($lockKey, true, 300)) {
+    echo 'Job already running.';
+    exit;
+}
+
+try {
+    runExportJob();
+} finally {
+    apcu_delete($lockKey); // Always release, even on failure
+}
+
+function runExportJob(): void
+{
+    // Long-running export logic
+}
+?>
+</code></pre>
+
+<h5>Safe Deletion with Existence Check</h5>
+<pre><code class="language-php">
+<?php
+$key = 'session:token:abc123';
+
+if (apcu_exists($key)) {
+    apcu_delete($key);
+    echo 'Token invalidated.';
+} else {
+    echo 'Token was already invalid or expired.';
+}
+?>
+</code></pre>
+
+<h5>apcu_delete() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_delete()</strong> – Removes specific keys or patterns;
+    precise and non-destructive to the rest of the cache
+  </li>
+  <li>
+    <strong>apcu_clear_cache()</strong> – Removes <em>all</em> entries;
+    use only for full resets or emergency flushes
+  </li>
+  <li>
+    <strong>apcu_exists()</strong> – Checks for presence without removing;
+    often paired with <code>apcu_delete()</code> for safe invalidation
+  </li>
+  <li>
+    <strong>APCUIterator</strong> – Enables regex-based key matching for
+    bulk operations, including deletion
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use namespaced, hierarchical keys (e.g., <code>user:42:profile</code>) to make pattern-based deletion predictable</li>
+  <li>Prefer <code>APCUIterator</code> for bulk invalidation instead of looping over manually tracked key lists</li>
+  <li>Always release locks acquired via <code>apcu_add()</code> using <code>apcu_delete()</code> inside a <code>finally</code> block</li>
+  <li>Check the return value of batch deletions to detect keys that were already absent</li>
+  <li>Avoid overly broad regex patterns in <code>APCUIterator</code> — they can unintentionally match unrelated keys</li>
+  <li>Invalidate cache entries immediately after the corresponding data is updated, not on a delay</li>
+  <li>Remember that APCu is process-local — deletion on one server does not propagate to others</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns <code>false</code> for keys that do not exist — does not indicate an error condition</li>
+  <li>Pattern-based deletion via <code>APCUIterator</code> can be expensive on caches with a very large number of entries</li>
+  <li>Process-local — does not propagate invalidation across multiple servers or PHP-FPM pools</li>
+  <li>No built-in cascading deletion — related keys must be deleted explicitly or via pattern matching</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Invalidating cached data immediately after a database update</li>
+  <li>Releasing locks and concurrency slots acquired with <code>apcu_add()</code></li>
+  <li>Removing expired or revoked authentication tokens from cache</li>
+  <li>Bulk invalidation of namespaced cache entries for a specific user, entity, or module</li>
+  <li>Cleaning up temporary cache entries used for stampede prevention</li>
+</ul>
+
+<p>
+  <code>apcu_delete()</code> is the precision tool of APCu cache management.
+  By supporting single keys, batch arrays, and regex-based iterators, it
+  enables targeted invalidation strategies that keep cached data consistent
+  with the underlying source of truth — without the performance cost and
+  disruption of a full cache wipe.
+</p>
 
 <h4 id="apcu_enabled">APCU_ENABLED</h4>
 
