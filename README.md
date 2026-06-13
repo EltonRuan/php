@@ -21108,6 +21108,216 @@ if (apcu_exists($key)) {
 </p>
 
 <h4 id="apcu_enabled">APCU_ENABLED</h4>
+<p>
+  <strong>apcu_enabled()</strong> is a PHP function that checks whether the
+  APCu extension is currently loaded and active in the running PHP environment.
+  It returns a simple boolean, providing a safe and lightweight way to verify
+  cache availability before attempting any APCu operation.
+</p>
+<p>
+  Since APCu is an optional extension that may be disabled in certain
+  environments (such as CLI, certain shared hosts, or specific SAPI
+  configurations), relying on this check prevents fatal errors caused by
+  calling undefined functions when the extension is not present.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function is called with no arguments</li>
+  <li>PHP checks if the APCu extension is loaded and enabled for the current SAPI</li>
+  <li>Returns <code>true</code> if APCu is available and usable</li>
+  <li>Returns <code>false</code> if APCu is not loaded, disabled, or unsupported in the current context</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_enabled(): bool
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+if (apcu_enabled()) {
+    echo 'APCu is available and ready to use.';
+} else {
+    echo 'APCu is not available in this environment.';
+}
+?>
+</code></pre>
+
+<h5>Guarding Cache Access with a Wrapper</h5>
+<pre><code class="language-php">
+<?php
+// Centralize the availability check to avoid repeating it everywhere
+
+class CacheHelper
+{
+    private static ?bool $available = null;
+
+    public static function isAvailable(): bool
+    {
+        return self::$available ??= apcu_enabled();
+    }
+
+    public static function get(string $key, mixed $default = null): mixed
+    {
+        if (!self::isAvailable()) {
+            return $default;
+        }
+
+        $value = apcu_fetch($key, $success);
+
+        return $success ? $value : $default;
+    }
+
+    public static function set(string $key, mixed $value, int $ttl = 0): bool
+    {
+        if (!self::isAvailable()) {
+            return false;
+        }
+
+        return apcu_store($key, $value, $ttl);
+    }
+}
+
+$config = CacheHelper::get('config:app', []);
+?>
+</code></pre>
+
+<h5>Building a Fallback Caching Layer</h5>
+<pre><code class="language-php">
+<?php
+// Gracefully degrade to a no-op cache when APCu is unavailable,
+// allowing the application to function correctly without it
+
+interface CacheInterface
+{
+    public function get(string $key): mixed;
+    public function set(string $key, mixed $value, int $ttl = 0): bool;
+}
+
+class ApcuCache implements CacheInterface
+{
+    public function get(string $key): mixed
+    {
+        $value = apcu_fetch($key, $success);
+        return $success ? $value : null;
+    }
+
+    public function set(string $key, mixed $value, int $ttl = 0): bool
+    {
+        return apcu_store($key, $value, $ttl);
+    }
+}
+
+class NullCache implements CacheInterface
+{
+    public function get(string $key): mixed { return null; }
+    public function set(string $key, mixed $value, int $ttl = 0): bool { return false; }
+}
+
+function createCache(): CacheInterface
+{
+    return apcu_enabled() ? new ApcuCache() : new NullCache();
+}
+
+$cache = createCache();
+?>
+</code></pre>
+
+<h5>Why apcu_enabled() Can Return False</h5>
+<ul>
+  <li><strong>Extension Not Installed</strong> – The <code>apcu</code> PHP extension is not compiled or installed</li>
+  <li><strong>Disabled in php.ini</strong> – <code>apc.enabled=0</code> explicitly turns off the extension</li>
+  <li><strong>CLI Restriction</strong> – By default, <code>apc.enable_cli=0</code> disables APCu in command-line scripts</li>
+  <li><strong>SAPI Limitations</strong> – Some embedded or restricted SAPIs may not support shared memory extensions</li>
+</ul>
+
+<h5>Verifying CLI Behavior</h5>
+<pre><code class="language-php">
+<?php
+// Demonstrates the difference between web and CLI contexts
+
+echo 'SAPI: ' . php_sapi_name() . PHP_EOL;
+echo 'APCu enabled: ' . (apcu_enabled() ? 'yes' : 'no') . PHP_EOL;
+
+// To enable APCu in CLI scripts, set in php.ini or via command line:
+// php -d apc.enable_cli=1 script.php
+?>
+</code></pre>
+
+<h5>Health Check Endpoint Example</h5>
+<pre><code class="language-php">
+<?php
+header('Content-Type: application/json');
+
+$status = [
+    'apcu_enabled' => apcu_enabled(),
+    'php_version'  => PHP_VERSION,
+    'sapi'         => php_sapi_name(),
+];
+
+if ($status['apcu_enabled']) {
+    $info = apcu_cache_info(true);
+    $status['cache_entries'] = $info['num_entries'];
+}
+
+echo json_encode($status, JSON_PRETTY_PRINT);
+?>
+</code></pre>
+
+<h5>apcu_enabled() vs Related Checks</h5>
+<ul>
+  <li>
+    <strong>apcu_enabled()</strong> – Direct, official check for APCu
+    availability; the recommended approach
+  </li>
+  <li>
+    <strong>extension_loaded('apcu')</strong> – Checks if the extension is
+    loaded, but does not verify it is enabled for the current SAPI (e.g., CLI)
+  </li>
+  <li>
+    <strong>function_exists('apcu_fetch')</strong> – Confirms the function
+    exists, but similarly does not account for runtime configuration like
+    <code>apc.enabled</code>
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always check <code>apcu_enabled()</code> before calling any other APCu function, especially in shared or unpredictable environments</li>
+  <li>Cache the result of <code>apcu_enabled()</code> per request — it does not change during execution and repeated calls add unnecessary overhead</li>
+  <li>Design caching layers with a fallback (no-op) implementation so the application degrades gracefully without APCu</li>
+  <li>Document the requirement for <code>apc.enable_cli=1</code> if APCu is expected to work in CLI scripts or cron jobs</li>
+  <li>Include APCu status in application health checks and diagnostics</li>
+  <li>Avoid hard dependencies on APCu for critical application logic — treat it strictly as a performance optimization layer</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Does not indicate available memory or cache health — only whether the extension is active</li>
+  <li>A <code>true</code> result does not guarantee subsequent operations will succeed (e.g., memory exhaustion can still cause failures)</li>
+  <li>Behavior may differ between web (FPM/Apache) and CLI contexts on the same server</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Guarding application bootstrap code that conditionally enables caching layers</li>
+  <li>Implementing fallback or null-object cache patterns for portability</li>
+  <li>Diagnostics and health check endpoints reporting environment capabilities</li>
+  <li>Differentiating behavior between web requests and CLI scripts</li>
+  <li>Ensuring compatibility across development, staging, and production environments with varying configurations</li>
+</ul>
+
+<p>
+  <code>apcu_enabled()</code> is a small but essential safeguard. By verifying
+  APCu's availability before use, applications can adopt in-memory caching as
+  a performance enhancement while remaining portable and resilient across
+  environments where the extension may be absent, disabled, or restricted —
+  ensuring caching is always an optimization, never a hard dependency.
+</p>
 
 <h4 id="apcu_entry">APCU_ENTRY</h4>
 
