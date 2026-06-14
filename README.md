@@ -21320,6 +21320,233 @@ echo json_encode($status, JSON_PRETTY_PRINT);
 </p>
 
 <h4 id="apcu_entry">APCU_ENTRY</h4>
+<p>
+  <strong>apcu_entry()</strong> is a PHP function that retrieves a cached
+  value by key, and — if the key does not exist — atomically generates it
+  using a provided callback, stores the result, and returns it. It combines
+  the read and write steps of the common "check, then fetch-or-create" pattern
+  into a single, race-condition-safe operation.
+</p>
+<p>
+  This function directly addresses one of the most frequent caching pitfalls:
+  the gap between checking whether a key exists and writing its value, during
+  which multiple concurrent requests may all attempt to regenerate the same
+  expensive resource simultaneously — a problem known as cache stampede.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a key, a generator callback, and an optional TTL</li>
+  <li>APCu checks if the key already exists in shared memory</li>
+  <li>If found, the cached value is returned immediately — the callback is never invoked</li>
+  <li>If not found, the callback is executed to compute the value</li>
+  <li>The computed value is stored under the given key with the specified TTL</li>
+  <li>The value is then returned to the caller</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_entry(string $key, callable $generator, int $ttl = 0): mixed
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+$config = apcu_entry('config:app', function (string $key) {
+    // This callback only runs if 'config:app' is not already cached
+    return [
+        'app_name' => 'MyApplication',
+        'version'  => '3.2.1',
+        'debug'    => false,
+    ];
+}, 3600);
+
+print_r($config);
+?>
+</code></pre>
+
+<h5>Caching Expensive Computations</h5>
+<pre><code class="language-php">
+<?php
+function getExpensiveReport(int $year, int $month): array
+{
+    $key = sprintf('report:%d-%02d', $year, $month);
+
+    return apcu_entry($key, function () use ($year, $month) {
+        // Expensive query or aggregation — runs only on cache miss
+        return generateMonthlyReport($year, $month);
+    }, 1800); // Cache for 30 minutes
+}
+
+function generateMonthlyReport(int $year, int $month): array
+{
+    // Heavy database aggregation logic
+    return ['year' => $year, 'month' => $month, 'total' => 152340.75];
+}
+
+$report = getExpensiveReport(2026, 6);
+?>
+</code></pre>
+
+<h5>Comparison — Manual Pattern vs apcu_entry()</h5>
+<pre><code class="language-php">
+<?php
+// Manual pattern — vulnerable to cache stampede under concurrency
+$key = 'expensive:data';
+$data = apcu_fetch($key, $success);
+
+if (!$success) {
+    $data = computeExpensiveData(); // Multiple processes may run this simultaneously
+    apcu_store($key, $data, 600);
+}
+
+// apcu_entry() — atomic equivalent, safe under concurrency
+$data = apcu_entry('expensive:data', function () {
+    return computeExpensiveData();
+}, 600);
+
+function computeExpensiveData(): array
+{
+    return ['result' => 42];
+}
+?>
+</code></pre>
+
+<h5>Using Closures with Captured Context</h5>
+<pre><code class="language-php">
+<?php
+function getUserPermissions(int $userId): array
+{
+    $key = 'permissions:user_' . $userId;
+
+    return apcu_entry($key, function () use ($userId) {
+        return fetchPermissionsFromDatabase($userId);
+    }, 300);
+}
+
+function fetchPermissionsFromDatabase(int $userId): array
+{
+    // Database query for user permissions
+    return ['read', 'write'];
+}
+
+$permissions = getUserPermissions(42);
+?>
+</code></pre>
+
+<h5>Combining with Cache Invalidation</h5>
+<pre><code class="language-php">
+<?php
+function getProductDetails(int $productId): array
+{
+    $key = 'product:' . $productId;
+
+    return apcu_entry($key, function () use ($productId) {
+        return loadProductFromDatabase($productId);
+    }, 600);
+}
+
+function invalidateProductCache(int $productId): void
+{
+    apcu_delete('product:' . $productId);
+}
+
+function loadProductFromDatabase(int $productId): array
+{
+    return ['id' => $productId, 'name' => 'Sample Product', 'price' => 99.90];
+}
+
+// After an update, invalidate so the next call regenerates the entry
+function updateProduct(int $productId, array $data): void
+{
+    saveProductToDatabase($productId, $data);
+    invalidateProductCache($productId);
+}
+
+function saveProductToDatabase(int $productId, array $data): void
+{
+    // Persist changes
+}
+?>
+</code></pre>
+
+<h5>Handling Exceptions in the Generator</h5>
+<pre><code class="language-php">
+<?php
+// If the generator callback throws, no value is cached and the exception propagates
+
+try {
+    $data = apcu_entry('external:api_data', function () {
+        $response = file_get_contents('https://api.example.com/data');
+
+        if ($response === false) {
+            throw new RuntimeException('Failed to fetch external data.');
+        }
+
+        return json_decode($response, true);
+    }, 300);
+} catch (RuntimeException $e) {
+    error_log('Cache generation failed: ' . $e->getMessage());
+    $data = []; // Fallback value, not cached
+}
+?>
+</code></pre>
+
+<h5>apcu_entry() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_entry()</strong> – Atomic fetch-or-generate; eliminates
+    cache stampede risk; ideal for expensive, deterministic computations
+  </li>
+  <li>
+    <strong>apcu_fetch() + apcu_store()</strong> – Manual two-step pattern;
+    simple but introduces a race window between check and write
+  </li>
+  <li>
+    <strong>apcu_add()</strong> – Write-once primitive; can be combined
+    manually to build a similar pattern, but with more boilerplate and
+    less clarity than <code>apcu_entry()</code>
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>apcu_entry()</code> whenever a cached value is the result of an expensive or deterministic computation</li>
+  <li>Keep generator callbacks pure and side-effect-free where possible — they may not execute on every call</li>
+  <li>Always set an appropriate TTL to avoid serving indefinitely stale data</li>
+  <li>Wrap calls in try/catch when the generator performs I/O operations that may fail (database, HTTP requests)</li>
+  <li>Use namespaced, descriptive keys to keep cache contents organized and easy to invalidate selectively</li>
+  <li>Pair with explicit <code>apcu_delete()</code> calls for invalidation when underlying data changes before the TTL expires</li>
+  <li>Remember that APCu is process-local — <code>apcu_entry()</code> does not coordinate generation across multiple servers</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Process-local — concurrent generation may still occur across different servers or PHP-FPM pools</li>
+  <li>If the generator throws an exception, the exception propagates and nothing is cached — must be handled by the caller</li>
+  <li>Not suitable for values that must be invalidated based on complex external events without explicit <code>apcu_delete()</code> calls</li>
+  <li>Available only where the APCu extension is enabled — always check <code>apcu_enabled()</code> first in portable code</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Caching configuration, feature flags, or route definitions generated once and reused across requests</li>
+  <li>Memoizing expensive database queries or aggregations</li>
+  <li>Caching results of external API calls with a defined TTL</li>
+  <li>Avoiding cache stampede on high-traffic endpoints with shared expensive resources</li>
+  <li>Lazy initialization of computed values shared across a request lifecycle</li>
+</ul>
+
+<p>
+  <code>apcu_entry()</code> elegantly solves one of the most common caching
+  challenges by merging retrieval and generation into a single atomic
+  operation. It reduces boilerplate, eliminates an entire class of race
+  conditions, and encourages a clean, declarative caching style — making it
+  one of the most practical functions in the APCu toolkit for everyday
+  performance optimization.
+</p>
 
 <h4 id="apcu_exists">APCU_EXISTS</h4>
 
