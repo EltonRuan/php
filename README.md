@@ -21549,6 +21549,215 @@ try {
 </p>
 
 <h4 id="apcu_exists">APCU_EXISTS</h4>
+<p>
+  <strong>apcu_exists()</strong> is a PHP function that checks whether one or
+  more keys exist in the APCu cache, without fetching their values. It is a
+  lightweight presence check, useful for validation, conditional logic, and
+  avoiding unnecessary value retrieval when only existence matters.
+</p>
+<p>
+  Importantly, <code>apcu_exists()</code> does not trigger the "fetch" event
+  counters used internally for cache statistics in the same way
+  <code>apcu_fetch()</code> does, and it correctly returns <code>false</code>
+  for keys whose stored value is exactly <code>false</code> — a distinction
+  that matters when designing reliable cache-check logic.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a single key or an array of keys</li>
+  <li>APCu checks shared memory for the presence of each key</li>
+  <li>Expired entries are treated as non-existent</li>
+  <li>For a single key, returns a boolean</li>
+  <li>For an array of keys, returns an array containing only the keys that exist</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_exists(string|array $keys): bool|array
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('session:token:abc123', ['user_id' => 42]);
+
+if (apcu_exists('session:token:abc123')) {
+    echo 'Token is valid and present in cache.';
+} else {
+    echo 'Token not found or expired.';
+}
+?>
+</code></pre>
+
+<h5>Checking Multiple Keys at Once</h5>
+<pre><code class="language-php">
+<?php
+$keys = ['config:app', 'config:database', 'config:cache'];
+
+// Returns only the keys that exist
+$existing = apcu_exists($keys);
+
+foreach ($keys as $key) {
+    $status = in_array($key, array_keys($existing), true) ? 'present' : 'missing';
+    echo $key . ': ' . $status . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>apcu_exists() vs apcu_fetch() — Why It Matters</h5>
+<pre><code class="language-php">
+<?php
+// Storing a value of `false` is a valid use case
+apcu_store('feature:legacy_mode', false);
+
+// apcu_fetch() alone cannot distinguish between
+// "value is false" and "key does not exist"
+$value = apcu_fetch('feature:legacy_mode'); // returns false either way
+
+// apcu_exists() resolves the ambiguity
+if (apcu_exists('feature:legacy_mode')) {
+    echo 'Key exists, stored value is: ' . var_export($value, true);
+} else {
+    echo 'Key does not exist in cache.';
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Conditional Cache Population</h5>
+<pre><code class="language-php">
+<?php
+function ensureCachePopulated(string $key, callable $generator, int $ttl = 3600): void
+{
+    if (!apcu_exists($key)) {
+        $value = $generator();
+        apcu_store($key, $value, $ttl);
+    }
+}
+
+ensureCachePopulated('routes:compiled', function () {
+    return compileApplicationRoutes();
+}, 7200);
+
+function compileApplicationRoutes(): array
+{
+    return []; // Compiled route definitions
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Feature Flag Defaults</h5>
+<pre><code class="language-php">
+<?php
+function isFeatureEnabled(string $flag, bool $default = false): bool
+{
+    if (!apcu_exists('feature:' . $flag)) {
+        return $default;
+    }
+
+    return (bool) apcu_fetch('feature:' . $flag);
+}
+
+if (isFeatureEnabled('dark_mode', false)) {
+    echo 'Dark mode is enabled.';
+} else {
+    echo 'Dark mode is disabled or not configured.';
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Batch Existence Check Before Bulk Fetch</h5>
+<pre><code class="language-php">
+<?php
+function getCachedProducts(array $productIds): array
+{
+    $keys = array_map(fn (int $id) => 'product:' . $id, $productIds);
+    $existing = apcu_exists($keys);
+
+    $cached  = [];
+    $missing = [];
+
+    foreach ($productIds as $id) {
+        $key = 'product:' . $id;
+
+        if (in_array($key, array_keys($existing), true)) {
+            $cached[$id] = apcu_fetch($key);
+        } else {
+            $missing[] = $id;
+        }
+    }
+
+    if (!empty($missing)) {
+        $fromDb = loadProductsFromDatabase($missing);
+
+        foreach ($fromDb as $id => $product) {
+            apcu_store('product:' . $id, $product, 600);
+            $cached[$id] = $product;
+        }
+    }
+
+    return $cached;
+}
+
+function loadProductsFromDatabase(array $ids): array
+{
+    return []; // Bulk database fetch
+}
+?>
+</code></pre>
+
+<h5>apcu_exists() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_exists()</strong> – Lightweight presence check; correctly
+    handles falsy stored values; does not return the value itself
+  </li>
+  <li>
+    <strong>apcu_fetch()</strong> – Retrieves the actual value; uses a
+    <code>$success</code> reference parameter to distinguish missing keys
+    from falsy values
+  </li>
+  <li>
+    <strong>apcu_add()</strong> – Combines an existence check with a
+    conditional write in a single atomic operation
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>apcu_exists()</code> when only presence matters and the value itself is not yet needed</li>
+  <li>Prefer <code>apcu_fetch()</code> with the <code>$success</code> reference parameter when both existence and value are required, to avoid a redundant lookup</li>
+  <li>Use the batch form with an array of keys to reduce the number of function calls when checking many keys</li>
+  <li>Be mindful that an entry can exist and legitimately hold <code>false</code>, <code>null</code>, or <code>0</code> — use <code>apcu_exists()</code> to disambiguate these cases</li>
+  <li>Combine with <code>apcu_add()</code> for atomic check-and-set patterns rather than separate exists/store calls, which are not race-condition safe</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Does not return the cached value — a separate <code>apcu_fetch()</code> call is needed if the value is required</li>
+  <li>Checking existence followed by a separate fetch introduces a race window in concurrent environments — prefer <code>apcu_fetch()</code> with <code>$success</code> or <code>apcu_entry()</code> when atomicity matters</li>
+  <li>Process-local — existence in one PHP-FPM worker or server does not imply existence in another</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Checking whether configuration or feature flags have been initialized before applying defaults</li>
+  <li>Validating session tokens or temporary credentials stored in cache</li>
+  <li>Determining which items in a batch require fetching from the database versus the cache</li>
+  <li>Guarding against redundant cache population in lazy-loading patterns</li>
+  <li>Disambiguating cached falsy values from missing keys</li>
+</ul>
+
+<p>
+  <code>apcu_exists()</code> provides a simple, efficient way to query the
+  presence of cached data without the overhead or ambiguity of a full fetch.
+  When used alongside <code>apcu_fetch()</code> and atomic primitives like
+  <code>apcu_add()</code> and <code>apcu_entry()</code>, it helps build
+  caching logic that is both clear in intent and correct in edge cases
+  involving falsy or absent values.
+</p>
 
 <h4 id="apcu_fetch">APCU_FETCH</h4>
 
