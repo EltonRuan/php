@@ -21760,6 +21760,231 @@ function loadProductsFromDatabase(array $ids): array
 </p>
 
 <h4 id="apcu_fetch">APCU_FETCH</h4>
+<p>
+  <strong>apcu_fetch()</strong> is a PHP function that retrieves one or more
+  values previously stored in the APCu cache by key. It is the primary
+  read operation of the APCu API, and exposes an optional reference parameter
+  that reliably distinguishes a missing key from a key whose stored value is
+  falsy (<code>false</code>, <code>null</code>, <code>0</code>, etc.).
+</p>
+<p>
+  Because APCu stores values in shared memory accessible to all processes
+  handling requests on the same server, <code>apcu_fetch()</code> provides
+  extremely fast access to cached data without the overhead of network calls
+  or serialization layers required by external cache stores.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a key or an array of keys, and an optional success reference</li>
+  <li>APCu checks shared memory for each requested key</li>
+  <li>Expired entries are treated as not found</li>
+  <li>If found, the stored value is returned (unserialized automatically)</li>
+  <li>The optional <code>$success</code> parameter is set to <code>true</code> or <code>false</code> accordingly</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_fetch(string|array $key, bool &$success = null): mixed
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('user:42:name', 'John Doe');
+
+$name = apcu_fetch('user:42:name');
+
+echo $name; // John Doe
+?>
+</code></pre>
+
+<h5>Using the Success Reference Parameter</h5>
+<pre><code class="language-php">
+<?php
+$value = apcu_fetch('nonexistent:key', $success);
+
+if (!$success) {
+    echo 'Key not found in cache.';
+} else {
+    echo 'Value: ' . var_export($value, true);
+}
+?>
+</code></pre>
+
+<h5>Why the Success Parameter Matters</h5>
+<pre><code class="language-php">
+<?php
+// A cached value can legitimately be false, null, or 0
+apcu_store('feature:beta_access', false);
+
+// Without $success, this is ambiguous:
+$value = apcu_fetch('feature:beta_access'); // false
+// Is it false because it's not cached, or because the stored value IS false?
+
+// With $success, the ambiguity is resolved:
+$value = apcu_fetch('feature:beta_access', $success);
+
+if ($success) {
+    echo 'Key exists. Stored value: ' . var_export($value, true);
+} else {
+    echo 'Key does not exist in cache.';
+}
+?>
+</code></pre>
+
+<h5>Fetching Multiple Keys at Once</h5>
+<pre><code class="language-php">
+<?php
+$keys = ['config:app', 'config:database', 'config:cache'];
+
+// Returns an associative array of key => value for found entries only
+$values = apcu_fetch($keys);
+
+foreach ($keys as $key) {
+    if (isset($values[$key])) {
+        echo $key . ': ' . print_r($values[$key], true);
+    } else {
+        echo $key . ': not found in cache' . PHP_EOL;
+    }
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Read-Through Cache</h5>
+<pre><code class="language-php">
+<?php
+function getUserProfile(int $userId): array
+{
+    $key = 'user:' . $userId . ':profile';
+
+    $profile = apcu_fetch($key, $success);
+
+    if (!$success) {
+        $profile = loadUserProfileFromDatabase($userId);
+        apcu_store($key, $profile, 600);
+    }
+
+    return $profile;
+}
+
+function loadUserProfileFromDatabase(int $userId): array
+{
+    // Database query
+    return ['id' => $userId, 'name' => 'John Doe'];
+}
+
+$profile = getUserProfile(42);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Bulk Read with Fallback</h5>
+<pre><code class="language-php">
+<?php
+function getProductsWithFallback(array $productIds): array
+{
+    $keys   = array_map(fn (int $id) => 'product:' . $id, $productIds);
+    $cached = apcu_fetch($keys);
+
+    $result      = [];
+    $missingIds  = [];
+
+    foreach ($productIds as $id) {
+        $key = 'product:' . $id;
+
+        if (array_key_exists($key, $cached)) {
+            $result[$id] = $cached[$key];
+        } else {
+            $missingIds[] = $id;
+        }
+    }
+
+    if (!empty($missingIds)) {
+        $fromDb = loadProductsFromDatabase($missingIds);
+
+        foreach ($fromDb as $id => $product) {
+            apcu_store('product:' . $id, $product, 900);
+            $result[$id] = $product;
+        }
+    }
+
+    return $result;
+}
+
+function loadProductsFromDatabase(array $ids): array
+{
+    return []; // Bulk fetch from database
+}
+?>
+</code></pre>
+
+<h5>Combining with Type Casting for Safety</h5>
+<pre><code class="language-php">
+<?php
+function getCachedInt(string $key, int $default = 0): int
+{
+    $value = apcu_fetch($key, $success);
+
+    return $success && is_int($value) ? $value : $default;
+}
+
+$viewCount = getCachedInt('page:views', 0);
+?>
+</code></pre>
+
+<h5>apcu_fetch() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_fetch()</strong> – Retrieves stored values; supports the
+    <code>$success</code> reference to disambiguate falsy values from missing keys
+  </li>
+  <li>
+    <strong>apcu_exists()</strong> – Checks presence only, without retrieving
+    the value; lighter when the value itself is not needed
+  </li>
+  <li>
+    <strong>apcu_entry()</strong> – Combines fetch with atomic generation
+    on cache miss, avoiding a separate fetch-then-store sequence
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always use the <code>$success</code> reference parameter when the cached value could legitimately be falsy</li>
+  <li>Prefer the batch form when retrieving multiple related keys to reduce function call overhead</li>
+  <li>Validate the type of fetched values before use, especially when cache content might be stale across deployments</li>
+  <li>Pair with <code>apcu_store()</code> in a clear read-through pattern, or use <code>apcu_entry()</code> for atomic fetch-or-generate logic</li>
+  <li>Use namespaced keys consistently to make batch fetches and invalidation predictable</li>
+  <li>Remember that APCu is process-local — a value fetched on one server will not exist on another unless populated independently</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Without the <code>$success</code> parameter, there is no way to distinguish a missing key from a stored falsy value</li>
+  <li>Process-local — values are not shared across multiple servers or PHP-FPM pools on different machines</li>
+  <li>Returns only data that was previously stored within the current cache lifetime — lost on process or server restart</li>
+  <li>Batch fetch silently omits missing keys from the result array rather than indicating which keys failed</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Implementing read-through caching for database query results</li>
+  <li>Retrieving configuration values, feature flags, and computed settings</li>
+  <li>Bulk retrieval of related cached entities (products, users, sessions)</li>
+  <li>Reading rate limit counters, locks, or concurrency slot states</li>
+  <li>Avoiding repeated expensive computations within a short time window</li>
+</ul>
+
+<p>
+  <code>apcu_fetch()</code> is the foundation of read access in APCu. Its
+  support for batch retrieval and the <code>$success</code> reference
+  parameter makes it both efficient and unambiguous, even when dealing with
+  cached values that are legitimately falsy. Combined with proper key
+  namespacing and fallback logic, it forms the backbone of most APCu-based
+  caching strategies.
+</p>
 
 <h4 id="apcu_inc">APCU_INC</h4>
 
