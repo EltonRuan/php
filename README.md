@@ -21987,6 +21987,228 @@ $viewCount = getCachedInt('page:views', 0);
 </p>
 
 <h4 id="apcu_inc">APCU_INC</h4>
+<p>
+  <strong>apcu_inc()</strong> is a PHP function that atomically increments
+  a numeric value stored in the APCu cache. As with its counterpart
+  <code>apcu_dec()</code>, the operation is performed as a single,
+  uninterruptible step, guaranteeing correctness even when multiple processes
+  attempt to update the same key concurrently.
+</p>
+<p>
+  This atomicity makes <code>apcu_inc()</code> the preferred mechanism for
+  implementing counters, statistics, and rate-tracking logic in PHP without
+  the overhead and complexity of explicit locking or external counter services.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a key, an optional step value, an optional success reference, and an optional TTL</li>
+  <li>APCu locates the entry in shared memory and acquires an atomic lock internally</li>
+  <li>Current value is increased by the specified step (default is 1)</li>
+  <li>Updated value is written back in the same atomic operation</li>
+  <li>Returns the new incremented value on success, or <code>false</code> if the key does not exist</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_inc(
+    string $key,
+    int    $step    = 1,
+    bool   &$success = null,
+    int    $ttl     = 0
+): int|false
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('page:views', 0);
+
+$views = apcu_inc('page:views');
+
+echo 'Total views: ' . $views;
+?>
+</code></pre>
+
+<h5>Incrementing by a Custom Step</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('points:user_42', 100);
+
+// Award 15 bonus points atomically
+$newTotal = apcu_inc('points:user_42', 15);
+
+echo 'New point total: ' . $newTotal;
+?>
+</code></pre>
+
+<h5>Using the Success Flag and TTL Together</h5>
+<pre><code class="language-php">
+<?php
+// If the key doesn't exist, apcu_inc() can initialize it via the $ttl
+// parameter ONLY in combination with proper initialization beforehand
+apcu_add('clicks:button_a', 0, 3600);
+
+$clicks = apcu_inc('clicks:button_a', 1, $success);
+
+if (!$success) {
+    echo 'Failed to increment — key may have expired.';
+} else {
+    echo 'Total clicks: ' . $clicks;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Request Counter per Endpoint</h5>
+<pre><code class="language-php">
+<?php
+function trackRequest(string $endpoint): int
+{
+    $key = 'requests:' . $endpoint;
+
+    // Ensure the key exists before incrementing
+    apcu_add($key, 0, 86400);
+
+    return apcu_inc($key);
+}
+
+$count = trackRequest('/api/users');
+echo 'Requests to /api/users today: ' . $count;
+?>
+</code></pre>
+
+<h5>Practical Pattern — Sliding Window Rate Limiting</h5>
+<pre><code class="language-php">
+<?php
+function checkRateLimit(string $userId, int $limit = 60, int $window = 60): bool
+{
+    $key = 'rate:' . $userId . ':' . floor(time() / $window);
+
+    apcu_add($key, 0, $window);
+
+    $count = apcu_inc($key);
+
+    return $count <= $limit;
+}
+
+if (!checkRateLimit('user_42', 60, 60)) {
+    http_response_code(429);
+    echo json_encode(['error' => 'Too many requests.']);
+    exit;
+}
+
+echo json_encode(['message' => 'Request processed.']);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Restoring a Concurrency Slot</h5>
+<pre><code class="language-php">
+<?php
+// Commonly paired with apcu_dec() to release a previously consumed resource slot
+
+$slotsKey = 'slots:image_processing';
+
+apcu_add($slotsKey, 5, 120);
+
+$available = apcu_dec($slotsKey);
+
+if ($available < 0) {
+    apcu_inc($slotsKey); // Restore — no slot was actually consumed
+    http_response_code(503);
+    echo 'No slots available.';
+    exit;
+}
+
+try {
+    processImage();
+} finally {
+    apcu_inc($slotsKey); // Always release the slot after use
+}
+
+function processImage(): void
+{
+    // Resource-intensive image processing logic
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Daily Statistics Counter</h5>
+<pre><code class="language-php">
+<?php
+function recordDailyMetric(string $metric): void
+{
+    $key = $metric . ':' . date('Y-m-d');
+
+    apcu_add($key, 0, 86400 * 2); // Keep for 2 days
+    apcu_inc($key);
+}
+
+recordDailyMetric('orders:completed');
+recordDailyMetric('emails:sent');
+
+$ordersToday = apcu_fetch('orders:completed:' . date('Y-m-d'));
+echo 'Orders completed today: ' . $ordersToday;
+?>
+</code></pre>
+
+<h5>apcu_inc() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_inc()</strong> – Atomically increments a numeric value;
+    returns the new value; requires the key to already exist
+  </li>
+  <li>
+    <strong>apcu_dec()</strong> – Atomically decrements a numeric value;
+    counterpart to <code>apcu_inc()</code> with identical signature and behavior
+  </li>
+  <li>
+    <strong>apcu_cas()</strong> – Conditional swap; useful when the increment
+    should only happen if the current value matches an expected state
+  </li>
+  <li>
+    <strong>apcu_add()</strong> – Used to initialize the counter before the
+    first increment, ensuring the key exists with a defined TTL
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always initialize the counter with <code>apcu_add()</code> before the first call to <code>apcu_inc()</code> to guarantee the key exists</li>
+  <li>Use the <code>$success</code> reference parameter to detect failures, especially when the key may have expired</li>
+  <li>Apply a consistent TTL strategy so counters naturally reset over time windows (e.g., per day, per rate-limit window)</li>
+  <li>Use namespaced, time-bucketed keys (e.g., <code>rate:user_42:1750000000</code>) for windowed rate limiting</li>
+  <li>Always pair with <code>apcu_dec()</code> or <code>apcu_inc()</code> in <code>finally</code> blocks when managing concurrency slots, to guarantee release</li>
+  <li>Remember that APCu is process-local — counters are not synchronized across multiple servers or PHP-FPM pools</li>
+  <li>For distributed counters shared across servers, prefer Redis's atomic <code>INCR</code> and <code>INCRBY</code> commands</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns <code>false</code> if the key does not exist — the counter must be initialized beforehand</li>
+  <li>Process-local — increments on one server are not visible to other servers or processes outside the local cache segment</li>
+  <li>Not persistent — counter values are lost when the PHP process or web server restarts</li>
+  <li>No upper bound enforcement — overflow handling must be implemented by the application if needed</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Tracking page views, API requests, and endpoint usage statistics</li>
+  <li>Implementing rate limiting and request throttling</li>
+  <li>Managing and restoring concurrency slots for resource-intensive operations</li>
+  <li>Awarding points, scores, or incremental rewards in gamified systems</li>
+  <li>Collecting lightweight, process-local metrics for dashboards and monitoring</li>
+</ul>
+
+<p>
+  <code>apcu_inc()</code> provides a fast and reliable way to manage numeric
+  shared state under concurrency, eliminating the race conditions inherent
+  in manual read-modify-write cycles. When paired with proper initialization
+  via <code>apcu_add()</code> and a clear TTL strategy, it becomes an
+  essential building block for counters, rate limiting, and lightweight
+  metrics tracking in PHP applications.
+</p>
 
 <h4 id="apcu_key_info">APCU_KEY_INFO</h4>
 
