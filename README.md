@@ -22211,6 +22211,219 @@ echo 'Orders completed today: ' . $ordersToday;
 </p>
 
 <h4 id="apcu_key_info">APCU_KEY_INFO</h4>
+<p>
+  <strong>apcu_key_info()</strong> is a PHP function that retrieves detailed
+  metadata about a single cached entry without affecting its hit counters or
+  altering its state. It returns information such as creation time, last
+  access time, TTL, memory size, and reference count for a specific key,
+  making it a precise diagnostic tool for inspecting individual cache entries.
+</p>
+<p>
+  Unlike <code>apcu_cache_info()</code>, which returns data about the entire
+  cache, <code>apcu_key_info()</code> focuses on a single entry, making it
+  more efficient and appropriate when debugging or monitoring specific keys
+  rather than the whole cache state.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives the name of a single cache key</li>
+  <li>APCu looks up the entry's metadata in shared memory</li>
+  <li>If the key exists, an associative array of metadata is returned</li>
+  <li>If the key does not exist or has expired, <code>null</code> is returned</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_key_info(string $key): array|null
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('user:42:session', ['token' => 'abc123'], 1800);
+
+$info = apcu_key_info('user:42:session');
+
+if ($info === null) {
+    echo 'Key does not exist or has expired.';
+} else {
+    print_r($info);
+}
+?>
+</code></pre>
+
+<h5>Inspecting Key Metadata</h5>
+<pre><code class="language-php">
+<?php
+$info = apcu_key_info('user:42:session');
+
+if ($info !== null) {
+    echo 'Key            : ' . $info['key']                                   . PHP_EOL;
+    echo 'Memory size    : ' . $info['mem_size'] . ' bytes'                   . PHP_EOL;
+    echo 'TTL            : ' . $info['ttl'] . ' seconds'                      . PHP_EOL;
+    echo 'Hits           : ' . $info['num_hits']                              . PHP_EOL;
+    echo 'Created at     : ' . date('Y-m-d H:i:s', $info['creation_time'])    . PHP_EOL;
+    echo 'Last accessed  : ' . date('Y-m-d H:i:s', $info['access_time'])      . PHP_EOL;
+    echo 'Last modified  : ' . date('Y-m-d H:i:s', $info['mtime'])            . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Calculating Remaining TTL</h5>
+<pre><code class="language-php">
+<?php
+function getRemainingTtl(string $key): ?int
+{
+    $info = apcu_key_info($key);
+
+    if ($info === null) {
+        return null;
+    }
+
+    // ttl = 0 means the entry never expires
+    if ($info['ttl'] === 0) {
+        return null;
+    }
+
+    $expiresAt = $info['creation_time'] + $info['ttl'];
+    $remaining = $expiresAt - time();
+
+    return max(0, $remaining);
+}
+
+$remaining = getRemainingTtl('user:42:session');
+
+echo $remaining !== null
+    ? 'Expires in ' . $remaining . ' seconds.'
+    : 'Key does not exist or has no expiration.';
+?>
+</code></pre>
+
+<h5>Practical Pattern — Debugging Cache Behavior</h5>
+<pre><code class="language-php">
+<?php
+function debugCacheKey(string $key): void
+{
+    $info = apcu_key_info($key);
+
+    if ($info === null) {
+        echo "[DEBUG] Key '{$key}' not found in cache." . PHP_EOL;
+        return;
+    }
+
+    echo "[DEBUG] Key '{$key}':" . PHP_EOL;
+    echo '  Hits        : ' . $info['num_hits']  . PHP_EOL;
+    echo '  Size        : ' . $info['mem_size'] . ' bytes' . PHP_EOL;
+    echo '  Age         : ' . (time() - $info['creation_time']) . ' seconds' . PHP_EOL;
+}
+
+apcu_store('debug:test_key', ['sample' => 'data'], 60);
+debugCacheKey('debug:test_key');
+?>
+</code></pre>
+
+<h5>Practical Pattern — Refreshing Near-Expiry Entries</h5>
+<pre><code class="language-php">
+<?php
+// Proactively refresh a cache entry shortly before it expires,
+// avoiding a hard cache miss on the next request
+
+function refreshIfNearExpiry(string $key, callable $generator, int $ttl, int $threshold = 30): mixed
+{
+    $info = apcu_key_info($key);
+
+    if ($info === null) {
+        $value = $generator();
+        apcu_store($key, $value, $ttl);
+        return $value;
+    }
+
+    $expiresAt = $info['creation_time'] + $info['ttl'];
+    $remaining = $expiresAt - time();
+
+    if ($info['ttl'] > 0 && $remaining <= $threshold) {
+        $value = $generator();
+        apcu_store($key, $value, $ttl);
+        return $value;
+    }
+
+    return apcu_fetch($key);
+}
+
+$data = refreshIfNearExpiry('report:summary', function () {
+    return ['generated_at' => time()];
+}, 300, 30);
+?>
+</code></pre>
+
+<h5>Returned Array — Key Fields Reference</h5>
+<ul>
+  <li><strong>key</strong> – The name of the cache key</li>
+  <li><strong>mem_size</strong> – Memory consumed by this entry in bytes</li>
+  <li><strong>num_hits</strong> – Number of times this entry has been retrieved</li>
+  <li><strong>ttl</strong> – Configured time to live in seconds; 0 means no expiration</li>
+  <li><strong>creation_time</strong> – Unix timestamp of when the entry was first stored</li>
+  <li><strong>access_time</strong> – Unix timestamp of the most recent read access</li>
+  <li><strong>mtime</strong> – Unix timestamp of the last modification to the entry</li>
+  <li><strong>ref_count</strong> – Internal reference count used by APCu's memory management</li>
+</ul>
+
+<h5>apcu_key_info() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_key_info()</strong> – Returns metadata for a single key
+    without affecting its state; ideal for targeted inspection
+  </li>
+  <li>
+    <strong>apcu_cache_info()</strong> – Returns metadata for the entire
+    cache, optionally including a full list of entries; heavier operation
+  </li>
+  <li>
+    <strong>apcu_exists()</strong> – Simple boolean presence check, with no
+    metadata returned
+  </li>
+  <li>
+    <strong>apcu_fetch()</strong> – Retrieves the actual stored value, not
+    metadata about the entry itself
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>apcu_key_info()</code> for targeted debugging instead of parsing the full entry list from <code>apcu_cache_info()</code></li>
+  <li>Calculate remaining TTL manually using <code>creation_time + ttl - time()</code>, since the function does not return remaining time directly</li>
+  <li>Use this function to implement proactive cache refresh strategies that avoid hard cache misses near expiration</li>
+  <li>Avoid calling this function in hot code paths for every request — reserve it for debugging, monitoring, or administrative tooling</li>
+  <li>Treat a <code>null</code> result as equivalent to a missing key, and handle it the same way as a failed <code>apcu_fetch()</code></li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns metadata for only one key per call — no batch variant exists</li>
+  <li>Does not return the cached value itself — must be combined with <code>apcu_fetch()</code> if the value is also needed</li>
+  <li>Process-local — metadata reflects only the current server's cache segment</li>
+  <li>Field availability may vary slightly depending on the installed APCu extension version</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Debugging unexpected cache behavior for a specific key</li>
+  <li>Building administrative tools to inspect individual cache entries</li>
+  <li>Implementing proactive cache refresh before TTL expiration</li>
+  <li>Auditing memory consumption of large or suspicious cache entries</li>
+  <li>Verifying hit counts to evaluate the effectiveness of a specific cached resource</li>
+</ul>
+
+<p>
+  <code>apcu_key_info()</code> offers a precise lens into the lifecycle of an
+  individual cache entry. While not intended for frequent use in production
+  request paths, it is an invaluable tool for debugging, monitoring, and
+  building proactive cache management strategies that respond intelligently
+  to entries nearing expiration.
+</p>
 
 <h4 id="apcu_sma_info">APCU_SMA_INFO</h4>
 
