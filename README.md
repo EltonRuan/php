@@ -22426,6 +22426,224 @@ $data = refreshIfNearExpiry('report:summary', function () {
 </p>
 
 <h4 id="apcu_sma_info">APCU_SMA_INFO</h4>
+<p>
+  <strong>apcu_sma_info()</strong> is a PHP function that returns information
+  about the Shared Memory Allocator (SMA) used internally by APCu. While
+  <code>apcu_cache_info()</code> reports on cached entries and hit/miss
+  statistics, <code>apcu_sma_info()</code> focuses specifically on the
+  underlying memory segments — their size, allocation, and fragmentation.
+</p>
+<p>
+  This function is essential for understanding the physical memory footprint
+  of APCu, diagnosing memory exhaustion issues, and properly sizing the
+  <code>apc.shm_size</code> configuration directive for production workloads.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives an optional boolean to limit the detail level</li>
+  <li>APCu queries the shared memory segments allocated at startup</li>
+  <li>Total size, available memory, and segment-level details are gathered</li>
+  <li>Returns an associative array describing memory allocation state</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_sma_info(bool $limited = false): array|false
+?>
+</code></pre>
+<p>
+  When <code>$limited</code> is <code>true</code>, the detailed per-block
+  allocation list is omitted, returning only summary statistics — faster
+  and more appropriate for routine monitoring.
+</p>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+$sma = apcu_sma_info();
+
+if ($sma === false) {
+    echo 'APCu is not available.';
+    exit;
+}
+
+echo 'Number of segments : ' . $sma['num_seg']    . PHP_EOL;
+echo 'Segment size        : ' . $sma['seg_size'] . ' bytes' . PHP_EOL;
+echo 'Available memory     : ' . $sma['avail_mem'] . ' bytes' . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Calculating Total and Used Memory</h5>
+<pre><code class="language-php">
+<?php
+$sma = apcu_sma_info(true);
+
+$totalMemory = $sma['num_seg'] * $sma['seg_size'];
+$freeMemory  = $sma['avail_mem'];
+$usedMemory  = $totalMemory - $freeMemory;
+$usedPercent = $totalMemory > 0 ? round(($usedMemory / $totalMemory) * 100, 2) : 0;
+
+echo 'Total : ' . number_format($totalMemory / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+echo 'Used  : ' . number_format($usedMemory  / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+echo 'Free  : ' . number_format($freeMemory  / 1024 / 1024, 2) . ' MB' . PHP_EOL;
+echo 'Usage : ' . $usedPercent . '%' . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Monitoring Memory Pressure with Alerts</h5>
+<pre><code class="language-php">
+<?php
+function checkApcuMemoryPressure(float $threshold = 85.0): void
+{
+    $sma = apcu_sma_info(true);
+
+    if ($sma === false) {
+        return;
+    }
+
+    $totalMemory = $sma['num_seg'] * $sma['seg_size'];
+    $usedMemory  = $totalMemory - $sma['avail_mem'];
+    $usedPercent = $totalMemory > 0 ? ($usedMemory / $totalMemory) * 100 : 0;
+
+    if ($usedPercent >= $threshold) {
+        error_log(sprintf(
+            'WARNING: APCu memory usage at %.2f%% (threshold: %.2f%%)',
+            $usedPercent,
+            $threshold
+        ));
+    }
+}
+
+checkApcuMemoryPressure(85.0);
+?>
+</code></pre>
+
+<h5>Inspecting Memory Block Fragmentation</h5>
+<pre><code class="language-php">
+<?php
+// Detailed mode includes a 'block_lists' entry describing free memory blocks
+$sma = apcu_sma_info();
+
+if (!empty($sma['block_lists'])) {
+    $totalBlocks = 0;
+    $totalFreeSize = 0;
+
+    foreach ($sma['block_lists'] as $segment) {
+        foreach ($segment as $block) {
+            $totalBlocks++;
+            $totalFreeSize += $block['size'];
+        }
+    }
+
+    echo 'Total free blocks     : ' . $totalBlocks . PHP_EOL;
+    echo 'Total free block size : ' . number_format($totalFreeSize / 1024, 2) . ' KB' . PHP_EOL;
+
+    // A high block count relative to free memory indicates fragmentation
+    if ($totalBlocks > 100) {
+        echo 'WARNING: High fragmentation detected.' . PHP_EOL;
+    }
+}
+?>
+</code></pre>
+
+<h5>Building a Combined Cache Health Report</h5>
+<pre><code class="language-php">
+<?php
+function getApcuHealthReport(): array
+{
+    $cacheInfo = apcu_cache_info(true);
+    $smaInfo   = apcu_sma_info(true);
+
+    if ($cacheInfo === false || $smaInfo === false) {
+        return ['available' => false];
+    }
+
+    $totalMemory = $smaInfo['num_seg'] * $smaInfo['seg_size'];
+    $usedMemory  = $totalMemory - $smaInfo['avail_mem'];
+
+    $hits   = $cacheInfo['num_hits'];
+    $misses = $cacheInfo['num_misses'];
+    $total  = $hits + $misses;
+
+    return [
+        'available'      => true,
+        'entries'        => $cacheInfo['num_entries'],
+        'hit_ratio'      => $total > 0 ? round(($hits / $total) * 100, 2) : 0,
+        'total_memory_mb' => round($totalMemory / 1024 / 1024, 2),
+        'used_memory_mb'  => round($usedMemory  / 1024 / 1024, 2),
+        'free_memory_mb'  => round($smaInfo['avail_mem'] / 1024 / 1024, 2),
+        'usage_percent'   => $totalMemory > 0 ? round(($usedMemory / $totalMemory) * 100, 2) : 0,
+    ];
+}
+
+header('Content-Type: application/json');
+echo json_encode(getApcuHealthReport(), JSON_PRETTY_PRINT);
+?>
+</code></pre>
+
+<h5>Returned Array — Key Fields Reference</h5>
+<ul>
+  <li><strong>num_seg</strong> – Number of shared memory segments allocated</li>
+  <li><strong>seg_size</strong> – Size of each segment in bytes, as defined by <code>apc.shm_size</code></li>
+  <li><strong>avail_mem</strong> – Total available (free) memory across all segments, in bytes</li>
+  <li><strong>block_lists</strong> – Detailed list of free memory blocks per segment (omitted when <code>$limited = true</code>)</li>
+</ul>
+
+<h5>apcu_sma_info() vs apcu_cache_info()</h5>
+<ul>
+  <li>
+    <strong>apcu_sma_info()</strong> – Reports on raw shared memory allocation:
+    segment count, size, and availability; answers "how much memory is there
+    and how much is free?"
+  </li>
+  <li>
+    <strong>apcu_cache_info()</strong> – Reports on cached entries and
+    access statistics: hits, misses, and entry-level details; answers
+    "what is stored and how effectively is it being used?"
+  </li>
+  <li>
+    Used together, they provide a complete picture: cache effectiveness
+    from <code>apcu_cache_info()</code> and memory capacity from
+    <code>apcu_sma_info()</code>
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use the limited mode (<code>true</code>) for routine monitoring to avoid the overhead of enumerating free blocks</li>
+  <li>Monitor used memory percentage continuously and alert before reaching critical thresholds (e.g., 85–90%)</li>
+  <li>Size <code>apc.shm_size</code> based on real observed usage patterns rather than guesswork — monitor before tuning</li>
+  <li>Watch for high fragmentation (many small free blocks) as a sign that <code>apc.shm_size</code> may need adjustment or that TTLs are too short</li>
+  <li>Combine with <code>apcu_cache_info()</code> to build a complete cache health dashboard</li>
+  <li>Restart the PHP process periodically in environments with long uptimes to mitigate accumulated fragmentation, if observed</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Reflects only the current server's shared memory — not aggregated across multiple servers</li>
+  <li>Detailed block list mode can be relatively expensive to compute on caches with significant fragmentation</li>
+  <li>Memory segment size is fixed at PHP startup via <code>apc.shm_size</code> — cannot be resized at runtime</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Diagnosing "Out of memory" warnings or unexpected cache evictions</li>
+  <li>Properly sizing the <code>apc.shm_size</code> configuration directive before deployment</li>
+  <li>Building cache health dashboards alongside <code>apcu_cache_info()</code></li>
+  <li>Detecting memory fragmentation patterns over long-running PHP processes</li>
+  <li>Capacity planning for applications with growing cache usage</li>
+</ul>
+
+<p>
+  <code>apcu_sma_info()</code> provides essential visibility into the memory
+  layer underlying APCu's caching capabilities. While <code>apcu_cache_info()</code>
+  tells you what is cached and how effectively, <code>apcu_sma_info()</code>
+  tells you whether there is enough room to keep caching it — making it a
+  critical tool for capacity planning and preventing memory-related cache
+  failures in production environments.
+</p>
 
 <h4 id="apcu_store">APCU_STORE</h4>
 
