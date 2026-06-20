@@ -22646,6 +22646,243 @@ echo json_encode(getApcuHealthReport(), JSON_PRETTY_PRINT);
 </p>
 
 <h4 id="apcu_store">APCU_STORE</h4>
+<p>
+  <strong>apcu_store()</strong> is a PHP function that writes a value to the
+  APCu cache under a given key, unconditionally overwriting any existing
+  entry with the same name. It is the primary write operation of the APCu
+  API, used to populate, refresh, or update cached data at any point in the
+  application lifecycle.
+</p>
+<p>
+  Unlike <code>apcu_add()</code>, which fails silently if the key already
+  exists, <code>apcu_store()</code> always succeeds in writing the value,
+  making it the appropriate choice whenever the cache needs to reflect the
+  most current state of the data, regardless of what was previously stored.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Function receives a key, a value, and an optional TTL</li>
+  <li>APCu serializes the value internally for storage in shared memory</li>
+  <li>If the key already exists, its value is replaced</li>
+  <li>If the key does not exist, a new entry is created</li>
+  <li>Entry expires automatically after the TTL, if one was provided</li>
+  <li>Returns <code>true</code> on success, <code>false</code> on failure</li>
+</ol>
+
+<h5>Function Signature</h5>
+<pre><code class="language-php">
+<?php
+apcu_store(string|array $key, mixed $value = null, int $ttl = 0): bool|array
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+$stored = apcu_store('config:app', [
+    'app_name' => 'MyApplication',
+    'version'  => '3.2.1',
+], 3600);
+
+if ($stored) {
+    echo 'Value cached successfully.';
+} else {
+    echo 'Failed to store value.';
+}
+?>
+</code></pre>
+
+<h5>Storing Without Expiration</h5>
+<pre><code class="language-php">
+<?php
+// TTL of 0 (default) means the entry never expires automatically
+// It remains cached until explicitly deleted or the cache is cleared
+apcu_store('app:install_date', date('Y-m-d'));
+?>
+</code></pre>
+
+<h5>Storing Multiple Keys at Once</h5>
+<pre><code class="language-php">
+<?php
+// When an array is passed, apcu_store() writes each key/value pair
+// Returns an array of keys that FAILED to store (empty array means success)
+$failed = apcu_store([
+    'setting:theme'    => 'dark',
+    'setting:language' => 'en',
+    'setting:timezone' => 'UTC',
+], null, 1800);
+
+if (empty($failed)) {
+    echo 'All settings cached successfully.';
+} else {
+    echo 'Failed to cache: ' . implode(', ', array_keys($failed));
+}
+?>
+</code></pre>
+
+<h5>Overwriting an Existing Entry</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('counter:visits', 100);
+
+// Unconditionally overwrites the previous value
+apcu_store('counter:visits', 0);
+
+echo apcu_fetch('counter:visits'); // 0
+?>
+</code></pre>
+
+<h5>Practical Pattern — Cache Refresh on Data Update</h5>
+<pre><code class="language-php">
+<?php
+function updateProductPrice(int $productId, float $newPrice): void
+{
+    // Persist the change to the source of truth
+    savePriceToDatabase($productId, $newPrice);
+
+    // Immediately refresh the cache to avoid serving stale data
+    $key     = 'product:' . $productId;
+    $product = apcu_fetch($key);
+
+    if ($product !== false) {
+        $product['price'] = $newPrice;
+        apcu_store($key, $product, 600);
+    }
+}
+
+function savePriceToDatabase(int $productId, float $newPrice): void
+{
+    // Database update logic
+}
+
+updateProductPrice(512, 79.90);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Read-Through Cache</h5>
+<pre><code class="language-php">
+<?php
+function getCategoryTree(): array
+{
+    $key  = 'categories:tree';
+    $tree = apcu_fetch($key, $success);
+
+    if (!$success) {
+        $tree = buildCategoryTreeFromDatabase();
+        apcu_store($key, $tree, 3600);
+    }
+
+    return $tree;
+}
+
+function buildCategoryTreeFromDatabase(): array
+{
+    // Expensive recursive query
+    return [];
+}
+
+$categories = getCategoryTree();
+?>
+</code></pre>
+
+<h5>Practical Pattern — Caching Serialized Objects</h5>
+<pre><code class="language-php">
+<?php
+// APCu can store any serializable PHP value, including objects
+
+class UserPreferences
+{
+    public function __construct(
+        public readonly string $theme,
+        public readonly string $language,
+        public readonly bool $notifications
+    ) {}
+}
+
+$preferences = new UserPreferences('dark', 'en', true);
+
+apcu_store('user:42:preferences', $preferences, 1800);
+
+$cached = apcu_fetch('user:42:preferences');
+
+echo $cached->theme; // dark
+?>
+</code></pre>
+
+<h5>Choosing an Appropriate TTL</h5>
+<pre><code class="language-php">
+<?php
+// Short TTL for frequently changing data
+apcu_store('stock:product_99', 42, 60);
+
+// Medium TTL for semi-stable data
+apcu_store('user:42:profile', ['name' => 'John Doe'], 600);
+
+// Long TTL for rarely changing configuration
+apcu_store('config:feature_flags', ['dark_mode' => true], 86400);
+
+// No expiration for data manually invalidated on change
+apcu_store('app:schema_version', 5);
+?>
+</code></pre>
+
+<h5>apcu_store() vs Related Functions</h5>
+<ul>
+  <li>
+    <strong>apcu_store()</strong> – Always writes, overwriting any existing
+    value; ideal for refreshing or updating cached data
+  </li>
+  <li>
+    <strong>apcu_add()</strong> – Writes only if the key does not already
+    exist; fails silently otherwise; suited for locks and write-once patterns
+  </li>
+  <li>
+    <strong>apcu_entry()</strong> – Combines fetch and conditional store
+    into a single atomic operation, avoiding a separate fetch-then-store sequence
+  </li>
+  <li>
+    <strong>apcu_cas()</strong> – Conditional swap based on the current
+    integer value, rather than an unconditional overwrite
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>apcu_store()</code> whenever the cache must reflect the latest state of the data, regardless of what was previously cached</li>
+  <li>Always set a TTL appropriate to how frequently the underlying data changes — avoid indefinite caching for volatile data</li>
+  <li>Use namespaced, hierarchical keys (e.g., <code>product:512</code>) to keep cache organization predictable and support pattern-based invalidation</li>
+  <li>Refresh the cache immediately after writing to the source of truth, rather than relying solely on TTL expiration</li>
+  <li>Check the return value, especially for batch writes, to detect entries that failed to store (e.g., due to memory pressure)</li>
+  <li>Avoid storing extremely large values — they consume disproportionate shared memory and can trigger fragmentation</li>
+  <li>Remember that APCu is process-local — values stored on one server are not visible on others</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Always overwrites — not safe for concurrent "only if absent" semantics; use <code>apcu_add()</code> instead</li>
+  <li>Not atomic with respect to a prior read — a separate fetch-then-store sequence is vulnerable to race conditions; use <code>apcu_entry()</code> or <code>apcu_cas()</code> when atomicity is required</li>
+  <li>Process-local — provides no consistency guarantees across multiple servers or PHP-FPM pools</li>
+  <li>Subject to eviction or storage failure under memory pressure, depending on <code>apc.shm_size</code> and fragmentation</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Populating and refreshing read-through caches for database query results</li>
+  <li>Storing configuration, feature flags, and computed settings</li>
+  <li>Caching serialized objects and complex data structures for reuse across requests</li>
+  <li>Updating cached representations immediately after a write to the source of truth</li>
+  <li>Storing precomputed values that are expensive to regenerate on every request</li>
+</ul>
+
+<p>
+  <code>apcu_store()</code> is the foundational write primitive of APCu.
+  Its unconditional overwrite behavior makes it the natural choice for
+  read-through caching and cache refresh patterns, while functions like
+  <code>apcu_add()</code>, <code>apcu_cas()</code>, and <code>apcu_entry()</code>
+  remain available for scenarios that require more precise concurrency
+  control.
+</p>
 
 <h4 id="apcuiterator-class">APCUIterator CLASS</h4>
 
