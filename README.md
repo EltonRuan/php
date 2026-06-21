@@ -22884,7 +22884,253 @@ apcu_store('app:schema_version', 5);
   control.
 </p>
 
-<h4 id="apcuiterator-class">APCUIterator CLASS</h4>
+<h4 id="apcuiterator-class">APCUITERATOR CLASS</h4>
+<p>
+  The <strong>APCUIterator</strong> class provides an efficient way to
+  traverse entries stored in the APCu cache without loading the entire
+  cache contents into memory at once. It implements PHP's
+  <code>Iterator</code> interface, allowing it to be used directly in
+  <code>foreach</code> loops while internally fetching cache entries in
+  manageable chunks.
+</p>
+<p>
+  This makes <code>APCUIterator</code> significantly more memory-efficient
+  than retrieving the full entry list via <code>apcu_cache_info()</code>,
+  especially on caches containing thousands of entries, and it supports
+  regex-based key filtering for targeted traversal and bulk operations.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Instance is created with an optional search pattern, format flags, and chunk size</li>
+  <li>APCu retrieves matching entries in batches (chunks) rather than all at once</li>
+  <li>Each iteration yields one cache entry as an associative array</li>
+  <li>Internal cursor advances automatically through chunks as iteration proceeds</li>
+</ol>
+
+<h5>Class Signature</h5>
+<pre><code class="language-php">
+<?php
+APCUIterator::__construct(
+    mixed $search    = null,
+    int   $format    = APC_ITER_ALL,
+    int   $chunk_size = 100,
+    int   $list      = APC_LIST_ACTIVE
+)
+?>
+</code></pre>
+
+<h5>Basic Usage — Iterating All Entries</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator();
+
+foreach ($iterator as $key => $entry) {
+    echo $key . ' => ' . $entry['mem_size'] . ' bytes' . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Filtering Entries with a Regex Pattern</h5>
+<pre><code class="language-php">
+<?php
+// Iterate only over keys matching the given pattern
+$iterator = new APCUIterator('/^user:/');
+
+foreach ($iterator as $key => $entry) {
+    echo $key . ' (TTL: ' . $entry['ttl'] . 's)' . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Counting Matching Entries</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^session:/');
+
+// APCUIterator implements Countable
+echo 'Total active sessions cached: ' . count($iterator);
+?>
+</code></pre>
+
+<h5>Controlling Returned Data with Format Flags</h5>
+<pre><code class="language-php">
+<?php
+// Retrieve only keys and values, skipping metadata for better performance
+$iterator = new APCUIterator(
+    '/^config:/',
+    APC_ITER_KEY | APC_ITER_VALUE
+);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . ' = ' . print_r($entry['value'], true) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Available Format Flags</h5>
+<ul>
+  <li><strong>APC_ITER_KEY</strong> – Include the entry key</li>
+  <li><strong>APC_ITER_VALUE</strong> – Include the entry value</li>
+  <li><strong>APC_ITER_TTL</strong> – Include the configured TTL</li>
+  <li><strong>APC_ITER_NUM_HITS</strong> – Include the number of hits</li>
+  <li><strong>APC_ITER_MTIME</strong> – Include the last modification time</li>
+  <li><strong>APC_ITER_CTIME</strong> – Include the creation time</li>
+  <li><strong>APC_ITER_ATIME</strong> – Include the last access time</li>
+  <li><strong>APC_ITER_REFCOUNT</strong> – Include the internal reference count</li>
+  <li><strong>APC_ITER_MEM_SIZE</strong> – Include the memory size of the entry</li>
+  <li><strong>APC_ITER_ALL</strong> – Include all available metadata (default)</li>
+  <li><strong>APC_ITER_NONE</strong> – Include no metadata, useful when combined selectively with other flags</li>
+</ul>
+
+<h5>Practical Pattern — Bulk Deletion by Pattern</h5>
+<pre><code class="language-php">
+<?php
+function clearCacheByPrefix(string $prefix): int
+{
+    $iterator = new APCUIterator('/^' . preg_quote($prefix, '/') . '/', APC_ITER_KEY);
+
+    return apcu_delete($iterator);
+}
+
+$deleted = clearCacheByPrefix('user:42:');
+echo 'Deleted ' . $deleted . ' entries for user 42.';
+?>
+</code></pre>
+
+<h5>Practical Pattern — Cache Audit Report</h5>
+<pre><code class="language-php">
+<?php
+function generateCacheAuditReport(): array
+{
+    $iterator = new APCUIterator(null, APC_ITER_ALL, 200);
+
+    $report = [
+        'total_entries' => 0,
+        'total_size'    => 0,
+        'largest_entry' => null,
+        'most_hits'     => null,
+    ];
+
+    foreach ($iterator as $key => $entry) {
+        $report['total_entries']++;
+        $report['total_size'] += $entry['mem_size'];
+
+        if ($report['largest_entry'] === null || $entry['mem_size'] > $report['largest_entry']['mem_size']) {
+            $report['largest_entry'] = ['key' => $key, 'mem_size' => $entry['mem_size']];
+        }
+
+        if ($report['most_hits'] === null || $entry['num_hits'] > $report['most_hits']['num_hits']) {
+            $report['most_hits'] = ['key' => $key, 'num_hits' => $entry['num_hits']];
+        }
+    }
+
+    return $report;
+}
+
+print_r(generateCacheAuditReport());
+?>
+</code></pre>
+
+<h5>Practical Pattern — Finding Stale or Unused Entries</h5>
+<pre><code class="language-php">
+<?php
+function findUnusedEntries(int $minAgeSeconds = 3600): array
+{
+    $iterator = new APCUIterator(null, APC_ITER_ALL);
+    $unused   = [];
+
+    foreach ($iterator as $key => $entry) {
+        $age = time() - $entry['creation_time'];
+
+        if ($entry['num_hits'] === 0 && $age > $minAgeSeconds) {
+            $unused[] = $key;
+        }
+    }
+
+    return $unused;
+}
+
+$staleKeys = findUnusedEntries(3600);
+
+foreach ($staleKeys as $key) {
+    echo 'Unused entry detected: ' . $key . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Tuning Chunk Size for Large Caches</h5>
+<pre><code class="language-php">
+<?php
+// chunk_size controls how many entries are fetched per internal batch
+// Smaller chunks reduce memory spikes; larger chunks reduce overhead
+
+$iterator = new APCUIterator(
+    null,
+    APC_ITER_ALL,
+    500 // fetch 500 entries per internal batch instead of the default 100
+);
+
+$count = 0;
+
+foreach ($iterator as $key => $entry) {
+    $count++;
+}
+
+echo 'Processed ' . $count . ' entries.';
+?>
+</code></pre>
+
+<h5>APCUIterator vs Related Approaches</h5>
+<ul>
+  <li>
+    <strong>APCUIterator</strong> – Memory-efficient, chunked traversal with
+    regex filtering; ideal for large caches and bulk operations
+  </li>
+  <li>
+    <strong>apcu_cache_info()</strong> – Returns the full entry list as a
+    single array; simpler for small caches but loads everything into memory at once
+  </li>
+  <li>
+    <strong>apcu_exists() / apcu_fetch()</strong> – Suited for checking or
+    retrieving known, specific keys rather than traversing the entire keyspace
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use a specific regex pattern whenever possible to avoid iterating over the entire cache unnecessarily</li>
+  <li>Combine format flags selectively (e.g., <code>APC_ITER_KEY | APC_ITER_VALUE</code>) to avoid fetching unused metadata</li>
+  <li>Adjust <code>chunk_size</code> based on cache size — larger chunks for big caches reduce iteration overhead</li>
+  <li>Use <code>APCUIterator</code> combined with <code>apcu_delete()</code> for safe, predictable bulk invalidation</li>
+  <li>Reserve full, unfiltered iteration for administrative tooling or scheduled maintenance scripts, not request-time logic</li>
+  <li>Design cache keys with consistent, hierarchical prefixes to make regex-based filtering reliable and maintainable</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Iterating over very large caches, even in chunks, can still be a relatively expensive operation</li>
+  <li>Process-local — reflects only the current server's cache segment, not a distributed view</li>
+  <li>Regex patterns add a small performance cost per entry evaluated, even when chunked</li>
+  <li>Not a snapshot — entries added or removed by other processes during iteration may affect results</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Bulk invalidation of cache entries matching a specific prefix or namespace</li>
+  <li>Building administrative dashboards to audit cache contents and memory usage</li>
+  <li>Identifying stale, oversized, or rarely accessed cache entries</li>
+  <li>Generating reports on cache composition for capacity planning</li>
+  <li>Implementing custom cache maintenance and cleanup routines</li>
+</ul>
+
+<p>
+  The <code>APCUIterator</code> class is the appropriate tool whenever an
+  application needs to traverse, filter, or bulk-manage APCu cache entries
+  beyond simple key-based access. Its chunked, memory-efficient design and
+  regex filtering capabilities make it the foundation for safe bulk
+  invalidation and administrative cache tooling in PHP applications.
+</p>
 
 <h4 id="apcuiterator-construct">APCUIterator::__CONSTRUCT</h4>
 
