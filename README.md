@@ -23133,6 +23133,268 @@ echo 'Processed ' . $count . ' entries.';
 </p>
 
 <h4 id="apcuiterator-construct">APCUIterator::__CONSTRUCT</h4>
+<p>
+  <strong>APCUIterator::__construct()</strong> is the constructor of the
+  <code>APCUIterator</code> class, responsible for initializing an iterator
+  over APCu cache entries. It accepts parameters that control which entries
+  are matched, what metadata is included in each iteration step, how many
+  entries are fetched per internal batch, and whether active or deleted
+  entries are traversed.
+</p>
+<p>
+  Understanding the constructor parameters in depth is essential for using
+  <code>APCUIterator</code> efficiently — choosing the right combination of
+  search pattern, format flags, and chunk size can make a significant
+  difference in performance and memory usage, particularly on large caches.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::__construct(
+    mixed $search     = null,
+    int   $format     = APC_ITER_ALL,
+    int   $chunk_size = 100,
+    int   $list       = APC_LIST_ACTIVE
+)
+?>
+</code></pre>
+
+<h5>Parameters Explained</h5>
+<ul>
+  <li>
+    <strong>$search</strong> – A PCRE regex string, an array of regex strings,
+    or <code>null</code> to match all entries. Each cache key is tested against
+    the pattern; only matching keys are included in iteration.
+  </li>
+  <li>
+    <strong>$format</strong> – A bitmask of <code>APC_ITER_*</code> constants
+    that controls which fields are included in each entry array returned
+    during iteration. Using only what is needed reduces data retrieval overhead.
+  </li>
+  <li>
+    <strong>$chunk_size</strong> – The number of entries fetched per internal
+    batch. Higher values reduce iteration overhead at the cost of higher memory
+    usage per batch. Must be greater than zero.
+  </li>
+  <li>
+    <strong>$list</strong> – Either <code>APC_LIST_ACTIVE</code> (default)
+    to iterate live entries, or <code>APC_LIST_DELETED</code> to iterate
+    entries that have been marked for deletion but not yet purged from memory.
+  </li>
+</ul>
+
+<h5>No Filter — Iterate All Entries</h5>
+<pre><code class="language-php">
+<?php
+// null as the first argument matches every key in the cache
+$iterator = new APCUIterator(null, APC_ITER_ALL, 100);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Single Regex Pattern</h5>
+<pre><code class="language-php">
+<?php
+// Only iterate keys starting with 'product:'
+$iterator = new APCUIterator('/^product:/');
+
+foreach ($iterator as $key => $entry) {
+    echo $key . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Multiple Regex Patterns</h5>
+<pre><code class="language-php">
+<?php
+// Match keys belonging to multiple namespaces in a single pass
+$iterator = new APCUIterator([
+    '/^user:/',
+    '/^session:/',
+    '/^permission:/',
+]);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Selective Format Flags for Better Performance</h5>
+<pre><code class="language-php">
+<?php
+// Retrieve only the keys and their sizes — skip all unused metadata
+$iterator = new APCUIterator(
+    '/^report:/',
+    APC_ITER_KEY | APC_ITER_MEM_SIZE
+);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . ' uses ' . $entry['mem_size'] . ' bytes' . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Tuning Chunk Size by Cache Volume</h5>
+<pre><code class="language-php">
+<?php
+// Small cache — small chunks avoid loading unnecessary data
+$lightIterator = new APCUIterator('/^config:/', APC_ITER_ALL, 10);
+
+// Large cache — bigger chunks reduce internal iteration overhead
+$heavyIterator = new APCUIterator('/^analytics:/', APC_ITER_ALL, 500);
+
+foreach ($heavyIterator as $key => $entry) {
+    echo $key . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Iterating Deleted Entries</h5>
+<pre><code class="language-php">
+<?php
+// Inspect entries marked for deletion but not yet garbage collected
+$deletedIterator = new APCUIterator(null, APC_ITER_ALL, 100, APC_LIST_DELETED);
+
+$count = 0;
+
+foreach ($deletedIterator as $key => $entry) {
+    $count++;
+    echo 'Pending deletion: ' . $key . PHP_EOL;
+}
+
+echo 'Total pending deletion: ' . $count . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Practical Pattern — Dynamic Pattern from User Context</h5>
+<pre><code class="language-php">
+<?php
+// Build a safe, dynamic pattern from runtime context
+// Always escape values before embedding in a regex
+
+function iterateUserCache(int $userId): APCUIterator
+{
+    $pattern = '/^user:' . preg_quote((string) $userId, '/') . ':/';
+    return new APCUIterator($pattern, APC_ITER_KEY | APC_ITER_TTL);
+}
+
+$iterator = iterateUserCache(42);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . ' expires in ' . $entry['ttl'] . ' seconds.' . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Bulk Invalidation with Custom Pattern</h5>
+<pre><code class="language-php">
+<?php
+function invalidateCacheNamespace(string $namespace): int
+{
+    $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+    $iterator = new APCUIterator($pattern, APC_ITER_KEY);
+
+    return (int) apcu_delete($iterator);
+}
+
+$cleared = invalidateCacheNamespace('product');
+echo 'Cleared ' . $cleared . ' product cache entries.';
+?>
+</code></pre>
+
+<h5>Combining Multiple Constructor Parameters</h5>
+<pre><code class="language-php">
+<?php
+// Fine-tuned iterator: targeted pattern, minimal metadata, large chunk size
+$iterator = new APCUIterator(
+    ['/^user:/', '/^session:/'],   // Match two namespaces
+    APC_ITER_KEY | APC_ITER_ATIME, // Fetch only key and last access time
+    250,                           // Batch size optimized for this cache volume
+    APC_LIST_ACTIVE                // Active entries only
+);
+
+$threshold = time() - 1800; // 30 minutes ago
+
+foreach ($iterator as $key => $entry) {
+    if ($entry['access_time'] < $threshold) {
+        echo 'Idle entry: ' . $key . PHP_EOL;
+    }
+}
+?>
+</code></pre>
+
+<h5>Constructor Parameter Reference</h5>
+<ul>
+  <li>
+    <strong>null</strong> – Matches all keys; equivalent to <code>/.*/</code>
+    but faster as it bypasses pattern evaluation entirely
+  </li>
+  <li>
+    <strong>string (regex)</strong> – A single PCRE-compatible pattern;
+    applied to each cache key during traversal
+  </li>
+  <li>
+    <strong>array (regex[])</strong> – Multiple patterns; an entry is
+    included if it matches any of the given patterns
+  </li>
+  <li>
+    <strong>APC_ITER_ALL</strong> – All fields included; convenient but
+    returns more data than may be needed
+  </li>
+  <li>
+    <strong>APC_ITER_KEY | APC_ITER_VALUE</strong> – Common minimal
+    combination for read-only traversal without metadata overhead
+  </li>
+  <li>
+    <strong>APC_LIST_ACTIVE</strong> – Default; includes all non-expired,
+    non-deleted entries currently serving reads
+  </li>
+  <li>
+    <strong>APC_LIST_DELETED</strong> – Diagnostic mode; includes entries
+    awaiting garbage collection
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always use <code>preg_quote()</code> when embedding runtime values into regex patterns to prevent injection or matching errors</li>
+  <li>Prefer specific patterns over <code>null</code> whenever only a subset of the cache needs to be traversed</li>
+  <li>Use selective format flags rather than <code>APC_ITER_ALL</code> when only a few fields are needed — this reduces per-entry overhead</li>
+  <li>Tune <code>chunk_size</code> to the approximate size of the target result set — too small increases iteration overhead, too large increases peak memory usage</li>
+  <li>Use multiple patterns in an array rather than running multiple separate iterator instances for related namespaces</li>
+  <li>Treat <code>APC_LIST_DELETED</code> as a diagnostic tool only — do not rely on deleted entry state for application logic</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Regex patterns are evaluated per key, which adds CPU cost proportional to the number of cache entries</li>
+  <li>The constructor does not validate regex patterns — a malformed pattern will cause iteration to produce no results or throw a warning</li>
+  <li>Chunk size cannot be changed after construction — a new instance is required for different tuning</li>
+  <li>The iterator reflects a non-snapshot view — concurrent writes may affect what is seen during traversal</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Initializing a filtered iterator for targeted bulk deletion or inspection</li>
+  <li>Tuning traversal performance on large caches through chunk size and format flags</li>
+  <li>Iterating multiple cache namespaces in a single pass using an array of patterns</li>
+  <li>Diagnosing pending deletions and garbage collection state with <code>APC_LIST_DELETED</code></li>
+  <li>Building reusable, context-aware iterator factories for different cache namespaces</li>
+</ul>
+
+<p>
+  <code>APCUIterator::__construct()</code> is where the precision and
+  efficiency of cache traversal is established. Thoughtful use of its
+  parameters — particularly regex patterns, format flags, and chunk size —
+  determines whether iteration is a lightweight, targeted operation or an
+  unnecessarily broad and memory-intensive one. Getting these right from
+  the start is the foundation of effective cache management with APCu.
+</p>
 
 <h4 id="apcuiterator-current">APCUIterator::CURRENT</h4>
 
