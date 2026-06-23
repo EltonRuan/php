@@ -23397,6 +23397,261 @@ foreach ($iterator as $key => $entry) {
 </p>
 
 <h4 id="apcuiterator-current">APCUIterator::CURRENT</h4>
+<p>
+  <strong>APCUIterator::current()</strong> is a method of the
+  <code>APCUIterator</code> class that returns the data associated with the
+  cache entry at the current iterator position. It is part of PHP's
+  <code>Iterator</code> interface implementation, called internally during
+  <code>foreach</code> traversal to provide the value for each iteration step.
+</p>
+<p>
+  The structure and content of the returned array is determined by the format
+  flags passed to the constructor. Understanding what <code>current()</code>
+  returns — and how to control it — is essential for writing efficient and
+  intentional cache traversal logic.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Iterator is positioned at a valid cache entry, either by initialization or a prior <code>next()</code> call</li>
+  <li><code>current()</code> returns the entry data array for the current position</li>
+  <li>The returned array contains only the fields specified by the format flags passed to the constructor</li>
+  <li>If the iterator is in an invalid position, <code>false</code> is returned</li>
+</ol>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::current(): mixed
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('config:timezone', 'UTC', 3600);
+apcu_store('config:language', 'en', 3600);
+
+$iterator = new APCUIterator('/^config:/', APC_ITER_ALL);
+$iterator->rewind();
+
+// Retrieve the current entry data directly
+$entry = $iterator->current();
+
+echo 'Key   : ' . $entry['key']      . PHP_EOL;
+echo 'Value : ' . $entry['value']    . PHP_EOL;
+echo 'Hits  : ' . $entry['num_hits'] . PHP_EOL;
+?>
+</code></pre>
+
+<h5>current() in a foreach Loop</h5>
+<pre><code class="language-php">
+<?php
+// In a foreach loop, current() is called implicitly on each iteration
+$iterator = new APCUIterator('/^product:/', APC_ITER_ALL);
+
+foreach ($iterator as $key => $entry) {
+    // $entry is the value returned by current()
+    // $key is the value returned by key()
+    echo $key . ' => ' . print_r($entry['value'], true) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Manual Iterator Control</h5>
+<pre><code class="language-php">
+<?php
+// Explicit iterator control using the Iterator interface methods
+$iterator = new APCUIterator('/^session:/', APC_ITER_ALL);
+
+for ($iterator->rewind(); $iterator->valid(); $iterator->next()) {
+    $entry = $iterator->current();
+
+    echo 'Key          : ' . $entry['key']           . PHP_EOL;
+    echo 'Created at   : ' . date('Y-m-d H:i:s', $entry['creation_time']) . PHP_EOL;
+    echo 'Last access  : ' . date('Y-m-d H:i:s', $entry['access_time'])   . PHP_EOL;
+    echo '---'                                                              . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Returned Entry Fields with APC_ITER_ALL</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('example:key', ['foo' => 'bar'], 600);
+
+$iterator = new APCUIterator('/^example:key$/', APC_ITER_ALL);
+$iterator->rewind();
+
+$entry = $iterator->current();
+
+/*
+Example output structure:
+[
+    'key'           => 'example:key',
+    'value'         => ['foo' => 'bar'],
+    'num_hits'      => 0,
+    'mtime'         => 1750000000,
+    'creation_time' => 1750000000,
+    'deletion_time' => 0,
+    'access_time'   => 1750000000,
+    'ref_count'     => 1,
+    'mem_size'      => 368,
+    'ttl'           => 600,
+    'key'           => 'example:key',
+]
+*/
+
+print_r($entry);
+?>
+</code></pre>
+
+<h5>Controlling Output with Format Flags</h5>
+<pre><code class="language-php">
+<?php
+// Only key and value fields will be present in current() output
+$iterator = new APCUIterator(
+    '/^report:/',
+    APC_ITER_KEY | APC_ITER_VALUE
+);
+
+foreach ($iterator as $key => $entry) {
+    // $entry contains only 'key' and 'value' — no metadata
+    echo $key . ': ' . print_r($entry['value'], true) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Processing Entries Based on Current Metadata</h5>
+<pre><code class="language-php">
+<?php
+// Use current() metadata to selectively process or skip entries
+
+$iterator = new APCUIterator(
+    '/^task:/',
+    APC_ITER_KEY | APC_ITER_VALUE | APC_ITER_ATIME
+);
+
+$idleThreshold = time() - 3600;
+
+foreach ($iterator as $key => $entry) {
+    if ($entry['access_time'] < $idleThreshold) {
+        // Entry has not been accessed in over an hour — skip
+        continue;
+    }
+
+    processTask($key, $entry['value']);
+}
+
+function processTask(string $key, mixed $value): void
+{
+    // Task processing logic
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Aggregating Values from current()</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator(
+    '/^order:/',
+    APC_ITER_KEY | APC_ITER_VALUE | APC_ITER_MEM_SIZE
+);
+
+$totalRevenue = 0.0;
+$totalSize    = 0;
+$count        = 0;
+
+foreach ($iterator as $key => $entry) {
+    if (isset($entry['value']['total'])) {
+        $totalRevenue += $entry['value']['total'];
+    }
+
+    $totalSize += $entry['mem_size'];
+    $count++;
+}
+
+echo 'Orders cached     : ' . $count . PHP_EOL;
+echo 'Total revenue     : $' . number_format($totalRevenue, 2) . PHP_EOL;
+echo 'Total memory used : ' . number_format($totalSize / 1024, 2) . ' KB' . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Handling an Invalid Iterator Position</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^nonexistent:namespace:/');
+$iterator->rewind();
+
+// If no entries match, valid() returns false and current() returns false
+if (!$iterator->valid()) {
+    echo 'No entries found for this pattern.';
+    exit;
+}
+
+$entry = $iterator->current();
+print_r($entry);
+?>
+</code></pre>
+
+<h5>APCUIterator::current() vs Related Methods</h5>
+<ul>
+  <li>
+    <strong>current()</strong> – Returns the full entry data array for the
+    current position; content controlled by constructor format flags
+  </li>
+  <li>
+    <strong>key()</strong> – Returns only the cache key string for the
+    current position, without any entry data
+  </li>
+  <li>
+    <strong>next()</strong> – Advances the iterator to the next entry;
+    triggers an internal batch fetch when the current chunk is exhausted
+  </li>
+  <li>
+    <strong>valid()</strong> – Returns whether the current position is
+    valid before calling <code>current()</code> directly
+  </li>
+  <li>
+    <strong>rewind()</strong> – Resets the iterator to the first matching
+    entry; called implicitly at the start of a <code>foreach</code> loop
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always check <code>valid()</code> before calling <code>current()</code> directly outside of a <code>foreach</code> loop</li>
+  <li>Use selective format flags in the constructor to limit which fields <code>current()</code> returns, reducing overhead on large caches</li>
+  <li>Access only the fields your code actually uses — requesting <code>APC_ITER_ALL</code> when only the key is needed wastes retrieval effort</li>
+  <li>Prefer <code>foreach</code> over manual iterator control for cleaner, less error-prone traversal code</li>
+  <li>Do not modify cached entries mid-iteration — concurrent writes and deletes may cause unexpected behavior in the returned data</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns <code>false</code> when the iterator position is invalid — always guard with <code>valid()</code> in manual iteration</li>
+  <li>The shape of the returned array depends entirely on the format flags set at construction time — cannot be changed without creating a new iterator</li>
+  <li>Does not reflect live changes to the cache entry made after the chunk was fetched — reflects a point-in-time snapshot per chunk</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Accessing cache entry data and metadata during bulk traversal</li>
+  <li>Inspecting individual entry fields to drive conditional processing or filtering logic</li>
+  <li>Aggregating values or statistics across a subset of cached entries</li>
+  <li>Manual iterator control in scenarios requiring non-linear traversal patterns</li>
+  <li>Validating or auditing cached data structures during development and maintenance</li>
+</ul>
+
+<p>
+  <code>APCUIterator::current()</code> is the access point for entry data
+  during cache traversal. Its output is shaped entirely by the format flags
+  chosen at construction, making thoughtful flag selection the primary lever
+  for balancing completeness against performance. Whether used implicitly
+  through <code>foreach</code> or explicitly in manual iteration, it is the
+  method that bridges the iterator's position to the actual data your
+  application needs.
+</p>
 
 <h4 id="apcuiterator-gettotalcount">APCUIterator::GETTOTALCOUNT</h4>
 
