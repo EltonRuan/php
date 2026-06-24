@@ -23654,6 +23654,258 @@ print_r($entry);
 </p>
 
 <h4 id="apcuiterator-gettotalcount">APCUIterator::GETTOTALCOUNT</h4>
+<p>
+  <strong>APCUIterator::getTotalCount()</strong> is a method of the
+  <code>APCUIterator</code> class that returns the total number of cache
+  entries matched by the iterator's search pattern, regardless of how many
+  have been traversed so far. It provides an efficient way to count matching
+  entries without manually iterating through all of them or loading the
+  full entry list into memory.
+</p>
+<p>
+  Unlike PHP's <code>count()</code> function applied to the iterator, which
+  also returns the total count via the <code>Countable</code> interface,
+  <code>getTotalCount()</code> is an explicit method call that makes the
+  intent clear and is particularly useful in contexts where both counting
+  and iterating are needed independently.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Iterator is initialized with a search pattern and format flags</li>
+  <li><code>getTotalCount()</code> queries the number of entries matching the pattern</li>
+  <li>The count is returned without requiring full iteration over matched entries</li>
+  <li>The iterator position is not affected by calling this method</li>
+</ol>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::getTotalCount(): int|false
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('session:user_1', ['active' => true], 1800);
+apcu_store('session:user_2', ['active' => true], 1800);
+apcu_store('session:user_3', ['active' => false], 1800);
+
+$iterator = new APCUIterator('/^session:/');
+
+echo 'Total active sessions cached: ' . $iterator->getTotalCount();
+?>
+</code></pre>
+
+<h5>Comparing getTotalCount() with count()</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^product:/');
+
+// Both return the same total count — getTotalCount() is explicit about intent
+$viaMethod    = $iterator->getTotalCount();
+$viaCountable = count($iterator);
+
+echo 'getTotalCount() : ' . $viaMethod    . PHP_EOL;
+echo 'count()         : ' . $viaCountable . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Counting All Cache Entries</h5>
+<pre><code class="language-php">
+<?php
+// null matches all entries — equivalent to querying the full cache size
+$iterator = new APCUIterator(null);
+
+echo 'Total entries in APCu cache: ' . $iterator->getTotalCount();
+?>
+</code></pre>
+
+<h5>Practical Pattern — Cache Namespace Dashboard</h5>
+<pre><code class="language-php">
+<?php
+function getCacheNamespaceSummary(array $namespaces): array
+{
+    $summary = [];
+
+    foreach ($namespaces as $namespace) {
+        $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+        $iterator = new APCUIterator($pattern, APC_ITER_MEM_SIZE);
+
+        $totalSize = 0;
+
+        foreach ($iterator as $entry) {
+            $totalSize += $entry['mem_size'];
+        }
+
+        $summary[$namespace] = [
+            'count'      => $iterator->getTotalCount(),
+            'total_size' => number_format($totalSize / 1024, 2) . ' KB',
+        ];
+    }
+
+    return $summary;
+}
+
+$report = getCacheNamespaceSummary(['user', 'product', 'session', 'config']);
+
+foreach ($report as $namespace => $data) {
+    echo $namespace . ': ' . $data['count'] . ' entries, ' . $data['total_size'] . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Threshold-Based Cache Alerts</h5>
+<pre><code class="language-php">
+<?php
+function checkNamespaceCacheLimit(string $namespace, int $maxEntries): void
+{
+    $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+    $iterator = new APCUIterator($pattern);
+    $count    = $iterator->getTotalCount();
+
+    if ($count === false) {
+        error_log('APCu unavailable — cannot check cache limit for: ' . $namespace);
+        return;
+    }
+
+    if ($count > $maxEntries) {
+        error_log(sprintf(
+            'WARNING: Cache namespace "%s" has %d entries, exceeding limit of %d.',
+            $namespace,
+            $count,
+            $maxEntries
+        ));
+    }
+}
+
+checkNamespaceCacheLimit('session', 5000);
+checkNamespaceCacheLimit('product', 10000);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Conditional Bulk Invalidation</h5>
+<pre><code class="language-php">
+<?php
+// Only perform bulk invalidation if the namespace has grown beyond a threshold
+
+function invalidateIfOversized(string $namespace, int $threshold = 1000): bool
+{
+    $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+    $iterator = new APCUIterator($pattern, APC_ITER_KEY);
+    $count    = $iterator->getTotalCount();
+
+    if ($count === false || $count <= $threshold) {
+        return false;
+    }
+
+    apcu_delete($iterator);
+    echo 'Cleared ' . $count . ' entries from namespace: ' . $namespace . PHP_EOL;
+
+    return true;
+}
+
+invalidateIfOversized('analytics', 500);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Pagination Over Cache Entries</h5>
+<pre><code class="language-php">
+<?php
+function getPaginatedCacheEntries(string $namespace, int $page, int $perPage): array
+{
+    $pattern   = '/^' . preg_quote($namespace, '/') . ':/';
+    $iterator  = new APCUIterator($pattern, APC_ITER_KEY | APC_ITER_VALUE);
+    $total     = $iterator->getTotalCount();
+    $offset    = ($page - 1) * $perPage;
+    $entries   = [];
+    $index     = 0;
+
+    foreach ($iterator as $key => $entry) {
+        if ($index < $offset) {
+            $index++;
+            continue;
+        }
+
+        if (count($entries) >= $perPage) {
+            break;
+        }
+
+        $entries[$key] = $entry['value'];
+        $index++;
+    }
+
+    return [
+        'total'       => $total,
+        'page'        => $page,
+        'per_page'    => $perPage,
+        'total_pages' => (int) ceil($total / $perPage),
+        'entries'     => $entries,
+    ];
+}
+
+$result = getPaginatedCacheEntries('product', page: 1, perPage: 25);
+print_r($result);
+?>
+</code></pre>
+
+<h5>getTotalCount() vs Related Approaches</h5>
+<ul>
+  <li>
+    <strong>getTotalCount()</strong> – Explicit method returning the total
+    number of entries matched by the iterator's pattern; does not affect
+    iterator position
+  </li>
+  <li>
+    <strong>count()</strong> – PHP's <code>Countable</code> interface method;
+    equivalent result to <code>getTotalCount()</code> but less explicit in
+    intent when reading code
+  </li>
+  <li>
+    <strong>apcu_cache_info(true)['num_entries']</strong> – Returns the total
+    count of all cache entries globally, without pattern filtering
+  </li>
+  <li>
+    <strong>Manual iteration count</strong> – Incrementing a counter inside
+    a <code>foreach</code> loop is unnecessary overhead when
+    <code>getTotalCount()</code> is available
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>getTotalCount()</code> when a count is needed independently of full iteration, to avoid redundant traversal</li>
+  <li>Always check for a <code>false</code> return value, which indicates APCu is unavailable rather than an empty result</li>
+  <li>Prefer explicit <code>getTotalCount()</code> over <code>count()</code> in code where intent should be clear to other developers</li>
+  <li>Combine with namespace patterns and threshold checks to build proactive cache capacity monitoring</li>
+  <li>Avoid calling <code>getTotalCount()</code> repeatedly in tight loops — cache the result in a local variable if the count is needed multiple times</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns <code>false</code> if APCu is unavailable — always distinguish this from a count of zero</li>
+  <li>Reflects a point-in-time count — concurrent writes or deletions may cause the actual entry count to differ by the time iteration begins</li>
+  <li>Process-local — the count reflects only the current server's cache segment, not an aggregated view across multiple servers</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Building cache namespace dashboards with per-namespace entry counts</li>
+  <li>Implementing threshold-based alerts when a cache namespace grows beyond expected bounds</li>
+  <li>Supporting pagination over cached entry sets in administrative tooling</li>
+  <li>Determining whether bulk invalidation is warranted before executing it</li>
+  <li>Reporting total matched entries alongside aggregated statistics gathered during iteration</li>
+</ul>
+
+<p>
+  <code>APCUIterator::getTotalCount()</code> provides a clean and efficient
+  way to quantify how many cache entries match a given pattern without the
+  cost of full traversal. When integrated into monitoring dashboards,
+  threshold guards, and administrative tooling, it gives developers clear
+  visibility into cache namespace sizes — an often overlooked but important
+  dimension of APCu cache health management.
+</p>
 
 <h4 id="apcuiterator-gettotalhits">APCUIterator::GETTOTALHITS</h4>
 
