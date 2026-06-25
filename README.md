@@ -23908,6 +23908,251 @@ print_r($result);
 </p>
 
 <h4 id="apcuiterator-gettotalhits">APCUIterator::GETTOTALHITS</h4>
+<p>
+  <strong>APCUIterator::getTotalHits()</strong> is a method of the
+  <code>APCUIterator</code> class that returns the combined number of cache
+  hits across all entries matched by the iterator's search pattern. Rather
+  than retrieving global hit statistics for the entire cache, it scopes the
+  result to only the keys the iterator was configured to traverse, making it
+  a precise tool for evaluating the access frequency of a specific cache
+  namespace or subset.
+</p>
+<p>
+  This method is particularly valuable when comparing the effectiveness of
+  different caching strategies across namespaces, or when identifying which
+  areas of the cache are actively serving requests versus sitting idle.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Iterator is initialized with a search pattern and format flags including <code>APC_ITER_NUM_HITS</code></li>
+  <li><code>getTotalHits()</code> aggregates the <code>num_hits</code> field across all matching entries</li>
+  <li>The result represents the cumulative number of successful reads against those entries since they were stored</li>
+  <li>Returns <code>false</code> if APCu is unavailable or the iterator cannot be traversed</li>
+</ol>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::getTotalHits(): int|false
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('product:1', ['name' => 'Widget A'], 3600);
+apcu_store('product:2', ['name' => 'Widget B'], 3600);
+
+// Simulate cache reads
+apcu_fetch('product:1');
+apcu_fetch('product:1');
+apcu_fetch('product:2');
+
+$iterator = new APCUIterator('/^product:/', APC_ITER_NUM_HITS);
+
+echo 'Total hits across product cache: ' . $iterator->getTotalHits();
+// Output: 3
+?>
+</code></pre>
+
+<h5>Requiring APC_ITER_NUM_HITS in Format Flags</h5>
+<pre><code class="language-php">
+<?php
+// getTotalHits() depends on the num_hits field being included
+// Always ensure APC_ITER_NUM_HITS is part of the format bitmask
+
+$withHits    = new APCUIterator('/^session:/', APC_ITER_NUM_HITS);
+$withoutHits = new APCUIterator('/^session:/');
+
+// Reliable — num_hits is available
+echo 'With flag    : ' . $withHits->getTotalHits() . PHP_EOL;
+
+// May return 0 or unexpected result if num_hits was not retrieved
+echo 'Without flag : ' . $withoutHits->getTotalHits() . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Practical Pattern — Namespace Hit Rate Comparison</h5>
+<pre><code class="language-php">
+<?php
+function compareNamespaceHitRates(array $namespaces): void
+{
+    $format = APC_ITER_NUM_HITS | APC_ITER_KEY;
+
+    foreach ($namespaces as $namespace) {
+        $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+        $iterator = new APCUIterator($pattern, $format);
+
+        $totalHits    = $iterator->getTotalHits();
+        $totalEntries = $iterator->getTotalCount();
+
+        if ($totalHits === false) {
+            echo $namespace . ': APCu unavailable' . PHP_EOL;
+            continue;
+        }
+
+        $avgHitsPerEntry = $totalEntries > 0
+            ? round($totalHits / $totalEntries, 2)
+            : 0;
+
+        echo sprintf(
+            '%-15s | entries: %4d | total hits: %6d | avg hits/entry: %5.2f',
+            $namespace,
+            $totalEntries,
+            $totalHits,
+            $avgHitsPerEntry
+        ) . PHP_EOL;
+    }
+}
+
+compareNamespaceHitRates(['user', 'product', 'session', 'config', 'report']);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Identifying Underutilized Cache Namespaces</h5>
+<pre><code class="language-php">
+<?php
+function findUnderutilizedNamespaces(array $namespaces, int $minHitsThreshold = 10): array
+{
+    $underutilized = [];
+
+    foreach ($namespaces as $namespace) {
+        $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+        $iterator = new APCUIterator($pattern, APC_ITER_NUM_HITS);
+        $hits     = $iterator->getTotalHits();
+
+        if ($hits === false) {
+            continue;
+        }
+
+        if ($hits < $minHitsThreshold) {
+            $underutilized[] = [
+                'namespace' => $namespace,
+                'hits'      => $hits,
+                'entries'   => $iterator->getTotalCount(),
+            ];
+        }
+    }
+
+    return $underutilized;
+}
+
+$results = findUnderutilizedNamespaces(['analytics', 'report', 'export'], 10);
+
+foreach ($results as $result) {
+    echo sprintf(
+        'Namespace "%s": %d hits across %d entries — consider reviewing TTL or caching strategy.',
+        $result['namespace'],
+        $result['hits'],
+        $result['entries']
+    ) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Cache Effectiveness Report</h5>
+<pre><code class="language-php">
+<?php
+function generateCacheEffectivenessReport(string $namespace): array
+{
+    $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+    $iterator = new APCUIterator(
+        $pattern,
+        APC_ITER_NUM_HITS | APC_ITER_MEM_SIZE | APC_ITER_KEY
+    );
+
+    $totalHits    = $iterator->getTotalHits();
+    $totalCount   = $iterator->getTotalCount();
+    $totalSize    = 0;
+    $zeroHitKeys  = [];
+
+    foreach ($iterator as $key => $entry) {
+        $totalSize += $entry['mem_size'];
+
+        if ($entry['num_hits'] === 0) {
+            $zeroHitKeys[] = $key;
+        }
+    }
+
+    return [
+        'namespace'      => $namespace,
+        'total_entries'  => $totalCount,
+        'total_hits'     => $totalHits,
+        'total_size_kb'  => round($totalSize / 1024, 2),
+        'zero_hit_keys'  => $zeroHitKeys,
+        'zero_hit_ratio' => $totalCount > 0
+            ? round((count($zeroHitKeys) / $totalCount) * 100, 2)
+            : 0,
+    ];
+}
+
+$report = generateCacheEffectivenessReport('product');
+
+echo 'Namespace      : ' . $report['namespace']      . PHP_EOL;
+echo 'Total entries  : ' . $report['total_entries']  . PHP_EOL;
+echo 'Total hits     : ' . $report['total_hits']      . PHP_EOL;
+echo 'Total size     : ' . $report['total_size_kb'] . ' KB' . PHP_EOL;
+echo 'Zero-hit ratio : ' . $report['zero_hit_ratio'] . '%'  . PHP_EOL;
+?>
+</code></pre>
+
+<h5>getTotalHits() vs Related Methods and Functions</h5>
+<ul>
+  <li>
+    <strong>getTotalHits()</strong> – Scoped hit count for entries matching
+    the iterator's pattern; useful for namespace-level effectiveness analysis
+  </li>
+  <li>
+    <strong>getTotalCount()</strong> – Returns the number of matching entries,
+    not their hit count; often used alongside <code>getTotalHits()</code>
+    to compute average hits per entry
+  </li>
+  <li>
+    <strong>apcu_cache_info()['num_hits']</strong> – Returns the global hit
+    count for the entire cache without pattern filtering
+  </li>
+  <li>
+    <strong>apcu_key_info()['num_hits']</strong> – Returns the hit count
+    for a single specific key rather than an aggregated namespace total
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always include <code>APC_ITER_NUM_HITS</code> in the format flags when <code>getTotalHits()</code> will be called</li>
+  <li>Always check for a <code>false</code> return value to distinguish APCu unavailability from a genuine hit count of zero</li>
+  <li>Combine with <code>getTotalCount()</code> to compute average hits per entry as a key effectiveness metric</li>
+  <li>Use zero-hit analysis to identify cache entries that are never read — candidates for TTL reduction or removal from caching strategy</li>
+  <li>Schedule effectiveness reports as periodic maintenance tasks rather than running them on every request</li>
+  <li>Treat a declining hit total over time as a signal that cached data is not aligned with actual access patterns</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns <code>false</code> if APCu is unavailable — must be distinguished from a zero result</li>
+  <li>Hit counts reset when the cache is cleared or the PHP process restarts — not suitable for long-term trend analysis without an external store</li>
+  <li>Process-local — hit counts reflect only the current server's shared memory segment</li>
+  <li>Accuracy depends on <code>APC_ITER_NUM_HITS</code> being included in the constructor format flags</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Comparing hit rates across cache namespaces to identify high-value and underutilized areas</li>
+  <li>Detecting cache entries with zero hits that may be safe to remove or reconfigure</li>
+  <li>Generating cache effectiveness reports for administrative dashboards</li>
+  <li>Validating that a newly introduced caching strategy is actually being utilized by the application</li>
+  <li>Supporting data-driven decisions about TTL tuning and cache namespace restructuring</li>
+</ul>
+
+<p>
+  <code>APCUIterator::getTotalHits()</code> brings namespace-level precision
+  to cache effectiveness analysis. By scoping hit aggregation to a specific
+  pattern rather than the global cache, it enables developers to evaluate
+  caching strategies at a granular level — identifying what is being served
+  from cache, what is being ignored, and where optimization efforts will have
+  the greatest impact.
+</p>
 
 <h4 id="apcuiterator-gettotalsize">APCUIterator::GETTOTALSIZE</h4>
 
