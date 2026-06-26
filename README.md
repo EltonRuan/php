@@ -24155,6 +24155,271 @@ echo 'Zero-hit ratio : ' . $report['zero_hit_ratio'] . '%'  . PHP_EOL;
 </p>
 
 <h4 id="apcuiterator-gettotalsize">APCUIterator::GETTOTALSIZE</h4>
+<p>
+  <strong>APCUIterator::getTotalSize()</strong> is a method of the
+  <code>APCUIterator</code> class that returns the combined memory consumed
+  by all cache entries matched by the iterator's search pattern. It provides
+  a scoped, namespace-level view of memory usage, complementing the global
+  memory statistics returned by <code>apcu_sma_info()</code> with targeted
+  insight into how much shared memory a specific subset of cache entries
+  occupies.
+</p>
+<p>
+  This makes it an essential tool for memory auditing, capacity planning, and
+  identifying cache namespaces that consume a disproportionate share of the
+  available shared memory segment.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Iterator is initialized with a search pattern and format flags including <code>APC_ITER_MEM_SIZE</code></li>
+  <li><code>getTotalSize()</code> aggregates the <code>mem_size</code> field across all matching entries</li>
+  <li>The result represents the total bytes consumed by those entries in APCu shared memory</li>
+  <li>Returns <code>false</code> if APCu is unavailable or the iterator cannot be traversed</li>
+</ol>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::getTotalSize(): int|false
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('product:1', ['name' => 'Widget A', 'price' => 29.90], 3600);
+apcu_store('product:2', ['name' => 'Widget B', 'price' => 49.90], 3600);
+apcu_store('product:3', ['name' => 'Widget C', 'price' => 99.90], 3600);
+
+$iterator  = new APCUIterator('/^product:/', APC_ITER_MEM_SIZE);
+$totalSize = $iterator->getTotalSize();
+
+echo 'Product cache size: ' . number_format($totalSize / 1024, 2) . ' KB';
+?>
+</code></pre>
+
+<h5>Requiring APC_ITER_MEM_SIZE in Format Flags</h5>
+<pre><code class="language-php">
+<?php
+// getTotalSize() depends on the mem_size field being included
+// Always ensure APC_ITER_MEM_SIZE is part of the format bitmask
+
+$withSize    = new APCUIterator('/^report:/', APC_ITER_MEM_SIZE);
+$withoutSize = new APCUIterator('/^report:/');
+
+// Reliable — mem_size is available
+echo 'With flag    : ' . $withSize->getTotalSize() . ' bytes' . PHP_EOL;
+
+// May return 0 or an unreliable result if mem_size was not retrieved
+echo 'Without flag : ' . $withoutSize->getTotalSize() . ' bytes' . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Converting to Human-Readable Format</h5>
+<pre><code class="language-php">
+<?php
+function formatBytes(int $bytes, int $precision = 2): string
+{
+    $units = ['B', 'KB', 'MB', 'GB'];
+    $index = 0;
+    $size  = (float) $bytes;
+
+    while ($size >= 1024 && $index < count($units) - 1) {
+        $size /= 1024;
+        $index++;
+    }
+
+    return round($size, $precision) . ' ' . $units[$index];
+}
+
+$iterator = new APCUIterator('/^session:/', APC_ITER_MEM_SIZE);
+$size     = $iterator->getTotalSize();
+
+echo 'Session cache size: ' . ($size !== false ? formatBytes($size) : 'unavailable');
+?>
+</code></pre>
+
+<h5>Practical Pattern — Memory Usage by Namespace</h5>
+<pre><code class="language-php">
+<?php
+function getMemoryUsageByNamespace(array $namespaces): array
+{
+    $report = [];
+
+    foreach ($namespaces as $namespace) {
+        $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+        $iterator = new APCUIterator($pattern, APC_ITER_MEM_SIZE);
+
+        $size  = $iterator->getTotalSize();
+        $count = $iterator->getTotalCount();
+
+        $report[$namespace] = [
+            'entries'       => $count,
+            'total_bytes'   => $size !== false ? $size : 0,
+            'total_kb'      => $size !== false ? round($size / 1024, 2) : 0,
+            'avg_entry_kb'  => ($size !== false && $count > 0)
+                ? round(($size / $count) / 1024, 2)
+                : 0,
+        ];
+    }
+
+    uasort($report, fn ($a, $b) => $b['total_bytes'] <=> $a['total_bytes']);
+
+    return $report;
+}
+
+$report = getMemoryUsageByNamespace(['user', 'product', 'session', 'config', 'report']);
+
+foreach ($report as $namespace => $data) {
+    echo sprintf(
+        '%-12s | entries: %4d | size: %8.2f KB | avg: %6.2f KB/entry',
+        $namespace,
+        $data['entries'],
+        $data['total_kb'],
+        $data['avg_entry_kb']
+    ) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Memory Pressure Alert by Namespace</h5>
+<pre><code class="language-php">
+<?php
+function alertIfNamespaceExceedsMemoryBudget(
+    string $namespace,
+    int    $budgetBytes
+): void {
+    $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+    $iterator = new APCUIterator($pattern, APC_ITER_MEM_SIZE);
+    $size     = $iterator->getTotalSize();
+
+    if ($size === false) {
+        error_log('APCu unavailable — cannot check memory budget for: ' . $namespace);
+        return;
+    }
+
+    if ($size > $budgetBytes) {
+        error_log(sprintf(
+            'WARNING: Cache namespace "%s" is using %s, exceeding the budget of %s.',
+            $namespace,
+            number_format($size / 1024 / 1024, 2) . ' MB',
+            number_format($budgetBytes / 1024 / 1024, 2) . ' MB'
+        ));
+    }
+}
+
+alertIfNamespaceExceedsMemoryBudget('analytics', 50 * 1024 * 1024); // 50 MB budget
+alertIfNamespaceExceedsMemoryBudget('session',   20 * 1024 * 1024); // 20 MB budget
+?>
+</code></pre>
+
+<h5>Practical Pattern — Full Cache Memory Audit</h5>
+<pre><code class="language-php">
+<?php
+function generateMemoryAuditReport(): array
+{
+    $sma         = apcu_sma_info(true);
+    $totalMemory = $sma['num_seg'] * $sma['seg_size'];
+    $freeMemory  = $sma['avail_mem'];
+    $usedMemory  = $totalMemory - $freeMemory;
+
+    $namespaces = ['user', 'product', 'session', 'config', 'report', 'analytics'];
+
+    $namespaceBreakdown = [];
+    $accountedBytes     = 0;
+
+    foreach ($namespaces as $namespace) {
+        $pattern  = '/^' . preg_quote($namespace, '/') . ':/';
+        $iterator = new APCUIterator($pattern, APC_ITER_MEM_SIZE);
+        $size     = $iterator->getTotalSize() ?: 0;
+
+        $accountedBytes += $size;
+
+        $namespaceBreakdown[$namespace] = [
+            'bytes'         => $size,
+            'kb'            => round($size / 1024, 2),
+            'share_percent' => $usedMemory > 0
+                ? round(($size / $usedMemory) * 100, 2)
+                : 0,
+        ];
+    }
+
+    return [
+        'total_memory_mb'  => round($totalMemory / 1024 / 1024, 2),
+        'used_memory_mb'   => round($usedMemory  / 1024 / 1024, 2),
+        'free_memory_mb'   => round($freeMemory  / 1024 / 1024, 2),
+        'accounted_kb'     => round($accountedBytes / 1024, 2),
+        'namespaces'       => $namespaceBreakdown,
+    ];
+}
+
+header('Content-Type: application/json');
+echo json_encode(generateMemoryAuditReport(), JSON_PRETTY_PRINT);
+?>
+</code></pre>
+
+<h5>getTotalSize() vs Related Methods and Functions</h5>
+<ul>
+  <li>
+    <strong>getTotalSize()</strong> – Scoped memory total for entries matching
+    the iterator's pattern; ideal for namespace-level memory analysis
+  </li>
+  <li>
+    <strong>getTotalCount()</strong> – Returns entry count rather than memory
+    size; often combined with <code>getTotalSize()</code> to compute average
+    entry size
+  </li>
+  <li>
+    <strong>getTotalHits()</strong> – Returns aggregated hit counts rather
+    than memory; used alongside <code>getTotalSize()</code> for a combined
+    effectiveness and memory profile
+  </li>
+  <li>
+    <strong>apcu_sma_info()</strong> – Reports total, used, and free memory
+    for the entire shared memory segment without namespace filtering
+  </li>
+  <li>
+    <strong>apcu_key_info()['mem_size']</strong> – Returns memory usage for
+    a single specific entry rather than an aggregated namespace total
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always include <code>APC_ITER_MEM_SIZE</code> in the format flags when <code>getTotalSize()</code> will be called</li>
+  <li>Always check for a <code>false</code> return value to distinguish APCu unavailability from a genuine size of zero</li>
+  <li>Combine with <code>getTotalCount()</code> to compute average entry size — oversized entries are a common cause of memory pressure</li>
+  <li>Use alongside <code>apcu_sma_info()</code> to express namespace sizes as a percentage of total available shared memory</li>
+  <li>Schedule memory audits as periodic background tasks rather than running them on every web request</li>
+  <li>Investigate namespaces with a high size-to-hit ratio — large entries that are rarely accessed are prime candidates for TTL reduction</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns <code>false</code> if APCu is unavailable — must be distinguished from a zero byte result</li>
+  <li>Requires <code>APC_ITER_MEM_SIZE</code> in the constructor format flags — omitting it may produce inaccurate results</li>
+  <li>Process-local — reflects only the current server's shared memory segment, not an aggregated multi-server view</li>
+  <li>Reported size includes internal APCu metadata overhead per entry, not just the raw serialized value size</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Auditing memory consumption per cache namespace for capacity planning</li>
+  <li>Identifying oversized cache entries or namespaces consuming disproportionate memory</li>
+  <li>Building memory breakdown dashboards alongside global statistics from <code>apcu_sma_info()</code></li>
+  <li>Implementing namespace-level memory budget enforcement with alerts</li>
+  <li>Supporting data-driven decisions about TTL, value size limits, and cache structure</li>
+</ul>
+
+<p>
+  <code>APCUIterator::getTotalSize()</code> bridges the gap between global
+  memory statistics and entry-level inspection by providing scoped,
+  namespace-level memory totals. When used alongside
+  <code>apcu_sma_info()</code>, <code>getTotalCount()</code>, and
+  <code>getTotalHits()</code>, it forms a complete picture of both what the
+  cache holds and how efficiently it uses the shared memory available to it.
+</p>
 
 <h4 id="apcuiterator-key">APCUIterator::KEY</h4>
 
