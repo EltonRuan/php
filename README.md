@@ -24422,6 +24422,257 @@ echo json_encode(generateMemoryAuditReport(), JSON_PRETTY_PRINT);
 </p>
 
 <h4 id="apcuiterator-key">APCUIterator::KEY</h4>
+<p>
+  <strong>APCUIterator::key()</strong> is a method of the
+  <code>APCUIterator</code> class that returns the cache key string for the
+  entry at the current iterator position. It is part of PHP's
+  <code>Iterator</code> interface implementation and is called implicitly
+  during <code>foreach</code> traversal to provide the key component of each
+  iteration step.
+</p>
+<p>
+  While <code>current()</code> returns the full entry data array,
+  <code>key()</code> returns only the string identifier of the current cache
+  entry — making it the lightweight choice when only the key name is needed
+  without the overhead of fetching associated metadata or values.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Iterator is positioned at a valid cache entry</li>
+  <li><code>key()</code> returns the string key of the current entry</li>
+  <li>In a <code>foreach</code> loop, the key is automatically assigned to the loop variable before the arrow</li>
+  <li>Returns <code>null</code> if the iterator is in an invalid position</li>
+</ol>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::key(): string|false
+?>
+</code></pre>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+apcu_store('user:1:profile', ['name' => 'Alice']);
+apcu_store('user:2:profile', ['name' => 'Bob']);
+apcu_store('user:3:profile', ['name' => 'Carol']);
+
+$iterator = new APCUIterator('/^user:.*:profile$/', APC_ITER_KEY);
+$iterator->rewind();
+
+// Retrieve the current key directly
+echo $iterator->key(); // e.g. user:1:profile
+?>
+</code></pre>
+
+<h5>key() in a foreach Loop</h5>
+<pre><code class="language-php">
+<?php
+// In a foreach loop, key() is called implicitly on each iteration
+// $key receives the value returned by key()
+// $entry receives the value returned by current()
+
+$iterator = new APCUIterator('/^product:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . ' => ' . $entry['value']['name'] . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Manual Iterator Control with key()</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^session:/', APC_ITER_KEY);
+
+for ($iterator->rewind(); $iterator->valid(); $iterator->next()) {
+    $key = $iterator->key();
+    echo 'Found session key: ' . $key . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Using Only APC_ITER_KEY for Lightweight Traversal</h5>
+<pre><code class="language-php">
+<?php
+// When only keys are needed, APC_ITER_KEY avoids fetching
+// values and metadata — the most efficient traversal mode
+
+$iterator = new APCUIterator('/^lock:/', APC_ITER_KEY);
+$keys     = [];
+
+foreach ($iterator as $key => $entry) {
+    $keys[] = $key;
+}
+
+echo 'Active locks: ' . implode(', ', $keys);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Collecting Keys for Batch Operations</h5>
+<pre><code class="language-php">
+<?php
+// Gather all keys matching a pattern, then operate on them separately
+
+function collectKeysByPattern(string $pattern): array
+{
+    $iterator = new APCUIterator($pattern, APC_ITER_KEY);
+    $keys     = [];
+
+    foreach ($iterator as $key => $entry) {
+        $keys[] = $key;
+    }
+
+    return $keys;
+}
+
+$expiredSessionKeys = collectKeysByPattern('/^session:expired:/');
+
+foreach ($expiredSessionKeys as $key) {
+    apcu_delete($key);
+    echo 'Removed: ' . $key . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Extracting IDs from Structured Keys</h5>
+<pre><code class="language-php">
+<?php
+// Parse structured keys to extract embedded identifiers
+
+function getCachedUserIds(): array
+{
+    $iterator = new APCUIterator('/^user:\d+:profile$/', APC_ITER_KEY);
+    $userIds  = [];
+
+    foreach ($iterator as $key => $entry) {
+        // Key format: user:{id}:profile
+        if (preg_match('/^user:(\d+):profile$/', $key, $matches)) {
+            $userIds[] = (int) $matches[1];
+        }
+    }
+
+    sort($userIds);
+
+    return $userIds;
+}
+
+$cachedUsers = getCachedUserIds();
+echo 'Cached user IDs: ' . implode(', ', $cachedUsers);
+?>
+</code></pre>
+
+<h5>Practical Pattern — Key Inspection for Debugging</h5>
+<pre><code class="language-php">
+<?php
+function dumpCacheKeys(string $pattern = null): void
+{
+    $regex    = $pattern ? '/' . preg_quote($pattern, '/') . '/' : null;
+    $iterator = new APCUIterator($regex, APC_ITER_KEY);
+    $count    = 0;
+
+    echo 'Cache keys' . ($pattern ? ' matching "' . $pattern . '"' : '') . ':' . PHP_EOL;
+
+    foreach ($iterator as $key => $entry) {
+        echo '  [' . ++$count . '] ' . $key . PHP_EOL;
+    }
+
+    echo 'Total: ' . $count . ' key(s).' . PHP_EOL;
+}
+
+dumpCacheKeys('config:');
+?>
+</code></pre>
+
+<h5>Practical Pattern — Key Validation and Sanitization Audit</h5>
+<pre><code class="language-php">
+<?php
+// Identify keys that do not conform to expected naming conventions
+
+function findMalformedKeys(string $namespace, string $expectedPattern): array
+{
+    $iterator     = new APCUIterator('/^' . preg_quote($namespace, '/') . ':/', APC_ITER_KEY);
+    $malformed    = [];
+
+    foreach ($iterator as $key => $entry) {
+        if (!preg_match($expectedPattern, $key)) {
+            $malformed[] = $key;
+        }
+    }
+
+    return $malformed;
+}
+
+// Expect user keys to follow: user:{integer}:{section}
+$malformed = findMalformedKeys('user', '/^user:\d+:[a-z_]+$/');
+
+foreach ($malformed as $key) {
+    echo 'Non-conforming key detected: ' . $key . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>APCUIterator::key() vs Related Methods</h5>
+<ul>
+  <li>
+    <strong>key()</strong> – Returns only the string key of the current
+    entry; the lightest read operation available during iteration
+  </li>
+  <li>
+    <strong>current()</strong> – Returns the full entry data array for the
+    current position; includes all fields specified by the format flags
+  </li>
+  <li>
+    <strong>next()</strong> – Advances the iterator to the next matching
+    entry without returning data; must be called after processing each entry
+    in manual iteration
+  </li>
+  <li>
+    <strong>valid()</strong> – Confirms the current position is valid before
+    calling <code>key()</code> directly in manual iteration
+  </li>
+  <li>
+    <strong>rewind()</strong> – Resets the iterator to the first matching
+    entry; called implicitly at the start of every <code>foreach</code> loop
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>APC_ITER_KEY</code> as the sole format flag when only key names are needed — this is the most efficient traversal mode available</li>
+  <li>Always check <code>valid()</code> before calling <code>key()</code> directly in manual iteration to avoid operating on an invalid position</li>
+  <li>Design cache keys with consistent, parseable naming conventions to make key-based extraction and validation reliable</li>
+  <li>Collect keys into an array first when planning bulk operations, rather than deleting or modifying entries mid-iteration</li>
+  <li>Use <code>preg_match()</code> on the key string to extract embedded identifiers rather than loading the full entry value</li>
+  <li>Prefer <code>foreach</code> over manual iteration for cleaner, less error-prone code in the majority of use cases</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns <code>null</code> when the iterator is in an invalid position — always guard with <code>valid()</code> in manual loops</li>
+  <li>Reflects the key as stored in APCu — no normalization, transformation, or decoding is applied</li>
+  <li>In a <code>foreach</code> loop, the key variable also appears in <code>current()</code>'s returned array under the <code>key</code> field — avoid redundant access to both</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Collecting all cache keys matching a pattern for batch deletion or inspection</li>
+  <li>Extracting structured identifiers (user IDs, product IDs) embedded in key names</li>
+  <li>Auditing cache key naming conventions for consistency and correctness</li>
+  <li>Building key inventories for administrative dashboards or debugging tools</li>
+  <li>Lightweight traversal when entry values and metadata are not required</li>
+</ul>
+
+<p>
+  <code>APCUIterator::key()</code> is the most focused and efficient read
+  available during cache traversal. When combined with <code>APC_ITER_KEY</code>
+  as the sole format flag, it enables rapid, low-overhead enumeration of cache
+  key names — making it the right tool for key audits, bulk operations, and
+  any scenario where the identifier alone carries sufficient information for
+  the task at hand.
+</p>
 
 <h4 id="apcuiterator-next">APCUIterator::NEXT</h4>
 
