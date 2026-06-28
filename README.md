@@ -24675,6 +24675,288 @@ foreach ($malformed as $key) {
 </p>
 
 <h4 id="apcuiterator-next">APCUIterator::NEXT</h4>
+<p>
+  <strong>APCUIterator::next()</strong> is a method of the
+  <code>APCUIterator</code> class that advances the iterator to the next
+  matching cache entry. It is part of PHP's <code>Iterator</code> interface
+  implementation and is called implicitly at the end of each
+  <code>foreach</code> iteration step, or explicitly when manual control
+  over traversal is required.
+</p>
+<p>
+  A key aspect of <code>next()</code> in APCUIterator is its interaction
+  with the internal chunking mechanism. Entries are fetched from shared
+  memory in batches defined by the <code>chunk_size</code> constructor
+  parameter. When the current chunk is exhausted, <code>next()</code>
+  transparently fetches the next batch, making the chunked retrieval
+  invisible to the caller.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Current position is advanced to the next entry within the current chunk</li>
+  <li>If the current chunk is exhausted, the next batch of entries is fetched from shared memory</li>
+  <li>If no further matching entries exist, the iterator becomes invalid</li>
+  <li>Returns <code>true</code> on success, <code>false</code> when no more entries are available</li>
+  <li><code>valid()</code> should be checked after calling <code>next()</code> in manual iteration</li>
+</ol>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::next(): bool
+?>
+</code></pre>
+
+<h5>Implicit next() in a foreach Loop</h5>
+<pre><code class="language-php">
+<?php
+// next() is called automatically at the end of each iteration step
+// This is the recommended approach for standard traversal
+
+$iterator = new APCUIterator('/^product:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . ' => ' . $entry['value']['name'] . PHP_EOL;
+    // next() is called implicitly here before the next iteration
+}
+?>
+</code></pre>
+
+<h5>Explicit next() in Manual Iteration</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^config:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+$iterator->rewind();
+
+while ($iterator->valid()) {
+    $key   = $iterator->key();
+    $entry = $iterator->current();
+
+    echo $key . ': ' . print_r($entry['value'], true) . PHP_EOL;
+
+    $iterator->next(); // Explicitly advance to the next entry
+}
+?>
+</code></pre>
+
+<h5>Using next() with Conditional Skipping</h5>
+<pre><code class="language-php">
+<?php
+// Manual control allows skipping entries based on conditions
+// without interrupting the iteration flow
+
+$iterator = new APCUIterator('/^report:/', APC_ITER_ALL);
+$iterator->rewind();
+
+while ($iterator->valid()) {
+    $entry = $iterator->current();
+
+    // Skip entries with zero hits
+    if ($entry['num_hits'] === 0) {
+        $iterator->next();
+        continue;
+    }
+
+    processReportEntry($iterator->key(), $entry);
+    $iterator->next();
+}
+
+function processReportEntry(string $key, array $entry): void
+{
+    echo $key . ' — hits: ' . $entry['num_hits'] . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Chunk Boundary Transparency</h5>
+<pre><code class="language-php">
+<?php
+// chunk_size controls how many entries are fetched per internal batch
+// next() handles chunk boundaries transparently — no special handling needed
+
+$iterator = new APCUIterator(
+    '/^analytics:/',
+    APC_ITER_KEY | APC_ITER_MEM_SIZE,
+    50 // Fetch 50 entries per internal batch
+);
+
+$processed = 0;
+
+foreach ($iterator as $key => $entry) {
+    $processed++;
+
+    // next() fetches a new batch automatically every 50 entries
+    echo '[' . $processed . '] ' . $key . PHP_EOL;
+}
+
+echo 'Total processed: ' . $processed . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Practical Pattern — Early Termination</h5>
+<pre><code class="language-php">
+<?php
+// Manual iteration with next() allows stopping before all entries are visited
+
+function findFirstMatchingEntry(string $pattern, callable $predicate): ?array
+{
+    $iterator = new APCUIterator($pattern, APC_ITER_ALL);
+    $iterator->rewind();
+
+    while ($iterator->valid()) {
+        $entry = $iterator->current();
+
+        if ($predicate($iterator->key(), $entry)) {
+            return ['key' => $iterator->key(), 'entry' => $entry];
+        }
+
+        $iterator->next();
+    }
+
+    return null;
+}
+
+$result = findFirstMatchingEntry('/^user:/', function (string $key, array $entry): bool {
+    return isset($entry['value']['role']) && $entry['value']['role'] === 'admin';
+});
+
+if ($result !== null) {
+    echo 'First admin found at key: ' . $result['key'];
+} else {
+    echo 'No admin user found in cache.';
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Stepped Batch Processing</h5>
+<pre><code class="language-php">
+<?php
+// Process entries in controlled batches with a delay between steps
+// Useful for background maintenance tasks that must not spike server load
+
+function processCacheInSteps(string $pattern, int $batchSize = 50): void
+{
+    $iterator = new APCUIterator($pattern, APC_ITER_ALL, $batchSize);
+    $iterator->rewind();
+
+    $count = 0;
+
+    while ($iterator->valid()) {
+        processCacheEntry($iterator->key(), $iterator->current());
+        $count++;
+
+        if ($count % $batchSize === 0) {
+            // Yield briefly after each logical batch to reduce CPU pressure
+            usleep(5000); // 5ms pause
+        }
+
+        $iterator->next();
+    }
+
+    echo 'Processed ' . $count . ' entries.' . PHP_EOL;
+}
+
+function processCacheEntry(string $key, array $entry): void
+{
+    // Entry processing logic
+}
+
+processCacheInSteps('/^session:/');
+?>
+</code></pre>
+
+<h5>Practical Pattern — Two-Phase Traversal</h5>
+<pre><code class="language-php">
+<?php
+// Phase 1: Collect keys via lightweight iteration
+// Phase 2: Process entries using the collected keys
+
+function twoPhaseProcess(string $pattern): void
+{
+    // Phase 1 — collect keys only, minimal overhead
+    $keyIterator = new APCUIterator($pattern, APC_ITER_KEY);
+    $keys        = [];
+
+    foreach ($keyIterator as $key => $entry) {
+        $keys[] = $key;
+    }
+
+    // Phase 2 — fetch and process each entry individually
+    foreach ($keys as $key) {
+        $value = apcu_fetch($key, $success);
+
+        if ($success) {
+            echo $key . ': ' . print_r($value, true) . PHP_EOL;
+        }
+    }
+}
+
+twoPhaseProcess('/^config:/');
+?>
+</code></pre>
+
+<h5>APCUIterator::next() vs Related Methods</h5>
+<ul>
+  <li>
+    <strong>next()</strong> – Advances the position to the next matching
+    entry; triggers an internal batch fetch when the current chunk is exhausted
+  </li>
+  <li>
+    <strong>rewind()</strong> – Resets the position to the first matching
+    entry and re-initializes the internal chunk; called implicitly by
+    <code>foreach</code>
+  </li>
+  <li>
+    <strong>valid()</strong> – Confirms the current position is valid after
+    a <code>next()</code> call, before reading key or entry data
+  </li>
+  <li>
+    <strong>current()</strong> – Returns the entry data at the current
+    position, after <code>next()</code> has advanced to it
+  </li>
+  <li>
+    <strong>key()</strong> – Returns the key string at the current position,
+    after <code>next()</code> has advanced to it
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Prefer <code>foreach</code> over manual <code>next()</code> calls for standard sequential traversal — it is cleaner, less error-prone, and handles edge cases automatically</li>
+  <li>Always call <code>valid()</code> after <code>next()</code> in manual loops before accessing <code>key()</code> or <code>current()</code></li>
+  <li>Use manual <code>next()</code> control only when traversal logic requires early termination, conditional skipping, or non-linear stepping</li>
+  <li>Align <code>chunk_size</code> with the expected result set size — <code>next()</code> performs best when chunk boundaries are crossed as infrequently as possible</li>
+  <li>Never modify or delete the current entry between <code>next()</code> calls inside a manual loop — cache mutations mid-iteration can produce unpredictable results</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Does not support backwards traversal — once <code>next()</code> has advanced past an entry, <code>rewind()</code> is the only way to revisit it</li>
+  <li>Concurrent writes between <code>next()</code> calls may cause entries to appear, disappear, or be seen in an inconsistent state</li>
+  <li>Crossing a chunk boundary on each call (i.e., <code>chunk_size = 1</code>) causes a shared memory fetch per entry — avoid very small chunk sizes on large caches</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Manual iterator control for early termination when a matching entry is found</li>
+  <li>Conditional skipping of entries that do not meet processing criteria</li>
+  <li>Stepped batch processing with rate limiting between logical entry groups</li>
+  <li>Two-phase cache traversal separating key collection from value processing</li>
+  <li>Building custom iteration patterns not expressible through a standard <code>foreach</code> loop</li>
+</ul>
+
+<p>
+  <code>APCUIterator::next()</code> is the engine of forward progression
+  through cached entries. In everyday use it operates silently within
+  <code>foreach</code>, handling chunk boundaries and iteration state
+  automatically. When precise traversal control is needed — for early exits,
+  conditional stepping, or rate-limited processing — explicit
+  <code>next()</code> calls combined with <code>valid()</code> provide
+  the control required while preserving the memory efficiency of APCu's
+  chunked retrieval model.
+</p>
 
 <h4 id="apcuiterator-rewind">APCUIterator::REWIND</h4>
 
