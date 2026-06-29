@@ -24959,6 +24959,268 @@ twoPhaseProcess('/^config:/');
 </p>
 
 <h4 id="apcuiterator-rewind">APCUIterator::REWIND</h4>
+<p>
+  <strong>APCUIterator::rewind()</strong> is a method of the
+  <code>APCUIterator</code> class that resets the iterator back to the first
+  matching cache entry, reinitializing the internal traversal state and
+  discarding any previously fetched chunks. It is part of PHP's
+  <code>Iterator</code> interface implementation and is called implicitly at
+  the beginning of every <code>foreach</code> loop, ensuring traversal always
+  starts from the first matching entry.
+</p>
+<p>
+  Unlike a simple pointer reset in a standard array iterator,
+  <code>rewind()</code> in <code>APCUIterator</code> has a meaningful
+  side effect: it re-queries shared memory, which means a second traversal
+  of the same iterator instance may yield a different set of entries if the
+  cache has been modified between the two passes.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Internal position is reset to before the first matching entry</li>
+  <li>Any previously fetched chunk data is discarded</li>
+  <li>The first batch of matching entries is fetched fresh from shared memory</li>
+  <li>Iterator is positioned at the first matching entry, ready for traversal</li>
+  <li>If no matching entries exist, the iterator is immediately placed in an invalid state</li>
+</ol>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::rewind(): void
+?>
+</code></pre>
+
+<h5>Implicit rewind() in a foreach Loop</h5>
+<pre><code class="language-php">
+<?php
+// rewind() is always called implicitly at the start of a foreach loop
+// This guarantees iteration begins from the first matching entry
+
+$iterator = new APCUIterator('/^product:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . PHP_EOL;
+    // rewind() was called silently before this first iteration step
+}
+?>
+</code></pre>
+
+<h5>Explicit rewind() for Manual Iteration</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^config:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+// Manually position the iterator before the first entry
+$iterator->rewind();
+
+while ($iterator->valid()) {
+    echo $iterator->key() . PHP_EOL;
+    $iterator->next();
+}
+?>
+</code></pre>
+
+<h5>Resetting Mid-Traversal</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^session:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+// First pass — collect all keys
+$firstPass = [];
+
+foreach ($iterator as $key => $entry) {
+    $firstPass[] = $key;
+}
+
+// rewind() is called implicitly again when foreach restarts
+// The second pass re-queries shared memory from the beginning
+$secondPass = [];
+
+foreach ($iterator as $key => $entry) {
+    $secondPass[] = $key;
+}
+
+// The two passes may differ if cache entries were added or removed between them
+$added   = array_diff($secondPass, $firstPass);
+$removed = array_diff($firstPass, $secondPass);
+
+echo 'Added between passes   : ' . implode(', ', $added)   . PHP_EOL;
+echo 'Removed between passes : ' . implode(', ', $removed) . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Practical Pattern — Multi-Pass Analysis</h5>
+<pre><code class="language-php">
+<?php
+// Perform two distinct analysis passes over the same iterator
+
+$iterator = new APCUIterator(
+    '/^order:/',
+    APC_ITER_KEY | APC_ITER_VALUE | APC_ITER_NUM_HITS | APC_ITER_MEM_SIZE
+);
+
+// Pass 1 — calculate total memory usage
+$totalSize = 0;
+
+foreach ($iterator as $entry) {
+    $totalSize += $entry['mem_size'];
+}
+
+// Pass 2 — identify entries with zero hits
+// rewind() is called implicitly by the second foreach
+$zeroHitKeys = [];
+
+foreach ($iterator as $key => $entry) {
+    if ($entry['num_hits'] === 0) {
+        $zeroHitKeys[] = $key;
+    }
+}
+
+echo 'Total memory    : ' . number_format($totalSize / 1024, 2) . ' KB' . PHP_EOL;
+echo 'Zero-hit entries: ' . count($zeroHitKeys) . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Practical Pattern — Retry After Cache Population</h5>
+<pre><code class="language-php">
+<?php
+// Rewind allows retrying traversal after populating the cache
+// useful in initialization or warm-up scenarios
+
+$iterator = new APCUIterator('/^config:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+$iterator->rewind();
+
+if (!$iterator->valid()) {
+    // Cache is empty — populate it before iterating
+    apcu_store('config:app',      ['debug' => false], 3600);
+    apcu_store('config:database', ['pool'  => 5],     3600);
+
+    // Rewind re-queries shared memory, now finding the newly stored entries
+    $iterator->rewind();
+}
+
+foreach ($iterator as $key => $entry) {
+    echo $key . ': ' . print_r($entry['value'], true) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Iterating the Same Pattern Multiple Times</h5>
+<pre><code class="language-php">
+<?php
+function runMultiplePasses(APCUIterator $iterator, array $processors): void
+{
+    foreach ($processors as $label => $processor) {
+        // Each foreach implicitly calls rewind() before starting
+        echo 'Running pass: ' . $label . PHP_EOL;
+
+        foreach ($iterator as $key => $entry) {
+            $processor($key, $entry);
+        }
+    }
+}
+
+$iterator = new APCUIterator('/^product:/', APC_ITER_ALL);
+
+runMultiplePasses($iterator, [
+    'memory_audit' => function (string $key, array $entry): void {
+        echo $key . ' uses ' . $entry['mem_size'] . ' bytes' . PHP_EOL;
+    },
+    'hit_audit' => function (string $key, array $entry): void {
+        echo $key . ' has ' . $entry['num_hits'] . ' hits' . PHP_EOL;
+    },
+]);
+?>
+</code></pre>
+
+<h5>rewind() and Cache Consistency</h5>
+<pre><code class="language-php">
+<?php
+// rewind() re-queries shared memory — entries stored after construction
+// but before rewind() will appear in the traversal
+
+apcu_store('snapshot:a', 'value_a');
+apcu_store('snapshot:b', 'value_b');
+
+$iterator = new APCUIterator('/^snapshot:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+// Store a new entry after iterator construction but before rewind
+apcu_store('snapshot:c', 'value_c');
+
+// rewind() re-queries — snapshot:c may be included depending on timing
+$iterator->rewind();
+
+foreach ($iterator as $key => $entry) {
+    echo $key . PHP_EOL; // May include snapshot:c
+}
+?>
+</code></pre>
+
+<h5>APCUIterator::rewind() vs Related Methods</h5>
+<ul>
+  <li>
+    <strong>rewind()</strong> – Resets position to the first matching entry
+    and re-queries shared memory; may return a different entry set on each call
+    if the cache has changed
+  </li>
+  <li>
+    <strong>next()</strong> – Advances position forward by one entry; does
+    not reset or re-query the chunk, only moves within or between existing batches
+  </li>
+  <li>
+    <strong>valid()</strong> – Should be checked immediately after
+    <code>rewind()</code> in manual iteration to confirm at least one matching
+    entry exists
+  </li>
+  <li>
+    <strong>current()</strong> – Returns the entry data after <code>rewind()</code>
+    positions the iterator at the first entry
+  </li>
+  <li>
+    <strong>key()</strong> – Returns the key string after <code>rewind()</code>
+    positions the iterator at the first entry
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Rely on the implicit <code>rewind()</code> called by <code>foreach</code> for standard traversal — explicit calls are only needed in manual iteration</li>
+  <li>Always call <code>valid()</code> immediately after an explicit <code>rewind()</code> before accessing <code>key()</code> or <code>current()</code></li>
+  <li>Be aware that each <code>rewind()</code> re-queries shared memory — results between passes are not guaranteed to be identical in a live cache</li>
+  <li>Use <code>rewind()</code> deliberately in retry and warm-up scenarios where the cache may have been populated between the initial check and the traversal</li>
+  <li>Avoid relying on entry order consistency between <code>rewind()</code> calls — APCu shared memory traversal order is not guaranteed to be stable</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Does not provide a snapshot — each <code>rewind()</code> reflects the current live state of the cache at that moment</li>
+  <li>No backwards traversal between entries — rewinding always restarts from the beginning, not from a saved position</li>
+  <li>Repeated <code>rewind()</code> calls on large caches cause repeated shared memory queries — avoid unnecessary rewinds in performance-sensitive code</li>
+  <li>Entry order between two <code>rewind()</code> calls is not guaranteed to be consistent — do not depend on positional stability across passes</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Initializing manual iteration before a <code>while</code> loop with <code>valid()</code> and <code>next()</code></li>
+  <li>Restarting traversal after detecting an empty cache and populating it</li>
+  <li>Running multiple sequential analysis passes over the same iterator instance</li>
+  <li>Detecting cache changes between two traversals of the same pattern</li>
+  <li>Implementing retry logic that re-checks cache state after a brief delay or population step</li>
+</ul>
+
+<p>
+  <code>APCUIterator::rewind()</code> is the reset mechanism that makes an
+  iterator instance reusable across multiple traversal passes. Its key
+  distinction from a simple pointer reset is that it re-queries shared memory
+  each time, meaning the results of a second pass may differ from the first
+  if the cache has changed in between. This live, non-snapshot behavior is
+  a fundamental characteristic of APCu iteration that every developer using
+  <code>APCUIterator</code> should understand and account for in their
+  traversal logic.
+</p>
 
 <h4 id="apcuiterator-valid">APCUIterator::VALID</h4>
 
