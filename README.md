@@ -25223,7 +25223,277 @@ foreach ($iterator as $key => $entry) {
 </p>
 
 <h4 id="apcuiterator-valid">APCUIterator::VALID</h4>
+<p>
+  <strong>APCUIterator::valid()</strong> is a method of the
+  <code>APCUIterator</code> class that checks whether the iterator's current
+  position points to a valid, accessible cache entry. It is part of PHP's
+  <code>Iterator</code> interface implementation and serves as the loop
+  condition that determines when traversal should stop — both implicitly in
+  <code>foreach</code> and explicitly in manual iteration.
+</p>
+<p>
+  <code>valid()</code> is the guard that must be checked before calling
+  <code>current()</code> or <code>key()</code> in manual iteration, since
+  both of those methods produce unreliable or <code>false</code> results
+  when the iterator has moved past the last matching entry.
+</p>
 
+<h5>How It Works</h5>
+<ol>
+  <li>Iterator checks whether the current internal position references an existing entry</li>
+  <li>If the current chunk is exhausted, it attempts to fetch the next batch before answering</li>
+  <li>Returns <code>true</code> if a matching entry is available at the current position</li>
+  <li>Returns <code>false</code> if no more matching entries exist, or if no entries matched the pattern at all</li>
+</ol>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public APCUIterator::valid(): bool
+?>
+</code></pre>
+
+<h5>Implicit valid() in a foreach Loop</h5>
+<pre><code class="language-php">
+<?php
+// valid() is checked implicitly before each iteration step
+// The loop terminates automatically when valid() returns false
+
+$iterator = new APCUIterator('/^product:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+foreach ($iterator as $key => $entry) {
+    echo $key . PHP_EOL;
+    // valid() is checked again here before the next iteration
+}
+?>
+</code></pre>
+
+<h5>Explicit valid() in Manual Iteration</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^session:/', APC_ITER_KEY | APC_ITER_VALUE);
+
+$iterator->rewind();
+
+while ($iterator->valid()) {
+    echo $iterator->key() . ': ' . print_r($iterator->current()['value'], true) . PHP_EOL;
+    $iterator->next();
+}
+?>
+</code></pre>
+
+<h5>Guarding Against an Empty Result Set</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^nonexistent:namespace:/', APC_ITER_KEY);
+$iterator->rewind();
+
+if (!$iterator->valid()) {
+    echo 'No entries match this pattern.';
+    exit;
+}
+
+// Safe to access current() and key() beyond this point
+echo 'First match: ' . $iterator->key();
+?>
+</code></pre>
+
+<h5>Why valid() Must Be Checked Before current() or key()</h5>
+<pre><code class="language-php">
+<?php
+$iterator = new APCUIterator('/^empty:pattern:/', APC_ITER_ALL);
+$iterator->rewind();
+
+// Calling current() without checking valid() first is unsafe
+// when no entries match the pattern
+$entry = $iterator->current(); // Returns false — not a usable entry array
+
+if ($entry === false) {
+    echo 'Attempted to read an invalid position.';
+}
+
+// Correct approach — always check valid() first
+if ($iterator->valid()) {
+    $entry = $iterator->current();
+    print_r($entry);
+} else {
+    echo 'No matching entries — current() would return false.';
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Bounded Manual Traversal</h5>
+<pre><code class="language-php">
+<?php
+// Process entries until either the iterator is exhausted
+// or a maximum number of entries has been processed
+
+function processLimitedEntries(string $pattern, int $limit): int
+{
+    $iterator = new APCUIterator($pattern, APC_ITER_ALL);
+    $iterator->rewind();
+
+    $processed = 0;
+
+    while ($iterator->valid() && $processed < $limit) {
+        processEntry($iterator->key(), $iterator->current());
+        $processed++;
+        $iterator->next();
+    }
+
+    return $processed;
+}
+
+function processEntry(string $key, array $entry): void
+{
+    // Entry processing logic
+}
+
+$count = processLimitedEntries('/^log:/', 100);
+echo 'Processed ' . $count . ' entries.';
+?>
+</code></pre>
+
+<h5>Practical Pattern — Conditional Early Exit</h5>
+<pre><code class="language-php">
+<?php
+// Combine valid() with a search condition to stop as soon as a match is found
+
+function findEntryByValue(string $pattern, callable $matcher): ?string
+{
+    $iterator = new APCUIterator($pattern, APC_ITER_KEY | APC_ITER_VALUE);
+    $iterator->rewind();
+
+    while ($iterator->valid()) {
+        $entry = $iterator->current();
+
+        if ($matcher($entry['value'])) {
+            return $iterator->key();
+        }
+
+        $iterator->next();
+    }
+
+    return null;
+}
+
+$foundKey = findEntryByValue('/^order:/', function (array $value): bool {
+    return ($value['status'] ?? null) === 'pending';
+});
+
+echo $foundKey !== null
+    ? 'First pending order found at: ' . $foundKey
+    : 'No pending orders in cache.';
+?>
+</code></pre>
+
+<h5>Practical Pattern — Safe Aggregation with valid()</h5>
+<pre><code class="language-php">
+<?php
+// Defensive aggregation that explicitly handles the empty-result case
+
+function safeAggregateMemorySize(string $pattern): int
+{
+    $iterator = new APCUIterator($pattern, APC_ITER_MEM_SIZE);
+    $iterator->rewind();
+
+    if (!$iterator->valid()) {
+        return 0; // No matching entries — explicit zero, not an error state
+    }
+
+    $total = 0;
+
+    while ($iterator->valid()) {
+        $total += $iterator->current()['mem_size'];
+        $iterator->next();
+    }
+
+    return $total;
+}
+
+echo 'Total size: ' . safeAggregateMemorySize('/^temp:/') . ' bytes';
+?>
+</code></pre>
+
+<h5>valid() vs getTotalCount() for Existence Checks</h5>
+<pre><code class="language-php">
+<?php
+// Checking valid() after rewind() is a lightweight existence check
+// equivalent in outcome to getTotalCount() > 0, but without counting all entries
+
+$iterator = new APCUIterator('/^cache:warm:/', APC_ITER_KEY);
+$iterator->rewind();
+
+$hasEntries = $iterator->valid();          // Stops at the first match — faster
+$totalCount = $iterator->getTotalCount();  // Counts all matches — more overhead
+
+echo 'Has entries (valid)      : ' . ($hasEntries ? 'yes' : 'no') . PHP_EOL;
+echo 'Has entries (count > 0)  : ' . ($totalCount > 0 ? 'yes' : 'no') . PHP_EOL;
+?>
+</code></pre>
+
+<h5>APCUIterator::valid() vs Related Methods</h5>
+<ul>
+  <li>
+    <strong>valid()</strong> – Boolean guard confirming the current position
+    holds a usable entry; must precede any call to <code>current()</code> or
+    <code>key()</code> in manual iteration
+  </li>
+  <li>
+    <strong>current()</strong> – Returns entry data only when
+    <code>valid()</code> would return <code>true</code>; otherwise returns
+    <code>false</code>
+  </li>
+  <li>
+    <strong>key()</strong> – Returns the key string only when
+    <code>valid()</code> would return <code>true</code>; otherwise returns
+    <code>false</code>
+  </li>
+  <li>
+    <strong>next()</strong> – May cause a subsequent <code>valid()</code>
+    call to return <code>false</code> once the last matching entry has been
+    passed
+  </li>
+  <li>
+    <strong>rewind()</strong> – Resets position before the first entry;
+    <code>valid()</code> should be checked immediately afterward to confirm
+    at least one match exists
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always check <code>valid()</code> before calling <code>current()</code> or <code>key()</code> in manual iteration — never assume a position is valid</li>
+  <li>Use <code>valid()</code> after <code>rewind()</code> as a lightweight existence check when only presence matters, rather than computing <code>getTotalCount()</code></li>
+  <li>Structure manual loops as <code>while ($iterator->valid())</code> followed by an explicit <code>next()</code> call inside the loop body</li>
+  <li>Combine <code>valid()</code> with custom conditions (limits, matchers) to implement bounded or early-exit traversal patterns</li>
+  <li>Prefer <code>foreach</code> for standard traversal — it manages <code>valid()</code>, <code>current()</code>, <code>key()</code>, and <code>next()</code> correctly without manual bookkeeping</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>A <code>true</code> result only guarantees validity at the moment of the call — concurrent deletions before the next <code>current()</code> call could still affect outcomes</li>
+  <li>Does not indicate how many entries remain — only whether at least the current one is accessible</li>
+  <li>Internally may trigger a chunk fetch from shared memory when crossing a batch boundary, making it not entirely free of cost despite being a simple boolean check</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Loop termination condition in manual <code>while</code> loop iteration</li>
+  <li>Guarding against unsafe calls to <code>current()</code> or <code>key()</code> on an empty or exhausted iterator</li>
+  <li>Lightweight existence checks for whether any entries match a given pattern</li>
+  <li>Implementing bounded traversal combined with a maximum entry count or custom stopping condition</li>
+  <li>Building early-exit search patterns that stop as soon as a matching entry is found</li>
+</ul>
+
+<p>
+  <code>APCUIterator::valid()</code> is the safety check that underlies all
+  reliable iteration over APCu cache entries. While <code>foreach</code>
+  handles it automatically and invisibly, any manual traversal pattern
+  depends on disciplined use of <code>valid()</code> to avoid reading from
+  an exhausted or empty iterator — making it one of the simplest yet most
+  essential methods in the <code>APCUIterator</code> interface.
+</p>
 
 <h4 id="componere">COMPONERE</h4>
 
