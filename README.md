@@ -25545,6 +25545,9 @@ echo 'Has entries (count > 0)  : ' . ($totalCount > 0 ? 'yes' : 'no') . PHP_EOL;
 </nav>
 
 <h4 id="introduction">INTRODUCTION</h4>
+
+.
+
 <h4 id="installation">INSTALLATION</h4>
 
 <h4 id="componere-abstract-definition-class">COMPONERE\ABSTRACT\DEFINITION CLASS</h4>
