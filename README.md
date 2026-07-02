@@ -25495,58 +25495,122 @@ echo 'Has entries (count > 0)  : ' . ($totalCount > 0 ? 'yes' : 'no') . PHP_EOL;
   essential methods in the <code>APCUIterator</code> interface.
 </p>
 
-<h4 id="componere">COMPONERE</h4>
-
-<nav align="center"> 
-  <h3>NAVIGATION</h3> 
-  <p>
-    <a href="#introduction">INTRODUCTION</a> | 
-    <a href="#installation">INSTALLATION</a> | 
-    <a href="#componere-abstract-definition-class">COMPONERE\ABSTRACT\DEFINITION CLASS</a> | 
-    <a href="#componere-abstract-definition-addinterface">COMPONERE\ABSTRACT\DEFINITION::ADDINTERFACE</a> | 
-    <a href="#componere-abstract-definition-addmethod">COMPONERE\ABSTRACT\DEFINITION::ADDMETHOD</a> | 
-    <a href="#componere-abstract-definition-addtrait">COMPONERE\ABSTRACT\DEFINITION::ADDTRAIT</a> | 
-    <a href="#componere-abstract-definition-getreflector">COMPONERE\ABSTRACT\DEFINITION::GETREFLECTOR</a> | 
-    <a href="#componere-definition-class">COMPONERE\DEFINITION CLASS</a> | 
-    <a href="#componere-definition-construct">COMPONERE\DEFINITION::__CONSTRUCT</a> | 
-    <a href="#componere-definition-addconstant">COMPONERE\DEFINITION::ADDCONSTANT</a> | 
-    <a href="#componere-definition-addproperty">COMPONERE\DEFINITION::ADDPROPERTY</a> | 
-    <a href="#componere-definition-register">COMPONERE\DEFINITION::REGISTER</a> | 
-    <a href="#componere-definition-isregistered">COMPONERE\DEFINITION::ISREGISTERED</a> | 
-    <a href="#componere-definition-getclosure">COMPONERE\DEFINITION::GETCLOSURE</a> | 
-    <a href="#componere-definition-getclosures">COMPONERE\DEFINITION::GETCLOSURES</a> | 
-    <a href="#componere-patch-class">COMPONERE\PATCH CLASS</a> | 
-    <a href="#componere-patch-construct">COMPONERE\PATCH::__CONSTRUCT</a> | 
-    <a href="#componere-patch-apply">COMPONERE\PATCH::APPLY</a> | 
-    <a href="#componere-patch-revert">COMPONERE\PATCH::REVERT</a> | 
-    <a href="#componere-patch-isapplied">COMPONERE\PATCH::ISAPPLIED</a> | 
-    <a href="#componere-patch-derive">COMPONERE\PATCH::DERIVE</a> | 
-    <a href="#componere-patch-getclosure">COMPONERE\PATCH::GETCLOSURE</a> | 
-    <a href="#componere-patch-getclosures">COMPONERE\PATCH::GETCLOSURES</a> | 
-    <a href="#componere-method-class">COMPONERE\METHOD CLASS</a> | 
-    <a href="#componere-method-construct">COMPONERE\METHOD::__CONSTRUCT</a> | 
-    <a href="#componere-method-setprivate">COMPONERE\METHOD::SETPRIVATE</a> | 
-    <a href="#componere-method-setprotected">COMPONERE\METHOD::SETPROTECTED</a> | 
-    <a href="#componere-method-setstatic">COMPONERE\METHOD::SETSTATIC</a> | 
-    <a href="#componere-method-getreflector">COMPONERE\METHOD::GETREFLECTOR</a> | 
-    <a href="#componere-value-class">COMPONERE\VALUE CLASS</a> | 
-    <a href="#componere-value-construct">COMPONERE\VALUE::__CONSTRUCT</a> | 
-    <a href="#componere-value-setprivate">COMPONERE\VALUE::SETPRIVATE</a> | 
-    <a href="#componere-value-setprotected">COMPONERE\VALUE::SETPROTECTED</a> | 
-    <a href="#componere-value-setstatic">COMPONERE\VALUE::SETSTATIC</a> | 
-    <a href="#componere-value-isprivate">COMPONERE\VALUE::ISPRIVATE</a> | 
-    <a href="#componere-value-isprotected">COMPONERE\VALUE::ISPROTECTED</a> | 
-    <a href="#componere-value-isstatic">COMPONERE\VALUE::ISSTATIC</a> | 
-    <a href="#componere-value-hasdefault">COMPONERE\VALUE::HASDEFAULT</a> | 
-    <a href="#componere-functions">COMPONERE FUNCTIONS</a> | 
-    <a href="#componere-cast">COMPONERE\CAST</a> | 
-    <a href="#componere-cast-by-ref">COMPONERE\CAST_BY_REF</a> |
-  </p> 
-</nav>
-
 <h4 id="introduction">INTRODUCTION</h4>
+<p>
+  <strong>Componere</strong> is a low-level PHP extension written in C that
+  enables runtime modification of class definitions. It allows developers to
+  add methods, properties, constants, interfaces, and traits to existing
+  classes — including internal PHP classes and third-party classes — without
+  altering their source code. Operating directly on the Zend Engine, Componere
+  provides capabilities that are simply not achievable through userland PHP alone.
+</p>
+<p>
+  The name <em>Componere</em> derives from Latin, meaning <em>to compose</em>
+  or <em>to put together</em> — reflecting the extension's core purpose of
+  assembling and reshaping class definitions dynamically at runtime.
+</p>
 
-.
+<h5>Core Concepts</h5>
+<p>
+  Componere is organized around three primary building blocks, each serving a
+  distinct role in runtime class manipulation:
+</p>
+<ul>
+  <li>
+    <strong>Definition</strong> – Creates and registers entirely new named
+    classes at runtime, optionally extending existing ones. A
+    <code>Definition</code> is built up by adding methods, properties,
+    constants, interfaces, and traits before being permanently registered
+    into the PHP class table.
+  </li>
+  <li>
+    <strong>Patch</strong> – Applies temporary modifications to an already
+    registered class, adding or replacing methods for the duration of a
+    request or until explicitly reverted. Unlike <code>Definition</code>,
+    patches are reversible and scoped, making them well-suited for testing
+    and controlled monkey patching.
+  </li>
+  <li>
+    <strong>Method and Value</strong> – Describe the individual members
+    (methods and properties) added to a <code>Definition</code> or
+    <code>Patch</code>. They carry visibility, static modifier, and
+    default value information that Componere applies to the target class.
+  </li>
+</ul>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Extension hooks into the Zend Engine's class entry structures at a low level</li>
+  <li>A <code>Definition</code> or <code>Patch</code> object is constructed in userland PHP</li>
+  <li>Methods, properties, interfaces, and traits are attached to the object</li>
+  <li>The definition is registered or the patch is applied to the target class</li>
+  <li>All instances — existing and future — of the target class reflect the modification</li>
+  <li>Patches can be reverted, restoring the original class definition</li>
+</ol>
+
+<h5>Primary Use Cases</h5>
+<ul>
+  <li>
+    <strong>Testing</strong> – The most legitimate and common use case.
+    Componere allows test suites to alter class behavior without dependency
+    injection, mocking frameworks, or modifying source code. This is
+    particularly valuable when dealing with final classes, internal PHP
+    classes, or third-party libraries that resist traditional mocking.
+  </li>
+  <li>
+    <strong>Runtime Extensibility</strong> – Plugin systems or framework
+    layers that need to augment classes dynamically based on configuration,
+    feature flags, or discovered plugins at bootstrap time.
+  </li>
+  <li>
+    <strong>Compatibility Layers</strong> – Adding interface implementations
+    or methods to existing classes to satisfy contracts that their original
+    authors did not anticipate.
+  </li>
+</ul>
+
+<h5>Requirements</h5>
+<ul>
+  <li>PHP 7.1 or later (PHP 8.x supported)</li>
+  <li>A C extension build environment (or a precompiled binary for your platform)</li>
+  <li>Installation via PECL: <code>pecl install componere</code></li>
+  <li>The <code>componere.so</code> extension directive added to <code>php.ini</code></li>
+</ul>
+
+<h5>Important Considerations</h5>
+<ul>
+  <li>
+    <strong>Not a userland library</strong> – Componere is a compiled C
+    extension and must be installed at the server level. It cannot be
+    required via Composer and is not available in all hosting environments.
+  </li>
+  <li>
+    <strong>Production use requires caution</strong> – While technically
+    possible, applying patches or dynamic definitions in production code
+    introduces significant complexity and maintainability risk. Runtime
+    class mutation makes code harder to reason about, debug, and audit.
+  </li>
+  <li>
+    <strong>Opcode cache interaction</strong> – When using OPcache, ensure
+    that Componere operations occur after the opcode cache has settled.
+    Dynamic class modifications do not interact well with aggressively
+    cached class entries.
+  </li>
+  <li>
+    <strong>No inheritance transparency</strong> – Methods and properties
+    added via Componere may not behave identically to natively declared
+    members in all reflection and serialization scenarios.
+  </li>
+</ul>
+
+<p>
+  Componere occupies a narrow but powerful niche in the PHP ecosystem.
+  Used appropriately — primarily in testing environments and carefully
+  considered extensibility scenarios — it unlocks capabilities that no
+  amount of design patterns or userland abstraction can replicate. Used
+  carelessly in production code, it can introduce subtle, hard-to-diagnose
+  bugs that undermine the stability and maintainability of an application.
+</p>
 
 <h4 id="installation">INSTALLATION</h4>
 
