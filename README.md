@@ -25613,6 +25613,183 @@ echo 'Has entries (count > 0)  : ' . ($totalCount > 0 ? 'yes' : 'no') . PHP_EOL;
 </p>
 
 <h4 id="installation">INSTALLATION</h4>
+<p>
+  Installing <strong>Componere</strong> requires compiling and loading a C
+  extension into the PHP runtime. It is not a userland library and cannot
+  be installed via Composer. The extension must be present at the system
+  level, loaded by PHP's extension mechanism, and confirmed active before
+  any of its classes or functions can be used.
+</p>
+<p>
+  The recommended installation path is through PECL, PHP's official extension
+  repository, which handles downloading, compiling, and linking the extension
+  against the active PHP installation. Manual compilation from source is also
+  supported for environments without PECL access or when a specific build
+  configuration is required.
+</p>
+
+<h5>Requirements</h5>
+<ul>
+  <li>PHP 7.1 or later (PHP 8.x fully supported)</li>
+  <li>PECL installed and accessible on the server</li>
+  <li>A working C compiler toolchain (<code>gcc</code> or <code>clang</code>)</li>
+  <li>PHP development headers (<code>php-dev</code> or <code>php-devel</code> package)</li>
+  <li>Write access to <code>php.ini</code> or the active extension configuration directory</li>
+</ul>
+
+<h5>Installing via PECL</h5>
+<pre><code class="language-bash">
+# Install the extension via PECL
+pecl install componere
+
+# PECL will download, compile, and install the .so file automatically
+# On success, it will output the path to the compiled extension
+</code></pre>
+
+<h5>Enabling the Extension</h5>
+<pre><code class="language-bash">
+# Add the extension directive to your php.ini
+extension=componere.so
+
+# Alternatively, create a dedicated configuration file
+# (preferred on Debian/Ubuntu-based systems with conf.d support)
+echo "extension=componere.so" > /etc/php/8.2/mods-available/componere.ini
+
+# Enable it via phpenmod (Debian/Ubuntu)
+phpenmod componere
+
+# Restart your web server or PHP-FPM to apply the change
+systemctl restart php8.2-fpm
+systemctl restart apache2  # if using Apache with mod_php
+</code></pre>
+
+<h5>Verifying the Installation</h5>
+<pre><code class="language-bash">
+# Confirm the extension is loaded from the command line
+php -m | grep componere
+
+# Display full extension info
+php --ri componere
+</code></pre>
+
+<pre><code class="language-php">
+<?php
+// Verify availability at runtime before using any Componere feature
+if (!extension_loaded('componere')) {
+    throw new RuntimeException('The Componere extension is not loaded.');
+}
+
+echo 'Componere is available: ' . phpversion('componere');
+?>
+</code></pre>
+
+<h5>Installing from Source</h5>
+<pre><code class="language-bash">
+# Clone the official repository
+git clone https://github.com/krakjoe/componere.git
+cd componere
+
+# Prepare the build environment
+phpize
+
+# Configure against the active PHP installation
+./configure --with-php-config=$(which php-config)
+
+# Compile and install
+make
+make install
+</code></pre>
+
+<h5>Installing for a Specific PHP Version</h5>
+<pre><code class="language-bash">
+# On systems with multiple PHP versions, target the correct one explicitly
+# Replace 8.2 with your active PHP version
+
+pecl -d php_suffix=8.2 install componere
+
+# Or use the versioned PECL binary if available
+pecl8.2 install componere
+</code></pre>
+
+<h5>Docker Installation Example</h5>
+<pre><code class="language-docker">
+FROM php:8.2-fpm
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    autoconf \
+    g++ \
+    make \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Componere via PECL
+RUN pecl install componere \
+    && docker-php-ext-enable componere
+</code></pre>
+
+<h5>Confirming in a PHP Script</h5>
+<pre><code class="language-php">
+<?php
+$loaded    = extension_loaded('componere');
+$version   = $loaded ? phpversion('componere') : 'not available';
+$phpVersion = PHP_VERSION;
+
+echo 'PHP version       : ' . $phpVersion . PHP_EOL;
+echo 'Componere loaded  : ' . ($loaded ? 'yes' : 'no') . PHP_EOL;
+echo 'Componere version : ' . $version . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Environment-Specific Notes</h5>
+<ul>
+  <li>
+    <strong>Shared Hosting</strong> – Componere cannot be installed on
+    most shared hosting environments due to the requirement for root or
+    sudo access to install system-level PHP extensions. A VPS, dedicated
+    server, or container-based environment is required.
+  </li>
+  <li>
+    <strong>PHP-FPM</strong> – After enabling the extension, the FPM pool
+    process must be fully restarted (not just reloaded) for the extension
+    to be recognized by worker processes.
+  </li>
+  <li>
+    <strong>OPcache</strong> – Componere is compatible with OPcache but
+    dynamic class modifications should occur before OPcache aggressively
+    caches affected class entries. In test environments, consider disabling
+    OPcache entirely.
+  </li>
+  <li>
+    <strong>CLI vs Web SAPI</strong> – The extension must be enabled
+    separately for CLI and web SAPIs if they use different
+    <code>php.ini</code> files, which is common on Debian and Ubuntu systems.
+  </li>
+  <li>
+    <strong>Windows</strong> – Precompiled DLLs for Windows may not be
+    available for all PHP versions. Compiling from source on Windows
+    requires the full Visual Studio build toolchain and PHP SDK.
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always verify the extension is loaded at application bootstrap when Componere features are required</li>
+  <li>Pin the Componere version in your build pipeline to avoid unexpected behavior from silent upstream updates</li>
+  <li>In CI/CD pipelines, include the Componere installation step explicitly in your environment setup stage</li>
+  <li>Keep the extension enabled only in environments where it is actively used — avoid loading unused extensions in production</li>
+  <li>Document the extension dependency clearly in your project's README and infrastructure setup guides</li>
+</ul>
+
+<p>
+  Once installed and verified, Componere is immediately available through
+  its namespaced classes (<code>Componere\Definition</code>,
+  <code>Componere\Patch</code>, <code>Componere\Method</code>, and
+  <code>Componere\Value</code>) and its global functions
+  (<code>Componere\cast()</code> and <code>Componere\cast_by_ref()</code>),
+  with no additional bootstrapping or autoloading required.
+</p>
+
 
 <h4 id="componere-abstract-definition-class">COMPONERE\ABSTRACT\DEFINITION CLASS</h4>
 <h4 id="componere-abstract-definition-addinterface">COMPONERE\ABSTRACT\DEFINITION::ADDINTERFACE</h4>
