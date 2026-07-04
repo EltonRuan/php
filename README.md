@@ -25792,6 +25792,207 @@ echo 'Componere version : ' . $version . PHP_EOL;
 
 
 <h4 id="componere-abstract-definition-class">COMPONERE\ABSTRACT\DEFINITION CLASS</h4>
+<p>
+  <strong>Componere\Abstract\Definition</strong> is the internal abstract base
+  class from which both <code>Componere\Definition</code> and
+  <code>Componere\Patch</code> inherit their shared functionality. It defines
+  the common interface for adding methods, interfaces, and traits to a class
+  definition or patch, encapsulating the core composition operations that both
+  concrete subclasses depend on.
+</p>
+<p>
+  This class cannot be instantiated directly — it exists solely to provide a
+  consistent, shared API surface for the two concrete Componere types. Understanding
+  its role clarifies why <code>Definition</code> and <code>Patch</code> share
+  the same method-adding, interface-implementing, and trait-consuming capabilities
+  while differing in their registration and lifecycle semantics.
+</p>
+
+<h5>Class Hierarchy</h5>
+<ul>
+  <li>
+    <strong>Componere\Abstract\Definition</strong> (abstract base)
+    <ul>
+      <li><strong>Componere\Definition</strong> – Creates and permanently registers new classes</li>
+      <li><strong>Componere\Patch</strong> – Applies reversible modifications to existing classes</li>
+    </ul>
+  </li>
+</ul>
+
+<h5>Inherited Methods</h5>
+<ul>
+  <li>
+    <strong>addMethod(string $name, Componere\Method $method)</strong> –
+    Adds a method to the definition or patch. The method's visibility,
+    static modifier, and closure body are all encapsulated in the
+    <code>Componere\Method</code> instance passed as the second argument.
+  </li>
+  <li>
+    <strong>addInterface(string $interface)</strong> –
+    Declares that the target class implements the given interface. The
+    interface must already be registered in PHP's class table at the time
+    this is called.
+  </li>
+  <li>
+    <strong>addTrait(string $trait)</strong> –
+    Applies a trait to the class definition or patch, importing its methods
+    and properties according to standard PHP trait semantics.
+  </li>
+  <li>
+    <strong>getReflector()</strong> –
+    Returns a <code>ReflectionClass</code> instance representing the current
+    state of the definition or patch, allowing introspection of what has been
+    declared so far.
+  </li>
+</ul>
+
+<h5>Relationship Between Definition and Patch</h5>
+<ul>
+  <li>
+    <strong>Componere\Definition</strong> – Builds an entirely new class from
+    scratch. Once registered via <code>register()</code>, the class becomes
+    permanently available in the runtime and cannot be unregistered. The base
+    class methods are used to populate the new class before registration.
+  </li>
+  <li>
+    <strong>Componere\Patch</strong> – Modifies an already existing class by
+    overlaying new or replacement methods. The patch can be applied and reverted
+    multiple times. The base class methods are used to describe the modifications
+    to overlay onto the target class.
+  </li>
+</ul>
+
+<h5>Why an Abstract Base Class</h5>
+<p>
+  Componere uses this inheritance structure deliberately. Both
+  <code>Definition</code> and <code>Patch</code> need to support adding
+  methods, interfaces, and traits — but they diverge significantly in what
+  happens after composition. Rather than duplicating the composition API in
+  both classes, the shared operations are centralized in
+  <code>Componere\Abstract\Definition</code>, while each subclass adds its
+  own distinct lifecycle methods (<code>register()</code>,
+  <code>isRegistered()</code> for <code>Definition</code>; <code>apply()</code>,
+  <code>revert()</code>, <code>isApplied()</code> for <code>Patch</code>).
+</p>
+
+<h5>Usage in Practice</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Patch;
+use Componere\Method;
+
+// Both Definition and Patch share the same composition API
+// inherited from Componere\Abstract\Definition
+
+// Via Definition — building a new class
+$definition = new Definition(stdClass::class);
+$definition->addMethod('greet', new Method(function (): string {
+    return 'Hello from Definition!';
+}));
+$definition->register();
+
+// Via Patch — modifying an existing class
+$patch = new Patch(stdClass::class);
+$patch->addMethod('greet', new Method(function (): string {
+    return 'Hello from Patch!';
+}));
+$patch->apply();
+?>
+</code></pre>
+
+<h5>Interface and Trait Composition</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Greetable
+{
+    public function greet(): string;
+}
+
+trait HasTimestamp
+{
+    public function timestamp(): string
+    {
+        return date('Y-m-d H:i:s');
+    }
+}
+
+// addInterface() and addTrait() are inherited from Abstract\Definition
+// and available on both Definition and Patch
+
+$definition = new Definition(stdClass::class);
+
+$definition->addInterface(Greetable::class);
+$definition->addTrait(HasTimestamp::class);
+$definition->addMethod('greet', new Method(function (): string {
+    return 'Hello at ' . $this->timestamp();
+}));
+
+$definition->register();
+
+$instance = new stdClass();
+echo $instance->greet();
+?>
+</code></pre>
+
+<h5>Introspection with getReflector()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition(stdClass::class);
+$definition->addMethod('hello', new Method(function (): string {
+    return 'Hello!';
+}));
+
+// getReflector() is inherited from Abstract\Definition
+// Returns a ReflectionClass of the current composition state
+$reflector = $definition->getReflector();
+
+echo 'Class name : ' . $reflector->getName()        . PHP_EOL;
+echo 'Methods    : ' . count($reflector->getMethods()) . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Key Characteristics</h5>
+<ul>
+  <li>Cannot be instantiated directly — always use <code>Componere\Definition</code> or <code>Componere\Patch</code></li>
+  <li>Provides the full composition API shared by both concrete subclasses</li>
+  <li>Method calls on this API are chainable — each returns the current instance, enabling fluent composition</li>
+  <li>Trait and interface resolution follows standard PHP semantics and respects the state of the class table at call time</li>
+  <li>Reflection via <code>getReflector()</code> reflects the composition state at the moment of the call, not the final registered or applied state</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Think of <code>Componere\Abstract\Definition</code> as a contract — if you are writing code that accepts either a <code>Definition</code> or a <code>Patch</code>, type-hint against the abstract base class for maximum flexibility</li>
+  <li>Use <code>getReflector()</code> during development and testing to verify that your composition is building the class structure you expect before registering or applying</li>
+  <li>Add interfaces before adding methods that implement them — this makes the composition order easier to read and reason about</li>
+  <li>Add traits before adding methods — traits are merged first, and explicitly added methods will take precedence over trait methods of the same name</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Type-hinting against the abstract base when building reusable composition utilities that work with both <code>Definition</code> and <code>Patch</code></li>
+  <li>Understanding the shared API surface before diving into the specifics of <code>Definition</code> or <code>Patch</code></li>
+  <li>Using <code>getReflector()</code> to introspect and validate class composition during development</li>
+  <li>Applying interfaces and traits as part of a structured, readable composition pipeline</li>
+</ul>
+
+<p>
+  <code>Componere\Abstract\Definition</code> is the architectural foundation
+  of the Componere extension's composition model. By centralizing the shared
+  API in an abstract base, Componere keeps the composition surface consistent
+  and predictable across both permanent class registration and reversible
+  patching — allowing developers to learn one set of composition methods and
+  apply them uniformly regardless of whether they are building new classes or
+  modifying existing ones.
+</p>
+
 <h4 id="componere-abstract-definition-addinterface">COMPONERE\ABSTRACT\DEFINITION::ADDINTERFACE</h4>
 <h4 id="componere-abstract-definition-addmethod">COMPONERE\ABSTRACT\DEFINITION::ADDMETHOD</h4>
 <h4 id="componere-abstract-definition-addtrait">COMPONERE\ABSTRACT\DEFINITION::ADDTRAIT</h4>
