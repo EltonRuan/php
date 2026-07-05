@@ -25994,6 +25994,252 @@ echo 'Methods    : ' . count($reflector->getMethods()) . PHP_EOL;
 </p>
 
 <h4 id="componere-abstract-definition-addinterface">COMPONERE\ABSTRACT\DEFINITION::ADDINTERFACE</h4>
+<p>
+  <strong>Componere\Abstract\Definition::addInterface()</strong> is a method
+  inherited by both <code>Componere\Definition</code> and
+  <code>Componere\Patch</code> that declares the target class as implementing
+  a given interface. The interface is applied at the Zend Engine level,
+  meaning the class will satisfy <code>instanceof</code> checks, type
+  declarations, and reflection queries for the specified interface just as
+  if it had been declared natively in source code.
+</p>
+<p>
+  Unlike adding a method or property, adding an interface does not inject
+  any executable behavior — it modifies the class's type identity within
+  the PHP runtime, affecting how the class is perceived by the type system,
+  dependency injection containers, and any code that performs interface
+  checks at runtime.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Abstract\Definition::addInterface(string $interface): Componere\Abstract\Definition
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The interface name is validated against PHP's class table — the interface must already be registered</li>
+  <li>The interface entry is attached to the target class definition or patch at the Zend Engine level</li>
+  <li>The method returns the current instance, enabling fluent chaining</li>
+  <li>For <code>Definition</code>, the interface becomes part of the class once <code>register()</code> is called</li>
+  <li>For <code>Patch</code>, the interface is applied to the existing class when <code>apply()</code> is called</li>
+</ol>
+
+<h5>Basic Usage with Definition</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Serializable
+{
+    public function serialize(): string;
+}
+
+$definition = new Definition(stdClass::class);
+
+$definition->addInterface(Serializable::class);
+$definition->addMethod('serialize', new Method(function (): string {
+    return json_encode((array) $this);
+}));
+
+$definition->register();
+
+$instance = new stdClass();
+
+echo ($instance instanceof Serializable) ? 'implements Serializable' : 'does not implement';
+echo $instance->serialize();
+?>
+</code></pre>
+
+<h5>Basic Usage with Patch</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+interface Loggable
+{
+    public function log(): void;
+}
+
+class UserService
+{
+    public function doWork(): void {}
+}
+
+$patch = new Patch(UserService::class);
+
+$patch->addInterface(Loggable::class);
+$patch->addMethod('log', new Method(function (): void {
+    echo '[LOG] ' . static::class . ' called at ' . date('H:i:s') . PHP_EOL;
+}));
+
+$patch->apply();
+
+$service = new UserService();
+
+echo ($service instanceof Loggable) ? 'implements Loggable' : 'does not implement';
+$service->log();
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Fluent Interface — Chaining Multiple addInterface() Calls</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Countable
+{
+    public function count(): int;
+}
+
+interface Stringable
+{
+    public function __toString(): string;
+}
+
+$definition = new Definition(stdClass::class);
+
+$definition
+    ->addInterface(Countable::class)
+    ->addInterface(Stringable::class)
+    ->addMethod('count', new Method(function (): int {
+        return count((array) $this);
+    }))
+    ->addMethod('__toString', new Method(function (): string {
+        return json_encode((array) $this);
+    }));
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Verifying Interface Implementation via Reflection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Renderable
+{
+    public function render(): string;
+}
+
+$definition = new Definition(stdClass::class);
+$definition->addInterface(Renderable::class);
+$definition->addMethod('render', new Method(function (): string {
+    return '<div>' . htmlspecialchars(json_encode((array) $this)) . '</div>';
+}));
+
+// Inspect via getReflector() before registering
+$reflector = $definition->getReflector();
+
+$interfaces = array_keys($reflector->getInterfaces());
+echo 'Declared interfaces: ' . implode(', ', $interfaces) . PHP_EOL;
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Satisfying Type Declarations at Runtime</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface EventListener
+{
+    public function handle(array $event): void;
+}
+
+function dispatch(EventListener $listener, array $event): void
+{
+    $listener->handle($event);
+}
+
+$definition = new Definition(stdClass::class);
+$definition->addInterface(EventListener::class);
+$definition->addMethod('handle', new Method(function (array $event): void {
+    echo 'Handling event: ' . ($event['name'] ?? 'unknown') . PHP_EOL;
+}));
+$definition->register();
+
+$listener = new stdClass();
+
+// stdClass now satisfies the EventListener type declaration
+dispatch($listener, ['name' => 'user.created']);
+?>
+</code></pre>
+
+<h5>Important Constraints</h5>
+<ul>
+  <li>
+    <strong>Interface must exist</strong> – The interface passed to
+    <code>addInterface()</code> must already be registered in PHP's class
+    table. Passing an undefined interface name will throw a
+    <code>RuntimeException</code>.
+  </li>
+  <li>
+    <strong>Methods are not automatically provided</strong> –
+    <code>addInterface()</code> only modifies type identity. Any methods
+    declared by the interface must be explicitly added via
+    <code>addMethod()</code>, or the class will not satisfy the interface
+    contract at runtime.
+  </li>
+  <li>
+    <strong>No validation of contract fulfillment</strong> – Componere does
+    not enforce that all interface methods are implemented. Missing method
+    implementations will cause fatal errors only when those methods are
+    actually called, not at the time of registration or application.
+  </li>
+  <li>
+    <strong>Patch revert removes the interface</strong> – When a
+    <code>Patch</code> that added an interface is reverted, the interface
+    is removed from the class and <code>instanceof</code> checks return
+    to their pre-patch state.
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always add the interface before adding the methods that implement it — this makes composition order clear and mirrors how PHP source code is naturally read</li>
+  <li>Use <code>getReflector()->getInterfaces()</code> during development to verify that interfaces are being attached correctly before registering or applying</li>
+  <li>Implement all methods declared by an added interface — Componere does not validate this for you and missing implementations will cause fatal errors at call time</li>
+  <li>When patching existing classes, prefer adding interfaces that add behavior rather than replacing it, to reduce the risk of breaking existing consumers of the class</li>
+  <li>Document any interfaces added via Componere in your project's architecture notes — runtime type modifications are invisible to static analysis tools and IDEs</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Static analysis tools (PHPStan, Psalm) and IDEs are unaware of interfaces added at runtime — type checking and autocompletion will not reflect Componere modifications</li>
+  <li>Interfaces added via <code>Patch</code> are temporary and tied to the patch lifecycle — do not rely on them being present after a revert</li>
+  <li>Cannot add an interface that the class already implements — doing so will throw a <code>RuntimeException</code></li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Making third-party or internal classes satisfy interface contracts without modifying their source code</li>
+  <li>Enabling dependency injection containers to resolve classes against interfaces they did not originally declare</li>
+  <li>Retrofitting interface compliance onto legacy classes during incremental refactoring</li>
+  <li>In testing, making a concrete class satisfy an interface to pass type-checked function signatures without full mocking</li>
+</ul>
+
+<p>
+  <code>addInterface()</code> is one of the most impactful operations in the
+  Componere API because it modifies not just what a class can do, but what
+  it <em>is</em> from the perspective of PHP's type system. Used carefully,
+  it enables powerful decoupling and compatibility patterns that would
+  otherwise require significant refactoring of existing code — but it must
+  always be paired with the corresponding method implementations to avoid
+  silent contract violations that only surface at runtime.
+</p>
+
 <h4 id="componere-abstract-definition-addmethod">COMPONERE\ABSTRACT\DEFINITION::ADDMETHOD</h4>
 <h4 id="componere-abstract-definition-addtrait">COMPONERE\ABSTRACT\DEFINITION::ADDTRAIT</h4>
 <h4 id="componere-abstract-definition-getreflector">COMPONERE\ABSTRACT\DEFINITION::GETREFLECTOR</h4>
