@@ -26241,6 +26241,261 @@ dispatch($listener, ['name' => 'user.created']);
 </p>
 
 <h4 id="componere-abstract-definition-addmethod">COMPONERE\ABSTRACT\DEFINITION::ADDMETHOD</h4>
+<p>
+  <strong>Componere\Abstract\Definition::addMethod()</strong> is the primary
+  composition method inherited by both <code>Componere\Definition</code> and
+  <code>Componere\Patch</code>. It attaches a callable behavior — wrapped in
+  a <code>Componere\Method</code> instance — to the target class under a given
+  name, making it available as a fully native method on every instance of that
+  class once the definition is registered or the patch is applied.
+</p>
+<p>
+  The method operates at the Zend Engine level, binding the closure directly
+  into the class entry structure. This means the added method behaves
+  identically to a natively declared method — it has access to
+  <code>$this</code>, respects visibility rules, supports static declaration,
+  and appears in reflection output — with no userland proxy or wrapper overhead.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Abstract\Definition::addMethod(
+    string            $name,
+    Componere\Method  $method
+): Componere\Abstract\Definition
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>A <code>Componere\Method</code> instance wraps a closure and its visibility and static modifiers</li>
+  <li><code>addMethod()</code> registers the method name and its associated <code>Method</code> object against the definition or patch</li>
+  <li>The closure is bound to the target class scope, giving it access to <code>$this</code> and private members when applicable</li>
+  <li>The method returns the current instance, enabling fluent chaining</li>
+  <li>For <code>Definition</code>, methods become live when <code>register()</code> is called</li>
+  <li>For <code>Patch</code>, methods become live when <code>apply()</code> is called and are removed when <code>revert()</code> is called</li>
+</ol>
+
+<h5>Basic Usage with Definition</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition(stdClass::class);
+
+$definition->addMethod('greet', new Method(function (string $name): string {
+    return 'Hello, ' . $name . '!';
+}));
+
+$definition->register();
+
+$instance = new stdClass();
+echo $instance->greet('World'); // Hello, World!
+?>
+</code></pre>
+
+<h5>Basic Usage with Patch</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class PaymentService
+{
+    public function charge(float $amount): bool
+    {
+        // Real payment logic
+        return true;
+    }
+}
+
+$patch = new Patch(PaymentService::class);
+
+$patch->addMethod('charge', new Method(function (float $amount): bool {
+    echo '[TEST] Intercepted charge of $' . number_format($amount, 2) . PHP_EOL;
+    return true; // Simulate success without real charge
+}));
+
+$patch->apply();
+
+$service = new PaymentService();
+$service->charge(99.90); // [TEST] Intercepted charge of $99.90
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Accessing $this Inside the Method</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+class Order
+{
+    public int    $id    = 0;
+    public string $status = 'pending';
+}
+
+$definition = new Definition(Order::class);
+
+$definition->addMethod('describe', new Method(function (): string {
+    // $this refers to the Order instance
+    return 'Order #' . $this->id . ' is ' . $this->status;
+}));
+
+$definition->register();
+
+$order         = new Order();
+$order->id     = 42;
+$order->status = 'completed';
+
+echo $order->describe(); // Order #42 is completed
+?>
+</code></pre>
+
+<h5>Controlling Visibility and Static Modifier</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition(stdClass::class);
+
+// Public method (default)
+$definition->addMethod('publicMethod', new Method(function (): string {
+    return 'public';
+}));
+
+// Protected method
+$definition->addMethod('protectedMethod', (new Method(function (): string {
+    return 'protected';
+}))->setProtected());
+
+// Private method
+$definition->addMethod('privateMethod', (new Method(function (): string {
+    return 'private';
+}))->setPrivate());
+
+// Static method
+$definition->addMethod('staticMethod', (new Method(function (): string {
+    return 'static';
+}))->setStatic());
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Fluent Chaining of Multiple Methods</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+class Product
+{
+    public string $name  = '';
+    public float  $price = 0.0;
+}
+
+$definition = new Definition(Product::class);
+
+$definition
+    ->addMethod('getLabel', new Method(function (): string {
+        return $this->name . ' — $' . number_format($this->price, 2);
+    }))
+    ->addMethod('applyDiscount', new Method(function (float $percent): void {
+        $this->price -= $this->price * ($percent / 100);
+    }))
+    ->addMethod('isOnSale', new Method(function (): bool {
+        return $this->price < 50.0;
+    }));
+
+$definition->register();
+
+$product        = new Product();
+$product->name  = 'Widget';
+$product->price = 80.00;
+
+$product->applyDiscount(20);
+echo $product->getLabel();  // Widget — $64.00
+echo $product->isOnSale() ? 'On sale' : 'Full price';
+?>
+</code></pre>
+
+<h5>Verifying Added Methods via Reflection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition(stdClass::class);
+$definition->addMethod('hello', new Method(function (): string {
+    return 'Hello!';
+}));
+
+$reflector = $definition->getReflector();
+$methods   = $reflector->getMethods();
+
+foreach ($methods as $method) {
+    echo $method->getName() . ' (' . ($method->isPublic() ? 'public' : 'non-public') . ')' . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>addMethod() vs Native Method Declaration</h5>
+<ul>
+  <li>
+    <strong>addMethod()</strong> – Applied at runtime via the Zend Engine;
+    invisible to static analysis and IDEs; no source code modification needed;
+    works on third-party and internal classes; reversible via <code>Patch</code>
+  </li>
+  <li>
+    <strong>Native declaration</strong> – Defined in source code at compile
+    time; fully visible to static analysis, IDEs, and documentation generators;
+    immutable at runtime; the correct choice whenever source modification is possible
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Keep closures passed to <code>Method</code> focused and single-purpose — the same clean code principles that apply to native methods apply here</li>
+  <li>Always declare explicit parameter and return types on closures for clarity and to support any reflection-based tooling that inspects the added methods</li>
+  <li>When replacing an existing method via <code>Patch</code>, preserve the original method's signature to avoid breaking callers that depend on the original contract</li>
+  <li>Use <code>getReflector()</code> to confirm that methods are attached with the expected names and visibility before registering or applying</li>
+  <li>Prefer adding methods via <code>Patch</code> in test scenarios so that modifications are automatically scoped and reversible</li>
+  <li>Document every <code>addMethod()</code> call clearly — runtime method injection is invisible to IDEs and static analyzers and must be communicated through comments or architecture documentation</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Added methods are invisible to static analysis tools such as PHPStan and Psalm — no type inference or autocompletion is available for them</li>
+  <li>Methods added via <code>Definition</code> are permanent — once registered, they cannot be removed without restarting the PHP process</li>
+  <li>The closure passed to <code>Method</code> cannot use <code>parent::</code> keyword calls in the same way as natively declared methods in some configurations</li>
+  <li>Debugging stack traces involving Componere-added methods may show closure origins rather than a named class method location</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Injecting test doubles and behavioral overrides into classes without mocking frameworks</li>
+  <li>Adding utility methods to third-party or internal PHP classes that cannot be modified at source level</li>
+  <li>Building plugin systems that augment registered classes dynamically based on runtime configuration</li>
+  <li>Implementing decorator-like patterns without wrapper classes or proxy objects</li>
+  <li>Retrofitting behavior onto legacy classes during incremental refactoring without touching their source files</li>
+</ul>
+
+<p>
+  <code>addMethod()</code> is the cornerstone of Componere's composition model.
+  It bridges the gap between PHP's static class system and the need for
+  runtime behavioral flexibility — delivering native method performance and
+  semantics without source code modification. Its power comes with a
+  corresponding responsibility: every method added at runtime must be
+  intentional, well-documented, and carefully scoped to avoid introducing
+  invisible complexity that undermines the maintainability of the codebase.
+</p>
+
 <h4 id="componere-abstract-definition-addtrait">COMPONERE\ABSTRACT\DEFINITION::ADDTRAIT</h4>
 <h4 id="componere-abstract-definition-getreflector">COMPONERE\ABSTRACT\DEFINITION::GETREFLECTOR</h4>
 
