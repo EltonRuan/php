@@ -26497,6 +26497,319 @@ foreach ($methods as $method) {
 </p>
 
 <h4 id="componere-abstract-definition-addtrait">COMPONERE\ABSTRACT\DEFINITION::ADDTRAIT</h4>
+<p>
+  <strong>Componere\Abstract\Definition::addTrait()</strong> is a method
+  inherited by both <code>Componere\Definition</code> and
+  <code>Componere\Patch</code> that applies a PHP trait to the target class
+  at runtime. The trait is merged into the class definition at the Zend Engine
+  level, importing its methods and properties according to standard PHP trait
+  semantics — as if the trait had been declared in the class body using the
+  <code>use</code> keyword in source code.
+</p>
+<p>
+  This makes <code>addTrait()</code> the most powerful of the three composition
+  methods available on <code>Componere\Abstract\Definition</code>, as a single
+  call can import an entire set of methods and properties into the target class
+  simultaneously — rather than adding them one by one via
+  <code>addMethod()</code>.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Abstract\Definition::addTrait(string $trait): Componere\Abstract\Definition
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The trait name is validated against PHP's class table — the trait must already be registered</li>
+  <li>The trait's methods and properties are merged into the target class definition at the Zend Engine level</li>
+  <li>Standard PHP trait conflict resolution rules apply — conflicts must be resolved explicitly</li>
+  <li>The method returns the current instance, enabling fluent chaining</li>
+  <li>For <code>Definition</code>, the trait becomes part of the class once <code>register()</code> is called</li>
+  <li>For <code>Patch</code>, the trait methods are applied when <code>apply()</code> is called and removed when <code>revert()</code> is called</li>
+</ol>
+
+<h5>Basic Usage with Definition</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+
+trait HasTimestamps
+{
+    public function createdAt(): string
+    {
+        return date('Y-m-d H:i:s');
+    }
+
+    public function updatedAt(): string
+    {
+        return date('Y-m-d H:i:s');
+    }
+}
+
+$definition = new Definition(stdClass::class);
+$definition->addTrait(HasTimestamps::class);
+$definition->register();
+
+$instance = new stdClass();
+echo $instance->createdAt(); // 2026-07-07 12:00:00
+echo $instance->updatedAt(); // 2026-07-07 12:00:00
+?>
+</code></pre>
+
+<h5>Basic Usage with Patch</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+
+trait Loggable
+{
+    public function log(string $message): void
+    {
+        echo '[' . static::class . '] ' . $message . PHP_EOL;
+    }
+}
+
+class OrderService
+{
+    public function process(int $orderId): void
+    {
+        // Original processing logic
+    }
+}
+
+$patch = new Patch(OrderService::class);
+$patch->addTrait(Loggable::class);
+$patch->apply();
+
+$service = new OrderService();
+$service->log('Processing order 42'); // [OrderService] Processing order 42
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Combining addTrait() with addMethod() and addInterface()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Auditable
+{
+    public function audit(): string;
+}
+
+trait HasUuid
+{
+    public function uuid(): string
+    {
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
+    }
+}
+
+class Entity
+{
+    public string $name = '';
+}
+
+$definition = new Definition(Entity::class);
+
+$definition
+    ->addInterface(Auditable::class)
+    ->addTrait(HasUuid::class)
+    ->addMethod('audit', new Method(function (): string {
+        return 'Entity "' . $this->name . '" with UUID: ' . $this->uuid();
+    }));
+
+$definition->register();
+
+$entity       = new Entity();
+$entity->name = 'Product';
+
+echo $entity->audit();
+?>
+</code></pre>
+
+<h5>Applying Multiple Traits</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+
+trait HasSoftDelete
+{
+    private ?string $deletedAt = null;
+
+    public function delete(): void
+    {
+        $this->deletedAt = date('Y-m-d H:i:s');
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->deletedAt !== null;
+    }
+}
+
+trait HasVersioning
+{
+    private int $version = 1;
+
+    public function incrementVersion(): void
+    {
+        $this->version++;
+    }
+
+    public function getVersion(): int
+    {
+        return $this->version;
+    }
+}
+
+class Document
+{
+    public string $title = '';
+}
+
+$definition = new Definition(Document::class);
+
+$definition
+    ->addTrait(HasSoftDelete::class)
+    ->addTrait(HasVersioning::class);
+
+$definition->register();
+
+$doc        = new Document();
+$doc->title = 'Architecture Overview';
+
+$doc->incrementVersion();
+echo 'Version   : ' . $doc->getVersion() . PHP_EOL; // 2
+
+$doc->delete();
+echo 'Is deleted: ' . ($doc->isDeleted() ? 'yes' : 'no') . PHP_EOL; // yes
+?>
+</code></pre>
+
+<h5>Trait Method Precedence Over addMethod()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+trait HasGreeting
+{
+    public function greet(): string
+    {
+        return 'Hello from trait!';
+    }
+}
+
+$definition = new Definition(stdClass::class);
+
+// Add the trait first
+$definition->addTrait(HasGreeting::class);
+
+// Explicitly added method takes precedence over the trait method of the same name
+$definition->addMethod('greet', new Method(function (): string {
+    return 'Hello from explicit method!';
+}));
+
+$definition->register();
+
+$instance = new stdClass();
+echo $instance->greet(); // Hello from explicit method!
+?>
+</code></pre>
+
+<h5>Verifying Trait Application via Reflection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+
+trait HasStatus
+{
+    public function status(): string
+    {
+        return 'active';
+    }
+}
+
+$definition = new Definition(stdClass::class);
+$definition->addTrait(HasStatus::class);
+
+$reflector = $definition->getReflector();
+$traits    = $reflector->getTraits();
+
+foreach ($traits as $name => $trait) {
+    echo 'Trait applied: ' . $name . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>addTrait() vs addMethod()</h5>
+<ul>
+  <li>
+    <strong>addTrait()</strong> – Imports an entire set of methods and
+    properties in a single call; follows standard PHP trait semantics;
+    best when reusing existing, well-defined trait bodies across multiple
+    definitions or patches
+  </li>
+  <li>
+    <strong>addMethod()</strong> – Adds a single method with a closure body;
+    more granular and explicit; best when adding one-off behavior that is
+    specific to the current definition or patch context
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Add traits before calling <code>addMethod()</code> for methods of the same name — explicitly added methods take precedence over trait methods and this ordering makes the precedence visible</li>
+  <li>Use <code>getReflector()->getTraits()</code> during development to confirm that traits are being merged correctly before registering or applying</li>
+  <li>Keep traits used with Componere small and focused — large traits with many methods increase the surface area of runtime class modification and make debugging harder</li>
+  <li>Remember that trait properties are also imported — ensure there are no property name collisions with the target class's existing properties</li>
+  <li>Document every <code>addTrait()</code> call clearly in your project — runtime trait application is invisible to static analysis tools and IDEs</li>
+  <li>In test environments, prefer <code>Patch</code> over <code>Definition</code> for trait application so that modifications are automatically reversible after each test</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>The trait must already be registered in PHP's class table — autoloading is not triggered by <code>addTrait()</code></li>
+  <li>Trait conflict resolution (aliasing and precedence via <code>insteadof</code> and <code>as</code>) is not directly supported through <code>addTrait()</code> — conflicts must be resolved in the trait definitions themselves or by overriding with explicit <code>addMethod()</code> calls</li>
+  <li>Static analysis tools and IDEs are unaware of traits applied at runtime — type inference and autocompletion will not reflect the imported methods</li>
+  <li>Trait properties imported via <code>Patch</code> are temporary — they are removed when the patch is reverted</li>
+  <li>Cannot add a trait that the target class already uses — doing so will throw a <code>RuntimeException</code></li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Importing reusable behavior (timestamps, soft deletes, versioning, logging) into classes that cannot be modified at source level</li>
+  <li>Applying cross-cutting concerns to third-party classes in a controlled, reversible way during testing</li>
+  <li>Building modular plugin systems where traits encapsulate pluggable feature sets applied at bootstrap time</li>
+  <li>Retrofitting shared behavior onto legacy classes without duplicating method implementations via repeated <code>addMethod()</code> calls</li>
+  <li>Composing complex class definitions from multiple focused trait bodies in combination with explicit methods and interfaces</li>
+</ul>
+
+<p>
+  <code>addTrait()</code> is the most expressive composition primitive in
+  the Componere API, capable of importing entire behavioral units into a
+  class with a single call. When combined with <code>addInterface()</code>
+  and <code>addMethod()</code>, it enables a structured, layered approach
+  to runtime class composition — applying shared behavior via traits,
+  satisfying type contracts via interfaces, and filling in context-specific
+  logic via explicit methods. Used with appropriate care and documentation,
+  it brings the composability of PHP traits to classes that were never
+  designed to use them.
+</p>
+
 <h4 id="componere-abstract-definition-getreflector">COMPONERE\ABSTRACT\DEFINITION::GETREFLECTOR</h4>
 
 <h4 id="componere-definition-class">COMPONERE\DEFINITION CLASS</h4>
