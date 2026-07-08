@@ -26811,6 +26811,334 @@ foreach ($traits as $name => $trait) {
 </p>
 
 <h4 id="componere-abstract-definition-getreflector">COMPONERE\ABSTRACT\DEFINITION::GETREFLECTOR</h4>
+<p>
+  <strong>Componere\Abstract\Definition::getReflector()</strong> is a method
+  inherited by both <code>Componere\Definition</code> and
+  <code>Componere\Patch</code> that returns a <code>ReflectionClass</code>
+  instance representing the current composition state of the definition or
+  patch. It provides a standard PHP reflection interface over the class
+  structure being built, allowing developers to inspect what methods,
+  properties, interfaces, and traits have been declared so far — before
+  the definition is registered or the patch is applied.
+</p>
+<p>
+  Unlike calling <code>new ReflectionClass()</code> on an already registered
+  class, <code>getReflector()</code> reflects the in-progress composition
+  state — capturing the structure as it exists on the
+  <code>Definition</code> or <code>Patch</code> object at the moment of the
+  call, rather than the live state of the class in the PHP runtime.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Abstract\Definition::getReflector(): ReflectionClass
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Returns a <code>ReflectionClass</code> instance bound to the current composition state</li>
+  <li>The reflector captures whatever has been added to the definition or patch up to the moment of the call</li>
+  <li>Subsequent additions (methods, traits, interfaces) after calling <code>getReflector()</code> are not reflected in the previously returned instance</li>
+  <li>Can be called multiple times at different stages of composition to inspect progressive state</li>
+  <li>Does not affect the definition or patch — purely a read operation</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition(stdClass::class);
+$definition->addMethod('greet', new Method(function (): string {
+    return 'Hello!';
+}));
+
+$reflector = $definition->getReflector();
+
+echo 'Class name : ' . $reflector->getName()          . PHP_EOL;
+echo 'Methods    : ' . count($reflector->getMethods()) . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Inspecting Methods</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition(stdClass::class);
+
+$definition
+    ->addMethod('getName', new Method(function (): string {
+        return $this->name ?? '';
+    }))
+    ->addMethod('setName', new Method(function (string $name): void {
+        $this->name = $name;
+    }))
+    ->addMethod('describe', (new Method(function (): string {
+        return 'Object: ' . $this->getName();
+    }))->setProtected());
+
+$reflector = $definition->getReflector();
+
+foreach ($reflector->getMethods() as $method) {
+    echo sprintf(
+        '%-15s | public: %-5s | protected: %-5s | static: %-5s',
+        $method->getName(),
+        $method->isPublic()    ? 'yes' : 'no',
+        $method->isProtected() ? 'yes' : 'no',
+        $method->isStatic()    ? 'yes' : 'no'
+    ) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Inspecting Interfaces</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Renderable
+{
+    public function render(): string;
+}
+
+interface Cacheable
+{
+    public function cacheKey(): string;
+}
+
+$definition = new Definition(stdClass::class);
+
+$definition
+    ->addInterface(Renderable::class)
+    ->addInterface(Cacheable::class)
+    ->addMethod('render', new Method(function (): string {
+        return '<div></div>';
+    }))
+    ->addMethod('cacheKey', new Method(function (): string {
+        return 'object:' . spl_object_id($this);
+    }));
+
+$reflector  = $definition->getReflector();
+$interfaces = $reflector->getInterfaceNames();
+
+echo 'Declared interfaces: ' . implode(', ', $interfaces) . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Inspecting Traits</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+
+trait HasTimestamps
+{
+    public function createdAt(): string { return date('Y-m-d'); }
+    public function updatedAt(): string { return date('Y-m-d'); }
+}
+
+trait HasSoftDelete
+{
+    public function delete(): void {}
+    public function isDeleted(): bool { return false; }
+}
+
+$definition = new Definition(stdClass::class);
+$definition
+    ->addTrait(HasTimestamps::class)
+    ->addTrait(HasSoftDelete::class);
+
+$reflector = $definition->getReflector();
+
+foreach ($reflector->getTraitNames() as $trait) {
+    echo 'Trait applied: ' . $trait . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Calling getReflector() at Different Composition Stages</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition(stdClass::class);
+
+// Stage 1 — no methods added yet
+$reflectorA = $definition->getReflector();
+echo 'Stage 1 methods: ' . count($reflectorA->getMethods()) . PHP_EOL; // 0
+
+$definition->addMethod('hello', new Method(function (): string {
+    return 'Hello!';
+}));
+
+// Stage 2 — one method added
+$reflectorB = $definition->getReflector();
+echo 'Stage 2 methods: ' . count($reflectorB->getMethods()) . PHP_EOL; // 1
+
+$definition->addMethod('goodbye', new Method(function (): string {
+    return 'Goodbye!';
+}));
+
+// Stage 3 — two methods added
+$reflectorC = $definition->getReflector();
+echo 'Stage 3 methods: ' . count($reflectorC->getMethods()) . PHP_EOL; // 2
+
+// Earlier reflector instances are snapshots and do NOT update retroactively
+echo 'Stage 1 still: ' . count($reflectorA->getMethods()) . PHP_EOL; // 0
+?>
+</code></pre>
+
+<h5>Practical Pattern — Composition Validation Before Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Repository
+{
+    public function find(int $id): ?array;
+    public function findAll(): array;
+    public function save(array $entity): bool;
+}
+
+function validateDefinitionImplementsInterface(
+    Definition $definition,
+    string     $interface
+): void {
+    $reflector       = $definition->getReflector();
+    $interfaceRef    = new ReflectionClass($interface);
+    $requiredMethods = array_map(
+        fn (ReflectionMethod $m) => $m->getName(),
+        $interfaceRef->getMethods()
+    );
+    $definedMethods  = array_map(
+        fn (ReflectionMethod $m) => $m->getName(),
+        $reflector->getMethods()
+    );
+    $missing = array_diff($requiredMethods, $definedMethods);
+
+    if (!empty($missing)) {
+        throw new RuntimeException(
+            'Definition is missing required methods for ' . $interface . ': '
+            . implode(', ', $missing)
+        );
+    }
+
+    echo 'Validation passed — all required methods are present.' . PHP_EOL;
+}
+
+$definition = new Definition(stdClass::class);
+
+$definition
+    ->addInterface(Repository::class)
+    ->addMethod('find',    new Method(function (int $id): ?array   { return null; }))
+    ->addMethod('findAll', new Method(function (): array            { return []; }))
+    ->addMethod('save',    new Method(function (array $entity): bool { return true; }));
+
+validateDefinitionImplementsInterface($definition, Repository::class);
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Practical Pattern — Debug Output During Development</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+function dumpDefinitionState(Definition $definition): void
+{
+    $reflector = $definition->getReflector();
+
+    echo '=== Definition State ===' . PHP_EOL;
+    echo 'Class      : ' . $reflector->getName() . PHP_EOL;
+    echo 'Interfaces : ' . implode(', ', $reflector->getInterfaceNames() ?: ['none']) . PHP_EOL;
+    echo 'Traits     : ' . implode(', ', $reflector->getTraitNames()     ?: ['none']) . PHP_EOL;
+    echo 'Methods    :' . PHP_EOL;
+
+    foreach ($reflector->getMethods() as $method) {
+        $visibility = match (true) {
+            $method->isPrivate()   => 'private',
+            $method->isProtected() => 'protected',
+            default                => 'public',
+        };
+
+        echo '  - ' . $method->getName()
+            . ' [' . $visibility . ']'
+            . ($method->isStatic() ? ' [static]' : '')
+            . PHP_EOL;
+    }
+
+    echo '========================' . PHP_EOL;
+}
+
+$definition = new Definition(stdClass::class);
+$definition
+    ->addMethod('publicMethod',    new Method(function (): void {}))
+    ->addMethod('protectedMethod', (new Method(function (): void {}))->setProtected())
+    ->addMethod('staticMethod',    (new Method(function (): void {}))->setStatic());
+
+dumpDefinitionState($definition);
+?>
+</code></pre>
+
+<h5>getReflector() vs ReflectionClass on a Registered Class</h5>
+<ul>
+  <li>
+    <strong>getReflector()</strong> – Reflects the in-progress composition
+    state of a <code>Definition</code> or <code>Patch</code> object; useful
+    before registration or application; each call returns a snapshot of the
+    current state
+  </li>
+  <li>
+    <strong>new ReflectionClass($className)</strong> – Reflects the live,
+    registered state of a class in the PHP runtime; accurate only after
+    <code>register()</code> or <code>apply()</code> has been called; the
+    correct tool for post-registration inspection
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Call <code>getReflector()</code> after completing the full composition to validate the final state before registering or applying</li>
+  <li>Use it during development and testing to catch missing method implementations or forgotten interface declarations early</li>
+  <li>Do not store the returned <code>ReflectionClass</code> instance as a long-lived reference — it reflects a point-in-time snapshot, not a live view of the composition</li>
+  <li>After <code>register()</code> is called, use <code>new ReflectionClass($className)</code> to inspect the live registered class instead</li>
+  <li>Combine with interface reflection to build automated validation that all required methods are present before registration</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns a snapshot — changes made after the call are not reflected in the returned <code>ReflectionClass</code> instance</li>
+  <li>Reflects the composition object's state, not the live PHP class table — behavior may differ from <code>new ReflectionClass()</code> on the same class name after registration</li>
+  <li>Standard <code>ReflectionClass</code> limitations apply — some internal Zend Engine details may not be fully exposed through the reflection API</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Validating that a definition or patch implements all required interface methods before registration or application</li>
+  <li>Debugging composition state during development to confirm methods, interfaces, and traits are attached correctly</li>
+  <li>Building automated composition validators and contract checkers in test suites</li>
+  <li>Generating documentation or logging for dynamically composed class structures</li>
+  <li>Inspecting progressive composition state at multiple stages to trace where a definition diverges from expectations</li>
+</ul>
+
+<p>
+  <code>getReflector()</code> brings PHP's familiar and powerful reflection
+  API to the in-progress state of a Componere composition, bridging the gap
+  between dynamic class building and standard introspection tooling. As a
+  pure read operation with no side effects, it can be called freely at any
+  stage of composition — making it the primary tool for validating,
+  debugging, and documenting the runtime class structures that Componere
+  builds.
+</p>
 
 <h4 id="componere-definition-class">COMPONERE\DEFINITION CLASS</h4>
 <h4 id="componere-definition-construct">COMPONERE\DEFINITION::__CONSTRUCT</h4>
