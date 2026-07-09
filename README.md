@@ -27141,6 +27141,320 @@ dumpDefinitionState($definition);
 </p>
 
 <h4 id="componere-definition-class">COMPONERE\DEFINITION CLASS</h4>
+<p>
+  <strong>Componere\Definition</strong> is a concrete class that extends
+  <code>Componere\Abstract\Definition</code> and represents the construction
+  and permanent registration of a new class into the PHP runtime. It is the
+  primary tool in the Componere extension for creating entirely new named
+  classes at runtime — optionally extending an existing class — without
+  writing or modifying any PHP source files.
+</p>
+<p>
+  Unlike <code>Componere\Patch</code>, which modifies an existing class
+  reversibly, a <code>Definition</code> is permanent. Once
+  <code>register()</code> is called, the class becomes part of PHP's class
+  table for the duration of the process and cannot be unregistered, modified,
+  or replaced. This makes <code>Definition</code> appropriate for bootstrap-time
+  class generation, plugin systems, and compatibility layers — but not for
+  scenarios requiring reversibility.
+</p>
+
+<h5>Class Synopsis</h5>
+<pre><code class="language-php">
+<?php
+namespace Componere;
+
+class Definition extends \Componere\Abstract\Definition
+{
+    // Constructor
+    public function __construct(string $class, array $interfaces = [])
+
+    // Inherited from Componere\Abstract\Definition
+    public function addMethod(string $name, Method $method): static
+    public function addInterface(string $interface): static
+    public function addTrait(string $trait): static
+    public function getReflector(): \ReflectionClass
+
+    // Definition-specific methods
+    public function addConstant(string $name, Value $value): static
+    public function addProperty(string $name, Value $value): static
+    public function register(): void
+    public function isRegistered(): bool
+    public function getClosure(string $name): \Closure
+    public function getClosures(): array
+}
+?>
+</code></pre>
+
+<h5>Definition-Specific Methods</h5>
+<ul>
+  <li>
+    <strong>__construct(string $class, array $interfaces = [])</strong> –
+    Initializes a new definition targeting the given class name, optionally
+    declaring interfaces at construction time. The class name must not
+    already exist in the PHP class table.
+  </li>
+  <li>
+    <strong>addConstant(string $name, Value $value)</strong> –
+    Adds a class constant to the definition. The <code>Value</code> instance
+    carries the constant's value and visibility modifiers.
+  </li>
+  <li>
+    <strong>addProperty(string $name, Value $value)</strong> –
+    Adds an instance or static property to the definition. The
+    <code>Value</code> instance carries the default value, visibility,
+    and static modifier.
+  </li>
+  <li>
+    <strong>register()</strong> –
+    Permanently registers the completed class definition into PHP's class
+    table, making it available for instantiation and type checking. Can
+    only be called once — subsequent calls throw a
+    <code>RuntimeException</code>.
+  </li>
+  <li>
+    <strong>isRegistered()</strong> –
+    Returns <code>true</code> if <code>register()</code> has already been
+    called on this definition, <code>false</code> otherwise.
+  </li>
+  <li>
+    <strong>getClosure(string $name)</strong> –
+    Returns the raw <code>Closure</code> associated with the named method
+    added to this definition.
+  </li>
+  <li>
+    <strong>getClosures()</strong> –
+    Returns an associative array of all closures added to this definition,
+    keyed by method name.
+  </li>
+</ul>
+
+<h5>Basic Usage — Creating and Registering a New Class</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('RuntimeEntity');
+
+$definition
+    ->addProperty('name', new Value(''))
+    ->addProperty('active', new Value(false))
+    ->addMethod('getName', new Method(function (): string {
+        return $this->name;
+    }))
+    ->addMethod('isActive', new Method(function (): bool {
+        return $this->active;
+    }));
+
+$definition->register();
+
+$entity         = new RuntimeEntity();
+$entity->name   = 'Widget';
+$entity->active = true;
+
+echo $entity->getName();   // Widget
+echo $entity->isActive() ? 'active' : 'inactive'; // active
+?>
+</code></pre>
+
+<h5>Extending an Existing Class</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+class BaseRepository
+{
+    protected array $items = [];
+
+    public function count(): int
+    {
+        return count($this->items);
+    }
+}
+
+// 'ProductRepository' will extend BaseRepository
+$definition = new Definition('ProductRepository', [BaseRepository::class]);
+
+$definition
+    ->addMethod('add', new Method(function (array $product): void {
+        $this->items[] = $product;
+    }))
+    ->addMethod('findByName', new Method(function (string $name): ?array {
+        foreach ($this->items as $item) {
+            if ($item['name'] === $name) {
+                return $item;
+            }
+        }
+        return null;
+    }));
+
+$definition->register();
+
+$repo = new ProductRepository();
+$repo->add(['name' => 'Widget', 'price' => 29.90]);
+
+echo 'Count : ' . $repo->count() . PHP_EOL; // 1
+print_r($repo->findByName('Widget'));
+?>
+</code></pre>
+
+<h5>Checking Registration State</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('MyDynamicClass');
+$definition->addMethod('hello', new Method(function (): string {
+    return 'Hello!';
+}));
+
+echo $definition->isRegistered() ? 'registered' : 'not yet registered';
+// not yet registered
+
+$definition->register();
+
+echo $definition->isRegistered() ? 'registered' : 'not yet registered';
+// registered
+?>
+</code></pre>
+
+<h5>Guarding Against Double Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+function safeRegister(Definition $definition): void
+{
+    if ($definition->isRegistered()) {
+        echo 'Definition already registered — skipping.' . PHP_EOL;
+        return;
+    }
+
+    $definition->register();
+    echo 'Definition registered successfully.' . PHP_EOL;
+}
+
+$definition = new Definition('GuardedClass');
+$definition->addMethod('ping', new Method(function (): string {
+    return 'pong';
+}));
+
+safeRegister($definition); // registered
+safeRegister($definition); // already registered — skipping
+?>
+</code></pre>
+
+<h5>Retrieving Closures After Composition</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('ClosureHost');
+$definition
+    ->addMethod('greet',   new Method(function (string $name): string {
+        return 'Hello, ' . $name . '!';
+    }))
+    ->addMethod('farewell', new Method(function (string $name): string {
+        return 'Goodbye, ' . $name . '!';
+    }));
+
+// Retrieve a single closure by method name
+$greet = $definition->getClosure('greet');
+echo $greet('World'); // Hello, World!
+
+// Retrieve all closures as an associative array
+$closures = $definition->getClosures();
+foreach ($closures as $name => $closure) {
+    echo $name . ': ' . $closure('Alice') . PHP_EOL;
+}
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Definition Lifecycle</h5>
+<ul>
+  <li>
+    <strong>Construction</strong> – A new <code>Definition</code> instance
+    is created with a class name that does not yet exist in the PHP runtime
+  </li>
+  <li>
+    <strong>Composition</strong> – Methods, properties, constants,
+    interfaces, and traits are added via the inherited and
+    definition-specific API
+  </li>
+  <li>
+    <strong>Validation</strong> – Optionally inspect the composed structure
+    via <code>getReflector()</code> before committing
+  </li>
+  <li>
+    <strong>Registration</strong> – <code>register()</code> permanently
+    installs the class into PHP's class table
+  </li>
+  <li>
+    <strong>Use</strong> – The class is available for instantiation,
+    type checking, and reflection for the remainder of the process lifetime
+  </li>
+</ul>
+
+<h5>Definition vs Patch</h5>
+<ul>
+  <li>
+    <strong>Definition</strong> – Creates a brand new class that did not
+    previously exist; permanent and irreversible after registration; targets
+    a class name not yet in the PHP class table
+  </li>
+  <li>
+    <strong>Patch</strong> – Modifies an already registered class by
+    overlaying new or replacement members; reversible via
+    <code>revert()</code>; targets an existing class name in the PHP
+    class table
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always call <code>register()</code> only once — use <code>isRegistered()</code> to guard against accidental double registration</li>
+  <li>Complete the entire composition before calling <code>register()</code> — no further modifications are possible after registration</li>
+  <li>Use <code>getReflector()</code> to validate the composition state immediately before calling <code>register()</code></li>
+  <li>Perform <code>Definition</code> registration during application bootstrap, not during request handling — registering classes mid-request introduces unpredictable state</li>
+  <li>Choose descriptive, namespaced class names to avoid conflicts with future userland or framework class definitions</li>
+  <li>Document all dynamically registered classes clearly — they are invisible to static analysis tools, IDEs, and documentation generators</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Registration is permanent for the duration of the PHP process — there is no <code>unregister()</code> method</li>
+  <li>The target class name must not already exist in the PHP class table at the time of construction</li>
+  <li>Static analysis tools and IDEs cannot infer the existence or structure of dynamically registered classes</li>
+  <li>Cannot be used to modify existing classes — use <code>Componere\Patch</code> for that purpose</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Generating data transfer objects, value objects, or repository classes at bootstrap time based on configuration</li>
+  <li>Building plugin architectures where third-party modules contribute class definitions at runtime</li>
+  <li>Creating compatibility shim classes that satisfy type contracts in environments where source modification is not possible</li>
+  <li>Generating test fixture classes dynamically without cluttering the test codebase with purpose-built stub files</li>
+  <li>Implementing code generation pipelines that produce and register classes from metadata or schema definitions</li>
+</ul>
+
+<p>
+  <code>Componere\Definition</code> is the tool of choice when a class needs
+  to exist at runtime but cannot or should not be defined in source code.
+  Its permanent, bootstrap-friendly registration model makes it well suited
+  for plugin systems, code generation pipelines, and compatibility layers —
+  while its shared composition API with <code>Componere\Patch</code> ensures
+  that the same fluent, consistent interface governs both class creation and
+  class modification across the entire Componere extension.
+</p>
+
 <h4 id="componere-definition-construct">COMPONERE\DEFINITION::__CONSTRUCT</h4>
 <h4 id="componere-definition-addconstant">COMPONERE\DEFINITION::ADDCONSTANT</h4>
 <h4 id="componere-definition-addproperty">COMPONERE\DEFINITION::ADDPROPERTY</h4>
