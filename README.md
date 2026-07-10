@@ -27456,6 +27456,316 @@ $definition->register();
 </p>
 
 <h4 id="componere-definition-construct">COMPONERE\DEFINITION::__CONSTRUCT</h4>
+<p>
+  <strong>Componere\Definition::__construct()</strong> is the constructor of
+  the <code>Componere\Definition</code> class, responsible for initializing
+  a new runtime class definition. It establishes the identity of the class
+  being built — its name, the class it optionally extends, and any interfaces
+  it should implement from the outset — before any methods, properties, or
+  traits are added to the composition.
+</p>
+<p>
+  The constructor performs validation immediately: the target class name must
+  not already be registered in PHP's class table, and any parent class or
+  interfaces passed must already exist. Passing invalid arguments will cause
+  a <code>RuntimeException</code> to be thrown at construction time, before
+  any composition work begins.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Definition::__construct(
+    string $class,
+    array  $interfaces = []
+)
+?>
+</code></pre>
+
+<h5>Parameters Explained</h5>
+<ul>
+  <li>
+    <strong>$class</strong> – The fully qualified name of the class to create.
+    This name must not already exist in PHP's class table. It may be a simple
+    name (<code>'MyClass'</code>) or a namespaced name
+    (<code>'App\\Models\\DynamicEntity'</code>). Optionally, it can be the
+    name of an existing class to use as the parent — see the parent class
+    pattern below.
+  </li>
+  <li>
+    <strong>$interfaces</strong> – An optional array of interface names the
+    new class should implement from the start. Each interface must already be
+    registered in PHP's class table. Interfaces can also be added later via
+    <code>addInterface()</code>.
+  </li>
+</ul>
+
+<h5>How It Works</h5>
+<ol>
+  <li>PHP validates that the target class name does not already exist in the class table</li>
+  <li>If a parent class is implied (via the <code>$class</code> name pattern), its existence is confirmed</li>
+  <li>Each interface in <code>$interfaces</code> is validated against the class table</li>
+  <li>A new internal class entry is initialized in the Zend Engine</li>
+  <li>The <code>Definition</code> instance is ready to accept methods, traits, properties, and constants</li>
+</ol>
+
+<h5>Basic Construction — New Standalone Class</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+// Creates a new class named 'RuntimeUser' with no parent or interfaces
+$definition = new Definition('RuntimeUser');
+
+$definition->addMethod('greet', new Method(function (): string {
+    return 'Hello from RuntimeUser!';
+}));
+
+$definition->register();
+
+$user = new RuntimeUser();
+echo $user->greet(); // Hello from RuntimeUser!
+?>
+</code></pre>
+
+<h5>Construction with Interfaces</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Printable
+{
+    public function print(): void;
+}
+
+interface Exportable
+{
+    public function export(): array;
+}
+
+// Declare interfaces at construction time
+$definition = new Definition('RuntimeDocument', [
+    Printable::class,
+    Exportable::class,
+]);
+
+$definition
+    ->addMethod('print', new Method(function (): void {
+        echo 'Printing: ' . ($this->title ?? 'Untitled') . PHP_EOL;
+    }))
+    ->addMethod('export', new Method(function (): array {
+        return ['title' => $this->title ?? ''];
+    }));
+
+$definition->register();
+
+$doc        = new RuntimeDocument();
+$doc->title = 'Architecture Overview';
+
+echo ($doc instanceof Printable)  ? 'is Printable'  : '' . PHP_EOL;
+echo ($doc instanceof Exportable) ? 'is Exportable' : '' . PHP_EOL;
+
+$doc->print();
+print_r($doc->export());
+?>
+</code></pre>
+
+<h5>Construction with a Parent Class</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+abstract class BaseModel
+{
+    protected array $attributes = [];
+
+    public function getAttribute(string $key): mixed
+    {
+        return $this->attributes[$key] ?? null;
+    }
+
+    public function setAttribute(string $key, mixed $value): void
+    {
+        $this->attributes[$key] = $value;
+    }
+}
+
+// Extend BaseModel by passing it as the first argument
+// followed by the new class name as the second element in $interfaces
+// Note: parent is the first arg; new name derived from it with Definition
+
+// Correct pattern: pass the parent class as the $class parameter
+// and use a separate class name string for the new class name
+$definition = new Definition('ProductModel', [BaseModel::class]);
+
+$definition->addMethod('getPrice', new Method(function (): float {
+    return (float) $this->getAttribute('price');
+}));
+
+$definition->addMethod('setPrice', new Method(function (float $price): void {
+    $this->setAttribute('price', $price);
+}));
+
+$definition->register();
+
+$product = new ProductModel();
+$product->setPrice(49.90);
+
+echo 'Price: $' . $product->getPrice(); // Price: $49.90
+echo ($product instanceof BaseModel) ? ' (extends BaseModel)' : '';
+?>
+</code></pre>
+
+<h5>Namespaced Class Names</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+// Fully namespaced class names are supported
+$definition = new Definition('App\\Runtime\\DynamicRepository');
+
+$definition->addMethod('findById', new Method(function (int $id): ?array {
+    // Lookup logic
+    return ['id' => $id, 'name' => 'Example'];
+}));
+
+$definition->register();
+
+$repo = new App\Runtime\DynamicRepository();
+print_r($repo->findById(1));
+?>
+</code></pre>
+
+<h5>Guarding Against Duplicate Construction</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+function buildDefinitionSafely(string $className): ?Definition
+{
+    if (class_exists($className, false)) {
+        echo 'Class "' . $className . '" already exists — skipping.' . PHP_EOL;
+        return null;
+    }
+
+    $definition = new Definition($className);
+    $definition->addMethod('ping', new Method(function (): string {
+        return 'pong';
+    }));
+
+    return $definition;
+}
+
+$definition = buildDefinitionSafely('SafeClass');
+
+if ($definition !== null) {
+    $definition->register();
+    echo (new SafeClass())->ping(); // pong
+}
+
+// Second call will detect the already-registered class
+buildDefinitionSafely('SafeClass'); // Class "SafeClass" already exists — skipping.
+?>
+</code></pre>
+
+<h5>Constructor vs addInterface()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Countable
+{
+    public function count(): int;
+}
+
+interface Stringable
+{
+    public function __toString(): string;
+}
+
+// Interfaces can be declared at construction time...
+$definition = new Definition('FlexibleClass', [Countable::class]);
+
+// ...or added later via addInterface() — both approaches are equivalent
+$definition->addInterface(Stringable::class);
+
+$definition
+    ->addMethod('count', new Method(function (): int {
+        return count((array) $this);
+    }))
+    ->addMethod('__toString', new Method(function (): string {
+        return json_encode((array) $this);
+    }));
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Construction Validation Errors</h5>
+<ul>
+  <li>
+    <strong>Class already exists</strong> – Constructing a
+    <code>Definition</code> with a class name that is already registered
+    in PHP's class table throws a <code>RuntimeException</code>. Always
+    check with <code>class_exists($name, false)</code> beforehand when
+    the class name is dynamic.
+  </li>
+  <li>
+    <strong>Interface does not exist</strong> – Passing an interface name
+    in the <code>$interfaces</code> array that is not yet registered throws
+    a <code>RuntimeException</code>. Ensure interfaces are autoloaded or
+    declared before constructing the definition.
+  </li>
+  <li>
+    <strong>Invalid class name format</strong> – Malformed class names (
+    empty strings, names with invalid characters) will throw a
+    <code>RuntimeException</code> at construction time.
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>class_exists($name, false)</code> to check for existing class names before constructing a <code>Definition</code> with a dynamic name</li>
+  <li>Declare well-known interfaces at construction time via the <code>$interfaces</code> parameter for clarity — reserve <code>addInterface()</code> for conditionally added interfaces</li>
+  <li>Use fully qualified namespaced names for dynamically created classes to reduce collision risk with userland or framework classes</li>
+  <li>Ensure all interfaces and parent classes passed to the constructor are autoloaded or declared before instantiation to avoid <code>RuntimeException</code></li>
+  <li>Treat construction as the declaration step and composition as the implementation step — keep them clearly separated in your code flow</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>The class name must not already exist in the PHP class table — there is no mechanism to replace or redefine an existing class via <code>Definition</code></li>
+  <li>Parent class inheritance via the constructor follows PHP's standard single inheritance rules — only one parent class is supported</li>
+  <li>Autoloading is not triggered for interface names passed to the constructor — they must already be loaded into the class table</li>
+  <li>Dynamically constructed class names are invisible to static analysis tools and IDEs</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Initializing a new runtime class definition at application bootstrap with known interfaces declared upfront</li>
+  <li>Creating subclasses of existing base classes dynamically without modifying the class hierarchy in source code</li>
+  <li>Building namespaced runtime classes for plugin, module, or code generation systems</li>
+  <li>Safely guarding class creation in systems where the same bootstrap code may run multiple times</li>
+  <li>Declaring interface compliance at the earliest possible point for clarity and discoverability in the composition pipeline</li>
+</ul>
+
+<p>
+  <code>Componere\Definition::__construct()</code> is the entry point to the
+  entire class creation lifecycle in Componere. The decisions made at
+  construction time — class name, parent class, and initial interfaces —
+  establish the identity and type contracts of the new class before any
+  behavior is added. Getting these right, validating inputs defensively, and
+  following a clear separation between construction and composition ensures
+  that dynamically created classes are as predictable, maintainable, and
+  correct as their statically declared counterparts.
+</p>
+
 <h4 id="componere-definition-addconstant">COMPONERE\DEFINITION::ADDCONSTANT</h4>
 <h4 id="componere-definition-addproperty">COMPONERE\DEFINITION::ADDPROPERTY</h4>
 <h4 id="componere-definition-register">COMPONERE\DEFINITION::REGISTER</h4>
