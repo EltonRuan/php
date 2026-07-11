@@ -27767,6 +27767,285 @@ $definition->register();
 </p>
 
 <h4 id="componere-definition-addconstant">COMPONERE\DEFINITION::ADDCONSTANT</h4>
+<p>
+  <strong>Componere\Definition::addConstant()</strong> is a method exclusive
+  to <code>Componere\Definition</code> that adds a named constant to the
+  class being built. The constant is defined using a
+  <code>Componere\Value</code> instance, which carries both the constant's
+  value and its visibility modifier. Once the definition is registered, the
+  constant is permanently available on the class just as if it had been
+  declared with the <code>const</code> keyword in source code.
+</p>
+<p>
+  Unlike <code>addMethod()</code> and <code>addTrait()</code> which are
+  inherited from <code>Componere\Abstract\Definition</code> and shared with
+  <code>Componere\Patch</code>, <code>addConstant()</code> is available only
+  on <code>Componere\Definition</code> — constants cannot be added to
+  existing classes via <code>Patch</code>.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Definition::addConstant(
+    string           $name,
+    Componere\Value  $value
+): Componere\Definition
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>A <code>Componere\Value</code> instance is created with the constant's value and optional visibility modifier</li>
+  <li><code>addConstant()</code> registers the name and <code>Value</code> against the definition</li>
+  <li>The method returns the current instance, enabling fluent chaining</li>
+  <li>The constant becomes accessible on the class once <code>register()</code> is called</li>
+  <li>Constant values must be compile-time scalar values — arrays of scalars are also supported</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('PaymentStatus');
+
+$definition
+    ->addConstant('PENDING',    new Value('pending'))
+    ->addConstant('COMPLETED',  new Value('completed'))
+    ->addConstant('FAILED',     new Value('failed'))
+    ->addConstant('REFUNDED',   new Value('refunded'));
+
+$definition->register();
+
+echo PaymentStatus::PENDING;   // pending
+echo PaymentStatus::COMPLETED; // completed
+echo PaymentStatus::FAILED;    // failed
+?>
+</code></pre>
+
+<h5>Constants with Different Scalar Types</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('AppConfig');
+
+$definition
+    ->addConstant('VERSION',      new Value('2.1.0'))       // string
+    ->addConstant('MAX_RETRIES',  new Value(3))             // int
+    ->addConstant('TIMEOUT',      new Value(30.5))          // float
+    ->addConstant('DEBUG',        new Value(false))         // bool
+    ->addConstant('ALLOWED_TAGS', new Value(['b', 'i', 'u'])); // array
+
+$definition->register();
+
+echo AppConfig::VERSION;     // 2.1.0
+echo AppConfig::MAX_RETRIES; // 3
+echo AppConfig::TIMEOUT;     // 30.5
+var_dump(AppConfig::DEBUG);  // bool(false)
+print_r(AppConfig::ALLOWED_TAGS);
+?>
+</code></pre>
+
+<h5>Controlling Constant Visibility</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('AccessLevels');
+
+// Public constant — accessible anywhere (default)
+$definition->addConstant('PUBLIC_KEY', new Value('public_value'));
+
+// Protected constant — accessible within class and subclasses
+$definition->addConstant(
+    'PROTECTED_KEY',
+    (new Value('protected_value'))->setProtected()
+);
+
+// Private constant — accessible only within the class itself
+$definition->addConstant(
+    'PRIVATE_KEY',
+    (new Value('private_value'))->setPrivate()
+);
+
+// Method to expose the private constant for demonstration
+$definition->addMethod('getPrivateKey', new Method(function (): string {
+    return self::PRIVATE_KEY;
+}));
+
+$definition->register();
+
+echo AccessLevels::PUBLIC_KEY;              // public_value
+echo (new AccessLevels())->getPrivateKey(); // private_value
+?>
+</code></pre>
+
+<h5>Fluent Chaining with Other Composition Methods</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+interface HasStatus
+{
+    public function getStatus(): string;
+}
+
+$definition = new Definition('Order', [HasStatus::class]);
+
+$definition
+    ->addConstant('STATUS_PENDING',    new Value('pending'))
+    ->addConstant('STATUS_PROCESSING', new Value('processing'))
+    ->addConstant('STATUS_SHIPPED',    new Value('shipped'))
+    ->addConstant('STATUS_DELIVERED',  new Value('delivered'))
+    ->addProperty('status', new Value('' ))
+    ->addMethod('getStatus', new Method(function (): string {
+        return $this->status;
+    }))
+    ->addMethod('isPending', new Method(function (): bool {
+        return $this->status === self::STATUS_PENDING;
+    }))
+    ->addMethod('ship', new Method(function (): void {
+        $this->status = self::STATUS_SHIPPED;
+    }));
+
+$definition->register();
+
+$order         = new Order();
+$order->status = Order::STATUS_PENDING;
+
+echo $order->getStatus();                         // pending
+echo $order->isPending() ? 'is pending' : '';     // is pending
+
+$order->ship();
+echo $order->getStatus();                         // shipped
+?>
+</code></pre>
+
+<h5>Practical Pattern — Runtime Enum-Like Class</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+// Before PHP 8.1 native enums, or for dynamic enum-like structures
+$definition = new Definition('HttpStatus');
+
+$definition
+    ->addConstant('OK',                    new Value(200))
+    ->addConstant('CREATED',               new Value(201))
+    ->addConstant('NO_CONTENT',            new Value(204))
+    ->addConstant('BAD_REQUEST',           new Value(400))
+    ->addConstant('UNAUTHORIZED',          new Value(401))
+    ->addConstant('FORBIDDEN',             new Value(403))
+    ->addConstant('NOT_FOUND',             new Value(404))
+    ->addConstant('INTERNAL_SERVER_ERROR', new Value(500))
+    ->addMethod('label', new Method(function (int $code): string {
+        return match ($code) {
+            self::OK                    => 'OK',
+            self::CREATED               => 'Created',
+            self::NO_CONTENT            => 'No Content',
+            self::BAD_REQUEST           => 'Bad Request',
+            self::UNAUTHORIZED          => 'Unauthorized',
+            self::FORBIDDEN             => 'Forbidden',
+            self::NOT_FOUND             => 'Not Found',
+            self::INTERNAL_SERVER_ERROR => 'Internal Server Error',
+            default                     => 'Unknown',
+        };
+    }));
+
+$definition->register();
+
+$http = new HttpStatus();
+
+echo HttpStatus::NOT_FOUND . PHP_EOL;         // 404
+echo $http->label(HttpStatus::NOT_FOUND);     // Not Found
+echo $http->label(HttpStatus::OK);            // OK
+?>
+</code></pre>
+
+<h5>Verifying Constants via Reflection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('StatusCodes');
+$definition
+    ->addConstant('ACTIVE',   new Value(1))
+    ->addConstant('INACTIVE', new Value(0))
+    ->addConstant('BANNED',   new Value(-1));
+
+$reflector  = $definition->getReflector();
+$constants  = $reflector->getConstants();
+
+foreach ($constants as $name => $value) {
+    echo $name . ' = ' . $value . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>addConstant() vs addProperty()</h5>
+<ul>
+  <li>
+    <strong>addConstant()</strong> – Defines an immutable named value on the
+    class; accessible via <code>ClassName::CONSTANT_NAME</code>; value cannot
+    be changed after registration; appropriate for fixed configuration values,
+    states, and identifiers
+  </li>
+  <li>
+    <strong>addProperty()</strong> – Defines a mutable instance or static
+    variable; accessible via <code>$instance->property</code> or
+    <code>ClassName::$property</code>; value can be changed at runtime;
+    appropriate for state that varies per instance or across the request
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use constants for values that are semantically fixed and should never change after class registration — states, codes, limits, and configuration defaults</li>
+  <li>Prefer uppercase snake_case naming conventions for constants to match PHP and PSR coding standards</li>
+  <li>Add constants before methods that reference them via <code>self::</code> for clarity and readability in the composition pipeline</li>
+  <li>Use <code>getReflector()->getConstants()</code> to verify that all expected constants are present with correct values before registering</li>
+  <li>Scope visibility deliberately — use protected or private constants for internal implementation details that should not form part of the public API</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Available only on <code>Componere\Definition</code> — constants cannot be added to existing classes via <code>Componere\Patch</code></li>
+  <li>Constant values must be scalar or arrays of scalars — objects and resources are not valid constant values</li>
+  <li>Once the definition is registered, constants are permanent and immutable — they cannot be changed or removed</li>
+  <li>Dynamically added constants are invisible to static analysis tools and IDEs — <code>ClassName::CONSTANT</code> references will produce unresolved symbol warnings</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Defining status codes, state identifiers, and enumeration-like values on dynamically generated classes</li>
+  <li>Embedding configuration defaults and limits directly into runtime class definitions</li>
+  <li>Building runtime enum-like structures for environments targeting PHP versions prior to native enum support</li>
+  <li>Attaching domain-specific named values to plugin or module classes generated at bootstrap time</li>
+  <li>Organizing related constant groups onto a single dynamically registered class for clean namespacing</li>
+</ul>
+
+<p>
+  <code>addConstant()</code> brings the semantic clarity and immutability of
+  PHP class constants to dynamically composed classes. By anchoring fixed
+  values directly onto a <code>Definition</code> — rather than relying on
+  separate configuration arrays or define() calls — it keeps related
+  constants co-located with the behavior that uses them, producing runtime
+  class definitions that are as organized and self-documenting as their
+  statically declared equivalents.
+</p>
+
 <h4 id="componere-definition-addproperty">COMPONERE\DEFINITION::ADDPROPERTY</h4>
 <h4 id="componere-definition-register">COMPONERE\DEFINITION::REGISTER</h4>
 <h4 id="componere-definition-isregistered">COMPONERE\DEFINITION::ISREGISTERED</h4>
