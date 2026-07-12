@@ -28047,6 +28047,342 @@ foreach ($constants as $name => $value) {
 </p>
 
 <h4 id="componere-definition-addproperty">COMPONERE\DEFINITION::ADDPROPERTY</h4>
+<p>
+  <strong>Componere\Definition::addProperty()</strong> is a method exclusive
+  to <code>Componere\Definition</code> that adds a named property to the
+  class being built. The property is defined using a
+  <code>Componere\Value</code> instance, which carries the property's default
+  value, visibility modifier, and optional static declaration. Once the
+  definition is registered, the property is available on every instance of
+  the class just as if it had been declared in the class body in source code.
+</p>
+<p>
+  Like <code>addConstant()</code>, <code>addProperty()</code> is exclusive
+  to <code>Componere\Definition</code> and is not available on
+  <code>Componere\Patch</code>. Properties define the state structure of
+  the class — the mutable data each instance carries — making
+  <code>addProperty()</code> a foundational step in building complete,
+  self-contained runtime class definitions.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Definition::addProperty(
+    string          $name,
+    Componere\Value $value
+): Componere\Definition
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>A <code>Componere\Value</code> instance is created carrying the default value and modifiers</li>
+  <li><code>addProperty()</code> registers the property name and its <code>Value</code> descriptor against the definition</li>
+  <li>The method returns the current instance, enabling fluent chaining</li>
+  <li>Once <code>register()</code> is called, every new instance of the class carries the property with the specified default value</li>
+  <li>Properties declared as static are shared across all instances via <code>ClassName::$property</code></li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('User');
+
+$definition
+    ->addProperty('id',       new Value(0))
+    ->addProperty('name',     new Value(''))
+    ->addProperty('email',    new Value(''))
+    ->addProperty('active',   new Value(true))
+    ->addMethod('describe', new Method(function (): string {
+        return sprintf(
+            'User #%d: %s <%s> [%s]',
+            $this->id,
+            $this->name,
+            $this->email,
+            $this->active ? 'active' : 'inactive'
+        );
+    }));
+
+$definition->register();
+
+$user          = new User();
+$user->id      = 42;
+$user->name    = 'Alice';
+$user->email   = 'alice@example.com';
+$user->active  = true;
+
+echo $user->describe();
+// User #42: Alice <alice@example.com> [active]
+?>
+</code></pre>
+
+<h5>Property Types and Default Values</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('TypedProperties');
+
+$definition
+    ->addProperty('stringProp',  new Value('default'))    // string
+    ->addProperty('intProp',     new Value(0))            // int
+    ->addProperty('floatProp',   new Value(0.0))          // float
+    ->addProperty('boolProp',    new Value(false))        // bool
+    ->addProperty('arrayProp',   new Value([]))           // array
+    ->addProperty('nullProp',    new Value(null));        // null (no default)
+
+$definition->register();
+
+$instance = new TypedProperties();
+
+var_dump($instance->stringProp); // string(7) "default"
+var_dump($instance->intProp);    // int(0)
+var_dump($instance->floatProp);  // float(0)
+var_dump($instance->boolProp);   // bool(false)
+var_dump($instance->arrayProp);  // array(0) {}
+var_dump($instance->nullProp);   // NULL
+?>
+</code></pre>
+
+<h5>Controlling Property Visibility</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('BankAccount');
+
+// Public property — accessible from anywhere
+$definition->addProperty('currency', new Value('USD'));
+
+// Protected property — accessible within class and subclasses
+$definition->addProperty(
+    'balance',
+    (new Value(0.0))->setProtected()
+);
+
+// Private property — accessible only within the class itself
+$definition->addProperty(
+    'pin',
+    (new Value(''))->setPrivate()
+);
+
+$definition
+    ->addMethod('getBalance', new Method(function (): float {
+        return $this->balance;
+    }))
+    ->addMethod('deposit', new Method(function (float $amount): void {
+        $this->balance += $amount;
+    }))
+    ->addMethod('setPin', new Method(function (string $pin): void {
+        $this->pin = $pin;
+    }))
+    ->addMethod('validatePin', new Method(function (string $pin): bool {
+        return $this->pin === $pin;
+    }));
+
+$definition->register();
+
+$account = new BankAccount();
+$account->deposit(500.00);
+
+echo $account->currency;       // USD
+echo $account->getBalance();   // 500
+
+$account->setPin('1234');
+echo $account->validatePin('1234') ? 'PIN valid' : 'PIN invalid'; // PIN valid
+?>
+</code></pre>
+
+<h5>Static Properties</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('Counter');
+
+// Static property — shared across all instances
+$definition->addProperty(
+    'count',
+    (new Value(0))->setStatic()
+);
+
+$definition
+    ->addMethod('increment', (new Method(function (): void {
+        self::$count++;
+    }))->setStatic())
+    ->addMethod('getCount', (new Method(function (): int {
+        return self::$count;
+    }))->setStatic());
+
+$definition->register();
+
+Counter::increment();
+Counter::increment();
+Counter::increment();
+
+echo Counter::getCount(); // 3
+echo Counter::$count;     // 3
+?>
+</code></pre>
+
+<h5>Fluent Composition Pipeline</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+interface Identifiable
+{
+    public function getId(): int;
+}
+
+interface Timestampable
+{
+    public function getCreatedAt(): string;
+}
+
+$definition = new Definition('Article', [
+    Identifiable::class,
+    Timestampable::class,
+]);
+
+$definition
+    ->addProperty('id',         new Value(0))
+    ->addProperty('title',      new Value(''))
+    ->addProperty('body',       new Value(''))
+    ->addProperty('published',  new Value(false))
+    ->addProperty('createdAt',  new Value(''))
+    ->addProperty('updatedAt',  new Value(''))
+    ->addMethod('getId', new Method(function (): int {
+        return $this->id;
+    }))
+    ->addMethod('getCreatedAt', new Method(function (): string {
+        return $this->createdAt;
+    }))
+    ->addMethod('publish', new Method(function (): void {
+        $this->published = true;
+        $this->updatedAt = date('Y-m-d H:i:s');
+    }))
+    ->addMethod('isPublished', new Method(function (): bool {
+        return $this->published;
+    }))
+    ->addMethod('summarize', new Method(function (): string {
+        return sprintf(
+            '[%d] %s — %s',
+            $this->id,
+            $this->title,
+            $this->isPublished() ? 'published' : 'draft'
+        );
+    }));
+
+$definition->register();
+
+$article             = new Article();
+$article->id         = 1;
+$article->title      = 'Componere in Practice';
+$article->createdAt  = date('Y-m-d H:i:s');
+
+echo $article->summarize() . PHP_EOL; // [1] Componere in Practice — draft
+$article->publish();
+echo $article->summarize() . PHP_EOL; // [1] Componere in Practice — published
+?>
+</code></pre>
+
+<h5>Verifying Properties via Reflection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('InspectableEntity');
+
+$definition
+    ->addProperty('id',     new Value(0))
+    ->addProperty('name',   new Value(''))
+    ->addProperty('active', (new Value(true))->setProtected());
+
+$reflector  = $definition->getReflector();
+$properties = $reflector->getProperties();
+
+foreach ($properties as $property) {
+    echo sprintf(
+        '%-12s | public: %-5s | protected: %-5s | static: %-5s | default: %s',
+        $property->getName(),
+        $property->isPublic()    ? 'yes' : 'no',
+        $property->isProtected() ? 'yes' : 'no',
+        $property->isStatic()    ? 'yes' : 'no',
+        var_export($property->getDefaultValue(), true)
+    ) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>addProperty() vs addConstant()</h5>
+<ul>
+  <li>
+    <strong>addProperty()</strong> – Defines mutable instance or static state;
+    value can be changed after instantiation; accessed via
+    <code>$instance->property</code> or <code>ClassName::$property</code>;
+    appropriate for data that varies per instance or changes over time
+  </li>
+  <li>
+    <strong>addConstant()</strong> – Defines immutable named values; cannot
+    be changed after registration; accessed via
+    <code>ClassName::CONSTANT</code>; appropriate for fixed configuration
+    values, states, and identifiers
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Declare properties before methods that access them — this mirrors native PHP class declaration order and makes the composition readable</li>
+  <li>Use the most restrictive visibility that satisfies the class's needs — prefer protected or private over public for internal state</li>
+  <li>Always provide a meaningful default value via <code>Value</code> — avoid <code>null</code> defaults unless the property is genuinely nullable by design</li>
+  <li>Use <code>getReflector()->getProperties()</code> to verify that all expected properties are defined with correct defaults and visibility before registering</li>
+  <li>Declare static properties explicitly via <code>(new Value(...))->setStatic()</code> and pair them with static methods for clear and consistent access patterns</li>
+  <li>Keep the number of public properties minimal — expose state through methods to maintain encapsulation even in dynamically composed classes</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Available only on <code>Componere\Definition</code> — properties cannot be added to existing classes via <code>Componere\Patch</code></li>
+  <li>Default values must be scalar values or arrays — object instances and resources are not valid property defaults</li>
+  <li>PHP typed property declarations (<code>public string $name</code>) are not supported via <code>addProperty()</code> — properties are untyped</li>
+  <li>Dynamically added properties are invisible to static analysis tools and IDEs — property access will produce unresolved symbol warnings</li>
+  <li>Once the definition is registered, the property list is fixed — no properties can be added to or removed from the class</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Defining the state structure of dynamically generated data transfer objects, value objects, and entities</li>
+  <li>Adding instance variables to runtime classes that are accessed and mutated by methods added via <code>addMethod()</code></li>
+  <li>Declaring shared static counters, registries, or caches on dynamically composed classes</li>
+  <li>Building self-contained runtime model classes with both state and behavior in a single fluent composition pipeline</li>
+  <li>Providing well-typed default values that express the intended data shape of each property from the moment of instantiation</li>
+</ul>
+
+<p>
+  <code>addProperty()</code> is the complement to <code>addMethod()</code>
+  in a complete <code>Componere\Definition</code> composition — methods
+  define behavior, properties define state. Together, they produce runtime
+  class definitions that are genuinely encapsulated, self-contained objects
+  rather than anonymous data bags. Thoughtful use of visibility modifiers,
+  meaningful defaults, and clear naming ensures that dynamically composed
+  classes carry the same structural discipline as their statically declared
+  counterparts.
+</p>
+
 <h4 id="componere-definition-register">COMPONERE\DEFINITION::REGISTER</h4>
 <h4 id="componere-definition-isregistered">COMPONERE\DEFINITION::ISREGISTERED</h4>
 <h4 id="componere-definition-getclosure">COMPONERE\DEFINITION::GETCLOSURE</h4>
