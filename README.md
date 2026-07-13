@@ -28384,6 +28384,316 @@ foreach ($properties as $property) {
 </p>
 
 <h4 id="componere-definition-register">COMPONERE\DEFINITION::REGISTER</h4>
+<p>
+  <strong>Componere\Definition::register()</strong> is the method that
+  finalizes and permanently installs a composed class definition into PHP's
+  class table, making it available for instantiation, type checking, and
+  reflection for the remainder of the process lifetime. It is the
+  concluding step of the <code>Componere\Definition</code> lifecycle —
+  the point at which a definition transitions from a mutable composition
+  object into an immutable, live PHP class.
+</p>
+<p>
+  Once <code>register()</code> is called, the class is permanent. No further
+  methods, properties, constants, interfaces, or traits can be added to it,
+  and it cannot be unregistered or replaced. This irreversibility makes the
+  timing and completeness of the composition before calling
+  <code>register()</code> critically important.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Definition::register(): void
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The composed class entry — including all methods, properties, constants, interfaces, and traits — is validated internally</li>
+  <li>The class entry is installed into the Zend Engine's class table under the name provided at construction</li>
+  <li>The class becomes immediately available for instantiation via <code>new ClassName()</code></li>
+  <li><code>instanceof</code> checks, type declarations, and reflection queries begin returning accurate results</li>
+  <li>The <code>Definition</code> instance is marked as registered — subsequent calls to <code>register()</code> throw a <code>RuntimeException</code></li>
+  <li>No further composition is possible on the <code>Definition</code> object after this call</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('RuntimeProduct');
+
+$definition
+    ->addProperty('name',  new Value(''))
+    ->addProperty('price', new Value(0.0))
+    ->addMethod('describe', new Method(function (): string {
+        return $this->name . ' — $' . number_format($this->price, 2);
+    }));
+
+// Finalize and install the class into the PHP runtime
+$definition->register();
+
+// Class is now available
+$product        = new RuntimeProduct();
+$product->name  = 'Widget';
+$product->price = 29.90;
+
+echo $product->describe(); // Widget — $29.90
+?>
+</code></pre>
+
+<h5>Verifying Registration State</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('VerifiedClass');
+$definition->addMethod('ping', new Method(function (): string {
+    return 'pong';
+}));
+
+echo $definition->isRegistered() ? 'registered' : 'not registered';
+// not registered
+
+$definition->register();
+
+echo $definition->isRegistered() ? 'registered' : 'not registered';
+// registered
+
+// Confirm via PHP's native class_exists()
+echo class_exists('VerifiedClass', false) ? 'exists' : 'not found';
+// exists
+?>
+</code></pre>
+
+<h5>Guarding Against Double Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('GuardedClass');
+$definition->addMethod('hello', new Method(function (): string {
+    return 'Hello!';
+}));
+
+function safeRegister(Definition $definition): void
+{
+    if ($definition->isRegistered()) {
+        echo 'Already registered — skipping.' . PHP_EOL;
+        return;
+    }
+
+    $definition->register();
+    echo 'Registered successfully.' . PHP_EOL;
+}
+
+safeRegister($definition); // Registered successfully.
+safeRegister($definition); // Already registered — skipping.
+?>
+</code></pre>
+
+<h5>Validate Before Registering</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Persistable
+{
+    public function save(): bool;
+    public function delete(): bool;
+}
+
+function validateAndRegister(Definition $definition, string $interface): void
+{
+    $reflector       = $definition->getReflector();
+    $interfaceMethods = array_map(
+        fn (\ReflectionMethod $m) => $m->getName(),
+        (new \ReflectionClass($interface))->getMethods()
+    );
+    $definedMethods  = array_map(
+        fn (\ReflectionMethod $m) => $m->getName(),
+        $reflector->getMethods()
+    );
+    $missing = array_diff($interfaceMethods, $definedMethods);
+
+    if (!empty($missing)) {
+        throw new \RuntimeException(
+            'Cannot register — missing methods: ' . implode(', ', $missing)
+        );
+    }
+
+    $definition->register();
+    echo 'Definition registered successfully.' . PHP_EOL;
+}
+
+$definition = new Definition('PersistableEntity', [Persistable::class]);
+$definition
+    ->addMethod('save',   new Method(function (): bool { return true; }))
+    ->addMethod('delete', new Method(function (): bool { return true; }));
+
+validateAndRegister($definition, Persistable::class);
+// Definition registered successfully.
+?>
+</code></pre>
+
+<h5>Practical Pattern — Bootstrap Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+// Centralized bootstrap function that registers all runtime class definitions
+// Called once at application startup — never during request handling
+
+function bootstrapRuntimeClasses(): void
+{
+    $classes = [
+        'RuntimeConfig'  => buildConfigDefinition(),
+        'RuntimeSession' => buildSessionDefinition(),
+    ];
+
+    foreach ($classes as $name => $definition) {
+        if (class_exists($name, false)) {
+            continue; // Already registered — skip
+        }
+
+        $definition->register();
+        echo '[Bootstrap] Registered: ' . $name . PHP_EOL;
+    }
+}
+
+function buildConfigDefinition(): Definition
+{
+    $definition = new Definition('RuntimeConfig');
+    $definition
+        ->addProperty('data', new Value([]))
+        ->addMethod('get', new Method(function (string $key, mixed $default = null): mixed {
+            return $this->data[$key] ?? $default;
+        }))
+        ->addMethod('set', new Method(function (string $key, mixed $value): void {
+            $this->data[$key] = $value;
+        }));
+
+    return $definition;
+}
+
+function buildSessionDefinition(): Definition
+{
+    $definition = new Definition('RuntimeSession');
+    $definition
+        ->addProperty('id',   new Value(''))
+        ->addProperty('data', new Value([]))
+        ->addMethod('start', new Method(function (): void {
+            $this->id = bin2hex(random_bytes(16));
+        }))
+        ->addMethod('getId', new Method(function (): string {
+            return $this->id;
+        }));
+
+    return $definition;
+}
+
+bootstrapRuntimeClasses();
+?>
+</code></pre>
+
+<h5>Post-Registration Behavior</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Greetable
+{
+    public function greet(): string;
+}
+
+$definition = new Definition('RegisteredClass', [Greetable::class]);
+$definition->addMethod('greet', new Method(function (): string {
+    return 'Hello from RegisteredClass!';
+}));
+
+$definition->register();
+
+// All standard PHP class behaviors are available post-registration
+
+$instance = new RegisteredClass();
+
+// instanceof checks
+echo ($instance instanceof Greetable)      ? 'implements Greetable' : '';    // yes
+echo ($instance instanceof RegisteredClass) ? 'is RegisteredClass'  : '';    // yes
+
+// Reflection
+$reflector = new \ReflectionClass(RegisteredClass::class);
+echo $reflector->getName();                                                   // RegisteredClass
+echo count($reflector->getMethods());                                         // 1
+echo count($reflector->getInterfaceNames());                                  // 1
+
+// Type declarations
+function greet(Greetable $g): string { return $g->greet(); }
+echo greet($instance); // Hello from RegisteredClass!
+?>
+</code></pre>
+
+<h5>register() vs Patch::apply()</h5>
+<ul>
+  <li>
+    <strong>register()</strong> – Permanent and irreversible; installs a
+    brand new class into the PHP class table; the class persists for the
+    duration of the process; no rollback mechanism exists
+  </li>
+  <li>
+    <strong>Patch::apply()</strong> – Temporary and reversible; overlays
+    modifications onto an existing class; can be reverted via
+    <code>revert()</code>; the original class is restored on revert
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always complete the entire composition before calling <code>register()</code> — no further additions are possible afterward</li>
+  <li>Use <code>getReflector()</code> to validate the composition state immediately before registering</li>
+  <li>Check <code>isRegistered()</code> or <code>class_exists($name, false)</code> before registering when the class name is dynamic or the bootstrap may run more than once</li>
+  <li>Perform all registrations at application bootstrap time — never call <code>register()</code> during request handling or inside loops</li>
+  <li>Treat <code>register()</code> as a deployment operation, not a runtime operation — the class it creates is as permanent as a statically declared class for the lifetime of the process</li>
+  <li>Log or echo each successful registration during bootstrap to make the set of dynamic classes discoverable during debugging</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Irreversible — once called, the class cannot be unregistered, modified, or replaced for the duration of the PHP process</li>
+  <li>Calling <code>register()</code> more than once on the same instance throws a <code>RuntimeException</code></li>
+  <li>The registered class is invisible to static analysis tools, IDEs, and documentation generators</li>
+  <li>Any errors in the composition (missing interface methods, property conflicts) will only surface at runtime — there is no compile-time validation</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Finalizing dynamically composed classes at application bootstrap time</li>
+  <li>Installing plugin-contributed class definitions into the PHP runtime during initialization</li>
+  <li>Registering code-generated classes produced from metadata, schemas, or configuration files</li>
+  <li>Completing compatibility shim classes that satisfy interface contracts required by the application</li>
+  <li>Building test fixture classes programmatically and registering them once per test suite run</li>
+</ul>
+
+<p>
+  <code>Componere\Definition::register()</code> is the commit operation of
+  the Componere class composition model. Everything before it is flexible,
+  introspectable, and reversible — everything after it is permanent and
+  live. Treating this boundary with the care it deserves — by validating
+  composition thoroughly, registering only at bootstrap, and documenting
+  every dynamic class — ensures that the power Componere provides is
+  exercised responsibly and predictably.
+</p>
+
 <h4 id="componere-definition-isregistered">COMPONERE\DEFINITION::ISREGISTERED</h4>
 <h4 id="componere-definition-getclosure">COMPONERE\DEFINITION::GETCLOSURE</h4>
 <h4 id="componere-definition-getclosures">COMPONERE\DEFINITION::GETCLOSURES</h4>
