@@ -28695,6 +28695,324 @@ echo greet($instance); // Hello from RegisteredClass!
 </p>
 
 <h4 id="componere-definition-isregistered">COMPONERE\DEFINITION::ISREGISTERED</h4>
+<p>
+  <strong>Componere\Definition::isRegistered()</strong> is a method that
+  returns a boolean indicating whether <code>register()</code> has already
+  been called on the current <code>Definition</code> instance. It is the
+  primary safeguard against double registration — a condition that would
+  otherwise throw a <code>RuntimeException</code> — and serves as the
+  canonical way to inspect the lifecycle state of a
+  <code>Definition</code> object at any point in the application.
+</p>
+<p>
+  While <code>class_exists()</code> can confirm whether a class name is
+  present in the PHP class table, <code>isRegistered()</code> is scoped
+  specifically to the <code>Definition</code> instance itself, making it
+  the more precise and semantically appropriate check when working directly
+  with a definition object rather than a class name string.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Definition::isRegistered(): bool
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The method reads the internal registration flag on the <code>Definition</code> instance</li>
+  <li>Returns <code>true</code> if <code>register()</code> has been successfully called on this instance</li>
+  <li>Returns <code>false</code> if <code>register()</code> has not yet been called</li>
+  <li>The flag is set atomically when <code>register()</code> completes — it is never partially true</li>
+  <li>Has no side effects — purely a read operation</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('StatusTracker');
+$definition->addMethod('ping', new Method(function (): string {
+    return 'pong';
+}));
+
+// Before registration
+var_dump($definition->isRegistered()); // bool(false)
+
+$definition->register();
+
+// After registration
+var_dump($definition->isRegistered()); // bool(true)
+?>
+</code></pre>
+
+<h5>Guarding Against Double Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('SafeClass');
+$definition->addMethod('hello', new Method(function (): string {
+    return 'Hello!';
+}));
+
+function registerOnce(Definition $definition): bool
+{
+    if ($definition->isRegistered()) {
+        return false; // Already registered — nothing to do
+    }
+
+    $definition->register();
+    return true;
+}
+
+$first  = registerOnce($definition); // true — registered successfully
+$second = registerOnce($definition); // false — already registered, skipped
+
+echo $first  ? 'First call registered.'  : 'First call skipped.'  . PHP_EOL;
+echo $second ? 'Second call registered.' : 'Second call skipped.' . PHP_EOL;
+?>
+</code></pre>
+
+<h5>isRegistered() vs class_exists()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('ComparedClass');
+$definition->addMethod('run', new Method(function (): void {}));
+
+// Before registration
+echo $definition->isRegistered()                    ? 'registered'  : 'not registered'; // not registered
+echo class_exists('ComparedClass', false)           ? 'exists'      : 'not found';      // not found
+
+$definition->register();
+
+// After registration — both return affirmative
+echo $definition->isRegistered()                    ? 'registered'  : 'not registered'; // registered
+echo class_exists('ComparedClass', false)           ? 'exists'      : 'not found';      // exists
+
+// Key distinction: class_exists() can be true even without a Definition instance
+// isRegistered() is scoped specifically to this Definition object
+class ManuallyDeclaredClass {}
+
+// class_exists() works for any class
+echo class_exists('ManuallyDeclaredClass', false)   ? 'exists'      : 'not found';      // exists
+
+// isRegistered() only reflects this Definition instance's state — not global class table
+?>
+</code></pre>
+
+<h5>Practical Pattern — Idempotent Bootstrap Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+class DefinitionRegistry
+{
+    /** @var Definition[] */
+    private array $definitions = [];
+
+    public function add(string $name, Definition $definition): void
+    {
+        $this->definitions[$name] = $definition;
+    }
+
+    public function registerAll(): void
+    {
+        foreach ($this->definitions as $name => $definition) {
+            if ($definition->isRegistered()) {
+                echo '[Skip]     ' . $name . ' — already registered.' . PHP_EOL;
+                continue;
+            }
+
+            $definition->register();
+            echo '[Registered] ' . $name . PHP_EOL;
+        }
+    }
+
+    public function getStatus(): array
+    {
+        return array_map(
+            fn (Definition $d) => $d->isRegistered() ? 'registered' : 'pending',
+            $this->definitions
+        );
+    }
+}
+
+// Build definitions
+$configDef = new Definition('AppConfig');
+$configDef->addProperty('data', new Value([]));
+
+$loggerDef = new Definition('AppLogger');
+$loggerDef->addMethod('log', new Method(function (string $msg): void {
+    echo '[LOG] ' . $msg . PHP_EOL;
+}));
+
+// Register via registry
+$registry = new DefinitionRegistry();
+$registry->add('AppConfig', $configDef);
+$registry->add('AppLogger', $loggerDef);
+
+$registry->registerAll();
+
+// Running again is safe — isRegistered() prevents double registration
+$registry->registerAll();
+
+// Inspect status
+print_r($registry->getStatus());
+?>
+</code></pre>
+
+<h5>Practical Pattern — Deferred Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+// Build the definition early, register lazily on first use
+
+class LazyDefinition
+{
+    private Definition $definition;
+
+    public function __construct()
+    {
+        $this->definition = new Definition('LazyClass');
+        $this->definition
+            ->addProperty('value', new Value(null))
+            ->addMethod('getValue', new Method(function (): mixed {
+                return $this->value;
+            }))
+            ->addMethod('setValue', new Method(function (mixed $v): void {
+                $this->value = $v;
+            }));
+    }
+
+    public function getInstance(): object
+    {
+        if (!$this->definition->isRegistered()) {
+            $this->definition->register();
+            echo 'LazyClass registered on first use.' . PHP_EOL;
+        }
+
+        return new LazyClass();
+    }
+}
+
+$lazy = new LazyDefinition();
+
+// First call — registers and instantiates
+$obj = $lazy->getInstance(); // LazyClass registered on first use.
+
+// Subsequent calls — already registered, no re-registration
+$obj2 = $lazy->getInstance();
+
+$obj->setValue(42);
+echo $obj->getValue(); // 42
+?>
+</code></pre>
+
+<h5>Practical Pattern — Conditional Composition Before Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+function buildAndFinalize(Definition $definition, bool $withLogging): void
+{
+    // Only add optional members if not yet registered
+    if (!$definition->isRegistered()) {
+        if ($withLogging) {
+            $definition->addMethod('log', new Method(function (string $msg): void {
+                echo '[LOG] ' . $msg . PHP_EOL;
+            }));
+        }
+
+        $definition->register();
+    }
+}
+
+$definition = new Definition('ConditionalClass');
+$definition->addProperty('name', new Value(''));
+
+buildAndFinalize($definition, withLogging: true);
+// Registered with logging
+
+buildAndFinalize($definition, withLogging: false);
+// Already registered — no-op
+
+$obj = new ConditionalClass();
+$obj->log('Hello from ConditionalClass'); // [LOG] Hello from ConditionalClass
+?>
+</code></pre>
+
+<h5>isRegistered() vs Related Methods and Functions</h5>
+<ul>
+  <li>
+    <strong>isRegistered()</strong> – Instance-scoped check; reflects
+    whether <em>this</em> <code>Definition</code> object has been
+    registered; the most precise check when working with a definition
+    object directly
+  </li>
+  <li>
+    <strong>class_exists(string $name, false)</strong> – Global check
+    against PHP's class table; works for any class regardless of how it
+    was defined; appropriate when only the class name is available, not
+    the <code>Definition</code> instance
+  </li>
+  <li>
+    <strong>register()</strong> – The action that causes
+    <code>isRegistered()</code> to return <code>true</code>; calling it
+    without checking <code>isRegistered()</code> first on an already
+    registered definition throws a <code>RuntimeException</code>
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always check <code>isRegistered()</code> before calling <code>register()</code> in any code path that may execute more than once — bootstrap hooks, service providers, and factory methods are common sources of double-registration bugs</li>
+  <li>Prefer <code>isRegistered()</code> over <code>class_exists()</code> when the <code>Definition</code> instance is in scope — it is more semantically precise and does not require passing a string class name</li>
+  <li>Use <code>class_exists($name, false)</code> as a complementary guard at the construction site, before creating the <code>Definition</code> instance, when the class name may already be defined by other means</li>
+  <li>Treat <code>isRegistered()</code> as the idempotency check that makes bootstrap registration safe to call multiple times without error handling</li>
+  <li>Combine with a registry or container to centralize registration state tracking across the application bootstrap lifecycle</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Instance-scoped only — returns <code>false</code> if the same class name was registered by a different <code>Definition</code> instance or declared natively in source code</li>
+  <li>Cannot return <code>true</code> for classes registered by other means — for global class existence, use <code>class_exists()</code></li>
+  <li>Provides no information about the composition state before registration — does not indicate whether methods, properties, or interfaces have been added</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Guarding <code>register()</code> calls in bootstrap and initialization code that may execute more than once</li>
+  <li>Implementing idempotent definition registries that can safely re-run without throwing exceptions</li>
+  <li>Enabling deferred or lazy registration patterns where a class is only registered on first use</li>
+  <li>Inspecting the lifecycle state of a <code>Definition</code> instance during debugging or administrative tooling</li>
+  <li>Conditionally adding final composition members only if the definition has not yet been committed</li>
+</ul>
+
+<p>
+  <code>Componere\Definition::isRegistered()</code> is a small but essential
+  method that brings idempotency and safety to the otherwise irreversible act
+  of class registration. By making the lifecycle state of a
+  <code>Definition</code> instance directly queryable, it enables robust,
+  re-entrant bootstrap code and deferred registration patterns — ensuring
+  that the permanence of <code>register()</code> is always exercised
+  deliberately and exactly once.
+</p>
+
 <h4 id="componere-definition-getclosure">COMPONERE\DEFINITION::GETCLOSURE</h4>
 <h4 id="componere-definition-getclosures">COMPONERE\DEFINITION::GETCLOSURES</h4>
 
