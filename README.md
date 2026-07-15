@@ -29014,6 +29014,289 @@ $obj->log('Hello from ConditionalClass'); // [LOG] Hello from ConditionalClass
 </p>
 
 <h4 id="componere-definition-getclosure">COMPONERE\DEFINITION::GETCLOSURE</h4>
+<p>
+  <strong>Componere\Definition::getClosure()</strong> is a method that
+  retrieves the raw <code>Closure</code> associated with a specific named
+  method that has been added to the definition via <code>addMethod()</code>.
+  It provides direct access to the underlying callable without going through
+  the class instance or reflection, making it useful for extracting, reusing,
+  or inspecting individual method closures independently of the class
+  composition lifecycle.
+</p>
+<p>
+  The closure returned is the same one passed to <code>Componere\Method</code>
+  at the time of composition — not a bound copy. This means it can be invoked
+  directly, passed to other functions, or bound to different objects via
+  <code>Closure::bind()</code> or <code>Closure::bindTo()</code> as needed.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Definition::getClosure(string $name): Closure
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The method name is looked up against the methods registered on the definition</li>
+  <li>The raw <code>Closure</code> associated with that method name is returned</li>
+  <li>If the method name does not exist on the definition, a <code>RuntimeException</code> is thrown</li>
+  <li>The returned closure is unbound — it is not automatically scoped to any class instance</li>
+  <li>Can be called before or after <code>register()</code> — the closure is accessible throughout the definition lifecycle</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('MathHelper');
+
+$definition->addMethod('square', new Method(function (int $n): int {
+    return $n * $n;
+}));
+
+// Retrieve the closure before or after registration
+$square = $definition->getClosure('square');
+
+// Invoke directly
+echo $square(5);  // 25
+echo $square(12); // 144
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Accessing Before Registration</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('StringHelper');
+
+$definition
+    ->addMethod('slugify', new Method(function (string $text): string {
+        return strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $text), '-'));
+    }))
+    ->addMethod('truncate', new Method(function (string $text, int $length = 100): string {
+        return strlen($text) > $length
+            ? substr($text, 0, $length) . '...'
+            : $text;
+    }));
+
+// Extract and test closures before committing to registration
+$slugify  = $definition->getClosure('slugify');
+$truncate = $definition->getClosure('truncate');
+
+echo $slugify('Hello World! This is PHP.');  // hello-world-this-is-php
+echo $truncate('A very long string...', 10); // A very lon...
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Binding a Closure to an Object</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('Invoice');
+
+$definition
+    ->addProperty('subtotal', new Value(0.0))
+    ->addProperty('taxRate',  new Value(0.1))
+    ->addMethod('total', new Method(function (): float {
+        return $this->subtotal * (1 + $this->taxRate);
+    }));
+
+$definition->register();
+
+$invoice           = new Invoice();
+$invoice->subtotal = 200.00;
+$invoice->taxRate  = 0.15;
+
+// Retrieve the raw closure from the definition
+$totalClosure = $definition->getClosure('total');
+
+// Bind it to a specific instance to access $this
+$boundTotal = Closure::bind($totalClosure, $invoice, Invoice::class);
+
+echo $boundTotal(); // 230
+?>
+</code></pre>
+
+<h5>Reusing a Closure Across Multiple Definitions</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+// Extract a closure from one definition and reuse it in another
+
+$sourceDefinition = new Definition('SourceClass');
+$sourceDefinition->addMethod('format', new Method(function (float $amount): string {
+    return '$' . number_format($amount, 2);
+}));
+
+// Retrieve the closure from the source definition
+$formatClosure = $sourceDefinition->getClosure('format');
+
+// Reuse the same closure in a different definition
+$targetDefinition = new Definition('TargetClass');
+$targetDefinition->addMethod('format', new Method($formatClosure));
+$targetDefinition->addMethod('describe', new Method(function (float $amount): string {
+    return 'Amount: ' . $this->format($amount);
+}));
+
+$sourceDefinition->register();
+$targetDefinition->register();
+
+$obj = new TargetClass();
+echo $obj->describe(1999.90); // Amount: $1,999.90
+?>
+</code></pre>
+
+<h5>Practical Pattern — Testing Closures in Isolation</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+// Extract and unit test individual method closures
+// without instantiating the full class
+
+$definition = new Definition('OrderCalculator');
+
+$definition
+    ->addProperty('items',    new Value([]))
+    ->addProperty('discount', new Value(0.0))
+    ->addMethod('subtotal', new Method(function (): float {
+        return array_sum(array_column($this->items, 'price'));
+    }))
+    ->addMethod('total', new Method(function (): float {
+        $subtotal = $this->subtotal();
+        return $subtotal - ($subtotal * $this->discount);
+    }));
+
+// Test subtotal closure in isolation by binding to a mock object
+$subtotalClosure = $definition->getClosure('subtotal');
+
+$mockOrder        = new stdClass();
+$mockOrder->items = [
+    ['name' => 'Widget A', 'price' => 29.90],
+    ['name' => 'Widget B', 'price' => 49.90],
+    ['name' => 'Widget C', 'price' => 19.90],
+];
+
+$boundSubtotal = Closure::bind($subtotalClosure, $mockOrder, 'stdClass');
+echo 'Subtotal: $' . number_format($boundSubtotal(), 2); // Subtotal: $99.70
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Practical Pattern — Closure Delegation</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+// Pass a definition's closure as a callable to higher-order functions
+
+$definition = new Definition('DataTransformer');
+
+$definition
+    ->addMethod('normalize', new Method(function (string $value): string {
+        return strtolower(trim($value));
+    }))
+    ->addMethod('sanitize', new Method(function (string $value): string {
+        return htmlspecialchars(strip_tags($value));
+    }));
+
+$definition->register();
+
+$rawInputs = ['  Hello World  ', '<b>Bold</b>', '  PHP  '];
+
+// Use extracted closures directly as array_map callbacks
+$normalized = array_map($definition->getClosure('normalize'), $rawInputs);
+$sanitized  = array_map($definition->getClosure('sanitize'), $rawInputs);
+
+print_r($normalized); // ['hello world', '<b>bold</b>', 'php']
+print_r($sanitized);  // ['Hello World', 'Bold', 'PHP']
+?>
+</code></pre>
+
+<h5>getClosure() vs getClosures()</h5>
+<ul>
+  <li>
+    <strong>getClosure(string $name)</strong> – Retrieves a single closure
+    by method name; throws a <code>RuntimeException</code> if the method
+    does not exist; appropriate when a specific method is needed and its
+    presence is expected
+  </li>
+  <li>
+    <strong>getClosures()</strong> – Returns all closures as an associative
+    array keyed by method name; appropriate for bulk retrieval, inspection,
+    or when iterating over all defined methods
+  </li>
+</ul>
+
+<h5>getClosure() vs Reflection-Based Extraction</h5>
+<ul>
+  <li>
+    <strong>getClosure()</strong> – Direct access to the raw closure from
+    the <code>Definition</code> object; works before and after registration;
+    no reflection overhead
+  </li>
+  <li>
+    <strong>ReflectionMethod::getClosure()</strong> – Standard PHP reflection
+    approach; requires the class to already be registered; returns a closure
+    bound to a specific instance rather than the raw unbound closure
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>getClosure()</code> to test individual method closures in isolation before registering the definition, reducing the surface area of debugging</li>
+  <li>Always wrap calls in a try/catch when the method name is dynamic — a missing method name throws a <code>RuntimeException</code></li>
+  <li>When binding the retrieved closure to an object via <code>Closure::bind()</code>, always pass the correct class scope as the third argument to ensure private and protected member access works as expected</li>
+  <li>Reuse extracted closures across multiple definitions when the same logic applies to more than one class — this avoids duplicating closure bodies</li>
+  <li>Prefer <code>getClosures()</code> when all methods need to be inspected or delegated — use <code>getClosure()</code> only for targeted, named retrieval</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Throws a <code>RuntimeException</code> if the specified method name has not been added to the definition</li>
+  <li>Returns the unbound closure — <code>$this</code> references inside it will only work correctly after binding to an appropriate object via <code>Closure::bind()</code></li>
+  <li>Only retrieves closures added via <code>addMethod()</code> — methods imported from traits are not accessible through this method</li>
+  <li>Cannot retrieve closures for methods inherited from a parent class passed at construction time</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Extracting individual method closures for unit testing before class registration</li>
+  <li>Reusing a closure from one definition as a method in another definition</li>
+  <li>Passing definition method closures as callbacks to higher-order functions like <code>array_map()</code> or <code>usort()</code></li>
+  <li>Binding a method closure to a specific object instance for targeted invocation outside the class context</li>
+  <li>Inspecting the exact callable body associated with a named method during debugging or documentation generation</li>
+</ul>
+
+<p>
+  <code>Componere\Definition::getClosure()</code> provides a precise escape
+  hatch from the class-centric composition model — giving direct access to
+  the raw callable that underlies any named method. Whether used for testing,
+  reuse, delegation, or binding, it treats closures as first-class values
+  that exist independently of the class structure they were composed into,
+  reflecting the fundamental nature of PHP closures as portable, reusable
+  units of behavior.
+</p>
+
 <h4 id="componere-definition-getclosures">COMPONERE\DEFINITION::GETCLOSURES</h4>
 
 <h4 id="componere-patch-class">COMPONERE\PATCH CLASS</h4>
