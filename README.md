@@ -29298,6 +29298,328 @@ print_r($sanitized);  // ['Hello World', 'Bold', 'PHP']
 </p>
 
 <h4 id="componere-definition-getclosures">COMPONERE\DEFINITION::GETCLOSURES</h4>
+<p>
+  <strong>Componere\Definition::getClosures()</strong> is a method that
+  returns all closures associated with the methods added to a
+  <code>Componere\Definition</code> instance, as an associative array keyed
+  by method name. It is the bulk counterpart to
+  <code>getClosure()</code> — rather than retrieving a single named closure,
+  it surfaces the entire set of method closures defined on the composition
+  in a single call.
+</p>
+<p>
+  Like <code>getClosure()</code>, the closures returned are the raw,
+  unbound callables passed to <code>Componere\Method</code> at composition
+  time. They can be invoked directly, iterated over, delegated to other
+  systems, or reused in other definitions — making
+  <code>getClosures()</code> particularly valuable for bulk inspection,
+  testing pipelines, and closure registry patterns.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Definition::getClosures(): array
+?>
+</code></pre>
+<p>
+  Returns an associative array of <code>string => Closure</code> pairs,
+  where each key is a method name and each value is the corresponding
+  raw closure. Returns an empty array if no methods have been added via
+  <code>addMethod()</code>.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The method iterates over all methods registered on the definition via <code>addMethod()</code></li>
+  <li>Each method name is paired with its associated raw closure</li>
+  <li>The complete associative array is returned in insertion order</li>
+  <li>Closures from traits, parent classes, or other non-explicit sources are not included</li>
+  <li>Can be called before or after <code>register()</code> without side effects</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('StringUtility');
+
+$definition
+    ->addMethod('uppercase',  new Method(function (string $s): string { return strtoupper($s); }))
+    ->addMethod('lowercase',  new Method(function (string $s): string { return strtolower($s); }))
+    ->addMethod('reverse',    new Method(function (string $s): string { return strrev($s); }))
+    ->addMethod('wordCount',  new Method(function (string $s): int    { return str_word_count($s); }));
+
+$closures = $definition->getClosures();
+
+foreach ($closures as $name => $closure) {
+    echo $name . PHP_EOL;
+    // uppercase
+    // lowercase
+    // reverse
+    // wordCount
+}
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Invoking All Closures Against a Value</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('TextTransformer');
+
+$definition
+    ->addMethod('trim',      new Method(function (string $s): string { return trim($s); }))
+    ->addMethod('lowercase', new Method(function (string $s): string { return strtolower($s); }))
+    ->addMethod('slugify',   new Method(function (string $s): string {
+        return preg_replace('/[^a-z0-9]+/', '-', strtolower(trim($s)));
+    }));
+
+$input    = '  Hello World! This is PHP.  ';
+$closures = $definition->getClosures();
+
+foreach ($closures as $name => $closure) {
+    echo $name . ': ' . $closure($input) . PHP_EOL;
+}
+// trim:      Hello World! This is PHP.
+// lowercase:   hello world! this is php.
+// slugify:   hello-world-this-is-php
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Bulk Testing of All Method Closures</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('MathOperations');
+
+$definition
+    ->addMethod('double',   new Method(function (int $n): int { return $n * 2; }))
+    ->addMethod('square',   new Method(function (int $n): int { return $n ** 2; }))
+    ->addMethod('negate',   new Method(function (int $n): int { return -$n; }))
+    ->addMethod('absolute', new Method(function (int $n): int { return abs($n); }));
+
+// Test all closures before registering the definition
+$testCases = [
+    'double'   => [5  => 10,  0 => 0,  -3 => -6],
+    'square'   => [5  => 25,  0 => 0,  -3 => 9],
+    'negate'   => [5  => -5,  0 => 0,  -3 => 3],
+    'absolute' => [-5 => 5,   0 => 0,   3 => 3],
+];
+
+$closures = $definition->getClosures();
+$passed   = 0;
+$failed   = 0;
+
+foreach ($testCases as $method => $cases) {
+    foreach ($cases as $input => $expected) {
+        $result = $closures[$method]($input);
+
+        if ($result === $expected) {
+            $passed++;
+        } else {
+            echo "[FAIL] {$method}({$input}) expected {$expected}, got {$result}" . PHP_EOL;
+            $failed++;
+        }
+    }
+}
+
+echo "Tests passed: {$passed} | Failed: {$failed}" . PHP_EOL;
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Practical Pattern — Closure Registry</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+// Extract all closures from a definition and register them
+// as standalone callables in an independent registry
+
+class ClosureRegistry
+{
+    private array $closures = [];
+
+    public function importFromDefinition(Definition $definition): void
+    {
+        foreach ($definition->getClosures() as $name => $closure) {
+            $this->closures[$name] = $closure;
+        }
+    }
+
+    public function has(string $name): bool
+    {
+        return isset($this->closures[$name]);
+    }
+
+    public function call(string $name, mixed ...$args): mixed
+    {
+        if (!$this->has($name)) {
+            throw new \RuntimeException('No callable registered under: ' . $name);
+        }
+
+        return ($this->closures[$name])(...$args);
+    }
+
+    public function all(): array
+    {
+        return $this->closures;
+    }
+}
+
+$definition = new Definition('Validators');
+$definition
+    ->addMethod('isEmail',    new Method(function (string $v): bool { return filter_var($v, FILTER_VALIDATE_EMAIL) !== false; }))
+    ->addMethod('isUrl',      new Method(function (string $v): bool { return filter_var($v, FILTER_VALIDATE_URL)   !== false; }))
+    ->addMethod('isPositive', new Method(function (int $v): bool    { return $v > 0; }));
+
+$registry = new ClosureRegistry();
+$registry->importFromDefinition($definition);
+
+echo $registry->call('isEmail', 'user@example.com') ? 'valid email'    : 'invalid email';    // valid email
+echo $registry->call('isUrl',   'https://php.net')  ? 'valid URL'      : 'invalid URL';      // valid URL
+echo $registry->call('isPositive', -5)              ? 'positive'       : 'not positive';     // not positive
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Practical Pattern — Reusing Closures Across Multiple Definitions</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+// Build a base definition, extract its closures,
+// and redistribute them to other definitions
+
+$baseDefinition = new Definition('BaseFormatter');
+$baseDefinition
+    ->addMethod('formatCurrency', new Method(function (float $amount): string {
+        return '$' . number_format($amount, 2);
+    }))
+    ->addMethod('formatDate', new Method(function (int $timestamp): string {
+        return date('Y-m-d', $timestamp);
+    }));
+
+$sharedClosures = $baseDefinition->getClosures();
+
+// Inject shared closures into a different definition
+$invoiceDefinition = new Definition('Invoice');
+
+foreach ($sharedClosures as $name => $closure) {
+    $invoiceDefinition->addMethod($name, new Method($closure));
+}
+
+$invoiceDefinition->addMethod('describe', new Method(function (): string {
+    return 'Invoice total: ' . $this->formatCurrency(1500.00)
+        . ' | Due: ' . $this->formatDate(time() + 86400 * 30);
+}));
+
+$baseDefinition->register();
+$invoiceDefinition->register();
+
+$invoice = new Invoice();
+echo $invoice->describe();
+// Invoice total: $1,500.00 | Due: 2026-08-15
+?>
+</code></pre>
+
+<h5>Inspecting Closure Signatures via Reflection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('InspectedClass');
+$definition
+    ->addMethod('add',      new Method(function (int $a, int $b): int       { return $a + $b; }))
+    ->addMethod('greet',    new Method(function (string $name): string      { return 'Hello, ' . $name; }))
+    ->addMethod('isActive', new Method(function (): bool                    { return true; }));
+
+foreach ($definition->getClosures() as $name => $closure) {
+    $ref    = new \ReflectionFunction($closure);
+    $params = array_map(
+        fn (\ReflectionParameter $p) => ($p->getType() ?? 'mixed') . ' $' . $p->getName(),
+        $ref->getParameters()
+    );
+    $return = $ref->getReturnType() ?? 'mixed';
+
+    echo $name . '(' . implode(', ', $params) . '): ' . $return . PHP_EOL;
+}
+
+// add(int $a, int $b): int
+// greet(string $name): string
+// isActive(): bool
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>getClosures() vs getClosure()</h5>
+<ul>
+  <li>
+    <strong>getClosures()</strong> – Returns all closures as an associative
+    array; appropriate for bulk inspection, iteration, redistribution, and
+    testing pipelines; returns an empty array if no methods have been added
+  </li>
+  <li>
+    <strong>getClosure(string $name)</strong> – Returns a single named closure;
+    throws a <code>RuntimeException</code> if the name does not exist;
+    appropriate for targeted, single-method retrieval when the method name
+    is known and its presence is expected
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>getClosures()</code> when all methods need to be inspected, tested, or redistributed — avoid calling <code>getClosure()</code> in a loop for the same purpose</li>
+  <li>Check <code>array_key_exists()</code> on the returned array before accessing a specific closure by name to avoid undefined index errors</li>
+  <li>Combine with <code>ReflectionFunction</code> to programmatically inspect parameter types and return types of each closure during development</li>
+  <li>When redistributing closures to other definitions, wrap each in a fresh <code>new Method($closure)</code> call to allow independent visibility and static modifiers per definition</li>
+  <li>Avoid caching the returned array across multiple composition steps — call <code>getClosures()</code> again after adding more methods to get an up-to-date snapshot</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Only includes closures added explicitly via <code>addMethod()</code> — trait methods, parent class methods, and inherited behaviors are not included</li>
+  <li>Returns unbound closures — <code>$this</code> references will only resolve correctly after binding to an instance via <code>Closure::bind()</code></li>
+  <li>Returns a snapshot at the time of the call — closures added after <code>getClosures()</code> is called are not reflected in the returned array</li>
+  <li>No filtering or searching capability — all closures are returned unconditionally; filter the result array manually if a subset is needed</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Bulk testing of all method closures in isolation before registering the definition</li>
+  <li>Extracting and redistributing shared method implementations across multiple definitions</li>
+  <li>Building closure registries that expose definition methods as standalone callables</li>
+  <li>Inspecting the full method surface of a definition via <code>ReflectionFunction</code> for documentation or tooling purposes</li>
+  <li>Iterating over all defined methods to apply transformations, wrappers, or decorators before final registration</li>
+</ul>
+
+<p>
+  <code>Componere\Definition::getClosures()</code> treats the method set of
+  a composed class as a first-class collection of portable callables — making
+  the entire behavioral surface of a definition accessible, inspectable, and
+  redistributable independently of the class structure it was built for.
+  Whether used for testing, reuse, or delegation, it reflects a core truth
+  about Componere's design: that closures are the fundamental unit of
+  behavior, and classes are simply one context in which they can be organized
+  and executed.
+</p>
 
 <h4 id="componere-patch-class">COMPONERE\PATCH CLASS</h4>
 <h4 id="componere-patch-construct">COMPONERE\PATCH::__CONSTRUCT</h4>
