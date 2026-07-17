@@ -29622,6 +29622,340 @@ $definition->register();
 </p>
 
 <h4 id="componere-patch-class">COMPONERE\PATCH CLASS</h4>
+<p>
+  <strong>Componere\Patch</strong> is a concrete class that extends
+  <code>Componere\Abstract\Definition</code> and represents a reversible,
+  temporary modification applied to an already registered PHP class. Where
+  <code>Componere\Definition</code> creates new classes permanently,
+  <code>Componere\Patch</code> overlays changes onto existing ones — adding
+  or replacing methods, implementing interfaces, and applying traits — and
+  can be fully reverted, restoring the original class to its pre-patch state.
+</p>
+<p>
+  This reversibility makes <code>Componere\Patch</code> the primary tool for
+  testing scenarios, where class behavior needs to be temporarily altered for
+  a single test and reliably restored afterward — without the overhead of
+  mocking frameworks, proxy objects, or dependency injection rewiring. It
+  is also applicable in production contexts where controlled, scoped runtime
+  class modification is genuinely required.
+</p>
+
+<h5>Class Synopsis</h5>
+<pre><code class="language-php">
+<?php
+namespace Componere;
+
+class Patch extends \Componere\Abstract\Definition
+{
+    // Constructor
+    public function __construct(string $class)
+
+    // Inherited from Componere\Abstract\Definition
+    public function addMethod(string $name, Method $method): static
+    public function addInterface(string $interface): static
+    public function addTrait(string $trait): static
+    public function getReflector(): \ReflectionClass
+
+    // Patch-specific methods
+    public function apply(): void
+    public function revert(): void
+    public function isApplied(): bool
+    public function derive(object $instance): object
+    public function getClosure(string $name): \Closure
+    public function getClosures(): array
+}
+?>
+</code></pre>
+
+<h5>Patch-Specific Methods</h5>
+<ul>
+  <li>
+    <strong>__construct(string $class)</strong> –
+    Initializes a patch targeting an already registered class. The class
+    must exist in PHP's class table at construction time. Unlike
+    <code>Definition</code>, the constructor accepts only a single argument —
+    the name of the existing class to patch.
+  </li>
+  <li>
+    <strong>apply()</strong> –
+    Activates the patch, overlaying its methods, interfaces, and traits onto
+    the target class. All existing and future instances of the class
+    immediately reflect the modifications. Calling <code>apply()</code>
+    on an already applied patch throws a <code>RuntimeException</code>.
+  </li>
+  <li>
+    <strong>revert()</strong> –
+    Deactivates the patch, restoring the target class to its original
+    pre-patch state. All modifications introduced by the patch are
+    removed. Calling <code>revert()</code> on a patch that has not been
+    applied throws a <code>RuntimeException</code>.
+  </li>
+  <li>
+    <strong>isApplied()</strong> –
+    Returns <code>true</code> if the patch is currently active,
+    <code>false</code> otherwise. The canonical guard before calling
+    <code>apply()</code> or <code>revert()</code>.
+  </li>
+  <li>
+    <strong>derive(object $instance)</strong> –
+    Returns a new object that is an instance of an anonymous class derived
+    from the patched class, with the patch's modifications applied to that
+    specific instance rather than the entire class. Useful for instance-scoped
+    patching without affecting all consumers of the class.
+  </li>
+  <li>
+    <strong>getClosure(string $name)</strong> –
+    Returns the raw <code>Closure</code> associated with a specific named
+    method added to the patch, without requiring the patch to be applied.
+  </li>
+  <li>
+    <strong>getClosures()</strong> –
+    Returns all closures added to the patch as an associative array keyed
+    by method name.
+  </li>
+</ul>
+
+<h5>Basic Usage — Apply and Revert</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class EmailService
+{
+    public function send(string $to, string $subject): bool
+    {
+        // Real email delivery logic
+        return mail($to, $subject, '');
+    }
+}
+
+$patch = new Patch(EmailService::class);
+$patch->addMethod('send', new Method(function (string $to, string $subject): bool {
+    echo '[TEST] Email intercepted — To: ' . $to . ' | Subject: ' . $subject . PHP_EOL;
+    return true;
+}));
+
+$patch->apply();
+
+$service = new EmailService();
+$service->send('user@example.com', 'Welcome'); // [TEST] Email intercepted...
+
+$patch->revert();
+
+// EmailService::send() is now back to its original implementation
+?>
+</code></pre>
+
+<h5>Checking Application State</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class CacheService
+{
+    public function get(string $key): mixed { return null; }
+    public function set(string $key, mixed $value): void {}
+}
+
+$patch = new Patch(CacheService::class);
+$patch->addMethod('get', new Method(function (string $key): mixed {
+    return 'mocked_value';
+}));
+
+var_dump($patch->isApplied()); // bool(false)
+
+$patch->apply();
+var_dump($patch->isApplied()); // bool(true)
+
+$patch->revert();
+var_dump($patch->isApplied()); // bool(false)
+?>
+</code></pre>
+
+<h5>Using derive() for Instance-Scoped Patching</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ReportGenerator
+{
+    public function generate(): string
+    {
+        return 'Real report content';
+    }
+}
+
+$patch = new Patch(ReportGenerator::class);
+$patch->addMethod('generate', new Method(function (): string {
+    return 'Mocked report content';
+}));
+
+$original = new ReportGenerator();
+$derived  = $patch->derive($original);
+
+// Only the derived instance reflects the patch
+echo $original->generate(); // Real report content
+echo $derived->generate();  // Mocked report content
+
+// The class itself is not modified — no apply() was called
+?>
+</code></pre>
+
+<h5>Implementing Interfaces via Patch</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+interface Auditable
+{
+    public function audit(): string;
+}
+
+class UserRepository
+{
+    public function find(int $id): ?array
+    {
+        return ['id' => $id, 'name' => 'Alice'];
+    }
+}
+
+$patch = new Patch(UserRepository::class);
+$patch->addInterface(Auditable::class);
+$patch->addMethod('audit', new Method(function (): string {
+    return 'UserRepository audited at ' . date('H:i:s');
+}));
+
+$patch->apply();
+
+$repo = new UserRepository();
+
+echo ($repo instanceof Auditable) ? 'implements Auditable' : '';
+echo $repo->audit();
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Applying Multiple Patches Sequentially</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class DataService
+{
+    public function fetch(): array { return ['raw' => 'data']; }
+    public function process(): string { return 'processed'; }
+}
+
+$fetchPatch = new Patch(DataService::class);
+$fetchPatch->addMethod('fetch', new Method(function (): array {
+    return ['mocked' => 'data'];
+}));
+
+$processPatch = new Patch(DataService::class);
+$processPatch->addMethod('process', new Method(function (): string {
+    return 'mocked_processed';
+}));
+
+$fetchPatch->apply();
+$processPatch->apply();
+
+$service = new DataService();
+print_r($service->fetch());    // ['mocked' => 'data']
+echo $service->process();      // mocked_processed
+
+// Revert in reverse order for predictable restoration
+$processPatch->revert();
+$fetchPatch->revert();
+?>
+</code></pre>
+
+<h5>Patch Lifecycle</h5>
+<ul>
+  <li>
+    <strong>Construction</strong> – A <code>Patch</code> instance is created
+    targeting an already registered class; the class must exist in PHP's
+    class table at this point
+  </li>
+  <li>
+    <strong>Composition</strong> – Methods, interfaces, and traits are added
+    via the inherited <code>Abstract\Definition</code> API
+  </li>
+  <li>
+    <strong>Application</strong> – <code>apply()</code> overlays the patch
+    onto the target class; all instances immediately reflect the changes
+  </li>
+  <li>
+    <strong>Use</strong> – Patched class behavior is active; instances behave
+    according to the modifications
+  </li>
+  <li>
+    <strong>Reversion</strong> – <code>revert()</code> removes all patch
+    modifications; the class returns to its original state
+  </li>
+  <li>
+    <strong>Re-application</strong> – The same patch can be applied and
+    reverted multiple times throughout the process lifetime
+  </li>
+</ul>
+
+<h5>Patch vs Definition</h5>
+<ul>
+  <li>
+    <strong>Patch</strong> – Targets an existing registered class; reversible
+    via <code>revert()</code>; cannot add properties or constants; suited for
+    testing and scoped runtime modification
+  </li>
+  <li>
+    <strong>Definition</strong> – Creates a brand new class that does not yet
+    exist; permanent after <code>register()</code>; supports adding properties
+    and constants; suited for bootstrap-time class generation
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always call <code>revert()</code> in a <code>finally</code> block or test teardown to guarantee the patch is removed even when exceptions occur</li>
+  <li>Use <code>isApplied()</code> to guard both <code>apply()</code> and <code>revert()</code> calls, preventing the <code>RuntimeException</code> thrown by double-apply or revert-without-apply</li>
+  <li>Prefer <code>derive()</code> over <code>apply()</code> when only a single instance needs to be modified — it avoids affecting all other consumers of the class</li>
+  <li>Revert patches in the reverse order they were applied when stacking multiple patches on the same class</li>
+  <li>Keep patch composition minimal — only override methods that are strictly necessary for the test or scenario at hand</li>
+  <li>Document patches clearly in test setup and teardown to make the modified surface area visible to other developers</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Cannot add properties or constants — only methods, interfaces, and traits are supported; use <code>Definition</code> for property and constant composition</li>
+  <li>Requires the target class to already be registered in PHP's class table at construction time</li>
+  <li>Applying multiple overlapping patches on the same class method may produce unpredictable results — manage patch order carefully</li>
+  <li>The target class and its modifications are invisible to static analysis tools while the patch is applied</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Replacing method implementations in tests without mocking frameworks or dependency injection</li>
+  <li>Temporarily intercepting method calls on third-party or internal classes during testing</li>
+  <li>Adding interface implementations to existing classes for the duration of a test scenario</li>
+  <li>Instance-scoped behavioral modification via <code>derive()</code> without affecting the broader class</li>
+  <li>Applying traits to existing classes at runtime for plugin or extensibility scenarios</li>
+</ul>
+
+<p>
+  <code>Componere\Patch</code> is the reversible counterpart to
+  <code>Componere\Definition</code> — purpose-built for scenarios where
+  temporary, scoped, and undoable class modification is required. Its
+  apply/revert lifecycle, instance-scoped <code>derive()</code> method,
+  and compatibility with the full <code>Abstract\Definition</code>
+  composition API make it the most flexible tool in the Componere extension
+  for testing, controlled monkey patching, and runtime extensibility without
+  permanent side effects.
+</p>
+
 <h4 id="componere-patch-construct">COMPONERE\PATCH::__CONSTRUCT</h4>
 <h4 id="componere-patch-apply">COMPONERE\PATCH::APPLY</h4>
 <h4 id="componere-patch-revert">COMPONERE\PATCH::REVERT</h4>
