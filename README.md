@@ -29957,6 +29957,304 @@ $fetchPatch->revert();
 </p>
 
 <h4 id="componere-patch-construct">COMPONERE\PATCH::__CONSTRUCT</h4>
+<p>
+  <strong>Componere\Patch::__construct()</strong> is the constructor of the
+  <code>Componere\Patch</code> class, responsible for initializing a patch
+  targeting an already registered PHP class. It establishes the link between
+  the patch object and its target class at construction time, validating that
+  the class exists before any composition begins.
+</p>
+<p>
+  Unlike <code>Componere\Definition::__construct()</code>, which accepts a
+  class name that must <em>not</em> yet exist, the
+  <code>Patch</code> constructor requires a class name that <em>already</em>
+  exists in PHP's class table. This fundamental difference reflects the
+  distinct roles of the two classes — one creates, the other modifies.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Patch::__construct(string $class)
+?>
+</code></pre>
+
+<h5>Parameters Explained</h5>
+<ul>
+  <li>
+    <strong>$class</strong> – The fully qualified name of an already registered
+    class to target with the patch. The class must exist in PHP's class table
+    at the time of construction — either declared natively in source code,
+    registered via autoloading, or previously installed via
+    <code>Componere\Definition::register()</code>. Passing an unregistered
+    class name throws a <code>RuntimeException</code>.
+  </li>
+</ul>
+
+<h5>How It Works</h5>
+<ol>
+  <li>PHP validates that the target class name exists in the class table</li>
+  <li>The internal patch entry is initialized, linking it to the target class's Zend Engine class entry</li>
+  <li>The <code>Patch</code> instance is ready to accept methods, interfaces, and traits via the inherited <code>Abstract\Definition</code> API</li>
+  <li>The target class is not modified at construction time — modifications only take effect when <code>apply()</code> is called</li>
+</ol>
+
+<h5>Basic Construction</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class NotificationService
+{
+    public function send(string $recipient, string $message): bool
+    {
+        // Real notification delivery
+        return true;
+    }
+}
+
+// Target class must already exist — Patch validates this at construction
+$patch = new Patch(NotificationService::class);
+
+$patch->addMethod('send', new Method(function (string $recipient, string $message): bool {
+    echo '[TEST] Notification intercepted — To: ' . $recipient . PHP_EOL;
+    return true;
+}));
+
+$patch->apply();
+
+$service = new NotificationService();
+$service->send('alice@example.com', 'Hello!');
+// [TEST] Notification intercepted — To: alice@example.com
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Targeting a Built-in PHP Class</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+// Componere can patch internal PHP classes as well as userland ones
+
+$patch = new Patch(stdClass::class);
+$patch->addMethod('toArray', new Method(function (): array {
+    return (array) $this;
+}));
+
+$patch->apply();
+
+$obj        = new stdClass();
+$obj->name  = 'Widget';
+$obj->price = 29.90;
+
+print_r($obj->toArray()); // ['name' => 'Widget', 'price' => 29.90]
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Targeting a Class Registered via Definition</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Patch;
+use Componere\Method;
+use Componere\Value;
+
+// First, register a class via Definition
+$definition = new Definition('DynamicService');
+$definition
+    ->addProperty('name', new Value(''))
+    ->addMethod('getName', new Method(function (): string {
+        return $this->name;
+    }));
+$definition->register();
+
+// Then, patch the dynamically registered class
+$patch = new Patch('DynamicService');
+$patch->addMethod('getLabel', new Method(function (): string {
+    return '[Service] ' . $this->getName();
+}));
+
+$patch->apply();
+
+$service       = new DynamicService();
+$service->name = 'Mailer';
+
+echo $service->getName();  // Mailer
+echo $service->getLabel(); // [Service] Mailer
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Targeting Namespaced Classes</h5>
+<pre><code class="language-php">
+<?php
+namespace App\Services;
+
+class PaymentGateway
+{
+    public function charge(float $amount): bool
+    {
+        return true; // Real charge logic
+    }
+}
+
+// In a test file
+use Componere\Patch;
+use Componere\Method;
+
+$patch = new Patch(\App\Services\PaymentGateway::class);
+$patch->addMethod('charge', new Method(function (float $amount): bool {
+    echo '[TEST] Charge of $' . number_format($amount, 2) . ' intercepted.' . PHP_EOL;
+    return true;
+}));
+
+$patch->apply();
+
+$gateway = new \App\Services\PaymentGateway();
+$gateway->charge(149.90); // [TEST] Charge of $149.90 intercepted.
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Guarding Construction with class_exists()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+function createPatchSafely(string $className): ?Patch
+{
+    if (!class_exists($className, true)) {
+        echo 'Cannot create patch — class not found: ' . $className . PHP_EOL;
+        return null;
+    }
+
+    return new Patch($className);
+}
+
+$patch = createPatchSafely('NonExistentClass'); // Cannot create patch — class not found: NonExistentClass
+
+// Assuming OrderService exists and is autoloaded
+$patch = createPatchSafely('OrderService');
+
+if ($patch !== null) {
+    $patch->addMethod('process', new Method(function (): string {
+        return 'mocked';
+    }));
+    $patch->apply();
+}
+?>
+</code></pre>
+
+<h5>Multiple Patches Targeting the Same Class</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class AnalyticsService
+{
+    public function track(string $event): void  { /* Real tracking */ }
+    public function flush(): void               { /* Real flush */ }
+}
+
+// Multiple patch instances can target the same class independently
+$trackPatch = new Patch(AnalyticsService::class);
+$trackPatch->addMethod('track', new Method(function (string $event): void {
+    echo '[MOCK] Tracking: ' . $event . PHP_EOL;
+}));
+
+$flushPatch = new Patch(AnalyticsService::class);
+$flushPatch->addMethod('flush', new Method(function (): void {
+    echo '[MOCK] Flush intercepted.' . PHP_EOL;
+}));
+
+$trackPatch->apply();
+$flushPatch->apply();
+
+$analytics = new AnalyticsService();
+$analytics->track('page_view'); // [MOCK] Tracking: page_view
+$analytics->flush();            // [MOCK] Flush intercepted.
+
+// Revert in reverse application order
+$flushPatch->revert();
+$trackPatch->revert();
+?>
+</code></pre>
+
+<h5>Construction vs apply()</h5>
+<ul>
+  <li>
+    <strong>Construction</strong> – Initializes the patch and links it to
+    the target class; no modifications are made to the class at this stage;
+    the class behaves exactly as before
+  </li>
+  <li>
+    <strong>apply()</strong> – Activates the patch and overlays all composed
+    modifications onto the target class; all instances immediately reflect
+    the changes; the class is now in a modified state
+  </li>
+</ul>
+
+<h5>Patch::__construct() vs Definition::__construct()</h5>
+<ul>
+  <li>
+    <strong>Patch::__construct()</strong> – Requires a class that already
+    exists; single argument only; cannot specify interfaces at construction;
+    results in reversible modification
+  </li>
+  <li>
+    <strong>Definition::__construct()</strong> – Requires a class name that
+    does not yet exist; accepts an optional interfaces array; creates a
+    new permanent class upon registration
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>class_exists($name, true)</code> with autoloading enabled before construction when the target class name is dynamic or conditionally available</li>
+  <li>Construct the patch as close to the point of use as possible — keeping construction, composition, and application together makes patch intent clear and scope obvious</li>
+  <li>In test environments, construct patches in the test setup method and always revert in teardown or a <code>finally</code> block</li>
+  <li>Use the fully qualified class name with <code>::class</code> syntax rather than string literals to benefit from IDE autocompletion and refactoring support</li>
+  <li>Create one patch instance per logical group of related method overrides — avoid creating monolithic patches that modify many unrelated methods</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Throws a <code>RuntimeException</code> if the target class does not exist in PHP's class table at construction time</li>
+  <li>Cannot target interfaces, traits, or abstract classes directly — only concrete or instantiable classes</li>
+  <li>Unlike <code>Definition::__construct()</code>, no interfaces can be declared at construction time — they must be added via <code>addInterface()</code></li>
+  <li>Autoloading is not triggered by the constructor — the target class must be loaded before constructing the patch</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Initializing a test patch targeting a service, repository, or third-party class in test setup methods</li>
+  <li>Creating a patch for a built-in PHP class to inject test-specific behavior during a single test scenario</li>
+  <li>Targeting a dynamically registered <code>Componere\Definition</code> class with further runtime modifications</li>
+  <li>Building multiple focused patch instances for the same class, each responsible for a distinct subset of method overrides</li>
+  <li>Safely constructing patches in environments where the target class may not always be available, using <code>class_exists()</code> as a guard</li>
+</ul>
+
+<p>
+  <code>Componere\Patch::__construct()</code> is the entry point to the
+  reversible side of Componere's class modification model. Its single,
+  focused parameter — a class name that must already exist — reflects the
+  fundamental contract of patching: you can only modify what is already
+  there, and the modification must remain undoable. Getting construction
+  right — targeting the correct class, ensuring it is loaded, and scoping
+  the patch appropriately — sets the foundation for safe, predictable,
+  and reversible runtime class modification.
+</p>
+
 <h4 id="componere-patch-apply">COMPONERE\PATCH::APPLY</h4>
 <h4 id="componere-patch-revert">COMPONERE\PATCH::REVERT</h4>
 <h4 id="componere-patch-isapplied">COMPONERE\PATCH::ISAPPLIED</h4>
