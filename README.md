@@ -30256,6 +30256,354 @@ $trackPatch->revert();
 </p>
 
 <h4 id="componere-patch-apply">COMPONERE\PATCH::APPLY</h4>
+<p>
+  <strong>Componere\Patch::apply()</strong> is the method that activates a
+  composed patch, overlaying its methods, interfaces, and traits onto the
+  target class in the Zend Engine. From the moment <code>apply()</code>
+  returns, every existing and future instance of the target class reflects
+  the modifications — the patch is live, global, and immediate in its effect
+  on the class.
+</p>
+<p>
+  <code>apply()</code> is the counterpart to <code>revert()</code> and
+  together they define the active window of a patch's lifecycle. Everything
+  between an <code>apply()</code> and its corresponding <code>revert()</code>
+  call is the patch's scope — the period during which the target class
+  behaves according to the overlay rather than its original definition.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Patch::apply(): void
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The patch validates that it has not already been applied — double application throws a <code>RuntimeException</code></li>
+  <li>Each method added via <code>addMethod()</code> is overlaid onto the target class entry in the Zend Engine</li>
+  <li>Each interface added via <code>addInterface()</code> is attached to the target class's interface list</li>
+  <li>Each trait added via <code>addTrait()</code> is merged into the target class</li>
+  <li>The internal applied flag is set to <code>true</code>, causing <code>isApplied()</code> to return <code>true</code></li>
+  <li>All existing and future instances of the target class immediately reflect the modifications</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class InvoiceService
+{
+    public function generate(int $orderId): string
+    {
+        return 'Invoice #' . $orderId; // Real generation logic
+    }
+}
+
+$patch = new Patch(InvoiceService::class);
+$patch->addMethod('generate', new Method(function (int $orderId): string {
+    return '[MOCK] Invoice #' . $orderId;
+}));
+
+// Before apply — original behavior is intact
+$service = new InvoiceService();
+echo $service->generate(42); // Invoice #42
+
+$patch->apply();
+
+// After apply — patch behavior is active
+echo $service->generate(42); // [MOCK] Invoice #42
+
+$patch->revert();
+
+// After revert — original behavior restored
+echo $service->generate(42); // Invoice #42
+?>
+</code></pre>
+
+<h5>Affect on Existing Instances</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class GreetingService
+{
+    public function greet(string $name): string
+    {
+        return 'Hello, ' . $name . '!';
+    }
+}
+
+// Instance created BEFORE apply()
+$before = new GreetingService();
+echo $before->greet('Alice'); // Hello, Alice!
+
+$patch = new Patch(GreetingService::class);
+$patch->addMethod('greet', new Method(function (string $name): string {
+    return 'Howdy, ' . $name . '!';
+}));
+
+$patch->apply();
+
+// Existing instance reflects the patch immediately
+echo $before->greet('Alice'); // Howdy, Alice!
+
+// Instance created AFTER apply()
+$after = new GreetingService();
+echo $after->greet('Alice'); // Howdy, Alice!
+
+$patch->revert();
+
+// Both instances revert to original behavior
+echo $before->greet('Alice'); // Hello, Alice!
+echo $after->greet('Alice');  // Hello, Alice!
+?>
+</code></pre>
+
+<h5>Guarding Against Double Application</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ReportService
+{
+    public function build(): string { return 'Real report'; }
+}
+
+$patch = new Patch(ReportService::class);
+$patch->addMethod('build', new Method(function (): string {
+    return 'Mocked report';
+}));
+
+function safeApply(Patch $patch): void
+{
+    if ($patch->isApplied()) {
+        echo 'Patch already applied — skipping.' . PHP_EOL;
+        return;
+    }
+
+    $patch->apply();
+    echo 'Patch applied.' . PHP_EOL;
+}
+
+safeApply($patch); // Patch applied.
+safeApply($patch); // Patch already applied — skipping.
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Using apply() in Test Setup</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class PaymentProcessor
+{
+    public function charge(float $amount, string $token): bool
+    {
+        // Real payment gateway call
+        return true;
+    }
+
+    public function refund(string $transactionId): bool
+    {
+        // Real refund logic
+        return true;
+    }
+}
+
+class PaymentProcessorTest
+{
+    private Patch $patch;
+
+    public function setUp(): void
+    {
+        $this->patch = new Patch(PaymentProcessor::class);
+
+        $this->patch
+            ->addMethod('charge', new Method(function (float $amount, string $token): bool {
+                echo '[TEST] Charge: $' . number_format($amount, 2) . PHP_EOL;
+                return true;
+            }))
+            ->addMethod('refund', new Method(function (string $transactionId): bool {
+                echo '[TEST] Refund: ' . $transactionId . PHP_EOL;
+                return true;
+            }));
+
+        $this->patch->apply();
+    }
+
+    public function tearDown(): void
+    {
+        if ($this->patch->isApplied()) {
+            $this->patch->revert();
+        }
+    }
+
+    public function testCharge(): void
+    {
+        $processor = new PaymentProcessor();
+        $result    = $processor->charge(99.90, 'tok_test_123');
+
+        echo 'testCharge passed: ' . ($result ? 'yes' : 'no') . PHP_EOL;
+    }
+
+    public function testRefund(): void
+    {
+        $processor = new PaymentProcessor();
+        $result    = $processor->refund('txn_abc_456');
+
+        echo 'testRefund passed: ' . ($result ? 'yes' : 'no') . PHP_EOL;
+    }
+}
+
+$test = new PaymentProcessorTest();
+$test->setUp();
+$test->testCharge();  // [TEST] Charge: $99.90 | testCharge passed: yes
+$test->testRefund();  // [TEST] Refund: txn_abc_456 | testRefund passed: yes
+$test->tearDown();
+?>
+</code></pre>
+
+<h5>Applying a Patch with try/finally</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ExternalApiClient
+{
+    public function fetch(string $endpoint): array
+    {
+        // Real HTTP request
+        return [];
+    }
+}
+
+$patch = new Patch(ExternalApiClient::class);
+$patch->addMethod('fetch', new Method(function (string $endpoint): array {
+    return ['mocked' => true, 'endpoint' => $endpoint];
+}));
+
+$patch->apply();
+
+try {
+    $client   = new ExternalApiClient();
+    $response = $client->fetch('/api/users');
+
+    print_r($response); // ['mocked' => true, 'endpoint' => '/api/users']
+
+    // Simulate a test assertion that may throw
+    if (empty($response)) {
+        throw new \RuntimeException('Response was empty');
+    }
+} finally {
+    // Always revert — even if an exception is thrown
+    if ($patch->isApplied()) {
+        $patch->revert();
+    }
+}
+?>
+</code></pre>
+
+<h5>Stacking Multiple Patches</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class OrderService
+{
+    public function create(array $data): int    { return 1; }
+    public function notify(int $orderId): void  { /* Send notification */ }
+    public function log(string $message): void  { /* Write to log */ }
+}
+
+$createPatch = new Patch(OrderService::class);
+$createPatch->addMethod('create', new Method(function (array $data): int {
+    echo '[MOCK] create() called' . PHP_EOL;
+    return 999;
+}));
+
+$notifyPatch = new Patch(OrderService::class);
+$notifyPatch->addMethod('notify', new Method(function (int $orderId): void {
+    echo '[MOCK] notify(' . $orderId . ') called' . PHP_EOL;
+}));
+
+// Apply in logical order
+$createPatch->apply();
+$notifyPatch->apply();
+
+$service  = new OrderService();
+$orderId  = $service->create(['product' => 'Widget']); // [MOCK] create() called
+$service->notify($orderId);                             // [MOCK] notify(999) called
+
+// Revert in reverse order
+$notifyPatch->revert();
+$createPatch->revert();
+?>
+</code></pre>
+
+<h5>apply() vs derive()</h5>
+<ul>
+  <li>
+    <strong>apply()</strong> – Modifies the target class globally; all
+    existing and future instances are affected immediately; requires a
+    corresponding <code>revert()</code> to undo; appropriate when the
+    entire class needs to behave differently for a defined period
+  </li>
+  <li>
+    <strong>derive()</strong> – Produces a single modified instance without
+    touching the class itself; no <code>revert()</code> needed; appropriate
+    when only one specific instance needs to behave differently while
+    others remain unaffected
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always pair every <code>apply()</code> with a corresponding <code>revert()</code> in a <code>finally</code> block to guarantee cleanup even when exceptions occur</li>
+  <li>Check <code>isApplied()</code> before calling <code>apply()</code> when the application state is uncertain to prevent the <code>RuntimeException</code> thrown on double application</li>
+  <li>Keep the window between <code>apply()</code> and <code>revert()</code> as narrow as possible — minimize the scope during which the class is in a modified state</li>
+  <li>When stacking multiple patches on the same class, apply them in dependency order and revert them in reverse order</li>
+  <li>Prefer <code>derive()</code> over <code>apply()</code> when only a single instance needs modification — it avoids global class mutation entirely</li>
+  <li>Never call <code>apply()</code> in production request-handling code without an unconditional corresponding <code>revert()</code> — leaving a patch applied indefinitely defeats the reversibility that makes <code>Patch</code> safe</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Throws a <code>RuntimeException</code> if called on a patch that is already applied — always guard with <code>isApplied()</code></li>
+  <li>Global in scope — affects all instances of the target class, not just newly created ones; existing instances are modified immediately</li>
+  <li>Cannot be partially applied — all composed methods, interfaces, and traits are applied atomically</li>
+  <li>Concurrent requests in PHP-FPM share nothing between workers — patches applied in one worker do not affect others</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Activating test doubles for service classes, repositories, and external API clients during test execution</li>
+  <li>Temporarily intercepting method calls to capture, log, or redirect behavior during integration testing</li>
+  <li>Applying interface implementations to existing classes for the duration of a specific test scenario</li>
+  <li>Enabling controlled monkey patching in production for feature flags, circuit breakers, or emergency overrides</li>
+  <li>Activating trait-based behavior on existing classes at runtime during plugin or module initialization</li>
+</ul>
+
+<p>
+  <code>Componere\Patch::apply()</code> is the moment a patch becomes real —
+  the boundary between composition and execution. Its global, immediate
+  effect on the target class demands the same care and discipline as any
+  operation that modifies shared state: narrow scope, unconditional cleanup,
+  and clear documentation of what is being changed and why. When used
+  correctly, it is one of the most powerful and precise tools available for
+  runtime class modification in PHP.
+</p>
+
 <h4 id="componere-patch-revert">COMPONERE\PATCH::REVERT</h4>
 <h4 id="componere-patch-isapplied">COMPONERE\PATCH::ISAPPLIED</h4>
 <h4 id="componere-patch-derive">COMPONERE\PATCH::DERIVE</h4>
