@@ -30605,6 +30605,388 @@ $createPatch->revert();
 </p>
 
 <h4 id="componere-patch-revert">COMPONERE\PATCH::REVERT</h4>
+<p>
+  <strong>Componere\Patch::revert()</strong> is the method that deactivates
+  an applied patch, removing all modifications it introduced and restoring
+  the target class to its exact pre-patch state. It is the direct counterpart
+  to <code>apply()</code> and completes the apply/revert lifecycle that
+  defines the reversibility model at the heart of
+  <code>Componere\Patch</code>.
+</p>
+<p>
+  Every method overridden, interface added, and trait applied by the patch
+  is undone the moment <code>revert()</code> returns. All existing instances
+  of the target class — not just newly created ones — immediately reflect
+  the restored original behavior, mirroring the same immediacy and global
+  scope that <code>apply()</code> exhibits in the opposite direction.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Patch::revert(): void
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The patch validates that it is currently applied — calling <code>revert()</code> on an unapplied patch throws a <code>RuntimeException</code></li>
+  <li>Each method overlaid by the patch is removed from the target class entry in the Zend Engine</li>
+  <li>Each interface added by the patch is detached from the target class's interface list</li>
+  <li>Each trait applied by the patch is removed from the target class</li>
+  <li>The internal applied flag is set to <code>false</code>, causing <code>isApplied()</code> to return <code>false</code></li>
+  <li>All existing and future instances of the target class immediately reflect the restored original state</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ShippingCalculator
+{
+    public function calculate(float $weight): float
+    {
+        return $weight * 2.5; // Real shipping rate
+    }
+}
+
+$patch = new Patch(ShippingCalculator::class);
+$patch->addMethod('calculate', new Method(function (float $weight): float {
+    return 0.0; // Free shipping for tests
+}));
+
+$calculator = new ShippingCalculator();
+echo $calculator->calculate(10); // 25 — original
+
+$patch->apply();
+echo $calculator->calculate(10); // 0 — patched
+
+$patch->revert();
+echo $calculator->calculate(10); // 25 — restored
+?>
+</code></pre>
+
+<h5>Revert Restores Existing Instances</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class TaxService
+{
+    public function rate(): float { return 0.2; }
+}
+
+$instance = new TaxService();
+
+$patch = new Patch(TaxService::class);
+$patch->addMethod('rate', new Method(function (): float { return 0.0; }));
+
+$patch->apply();
+echo $instance->rate(); // 0 — existing instance is patched
+
+$patch->revert();
+echo $instance->rate(); // 0.2 — existing instance is restored
+?>
+</code></pre>
+
+<h5>Guarding Against Revert Without Apply</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class LogService
+{
+    public function write(string $message): void
+    {
+        file_put_contents('/var/log/app.log', $message . PHP_EOL, FILE_APPEND);
+    }
+}
+
+$patch = new Patch(LogService::class);
+$patch->addMethod('write', new Method(function (string $message): void {
+    echo '[CAPTURED] ' . $message . PHP_EOL;
+}));
+
+function safeRevert(Patch $patch): void
+{
+    if (!$patch->isApplied()) {
+        echo 'Patch is not applied — nothing to revert.' . PHP_EOL;
+        return;
+    }
+
+    $patch->revert();
+    echo 'Patch reverted successfully.' . PHP_EOL;
+}
+
+safeRevert($patch); // Patch is not applied — nothing to revert.
+
+$patch->apply();
+safeRevert($patch); // Patch reverted successfully.
+safeRevert($patch); // Patch is not applied — nothing to revert.
+?>
+</code></pre>
+
+<h5>Unconditional Revert with try/finally</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ExternalDataFetcher
+{
+    public function fetch(string $url): array
+    {
+        // Real HTTP request
+        return [];
+    }
+}
+
+$patch = new Patch(ExternalDataFetcher::class);
+$patch->addMethod('fetch', new Method(function (string $url): array {
+    return ['status' => 'ok', 'data' => ['item1', 'item2']];
+}));
+
+$patch->apply();
+
+try {
+    $fetcher  = new ExternalDataFetcher();
+    $response = $fetcher->fetch('https://api.example.com/items');
+
+    if ($response['status'] !== 'ok') {
+        throw new \RuntimeException('Unexpected status: ' . $response['status']);
+    }
+
+    print_r($response['data']);
+} finally {
+    // Always revert regardless of success or failure
+    if ($patch->isApplied()) {
+        $patch->revert();
+    }
+}
+?>
+</code></pre>
+
+<h5>Revert in Test Teardown</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class DatabaseConnection
+{
+    public function query(string $sql): array
+    {
+        // Real database query
+        return [];
+    }
+
+    public function execute(string $sql): bool
+    {
+        // Real execution
+        return true;
+    }
+}
+
+class DatabaseConnectionTest
+{
+    private Patch  $patch;
+    private array  $capturedQueries = [];
+
+    public function setUp(): void
+    {
+        $this->capturedQueries = [];
+
+        $captured = &$this->capturedQueries;
+
+        $this->patch = new Patch(DatabaseConnection::class);
+        $this->patch
+            ->addMethod('query', new Method(function (string $sql) use (&$captured): array {
+                $captured[] = ['type' => 'query', 'sql' => $sql];
+                return [['id' => 1, 'name' => 'Mock Result']];
+            }))
+            ->addMethod('execute', new Method(function (string $sql) use (&$captured): bool {
+                $captured[] = ['type' => 'execute', 'sql' => $sql];
+                return true;
+            }));
+
+        $this->patch->apply();
+    }
+
+    public function tearDown(): void
+    {
+        // Always revert in teardown — even if a test assertion threw
+        if ($this->patch->isApplied()) {
+            $this->patch->revert();
+        }
+
+        $this->capturedQueries = [];
+    }
+
+    public function testQueryCapture(): void
+    {
+        $db      = new DatabaseConnection();
+        $results = $db->query('SELECT * FROM users');
+
+        echo 'Results: '         . count($results)              . PHP_EOL; // 1
+        echo 'Captured queries: '. count($this->capturedQueries) . PHP_EOL; // 1
+        echo 'SQL: '             . $this->capturedQueries[0]['sql'] . PHP_EOL;
+    }
+}
+
+$test = new DatabaseConnectionTest();
+$test->setUp();
+$test->testQueryCapture();
+$test->tearDown();
+
+// After teardown — original behavior is fully restored
+$db = new DatabaseConnection();
+// $db->query() now executes real database queries again
+?>
+</code></pre>
+
+<h5>Reverting Stacked Patches</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class Pipeline
+{
+    public function read(): string  { return 'real_read'; }
+    public function write(): string { return 'real_write'; }
+    public function flush(): string { return 'real_flush'; }
+}
+
+$readPatch  = new Patch(Pipeline::class);
+$readPatch->addMethod('read', new Method(function (): string { return 'mock_read'; }));
+
+$writePatch = new Patch(Pipeline::class);
+$writePatch->addMethod('write', new Method(function (): string { return 'mock_write'; }));
+
+$flushPatch = new Patch(Pipeline::class);
+$flushPatch->addMethod('flush', new Method(function (): string { return 'mock_flush'; }));
+
+// Apply in logical order
+$readPatch->apply();
+$writePatch->apply();
+$flushPatch->apply();
+
+$pipeline = new Pipeline();
+echo $pipeline->read();  // mock_read
+echo $pipeline->write(); // mock_write
+echo $pipeline->flush(); // mock_flush
+
+// Revert in reverse order to avoid conflicts between overlapping patches
+$flushPatch->revert();
+$writePatch->revert();
+$readPatch->revert();
+
+echo $pipeline->read();  // real_read
+echo $pipeline->write(); // real_write
+echo $pipeline->flush(); // real_flush
+?>
+</code></pre>
+
+<h5>Revert and Re-Apply Pattern</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class FeatureToggle
+{
+    public function isEnabled(string $feature): bool
+    {
+        return false; // Feature flags off by default
+    }
+}
+
+$patch = new Patch(FeatureToggle::class);
+$patch->addMethod('isEnabled', new Method(function (string $feature): bool {
+    return true; // All features enabled in test context
+}));
+
+$toggle = new FeatureToggle();
+
+// First test scenario — features enabled
+$patch->apply();
+echo $toggle->isEnabled('dark_mode') ? 'enabled' : 'disabled'; // enabled
+$patch->revert();
+
+// Between scenarios — original behavior
+echo $toggle->isEnabled('dark_mode') ? 'enabled' : 'disabled'; // disabled
+
+// Second test scenario — features enabled again
+$patch->apply();
+echo $toggle->isEnabled('dark_mode') ? 'enabled' : 'disabled'; // enabled
+$patch->revert();
+?>
+</code></pre>
+
+<h5>revert() vs Related Methods</h5>
+<ul>
+  <li>
+    <strong>revert()</strong> – Deactivates the patch and fully restores
+    the target class; the patch object remains valid and can be re-applied;
+    throws <code>RuntimeException</code> if the patch is not currently applied
+  </li>
+  <li>
+    <strong>apply()</strong> – Activates the patch; the direct counterpart
+    to <code>revert()</code>; throws <code>RuntimeException</code> if the
+    patch is already applied
+  </li>
+  <li>
+    <strong>isApplied()</strong> – Returns the current application state;
+    the guard that prevents both double-apply and revert-without-apply errors
+  </li>
+  <li>
+    <strong>derive()</strong> – Instance-scoped alternative that never
+    requires a <code>revert()</code> call — the modification is contained
+    to the derived object and does not affect the class itself
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always call <code>revert()</code> in a <code>finally</code> block or test teardown method — never rely on normal control flow alone to guarantee cleanup</li>
+  <li>Always guard <code>revert()</code> with <code>isApplied()</code> before calling it when the application state is uncertain, to prevent the <code>RuntimeException</code> thrown on revert-without-apply</li>
+  <li>Revert stacked patches in the reverse order they were applied to avoid unexpected interactions between overlapping method overrides</li>
+  <li>Treat <code>revert()</code> as mandatory, not optional — a patch left applied beyond its intended scope is a source of subtle, hard-to-diagnose bugs</li>
+  <li>After reverting, verify restoration with a spot-check assertion in critical test scenarios to confirm the class has returned to its expected original state</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Throws a <code>RuntimeException</code> if called on a patch that has not been applied — always guard with <code>isApplied()</code></li>
+  <li>Cannot selectively revert individual methods — the entire patch is reverted atomically; partial reversion requires separate patch instances</li>
+  <li>Does not clean up any side effects caused by the patched methods during the active window — only the class definition is restored</li>
+  <li>Concurrent requests in PHP-FPM share nothing between workers — revert in one worker has no effect on others</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Restoring original class behavior in test teardown methods after each test scenario</li>
+  <li>Guaranteed cleanup in <code>finally</code> blocks after patch-dependent operations that may throw exceptions</li>
+  <li>Cycling through multiple test scenarios where the same patch needs to be applied and reverted repeatedly</li>
+  <li>Removing temporarily applied interface implementations after a scoped compatibility window closes</li>
+  <li>Restoring original method behavior after emergency production overrides or circuit breaker activations</li>
+</ul>
+
+<p>
+  <code>Componere\Patch::revert()</code> is the guarantee that makes
+  <code>Componere\Patch</code> safe to use. Without it, every
+  <code>apply()</code> would be as permanent and consequential as
+  <code>Definition::register()</code>. With it, patches become truly
+  scoped instruments — precise, reversible, and disciplined modifications
+  that leave no permanent trace on the classes they temporarily transform.
+  Treating <code>revert()</code> as unconditional and non-negotiable is
+  the single most important practice when working with Componere patches.
+</p>
+
 <h4 id="componere-patch-isapplied">COMPONERE\PATCH::ISAPPLIED</h4>
 <h4 id="componere-patch-derive">COMPONERE\PATCH::DERIVE</h4>
 <h4 id="componere-patch-getclosure">COMPONERE\PATCH::GETCLOSURE</h4>
