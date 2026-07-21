@@ -30988,6 +30988,366 @@ $patch->revert();
 </p>
 
 <h4 id="componere-patch-isapplied">COMPONERE\PATCH::ISAPPLIED</h4>
+<p>
+  <strong>Componere\Patch::isApplied()</strong> is a method that returns a
+  boolean indicating whether the patch is currently active — that is, whether
+  <code>apply()</code> has been called and a corresponding
+  <code>revert()</code> has not yet been executed. It is the canonical state
+  inspection method for the <code>Componere\Patch</code> lifecycle, serving
+  as the primary guard against the two most common patch misuse errors:
+  double application and revert-without-apply.
+</p>
+<p>
+  Like <code>Componere\Definition::isRegistered()</code>,
+  <code>isApplied()</code> is a pure read operation with no side effects.
+  It reflects the current application state of the patch instance at the
+  moment of the call — making it safe to invoke at any point in the patch
+  lifecycle without risk of altering class behavior.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Patch::isApplied(): bool
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The method reads the internal application flag on the <code>Patch</code> instance</li>
+  <li>Returns <code>true</code> if <code>apply()</code> has been called and <code>revert()</code> has not yet been called</li>
+  <li>Returns <code>false</code> if the patch has never been applied, or has been applied and subsequently reverted</li>
+  <li>The flag toggles between <code>true</code> and <code>false</code> as <code>apply()</code> and <code>revert()</code> are called</li>
+  <li>Has no side effects — purely a read operation on internal state</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class CurrencyConverter
+{
+    public function convert(float $amount, string $from, string $to): float
+    {
+        return $amount * 1.1; // Real conversion logic
+    }
+}
+
+$patch = new Patch(CurrencyConverter::class);
+$patch->addMethod('convert', new Method(function (float $amount, string $from, string $to): float {
+    return $amount * 1.0; // Fixed rate for testing
+}));
+
+var_dump($patch->isApplied()); // bool(false) — not yet applied
+
+$patch->apply();
+var_dump($patch->isApplied()); // bool(true)  — currently active
+
+$patch->revert();
+var_dump($patch->isApplied()); // bool(false) — reverted
+?>
+</code></pre>
+
+<h5>Guarding apply() and revert()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class StorageDriver
+{
+    public function read(string $path): string  { return file_get_contents($path); }
+    public function write(string $path, string $content): void { file_put_contents($path, $content); }
+}
+
+$patch = new Patch(StorageDriver::class);
+$patch
+    ->addMethod('read',  new Method(function (string $path): string       { return 'mocked_content'; }))
+    ->addMethod('write', new Method(function (string $path, string $content): void {
+        echo '[MOCK] write(' . $path . ')' . PHP_EOL;
+    }));
+
+// Safe apply — prevents double application RuntimeException
+if (!$patch->isApplied()) {
+    $patch->apply();
+    echo 'Patch applied.' . PHP_EOL;
+}
+
+// Safe revert — prevents revert-without-apply RuntimeException
+if ($patch->isApplied()) {
+    $patch->revert();
+    echo 'Patch reverted.' . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Using isApplied() in a Lifecycle Manager</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class PatchManager
+{
+    /** @var Patch[] */
+    private array $patches = [];
+
+    public function register(string $name, Patch $patch): void
+    {
+        $this->patches[$name] = $patch;
+    }
+
+    public function applyAll(): void
+    {
+        foreach ($this->patches as $name => $patch) {
+            if ($patch->isApplied()) {
+                echo '[Skip]    ' . $name . ' — already applied.' . PHP_EOL;
+                continue;
+            }
+
+            $patch->apply();
+            echo '[Applied] ' . $name . PHP_EOL;
+        }
+    }
+
+    public function revertAll(): void
+    {
+        foreach (array_reverse($this->patches) as $name => $patch) {
+            if (!$patch->isApplied()) {
+                echo '[Skip]    ' . $name . ' — not applied.' . PHP_EOL;
+                continue;
+            }
+
+            $patch->revert();
+            echo '[Reverted] ' . $name . PHP_EOL;
+        }
+    }
+
+    public function status(): void
+    {
+        foreach ($this->patches as $name => $patch) {
+            echo $name . ': ' . ($patch->isApplied() ? 'applied' : 'reverted') . PHP_EOL;
+        }
+    }
+}
+
+class MailService
+{
+    public function send(string $to): bool { return mail($to, 'Test', ''); }
+}
+
+class QueueService
+{
+    public function push(array $job): void { /* Real queue push */ }
+}
+
+$manager = new PatchManager();
+
+$mailPatch = new Patch(MailService::class);
+$mailPatch->addMethod('send', new Method(function (string $to): bool {
+    echo '[MOCK] Mail to: ' . $to . PHP_EOL;
+    return true;
+}));
+
+$queuePatch = new Patch(QueueService::class);
+$queuePatch->addMethod('push', new Method(function (array $job): void {
+    echo '[MOCK] Queue push: ' . json_encode($job) . PHP_EOL;
+}));
+
+$manager->register('mail',  $mailPatch);
+$manager->register('queue', $queuePatch);
+
+$manager->applyAll();
+$manager->status();
+
+// Run tests...
+(new MailService())->send('user@example.com');  // [MOCK] Mail to: user@example.com
+(new QueueService())->push(['job' => 'export']); // [MOCK] Queue push: {"job":"export"}
+
+$manager->revertAll();
+$manager->status();
+?>
+</code></pre>
+
+<h5>isApplied() in Test Base Classes</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+abstract class PatchTestCase
+{
+    /** @var Patch[] */
+    private array $activePatches = [];
+
+    protected function applyPatch(Patch $patch): void
+    {
+        if (!$patch->isApplied()) {
+            $patch->apply();
+            $this->activePatches[] = $patch;
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        // Revert all patches registered during the test, in reverse order
+        foreach (array_reverse($this->activePatches) as $patch) {
+            if ($patch->isApplied()) {
+                $patch->revert();
+            }
+        }
+
+        $this->activePatches = [];
+    }
+}
+
+class NotificationTest extends PatchTestCase
+{
+    public function testEmailNotification(): void
+    {
+        $patch = new Patch(\NotificationService::class);
+        $patch->addMethod('send', new Method(function (string $to): bool {
+            echo '[MOCK] Notification to: ' . $to . PHP_EOL;
+            return true;
+        }));
+
+        $this->applyPatch($patch);
+
+        // isApplied() used internally to prevent double application
+        $this->applyPatch($patch); // Silently skipped — already applied
+
+        echo 'isApplied: ' . ($patch->isApplied() ? 'yes' : 'no') . PHP_EOL; // yes
+
+        // tearDown() will revert all active patches automatically
+    }
+}
+?>
+</code></pre>
+
+<h5>Monitoring Patch State in Long-Running Processes</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class CircuitBreaker
+{
+    private Patch $patch;
+    private bool  $open = false;
+
+    public function __construct(string $serviceClass, Method $fallback, string $method)
+    {
+        $this->patch = new Patch($serviceClass);
+        $this->patch->addMethod($method, $fallback);
+    }
+
+    public function open(): void
+    {
+        if (!$this->patch->isApplied()) {
+            $this->patch->apply();
+            $this->open = true;
+            echo '[CircuitBreaker] Opened — fallback active.' . PHP_EOL;
+        }
+    }
+
+    public function close(): void
+    {
+        if ($this->patch->isApplied()) {
+            $this->patch->revert();
+            $this->open = false;
+            echo '[CircuitBreaker] Closed — original behavior restored.' . PHP_EOL;
+        }
+    }
+
+    public function isOpen(): bool
+    {
+        return $this->patch->isApplied();
+    }
+}
+
+class PaymentGateway
+{
+    public function charge(float $amount): bool
+    {
+        return true; // Real gateway call
+    }
+}
+
+$breaker = new CircuitBreaker(
+    PaymentGateway::class,
+    new Method(function (float $amount): bool {
+        echo '[FALLBACK] Payment unavailable — queuing $' . $amount . PHP_EOL;
+        return false;
+    }),
+    'charge'
+);
+
+echo $breaker->isOpen() ? 'open' : 'closed'; // closed
+
+$breaker->open();
+echo $breaker->isOpen() ? 'open' : 'closed'; // open
+
+(new PaymentGateway())->charge(99.90); // [FALLBACK] Payment unavailable — queuing $99.90
+
+$breaker->close();
+echo $breaker->isOpen() ? 'open' : 'closed'; // closed
+?>
+</code></pre>
+
+<h5>isApplied() vs isRegistered()</h5>
+<ul>
+  <li>
+    <strong>isApplied()</strong> – Toggleable state; returns <code>true</code>
+    after <code>apply()</code> and <code>false</code> after
+    <code>revert()</code>; can cycle between states multiple times throughout
+    the process lifetime
+  </li>
+  <li>
+    <strong>isRegistered()</strong> – One-way state on
+    <code>Componere\Definition</code>; returns <code>false</code> until
+    <code>register()</code> is called, then permanently returns
+    <code>true</code>; cannot be reversed
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always check <code>isApplied()</code> before calling <code>apply()</code> or <code>revert()</code> whenever the patch state is not guaranteed by the surrounding code structure</li>
+  <li>Use <code>isApplied()</code> as the loop condition in patch manager implementations that operate over collections of patches</li>
+  <li>Prefer explicit <code>isApplied()</code> checks in teardown logic over assumptions about application state — test failures can leave patches in unexpected states</li>
+  <li>In long-running process contexts (Swoole, RoadRunner, CLI daemons), use <code>isApplied()</code> to build observable, queryable patch state that can be inspected by monitoring or health-check endpoints</li>
+  <li>Treat <code>isApplied()</code> as the single source of truth for patch state — do not maintain a separate boolean flag in application code when the method provides exactly this information</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Instance-scoped only — reflects the state of this specific <code>Patch</code> instance, not whether any patch is currently applied to the target class</li>
+  <li>Cannot detect patches applied by other <code>Patch</code> instances targeting the same class — use a centralized patch registry for cross-instance awareness</li>
+  <li>Provides no information about which methods, interfaces, or traits are currently overlaid — use <code>getReflector()</code> to inspect composition content</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Guarding <code>apply()</code> and <code>revert()</code> calls to prevent <code>RuntimeException</code> from double application or revert-without-apply</li>
+  <li>Implementing idempotent patch managers that safely apply and revert collections of patches</li>
+  <li>Building reusable test base classes with automatic teardown logic driven by <code>isApplied()</code> state</li>
+  <li>Implementing circuit breaker and feature toggle patterns where patch state maps directly to system behavior state</li>
+  <li>Monitoring patch activation state in long-running processes where patches may be applied and reverted dynamically</li>
+</ul>
+
+<p>
+  <code>Componere\Patch::isApplied()</code> is the observability primitive
+  that makes the patch lifecycle safe to navigate. By exposing the current
+  application state as a direct, reliable boolean, it eliminates the need
+  for external state tracking variables and enables defensive, idempotent
+  patch management patterns. Whether guarding a single apply/revert pair
+  or orchestrating a collection of patches across a test suite, it is the
+  method that turns the inherently stateful patch lifecycle into something
+  predictable, inspectable, and robust.
+</p>
+
 <h4 id="componere-patch-derive">COMPONERE\PATCH::DERIVE</h4>
 <h4 id="componere-patch-getclosure">COMPONERE\PATCH::GETCLOSURE</h4>
 <h4 id="componere-patch-getclosures">COMPONERE\PATCH::GETCLOSURES</h4>
