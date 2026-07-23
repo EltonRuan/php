@@ -31349,6 +31349,392 @@ echo $breaker->isOpen() ? 'open' : 'closed'; // closed
 </p>
 
 <h4 id="componere-patch-derive">COMPONERE\PATCH::DERIVE</h4>
+<p>
+  <strong>Componere\Patch::derive()</strong> is a method that applies a
+  patch's modifications to a single specific object instance rather than
+  to the entire target class. It returns a new object that is an instance
+  of an anonymous class derived from the patched class, carrying all the
+  patch's method overrides — while leaving the original class and all other
+  instances of it completely unaffected.
+</p>
+<p>
+  This instance-scoped approach is fundamentally different from
+  <code>apply()</code>, which modifies the class globally and requires a
+  corresponding <code>revert()</code>. With <code>derive()</code>, no
+  <code>apply()</code> or <code>revert()</code> is needed — the
+  modification is contained entirely within the returned object, making it
+  the safest and most surgical patching tool in the Componere API.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Patch::derive(object $instance): object
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The method receives an existing object instance of the target class</li>
+  <li>An anonymous class is derived from the target class with the patch's methods overlaid</li>
+  <li>A new object is created from this anonymous class, carrying the same property state as the original instance</li>
+  <li>The returned object reflects all patch modifications for its entire lifetime</li>
+  <li>The original instance and the target class are completely unaffected</li>
+  <li>No <code>apply()</code> or <code>revert()</code> is required — the patch does not need to be in an applied state</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class PricingEngine
+{
+    public function calculate(float $basePrice): float
+    {
+        return $basePrice * 1.2; // Real pricing with 20% markup
+    }
+}
+
+$patch = new Patch(PricingEngine::class);
+$patch->addMethod('calculate', new Method(function (float $basePrice): float {
+    return $basePrice; // No markup for test instance
+}));
+
+$original = new PricingEngine();
+$derived  = $patch->derive($original);
+
+// Original instance is completely unaffected
+echo $original->calculate(100.0); // 120 — real markup
+echo $derived->calculate(100.0);  // 100 — patched behavior
+
+// Class itself is unmodified — new instances use original behavior
+$another = new PricingEngine();
+echo $another->calculate(100.0);  // 120 — real markup
+?>
+</code></pre>
+
+<h5>derive() vs apply() — Side by Side</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class AuditLogger
+{
+    public function log(string $event): void
+    {
+        file_put_contents('/var/log/audit.log', $event . PHP_EOL, FILE_APPEND);
+    }
+}
+
+$patch = new Patch(AuditLogger::class);
+$patch->addMethod('log', new Method(function (string $event): void {
+    echo '[CAPTURED] ' . $event . PHP_EOL;
+}));
+
+// --- Using apply() — global, requires revert ---
+$patch->apply();
+$logger = new AuditLogger();
+$logger->log('user.login');   // [CAPTURED] user.login — ALL instances affected
+$patch->revert();
+
+// --- Using derive() — instance-scoped, no revert needed ---
+$realLogger    = new AuditLogger();
+$captureLogger = $patch->derive($realLogger);
+
+$captureLogger->log('user.login');  // [CAPTURED] user.login — only this instance
+$realLogger->log('user.login');     // Writes to real log file — unaffected
+?>
+</code></pre>
+
+<h5>Preserving Property State</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class UserProfile
+{
+    public int    $id       = 0;
+    public string $name     = '';
+    public string $role     = 'user';
+
+    public function label(): string
+    {
+        return '[' . strtoupper($this->role) . '] ' . $this->name;
+    }
+}
+
+$original       = new UserProfile();
+$original->id   = 42;
+$original->name = 'Alice';
+$original->role = 'admin';
+
+$patch = new Patch(UserProfile::class);
+$patch->addMethod('label', new Method(function (): string {
+    // Derived instance carries the same property values
+    return '(Derived) [' . strtoupper($this->role) . '] ' . $this->name;
+}));
+
+$derived = $patch->derive($original);
+
+// Property state is preserved in the derived instance
+echo $derived->id;   // 42
+echo $derived->name; // Alice
+echo $derived->role; // admin
+
+echo $original->label(); // [ADMIN] Alice
+echo $derived->label();  // (Derived) [ADMIN] Alice
+?>
+</code></pre>
+
+<h5>Practical Pattern — Isolating a Single Test Dependency</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class RecommendationEngine
+{
+    public function recommend(int $userId): array
+    {
+        // Expensive ML-based recommendation — real implementation
+        return []; // Would return real recommendations
+    }
+
+    public function trending(): array
+    {
+        // Real trending items query
+        return [];
+    }
+}
+
+// Only override the method being tested — leave others intact
+$patch = new Patch(RecommendationEngine::class);
+$patch->addMethod('recommend', new Method(function (int $userId): array {
+    return [
+        ['id' => 1, 'title' => 'Mock Product A'],
+        ['id' => 2, 'title' => 'Mock Product B'],
+    ];
+}));
+
+$real    = new RecommendationEngine();
+$derived = $patch->derive($real);
+
+// Only recommend() is mocked — trending() still uses real logic
+$recommendations = $derived->recommend(42);
+echo count($recommendations); // 2
+
+// Class is untouched — no cleanup needed
+?>
+</code></pre>
+
+<h5>Practical Pattern — Multiple Derived Instances from One Patch</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class TaxCalculator
+{
+    public string $region = '';
+
+    public function rate(): float
+    {
+        return match ($this->region) {
+            'US' => 0.08,
+            'EU' => 0.20,
+            default => 0.0,
+        };
+    }
+}
+
+$patch = new Patch(TaxCalculator::class);
+$patch->addMethod('rate', new Method(function (): float {
+    return 0.0; // Zero tax for all derived instances
+}));
+
+$us       = new TaxCalculator();
+$us->region = 'US';
+
+$eu       = new TaxCalculator();
+$eu->region = 'EU';
+
+$derivedUs = $patch->derive($us);
+$derivedEu = $patch->derive($eu);
+
+// Original instances use real rates
+echo $us->rate(); // 0.08
+echo $eu->rate(); // 0.20
+
+// Derived instances use patched rate regardless of region
+echo $derivedUs->rate(); // 0
+echo $derivedEu->rate(); // 0
+
+// Region property is preserved
+echo $derivedUs->region; // US
+echo $derivedEu->region; // EU
+?>
+</code></pre>
+
+<h5>Practical Pattern — Derived Instance as a Test Spy</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class EventDispatcher
+{
+    public function dispatch(string $event, array $payload = []): void
+    {
+        // Real event dispatch logic
+    }
+}
+
+// Capture all dispatched events without affecting others
+function createSpyDispatcher(EventDispatcher $dispatcher): array
+{
+    $captured = [];
+
+    $patch = new Patch(EventDispatcher::class);
+    $patch->addMethod('dispatch', new Method(
+        function (string $event, array $payload = []) use (&$captured): void {
+            $captured[] = ['event' => $event, 'payload' => $payload];
+        }
+    ));
+
+    return [$patch->derive($dispatcher), &$captured];
+}
+
+$dispatcher = new EventDispatcher();
+[$spy, $captured] = createSpyDispatcher($dispatcher);
+
+$spy->dispatch('user.created',  ['id' => 1]);
+$spy->dispatch('order.placed',  ['id' => 42]);
+$spy->dispatch('email.sent',    ['to' => 'alice@example.com']);
+
+echo 'Captured events: ' . count($captured) . PHP_EOL; // 3
+
+foreach ($captured as $entry) {
+    echo $entry['event'] . ': ' . json_encode($entry['payload']) . PHP_EOL;
+}
+
+// Original dispatcher is completely untouched
+// No revert() needed
+?>
+</code></pre>
+
+<h5>Practical Pattern — Dependency Substitution Without Injection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class OrderProcessor
+{
+    private PaymentService $payment;
+    private StockService   $stock;
+
+    public function __construct(PaymentService $payment, StockService $stock)
+    {
+        $this->payment = $payment;
+        $this->stock   = $stock;
+    }
+
+    public function process(array $order): bool
+    {
+        if (!$this->stock->reserve($order['product_id'], $order['quantity'])) {
+            return false;
+        }
+        return $this->payment->charge($order['total']);
+    }
+}
+
+class PaymentService
+{
+    public function charge(float $amount): bool { return true; }
+}
+
+class StockService
+{
+    public function reserve(int $productId, int $qty): bool { return true; }
+}
+
+// Derive a modified payment service instance for this test
+$paymentPatch = new Patch(PaymentService::class);
+$paymentPatch->addMethod('charge', new Method(function (float $amount): bool {
+    echo '[MOCK] Charge: $' . $amount . PHP_EOL;
+    return true;
+}));
+
+$realPayment   = new PaymentService();
+$mockedPayment = $paymentPatch->derive($realPayment);
+
+// Inject the derived instance — no class-wide patch needed
+$processor = new OrderProcessor($mockedPayment, new StockService());
+$result    = $processor->process(['product_id' => 1, 'quantity' => 2, 'total' => 59.90]);
+
+echo $result ? 'Order processed.' : 'Order failed.';
+// [MOCK] Charge: $59.9
+// Order processed.
+?>
+</code></pre>
+
+<h5>derive() vs apply()</h5>
+<ul>
+  <li>
+    <strong>derive()</strong> – Instance-scoped; affects only the returned
+    object; no <code>apply()</code> or <code>revert()</code> needed; the
+    target class and all other instances are completely unaffected; the
+    safest and most surgical patching option
+  </li>
+  <li>
+    <strong>apply()</strong> – Class-scoped; affects all existing and future
+    instances immediately; requires a corresponding <code>revert()</code>
+    to restore original behavior; appropriate when the entire class must
+    behave differently for a defined period
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Prefer <code>derive()</code> over <code>apply()</code> whenever only a single instance needs modification — it eliminates the need for <code>revert()</code> and removes all risk of leaving a patch applied beyond its intended scope</li>
+  <li>Use <code>derive()</code> to build test spies, stubs, and mocks that are passed as dependencies rather than applied globally to the class</li>
+  <li>Remember that property state from the original instance is carried into the derived object — verify that the expected state is present before passing the derived instance to code under test</li>
+  <li>Combine multiple patches by deriving sequentially — derive from the result of a first derivation to stack multiple behavioral overrides on a single instance</li>
+  <li>Document the use of derived instances clearly in test code — the behavioral difference between the original and derived object can be surprising to developers unfamiliar with Componere</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>The returned object is an instance of an anonymous class — <code>get_class()</code> will not return the original class name; use <code>instanceof</code> for type checking instead</li>
+  <li>Cannot add properties or constants to derived instances — only methods are overlaid; property additions require <code>Definition</code></li>
+  <li>The derived object and the original are not linked — changes to the original instance's properties after derivation are not reflected in the derived object</li>
+  <li>Only closures added via <code>addMethod()</code> are overlaid — trait methods, parent class methods, and interface default methods are not individually overridable via <code>derive()</code></li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Creating test doubles for specific object instances without affecting the broader class behavior</li>
+  <li>Building spy objects that capture method calls and arguments during test execution</li>
+  <li>Substituting a single dependency with a modified version in tests without full dependency injection rewiring</li>
+  <li>Applying instance-level behavioral overrides in production for feature flags or circuit breaker patterns without class-wide modification</li>
+  <li>Stacking multiple behavioral modifications on a single object instance by chaining <code>derive()</code> calls across multiple patches</li>
+</ul>
+
+<p>
+  <code>Componere\Patch::derive()</code> represents the most precise and
+  contained form of runtime class modification available in the Componere
+  API. By scoping all changes to a single returned object — leaving the
+  class, all other instances, and the patch itself in their original states —
+  it provides the surgical precision of instance-level behavioral modification
+  without any of the cleanup responsibility that comes with
+  <code>apply()</code>. When the goal is to modify one object rather than
+  an entire class, <code>derive()</code> is always the right tool.
+</p>
+
 <h4 id="componere-patch-getclosure">COMPONERE\PATCH::GETCLOSURE</h4>
 <h4 id="componere-patch-getclosures">COMPONERE\PATCH::GETCLOSURES</h4>
 
