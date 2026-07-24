@@ -31736,6 +31736,326 @@ echo $result ? 'Order processed.' : 'Order failed.';
 </p>
 
 <h4 id="componere-patch-getclosure">COMPONERE\PATCH::GETCLOSURE</h4>
+<p>
+  <strong>Componere\Patch::getClosure()</strong> is a method that retrieves
+  the raw <code>Closure</code> associated with a specific named method that
+  has been added to the patch via <code>addMethod()</code>. It provides
+  direct access to the underlying callable independently of whether the patch
+  has been applied, reverted, or is in any particular lifecycle state —
+  making it available throughout the entire patch lifetime.
+</p>
+<p>
+  The method is functionally identical to
+  <code>Componere\Definition::getClosure()</code> in behavior and purpose,
+  but operates on the context of a <code>Patch</code> rather than a
+  <code>Definition</code>. The returned closure is the raw, unbound callable
+  passed to <code>Componere\Method</code> at composition time, accessible
+  for direct invocation, delegation, reuse across other compositions, or
+  binding to specific object instances.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Patch::getClosure(string $name): Closure
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The method name is looked up against the methods registered on the patch via <code>addMethod()</code></li>
+  <li>The raw <code>Closure</code> associated with that method name is returned</li>
+  <li>If the method name does not exist on the patch, a <code>RuntimeException</code> is thrown</li>
+  <li>The returned closure is unbound — not automatically scoped to any class or instance</li>
+  <li>Can be called regardless of whether the patch is applied, reverted, or unapplied</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class DiscountCalculator
+{
+    public function apply(float $price, float $rate): float
+    {
+        return $price - ($price * $rate);
+    }
+}
+
+$patch = new Patch(DiscountCalculator::class);
+$patch->addMethod('apply', new Method(function (float $price, float $rate): float {
+    return $price; // No discount applied — flat price for testing
+}));
+
+// Retrieve the closure directly — no need to apply the patch first
+$closure = $patch->getClosure('apply');
+
+// Invoke as a standalone callable
+echo $closure(100.0, 0.2); // 100 — no discount applied
+?>
+</code></pre>
+
+<h5>Accessing Before and After apply()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class StockChecker
+{
+    public function isAvailable(int $productId): bool
+    {
+        return true; // Real stock check
+    }
+}
+
+$patch = new Patch(StockChecker::class);
+$patch->addMethod('isAvailable', new Method(function (int $productId): bool {
+    return $productId > 0; // Simplified availability rule
+}));
+
+// Available before apply()
+$closureBefore = $patch->getClosure('isAvailable');
+echo $closureBefore(5)  ? 'available' : 'unavailable'; // available
+echo $closureBefore(-1) ? 'available' : 'unavailable'; // unavailable
+
+$patch->apply();
+
+// Still available after apply()
+$closureAfter = $patch->getClosure('isAvailable');
+echo $closureAfter(5) ? 'available' : 'unavailable'; // available
+
+$patch->revert();
+
+// Still available after revert()
+$closureAfterRevert = $patch->getClosure('isAvailable');
+echo $closureAfterRevert(5) ? 'available' : 'unavailable'; // available
+?>
+</code></pre>
+
+<h5>Binding a Patch Closure to an Instance</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ShoppingCart
+{
+    public array $items   = [];
+    public float $discount = 0.0;
+
+    public function total(): float
+    {
+        $subtotal = array_sum(array_column($this->items, 'price'));
+        return $subtotal - ($subtotal * $this->discount);
+    }
+}
+
+$patch = new Patch(ShoppingCart::class);
+$patch->addMethod('total', new Method(function (): float {
+    // Patched version — applies a fixed 50% discount regardless
+    $subtotal = array_sum(array_column($this->items, 'price'));
+    return $subtotal * 0.5;
+}));
+
+$cart           = new ShoppingCart();
+$cart->items    = [
+    ['name' => 'Widget A', 'price' => 50.0],
+    ['name' => 'Widget B', 'price' => 30.0],
+];
+$cart->discount = 0.1;
+
+// Retrieve raw closure and bind it to the cart instance
+$totalClosure = $patch->getClosure('total');
+$bound        = Closure::bind($totalClosure, $cart, ShoppingCart::class);
+
+echo 'Original total : $' . $cart->total();  // $72 (with 10% discount)
+echo 'Patched total  : $' . $bound();         // $40 (with fixed 50% discount)
+
+// Cart instance and class remain unmodified — no apply() was called
+?>
+</code></pre>
+
+<h5>Reusing a Patch Closure in a Definition</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Definition;
+use Componere\Method;
+
+class Formatter
+{
+    public function format(float $amount): string
+    {
+        return '$' . number_format($amount, 2);
+    }
+}
+
+// Build a patch with a reusable formatting closure
+$patch   = new Patch(Formatter::class);
+$patch->addMethod('format', new Method(function (float $amount): string {
+    return '€' . number_format($amount, 2, ',', '.');
+}));
+
+// Extract the closure and reuse it in a Definition
+$formatClosure = $patch->getClosure('format');
+
+$definition = new Definition('EuroFormatter');
+$definition->addMethod('format', new Method($formatClosure));
+$definition->addMethod('label', new Method(function (float $amount): string {
+    return 'Total: ' . $this->format($amount);
+}));
+
+$definition->register();
+
+$euroFormatter = new EuroFormatter();
+echo $euroFormatter->label(1999.99); // Total: €1.999,99
+?>
+</code></pre>
+
+<h5>Practical Pattern — Testing a Closure in Isolation</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class OrderValidator
+{
+    public function validate(array $order): bool
+    {
+        return isset($order['id'], $order['total']) && $order['total'] > 0;
+    }
+}
+
+$patch = new Patch(OrderValidator::class);
+$patch->addMethod('validate', new Method(function (array $order): bool {
+    // Patched validation — also requires a customer ID
+    return isset($order['id'], $order['total'], $order['customer_id'])
+        && $order['total'] > 0;
+}));
+
+// Test the closure logic directly without applying the patch
+$validate = $patch->getClosure('validate');
+
+$cases = [
+    [['id' => 1, 'total' => 50.0],                              false], // Missing customer_id
+    [['id' => 1, 'total' => 50.0, 'customer_id' => 42],        true],  // Valid
+    [['id' => 1, 'total' => 0.0,  'customer_id' => 42],        false], // Zero total
+    [['id' => 1, 'total' => -10,  'customer_id' => 42],        false], // Negative total
+];
+
+foreach ($cases as [$input, $expected]) {
+    $result  = $validate($input);
+    $status  = $result === $expected ? 'PASS' : 'FAIL';
+    echo '[' . $status . '] ' . json_encode($input) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Closure Delegation from Patch</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class DataSanitizer
+{
+    public function sanitize(string $input): string
+    {
+        return htmlspecialchars(strip_tags(trim($input)));
+    }
+}
+
+$patch = new Patch(DataSanitizer::class);
+$patch->addMethod('sanitize', new Method(function (string $input): string {
+    return strtolower(preg_replace('/[^a-zA-Z0-9\s]/', '', trim($input)));
+}));
+
+// Extract and use as a pipeline step
+$sanitize = $patch->getClosure('sanitize');
+
+$inputs = [
+    '  Hello, World!  ',
+    '<script>alert("xss")</script>',
+    'PHP 8.2 is Great!!!',
+];
+
+$cleaned = array_map($sanitize, $inputs);
+print_r($cleaned);
+// ['hello world', 'scriptalertxssscript', 'php 82 is great']
+?>
+</code></pre>
+
+<h5>getClosure() vs getClosures()</h5>
+<ul>
+  <li>
+    <strong>getClosure(string $name)</strong> – Retrieves a single named
+    closure; throws a <code>RuntimeException</code> if the method does
+    not exist on the patch; appropriate for targeted, single-method retrieval
+    when the method name is known and its presence is expected
+  </li>
+  <li>
+    <strong>getClosures()</strong> – Returns all closures as an associative
+    array keyed by method name; returns an empty array if no methods have
+    been added; appropriate for bulk retrieval, inspection, and delegation
+  </li>
+</ul>
+
+<h5>Patch::getClosure() vs Definition::getClosure()</h5>
+<ul>
+  <li>
+    <strong>Patch::getClosure()</strong> – Retrieves a closure from a patch
+    targeting an existing class; available regardless of the patch's applied
+    state; the closure reflects method overrides intended to modify existing
+    behavior
+  </li>
+  <li>
+    <strong>Definition::getClosure()</strong> – Retrieves a closure from a
+    definition building a new class; available regardless of registration
+    state; the closure reflects methods being added to a brand new class
+    composition
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>getClosure()</code> to test patch method logic in isolation before applying the patch to the class, reducing the scope of debugging when issues arise</li>
+  <li>Always wrap calls in a try/catch when the method name is dynamic — a missing method name throws a <code>RuntimeException</code></li>
+  <li>When binding the retrieved closure to an object, always pass the correct class scope as the third argument to <code>Closure::bind()</code> to ensure private and protected member access works correctly</li>
+  <li>Extract closures from patches for reuse in <code>Definition</code> compositions when the same logic serves both a patch override and a new class method</li>
+  <li>Prefer <code>getClosures()</code> when all patch methods need to be inspected or delegated — use <code>getClosure()</code> only for targeted, named retrieval</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Throws a <code>RuntimeException</code> if the specified method name has not been added to the patch via <code>addMethod()</code></li>
+  <li>Returns the unbound closure — <code>$this</code> references inside it will only resolve correctly after binding to an appropriate object via <code>Closure::bind()</code></li>
+  <li>Only retrieves closures added explicitly via <code>addMethod()</code> — methods imported from traits are not accessible through this method</li>
+  <li>Cannot retrieve closures for methods that exist on the original target class but were not added to the patch</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Testing patch method closures in isolation before applying the patch to the class</li>
+  <li>Reusing patch closures as method implementations in <code>Definition</code> compositions</li>
+  <li>Binding patch closures to specific object instances for targeted invocation without a class-wide patch</li>
+  <li>Delegating patch closures as callbacks to higher-order functions like <code>array_map()</code>, <code>array_filter()</code>, or <code>usort()</code></li>
+  <li>Inspecting the exact callable body associated with a named patch method during debugging or documentation generation</li>
+</ul>
+
+<p>
+  <code>Componere\Patch::getClosure()</code> exposes the raw callable behind
+  any patch method, making it available as a first-class, portable value
+  independent of the patch's lifecycle state. Whether used for isolated
+  testing, closure reuse across compositions, or instance-level binding
+  as a lightweight alternative to full patch application, it reinforces
+  the principle that closures in Componere are not just class members —
+  they are portable units of behavior that can be extracted, reused, and
+  composed wherever they are needed.
+</p>
+
 <h4 id="componere-patch-getclosures">COMPONERE\PATCH::GETCLOSURES</h4>
 
 <h4 id="componere-method-class">COMPONERE\METHOD CLASS</h4>
