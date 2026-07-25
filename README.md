@@ -32057,6 +32057,363 @@ print_r($cleaned);
 </p>
 
 <h4 id="componere-patch-getclosures">COMPONERE\PATCH::GETCLOSURES</h4>
+<p>
+  <strong>Componere\Patch::getClosures()</strong> is a method that returns
+  all closures associated with the methods added to a
+  <code>Componere\Patch</code> instance, as an associative array keyed by
+  method name. It is the bulk counterpart to
+  <code>Componere\Patch::getClosure()</code> — surfacing the entire set of
+  method closures composed on the patch in a single call, regardless of
+  whether the patch is currently applied, reverted, or unapplied.
+</p>
+<p>
+  Functionally identical to <code>Componere\Definition::getClosures()</code>
+  in behavior and return structure, <code>Patch::getClosures()</code>
+  operates specifically within the context of a patch targeting an existing
+  class. The returned closures are the raw, unbound callables passed to
+  <code>Componere\Method</code> at composition time — available for bulk
+  inspection, testing, delegation, and reuse independently of the patch
+  lifecycle.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Patch::getClosures(): array
+?>
+</code></pre>
+<p>
+  Returns an associative array of <code>string => Closure</code> pairs,
+  where each key is a method name and each value is the corresponding raw
+  closure. Returns an empty array if no methods have been added to the patch
+  via <code>addMethod()</code>.
+</p>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The method iterates over all methods registered on the patch via <code>addMethod()</code></li>
+  <li>Each method name is paired with its associated raw closure</li>
+  <li>The complete associative array is returned in insertion order</li>
+  <li>Closures from traits applied via <code>addTrait()</code> are not included</li>
+  <li>Can be called at any point in the patch lifecycle without side effects</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ReportBuilder
+{
+    public function build(array $data): string  { return implode(',', $data); }
+    public function format(string $raw): string { return strtoupper($raw); }
+    public function export(string $content): bool { return true; }
+}
+
+$patch = new Patch(ReportBuilder::class);
+$patch
+    ->addMethod('build',  new Method(function (array $data): string  { return '[MOCK] ' . implode(',', $data); }))
+    ->addMethod('format', new Method(function (string $raw): string  { return '[MOCK] ' . strtolower($raw); }))
+    ->addMethod('export', new Method(function (string $content): bool { return false; }));
+
+$closures = $patch->getClosures();
+
+echo 'Total closures: ' . count($closures) . PHP_EOL; // 3
+
+foreach ($closures as $name => $closure) {
+    echo $name . PHP_EOL;
+    // build
+    // format
+    // export
+}
+?>
+</code></pre>
+
+<h5>Invoking All Closures Against Test Input</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class StringProcessor
+{
+    public function trim(string $s): string    { return trim($s); }
+    public function upper(string $s): string   { return strtoupper($s); }
+    public function reverse(string $s): string { return strrev($s); }
+}
+
+$patch = new Patch(StringProcessor::class);
+$patch
+    ->addMethod('trim',    new Method(function (string $s): string { return ltrim($s); }))  // Left-trim only
+    ->addMethod('upper',   new Method(function (string $s): string { return mb_strtoupper($s); }))
+    ->addMethod('reverse', new Method(function (string $s): string { return implode(' ', array_reverse(explode(' ', $s))); })); // Word reverse
+
+$input    = '  Hello World  ';
+$closures = $patch->getClosures();
+
+foreach ($closures as $name => $closure) {
+    echo $name . ': "' . $closure($input) . '"' . PHP_EOL;
+}
+// trim:    "Hello World  "
+// upper:   "  HELLO WORLD  "
+// reverse: "  World Hello  "
+?>
+</code></pre>
+
+<h5>Bulk Testing All Patch Closures</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class PriceCalculator
+{
+    public function withTax(float $price): float       { return $price * 1.2; }
+    public function withDiscount(float $price): float  { return $price * 0.9; }
+    public function round(float $price): float         { return round($price, 2); }
+}
+
+$patch = new Patch(PriceCalculator::class);
+$patch
+    ->addMethod('withTax',      new Method(function (float $price): float { return $price * 1.1; }))  // 10% tax
+    ->addMethod('withDiscount', new Method(function (float $price): float { return $price * 0.8; }))  // 20% discount
+    ->addMethod('round',        new Method(function (float $price): float { return ceil($price); })); // Round up
+
+$testCases = [
+    'withTax'      => [100.0 => 110.0, 200.0 => 220.0, 0.0 => 0.0],
+    'withDiscount' => [100.0 => 80.0,  200.0 => 160.0, 0.0 => 0.0],
+    'round'        => [10.1  => 11.0,  10.9  => 11.0,  10.0 => 10.0],
+];
+
+$closures = $patch->getClosures();
+$passed   = 0;
+$failed   = 0;
+
+foreach ($testCases as $method => $cases) {
+    foreach ($cases as $input => $expected) {
+        $result = $closures[$method]((float) $input);
+
+        if ($result === $expected) {
+            $passed++;
+        } else {
+            echo "[FAIL] {$method}({$input}) — expected {$expected}, got {$result}" . PHP_EOL;
+            $failed++;
+        }
+    }
+}
+
+echo "Passed: {$passed} | Failed: {$failed}" . PHP_EOL;
+?>
+</code></pre>
+
+<h5>Practical Pattern — Transferring Patch Closures to a Definition</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+class BaseFormatter
+{
+    public function currency(float $amount): string { return '$' . number_format($amount, 2); }
+    public function percent(float $rate): string    { return round($rate * 100, 1) . '%'; }
+    public function date(int $ts): string           { return date('Y-m-d', $ts); }
+}
+
+// Build patch with shared formatting logic
+$patch = new Patch(BaseFormatter::class);
+$patch
+    ->addMethod('currency', new Method(function (float $amount): string { return '€' . number_format($amount, 2, ',', '.'); }))
+    ->addMethod('percent',  new Method(function (float $rate): string   { return number_format($rate * 100, 2) . '%'; }))
+    ->addMethod('date',     new Method(function (int $ts): string       { return date('d/m/Y', $ts); }));
+
+// Extract all closures and redistribute to a new Definition
+$definition = new Definition('EuroFormatter');
+
+foreach ($patch->getClosures() as $name => $closure) {
+    $definition->addMethod($name, new Method($closure));
+}
+
+$definition
+    ->addProperty('locale', new Value('eu'))
+    ->addMethod('label', new Method(function (float $amount): string {
+        return 'Amount (' . $this->locale . '): ' . $this->currency($amount);
+    }));
+
+$definition->register();
+
+$formatter = new EuroFormatter();
+echo $formatter->currency(1999.99);         // €1.999,99
+echo $formatter->percent(0.1525);           // 15.25%
+echo $formatter->label(500.0);             // Amount (eu): €500,00
+?>
+</code></pre>
+
+<h5>Practical Pattern — Patch Closure Registry for Test Suites</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ServiceMockRegistry
+{
+    private array $closureMap = [];
+
+    public function registerPatch(string $namespace, Patch $patch): void
+    {
+        foreach ($patch->getClosures() as $method => $closure) {
+            $this->closureMap[$namespace . '::' . $method] = $closure;
+        }
+    }
+
+    public function has(string $key): bool
+    {
+        return isset($this->closureMap[$key]);
+    }
+
+    public function invoke(string $key, mixed ...$args): mixed
+    {
+        if (!$this->has($key)) {
+            throw new \RuntimeException('No mock registered for: ' . $key);
+        }
+
+        return ($this->closureMap[$key])(...$args);
+    }
+
+    public function all(): array
+    {
+        return $this->closureMap;
+    }
+}
+
+class EmailService
+{
+    public function send(string $to, string $subject): bool { return mail($to, $subject, ''); }
+    public function queue(string $to, string $subject): void { /* Queue logic */ }
+}
+
+$patch = new Patch(EmailService::class);
+$patch
+    ->addMethod('send',  new Method(function (string $to, string $subject): bool {
+        echo '[MOCK] send → ' . $to . PHP_EOL;
+        return true;
+    }))
+    ->addMethod('queue', new Method(function (string $to, string $subject): void {
+        echo '[MOCK] queue → ' . $to . PHP_EOL;
+    }));
+
+$registry = new ServiceMockRegistry();
+$registry->registerPatch('EmailService', $patch);
+
+$registry->invoke('EmailService::send',  'alice@example.com', 'Welcome');
+$registry->invoke('EmailService::queue', 'bob@example.com',   'Newsletter');
+
+echo 'Registered mocks: ' . count($registry->all()) . PHP_EOL; // 2
+?>
+</code></pre>
+
+<h5>Inspecting Closure Signatures via Reflection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class OrderService
+{
+    public function create(array $data): int    { return 0; }
+    public function cancel(int $id): bool       { return false; }
+    public function status(int $id): string     { return 'unknown'; }
+}
+
+$patch = new Patch(OrderService::class);
+$patch
+    ->addMethod('create', new Method(function (array $data): int    { return 999; }))
+    ->addMethod('cancel', new Method(function (int $id): bool       { return true; }))
+    ->addMethod('status', new Method(function (int $id): string     { return 'mocked'; }));
+
+foreach ($patch->getClosures() as $name => $closure) {
+    $ref    = new \ReflectionFunction($closure);
+    $params = array_map(
+        fn (\ReflectionParameter $p) => ($p->getType() ?? 'mixed') . ' $' . $p->getName(),
+        $ref->getParameters()
+    );
+    $return = $ref->getReturnType() ?? 'mixed';
+
+    echo $name . '(' . implode(', ', $params) . '): ' . $return . PHP_EOL;
+}
+// create(array $data): int
+// cancel(int $id): bool
+// status(int $id): string
+?>
+</code></pre>
+
+<h5>getClosures() vs getClosure()</h5>
+<ul>
+  <li>
+    <strong>getClosures()</strong> – Returns all closures as an associative
+    array; appropriate for bulk inspection, iteration, redistribution, and
+    test pipelines; returns an empty array if no methods have been added
+  </li>
+  <li>
+    <strong>getClosure(string $name)</strong> – Returns a single named
+    closure; throws a <code>RuntimeException</code> if the name does not
+    exist; appropriate for targeted, single-method retrieval when the method
+    name is known and its presence is expected
+  </li>
+</ul>
+
+<h5>Patch::getClosures() vs Definition::getClosures()</h5>
+<ul>
+  <li>
+    <strong>Patch::getClosures()</strong> – Retrieves closures from a patch
+    targeting an existing class; closures represent behavioral overrides
+    intended to temporarily replace or extend existing methods
+  </li>
+  <li>
+    <strong>Definition::getClosures()</strong> – Retrieves closures from a
+    definition building a new class; closures represent methods being
+    introduced to a class that did not previously exist
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>getClosures()</code> to validate the full method surface of a patch before applying it — confirm that all expected methods are present with the correct logic</li>
+  <li>Avoid calling <code>getClosure()</code> in a loop for multiple methods — <code>getClosures()</code> retrieves all in a single call and is the more efficient approach</li>
+  <li>When redistributing closures to a <code>Definition</code>, wrap each in a fresh <code>new Method($closure)</code> to allow independent visibility and static modifiers per definition</li>
+  <li>Combine with <code>ReflectionFunction</code> to programmatically verify parameter types and return types across all patch methods during development</li>
+  <li>Treat the returned array as a snapshot — closures added after <code>getClosures()</code> is called are not reflected; call again after further composition if needed</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Only includes closures added explicitly via <code>addMethod()</code> — methods from traits applied via <code>addTrait()</code> are not included</li>
+  <li>Returns unbound closures — <code>$this</code> references resolve correctly only after binding to an appropriate instance via <code>Closure::bind()</code></li>
+  <li>Returns a point-in-time snapshot — closures added to the patch after this call are not reflected in the returned array</li>
+  <li>No built-in filtering — all closures are returned unconditionally; apply array filtering manually if a subset is needed</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Bulk testing of all patch method closures in isolation before applying the patch to the class</li>
+  <li>Transferring shared closure logic from a patch composition to a <code>Definition</code> composition</li>
+  <li>Building mock and stub registries that index patch closures by namespace and method name for test suite use</li>
+  <li>Inspecting the full override surface of a patch via <code>ReflectionFunction</code> for documentation or debugging</li>
+  <li>Iterating over all patch methods to apply decorators, wrappers, or logging around each closure before registration</li>
+</ul>
+
+<p>
+  <code>Componere\Patch::getClosures()</code> surfaces the entire behavioral
+  override set of a patch as a portable, iterable collection of first-class
+  callables. Whether used to validate patch composition before application,
+  redistribute shared logic across definitions, or build test infrastructure
+  that indexes closures by name, it reinforces the same principle that runs
+  through the entire Componere API: closures are the fundamental unit of
+  behavior, and every context — patch or definition, applied or unapplied —
+  should provide equal access to them.
+</p>
 
 <h4 id="componere-method-class">COMPONERE\METHOD CLASS</h4>
 <h4 id="componere-method-construct">COMPONERE\METHOD::__CONSTRUCT</h4>
