@@ -32739,6 +32739,358 @@ echo $reflector->isStatic()    ? ' static'   : '';  // static
 </p>
 
 <h4 id="componere-method-construct">COMPONERE\METHOD::__CONSTRUCT</h4>
+<p>
+  <strong>Componere\Method::__construct()</strong> is the constructor of the
+  <code>Componere\Method</code> class, responsible for initializing a method
+  descriptor by wrapping a PHP closure into a composable, modifier-ready
+  object. It is the entry point to every method added to a
+  <code>Componere\Definition</code> or <code>Componere\Patch</code> — every
+  call to <code>addMethod()</code> requires a <code>Method</code> instance,
+  and every <code>Method</code> instance begins with this constructor.
+</p>
+<p>
+  The constructor accepts a single <code>Closure</code> argument and
+  establishes it as the callable body of the method. No modifiers are
+  applied at construction time — the resulting instance is public and
+  non-static by default, ready for optional modification via
+  <code>setPrivate()</code>, <code>setProtected()</code>, and
+  <code>setStatic()</code> before being passed to <code>addMethod()</code>.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Method::__construct(Closure $closure)
+?>
+</code></pre>
+
+<h5>Parameters Explained</h5>
+<ul>
+  <li>
+    <strong>$closure</strong> – Any valid PHP <code>Closure</code> instance.
+    This becomes the executable body of the composed method. It may capture
+    variables from its surrounding scope via <code>use</code>, declare typed
+    parameters and return types, and reference <code>$this</code> — which
+    will be bound to the class instance when the method is invoked after
+    composition.
+  </li>
+</ul>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The closure is validated and stored internally as the method body</li>
+  <li>Default visibility is set to public — no modifier needs to be called for public methods</li>
+  <li>Default static state is non-static — <code>setStatic()</code> must be called explicitly to make the method static</li>
+  <li>The <code>Method</code> instance is ready to be passed directly to <code>addMethod()</code>, or modified first via the available modifier methods</li>
+</ol>
+
+<h5>Basic Construction — Inline Closure</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('Greeter');
+
+// Closure passed directly to the constructor inline
+$definition->addMethod('greet', new Method(function (string $name): string {
+    return 'Hello, ' . $name . '!';
+}));
+
+$definition->register();
+
+echo (new Greeter())->greet('World'); // Hello, World!
+?>
+</code></pre>
+
+<h5>Construction from a Pre-Defined Closure</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+// Define the closure separately for clarity or reuse
+$formatCurrency = function (float $amount, string $symbol = '$'): string {
+    return $symbol . number_format($amount, 2);
+};
+
+$definition = new Definition('PriceFormatter');
+$definition->addMethod('format', new Method($formatCurrency));
+$definition->register();
+
+$formatter = new PriceFormatter();
+echo $formatter->format(1999.9);       // $1,999.90
+echo $formatter->format(1999.9, '€'); // €1,999.90
+?>
+</code></pre>
+
+<h5>Closure with $this Access</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('Product');
+
+$definition
+    ->addProperty('name',  new Value(''))
+    ->addProperty('price', new Value(0.0))
+    ->addMethod('describe', new Method(function (): string {
+        // $this is bound to the Product instance at invocation time
+        return sprintf('%s — $%.2f', $this->name, $this->price);
+    }));
+
+$definition->register();
+
+$product        = new Product();
+$product->name  = 'Widget';
+$product->price = 29.90;
+
+echo $product->describe(); // Widget — $29.90
+?>
+</code></pre>
+
+<h5>Closure Capturing Scope via use</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ApiClient
+{
+    public function request(string $endpoint): array
+    {
+        // Real HTTP request
+        return [];
+    }
+}
+
+// Capture test fixtures into the closure via use
+$fixtures = [
+    '/users'    => [['id' => 1, 'name' => 'Alice']],
+    '/products' => [['id' => 42, 'name' => 'Widget']],
+];
+
+$patch = new Patch(ApiClient::class);
+$patch->addMethod('request', new Method(
+    function (string $endpoint) use ($fixtures): array {
+        return $fixtures[$endpoint] ?? [];
+    }
+));
+
+$patch->apply();
+
+$client = new ApiClient();
+print_r($client->request('/users'));    // [['id' => 1, 'name' => 'Alice']]
+print_r($client->request('/products')); // [['id' => 42, 'name' => 'Widget']]
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Construction with Typed Parameters and Return Types</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('TypedClass');
+
+$definition
+    ->addMethod('process', new Method(function (
+        int    $id,
+        string $name,
+        bool   $active = true,
+        array  $tags   = []
+    ): array {
+        return [
+            'id'     => $id,
+            'name'   => $name,
+            'active' => $active,
+            'tags'   => $tags,
+        ];
+    }))
+    ->addMethod('validate', new Method(function (array $data): bool {
+        return !empty($data['id']) && !empty($data['name']);
+    }))
+    ->addMethod('format', new Method(function (?string $value): string {
+        return $value ?? 'N/A';
+    }));
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Chaining Construction with Modifiers</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('AccessDemo');
+
+$definition
+    // Public — no modifier (default)
+    ->addMethod('publicMethod', new Method(function (): string {
+        return 'public: ' . $this->protectedMethod();
+    }))
+
+    // Protected — modifier applied immediately after construction
+    ->addMethod('protectedMethod', (new Method(function (): string {
+        return 'protected: ' . $this->privateMethod();
+    }))->setProtected())
+
+    // Private — modifier applied immediately after construction
+    ->addMethod('privateMethod', (new Method(function (): string {
+        return 'private value';
+    }))->setPrivate())
+
+    // Static public
+    ->addMethod('staticMethod', (new Method(function (): string {
+        return 'static value';
+    }))->setStatic());
+
+$definition->register();
+
+$obj = new AccessDemo();
+echo $obj->publicMethod();        // public: protected: private value
+echo AccessDemo::staticMethod();  // static value
+?>
+</code></pre>
+
+<h5>Reusing the Same Closure in Multiple Method Instances</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Patch;
+use Componere\Method;
+
+// A single closure can be passed to multiple Method constructors
+// Each Method instance independently applies its own modifiers
+
+$slugify = function (string $text): string {
+    return strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $text), '-'));
+};
+
+// Public in Definition A
+$defA = new Definition('SluggerA');
+$defA->addMethod('slugify', new Method($slugify)); // public
+
+// Protected in Definition B
+$defB = new Definition('SluggerB');
+$defB->addMethod('slugify', (new Method($slugify))->setProtected()); // protected
+
+$defA->register();
+$defB->register();
+
+$a = new SluggerA();
+echo $a->slugify('Hello World!'); // hello-world
+
+// $b->slugify() would throw — protected method
+?>
+</code></pre>
+
+<h5>Construction Validation</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+// Only Closure instances are accepted — no callable strings or arrays
+// The following would throw a TypeError:
+// new Method('strlen');            // string callable — invalid
+// new Method([$obj, 'method']);    // array callable — invalid
+// new Method(Closure::fromCallable('strlen')); // valid — explicit conversion
+
+// Correct approach when wrapping non-closure callables:
+$method = new Method(Closure::fromCallable('strtolower'));
+$reflector = $method->getReflector();
+echo $reflector->isPublic() ? 'public' : ''; // public
+?>
+</code></pre>
+
+<h5>Verifying Construction via getReflector()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$method = new Method(function (string $a, int $b = 0): bool {
+    return strlen($a) > $b;
+});
+
+$reflector = $method->getReflector();
+
+echo 'Is public    : ' . ($reflector->isPublic()    ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Is static    : ' . ($reflector->isStatic()    ? 'yes' : 'no') . PHP_EOL; // no
+echo 'Is protected : ' . ($reflector->isProtected() ? 'yes' : 'no') . PHP_EOL; // no
+
+foreach ($reflector->getParameters() as $param) {
+    $type    = $param->getType() ?? 'mixed';
+    $default = $param->isOptional() ? ' = ' . var_export($param->getDefaultValue(), true) : '';
+    echo $type . ' $' . $param->getName() . $default . PHP_EOL;
+}
+// string $a
+// int $b = 0
+?>
+</code></pre>
+
+<h5>Method::__construct() vs Wrapping Approaches</h5>
+<ul>
+  <li>
+    <strong>new Method(function() {})</strong> – Most common pattern; closure
+    defined inline at the point of use; clear and self-contained; default
+    public visibility
+  </li>
+  <li>
+    <strong>new Method($predefinedClosure)</strong> – Closure defined
+    separately and passed by reference; enables reuse across multiple
+    <code>Method</code> instances and compositions
+  </li>
+  <li>
+    <strong>new Method(Closure::fromCallable(...))</strong> – Converts
+    non-closure callables (named functions, static methods) into a
+    <code>Closure</code> before wrapping; the only way to use non-closure
+    callables with <code>Method</code>
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always declare explicit parameter types and return types on closures passed to the constructor — this improves readability and makes reflection output via <code>getReflector()</code> accurate and useful</li>
+  <li>Define complex closure bodies as named variables before passing them to the constructor — keeping the <code>addMethod()</code> call clean and the closure logic readable</li>
+  <li>Use <code>Closure::fromCallable()</code> when wrapping existing named functions or static methods into a <code>Method</code> instance</li>
+  <li>Capture external dependencies via <code>use</code> rather than relying on global state inside closures — this makes the method's dependencies explicit and testable</li>
+  <li>Apply modifiers immediately after construction using fluent chaining rather than storing intermediate <code>Method</code> instances and modifying them later</li>
+  <li>Use <code>getReflector()</code> after construction to verify that the closure's parameter and return type signatures are as expected before composition</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Only accepts <code>Closure</code> instances — string callables, array callables, and invokable objects must be converted via <code>Closure::fromCallable()</code></li>
+  <li>The closure body is fixed at construction time — it cannot be replaced on the same <code>Method</code> instance; create a new instance to change the body</li>
+  <li>Variables captured via <code>use</code> are captured at construction time — changes to the original variable after construction are not reflected unless captured by reference with <code>&</code></li>
+  <li>Arrow functions (<code>fn() =></code>) are valid closures and can be passed to the constructor, but they implicitly capture by value and cannot use <code>$this</code> directly in all contexts</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Wrapping inline closures as the primary pattern for adding single-use method logic to a composition</li>
+  <li>Constructing reusable method descriptors from pre-defined closures shared across multiple definitions or patches</li>
+  <li>Converting existing named functions or static methods into composable <code>Method</code> instances via <code>Closure::fromCallable()</code></li>
+  <li>Capturing test fixtures, configuration values, or mock data into closures via <code>use</code> for use in patch and definition test scenarios</li>
+  <li>Verifying closure signatures and default modifier state via <code>getReflector()</code> immediately after construction</li>
+</ul>
+
+<p>
+  <code>Componere\Method::__construct()</code> is where behavior enters the
+  Componere composition pipeline. The single-argument design — accepting only
+  a <code>Closure</code> — keeps construction focused and unambiguous, while
+  the modifier methods that follow allow precise, fluent configuration of
+  how that behavior is exposed through the class interface. Every method
+  in every Componere composition, whether in a definition or a patch,
+  begins with this constructor call.
+</p>
+
 <h4 id="componere-method-setprivate">COMPONERE\METHOD::SETPRIVATE</h4>
 <h4 id="componere-method-setprotected">COMPONERE\METHOD::SETPROTECTED</h4>
 <h4 id="componere-method-setstatic">COMPONERE\METHOD::SETSTATIC</h4>
