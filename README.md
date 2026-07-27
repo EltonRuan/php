@@ -32416,6 +32416,328 @@ foreach ($patch->getClosures() as $name => $closure) {
 </p>
 
 <h4 id="componere-method-class">COMPONERE\METHOD CLASS</h4>
+<p>
+  <strong>Componere\Method</strong> is a value object that wraps a PHP
+  closure and its associated modifiers — visibility and static declaration —
+  into a single descriptor that can be passed to
+  <code>addMethod()</code> on both <code>Componere\Definition</code> and
+  <code>Componere\Patch</code>. It is the bridge between a raw PHP closure
+  and a fully qualified class method with a defined access level and
+  invocation context.
+</p>
+<p>
+  Every method added to a Componere composition must be wrapped in a
+  <code>Method</code> instance. This design separates the callable body
+  from its class membership attributes, allowing the same closure to be
+  reused across multiple compositions with different visibility or static
+  modifiers applied independently per use.
+</p>
+
+<h5>Class Synopsis</h5>
+<pre><code class="language-php">
+<?php
+namespace Componere;
+
+final class Method
+{
+    // Constructor
+    public function __construct(Closure $closure)
+
+    // Visibility modifiers — mutually exclusive
+    public function setPrivate(): Method
+    public function setProtected(): Method
+
+    // Static modifier
+    public function setStatic(): Method
+
+    // Introspection
+    public function getReflector(): \ReflectionMethod
+}
+?>
+</code></pre>
+
+<h5>Method Modifiers</h5>
+<ul>
+  <li>
+    <strong>setPrivate()</strong> – Marks the method as private; accessible
+    only from within the class itself; mutually exclusive with
+    <code>setProtected()</code>
+  </li>
+  <li>
+    <strong>setProtected()</strong> – Marks the method as protected;
+    accessible from within the class and its subclasses; mutually exclusive
+    with <code>setPrivate()</code>
+  </li>
+  <li>
+    <strong>setStatic()</strong> – Marks the method as static; callable
+    via <code>ClassName::method()</code> without an instance; can be
+    combined with either visibility modifier
+  </li>
+  <li>
+    <strong>getReflector()</strong> – Returns a <code>ReflectionMethod</code>
+    instance representing the method's current state — visibility, static
+    modifier, and parameter signatures — for introspection purposes
+  </li>
+</ul>
+
+<h5>Default Visibility</h5>
+<p>
+  A <code>Method</code> instance is <strong>public</strong> by default.
+  Calling neither <code>setPrivate()</code> nor <code>setProtected()</code>
+  produces a public method — consistent with PHP's own default behavior for
+  method declarations.
+</p>
+
+<h5>Basic Usage — Public Method (Default)</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('Greeter');
+
+// Public by default — no modifier needed
+$definition->addMethod('greet', new Method(function (string $name): string {
+    return 'Hello, ' . $name . '!';
+}));
+
+$definition->register();
+
+$greeter = new Greeter();
+echo $greeter->greet('World'); // Hello, World!
+?>
+</code></pre>
+
+<h5>Protected Method</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('BaseEntity');
+
+$definition
+    ->addMethod('validate', (new Method(function (): bool {
+        return !empty($this->name ?? '');
+    }))->setProtected())
+    ->addMethod('getName', new Method(function (): string {
+        // Public method calling the protected one
+        return $this->validate() ? ($this->name ?? '') : '[invalid]';
+    }));
+
+$definition->register();
+
+$entity       = new BaseEntity();
+$entity->name = 'Widget';
+
+echo $entity->getName(); // Widget
+// $entity->validate() would throw — protected method
+?>
+</code></pre>
+
+<h5>Private Method</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('PasswordHasher');
+
+$definition
+    ->addMethod('generateSalt', (new Method(function (): string {
+        return bin2hex(random_bytes(16));
+    }))->setPrivate())
+    ->addMethod('hash', new Method(function (string $password): string {
+        // Calls the private method internally
+        $salt = $this->generateSalt();
+        return hash('sha256', $password . $salt) . ':' . $salt;
+    }));
+
+$definition->register();
+
+$hasher = new PasswordHasher();
+echo $hasher->hash('secret123'); // a3f...hash...:salt
+// $hasher->generateSalt() would throw — private method
+?>
+</code></pre>
+
+<h5>Static Method</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('MathUtils');
+
+$definition
+    ->addProperty('pi', (new Value(3.14159))->setStatic())
+    ->addMethod('circleArea', (new Method(function (float $radius): float {
+        return self::$pi * $radius ** 2;
+    }))->setStatic())
+    ->addMethod('circumference', (new Method(function (float $radius): float {
+        return 2 * self::$pi * $radius;
+    }))->setStatic());
+
+$definition->register();
+
+echo MathUtils::circleArea(5);      // 78.53975
+echo MathUtils::circumference(5);   // 31.4159
+?>
+</code></pre>
+
+<h5>Combining Static and Protected</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('Registry');
+
+$definition
+    // Static protected — callable from subclasses, not from outside
+    ->addMethod('resolveKey', (new Method(function (string $key): string {
+        return strtolower(trim($key));
+    }))->setProtected()->setStatic())
+
+    // Static public — callable from anywhere
+    ->addMethod('normalize', (new Method(function (string $key): string {
+        return self::resolveKey($key);
+    }))->setStatic());
+
+$definition->register();
+
+echo Registry::normalize('  WIDGET_A  '); // widget_a
+?>
+</code></pre>
+
+<h5>Reusing a Closure Across Multiple Method Instances</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Patch;
+use Componere\Method;
+
+// The same closure can be wrapped in different Method instances
+// with different modifiers for different compositions
+
+$sharedClosure = function (string $input): string {
+    return strtolower(trim($input));
+};
+
+$definition = new Definition('Normalizer');
+$definition->addMethod('normalize', new Method($sharedClosure)); // public
+
+class LegacyFormatter
+{
+    public function format(string $s): string { return $s; }
+}
+
+$patch = new Patch(LegacyFormatter::class);
+$patch->addMethod('normalize', (new Method($sharedClosure))->setProtected()); // protected
+
+$definition->register();
+$patch->apply();
+
+$normalizer = new Normalizer();
+echo $normalizer->normalize('  Hello  '); // hello
+
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Introspecting a Method via getReflector()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$method = (new Method(function (int $a, int $b): int {
+    return $a + $b;
+}))->setProtected()->setStatic();
+
+$reflector = $method->getReflector();
+
+echo 'Is protected : ' . ($reflector->isProtected() ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Is static    : ' . ($reflector->isStatic()    ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Is public    : ' . ($reflector->isPublic()    ? 'yes' : 'no') . PHP_EOL; // no
+
+foreach ($reflector->getParameters() as $param) {
+    echo 'Param: ' . $param->getType() . ' $' . $param->getName() . PHP_EOL;
+}
+// Param: int $a
+// Param: int $b
+?>
+</code></pre>
+
+<h5>Method Class vs Raw Closure</h5>
+<ul>
+  <li>
+    <strong>Componere\Method</strong> – Carries both the closure body and
+    its class membership attributes (visibility, static modifier); required
+    by <code>addMethod()</code>; enables precise control over how the closure
+    behaves as a class method
+  </li>
+  <li>
+    <strong>Raw Closure</strong> – A standalone callable with no inherent
+    visibility or class membership; must be wrapped in a
+    <code>Method</code> instance before being added to a composition;
+    can be passed directly to the <code>Method</code> constructor and
+    reused across multiple <code>Method</code> instances with different
+    modifiers
+  </li>
+</ul>
+
+<h5>Modifier Chaining</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+// Modifiers return the Method instance — enabling fluent chaining
+$method = (new Method(function (): void {}))->setProtected()->setStatic();
+
+$reflector = $method->getReflector();
+echo $reflector->isProtected() ? 'protected' : '';  // protected
+echo $reflector->isStatic()    ? ' static'   : '';  // static
+?>
+</code></pre>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Apply the most restrictive visibility that satisfies the method's role — default to public only when external access is genuinely required</li>
+  <li>Use <code>setStatic()</code> only when the method genuinely requires no instance state — avoid making methods static merely for convenience</li>
+  <li>Declare explicit parameter and return types on closures passed to <code>Method</code> — this improves code readability and enables accurate reflection output via <code>getReflector()</code></li>
+  <li>Use <code>getReflector()</code> during development to verify that modifiers have been applied as intended before passing the <code>Method</code> to <code>addMethod()</code></li>
+  <li>Separate closure logic from modifier application — define the closure first, then wrap and modify, for cleaner and more readable composition code</li>
+  <li>Remember that <code>Method</code> is <code>final</code> — it cannot be extended; all behavioral customization must happen through the closure body and the available modifier methods</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li><code>Method</code> is declared <code>final</code> — it cannot be subclassed or extended</li>
+  <li>Visibility modifiers are mutually exclusive — calling both <code>setPrivate()</code> and <code>setProtected()</code> on the same instance will apply only the last one called</li>
+  <li>Once added to a <code>Definition</code> or <code>Patch</code>, the <code>Method</code> instance's modifiers cannot be changed — create a new instance if different modifiers are needed</li>
+  <li>PHP typed property declarations and promoted constructor parameters are not supported inside closures passed to <code>Method</code></li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Wrapping closures as public methods for the primary API surface of dynamically composed classes</li>
+  <li>Defining private helper methods that support the internal logic of a composed class without being exposed externally</li>
+  <li>Declaring static utility methods on runtime classes that do not require instance context</li>
+  <li>Combining protected and static modifiers for shared, subclass-accessible factory or resolution methods</li>
+  <li>Introspecting method configuration via <code>getReflector()</code> during development and test validation pipelines</li>
+</ul>
+
+<p>
+  <code>Componere\Method</code> is the fundamental unit of behavioral
+  composition in the Componere extension. By decoupling the closure body
+  from its class membership attributes, it enables the same logic to be
+  reused across multiple compositions with independent visibility and
+  static configurations — treating behavior as a portable, configurable
+  value rather than a fixed declaration. Every method in every Componere
+  composition begins here.
+</p>
+
 <h4 id="componere-method-construct">COMPONERE\METHOD::__CONSTRUCT</h4>
 <h4 id="componere-method-setprivate">COMPONERE\METHOD::SETPRIVATE</h4>
 <h4 id="componere-method-setprotected">COMPONERE\METHOD::SETPROTECTED</h4>
