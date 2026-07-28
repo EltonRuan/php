@@ -33092,6 +33092,277 @@ foreach ($reflector->getParameters() as $param) {
 </p>
 
 <h4 id="componere-method-setprivate">COMPONERE\METHOD::SETPRIVATE</h4>
+<p>
+  <strong>Componere\Method::setPrivate()</strong> is a modifier method that
+  marks a <code>Componere\Method</code> instance as private, restricting
+  access to the method to within the class body itself. Once applied, the
+  method behaves identically to a natively declared private method — it is
+  invisible to external callers, inaccessible to subclasses, and can only
+  be invoked by other methods within the same class.
+</p>
+<p>
+  Since <code>Componere\Method</code> instances are public by default,
+  <code>setPrivate()</code> must be called explicitly whenever a method
+  should be restricted to internal class use only. It returns the
+  <code>Method</code> instance, enabling fluent chaining with
+  <code>setStatic()</code> and direct inline passing to
+  <code>addMethod()</code>.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Method::setPrivate(): Componere\Method
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The internal visibility flag on the <code>Method</code> instance is set to private</li>
+  <li>Any previously set protected visibility is overridden</li>
+  <li>When the method is added to a definition or patch and registered or applied, the Zend Engine enforces private access semantics</li>
+  <li>The method instance is returned, enabling fluent chaining</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('UserAccount');
+
+$definition
+    ->addMethod('generateToken', (new Method(function (): string {
+        return bin2hex(random_bytes(32));
+    }))->setPrivate())
+    ->addMethod('getToken', new Method(function (): string {
+        // Calls the private method internally
+        return $this->generateToken();
+    }));
+
+$definition->register();
+
+$account = new UserAccount();
+
+echo $account->getToken(); // Returns a 64-character hex token
+
+// $account->generateToken() would throw a fatal error — private method
+?>
+</code></pre>
+
+<h5>Fluent Chaining with setStatic()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('ConfigLoader');
+
+$definition
+    // Private static — internal helper, no instance required
+    ->addMethod('parseLine', (new Method(function (string $line): array {
+        [$key, $value] = explode('=', $line, 2);
+        return [trim($key) => trim($value)];
+    }))->setPrivate()->setStatic())
+
+    // Public static — exposes result of private helper
+    ->addMethod('parse', (new Method(function (string $raw): array {
+        $lines  = array_filter(array_map('trim', explode("\n", $raw)));
+        $result = [];
+
+        foreach ($lines as $line) {
+            if (str_starts_with($line, '#') || !str_contains($line, '=')) {
+                continue;
+            }
+            $result = array_merge($result, self::parseLine($line));
+        }
+
+        return $result;
+    }))->setStatic());
+
+$definition->register();
+
+$config = ConfigLoader::parse("
+    # App configuration
+    APP_NAME=MyApp
+    APP_ENV=production
+    DEBUG=false
+");
+
+print_r($config);
+// ['APP_NAME' => 'MyApp', 'APP_ENV' => 'production', 'DEBUG' => 'false']
+?>
+</code></pre>
+
+<h5>Private Method for Internal Validation</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('BankTransfer');
+
+$definition
+    ->addProperty('amount',    new Value(0.0))
+    ->addProperty('recipient', new Value(''))
+
+    // Private validation helpers
+    ->addMethod('isValidAmount', (new Method(function (): bool {
+        return $this->amount > 0 && $this->amount <= 10000;
+    }))->setPrivate())
+    ->addMethod('isValidRecipient', (new Method(function (): bool {
+        return !empty($this->recipient) && strlen($this->recipient) >= 3;
+    }))->setPrivate())
+
+    // Public interface that uses private helpers
+    ->addMethod('execute', new Method(function (): array {
+        if (!$this->isValidAmount()) {
+            return ['success' => false, 'error' => 'Invalid amount'];
+        }
+
+        if (!$this->isValidRecipient()) {
+            return ['success' => false, 'error' => 'Invalid recipient'];
+        }
+
+        return ['success' => true, 'transferred' => $this->amount];
+    }));
+
+$definition->register();
+
+$transfer            = new BankTransfer();
+$transfer->amount    = 500.0;
+$transfer->recipient = 'Alice';
+
+print_r($transfer->execute()); // ['success' => true, 'transferred' => 500.0]
+?>
+</code></pre>
+
+<h5>Verifying Private Visibility via getReflector()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$method    = (new Method(function (): void {}))->setPrivate();
+$reflector = $method->getReflector();
+
+echo 'Is private   : ' . ($reflector->isPrivate()   ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Is protected : ' . ($reflector->isProtected() ? 'yes' : 'no') . PHP_EOL; // no
+echo 'Is public    : ' . ($reflector->isPublic()    ? 'yes' : 'no') . PHP_EOL; // no
+?>
+</code></pre>
+
+<h5>Overriding setProtected() with setPrivate()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+// Visibility modifiers override each other — last one wins
+$method = (new Method(function (): void {}))
+    ->setProtected() // Protected first
+    ->setPrivate();  // Overrides to private
+
+$reflector = $method->getReflector();
+echo $reflector->isPrivate()   ? 'private'   : ''; // private
+echo $reflector->isProtected() ? 'protected' : ''; // (empty)
+?>
+</code></pre>
+
+<h5>Private Methods in Patches</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class ReportService
+{
+    public function generate(array $data): string
+    {
+        return implode(',', $data);
+    }
+}
+
+$patch = new Patch(ReportService::class);
+
+$patch
+    // Private helper — used internally by the patched generate()
+    ->addMethod('sanitize', (new Method(function (array $data): array {
+        return array_map('htmlspecialchars', $data);
+    }))->setPrivate())
+
+    // Public override — calls the private helper
+    ->addMethod('generate', new Method(function (array $data): string {
+        $clean = $this->sanitize($data);
+        return '[PATCHED] ' . implode(',', $clean);
+    }));
+
+$patch->apply();
+
+$service = new ReportService();
+echo $service->generate(['<b>bold</b>', 'normal', '<script>xss</script>']);
+// [PATCHED] &lt;b&gt;bold&lt;/b&gt;,normal,&lt;script&gt;xss&lt;/script&gt;
+
+// $service->sanitize() would throw — private method
+$patch->revert();
+?>
+</code></pre>
+
+<h5>setPrivate() vs setProtected()</h5>
+<ul>
+  <li>
+    <strong>setPrivate()</strong> – Restricts access to the class body
+    itself only; subclasses cannot access the method; the most restrictive
+    visibility level; appropriate for implementation details that should
+    never be overridden or accessed externally
+  </li>
+  <li>
+    <strong>setProtected()</strong> – Restricts external access but permits
+    access from within the class and any subclasses; appropriate for methods
+    intended to support subclass extension or template method patterns
+  </li>
+  <li>
+    <strong>Default (public)</strong> – No restriction; accessible from
+    anywhere; appropriate for the public API surface of the class
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Apply <code>setPrivate()</code> to any method that is purely an internal implementation detail — encapsulation principles apply equally to dynamically composed classes</li>
+  <li>Use <code>getReflector()</code> immediately after calling <code>setPrivate()</code> to confirm the visibility has been set as intended before adding the method to a composition</li>
+  <li>Prefer <code>setPrivate()</code> over <code>setProtected()</code> when there is no intent for subclasses to access or override the method — default to the most restrictive visibility that satisfies the design</li>
+  <li>Chain <code>setPrivate()</code> and <code>setStatic()</code> for internal class-level utility methods that operate on class-wide state without requiring an instance</li>
+  <li>Document private methods in composition code with comments — since they are invisible to IDEs and static analysis tools, their existence and purpose must be communicated through code annotations</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Private methods added via Componere are invisible to static analysis tools and IDEs — calls to them from within other closures in the same composition will appear as unresolved method calls</li>
+  <li>Once added to a definition or patch, the visibility of a method cannot be changed — create a new <code>Method</code> instance with the desired modifier if a change is needed</li>
+  <li>Calling <code>setPrivate()</code> after <code>setProtected()</code> overrides the protected visibility — the last modifier called always wins</li>
+  <li>Private methods in a <code>Patch</code> are subject to the same revert semantics as all patch members — they are removed when <code>revert()</code> is called</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Defining internal helper methods that support the logic of public methods without being exposed as part of the class API</li>
+  <li>Encapsulating validation, parsing, sanitization, or transformation logic as private methods called by the public interface</li>
+  <li>Hiding implementation details of dynamically generated classes from external consumers</li>
+  <li>Creating private static factory or resolution methods for internal use by other static methods on the class</li>
+  <li>Adding private helper methods to a patch for use by other patched methods without exposing them to the outside world</li>
+</ul>
+
+<p>
+  <code>Componere\Method::setPrivate()</code> brings proper encapsulation to
+  dynamically composed classes. By restricting a method's visibility to the
+  class body itself, it enforces the same separation between public API and
+  internal implementation that characterizes well-designed statically declared
+  classes — ensuring that the power to compose classes at runtime does not
+  come at the cost of the discipline that makes those classes maintainable
+  and predictable.
+</p>
+
 <h4 id="componere-method-setprotected">COMPONERE\METHOD::SETPROTECTED</h4>
 <h4 id="componere-method-setstatic">COMPONERE\METHOD::SETSTATIC</h4>
 <h4 id="componere-method-getreflector">COMPONERE\METHOD::GETREFLECTOR</h4>
