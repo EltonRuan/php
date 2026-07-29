@@ -33364,6 +33364,315 @@ $patch->revert();
 </p>
 
 <h4 id="componere-method-setprotected">COMPONERE\METHOD::SETPROTECTED</h4>
+<p>
+  <strong>Componere\Method::setProtected()</strong> is a modifier method
+  that marks a <code>Componere\Method</code> instance as protected,
+  restricting access to the class body itself and any subclasses while
+  preventing direct invocation from external code. It occupies the middle
+  ground between public and private visibility — more restrictive than
+  public, but more permissive than private in that subclasses retain access.
+</p>
+<p>
+  Since <code>Componere\Method</code> instances are public by default,
+  <code>setProtected()</code> must be called explicitly whenever a method
+  should be accessible to the class hierarchy but hidden from external
+  consumers. It returns the <code>Method</code> instance, enabling fluent
+  chaining with <code>setStatic()</code> and direct inline passing to
+  <code>addMethod()</code>.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Method::setProtected(): Componere\Method
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The internal visibility flag on the <code>Method</code> instance is set to protected</li>
+  <li>Any previously set private visibility is overridden</li>
+  <li>When the method is added to a definition or patch and registered or applied, the Zend Engine enforces protected access semantics</li>
+  <li>The method instance is returned, enabling fluent chaining</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('BaseModel');
+
+$definition
+    ->addProperty('attributes', new Value([]))
+
+    // Protected — accessible within class and subclasses
+    ->addMethod('getAttribute', (new Method(function (string $key): mixed {
+        return $this->attributes[$key] ?? null;
+    }))->setProtected())
+    ->addMethod('setAttribute', (new Method(function (string $key, mixed $value): void {
+        $this->attributes[$key] = $value;
+    }))->setProtected())
+
+    // Public — exposes a safe read-only interface
+    ->addMethod('toArray', new Method(function (): array {
+        return $this->attributes;
+    }));
+
+$definition->register();
+
+$model = new BaseModel();
+
+// Public method is accessible
+$model->toArray(); // []
+
+// Protected methods are not accessible externally
+// $model->getAttribute('key') would throw a fatal error
+?>
+</code></pre>
+
+<h5>Template Method Pattern</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+// Template method pattern — public method orchestrates protected steps
+$definition = new Definition('DataImporter');
+
+$definition
+    ->addProperty('data', new Value([]))
+
+    // Protected steps — override points for subclasses
+    ->addMethod('validate', (new Method(function (array $row): bool {
+        return !empty($row['id']) && !empty($row['name']);
+    }))->setProtected())
+    ->addMethod('transform', (new Method(function (array $row): array {
+        return [
+            'id'   => (int) $row['id'],
+            'name' => trim($row['name']),
+        ];
+    }))->setProtected())
+    ->addMethod('persist', (new Method(function (array $row): void {
+        $this->data[] = $row;
+    }))->setProtected())
+
+    // Public orchestration method — the template
+    ->addMethod('import', new Method(function (array $rows): int {
+        $imported = 0;
+
+        foreach ($rows as $row) {
+            if (!$this->validate($row)) {
+                continue;
+            }
+
+            $this->persist($this->transform($row));
+            $imported++;
+        }
+
+        return $imported;
+    }))
+    ->addMethod('getData', new Method(function (): array {
+        return $this->data;
+    }));
+
+$definition->register();
+
+$importer = new DataImporter();
+$count    = $importer->import([
+    ['id' => '1',  'name' => '  Alice  '],
+    ['id' => '',   'name' => 'Invalid'],
+    ['id' => '2',  'name' => '  Bob  '],
+]);
+
+echo 'Imported: ' . $count . PHP_EOL; // Imported: 2
+print_r($importer->getData());
+// [['id' => 1, 'name' => 'Alice'], ['id' => 2, 'name' => 'Bob']]
+?>
+</code></pre>
+
+<h5>Fluent Chaining with setStatic()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('ServiceLocator');
+
+$definition
+    ->addProperty('registry', (new Value([]))->setStatic())
+
+    // Protected static — accessible to subclasses, hidden externally
+    ->addMethod('resolve', (new Method(function (string $key): mixed {
+        return self::$registry[$key] ?? null;
+    }))->setProtected()->setStatic())
+
+    // Public static — exposes registration
+    ->addMethod('register', (new Method(function (string $key, mixed $service): void {
+        self::$registry[$key] = $service;
+    }))->setStatic())
+
+    // Public instance — uses protected static resolver internally
+    ->addMethod('get', new Method(function (string $key): mixed {
+        return self::resolve($key);
+    }));
+
+$definition->register();
+
+ServiceLocator::register('mailer', new stdClass());
+
+$locator = new ServiceLocator();
+$service = $locator->get('mailer');
+
+var_dump($service instanceof stdClass); // bool(true)
+
+// ServiceLocator::resolve() is not directly accessible — protected
+?>
+</code></pre>
+
+<h5>Protected Methods in Patches</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class QueryBuilder
+{
+    public function build(array $conditions): string
+    {
+        return 'SELECT * FROM table WHERE 1=1';
+    }
+}
+
+$patch = new Patch(QueryBuilder::class);
+
+$patch
+    // Protected helper — builds individual condition clauses
+    ->addMethod('buildClause', (new Method(function (string $key, mixed $value): string {
+        return sprintf("AND %s = '%s'", $key, addslashes((string) $value));
+    }))->setProtected())
+
+    // Public override — uses the protected helper
+    ->addMethod('build', new Method(function (array $conditions): string {
+        $sql = 'SELECT * FROM table WHERE 1=1';
+
+        foreach ($conditions as $key => $value) {
+            $sql .= ' ' . $this->buildClause($key, $value);
+        }
+
+        return $sql;
+    }));
+
+$patch->apply();
+
+$builder = new QueryBuilder();
+echo $builder->build(['status' => 'active', 'role' => 'admin']);
+// SELECT * FROM table WHERE 1=1 AND status = 'active' AND role = 'admin'
+
+// $builder->buildClause() would throw — protected method
+$patch->revert();
+?>
+</code></pre>
+
+<h5>Verifying Protected Visibility via getReflector()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$method    = (new Method(function (): void {}))->setProtected();
+$reflector = $method->getReflector();
+
+echo 'Is protected : ' . ($reflector->isProtected() ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Is private   : ' . ($reflector->isPrivate()   ? 'yes' : 'no') . PHP_EOL; // no
+echo 'Is public    : ' . ($reflector->isPublic()    ? 'yes' : 'no') . PHP_EOL; // no
+
+// Chained with setStatic()
+$staticProtected = (new Method(function (): void {}))->setProtected()->setStatic();
+$ref             = $staticProtected->getReflector();
+
+echo 'Is protected : ' . ($ref->isProtected() ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Is static    : ' . ($ref->isStatic()    ? 'yes' : 'no') . PHP_EOL; // yes
+?>
+</code></pre>
+
+<h5>Overriding setPrivate() with setProtected()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+// Visibility modifiers override each other — last one wins
+$method = (new Method(function (): void {}))
+    ->setPrivate()    // Private first
+    ->setProtected(); // Overrides to protected
+
+$reflector = $method->getReflector();
+echo $reflector->isProtected() ? 'protected' : ''; // protected
+echo $reflector->isPrivate()   ? 'private'   : ''; // (empty)
+?>
+</code></pre>
+
+<h5>setProtected() vs setPrivate()</h5>
+<ul>
+  <li>
+    <strong>setProtected()</strong> – Restricts external access while
+    preserving access for the class itself and all subclasses; appropriate
+    when a method serves as an override point, a shared helper, or a
+    template method step that subclasses may need to call or redefine
+  </li>
+  <li>
+    <strong>setPrivate()</strong> – Restricts access to the class body only;
+    subclasses cannot access or override the method; appropriate for
+    internal implementation details that should remain entirely encapsulated
+    within the class
+  </li>
+  <li>
+    <strong>Default (public)</strong> – No restriction; accessible from
+    anywhere including external code, subclasses, and the class itself;
+    appropriate for the class's public API surface
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Use <code>setProtected()</code> when a method is intended as a shared helper or override point for subclasses — prefer <code>setPrivate()</code> when subclass access is not needed</li>
+  <li>Apply the template method pattern deliberately — define the public orchestration method, mark the individual steps as protected, and document the expected override contract clearly</li>
+  <li>Use <code>getReflector()</code> immediately after calling <code>setProtected()</code> to confirm the visibility before adding the method to a composition</li>
+  <li>Chain <code>setProtected()</code> with <code>setStatic()</code> for shared class-level helpers that should be accessible to subclasses but hidden from external callers</li>
+  <li>Document protected methods in composition code — they are invisible to IDEs and static analysis tools, so their role as override points or shared helpers must be communicated through comments or architecture documentation</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Protected methods added via Componere are invisible to static analysis tools and IDEs — subclass access and override patterns will not be reflected in type checking or autocompletion</li>
+  <li>Once added to a definition or patch, the visibility cannot be changed — create a new <code>Method</code> instance with the desired modifier if a change is needed</li>
+  <li>Calling <code>setProtected()</code> after <code>setPrivate()</code> overrides the private visibility — the last modifier called always wins</li>
+  <li>Protected methods in a <code>Patch</code> are subject to revert semantics — they are removed along with all other patch members when <code>revert()</code> is called</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Defining template method steps that subclasses are expected to call or override</li>
+  <li>Encapsulating shared helper logic accessible to the class hierarchy but hidden from external consumers</li>
+  <li>Building protected static factory or resolution methods used by both instance and static public methods</li>
+  <li>Restricting low-level database, file, or network access methods while allowing subclasses to invoke them through a controlled interface</li>
+  <li>Adding protected helper methods to a patch that support the logic of patched public methods without exposing them externally</li>
+</ul>
+
+<p>
+  <code>Componere\Method::setProtected()</code> enables the full spectrum of
+  PHP's visibility model in dynamically composed classes. By marking a method
+  as protected, it communicates both a restriction — external code may not
+  call this — and an invitation — subclasses are welcome to use and override
+  this. In compositions that model inheritance hierarchies, template method
+  patterns, or layered access control, <code>setProtected()</code> is the
+  precise visibility tool that makes those architectural intentions explicit
+  and enforceable at the Zend Engine level.
+</p>
+
 <h4 id="componere-method-setstatic">COMPONERE\METHOD::SETSTATIC</h4>
 <h4 id="componere-method-getreflector">COMPONERE\METHOD::GETREFLECTOR</h4>
 
