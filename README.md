@@ -33674,6 +33674,336 @@ echo $reflector->isPrivate()   ? 'private'   : ''; // (empty)
 </p>
 
 <h4 id="componere-method-setstatic">COMPONERE\METHOD::SETSTATIC</h4>
+<p>
+  <strong>Componere\Method::setStatic()</strong> is a modifier method that
+  marks a <code>Componere\Method</code> instance as static, making it
+  callable on the class itself rather than requiring an object instance.
+  A static method has no access to <code>$this</code> — it operates
+  entirely at the class level, working with static properties, constants,
+  and other static methods via <code>self::</code>, <code>static::</code>,
+  or <code>parent::</code>.
+</p>
+<p>
+  Unlike the visibility modifiers <code>setPrivate()</code> and
+  <code>setProtected()</code>, which are mutually exclusive,
+  <code>setStatic()</code> is orthogonal to visibility — it can be freely
+  combined with the default public visibility or with either visibility
+  modifier to produce public static, protected static, or private static
+  methods. It returns the <code>Method</code> instance, enabling fluent
+  chaining with visibility modifiers and direct inline passing to
+  <code>addMethod()</code>.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Method::setStatic(): Componere\Method
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The internal static flag on the <code>Method</code> instance is set to true</li>
+  <li>When added to a definition or patch and registered or applied, the Zend Engine enforces static invocation semantics</li>
+  <li><code>$this</code> is not available inside the closure body of a static method — attempting to use it will throw a fatal error</li>
+  <li>The method is callable via <code>ClassName::method()</code> as well as on instances, consistent with PHP's native static method behavior</li>
+  <li>The method instance is returned, enabling fluent chaining with visibility modifiers</li>
+</ol>
+
+<h5>Basic Usage — Public Static (Default Visibility)</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+$definition = new Definition('StringHelper');
+
+$definition
+    ->addMethod('slugify', (new Method(function (string $text): string {
+        return strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $text), '-'));
+    }))->setStatic())
+    ->addMethod('truncate', (new Method(function (string $text, int $length = 100): string {
+        return strlen($text) > $length ? substr($text, 0, $length) . '...' : $text;
+    }))->setStatic())
+    ->addMethod('wordCount', (new Method(function (string $text): int {
+        return str_word_count($text);
+    }))->setStatic());
+
+$definition->register();
+
+// Callable on the class directly
+echo StringHelper::slugify('Hello World! This is PHP.');  // hello-world-this-is-php
+echo StringHelper::truncate('A very long string here', 10); // A very lon...
+echo StringHelper::wordCount('The quick brown fox');         // 4
+?>
+</code></pre>
+
+<h5>Protected Static</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('AbstractFactory');
+
+$definition
+    ->addProperty('instances', (new Value([]))->setStatic())
+
+    // Protected static — shared resolution logic, hidden from external callers
+    ->addMethod('resolveKey', (new Method(function (string $class): string {
+        return ltrim(strtolower(preg_replace('/[A-Z]/', '_$0', $class)), '_');
+    }))->setProtected()->setStatic())
+
+    // Public static — uses the protected resolver
+    ->addMethod('create', (new Method(function (string $class): object {
+        $key = self::resolveKey($class);
+
+        if (!isset(self::$instances[$key])) {
+            self::$instances[$key] = new $class();
+        }
+
+        return self::$instances[$key];
+    }))->setStatic())
+
+    // Public static — exposes instance count
+    ->addMethod('count', (new Method(function (): int {
+        return count(self::$instances);
+    }))->setStatic());
+
+$definition->register();
+
+$a = AbstractFactory::create(stdClass::class);
+$b = AbstractFactory::create(stdClass::class);
+
+var_dump($a === $b);             // bool(true) — same instance
+echo AbstractFactory::count();   // 1
+?>
+</code></pre>
+
+<h5>Private Static</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('IdGenerator');
+
+$definition
+    ->addProperty('counter', (new Value(0))->setStatic())
+
+    // Private static — internal counter management
+    ->addMethod('incrementCounter', (new Method(function (): void {
+        self::$counter++;
+    }))->setPrivate()->setStatic())
+    ->addMethod('getCounter', (new Method(function (): int {
+        return self::$counter;
+    }))->setPrivate()->setStatic())
+
+    // Public static — exposes generated ID only
+    ->addMethod('generate', (new Method(function (string $prefix = 'id'): string {
+        self::incrementCounter();
+        return $prefix . '_' . self::getCounter() . '_' . bin2hex(random_bytes(4));
+    }))->setStatic());
+
+$definition->register();
+
+echo IdGenerator::generate('user');    // user_1_a3f4b2c1
+echo IdGenerator::generate('order');   // order_2_d5e6f7a8
+echo IdGenerator::generate();          // id_3_b1c2d3e4
+
+// IdGenerator::incrementCounter() — not accessible, private static
+// IdGenerator::getCounter()       — not accessible, private static
+?>
+</code></pre>
+
+<h5>Combining All Three Combinations</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('CacheManager');
+
+$definition
+    ->addProperty('store',      (new Value([]))->setStatic())
+    ->addProperty('hitCount',   (new Value(0))->setStatic())
+    ->addProperty('missCount',  (new Value(0))->setStatic())
+
+    // Private static — internal state management
+    ->addMethod('recordHit',  (new Method(function (): void { self::$hitCount++;  }))->setPrivate()->setStatic())
+    ->addMethod('recordMiss', (new Method(function (): void { self::$missCount++; }))->setPrivate()->setStatic())
+
+    // Protected static — accessible to subclasses
+    ->addMethod('buildKey', (new Method(function (string $namespace, string $id): string {
+        return $namespace . ':' . $id;
+    }))->setProtected()->setStatic())
+
+    // Public static — external API
+    ->addMethod('get', (new Method(function (string $namespace, string $id): mixed {
+        $key = self::buildKey($namespace, $id);
+
+        if (isset(self::$store[$key])) {
+            self::recordHit();
+            return self::$store[$key];
+        }
+
+        self::recordMiss();
+        return null;
+    }))->setStatic())
+    ->addMethod('set', (new Method(function (string $namespace, string $id, mixed $value): void {
+        self::$store[self::buildKey($namespace, $id)] = $value;
+    }))->setStatic())
+    ->addMethod('stats', (new Method(function (): array {
+        return ['hits' => self::$hitCount, 'misses' => self::$missCount];
+    }))->setStatic());
+
+$definition->register();
+
+CacheManager::set('user',    '42', ['name' => 'Alice']);
+CacheManager::set('product', '1',  ['name' => 'Widget']);
+
+CacheManager::get('user', '42');    // Hit
+CacheManager::get('user', '99');    // Miss
+CacheManager::get('product', '1'); // Hit
+
+print_r(CacheManager::stats()); // ['hits' => 2, 'misses' => 1]
+?>
+</code></pre>
+
+<h5>setStatic() in Patches</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Patch;
+use Componere\Method;
+
+class DateHelper
+{
+    public static function now(): string
+    {
+        return date('Y-m-d H:i:s');
+    }
+
+    public static function today(): string
+    {
+        return date('Y-m-d');
+    }
+}
+
+$patch = new Patch(DateHelper::class);
+
+// Override static methods with static patch methods
+$patch
+    ->addMethod('now', (new Method(function (): string {
+        return '2026-01-01 00:00:00'; // Fixed time for testing
+    }))->setStatic())
+    ->addMethod('today', (new Method(function (): string {
+        return '2026-01-01'; // Fixed date for testing
+    }))->setStatic());
+
+$patch->apply();
+
+echo DateHelper::now();   // 2026-01-01 00:00:00
+echo DateHelper::today(); // 2026-01-01
+
+$patch->revert();
+
+// Back to real time
+echo DateHelper::now(); // Current datetime
+?>
+</code></pre>
+
+<h5>Verifying Static Declaration via getReflector()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+// Public static
+$publicStatic = (new Method(function (): void {}))->setStatic();
+$ref          = $publicStatic->getReflector();
+echo 'public: '    . ($ref->isPublic()    ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'static: '    . ($ref->isStatic()    ? 'yes' : 'no') . PHP_EOL; // yes
+
+// Protected static
+$protectedStatic = (new Method(function (): void {}))->setProtected()->setStatic();
+$ref             = $protectedStatic->getReflector();
+echo 'protected: ' . ($ref->isProtected() ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'static: '    . ($ref->isStatic()    ? 'yes' : 'no') . PHP_EOL; // yes
+
+// Private static
+$privateStatic = (new Method(function (): void {}))->setPrivate()->setStatic();
+$ref           = $privateStatic->getReflector();
+echo 'private: '   . ($ref->isPrivate()   ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'static: '    . ($ref->isStatic()    ? 'yes' : 'no') . PHP_EOL; // yes
+?>
+</code></pre>
+
+<h5>setStatic() vs Instance Methods</h5>
+<ul>
+  <li>
+    <strong>setStatic()</strong> – Method belongs to the class, not an
+    instance; no access to <code>$this</code>; callable via
+    <code>ClassName::method()</code>; appropriate for utility functions,
+    factory methods, and class-level state management
+  </li>
+  <li>
+    <strong>Instance method (default)</strong> – Method belongs to an
+    instance; has full access to <code>$this</code> and instance state;
+    callable only on an object; appropriate for behavior that depends on
+    or modifies per-instance state
+  </li>
+</ul>
+
+<h5>Modifier Combination Reference</h5>
+<ul>
+  <li><strong>setStatic()</strong> alone → public static</li>
+  <li><strong>setProtected()->setStatic()</strong> → protected static</li>
+  <li><strong>setPrivate()->setStatic()</strong> → private static</li>
+  <li><strong>setStatic()->setProtected()</strong> → protected static (order does not matter)</li>
+  <li><strong>setStatic()->setPrivate()</strong> → private static (order does not matter)</li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Only use <code>setStatic()</code> when the method genuinely has no dependency on instance state — avoid static methods as a shortcut to avoid passing dependencies</li>
+  <li>Never reference <code>$this</code> inside the closure body of a static method — it will cause a fatal error at invocation time</li>
+  <li>Use <code>self::</code> for class-level access to static properties and other static methods within the closure body</li>
+  <li>Combine with <code>setProtected()</code> for internal class-level helpers that subclasses may need but external code should not call</li>
+  <li>Combine with <code>setPrivate()</code> for internal implementation details that should remain entirely encapsulated within the class at the static level</li>
+  <li>Use <code>getReflector()</code> to verify both the static flag and the visibility modifier have been applied correctly before adding the method to a composition</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Using <code>$this</code> inside a static method closure will throw a fatal error at invocation time — not at composition or registration time</li>
+  <li>Static methods added via Componere are invisible to static analysis tools and IDEs — <code>ClassName::method()</code> calls will produce unresolved symbol warnings</li>
+  <li>Late static binding via <code>static::</code> behaves according to the class the method is called on, consistent with PHP's native late static binding semantics</li>
+  <li>Once added to a definition or patch, the static flag cannot be changed — create a new <code>Method</code> instance if a different declaration is needed</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Defining utility and transformation methods on dynamically composed helper or service classes</li>
+  <li>Building factory methods and singleton accessors that operate at the class level without requiring an instance</li>
+  <li>Managing shared class-level state such as counters, registries, and caches via static properties and static methods</li>
+  <li>Overriding existing static methods in patches for testing time-dependent, random, or external-call-dependent behavior</li>
+  <li>Defining protected static helpers that provide shared resolution or construction logic accessible to the class hierarchy</li>
+</ul>
+
+<p>
+  <code>Componere\Method::setStatic()</code> completes the modifier set
+  of <code>Componere\Method</code> by introducing the class-versus-instance
+  dimension to the visibility axis. Its orthogonality to visibility modifiers
+  — combinable freely with public, protected, or private — mirrors PHP's own
+  native method declaration model exactly, ensuring that dynamically composed
+  methods carry the same expressive range as their statically declared
+  counterparts. Used with discipline and clear intent, it enables well-structured
+  class-level behavior in Componere compositions without sacrificing the
+  encapsulation principles that make classes maintainable.
+</p>
+
 <h4 id="componere-method-getreflector">COMPONERE\METHOD::GETREFLECTOR</h4>
 
 <h4 id="componere-value-class">COMPONERE\VALUE CLASS</h4>
