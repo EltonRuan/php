@@ -34005,6 +34005,343 @@ echo 'static: '    . ($ref->isStatic()    ? 'yes' : 'no') . PHP_EOL; // yes
 </p>
 
 <h4 id="componere-method-getreflector">COMPONERE\METHOD::GETREFLECTOR</h4>
+<p>
+  <strong>Componere\Method::getReflector()</strong> is an introspection method
+  that returns a <code>ReflectionMethod</code> instance representing the
+  current state of the <code>Componere\Method</code> object — its visibility
+  modifier, static declaration, and the parameter signatures and return type
+  of its underlying closure. It provides a standard PHP reflection interface
+  over the method descriptor before it is added to any composition, enabling
+  verification, debugging, and documentation of individual method
+  configurations independently of the class they will be composed into.
+</p>
+<p>
+  Unlike calling <code>ReflectionClass::getMethod()</code> on an already
+  registered class, <code>Componere\Method::getReflector()</code> operates
+  on the <code>Method</code> object itself — before it has been added to a
+  definition or patch, and long before any class registration or patch
+  application has occurred. This makes it the earliest possible introspection
+  point in the Componere composition pipeline.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Method::getReflector(): ReflectionMethod
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>Returns a <code>ReflectionMethod</code> instance bound to the current state of the <code>Method</code> object</li>
+  <li>Visibility (public, protected, private) is reflected accurately based on any modifiers applied before the call</li>
+  <li>Static declaration is reflected accurately based on whether <code>setStatic()</code> has been called</li>
+  <li>Parameter types, names, default values, and the return type of the underlying closure are fully inspectable</li>
+  <li>Has no side effects — purely a read operation that does not alter the method's state</li>
+  <li>Can be called at any point after construction, before or after modifier application</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$method    = new Method(function (string $name, int $age = 0): bool {
+    return strlen($name) > 0 && $age >= 0;
+});
+
+$reflector = $method->getReflector();
+
+echo 'Is public  : ' . ($reflector->isPublic()  ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Is static  : ' . ($reflector->isStatic()  ? 'yes' : 'no') . PHP_EOL; // no
+echo 'Parameters : ' . $reflector->getNumberOfParameters()       . PHP_EOL; // 2
+echo 'Return type: ' . $reflector->getReturnType()               . PHP_EOL; // bool
+?>
+</code></pre>
+
+<h5>Inspecting After Modifier Application</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$method = (new Method(function (float $amount): string {
+    return '$' . number_format($amount, 2);
+}))->setProtected()->setStatic();
+
+$reflector = $method->getReflector();
+
+echo 'Is public    : ' . ($reflector->isPublic()    ? 'yes' : 'no') . PHP_EOL; // no
+echo 'Is protected : ' . ($reflector->isProtected() ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Is private   : ' . ($reflector->isPrivate()   ? 'yes' : 'no') . PHP_EOL; // no
+echo 'Is static    : ' . ($reflector->isStatic()    ? 'yes' : 'no') . PHP_EOL; // yes
+?>
+</code></pre>
+
+<h5>Inspecting Parameter Signatures</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$method    = new Method(function (
+    int     $id,
+    string  $name,
+    bool    $active   = true,
+    ?string $nickname = null,
+    array   $tags     = []
+): array {
+    return compact('id', 'name', 'active', 'nickname', 'tags');
+});
+
+$reflector = $method->getReflector();
+
+foreach ($reflector->getParameters() as $param) {
+    $type     = $param->getType() ?? 'mixed';
+    $optional = $param->isOptional();
+    $default  = $optional ? var_export($param->getDefaultValue(), true) : 'required';
+
+    echo sprintf(
+        '%-12s | type: %-10s | optional: %-5s | default: %s',
+        '$' . $param->getName(),
+        $type,
+        $optional ? 'yes' : 'no',
+        $default
+    ) . PHP_EOL;
+}
+
+// $id         | type: int        | optional: no    | default: required
+// $name       | type: string     | optional: no    | default: required
+// $active     | type: bool       | optional: yes   | default: true
+// $nickname   | type: ?string    | optional: yes   | default: NULL
+// $tags       | type: array      | optional: yes   | default: array ()
+?>
+</code></pre>
+
+<h5>Inspecting Return Types</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$methods = [
+    'getInt'    => new Method(function (): int     { return 0; }),
+    'getString' => new Method(function (): string  { return ''; }),
+    'getBool'   => new Method(function (): bool    { return false; }),
+    'getArray'  => new Method(function (): array   { return []; }),
+    'getVoid'   => new Method(function (): void    {}),
+    'getNull'   => new Method(function (): ?string { return null; }),
+    'getMixed'  => new Method(function ()          { return null; }), // No return type
+];
+
+foreach ($methods as $name => $method) {
+    $returnType = $method->getReflector()->getReturnType();
+    echo $name . ': ' . ($returnType ?? 'none declared') . PHP_EOL;
+}
+
+// getInt:    int
+// getString: string
+// getBool:   bool
+// getArray:  array
+// getVoid:   void
+// getNull:   ?string
+// getMixed:  none declared
+?>
+</code></pre>
+
+<h5>Practical Pattern — Pre-Composition Validation</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+interface Transformable
+{
+    public function transform(array $input): array;
+    public function validate(array $input): bool;
+}
+
+function validateMethodSignature(
+    Method $method,
+    string $expectedReturn,
+    int    $expectedParams
+): bool {
+    $reflector    = $method->getReflector();
+    $returnType   = (string) ($reflector->getReturnType() ?? '');
+    $paramCount   = $reflector->getNumberOfParameters();
+
+    if ($returnType !== $expectedReturn) {
+        echo "[WARN] Expected return type '{$expectedReturn}', got '{$returnType}'" . PHP_EOL;
+        return false;
+    }
+
+    if ($paramCount !== $expectedParams) {
+        echo "[WARN] Expected {$expectedParams} parameter(s), got {$paramCount}" . PHP_EOL;
+        return false;
+    }
+
+    return true;
+}
+
+$transformMethod = new Method(function (array $input): array {
+    return array_map('strtolower', $input);
+});
+
+$validateMethod = new Method(function (array $input): bool {
+    return !empty($input);
+});
+
+// Validate signatures before composing
+$transformOk = validateMethodSignature($transformMethod, 'array', 1);
+$validateOk  = validateMethodSignature($validateMethod,  'bool',  1);
+
+if ($transformOk && $validateOk) {
+    $definition = new Definition('DataTransformer', [Transformable::class]);
+    $definition
+        ->addMethod('transform', $transformMethod)
+        ->addMethod('validate',  $validateMethod);
+    $definition->register();
+
+    echo 'DataTransformer registered successfully.' . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Practical Pattern — Composition Audit Report</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+
+function auditDefinitionMethods(Definition $definition): void
+{
+    $closures = $definition->getClosures();
+
+    echo '=== Method Audit ===' . PHP_EOL;
+
+    foreach ($closures as $name => $closure) {
+        $method    = new Method($closure);
+        $reflector = $method->getReflector();
+
+        $visibility = match (true) {
+            $reflector->isPrivate()   => 'private',
+            $reflector->isProtected() => 'protected',
+            default                   => 'public',
+        };
+
+        $params = array_map(
+            fn (\ReflectionParameter $p) => ($p->getType() ?? 'mixed') . ' $' . $p->getName(),
+            $reflector->getParameters()
+        );
+
+        $returnType = (string) ($reflector->getReturnType() ?? 'mixed');
+
+        echo sprintf(
+            '%s %s %s(%s): %s',
+            $visibility,
+            $reflector->isStatic() ? 'static ' : '',
+            $name,
+            implode(', ', $params),
+            $returnType
+        ) . PHP_EOL;
+    }
+
+    echo '====================' . PHP_EOL;
+}
+
+$definition = new Definition('AuditedClass');
+$definition
+    ->addMethod('getId',    new Method(function (): int    { return 0; }))
+    ->addMethod('getName',  new Method(function (): string { return ''; }))
+    ->addMethod('validate', (new Method(function (array $data): bool { return true; }))->setProtected())
+    ->addMethod('reset',    (new Method(function (): void {}))->setPrivate()->setStatic());
+
+auditDefinitionMethods($definition);
+// public getId(): int
+// public getName(): string
+// protected validate(array $data): bool
+// private static reset(): void
+?>
+</code></pre>
+
+<h5>Calling getReflector() at Different Stages</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Method;
+
+$method = new Method(function (int $n): int { return $n * 2; });
+
+// Stage 1 — immediately after construction
+$ref1 = $method->getReflector();
+echo 'Stage 1 — public: '    . ($ref1->isPublic()    ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Stage 1 — static: '    . ($ref1->isStatic()    ? 'yes' : 'no') . PHP_EOL; // no
+
+// Stage 2 — after applying modifiers
+$method->setProtected()->setStatic();
+$ref2 = $method->getReflector();
+echo 'Stage 2 — protected: ' . ($ref2->isProtected() ? 'yes' : 'no') . PHP_EOL; // yes
+echo 'Stage 2 — static: '    . ($ref2->isStatic()    ? 'yes' : 'no') . PHP_EOL; // yes
+
+// Earlier reflector is a snapshot — does not update retroactively
+echo 'Stage 1 still public: ' . ($ref1->isPublic() ? 'yes' : 'no') . PHP_EOL; // yes
+?>
+</code></pre>
+
+<h5>getReflector() vs Post-Registration Reflection</h5>
+<ul>
+  <li>
+    <strong>Method::getReflector()</strong> – Reflects the state of the
+    <code>Method</code> object before it has been added to any composition;
+    the earliest available introspection point; useful for pre-composition
+    validation and debugging
+  </li>
+  <li>
+    <strong>Abstract\Definition::getReflector()</strong> – Reflects the
+    in-progress composition state of a <code>Definition</code> or
+    <code>Patch</code> after methods have been added but before registration
+    or application; the mid-composition introspection point
+  </li>
+  <li>
+    <strong>new ReflectionClass($className)</strong> – Reflects the live,
+    registered state of a class in the PHP runtime after
+    <code>register()</code> or <code>apply()</code> has been called; the
+    post-composition introspection point
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Call <code>getReflector()</code> after all modifiers have been applied to get an accurate, final snapshot of the method's configuration before adding it to a composition</li>
+  <li>Use it to build pre-composition validation functions that confirm parameter types, return types, and visibility before <code>addMethod()</code> is called</li>
+  <li>Do not store the returned <code>ReflectionMethod</code> as a long-lived reference — it is a point-in-time snapshot and will not reflect modifiers applied after the call</li>
+  <li>Combine with <code>Definition::getReflector()</code> or <code>Patch::getReflector()</code> for a two-stage validation pipeline — individual method validation followed by full composition validation</li>
+  <li>Use in development and CI tooling to generate method signature documentation for dynamically composed classes that are invisible to standard documentation generators</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Returns a point-in-time snapshot — modifiers applied after <code>getReflector()</code> is called are not reflected in the previously returned instance</li>
+  <li>Reflects the <code>Method</code> object's state, not its eventual behavior inside a registered class — some reflection details may differ after composition and registration</li>
+  <li>Parameter and return type information is derived from the closure — closures without declared types will show no type information in the reflector</li>
+  <li>The returned <code>ReflectionMethod</code> does not have a meaningful declaring class context until the method has been added to a composition and the class registered or patch applied</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Verifying that visibility and static modifiers have been applied correctly before adding a method to a definition or patch</li>
+  <li>Validating parameter types and return types against interface contracts before composition</li>
+  <li>Building automated pre-composition contract checkers that surface missing type declarations or incorrect signatures early</li>
+  <li>Generating method signature documentation or audit reports for dynamically composed class structures</li>
+  <li>Debugging modifier application order to confirm that the last-modifier-wins behavior produces the intended final state</li>
+</ul>
+
+<p>
+  <code>Componere\Method::getReflector()</code> is the earliest introspection
+  point in the entire Componere composition pipeline — operating on the method
+  descriptor itself, before it has been incorporated into any class structure.
+  By surfacing visibility, static declaration, and closure signatures through
+  PHP's familiar <code>ReflectionMethod</code> interface, it enables confident,
+  validated composition: every method can be inspected and confirmed before it
+  becomes part of a class, catching configuration errors at the earliest
+  possible moment rather than at runtime after registration.
+</p>
 
 <h4 id="componere-value-class">COMPONERE\VALUE CLASS</h4>
 <h4 id="componere-value-construct">COMPONERE\VALUE::__CONSTRUCT</h4>
