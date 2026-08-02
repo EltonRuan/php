@@ -34344,6 +34344,412 @@ echo 'Stage 1 still public: ' . ($ref1->isPublic() ? 'yes' : 'no') . PHP_EOL; //
 </p>
 
 <h4 id="componere-value-class">COMPONERE\VALUE CLASS</h4>
+<p>
+  <strong>Componere\Value</strong> is a value object that wraps a scalar
+  default value and its associated modifiers — visibility, static declaration,
+  and default value presence — into a single descriptor that can be passed to
+  <code>addProperty()</code> and <code>addConstant()</code> on
+  <code>Componere\Definition</code>. It is the property and constant
+  counterpart to <code>Componere\Method</code>, playing the same role in
+  state composition that <code>Method</code> plays in behavioral composition.
+</p>
+<p>
+  Every property and constant added to a <code>Componere\Definition</code>
+  must be wrapped in a <code>Value</code> instance. This design separates
+  the raw default value from its class membership attributes, allowing the
+  same value to be reused across multiple compositions with different
+  visibility or static modifiers applied independently per use.
+</p>
+
+<h5>Class Synopsis</h5>
+<pre><code class="language-php">
+<?php
+namespace Componere;
+
+final class Value
+{
+    // Constructor
+    public function __construct(mixed $value = null)
+
+    // Visibility modifiers — mutually exclusive
+    public function setPrivate(): Value
+    public function setProtected(): Value
+
+    // Static modifier
+    public function setStatic(): Value
+
+    // Introspection
+    public function isPrivate(): bool
+    public function isProtected(): bool
+    public function isStatic(): bool
+    public function hasDefault(): bool
+}
+?>
+</code></pre>
+
+<h5>Value Modifiers</h5>
+<ul>
+  <li>
+    <strong>setPrivate()</strong> – Marks the property or constant as private;
+    accessible only from within the class body; mutually exclusive with
+    <code>setProtected()</code>
+  </li>
+  <li>
+    <strong>setProtected()</strong> – Marks the property or constant as
+    protected; accessible from within the class and its subclasses;
+    mutually exclusive with <code>setPrivate()</code>
+  </li>
+  <li>
+    <strong>setStatic()</strong> – Marks the property as static; shared
+    across all instances and accessible via <code>ClassName::$property</code>;
+    can be combined with any visibility modifier
+  </li>
+</ul>
+
+<h5>Introspection Methods</h5>
+<ul>
+  <li>
+    <strong>isPrivate()</strong> – Returns <code>true</code> if
+    <code>setPrivate()</code> has been called on this instance
+  </li>
+  <li>
+    <strong>isProtected()</strong> – Returns <code>true</code> if
+    <code>setProtected()</code> has been called on this instance
+  </li>
+  <li>
+    <strong>isStatic()</strong> – Returns <code>true</code> if
+    <code>setStatic()</code> has been called on this instance
+  </li>
+  <li>
+    <strong>hasDefault()</strong> – Returns <code>true</code> if a non-null
+    default value was provided to the constructor; <code>false</code> if
+    constructed with no argument or with <code>null</code>
+  </li>
+</ul>
+
+<h5>Default Visibility</h5>
+<p>
+  A <code>Value</code> instance is <strong>public</strong> by default —
+  consistent with <code>Componere\Method</code> and PHP's own default
+  behavior. Neither <code>setPrivate()</code> nor <code>setProtected()</code>
+  needs to be called for public properties or constants.
+</p>
+
+<h5>Basic Usage — Property</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('Customer');
+
+$definition
+    ->addProperty('id',       new Value(0))
+    ->addProperty('name',     new Value(''))
+    ->addProperty('email',    new Value(''))
+    ->addProperty('verified', new Value(false))
+    ->addMethod('describe', new Method(function (): string {
+        return sprintf(
+            'Customer #%d: %s <%s> [%s]',
+            $this->id,
+            $this->name,
+            $this->email,
+            $this->verified ? 'verified' : 'unverified'
+        );
+    }));
+
+$definition->register();
+
+$customer           = new Customer();
+$customer->id       = 1;
+$customer->name     = 'Alice';
+$customer->email    = 'alice@example.com';
+$customer->verified = true;
+
+echo $customer->describe();
+// Customer #1: Alice <alice@example.com> [verified]
+?>
+</code></pre>
+
+<h5>Basic Usage — Constant</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('OrderStatus');
+
+$definition
+    ->addConstant('PENDING',    new Value('pending'))
+    ->addConstant('PROCESSING', new Value('processing'))
+    ->addConstant('SHIPPED',    new Value('shipped'))
+    ->addConstant('DELIVERED',  new Value('delivered'))
+    ->addConstant('CANCELLED',  new Value('cancelled'));
+
+$definition->register();
+
+echo OrderStatus::PENDING;    // pending
+echo OrderStatus::SHIPPED;    // shipped
+echo OrderStatus::DELIVERED;  // delivered
+?>
+</code></pre>
+
+<h5>Visibility Modifiers on Properties</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('SecureConfig');
+
+$definition
+    // Public — readable from anywhere
+    ->addProperty('name',    new Value('MyApp'))
+
+    // Protected — readable within class and subclasses
+    ->addProperty('options', (new Value([]))->setProtected())
+
+    // Private — readable only within the class itself
+    ->addProperty('secret',  (new Value(''))->setPrivate())
+
+    ->addMethod('getSecret', (new Method(function (): string {
+        return $this->secret; // Accesses private property internally
+    }))->setProtected())
+    ->addMethod('setSecret', new Method(function (string $secret): void {
+        $this->secret = $secret;
+    }));
+
+$definition->register();
+
+$config = new SecureConfig();
+echo $config->name;          // MyApp — public
+
+$config->setSecret('s3cr3t');
+// $config->secret would throw — private property
+// $config->options would throw — protected property
+?>
+</code></pre>
+
+<h5>Static Properties</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('RequestCounter');
+
+$definition
+    // Static — shared across all instances
+    ->addProperty('count',     (new Value(0))->setStatic())
+    ->addProperty('lastReset', (new Value(''))->setStatic())
+
+    ->addMethod('increment', (new Method(function (): void {
+        self::$count++;
+    }))->setStatic())
+    ->addMethod('reset', (new Method(function (): void {
+        self::$count     = 0;
+        self::$lastReset = date('Y-m-d H:i:s');
+    }))->setStatic())
+    ->addMethod('getCount', (new Method(function (): int {
+        return self::$count;
+    }))->setStatic());
+
+$definition->register();
+
+RequestCounter::increment();
+RequestCounter::increment();
+RequestCounter::increment();
+
+echo RequestCounter::getCount(); // 3
+echo RequestCounter::$count;     // 3
+
+RequestCounter::reset();
+echo RequestCounter::getCount(); // 0
+?>
+</code></pre>
+
+<h5>Value Without a Default</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('NullableEntity');
+
+// No argument — property has no default value
+$definition->addProperty('optionalData', new Value());
+
+$noDefaultValue = new Value();
+echo $noDefaultValue->hasDefault() ? 'has default' : 'no default'; // no default
+
+// With null explicitly passed — also no default in Componere terms
+$nullValue = new Value(null);
+echo $nullValue->hasDefault() ? 'has default' : 'no default'; // no default
+
+// Any non-null value constitutes a default
+$withDefault = new Value(0);
+echo $withDefault->hasDefault() ? 'has default' : 'no default'; // has default
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Fluent Chaining of Modifiers</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('SessionManager');
+
+$definition
+    // Static protected — shared, accessible to subclasses
+    ->addProperty('sessions', (new Value([]))->setProtected()->setStatic())
+
+    // Static private — shared, internal only
+    ->addProperty('maxAge',   (new Value(1800))->setPrivate()->setStatic())
+
+    // Public instance
+    ->addProperty('id',       new Value(''))
+
+    // Protected instance
+    ->addProperty('data',     (new Value([]))->setProtected());
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Introspecting Value State</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Value;
+
+$values = [
+    'public instance'    => new Value('default'),
+    'protected instance' => (new Value(0))->setProtected(),
+    'private instance'   => (new Value(false))->setPrivate(),
+    'public static'      => (new Value([]))->setStatic(),
+    'protected static'   => (new Value(''))->setProtected()->setStatic(),
+    'no default'         => new Value(),
+];
+
+foreach ($values as $label => $value) {
+    echo sprintf(
+        '%-22s | private: %-5s | protected: %-5s | static: %-5s | hasDefault: %-5s',
+        $label,
+        $value->isPrivate()   ? 'yes' : 'no',
+        $value->isProtected() ? 'yes' : 'no',
+        $value->isStatic()    ? 'yes' : 'no',
+        $value->hasDefault()  ? 'yes' : 'no'
+    ) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>Reusing a Value Across Multiple Definitions</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+// The same Value instance or its configuration can seed multiple definitions
+
+$emptyArray    = new Value([]);
+$zeroInt       = new Value(0);
+$emptyString   = new Value('');
+
+$userDef = new Definition('User');
+$userDef
+    ->addProperty('id',    $zeroInt)
+    ->addProperty('name',  $emptyString)
+    ->addProperty('roles', $emptyArray);
+
+$postDef = new Definition('Post');
+$postDef
+    ->addProperty('id',      $zeroInt)
+    ->addProperty('title',   $emptyString)
+    ->addProperty('tags',    $emptyArray)
+    ->addProperty('viewCount', new Value(0));
+
+$userDef->register();
+$postDef->register();
+?>
+</code></pre>
+
+<h5>Value Class vs Raw Scalar</h5>
+<ul>
+  <li>
+    <strong>Componere\Value</strong> – Carries both the default scalar value
+    and its class membership attributes (visibility, static modifier);
+    required by <code>addProperty()</code> and <code>addConstant()</code>;
+    exposes introspection methods for querying its own state
+  </li>
+  <li>
+    <strong>Raw scalar</strong> – A plain PHP value with no class membership
+    attributes; must be wrapped in a <code>Value</code> instance before being
+    added to a composition; cannot carry visibility or static modifiers
+    independently
+  </li>
+</ul>
+
+<h5>Value vs Method</h5>
+<ul>
+  <li>
+    <strong>Componere\Value</strong> – Describes state: properties and
+    constants; carries a default value and optional visibility/static
+    modifiers; provides <code>isPrivate()</code>, <code>isProtected()</code>,
+    <code>isStatic()</code>, <code>hasDefault()</code> for introspection
+  </li>
+  <li>
+    <strong>Componere\Method</strong> – Describes behavior: methods; carries
+    a closure and optional visibility/static modifiers; provides
+    <code>getReflector()</code> for introspection; does not expose
+    boolean state queries
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always provide a meaningful default value via the constructor — avoid omitting defaults unless the property is genuinely intended to start as null</li>
+  <li>Apply the most restrictive visibility that satisfies the property's role — encapsulation principles apply equally to dynamically composed properties</li>
+  <li>Use <code>hasDefault()</code>, <code>isPrivate()</code>, <code>isProtected()</code>, and <code>isStatic()</code> to validate <code>Value</code> configurations programmatically in composition pipelines</li>
+  <li>Add properties before the methods that access them — this mirrors native PHP class declaration order and makes composition readable</li>
+  <li>Use <code>setStatic()</code> only when the property genuinely needs to be shared across all instances — avoid static properties as a substitute for proper dependency management</li>
+  <li>Remember that <code>Value</code> is <code>final</code> — it cannot be subclassed; all configuration must be applied through the available modifier methods</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li><code>Value</code> is declared <code>final</code> — it cannot be subclassed or extended</li>
+  <li>Default values must be scalar or arrays — objects and resources are not valid property or constant defaults</li>
+  <li>PHP typed property declarations are not supported — properties added via <code>Value</code> are untyped</li>
+  <li>Only available on <code>Componere\Definition</code> — properties and constants cannot be added to existing classes via <code>Componere\Patch</code></li>
+  <li>Dynamically added properties and constants are invisible to static analysis tools and IDEs</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Defining the default state of instance properties on dynamically generated data transfer objects and entities</li>
+  <li>Declaring class constants for status codes, configuration defaults, and enumeration-like values</li>
+  <li>Managing shared class-level state through static properties on dynamically composed service and registry classes</li>
+  <li>Encapsulating sensitive internal state behind private or protected visibility on runtime class definitions</li>
+  <li>Building self-contained composition pipelines where both state and behavior are defined fluently before a single <code>register()</code> call</li>
+</ul>
+
+<p>
+  <code>Componere\Value</code> is the state counterpart to
+  <code>Componere\Method</code> — together they cover the complete surface
+  of a class definition, with <code>Value</code> handling what a class
+  <em>holds</em> and <code>Method</code> handling what a class <em>does</em>.
+  Its introspection methods, fluent modifier chaining, and clean separation
+  of default values from visibility attributes make it a precise and
+  expressive primitive for composing well-encapsulated, self-documented
+  runtime class state.
+</p>
+
 <h4 id="componere-value-construct">COMPONERE\VALUE::__CONSTRUCT</h4>
 <h4 id="componere-value-setprivate">COMPONERE\VALUE::SETPRIVATE</h4>
 <h4 id="componere-value-setprotected">COMPONERE\VALUE::SETPROTECTED</h4>
