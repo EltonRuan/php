@@ -34751,6 +34751,373 @@ $postDef->register();
 </p>
 
 <h4 id="componere-value-construct">COMPONERE\VALUE::__CONSTRUCT</h4>
+<p>
+  <strong>Componere\Value::__construct()</strong> is the constructor of the
+  <code>Componere\Value</code> class, responsible for initializing a property
+  or constant descriptor by wrapping a scalar default value into a composable,
+  modifier-ready object. It is the entry point to every property and constant
+  added to a <code>Componere\Definition</code> — every call to
+  <code>addProperty()</code> and <code>addConstant()</code> requires a
+  <code>Value</code> instance, and every <code>Value</code> instance begins
+  with this constructor.
+</p>
+<p>
+  The constructor accepts a single optional argument — the default value for
+  the property or constant being described. No modifiers are applied at
+  construction time — the resulting instance is public and non-static by
+  default, ready for optional modification via <code>setPrivate()</code>,
+  <code>setProtected()</code>, and <code>setStatic()</code> before being
+  passed to <code>addProperty()</code> or <code>addConstant()</code>.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Value::__construct(mixed $value = null)
+?>
+</code></pre>
+
+<h5>Parameters Explained</h5>
+<ul>
+  <li>
+    <strong>$value</strong> – The default value for the property or the
+    value of the constant. Must be a scalar type (<code>int</code>,
+    <code>float</code>, <code>string</code>, <code>bool</code>) or an
+    array of scalars. Passing <code>null</code> or omitting the argument
+    entirely produces a <code>Value</code> with no default —
+    <code>hasDefault()</code> will return <code>false</code> in both cases.
+  </li>
+</ul>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The provided value is stored internally as the property default or constant value</li>
+  <li>If no argument is passed or <code>null</code> is passed, the instance is marked as having no default</li>
+  <li>Default visibility is set to public — no modifier needs to be called for public properties or constants</li>
+  <li>Default static state is non-static — <code>setStatic()</code> must be called explicitly</li>
+  <li>The <code>Value</code> instance is ready to be passed directly to <code>addProperty()</code> or <code>addConstant()</code>, or modified first via the available modifier methods</li>
+</ol>
+
+<h5>Basic Construction — Scalar Types</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('TypedProperties');
+
+$definition
+    ->addProperty('name',     new Value(''))        // string default
+    ->addProperty('count',    new Value(0))         // int default
+    ->addProperty('price',    new Value(0.0))       // float default
+    ->addProperty('active',   new Value(true))      // bool default
+    ->addProperty('tags',     new Value([]))        // array default
+    ->addProperty('optional', new Value());         // no default (null)
+
+$definition->register();
+
+$instance = new TypedProperties();
+
+var_dump($instance->name);     // string(0) ""
+var_dump($instance->count);    // int(0)
+var_dump($instance->price);    // float(0)
+var_dump($instance->active);   // bool(true)
+var_dump($instance->tags);     // array(0) {}
+var_dump($instance->optional); // NULL
+?>
+</code></pre>
+
+<h5>Construction for Constants</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('HttpMethod');
+
+$definition
+    ->addConstant('GET',     new Value('GET'))
+    ->addConstant('POST',    new Value('POST'))
+    ->addConstant('PUT',     new Value('PUT'))
+    ->addConstant('PATCH',   new Value('PATCH'))
+    ->addConstant('DELETE',  new Value('DELETE'))
+    ->addConstant('OPTIONS', new Value('OPTIONS'));
+
+$definition->register();
+
+echo HttpMethod::GET;    // GET
+echo HttpMethod::POST;   // POST
+echo HttpMethod::DELETE; // DELETE
+?>
+</code></pre>
+
+<h5>No Default vs Null Default</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Value;
+
+// Three ways to construct — and how hasDefault() responds
+
+// 1 — No argument: no default
+$noArg = new Value();
+echo $noArg->hasDefault() ? 'has default' : 'no default'; // no default
+
+// 2 — Explicit null: treated the same as no argument
+$nullArg = new Value(null);
+echo $nullArg->hasDefault() ? 'has default' : 'no default'; // no default
+
+// 3 — Any non-null scalar: has default
+$withDefault = new Value(0);
+echo $withDefault->hasDefault() ? 'has default' : 'no default'; // has default
+
+$withString = new Value('');
+echo $withString->hasDefault() ? 'has default' : 'no default'; // has default
+
+$withFalse = new Value(false);
+echo $withFalse->hasDefault() ? 'has default' : 'no default'; // has default
+
+$withArray = new Value([]);
+echo $withArray->hasDefault() ? 'has default' : 'no default'; // has default
+?>
+</code></pre>
+
+<h5>Chaining Modifiers After Construction</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('AccessLevels');
+
+$definition
+    // Public (default) — no modifier needed
+    ->addProperty('publicProp',    new Value('public'))
+
+    // Protected — modifier applied immediately after construction
+    ->addProperty('protectedProp', (new Value('protected'))->setProtected())
+
+    // Private — modifier applied immediately after construction
+    ->addProperty('privateProp',   (new Value('private'))->setPrivate())
+
+    // Public static
+    ->addProperty('staticProp',    (new Value(0))->setStatic())
+
+    // Protected static
+    ->addProperty('sharedData',    (new Value([]))->setProtected()->setStatic())
+
+    // Private static
+    ->addProperty('internalCount', (new Value(0))->setPrivate()->setStatic());
+
+$definition->register();
+?>
+</code></pre>
+
+<h5>Reusing a Value Across Multiple Compositions</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+// Shared Value instances can be passed to multiple addProperty() calls
+// across different definitions — each definition stores its own copy
+
+$emptyString = new Value('');
+$zeroInt     = new Value(0);
+$emptyArray  = new Value([]);
+
+$productDef = new Definition('Product');
+$productDef
+    ->addProperty('id',    $zeroInt)
+    ->addProperty('name',  $emptyString)
+    ->addProperty('tags',  $emptyArray)
+    ->addProperty('price', new Value(0.0));
+
+$categoryDef = new Definition('Category');
+$categoryDef
+    ->addProperty('id',       $zeroInt)
+    ->addProperty('name',     $emptyString)
+    ->addProperty('children', $emptyArray);
+
+$productDef->register();
+$categoryDef->register();
+
+$product       = new Product();
+$product->name = 'Widget';
+
+$category       = new Category();
+$category->name = 'Electronics';
+
+echo $product->name;   // Widget
+echo $category->name;  // Electronics
+?>
+</code></pre>
+
+<h5>Array Default Values</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Value;
+
+$definition = new Definition('AppConfiguration');
+
+$definition
+    // Scalar array default
+    ->addProperty('allowedMethods', new Value(['GET', 'POST', 'PUT', 'DELETE']))
+    ->addProperty('defaultHeaders',  new Value([
+        'Content-Type'  => 'application/json',
+        'Accept'        => 'application/json',
+    ]))
+    ->addConstant('SUPPORTED_FORMATS', new Value(['json', 'xml', 'csv']));
+
+$definition->register();
+
+$config = new AppConfiguration();
+print_r($config->allowedMethods);   // ['GET', 'POST', 'PUT', 'DELETE']
+print_r($config->defaultHeaders);   // ['Content-Type' => ..., 'Accept' => ...]
+print_r(AppConfiguration::SUPPORTED_FORMATS); // ['json', 'xml', 'csv']
+?>
+</code></pre>
+
+<h5>Validating Construction via Introspection</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Value;
+
+function describeValue(string $label, Value $value): void
+{
+    echo sprintf(
+        '%-20s | hasDefault: %-5s | private: %-5s | protected: %-5s | static: %-5s',
+        $label,
+        $value->hasDefault()  ? 'yes' : 'no',
+        $value->isPrivate()   ? 'yes' : 'no',
+        $value->isProtected() ? 'yes' : 'no',
+        $value->isStatic()    ? 'yes' : 'no'
+    ) . PHP_EOL;
+}
+
+describeValue('no arg',           new Value());
+describeValue('null arg',         new Value(null));
+describeValue('empty string',     new Value(''));
+describeValue('zero int',         new Value(0));
+describeValue('false bool',       new Value(false));
+describeValue('empty array',      new Value([]));
+describeValue('private',          (new Value('x'))->setPrivate());
+describeValue('protected static', (new Value(0))->setProtected()->setStatic());
+?>
+</code></pre>
+
+<h5>Practical Pattern — Composition Builder</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+// A structured builder that constructs a full entity definition
+// using Value for state and Method for behavior
+
+function buildEntityDefinition(string $className, array $schema): Definition
+{
+    $definition = new Definition($className);
+
+    foreach ($schema['properties'] as $name => $config) {
+        $value = new Value($config['default'] ?? null);
+
+        if ($config['visibility'] === 'protected') {
+            $value->setProtected();
+        } elseif ($config['visibility'] === 'private') {
+            $value->setPrivate();
+        }
+
+        if (!empty($config['static'])) {
+            $value->setStatic();
+        }
+
+        $definition->addProperty($name, $value);
+    }
+
+    $definition->addMethod('toArray', new Method(function (): array {
+        return get_object_vars($this);
+    }));
+
+    return $definition;
+}
+
+$definition = buildEntityDefinition('Article', [
+    'properties' => [
+        'id'        => ['default' => 0,     'visibility' => 'public'],
+        'title'     => ['default' => '',    'visibility' => 'public'],
+        'body'      => ['default' => '',    'visibility' => 'public'],
+        'published' => ['default' => false, 'visibility' => 'public'],
+        'viewCount' => ['default' => 0,     'visibility' => 'protected', 'static' => false],
+    ],
+]);
+
+$definition->register();
+
+$article            = new Article();
+$article->id        = 1;
+$article->title     = 'Componere Value Class';
+$article->published = true;
+
+print_r($article->toArray());
+?>
+</code></pre>
+
+<h5>Value::__construct() vs Method::__construct()</h5>
+<ul>
+  <li>
+    <strong>Value::__construct(mixed $value = null)</strong> – Accepts a
+    scalar default value or nothing; used for properties and constants;
+    the value is the data held by the class member; introspectable via
+    <code>hasDefault()</code>, <code>isPrivate()</code>,
+    <code>isProtected()</code>, <code>isStatic()</code>
+  </li>
+  <li>
+    <strong>Method::__construct(Closure $closure)</strong> – Requires a
+    closure; used for methods; the closure is the behavior executed when
+    the method is called; introspectable via <code>getReflector()</code>
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Always provide a meaningful non-null default value — omit the argument only when the property is genuinely intended to start without a defined state</li>
+  <li>Use empty-but-typed defaults (<code>''</code>, <code>0</code>, <code>false</code>, <code>[]</code>) rather than <code>null</code> to communicate the expected type of the property through its default</li>
+  <li>Apply modifiers immediately after construction using fluent chaining for cleaner, more readable composition code</li>
+  <li>Use <code>hasDefault()</code> in composition validation pipelines to confirm that all required properties have been given meaningful defaults before registration</li>
+  <li>Keep array defaults simple and flat — avoid deeply nested arrays as property defaults, as they can obscure the intended data shape</li>
+  <li>Prefer creating a new <code>Value</code> instance per property over reusing a single instance with different modifiers applied — shared instances with applied modifiers carry the same modifier state to all compositions they are passed to</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Only scalar values and arrays of scalars are valid — objects, resources, and closures cannot be used as property or constant defaults</li>
+  <li>Passing <code>null</code> is indistinguishable from passing no argument — <code>hasDefault()</code> returns <code>false</code> in both cases</li>
+  <li>The default value is fixed at construction time — it cannot be changed on the same <code>Value</code> instance; create a new instance to use a different default</li>
+  <li>PHP typed property declarations are not supported — <code>Value</code> does not carry type information for the property beyond the default value's implied type</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Wrapping scalar and array defaults for instance properties on dynamically generated entity and DTO classes</li>
+  <li>Providing constant values for status codes, configuration keys, and enumeration-like identifiers</li>
+  <li>Communicating property types implicitly through well-chosen non-null defaults</li>
+  <li>Building programmatic composition pipelines that generate <code>Value</code> instances from schema definitions or configuration arrays</li>
+  <li>Using <code>hasDefault()</code> in validation routines to confirm that all composed properties have been intentionally initialized before class registration</li>
+</ul>
+
+<p>
+  <code>Componere\Value::__construct()</code> is where state enters the
+  Componere composition pipeline. The single-argument design — accepting
+  only a scalar or array default — keeps construction focused and
+  unambiguous, while the modifier methods that follow allow precise,
+  fluent configuration of how that state is scoped and shared within the
+  class. Every property and constant in every <code>Componere\Definition</code>
+  composition begins with this constructor call.
+</p>
+
+
 <h4 id="componere-value-setprivate">COMPONERE\VALUE::SETPRIVATE</h4>
 <h4 id="componere-value-setprotected">COMPONERE\VALUE::SETPROTECTED</h4>
 <h4 id="componere-value-setstatic">COMPONERE\VALUE::SETSTATIC</h4>
