@@ -35119,6 +35119,306 @@ print_r($article->toArray());
 
 
 <h4 id="componere-value-setprivate">COMPONERE\VALUE::SETPRIVATE</h4>
+<p>
+  <strong>Componere\Value::setPrivate()</strong> is a modifier method that
+  marks a <code>Componere\Value</code> instance as private, restricting
+  access to the property or constant it describes to within the class body
+  itself. Once applied, the property behaves identically to a natively
+  declared private property — it is invisible to external code, inaccessible
+  to subclasses, and can only be read or written by methods defined within
+  the same class.
+</p>
+<p>
+  Since <code>Componere\Value</code> instances are public by default,
+  <code>setPrivate()</code> must be called explicitly whenever a property
+  should be encapsulated as an internal implementation detail. It returns
+  the <code>Value</code> instance, enabling fluent chaining with
+  <code>setStatic()</code> and direct inline passing to
+  <code>addProperty()</code> or <code>addConstant()</code>.
+</p>
+
+<h5>Method Signature</h5>
+<pre><code class="language-php">
+<?php
+public Componere\Value::setPrivate(): Componere\Value
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+<ol>
+  <li>The internal visibility flag on the <code>Value</code> instance is set to private</li>
+  <li>Any previously set protected visibility is overridden — the last modifier called always wins</li>
+  <li>When the property is added to a definition and registered, the Zend Engine enforces private access semantics</li>
+  <li>The <code>Value</code> instance is returned, enabling fluent chaining</li>
+  <li><code>isPrivate()</code> returns <code>true</code> after this call</li>
+</ol>
+
+<h5>Basic Usage</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('ApiClient');
+
+$definition
+    // Private — internal credential, never exposed externally
+    ->addProperty('apiKey',    (new Value(''))->setPrivate())
+    ->addProperty('secretKey', (new Value(''))->setPrivate())
+
+    // Public — safe to expose
+    ->addProperty('baseUrl',   new Value('https://api.example.com'))
+
+    ->addMethod('setCredentials', new Method(function (string $apiKey, string $secretKey): void {
+        $this->apiKey    = $apiKey;
+        $this->secretKey = $secretKey;
+    }))
+    ->addMethod('getAuthHeader', new Method(function (): string {
+        // Accesses private properties internally
+        return base64_encode($this->apiKey . ':' . $this->secretKey);
+    }));
+
+$definition->register();
+
+$client = new ApiClient();
+$client->setCredentials('key_abc', 'secret_xyz');
+
+echo $client->baseUrl;        // https://api.example.com — public
+echo $client->getAuthHeader(); // a2V5X2FiYzpzZWNyZXRfeHl6
+
+// $client->apiKey would throw — private property
+// $client->secretKey would throw — private property
+?>
+</code></pre>
+
+<h5>Fluent Chaining with setStatic()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('ConnectionPool');
+
+$definition
+    // Private static — shared internal pool, hidden from external access
+    ->addProperty('connections', (new Value([]))->setPrivate()->setStatic())
+    ->addProperty('maxSize',     (new Value(10))->setPrivate()->setStatic())
+
+    // Public static — external API
+    ->addMethod('acquire', (new Method(function (): ?object {
+        if (count(self::$connections) === 0) {
+            return null;
+        }
+        return array_pop(self::$connections);
+    }))->setStatic())
+    ->addMethod('release', (new Method(function (object $connection): void {
+        if (count(self::$connections) < self::$maxSize) {
+            self::$connections[] = $connection;
+        }
+    }))->setStatic())
+    ->addMethod('size', (new Method(function (): int {
+        return count(self::$connections);
+    }))->setStatic());
+
+$definition->register();
+
+ConnectionPool::release(new stdClass());
+ConnectionPool::release(new stdClass());
+
+echo ConnectionPool::size(); // 2
+
+// ConnectionPool::$connections would throw — private static property
+// ConnectionPool::$maxSize    would throw — private static property
+?>
+</code></pre>
+
+<h5>Private Properties for Encapsulated State</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('BankAccount');
+
+$definition
+    // Private state — enforced encapsulation
+    ->addProperty('balance',       (new Value(0.0))->setPrivate())
+    ->addProperty('transactions',  (new Value([]))->setPrivate())
+    ->addProperty('pin',           (new Value(''))->setPrivate())
+
+    // Public interface — controlled access to private state
+    ->addMethod('deposit', new Method(function (float $amount): void {
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException('Deposit must be positive.');
+        }
+        $this->balance        += $amount;
+        $this->transactions[]  = ['type' => 'deposit', 'amount' => $amount];
+    }))
+    ->addMethod('withdraw', new Method(function (float $amount, string $pin): bool {
+        if ($pin !== $this->pin || $amount > $this->balance) {
+            return false;
+        }
+        $this->balance        -= $amount;
+        $this->transactions[]  = ['type' => 'withdrawal', 'amount' => $amount];
+        return true;
+    }))
+    ->addMethod('getBalance', new Method(function (string $pin): ?float {
+        return $pin === $this->pin ? $this->balance : null;
+    }))
+    ->addMethod('setPin', new Method(function (string $pin): void {
+        $this->pin = $pin;
+    }))
+    ->addMethod('getTransactionCount', new Method(function (): int {
+        return count($this->transactions);
+    }));
+
+$definition->register();
+
+$account = new BankAccount();
+$account->setPin('9876');
+$account->deposit(1000.00);
+$account->deposit(500.00);
+$account->withdraw(200.00, '9876');
+
+echo $account->getBalance('9876');          // 1300
+echo $account->getTransactionCount();       // 3
+
+// $account->balance      would throw — private
+// $account->transactions would throw — private
+// $account->pin          would throw — private
+?>
+</code></pre>
+
+<h5>Private Constants</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Definition;
+use Componere\Method;
+use Componere\Value;
+
+$definition = new Definition('Encryptor');
+
+$definition
+    // Private constant — internal algorithm detail
+    ->addConstant('ALGORITHM', (new Value('AES-256-CBC'))->setPrivate())
+    ->addConstant('IV_LENGTH',  (new Value(16))->setPrivate())
+
+    // Public constant — safe to expose
+    ->addConstant('VERSION', new Value('1.0'))
+
+    ->addMethod('encrypt', new Method(function (string $data, string $key): string {
+        $iv = random_bytes(self::IV_LENGTH);
+        return base64_encode(
+            $iv . openssl_encrypt($data, self::ALGORITHM, $key, OPENSSL_RAW_DATA, $iv)
+        );
+    }))
+    ->addMethod('decrypt', new Method(function (string $encoded, string $key): string {
+        $raw = base64_decode($encoded);
+        $iv  = substr($raw, 0, self::IV_LENGTH);
+        return openssl_decrypt(
+            substr($raw, self::IV_LENGTH),
+            self::ALGORITHM,
+            $key,
+            OPENSSL_RAW_DATA,
+            $iv
+        );
+    }));
+
+$definition->register();
+
+echo Encryptor::VERSION;    // 1.0 — public constant
+
+// Encryptor::ALGORITHM would throw — private constant
+// Encryptor::IV_LENGTH  would throw — private constant
+?>
+</code></pre>
+
+<h5>Verifying Private State via isPrivate()</h5>
+<pre><code class="language-php">
+<?php
+use Componere\Value;
+
+$values = [
+    'default (public)'   => new Value('x'),
+    'setPrivate()'       => (new Value('x'))->setPrivate(),
+    'setProtected()'     => (new Value('x'))->setProtected(),
+    'private + static'   => (new Value(0))->setPrivate()->setStatic(),
+    'protected then priv'=> (new Value(0))->setProtected()->setPrivate(),
+];
+
+foreach ($values as $label => $value) {
+    echo sprintf(
+        '%-22s | isPrivate: %-5s | isProtected: %-5s | isStatic: %-5s',
+        $label,
+        $value->isPrivate()   ? 'yes' : 'no',
+        $value->isProtected() ? 'yes' : 'no',
+        $value->isStatic()    ? 'yes' : 'no'
+    ) . PHP_EOL;
+}
+?>
+</code></pre>
+
+<h5>setPrivate() vs setProtected()</h5>
+<ul>
+  <li>
+    <strong>setPrivate()</strong> – Restricts access to the class body only;
+    subclasses cannot access the property or constant; the most restrictive
+    visibility level; appropriate for implementation details that must
+    remain entirely encapsulated and should never be overridden or
+    accessed by subclasses
+  </li>
+  <li>
+    <strong>setProtected()</strong> – Restricts external access but permits
+    access from within the class and any subclasses; appropriate for shared
+    state that subclasses are expected to read, write, or build upon as
+    part of an inheritance hierarchy
+  </li>
+  <li>
+    <strong>Default (public)</strong> – No restriction; accessible from
+    anywhere; appropriate for properties that form part of the class's
+    public data interface
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+<ul>
+  <li>Apply <code>setPrivate()</code> to any property that represents internal implementation state — credentials, counters, raw buffers, or computed caches that external code should never access directly</li>
+  <li>Pair private properties with public accessor or mutator methods to provide controlled, validated access to the underlying state</li>
+  <li>Use <code>isPrivate()</code> in composition validation pipelines to confirm that sensitive properties have been correctly marked before registration</li>
+  <li>Prefer <code>setPrivate()</code> over <code>setProtected()</code> when there is no intent for subclasses to access the property — default to the most restrictive visibility that satisfies the design</li>
+  <li>Chain <code>setPrivate()->setStatic()</code> for shared internal class-level state that must remain hidden from both external code and subclasses</li>
+</ul>
+
+<h5>Limitations</h5>
+<ul>
+  <li>Private properties added via Componere are invisible to static analysis tools and IDEs — access to them from within closures in the same composition will produce unresolved property warnings</li>
+  <li>Once added to a definition and registered, the visibility of a property cannot be changed — create a new <code>Value</code> instance with the desired modifier if a change is needed before registration</li>
+  <li>Calling <code>setPrivate()</code> after <code>setProtected()</code> overrides the protected visibility — the last modifier called always wins</li>
+  <li>Only available on <code>Componere\Definition</code> — properties cannot be added to existing classes via <code>Componere\Patch</code> regardless of visibility</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+<ul>
+  <li>Encapsulating sensitive data such as API credentials, encryption keys, tokens, and PINs behind private properties with controlled accessor methods</li>
+  <li>Hiding internal counters, buffers, caches, and state machines from external consumers of a dynamically composed class</li>
+  <li>Defining private constants for internal algorithm details, magic numbers, and configuration values that should not form part of the public API</li>
+  <li>Creating private static properties for shared internal registries, pools, or counters that must remain invisible to subclasses and external code</li>
+  <li>Enforcing encapsulation discipline on dynamically generated entity and service classes to prevent external mutation of internal state</li>
+</ul>
+
+<p>
+  <code>Componere\Value::setPrivate()</code> brings rigorous encapsulation
+  to the state layer of dynamically composed classes. By restricting property
+  and constant access to the class body itself, it enforces the same
+  separation between public interface and internal implementation that
+  characterizes well-designed statically declared classes — ensuring that
+  runtime class composition does not come at the cost of the access control
+  discipline that makes classes safe, predictable, and maintainable.
+</p>
+
 <h4 id="componere-value-setprotected">COMPONERE\VALUE::SETPROTECTED</h4>
 <h4 id="componere-value-setstatic">COMPONERE\VALUE::SETSTATIC</h4>
 <h4 id="componere-value-isprivate">COMPONERE\VALUE::ISPRIVATE</h4>
