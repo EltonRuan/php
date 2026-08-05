@@ -35420,6 +35420,83 @@ foreach ($values as $label => $value) {
 </p>
 
 <h4 id="componere-value-setprotected">COMPONERE\VALUE::SETPROTECTED</h4>
+
+<p>
+  <strong>Componere\Value::setProtected()</strong> is a method provided by the
+  <strong>Componere</strong> PECL extension that marks a value as
+  <strong>protected</strong> when dynamically composing or modifying PHP classes
+  at runtime.
+</p>
+
+<p>
+  The Componere extension is designed for advanced runtime composition and
+  manipulation of classes, methods, properties, and values. It is not part of
+  the standard PHP distribution.
+</p>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Define a property or value with <code>protected</code> visibility</li>
+  <li>Control member accessibility during runtime composition</li>
+  <li>Support dynamic class generation</li>
+</ul>
+
+<h5>Basic Syntax</h5>
+
+<pre><code class="language-php">
+<?php
+$value = new Componere\Value("Example");
+
+$value->setProtected();
+?>
+</code></pre>
+
+<h5>Method Signature</h5>
+
+<pre><code class="language-php">
+Componere\Value::setProtected(): Componere\Value
+</code></pre>
+
+<h5>Behavior</h5>
+
+<ul>
+  <li>Marks the value as <code>protected</code>.</li>
+  <li>Returns the current <code>Componere\Value</code> instance for method chaining.</li>
+  <li>Used when defining properties or members dynamically.</li>
+</ul>
+
+<h5>Example with Method Chaining</h5>
+
+<pre><code class="language-php">
+<?php
+$value = (new Componere\Value("John"))
+    ->setProtected();
+?>
+</code></pre>
+
+<h5>Related Methods</h5>
+
+<ul>
+  <li><code>setPrivate()</code> – Sets private visibility</li>
+  <li><code>setProtected()</code> – Sets protected visibility</li>
+  <li><code>setStatic()</code> – Marks the value as static</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Available only when the <strong>Componere</strong> extension is installed.</li>
+  <li>Not included in standard PHP.</li>
+  <li>Primarily intended for advanced metaprogramming and runtime class composition.</li>
+</ul>
+
+<p>
+  <code>Componere\Value::setProtected()</code> is used to assign
+  <strong>protected visibility</strong> to dynamically created class members
+  when working with the Componere extension.
+</p>
+
 <h4 id="componere-value-setstatic">COMPONERE\VALUE::SETSTATIC</h4>
 <h4 id="componere-value-isprivate">COMPONERE\VALUE::ISPRIVATE</h4>
 <h4 id="componere-value-isprotected">COMPONERE\VALUE::ISPROTECTED</h4>
