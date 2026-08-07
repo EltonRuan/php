@@ -35498,6 +35498,88 @@ $value = (new Componere\Value("John"))
 </p>
 
 <h4 id="componere-value-setstatic">COMPONERE\VALUE::SETSTATIC</h4>
+
+<p>
+  <strong>Componere\Value::setStatic()</strong> is a method provided by the
+  <strong>Componere</strong> PECL extension that marks a value as
+  <strong>static</strong> when dynamically defining a class property.
+</p>
+
+<p>
+  The Componere extension enables runtime composition and modification of PHP
+  classes, allowing properties, methods, and constants to be created or altered
+  dynamically. It is not included in the standard PHP installation.
+</p>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Declare a dynamically created property as <code>static</code>.</li>
+  <li>Share the property across all instances of a class.</li>
+  <li>Support runtime class composition.</li>
+</ul>
+
+<h5>Method Signature</h5>
+
+<pre><code class="language-php">
+Componere\Value::setStatic(): Componere\Value
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$value = new Componere\Value(100);
+
+$value->setStatic();
+?>
+</code></pre>
+
+<h5>Method Chaining</h5>
+
+<p>
+  Since the method returns the current <code>Componere\Value</code> instance,
+  it can be chained with other modifier methods:
+</p>
+
+<pre><code class="language-php">
+<?php
+$value = (new Componere\Value("Administrator"))
+    ->setProtected()
+    ->setStatic();
+?>
+</code></pre>
+
+<h5>Behavior</h5>
+
+<ul>
+  <li>Marks the property as <code>static</code>.</li>
+  <li>Returns the current <code>Componere\Value</code> object.</li>
+  <li>The property becomes shared by every instance of the class.</li>
+</ul>
+
+<h5>Related Methods</h5>
+
+<ul>
+  <li><code>setPrivate()</code> – Sets private visibility.</li>
+  <li><code>setProtected()</code> – Sets protected visibility.</li>
+  <li><code>setStatic()</code> – Declares the property as static.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Available only through the <strong>Componere</strong> PECL extension.</li>
+  <li>Not part of the standard PHP language.</li>
+  <li>Mainly intended for advanced runtime metaprogramming.</li>
+</ul>
+
+<p>
+  <code>Componere\Value::setStatic()</code> is used to define dynamically
+  created class properties as <strong>static</strong>, allowing them to be
+  shared across all instances of the composed class.
+</p>
+
 <h4 id="componere-value-isprivate">COMPONERE\VALUE::ISPRIVATE</h4>
 <h4 id="componere-value-isprotected">COMPONERE\VALUE::ISPROTECTED</h4>
 <h4 id="componere-value-isstatic">COMPONERE\VALUE::ISSTATIC</h4>
