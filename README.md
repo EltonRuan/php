@@ -35672,7 +35672,6 @@ var_dump($value->isPrivate());
   when composing PHP classes at runtime.
 </p>
 
-
 <h4 id="componere-value-isprotected">COMPONERE\VALUE::ISPROTECTED</h4>
 <h4 id="componere-value-isstatic">COMPONERE\VALUE::ISSTATIC</h4>
 <h4 id="componere-value-hasdefault">COMPONERE\VALUE::HASDEFAULT</h4>
