@@ -35581,6 +35581,98 @@ $value = (new Componere\Value("Administrator"))
 </p>
 
 <h4 id="componere-value-isprivate">COMPONERE\VALUE::ISPRIVATE</h4>
+
+<p>
+  <strong>Componere\Value::isPrivate()</strong> is a method provided by the
+  <strong>Componere</strong> PECL extension that checks whether a
+  <code>Componere\Value</code> has been configured with
+  <strong>private visibility</strong>.
+</p>
+
+<p>
+  It is useful when inspecting dynamically defined class properties and
+  determining their visibility during runtime composition.
+</p>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Check whether a value is marked as <code>private</code>.</li>
+  <li>Inspect the visibility of dynamically created properties.</li>
+  <li>Support runtime class composition and introspection.</li>
+</ul>
+
+<h5>Method Signature</h5>
+
+<pre><code class="language-php">
+Componere\Value::isPrivate(): bool
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+$value = new Componere\Value("Secret");
+
+$value->setPrivate();
+
+var_dump($value->isPrivate());
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+bool(true)
+</code></pre>
+
+<h5>Checking a Non-Private Value</h5>
+
+<pre><code class="language-php">
+<?php
+$value = new Componere\Value("Example");
+
+var_dump($value->isPrivate());
+?>
+</code></pre>
+
+<p>
+  The method returns <code>false</code> when the value has not been configured
+  with private visibility.
+</p>
+
+<h5>Return Value</h5>
+
+<ul>
+  <li><code>true</code> – The value is marked as <code>private</code>.</li>
+  <li><code>false</code> – The value is not marked as <code>private</code>.</li>
+</ul>
+
+<h5>Related Methods</h5>
+
+<ul>
+  <li><code>setPrivate()</code> – Marks the value as private.</li>
+  <li><code>setProtected()</code> – Marks the value as protected.</li>
+  <li><code>isPrivate()</code> – Checks for private visibility.</li>
+  <li><code>isProtected()</code> – Checks for protected visibility.</li>
+  <li><code>isStatic()</code> – Checks whether the value is static.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Available through the <strong>Componere</strong> PECL extension.</li>
+  <li>Not part of a standard PHP installation.</li>
+  <li>Returns a boolean indicating the current visibility state.</li>
+</ul>
+
+<p>
+  <code>Componere\Value::isPrivate()</code> provides a simple way to determine
+  whether a dynamically defined value has <strong>private visibility</strong>
+  when composing PHP classes at runtime.
+</p>
+
+
 <h4 id="componere-value-isprotected">COMPONERE\VALUE::ISPROTECTED</h4>
 <h4 id="componere-value-isstatic">COMPONERE\VALUE::ISSTATIC</h4>
 <h4 id="componere-value-hasdefault">COMPONERE\VALUE::HASDEFAULT</h4>
