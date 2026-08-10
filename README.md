@@ -35673,6 +35673,91 @@ var_dump($value->isPrivate());
 </p>
 
 <h4 id="componere-value-isprotected">COMPONERE\VALUE::ISPROTECTED</h4>
+
+<p>
+  <strong>Componere\Value::isProtected()</strong> is a method from the
+  <strong>Componere</strong> extension that checks whether a
+  <code>Componere\Value</code> has <strong>protected visibility</strong>.
+</p>
+
+<p>
+  It is useful when inspecting values that are being used to dynamically
+  compose or modify PHP classes at runtime.
+</p>
+
+<h5>Method Signature</h5>
+
+<pre><code class="language-php">
+Componere\Value::isProtected(): bool
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+$value = new Componere\Value("Example");
+
+$value->setProtected();
+
+var_dump($value->isProtected());
+// bool(true)
+
+?>
+</code></pre>
+
+<h5>Without Protected Visibility</h5>
+
+<pre><code class="language-php">
+<?php
+
+$value = new Componere\Value("Example");
+
+var_dump($value->isProtected());
+// bool(false)
+
+?>
+</code></pre>
+
+<h5>Return Value</h5>
+
+<ul>
+  <li>
+    <code>true</code> – The value has protected visibility.
+  </li>
+  <li>
+    <code>false</code> – The value does not have protected visibility.
+  </li>
+</ul>
+
+<h5>Related Methods</h5>
+
+<ul>
+  <li><code>setProtected()</code> – Sets protected visibility.</li>
+  <li><code>setPrivate()</code> – Sets private visibility.</li>
+  <li><code>isPrivate()</code> – Checks for private visibility.</li>
+  <li><code>isProtected()</code> – Checks for protected visibility.</li>
+  <li><code>setStatic()</code> – Marks the value as static.</li>
+  <li><code>isStatic()</code> – Checks whether the value is static.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Requires the <strong>Componere</strong> extension.</li>
+  <li>It is not part of standard PHP.</li>
+  <li>Returns a boolean value.</li>
+  <li>It is mainly useful for runtime class composition.</li>
+</ul>
+
+<p>
+  In short, <code>isProtected()</code> answers:
+  <strong>"This Componere value is protected?"</strong>
+  If yes, it returns <code>true</code>; otherwise, it returns
+  <code>false</code>.
+</p>
+
+
 <h4 id="componere-value-isstatic">COMPONERE\VALUE::ISSTATIC</h4>
 <h4 id="componere-value-hasdefault">COMPONERE\VALUE::HASDEFAULT</h4>
 
