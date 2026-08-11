@@ -35757,8 +35757,118 @@ var_dump($value->isProtected());
   <code>false</code>.
 </p>
 
-
 <h4 id="componere-value-isstatic">COMPONERE\VALUE::ISSTATIC</h4>
+
+
+<p>
+  <strong>Componere\Value::isStatic()</strong> is a method from the
+  <strong>Componere</strong> extension that checks whether a
+  <code>Componere\Value</code> has been marked as <strong>static</strong>.
+</p>
+
+<p>
+  It is mainly used when inspecting values that are being dynamically added
+  to or modified within PHP classes at runtime.
+</p>
+
+<h5>Method Signature</h5>
+
+<pre><code class="language-php">
+Componere\Value::isStatic(): bool
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+$value = new Componere\Value("Example");
+
+$value->setStatic();
+
+var_dump($value->isStatic());
+// bool(true)
+
+?>
+</code></pre>
+
+<h5>Without Static</h5>
+
+<pre><code class="language-php">
+<?php
+
+$value = new Componere\Value("Example");
+
+var_dump($value->isStatic());
+// bool(false)
+
+?>
+</code></pre>
+
+<h5>Return Value</h5>
+
+<ul>
+  <li>
+    <code>true</code> – The value is marked as <code>static</code>.
+  </li>
+  <li>
+    <code>false</code> – The value is not marked as <code>static</code>.
+  </li>
+</ul>
+
+<h5>Static vs Non-Static</h5>
+
+<p>
+  A static property belongs to the class itself rather than to an individual
+  object instance.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+class Counter {
+    public static int $count = 0;
+}
+
+Counter::$count++;
+
+echo Counter::$count;
+
+?>
+</code></pre>
+
+<p>
+  In Componere, <code>setStatic()</code> can be used to configure a dynamically
+  created value as static, while <code>isStatic()</code> can be used to check
+  that configuration.
+</p>
+
+<h5>Related Methods</h5>
+
+<ul>
+  <li><code>setStatic()</code> – Marks the value as static.</li>
+  <li><code>isStatic()</code> – Checks whether the value is static.</li>
+  <li><code>setPrivate()</code> – Sets private visibility.</li>
+  <li><code>isPrivate()</code> – Checks for private visibility.</li>
+  <li><code>setProtected()</code> – Sets protected visibility.</li>
+  <li><code>isProtected()</code> – Checks for protected visibility.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Requires the <strong>Componere</strong> extension.</li>
+  <li>It is not part of standard PHP.</li>
+  <li>Returns a boolean value.</li>
+  <li>Is primarily relevant to runtime class composition.</li>
+</ul>
+
+<p>
+  In short, <code>isStatic()</code> answers whether a
+  <code>Componere\Value</code> has been configured as
+  <strong>static</strong>.
+</p>
+
 <h4 id="componere-value-hasdefault">COMPONERE\VALUE::HASDEFAULT</h4>
 
 <h4 id="componere-functions">COMPONERE FUNCTIONS</h4>
