@@ -35871,6 +35871,99 @@ echo Counter::$count;
 
 <h4 id="componere-value-hasdefault">COMPONERE\VALUE::HASDEFAULT</h4>
 
+<p>
+  <strong>Componere\Value::hasDefault()</strong> is a method from the
+  <strong>Componere</strong> extension that checks whether a
+  <code>Componere\Value</code> has a <strong>default value</strong> defined.
+</p>
+
+<p>
+  It is useful when inspecting dynamically created properties or values during
+  runtime class composition.
+</p>
+
+<h5>Method Signature</h5>
+
+<pre><code class="language-php">
+Componere\Value::hasDefault(): bool
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+$value = new Componere\Value("John");
+
+var_dump($value->hasDefault());
+
+?>
+</code></pre>
+
+<h5>Return Value</h5>
+
+<ul>
+  <li>
+    <code>true</code> – The value has a default value.
+  </li>
+  <li>
+    <code>false</code> – The value does not have a default value.
+  </li>
+</ul>
+
+<h5>Purpose</h5>
+
+<p>
+  A default value is the value automatically assigned to a property when an
+  object is created without explicitly providing another value.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+class User
+{
+    public string $name = "Guest";
+}
+
+$user = new User();
+
+echo $user->name;
+// Guest
+
+?>
+</code></pre>
+
+<p>
+  In Componere, <code>hasDefault()</code> allows the code to determine whether
+  a dynamically defined value has such a default value configured.
+</p>
+
+<h5>Related Methods</h5>
+
+<ul>
+  <li><code>hasDefault()</code> – Checks whether a default value exists.</li>
+  <li><code>getDefault()</code> – Retrieves the default value.</li>
+  <li><code>setDefault()</code> – Defines a default value.</li>
+  <li><code>isPrivate()</code> – Checks private visibility.</li>
+  <li><code>isProtected()</code> – Checks protected visibility.</li>
+  <li><code>isStatic()</code> – Checks whether the value is static.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Requires the <strong>Componere</strong> extension.</li>
+  <li>It is not part of standard PHP.</li>
+  <li>Returns a boolean value.</li>
+  <li>It is primarily used for runtime class composition.</li>
+</ul>
+
+<p>
+  In short, <code>hasDefault()</code> answers:
+  <strong>"Does this Componere value have a default value?"</strong>
+</p>
+
 <h4 id="componere-functions">COMPONERE FUNCTIONS</h4>
 <h4 id="componere-cast">COMPONERE\CAST</h4>
 <h4 id="componere-cast-by-ref">COMPONERE\CAST_BY_REF</h4>
