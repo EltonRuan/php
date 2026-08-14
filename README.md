@@ -35965,6 +35965,103 @@ echo $user->name;
 </p>
 
 <h4 id="componere-functions">COMPONERE FUNCTIONS</h4>
+
+
+<p>
+  <strong>Componere functions</strong> are functions provided by the
+  <strong>Componere</strong> extension for dynamically composing and modifying
+  PHP classes at runtime.
+</p>
+
+<p>
+  Componere is an extension designed for advanced runtime manipulation,
+  allowing classes, methods, properties, and values to be created or modified
+  dynamically.
+</p>
+
+<h5>Extension</h5>
+
+<p>
+  Componere is not part of the standard PHP installation and must be installed
+  separately as an extension.
+</p>
+
+<h5>Main Componere Functions</h5>
+
+<ul>
+  <li>
+    <code>componere_autoload()</code> – Registers or handles Componere
+    autoloading.
+  </li>
+  <li>
+    <code>componere_preload()</code> – Handles Componere preloading.
+  </li>
+</ul>
+
+<h5>Componere Classes</h5>
+
+<p>
+  Most of the functionality of Componere is provided through classes rather
+  than standalone functions.
+</p>
+
+<ul>
+  <li><code>Componere\Definition</code></li>
+  <li><code>Componere\Patch</code></li>
+  <li><code>Componere\Method</code></li>
+  <li><code>Componere\Property</code></li>
+  <li><code>Componere\Value</code></li>
+</ul>
+
+<h5>Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+$definition = new Componere\Definition("Example");
+
+$definition->addMethod(
+    "hello",
+    new Componere\Method(
+        function () {
+            return "Hello World";
+        }
+    )
+);
+
+$definition->register();
+
+$object = new Example();
+
+echo $object->hello();
+
+?>
+</code></pre>
+
+<h5>Common Uses</h5>
+
+<ul>
+  <li>Runtime class composition</li>
+  <li>Dynamic method creation</li>
+  <li>Dynamic property manipulation</li>
+  <li>Runtime class patching</li>
+  <li>Advanced metaprogramming</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Componere is an advanced and specialized PHP extension.</li>
+  <li>It is not commonly required in typical PHP applications.</li>
+  <li>Its API is primarily object-oriented rather than function-oriented.</li>
+  <li>Availability depends on the installed PHP extension.</li>
+</ul>
+
+<p>
+  The Componere API provides tools for modifying PHP's object model at runtime,
+  with most functionality exposed through its specialized classes and methods.
+</p>
+
 <h4 id="componere-cast">COMPONERE\CAST</h4>
 <h4 id="componere-cast-by-ref">COMPONERE\CAST_BY_REF</h4>
 
