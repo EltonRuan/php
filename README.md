@@ -36063,6 +36063,80 @@ echo $object->hello();
 </p>
 
 <h4 id="componere-cast">COMPONERE\CAST</h4>
+
+
+<p>
+  <strong>Componere\cast()</strong> is a function from the
+  <strong>Componere</strong> extension that allows an object to be cast to a
+  specified class at runtime.
+</p>
+
+<p>
+  It is designed for advanced runtime object composition and can be used to
+  change how an existing object is treated by the PHP object model.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+Componere\cast(object $object, string $type): object
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+class User
+{
+    public string $name = "Elton";
+}
+
+$user = new User();
+
+$result = Componere\cast($user, User::class);
+
+var_dump($result);
+
+?>
+</code></pre>
+
+<h5>Purpose</h5>
+
+<p>
+  Unlike a traditional PHP type cast such as <code>(string)</code> or
+  <code>(int)</code>, <code>Componere\cast()</code> is intended for
+  object-oriented runtime manipulation.
+</p>
+
+<ul>
+  <li>Works with objects</li>
+  <li>Uses a target class</li>
+  <li>Supports runtime object composition</li>
+  <li>Belongs to the Componere extension</li>
+</ul>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li>The <strong>Componere</strong> extension must be installed.</li>
+  <li>The supplied value must be an object.</li>
+  <li>The target type must be a valid class.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Componere is not part of standard PHP.</li>
+  <li>This functionality is intended for advanced metaprogramming.</li>
+  <li>It should not be confused with PHP's normal scalar type casting.</li>
+</ul>
+
+<p>
+  <code>Componere\cast()</code> provides advanced runtime object manipulation
+  capabilities through the Componere extension.
+</p>
+
 <h4 id="componere-cast-by-ref">COMPONERE\CAST_BY_REF</h4>
 
 
