@@ -36064,7 +36064,6 @@ echo $object->hello();
 
 <h4 id="componere-cast">COMPONERE\CAST</h4>
 
-
 <p>
   <strong>Componere\cast()</strong> is a function from the
   <strong>Componere</strong> extension that allows an object to be cast to a
@@ -36139,6 +36138,121 @@ var_dump($result);
 
 <h4 id="componere-cast-by-ref">COMPONERE\CAST_BY_REF</h4>
 
+<p>
+  <strong>Componere\cast_by_ref()</strong> is a function from the
+  <strong>Componere</strong> extension that casts an object to a specified
+  class while preserving the object reference.
+</p>
+
+<p>
+  It is intended for advanced runtime object composition and manipulation,
+  allowing an existing object to be treated as an instance of another
+  compatible class without creating a separate object.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+Componere\cast_by_ref(object $object, string $type): object
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+class User
+{
+    public string $name = "Elton";
+}
+
+$user = new User();
+
+$result = Componere\cast_by_ref(
+    $user,
+    User::class
+);
+
+var_dump($result);
+
+?>
+</code></pre>
+
+<h5>Reference Behavior</h5>
+
+<p>
+  The main difference between <code>cast()</code> and
+  <code>cast_by_ref()</code> is that <code>cast_by_ref()</code> operates on
+  the object by reference.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+class Example
+{
+    public string $value = "Original";
+}
+
+$object = new Example();
+
+$casted = Componere\cast_by_ref(
+    $object,
+    Example::class
+);
+
+$casted->value = "Changed";
+
+echo $object->value;
+// Changed
+
+?>
+</code></pre>
+
+<h5>Purpose</h5>
+
+<ul>
+  <li>Cast objects while preserving their reference.</li>
+  <li>Support runtime object manipulation.</li>
+  <li>Work with dynamically composed classes.</li>
+  <li>Enable advanced metaprogramming techniques.</li>
+</ul>
+
+<h5>Requirements</h5>
+
+<ul>
+  <li>The <strong>Componere</strong> extension must be installed.</li>
+  <li>The supplied value must be an object.</li>
+  <li>The target type must be a valid class.</li>
+</ul>
+
+<h5>Related Function</h5>
+
+<ul>
+  <li>
+    <code>Componere\cast()</code> – Performs an object cast without the
+    explicit by-reference behavior.
+  </li>
+  <li>
+    <code>Componere\cast_by_ref()</code> – Performs the cast while preserving
+    the object reference.
+  </li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>Componere is an external PHP extension.</li>
+  <li>It is not included in standard PHP.</li>
+  <li>This functionality is intended for advanced runtime object composition.</li>
+  <li>It should not be confused with ordinary PHP type casting.</li>
+</ul>
+
+<p>
+  <code>Componere\cast_by_ref()</code> is designed for advanced scenarios where
+  an existing object needs to be manipulated through a different compatible
+  class representation while maintaining its reference.
+</p>
 
 <h4 id="error-handling-and-logging">ERROR HANDLING AND LOGGING</h4>
 
