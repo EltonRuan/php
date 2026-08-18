@@ -36281,6 +36281,130 @@ echo $object->value;
 </nav>
 
 <h4 id="introduction">INTRODUCTION</h4>
+
+<p>
+  <strong>Error handling and logging</strong> is the process of detecting,
+  managing, reporting, and recording errors that occur during the execution of
+  a PHP application.
+</p>
+
+<p>
+  PHP provides a set of built-in mechanisms and functions that allow developers
+  to control how errors and exceptions are handled, determine which errors
+  should be reported, inspect the execution flow, and record relevant
+  information for debugging and monitoring.
+</p>
+
+<h5>Error Handling</h5>
+
+<p>
+  Error handling allows an application to respond appropriately when something
+  goes wrong instead of allowing unexpected behavior to occur without control.
+  PHP supports different error levels, including warnings, notices, and fatal
+  errors.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+error_reporting(E_ALL);
+
+echo $undefinedVariable;
+
+?>
+</code></pre>
+
+<h5>Exception Handling</h5>
+
+<p>
+  PHP also provides <strong>exceptions</strong>, which can be thrown and
+  handled using <code>try</code>, <code>catch</code>, and
+  <code>finally</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+try {
+    throw new Exception("Something went wrong.");
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+}
+
+?>
+</code></pre>
+
+<h5>Error Logging</h5>
+
+<p>
+  Logging allows errors and other relevant events to be recorded in a file,
+  system log, or another logging destination. This is especially important in
+  production environments, where errors should be monitored without exposing
+  sensitive implementation details to users.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+error_log("Application error occurred.");
+
+?>
+</code></pre>
+
+<h5>Custom Error Handlers</h5>
+
+<p>
+  PHP allows applications to register custom handlers for errors and
+  exceptions. This makes it possible to centralize error processing,
+  formatting, logging, and application-specific responses.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+set_error_handler(function (
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+) {
+    error_log(
+        "{$message} in {$file}:{$line}"
+    );
+});
+
+?>
+</code></pre>
+
+<h5>Debugging</h5>
+
+<p>
+  PHP provides debugging functions that can help developers understand what
+  happened during execution. Functions such as
+  <code>debug_backtrace()</code> and
+  <code>debug_print_backtrace()</code> can reveal the sequence of function
+  calls that led to a particular point in the application.
+</p>
+
+<h5>Main Topics</h5>
+
+<ul>
+  <li>Error reporting and configuration</li>
+  <li>Error handlers</li>
+  <li>Exception handlers</li>
+  <li>Error logging</li>
+  <li>Retrieving the last error</li>
+  <li>Clearing the last error</li>
+  <li>Debugging execution backtraces</li>
+  <li>Triggering user-defined errors</li>
+</ul>
+
+<p>
+  Proper error handling and logging are essential for building PHP
+  applications that are <strong>reliable, maintainable, debuggable, and
+  secure</strong>.
+</p>
+
 <h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
 <h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
 
