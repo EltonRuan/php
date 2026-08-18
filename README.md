@@ -36406,6 +36406,148 @@ set_error_handler(function (
 </p>
 
 <h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+
+<p>
+  PHP's <strong>Error Handling and Logging</strong> functionality is built
+  into the PHP runtime, so there is generally no separate extension to install.
+  The behavior of error reporting and logging is primarily controlled through
+  the <code>php.ini</code> configuration file and can also be adjusted at
+  runtime using PHP functions.
+</p>
+
+<h5>Configuration File</h5>
+
+<p>
+  The main configuration file for PHP is <code>php.ini</code>. The following
+  directives control important aspects of error handling and logging:
+</p>
+
+<pre><code class="language-ini">
+; Report which types of errors
+error_reporting = E_ALL
+
+; Display errors to the user
+display_errors = On
+
+; Display startup errors
+display_startup_errors = On
+
+; Enable error logging
+log_errors = On
+
+; File where errors should be logged
+error_log = /path/to/php-error.log
+</code></pre>
+
+<h5>Development Configuration</h5>
+
+<p>
+  During development, displaying errors can be useful because it makes
+  problems easier to identify.
+</p>
+
+<pre><code class="language-ini">
+error_reporting = E_ALL
+display_errors = On
+display_startup_errors = On
+log_errors = On
+</code></pre>
+
+<p>
+  With <code>E_ALL</code>, PHP reports all supported error levels that are
+  appropriate for the installed PHP version.
+</p>
+
+<h5>Production Configuration</h5>
+
+<p>
+  In production environments, errors should generally be logged instead of
+  being displayed directly to users. This prevents internal information such
+  as file paths, database details, and implementation details from being
+  exposed.
+</p>
+
+<pre><code class="language-ini">
+error_reporting = E_ALL
+display_errors = Off
+display_startup_errors = Off
+log_errors = On
+error_log = /var/log/php/error.log
+</code></pre>
+
+<h5>Configuring at Runtime</h5>
+
+<p>
+  Some error-handling settings can also be configured directly from PHP code.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+error_reporting(E_ALL);
+
+ini_set('display_errors', '1');
+ini_set('log_errors', '1');
+
+?>
+</code></pre>
+
+<h5>Checking the Current Configuration</h5>
+
+<p>
+  The <code>ini_get()</code> function can be used to inspect individual
+  configuration directives.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+echo ini_get('error_reporting');
+echo ini_get('display_errors');
+echo ini_get('log_errors');
+echo ini_get('error_log');
+
+?>
+</code></pre>
+
+<h5>Important Directives</h5>
+
+<ul>
+  <li>
+    <code>error_reporting</code> – Determines which error levels are reported.
+  </li>
+  <li>
+    <code>display_errors</code> – Controls whether errors are displayed as part
+    of the response.
+  </li>
+  <li>
+    <code>display_startup_errors</code> – Controls the display of errors that
+    occur during PHP's startup sequence.
+  </li>
+  <li>
+    <code>log_errors</code> – Enables or disables error logging.
+  </li>
+  <li>
+    <code>error_log</code> – Specifies the destination used for error logs.
+  </li>
+</ul>
+
+<h5>Best Practices</h5>
+
+<ul>
+  <li>Use <code>E_ALL</code> during development.</li>
+  <li>Enable <code>log_errors</code> in production.</li>
+  <li>Disable <code>display_errors</code> in production.</li>
+  <li>Protect log files from unauthorized access.</li>
+  <li>Avoid exposing sensitive information through error messages.</li>
+</ul>
+
+<p>
+  Proper configuration allows developers to obtain detailed information during
+  development while keeping production applications secure and preventing
+  internal errors from being exposed to end users.
+</p>
+
 <h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
 
 <h4 id="error-handling-functions">ERROR HANDLING FUNCTIONS</h4>
