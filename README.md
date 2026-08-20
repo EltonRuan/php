@@ -36708,6 +36708,168 @@ var_dump($currentLevel);
 </p>
 
 <h4 id="error-handling-functions">ERROR HANDLING FUNCTIONS</h4>
+
+
+<p>
+  PHP provides a collection of <strong>error handling functions</strong> for
+  detecting, reporting, logging, customizing, and debugging errors that occur
+  during script execution.
+</p>
+
+<p>
+  These functions allow developers to control how errors are reported, create
+  custom error and exception handlers, inspect previous errors, generate
+  user-defined errors, and analyze the execution flow of an application.
+</p>
+
+<h5>Main Error Handling Functions</h5>
+
+<ul>
+  <li>
+    <code>debug_backtrace()</code> – Generates a backtrace containing
+    information about the current function call stack.
+  </li>
+  <li>
+    <code>debug_print_backtrace()</code> – Prints the current function call
+    stack directly.
+  </li>
+  <li>
+    <code>error_clear_last()</code> – Clears the most recent error stored by
+    PHP.
+  </li>
+  <li>
+    <code>error_get_last()</code> – Retrieves information about the last error
+    that occurred.
+  </li>
+  <li>
+    <code>error_log()</code> – Sends an error message to a log, file, or other
+    configured destination.
+  </li>
+  <li>
+    <code>error_reporting()</code> – Specifies which PHP error levels should be
+    reported.
+  </li>
+  <li>
+    <code>get_error_handler()</code> – Retrieves information about the current
+    error handler.
+  </li>
+  <li>
+    <code>get_exception_handler()</code> – Retrieves the current exception
+    handler.
+  </li>
+  <li>
+    <code>restore_error_handler()</code> – Restores the previous error handler.
+  </li>
+  <li>
+    <code>restore_exception_handler()</code> – Restores the previous exception
+    handler.
+  </li>
+  <li>
+    <code>set_error_handler()</code> – Registers a custom error handler.
+  </li>
+  <li>
+    <code>set_exception_handler()</code> – Registers a custom exception handler.
+  </li>
+  <li>
+    <code>trigger_error()</code> – Generates a user-level error, warning, or
+    notice.
+  </li>
+  <li>
+    <code>user_error()</code> – Alias of <code>trigger_error()</code>.
+  </li>
+</ul>
+
+<h5>Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+error_reporting(E_ALL);
+
+set_error_handler(function (
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+) {
+    error_log(
+        "{$message} in {$file}:{$line}"
+    );
+});
+
+trigger_error(
+    "Example warning",
+    E_USER_WARNING
+);
+
+?>
+</code></pre>
+
+<h5>Error vs Exception Handling</h5>
+
+<p>
+  PHP errors and exceptions are related but are handled through different
+  mechanisms. Functions such as <code>set_error_handler()</code> are used for
+  handling supported PHP errors, while <code>set_exception_handler()</code> is
+  used for uncaught exceptions.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+set_exception_handler(function (Throwable $exception) {
+    error_log($exception->getMessage());
+
+    echo "An unexpected error occurred.";
+});
+
+throw new Exception("Something went wrong.");
+
+?>
+</code></pre>
+
+<h5>Debugging Functions</h5>
+
+<p>
+  Backtrace functions are particularly useful for identifying how execution
+  reached a specific point in the application.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+function first()
+{
+    second();
+}
+
+function second()
+{
+    print_r(debug_backtrace());
+}
+
+first();
+
+?>
+</code></pre>
+
+<h5>Best Practices</h5>
+
+<ul>
+  <li>Use <code>E_ALL</code> during development.</li>
+  <li>Log errors in production environments.</li>
+  <li>Avoid displaying sensitive error information to users.</li>
+  <li>Use custom handlers when centralized error processing is necessary.</li>
+  <li>Use exceptions for exceptional application conditions.</li>
+  <li>Keep error logs protected from unauthorized access.</li>
+</ul>
+
+<p>
+  Understanding these functions provides the foundation for building a
+  consistent error handling, logging, and debugging strategy in PHP
+  applications.
+</p>
+
 <h4 id="debug-backtrace">DEBUG_BACKTRACE</h4>
 <h4 id="debug-print-backtrace">DEBUG_PRINT_BACKTRACE</h4>
 <h4 id="error-clear-last">ERROR_CLEAR_LAST</h4>
