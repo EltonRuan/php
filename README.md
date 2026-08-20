@@ -36709,7 +36709,6 @@ var_dump($currentLevel);
 
 <h4 id="error-handling-functions">ERROR HANDLING FUNCTIONS</h4>
 
-
 <p>
   PHP provides a collection of <strong>error handling functions</strong> for
   detecting, reporting, logging, customizing, and debugging errors that occur
