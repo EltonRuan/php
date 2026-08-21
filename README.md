@@ -36870,6 +36870,209 @@ first();
 </p>
 
 <h4 id="debug-backtrace">DEBUG_BACKTRACE</h4>
+
+
+<p>
+  <strong>debug_backtrace()</strong> is a PHP function that generates a
+  <strong>backtrace</strong> containing information about the sequence of
+  function and method calls that led to the current point in the execution.
+</p>
+
+<p>
+  It is primarily used for <strong>debugging</strong>, allowing developers to
+  determine which functions were called, which files were involved, and which
+  arguments were passed along the execution path.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+debug_backtrace(int $options = DEBUG_BACKTRACE_PROVIDE_OBJECT, int $limit = 0): array
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+function firstFunction()
+{
+    secondFunction();
+}
+
+function secondFunction()
+{
+    $trace = debug_backtrace();
+
+    print_r($trace);
+}
+
+firstFunction();
+
+?>
+</code></pre>
+
+<p>
+  The result contains information about the calls that led to
+  <code>secondFunction()</code>.
+</p>
+
+<h5>Example Result</h5>
+
+<pre><code>
+Array
+(
+    [0] =&gt; Array
+        (
+            [function] =&gt; secondFunction
+            [file] =&gt; /var/www/index.php
+            [line] =&gt; 8
+        )
+
+    [1] =&gt; Array
+        (
+            [function] =&gt; firstFunction
+            [file] =&gt; /var/www/index.php
+            [line] =&gt; 13
+        )
+)
+</code></pre>
+
+<h5>Information Available</h5>
+
+<p>
+  Depending on the call context and options used, each stack frame can contain
+  information such as:
+</p>
+
+<ul>
+  <li><code>function</code> – Name of the function being called.</li>
+  <li><code>class</code> – Class associated with the call, when applicable.</li>
+  <li><code>type</code> – Type of call, such as <code>-&gt;</code> or
+    <code>::</code>.</li>
+  <li><code>file</code> – File where the call occurred.</li>
+  <li><code>line</code> – Line where the call occurred.</li>
+  <li><code>args</code> – Arguments passed to the function, when included.</li>
+</ul>
+
+<h5>Limiting the Backtrace</h5>
+
+<p>
+  The <code>$limit</code> parameter can restrict the number of stack frames
+  returned.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+function first()
+{
+    second();
+}
+
+function second()
+{
+    third();
+}
+
+function third()
+{
+    print_r(debug_backtrace(0, 2));
+}
+
+first();
+
+?>
+</code></pre>
+
+<p>
+  In this example, only the first two stack frames are returned.
+</p>
+
+<h5>Using Options</h5>
+
+<p>
+  The first parameter controls which information is included in the
+  backtrace.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+$trace = debug_backtrace(
+    DEBUG_BACKTRACE_IGNORE_ARGS
+);
+
+print_r($trace);
+
+?>
+</code></pre>
+
+<p>
+  <code>DEBUG_BACKTRACE_IGNORE_ARGS</code> prevents function arguments from
+  being included in the generated backtrace.
+</p>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Debugging unexpected function calls</li>
+  <li>Finding the origin of an error</li>
+  <li>Inspecting execution flow</li>
+  <li>Building custom logging systems</li>
+  <li>Diagnosing complex application behavior</li>
+</ul>
+
+<h5>Example with Logging</h5>
+
+<pre><code class="language-php">
+<?php
+
+function logDebugInformation()
+{
+    $trace = debug_backtrace(
+        DEBUG_BACKTRACE_IGNORE_ARGS
+    );
+
+    error_log(
+        print_r($trace, true)
+    );
+}
+
+function processData()
+{
+    logDebugInformation();
+}
+
+processData();
+
+?>
+</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    <code>debug_backtrace()</code> returns an array of stack frames.
+  </li>
+  <li>
+    It is primarily intended for debugging and diagnostics.
+  </li>
+  <li>
+    Including function arguments can expose sensitive information, so
+    <code>DEBUG_BACKTRACE_IGNORE_ARGS</code> can be useful when logging.
+  </li>
+  <li>
+    Generating detailed backtraces can have a performance cost, especially in
+    frequently executed code.
+  </li>
+</ul>
+
+<p>
+  In short, <code>debug_backtrace()</code> answers the question:
+  <strong>"How did the application get here?"</strong>
+  by providing a detailed representation of the current execution call stack.
+</p>
 <h4 id="debug-print-backtrace">DEBUG_PRINT_BACKTRACE</h4>
 <h4 id="error-clear-last">ERROR_CLEAR_LAST</h4>
 <h4 id="error-get-last">ERROR_GET_LAST</h4>
