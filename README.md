@@ -37073,6 +37073,7 @@ processData();
   <strong>"How did the application get here?"</strong>
   by providing a detailed representation of the current execution call stack.
 </p>
+
 <h4 id="debug-print-backtrace">DEBUG_PRINT_BACKTRACE</h4>
 <h4 id="error-clear-last">ERROR_CLEAR_LAST</h4>
 <h4 id="error-get-last">ERROR_GET_LAST</h4>
