@@ -37075,6 +37075,179 @@ processData();
 </p>
 
 <h4 id="debug-print-backtrace">DEBUG_PRINT_BACKTRACE</h4>
+
+<p>
+  <strong>debug_print_backtrace()</strong> is a PHP function that prints the
+  current <strong>execution backtrace</strong>. It displays the sequence of
+  function and method calls that led to the point where the function was
+  called.
+</p>
+
+<p>
+  Unlike <code>debug_backtrace()</code>, which returns the backtrace as an
+  array, <code>debug_print_backtrace()</code> directly prints the information.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+debug_print_backtrace(
+    int $options = 0,
+    int $limit = 0
+): void
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+function firstFunction()
+{
+    secondFunction();
+}
+
+function secondFunction()
+{
+    debug_print_backtrace();
+}
+
+firstFunction();
+
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+#0 secondFunction() called at [/var/www/index.php:13]
+#1 firstFunction() called at [/var/www/index.php:16]
+</code></pre>
+
+<p>
+  The output shows the functions involved in the execution path and where
+  those calls originated.
+</p>
+
+<h5>Limiting the Backtrace</h5>
+
+<p>
+  The <code>$limit</code> parameter can be used to restrict the number of
+  stack frames that are printed.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+function first()
+{
+    second();
+}
+
+function second()
+{
+    third();
+}
+
+function third()
+{
+    debug_print_backtrace(0, 2);
+}
+
+first();
+
+?>
+</code></pre>
+
+<p>
+  In this example, only the first two levels of the backtrace are displayed.
+</p>
+
+<h5>Ignoring Function Arguments</h5>
+
+<p>
+  The <code>DEBUG_BACKTRACE_IGNORE_ARGS</code> constant can be used through
+  the <code>$options</code> parameter to prevent function arguments from
+  appearing in the output.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+function processUser($username, $password)
+{
+    debug_print_backtrace(
+        DEBUG_BACKTRACE_IGNORE_ARGS
+    );
+}
+
+processUser("Elton", "secret");
+
+?>
+</code></pre>
+
+<p>
+  Ignoring arguments can be useful when debugging or logging code that may
+  contain sensitive information.
+</p>
+
+<h5>Comparison with debug_backtrace()</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Result</th>
+      <th>Typical Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>debug_backtrace()</code></td>
+      <td>Returns an array</td>
+      <td>Programmatic inspection</td>
+    </tr>
+    <tr>
+      <td><code>debug_print_backtrace()</code></td>
+      <td>Prints the backtrace</td>
+      <td>Direct debugging output</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Debugging unexpected execution paths</li>
+  <li>Identifying the origin of function calls</li>
+  <li>Inspecting nested function calls</li>
+  <li>Quick debugging during development</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    <code>debug_print_backtrace()</code> returns <code>void</code>.
+  </li>
+  <li>
+    It directly prints the generated backtrace.
+  </li>
+  <li>
+    It should generally not be used for user-facing output in production.
+  </li>
+  <li>
+    Be careful when displaying arguments because they may contain sensitive
+    information.
+  </li>
+</ul>
+
+<p>
+  In short, <code>debug_print_backtrace()</code> is useful when you want to
+  <strong>immediately see the execution path</strong> that led to a specific
+  point in your PHP application.
+</p>
+
 <h4 id="error-clear-last">ERROR_CLEAR_LAST</h4>
 <h4 id="error-get-last">ERROR_GET_LAST</h4>
 <h4 id="error-log">ERROR_LOG</h4>
