@@ -37249,6 +37249,136 @@ processUser("Elton", "secret");
 </p>
 
 <h4 id="error-clear-last">ERROR_CLEAR_LAST</h4>
+
+
+<p>
+  <strong>error_clear_last()</strong> is a PHP function that clears the
+  information about the <strong>last error</strong> stored by PHP.
+</p>
+
+<p>
+  It is useful when an application needs to remove a previously recorded error
+  before performing another operation or before checking the result of a
+  subsequent operation with <code>error_get_last()</code>.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+error_clear_last(): void
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+@file_get_contents("missing-file.txt");
+
+var_dump(error_get_last());
+
+error_clear_last();
+
+var_dump(error_get_last());
+
+?>
+</code></pre>
+
+<h5>Example Output</h5>
+
+<pre><code>
+array(
+    "type" =&gt; 2,
+    "message" =&gt; "...",
+    "file" =&gt; "...",
+    "line" =&gt; ...
+)
+
+NULL
+</code></pre>
+
+<p>
+  After <code>error_clear_last()</code> is called, the information returned by
+  <code>error_get_last()</code> is cleared and subsequent calls return
+  <code>NULL</code> until another applicable error occurs.
+</p>
+
+<h5>Practical Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+@file_get_contents("missing-file.txt");
+
+error_clear_last();
+
+$result = file_get_contents("existing-file.txt");
+
+if ($result === false) {
+    $error = error_get_last();
+
+    if ($error !== null) {
+        echo $error["message"];
+    }
+}
+
+?>
+</code></pre>
+
+<p>
+  Clearing the previous error ensures that an error retrieved later does not
+  refer to an earlier operation.
+</p>
+
+<h5>Return Value</h5>
+
+<p>
+  The function does not return a value. Its return type is
+  <code>void</code>.
+</p>
+
+<h5>Related Function</h5>
+
+<ul>
+  <li>
+    <code>error_get_last()</code> – Retrieves information about the last
+    error.
+  </li>
+  <li>
+    <code>error_clear_last()</code> – Clears information about the last error.
+  </li>
+</ul>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Resetting the last error before a new operation</li>
+  <li>Preventing stale error information from being processed</li>
+  <li>Implementing custom error-handling logic</li>
+  <li>Controlling how <code>error_get_last()</code> is used</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    <code>error_clear_last()</code> only clears the information about the last
+    error; it does not undo the operation that caused the error.
+  </li>
+  <li>
+    It returns <code>void</code>.
+  </li>
+  <li>
+    It is commonly used together with <code>error_get_last()</code>.
+  </li>
+</ul>
+
+<p>
+  In short, <code>error_clear_last()</code> allows PHP applications to
+  <strong>reset the stored last-error information</strong>, making it useful
+  when implementing controlled error detection and logging.
+</p>
+
 <h4 id="error-get-last">ERROR_GET_LAST</h4>
 <h4 id="error-log">ERROR_LOG</h4>
 <h4 id="error-reporting">ERROR_REPORTING</h4>
