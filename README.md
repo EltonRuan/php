@@ -37546,6 +37546,204 @@ if ($error !== null) {
 </p>
 
 <h4 id="error-log">ERROR_LOG</h4>
+
+
+<p>
+  <strong>error_log()</strong> is a PHP function used to send an error message
+  or other diagnostic information to the configured <strong>error log</strong>,
+  a file, the system logger, or another supported destination.
+</p>
+
+<p>
+  It is commonly used to record errors and application events without exposing
+  internal information directly to the user.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+error_log(
+    string $message,
+    int $message_type = 0,
+    ?string $destination = null,
+    ?string $additional_headers = null
+): bool
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+error_log("An unexpected error occurred.");
+
+?>
+</code></pre>
+
+<p>
+  With the default message type, PHP sends the message to the configured
+  logging destination.
+</p>
+
+<h5>Logging an Exception</h5>
+
+<pre><code class="language-php">
+<?php
+
+try {
+    throw new Exception("Database connection failed.");
+} catch (Throwable $exception) {
+    error_log($exception->getMessage());
+}
+
+?>
+</code></pre>
+
+<h5>Logging to a File</h5>
+
+<p>
+  A specific file can be provided as the destination by using message type
+  <code>3</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+error_log(
+    "Database connection failed.",
+    3,
+    "/var/log/my-application.log"
+);
+
+?>
+</code></pre>
+
+<h5>Message Types</h5>
+
+<ul>
+  <li>
+    <code>0</code> – Sends the message to PHP's configured system logger.
+  </li>
+  <li>
+    <code>1</code> – Sends the message by email using the
+    <code>additional_headers</code> parameter.
+  </li>
+  <li>
+    <code>3</code> – Appends the message to the specified file.
+  </li>
+    <li>
+    <code>4</code> – Sends the message directly to the SAPI logging handler.
+  </li>
+</ul>
+
+<h5>Logging Variables</h5>
+
+<p>
+  <code>error_log()</code> can also be used to record useful debugging
+  information.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+$userId = 42;
+
+error_log(
+    "Processing user ID: " . $userId
+);
+
+?>
+</code></pre>
+
+<h5>Logging Structured Data</h5>
+
+<p>
+  Complex values can be converted into strings before being written to the
+  log.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+$user = [
+    "id" =&gt; 42,
+    "name" =&gt; "Elton"
+];
+
+error_log(
+    print_r($user, true)
+);
+
+?>
+</code></pre>
+
+<h5>Using JSON</h5>
+
+<pre><code class="language-php">
+<?php
+
+$data = [
+    "event" =&gt; "login",
+    "user_id" =&gt; 42
+];
+
+error_log(
+    json_encode($data)
+);
+
+?>
+</code></pre>
+
+<h5>Return Value</h5>
+
+<p>
+  The function returns <code>true</code> if the message was successfully
+  accepted for logging and <code>false</code> if it could not be logged.
+</p>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Recording application errors</li>
+  <li>Logging exceptions</li>
+  <li>Debugging production problems</li>
+  <li>Recording important application events</li>
+  <li>Creating custom application logs</li>
+</ul>
+
+<h5>Best Practices</h5>
+
+<ul>
+  <li>Do not log passwords or other sensitive credentials.</li>
+  <li>Protect log files from unauthorized access.</li>
+  <li>Use structured and meaningful log messages.</li>
+  <li>Include useful contextual information when appropriate.</li>
+  <li>Use centralized logging for larger applications.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    <code>error_log()</code> does not automatically throw an exception.
+  </li>
+  <li>
+    The default destination depends on the PHP configuration and environment.
+  </li>
+  <li>
+    Logging should be configured differently for development and production.
+  </li>
+  <li>
+    Avoid exposing internal error messages directly to end users.
+  </li>
+</ul>
+
+<p>
+  In short, <code>error_log()</code> provides a simple way to
+  <strong>record errors, diagnostic information, and application events</strong>
+  without displaying them directly to the user.
+</p>
+
 <h4 id="error-reporting">ERROR_REPORTING</h4>
 <h4 id="get-error-handler">GET_ERROR_HANDLER</h4>
 <h4 id="get-exception-handler">GET_EXCEPTION_HANDLER</h4>
