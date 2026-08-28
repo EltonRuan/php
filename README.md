@@ -37941,6 +37941,138 @@ error_reporting($previous);
 </p>
 
 <h4 id="get-error-handler">GET_ERROR_HANDLER</h4>
+
+<p>
+  <strong>get_error_handler()</strong> is a PHP function used to retrieve the
+  <strong>currently registered error handler</strong>.
+</p>
+
+<p>
+  It is useful when an application needs to inspect whether a custom error
+  handler has been registered and identify the callable responsible for
+  handling errors.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+get_error_handler(): ?array
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+function myErrorHandler(
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+) {
+    echo "Error: " . $message;
+}
+
+set_error_handler('myErrorHandler');
+
+$handler = get_error_handler();
+
+var_dump($handler);
+
+?>
+</code></pre>
+
+<h5>Return Value</h5>
+
+<p>
+  When a custom error handler is registered, the function returns information
+  about the handler. If there is no custom error handler, it returns
+  <code>NULL</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+$handler = get_error_handler();
+
+if ($handler === null) {
+    echo "No custom error handler is registered.";
+}
+
+?>
+</code></pre>
+
+<h5>Inspecting the Handler</h5>
+
+<p>
+  The returned information can be inspected to determine the callable used as
+  the current error handler.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+function handleError(
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+) {
+    error_log($message);
+}
+
+set_error_handler('handleError');
+
+$handler = get_error_handler();
+
+var_dump($handler);
+
+?>
+</code></pre>
+
+<h5>Related Functions</h5>
+
+<ul>
+  <li>
+    <code>set_error_handler()</code> – Registers a custom error handler.
+  </li>
+  <li>
+    <code>get_error_handler()</code> – Retrieves the current error handler.
+  </li>
+  <li>
+    <code>restore_error_handler()</code> – Restores the previous error handler.
+  </li>
+</ul>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Inspecting the current error handler</li>
+  <li>Debugging custom error-handling configurations</li>
+  <li>Checking whether an application has registered a handler</li>
+  <li>Working with dynamically configured error handlers</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    The function is intended for inspecting the currently registered custom
+    error handler.
+  </li>
+  <li>
+    It does not register, remove, or execute the error handler.
+  </li>
+  <li>
+    If no custom handler is registered, the result is <code>NULL</code>.
+  </li>
+</ul>
+
+<p>
+  In short, <code>get_error_handler()</code> allows an application to
+  <strong>inspect the error handler currently registered by PHP</strong>.
+</p>
+
 <h4 id="get-exception-handler">GET_EXCEPTION_HANDLER</h4>
 <h4 id="restore-error-handler">RESTORE_ERROR_HANDLER</h4>
 <h4 id="restore-exception-handler">RESTORE_EXCEPTION_HANDLER</h4>
