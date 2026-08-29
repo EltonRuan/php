@@ -38074,6 +38074,138 @@ var_dump($handler);
 </p>
 
 <h4 id="get-exception-handler">GET_EXCEPTION_HANDLER</h4>
+
+<p>
+  <strong>get_exception_handler()</strong> is a PHP function used to retrieve
+  the <strong>currently registered exception handler</strong>.
+</p>
+
+<p>
+  It is useful when an application needs to inspect whether a custom exception
+  handler has been registered and identify the callable responsible for
+  handling uncaught exceptions.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+get_exception_handler(): ?callable
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+function handleException(Throwable $exception)
+{
+    echo "Exception: " . $exception->getMessage();
+}
+
+set_exception_handler('handleException');
+
+$handler = get_exception_handler();
+
+var_dump($handler);
+
+?>
+</code></pre>
+
+<h5>Return Value</h5>
+
+<p>
+  If a custom exception handler is registered, the function returns the
+  callable used as the handler. If no custom exception handler is registered,
+  it returns <code>NULL</code>.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+$handler = get_exception_handler();
+
+if ($handler === null) {
+    echo "No custom exception handler is registered.";
+}
+
+?>
+</code></pre>
+
+<h5>Using a Class Method</h5>
+
+<p>
+  An exception handler can also be a static or instance method of a class.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+class ErrorHandler
+{
+    public static function handle(Throwable $exception)
+    {
+        error_log($exception->getMessage());
+    }
+}
+
+set_exception_handler(
+    [ErrorHandler::class, 'handle']
+);
+
+$handler = get_exception_handler();
+
+var_dump($handler);
+
+?>
+</code></pre>
+
+<h5>Related Functions</h5>
+
+<ul>
+  <li>
+    <code>set_exception_handler()</code> – Registers a custom exception
+    handler.
+  </li>
+  <li>
+    <code>get_exception_handler()</code> – Retrieves the current exception
+    handler.
+  </li>
+  <li>
+    <code>restore_exception_handler()</code> – Restores the previous exception
+    handler.
+  </li>
+</ul>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Inspecting the current exception handler</li>
+  <li>Debugging exception-handling configurations</li>
+  <li>Checking whether a custom handler has been registered</li>
+  <li>Working with custom application-wide exception handling</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    The function only retrieves the registered handler; it does not execute it.
+  </li>
+  <li>
+    If no custom exception handler exists, the result is <code>NULL</code>.
+  </li>
+  <li>
+    The handler is normally used for exceptions that are not caught by a
+    <code>try/catch</code> block.
+  </li>
+</ul>
+
+<p>
+  In short, <code>get_exception_handler()</code> allows PHP applications to
+  <strong>inspect the callable currently registered to handle uncaught
+  exceptions</strong>.
+</p>
+
 <h4 id="restore-error-handler">RESTORE_ERROR_HANDLER</h4>
 <h4 id="restore-exception-handler">RESTORE_EXCEPTION_HANDLER</h4>
 <h4 id="set-error-handler">SET_ERROR_HANDLER</h4>
