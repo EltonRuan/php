@@ -38207,6 +38207,174 @@ var_dump($handler);
 </p>
 
 <h4 id="restore-error-handler">RESTORE_ERROR_HANDLER</h4>
+
+<p>
+  <strong>restore_error_handler()</strong> is a PHP function used to restore
+  the <strong>previous error handler</strong> that was active before the most
+  recent call to <code>set_error_handler()</code>.
+</p>
+
+<p>
+  It is useful when an application temporarily replaces the default or
+  existing error handler and needs to return to the previous configuration
+  afterward.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+restore_error_handler(): bool
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+function customErrorHandler(
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+) {
+    echo "Custom handler: " . $message;
+}
+
+set_error_handler('customErrorHandler');
+
+/*
+ * The custom handler is active here.
+ */
+
+restore_error_handler();
+
+/*
+ * The previous error handler is restored.
+ */
+
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+
+<p>
+  When <code>set_error_handler()</code> registers a new handler, PHP keeps the
+  previous handler in a stack. Calling <code>restore_error_handler()</code>
+  removes the current handler and restores the previous one.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+function firstHandler(
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+) {
+    echo "First handler";
+}
+
+function secondHandler(
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+) {
+    echo "Second handler";
+}
+
+set_error_handler('firstHandler');
+
+set_error_handler('secondHandler');
+
+/* secondHandler is currently active */
+
+restore_error_handler();
+
+/* firstHandler is active again */
+
+?>
+</code></pre>
+
+<h5>Using It Temporarily</h5>
+
+<p>
+  A common use is to install a custom handler for a specific operation and
+  restore the previous handler afterward.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+set_error_handler(function (
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+) {
+    error_log($message);
+});
+
+$result = file_get_contents("example.txt");
+
+restore_error_handler();
+
+?>
+</code></pre>
+
+<h5>Return Value</h5>
+
+<p>
+  The function returns <code>true</code> when the previous error handler was
+  successfully restored and <code>false</code> when there is no previous
+  handler to restore.
+</p>
+
+<h5>Related Functions</h5>
+
+<ul>
+  <li>
+    <code>set_error_handler()</code> – Registers a custom error handler.
+  </li>
+  <li>
+    <code>get_error_handler()</code> – Retrieves the current error handler.
+  </li>
+  <li>
+    <code>restore_error_handler()</code> – Restores the previous error handler.
+  </li>
+</ul>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Temporarily replacing an error handler</li>
+  <li>Restoring the application's previous error-handling behavior</li>
+  <li>Managing multiple custom error handlers</li>
+  <li>Keeping error handling localized to a specific operation</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    It only affects handlers registered through
+    <code>set_error_handler()</code>.
+  </li>
+  <li>
+    It does not clear errors stored by <code>error_get_last()</code>.
+  </li>
+  <li>
+    Calling it repeatedly can restore handlers further down the handler stack.
+  </li>
+</ul>
+
+<p>
+  In short, <code>restore_error_handler()</code> allows PHP applications to
+  <strong>return to the previous error-handling configuration</strong> after
+  temporarily using a custom error handler.
+</p>
+
 <h4 id="restore-exception-handler">RESTORE_EXCEPTION_HANDLER</h4>
 <h4 id="set-error-handler">SET_ERROR_HANDLER</h4>
 <h4 id="set-exception-handler">SET_EXCEPTION_HANDLER</h4>
