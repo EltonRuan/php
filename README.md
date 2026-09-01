@@ -38376,6 +38376,170 @@ restore_error_handler();
 </p>
 
 <h4 id="restore-exception-handler">RESTORE_EXCEPTION_HANDLER</h4>
+
+<p>
+  <strong>restore_exception_handler()</strong> is a PHP function used to
+  restore the <strong>previous exception handler</strong> that was active
+  before the most recent call to <code>set_exception_handler()</code>.
+</p>
+
+<p>
+  It is useful when an application temporarily registers a custom exception
+  handler and needs to return to the previous handler afterward.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">
+restore_exception_handler(): bool
+</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">
+<?php
+
+function customExceptionHandler(Throwable $exception)
+{
+    echo "Custom handler: " . $exception->getMessage();
+}
+
+set_exception_handler('customExceptionHandler');
+
+/*
+ * The custom exception handler is active here.
+ */
+
+restore_exception_handler();
+
+/*
+ * The previous exception handler is restored.
+ */
+
+?>
+</code></pre>
+
+<h5>How It Works</h5>
+
+<p>
+  When <code>set_exception_handler()</code> registers a new exception handler,
+  PHP keeps the previous handler. Calling
+  <code>restore_exception_handler()</code> restores that previous handler.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+function firstHandler(Throwable $exception)
+{
+    echo "First handler";
+}
+
+function secondHandler(Throwable $exception)
+{
+    echo "Second handler";
+}
+
+set_exception_handler('firstHandler');
+
+set_exception_handler('secondHandler');
+
+/*
+ * secondHandler is currently active.
+ */
+
+restore_exception_handler();
+
+/*
+ * firstHandler is active again.
+ */
+
+?>
+</code></pre>
+
+<h5>Using It Temporarily</h5>
+
+<p>
+  A custom exception handler can be registered for a specific section of the
+  application and then restored when that section has finished.
+</p>
+
+<pre><code class="language-php">
+<?php
+
+set_exception_handler(function (Throwable $exception) {
+    error_log($exception->getMessage());
+
+    echo "An error occurred.";
+});
+
+try {
+    throw new Exception("Example exception");
+} catch (Throwable $exception) {
+    // Exception handled locally.
+}
+
+restore_exception_handler();
+
+?>
+</code></pre>
+
+<h5>Return Value</h5>
+
+<p>
+  The function returns <code>true</code> when the previous exception handler
+  is successfully restored and <code>false</code> when there is no previous
+  handler to restore.
+</p>
+
+<h5>Related Functions</h5>
+
+<ul>
+  <li>
+    <code>set_exception_handler()</code> – Registers a custom exception
+    handler.
+  </li>
+  <li>
+    <code>get_exception_handler()</code> – Retrieves the current exception
+    handler.
+  </li>
+  <li>
+    <code>restore_exception_handler()</code> – Restores the previous exception
+    handler.
+  </li>
+</ul>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+  <li>Temporarily replacing an exception handler</li>
+  <li>Restoring the application's previous exception handling behavior</li>
+  <li>Managing multiple custom exception handlers</li>
+  <li>Limiting a custom handler to a specific part of the application</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+  <li>
+    It affects exception handlers registered through
+    <code>set_exception_handler()</code>.
+  </li>
+  <li>
+    It does not catch or handle an exception by itself.
+  </li>
+  <li>
+    It restores the previous handler rather than removing all exception
+    handling.
+  </li>
+</ul>
+
+<p>
+  In short, <code>restore_exception_handler()</code> allows a PHP application
+  to <strong>return to the previous exception-handling configuration</strong>
+  after temporarily using a custom exception handler.
+</p>
+
 <h4 id="set-error-handler">SET_ERROR_HANDLER</h4>
 <h4 id="set-exception-handler">SET_EXCEPTION_HANDLER</h4>
 <h4 id="trigger-error">TRIGGER_ERROR</h4>
