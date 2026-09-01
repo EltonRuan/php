@@ -38541,6 +38541,9 @@ restore_exception_handler();
 </p>
 
 <h4 id="set-error-handler">SET_ERROR_HANDLER</h4>
+
+
+
 <h4 id="set-exception-handler">SET_EXCEPTION_HANDLER</h4>
 <h4 id="trigger-error">TRIGGER_ERROR</h4>
 <h4 id="user-error">USER_ERROR</h4>
