@@ -38781,6 +38781,255 @@ restore_error_handler();
 </p>
 
 <h4 id="set-exception-handler">SET_EXCEPTION_HANDLER</h4>
+
+<p>
+    The <code>set_exception_handler()</code> function is used to register a custom function that will be called when an
+    <strong>uncaught exception</strong> occurs in a PHP script. It allows developers to define how exceptions that are not
+    handled by a <code>try/catch</code> block should be processed.
+</p>
+
+<p>
+    By default, an uncaught exception causes PHP to terminate the script and display an error message. With
+    <code>set_exception_handler()</code>, you can replace this default behavior with your own logic, such as logging the
+    exception, displaying a friendly error page, or returning a standardized response.
+</p>
+
+<h5>Function Signature</h5>
+
+<pre><code class="language-php">set_exception_handler(?callable $callback): ?callable</code></pre>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">&lt;?php
+
+function exceptionHandler(Throwable $exception): void
+{
+    echo "An unexpected error occurred.";
+}
+
+set_exception_handler('exceptionHandler');
+
+throw new Exception('Something went wrong.');</code></pre>
+
+<p>
+    In this example, the exception is not handled by a <code>try/catch</code> block. PHP therefore calls the registered
+    <code>exceptionHandler()</code> function instead of using the default uncaught-exception behavior.
+</p>
+
+<h5>Exception Handler Parameter</h5>
+
+<p>
+    The callback receives one argument containing the exception object. The recommended type is
+    <code>Throwable</code>, because it allows the handler to work with both <code>Exception</code> and
+    <code>Error</code> objects.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function exceptionHandler(Throwable $exception): void
+{
+    echo "Message: " . $exception-&gt;getMessage() . "&lt;br&gt;";
+    echo "File: " . $exception-&gt;getFile() . "&lt;br&gt;";
+    echo "Line: " . $exception-&gt;getLine();
+}
+
+set_exception_handler('exceptionHandler');
+
+throw new Exception('Database connection failed.');</code></pre>
+
+<h5>Using an Anonymous Function</h5>
+
+<p>
+    The handler can also be defined using an anonymous function or closure.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+set_exception_handler(function (Throwable $exception): void {
+    echo "Unexpected error: " . $exception-&gt;getMessage();
+});
+
+throw new RuntimeException('Operation failed.');</code></pre>
+
+<h5>Using a Class Method</h5>
+
+<p>
+    A class method can also be registered as the exception handler.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+class ErrorHandler
+{
+    public static function handle(Throwable $exception): void
+    {
+        echo "Error: " . $exception-&gt;getMessage();
+    }
+}
+
+set_exception_handler([ErrorHandler::class, 'handle']);
+
+throw new Exception('Something went wrong.');</code></pre>
+
+<h5>Handling Exceptions Globally</h5>
+
+<p>
+    One of the most common uses of <code>set_exception_handler()</code> is to create a centralized exception handling
+    mechanism for an application.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function handleException(Throwable $exception): void
+{
+    error_log(
+        $exception-&gt;getMessage() .
+        " in " . $exception-&gt;getFile() .
+        " on line " . $exception-&gt;getLine()
+    );
+
+    echo "An internal error occurred. Please try again later.";
+}
+
+set_exception_handler('handleException');
+
+throw new RuntimeException('Unable to process request.');</code></pre>
+
+<p>
+    This approach is useful for applications because the internal exception details can be logged while the user receives
+    a safer and more appropriate message.
+</p>
+
+<h5>Return Value</h5>
+
+<p>
+    The function returns the previously defined exception handler, or <code>null</code> if no previous handler was
+    registered.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function handlerOne(Throwable $exception): void
+{
+    echo "Handler one";
+}
+
+function handlerTwo(Throwable $exception): void
+{
+    echo "Handler two";
+}
+
+set_exception_handler('handlerOne');
+
+$previousHandler = set_exception_handler('handlerTwo');
+
+var_dump($previousHandler);</code></pre>
+
+<p>
+    In this example, registering <code>handlerTwo</code> replaces <code>handlerOne</code>, and the previous handler is
+    returned.
+</p>
+
+<h5>Replacing the Handler</h5>
+
+<p>
+    Calling <code>set_exception_handler()</code> again replaces the currently registered exception handler.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function firstHandler(Throwable $exception): void
+{
+    echo "First handler";
+}
+
+function secondHandler(Throwable $exception): void
+{
+    echo "Second handler";
+}
+
+set_exception_handler('firstHandler');
+set_exception_handler('secondHandler');
+
+throw new Exception('Test exception.');</code></pre>
+
+<p>
+    The second handler is the one that will be executed because it replaced the first handler.
+</p>
+
+<h5>Uncaught Exceptions</h5>
+
+<p>
+    The registered handler is used only when an exception reaches the top level without being caught by a
+    <code>try/catch</code> statement.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+set_exception_handler(function (Throwable $exception): void {
+    echo "Global handler";
+});
+
+try {
+    throw new Exception('Test');
+} catch (Exception $exception) {
+    echo "Exception handled locally";
+}</code></pre>
+
+<p>
+    The global handler is not called in this case because the exception was already handled by the
+    <code>catch</code> block.
+</p>
+
+<h5>Removing the Handler</h5>
+
+<p>
+    The currently registered exception handler can be removed using <code>restore_exception_handler()</code>.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function handler(Throwable $exception): void
+{
+    echo "Custom handler";
+}
+
+set_exception_handler('handler');
+
+restore_exception_handler();</code></pre>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+    <li>Creating a centralized exception handling system.</li>
+    <li>Logging uncaught exceptions.</li>
+    <li>Displaying friendly error messages to users.</li>
+    <li>Creating custom error pages.</li>
+    <li>Returning standardized responses in web applications and APIs.</li>
+    <li>Preventing sensitive exception details from being exposed to users.</li>
+    <li>Monitoring unexpected application failures.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li><code>set_exception_handler()</code> handles <strong>uncaught</strong> exceptions.</li>
+    <li>Exceptions handled by a <code>try/catch</code> block do not reach the global handler.</li>
+    <li>The callback receives a <code>Throwable</code> object.</li>
+    <li>Registering a new handler replaces the previously registered handler.</li>
+    <li><code>restore_exception_handler()</code> can be used to restore the previous handler.</li>
+    <li>The exception handler should avoid exposing sensitive information such as database credentials or internal paths to end users.</li>
+    <li>For production applications, it is generally better to log detailed exception information while showing users a generic error message.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>set_exception_handler()</code> registers a global callback for handling uncaught exceptions. It is especially
+    useful for centralized error handling, logging, monitoring, and displaying user-friendly error messages. Exceptions
+    that are explicitly handled with <code>try/catch</code> do not trigger the registered global handler.
+</p>
+
 <h4 id="trigger-error">TRIGGER_ERROR</h4>
 <h4 id="user-error">USER_ERROR</h4>
 
