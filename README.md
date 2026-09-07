@@ -39248,7 +39248,166 @@ throw new RuntimeException("Invalid value.");</code></pre>
 
 <h4 id="user-error">USER_ERROR</h4>
 
+<p>
+    <code>E_USER_ERROR</code> is a PHP error level used to indicate a <strong>user-generated fatal error</strong>.
+    It is generated programmatically by the application, typically through <code>trigger_error()</code>, when a
+    condition is considered severe enough that script execution should not continue.
+</p>
 
+<p>
+    Unlike a normal PHP error caused directly by an invalid operation, <code>E_USER_ERROR</code> allows the developer
+    to explicitly signal a critical application-level problem.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">&lt;?php
+
+trigger_error(
+    "A critical application error occurred.",
+    E_USER_ERROR
+);
+
+echo "This code will not be executed.";</code></pre>
+
+<p>
+    When <code>E_USER_ERROR</code> is triggered, PHP treats the condition as a fatal user-generated error and stops
+    normal script execution.
+</p>
+
+<h5>Using E_USER_ERROR with trigger_error()</h5>
+
+<p>
+    The most common way to generate this error level is by passing <code>E_USER_ERROR</code> as the second argument
+    to <code>trigger_error()</code>.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function connectToService(): void
+{
+    $connected = false;
+
+    if (!$connected) {
+        trigger_error(
+            "Unable to connect to the required service.",
+            E_USER_ERROR
+        );
+    }
+
+    echo "Service connected.";
+}
+
+connectToService();</code></pre>
+
+<h5>Using a Custom Error Handler</h5>
+
+<p>
+    A custom error handler registered with <code>set_error_handler()</code> can receive user-generated errors.
+    However, <code>E_USER_ERROR</code> represents a fatal condition, so custom handling does not make it appropriate
+    to simply continue execution as if nothing happened.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function errorHandler(
+    int $severity,
+    string $message,
+    string $file,
+    int $line
+): bool {
+    error_log(
+        "Critical error: {$message} in {$file} on line {$line}"
+    );
+
+    return false;
+}
+
+set_error_handler('errorHandler');
+
+trigger_error(
+    "Critical application failure.",
+    E_USER_ERROR
+);</code></pre>
+
+<h5>Difference Between E_USER_ERROR and E_USER_WARNING</h5>
+
+<p>
+    Both are user-generated error levels, but they represent different levels of severity.
+</p>
+
+<ul>
+    <li>
+        <code>E_USER_WARNING</code>: Indicates a serious condition, but execution can normally continue.
+    </li>
+    <li>
+        <code>E_USER_ERROR</code>: Indicates a critical condition where normal script execution should stop.
+    </li>
+</ul>
+
+<pre><code class="language-php">&lt;?php
+
+// Execution normally continues after this warning.
+trigger_error(
+    "Optional configuration is missing.",
+    E_USER_WARNING
+);
+
+echo "The script continues.";
+
+// Execution stops because this is a fatal user-generated error.
+trigger_error(
+    "Required configuration is missing.",
+    E_USER_ERROR
+);
+
+echo "This will not execute.";</code></pre>
+
+<h5>E_USER_ERROR vs Exceptions</h5>
+
+<p>
+    <code>E_USER_ERROR</code> belongs to PHP's traditional error handling system, while exceptions use
+    <code>throw</code>, <code>try</code>, and <code>catch</code>.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+// User-generated fatal error
+trigger_error(
+    "Critical error.",
+    E_USER_ERROR
+);
+
+// Exception
+throw new RuntimeException(
+    "Critical error."
+);</code></pre>
+
+<p>
+    In modern PHP applications, exceptions are generally preferred for structured application error handling because
+    they can be caught and handled explicitly. <code>E_USER_ERROR</code> is mainly relevant when working with PHP's
+    traditional error handling mechanisms.
+</p>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li><code>E_USER_ERROR</code> is a user-generated fatal error level.</li>
+    <li>It is commonly generated with <code>trigger_error()</code>.</li>
+    <li>It indicates that normal execution cannot safely continue.</li>
+    <li>It can be intercepted by a custom error handler registered with <code>set_error_handler()</code>.</li>
+    <li>It is different from exceptions and cannot be handled with a <code>try/catch</code> block as an <code>Exception</code>.</li>
+    <li>For modern application-level failures, exceptions are generally preferred because they provide structured control flow.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>E_USER_ERROR</code> is a PHP error level used to explicitly signal a critical, user-generated error.
+    It is normally triggered with <code>trigger_error()</code> and indicates that script execution should terminate.
+    Although it remains part of PHP's error handling system, modern applications will often use exceptions instead
+    when structured error handling is required.
+</p>
 
 <h4 id="ffi">FFI</h4>
 
