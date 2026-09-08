@@ -39426,6 +39426,117 @@ throw new RuntimeException(
 </nav>
 
 <h4 id="introduction">INTRODUCTION</h4>
+
+<h4 id="introduction">INTRODUCTION</h4>
+
+<p>
+    <strong>FFI (Foreign Function Interface)</strong> is a PHP extension that allows PHP code to interact directly with
+    functions, structures, and data types defined in libraries written in languages such as <strong>C</strong>.
+    It provides a way for PHP applications to use functionality from native libraries without requiring the library
+    to be rewritten in PHP.
+</p>
+
+<p>
+    Through FFI, PHP can load a shared library and access functions exported by that library using their C declarations.
+    This makes it possible to integrate PHP applications with existing native code, system-level functionality, and
+    specialized libraries.
+</p>
+
+<h5>How FFI Works</h5>
+
+<p>
+    FFI works by defining or loading the declarations of native C functions and data structures and then allowing PHP
+    to call and manipulate them.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef(
+    "int strlen(const char *str);",
+    null
+);
+
+$length = $ffi-&gt;strlen("Hello");
+
+echo $length;</code></pre>
+
+<p>
+    In this example, PHP uses FFI to access the C standard library's <code>strlen()</code> function. The C function
+    declaration is provided to <code>FFI::cdef()</code>, allowing the function to be called from PHP.
+</p>
+
+<h5>Native Libraries</h5>
+
+<p>
+    FFI can also load functions from a shared library. The exact library format depends on the operating system, such
+    as <code>.dll</code> on Windows or <code>.so</code> on Linux.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef(
+    "int some_function(int value);",
+    "example.dll"
+);
+
+$result = $ffi-&gt;some_function(10);
+
+echo $result;</code></pre>
+
+<p>
+    This allows PHP to communicate with functionality implemented outside the PHP runtime.
+</p>
+
+<h5>Working with C Data Types</h5>
+
+<p>
+    FFI is not limited to calling functions. It can also create and manipulate native C data types, pointers,
+    structures, arrays, and other memory representations.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$value = $ffi-&gt;new("int");
+$value-&gt;cdata = 42;
+
+echo $value-&gt;cdata;</code></pre>
+
+<p>
+    This low-level capability makes FFI useful when PHP needs to exchange data with native libraries using the same
+    memory representation expected by C code.
+</p>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+    <li>Calling functions from existing C libraries.</li>
+    <li>Integrating PHP applications with native system libraries.</li>
+    <li>Reusing functionality implemented in C or other languages with C-compatible interfaces.</li>
+    <li>Interacting with specialized hardware or native APIs.</li>
+    <li>Working with applications that require low-level data structures.</li>
+    <li>Prototyping integrations with native libraries before developing a dedicated PHP extension.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>FFI provides low-level access to native code and should be used carefully.</li>
+    <li>Incorrect declarations, pointers, or memory operations can cause crashes or undefined behavior.</li>
+    <li>FFI must be enabled in the PHP configuration before it can be used in environments where it is disabled.</li>
+    <li>Using native libraries introduces dependencies on the operating system and library binaries.</li>
+    <li>For production applications, a dedicated PHP extension may be more appropriate when long-term, high-performance integration is required.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    FFI allows PHP to communicate directly with native code, particularly C-compatible libraries. It provides access to
+    native functions and data structures, making it possible to integrate existing low-level functionality into PHP
+    applications without rewriting the native library in PHP.
+</p>
+
 <h4 id="dependencies">DEPENDENCIES</h4>
 <h4 id="installation">INSTALLATION</h4>
 <h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
