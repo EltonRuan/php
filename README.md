@@ -39538,6 +39538,103 @@ echo $value-&gt;cdata;</code></pre>
 </p>
 
 <h4 id="dependencies">DEPENDENCIES</h4>
+
+<p>
+    The <strong>FFI (Foreign Function Interface)</strong> extension has relatively few dependencies because it is
+    integrated into PHP itself. However, using FFI to interact with native libraries requires the appropriate PHP
+    extension to be installed and enabled, as well as access to the native libraries that the application intends to
+    use.
+</p>
+
+<h5>PHP FFI Extension</h5>
+
+<p>
+    The primary requirement is the <strong>FFI extension</strong>. It is available as a core PHP extension and must be
+    enabled in the PHP configuration before FFI functionality can be used.
+</p>
+
+<pre><code class="language-ini">ffi.enable=true</code></pre>
+
+<p>
+    The <code>ffi.enable</code> configuration directive controls whether FFI is available. Depending on the PHP
+    environment, it may be necessary to modify the <code>php.ini</code> configuration and restart the PHP runtime or
+    web server.
+</p>
+
+<h5>Native Libraries</h5>
+
+<p>
+    When FFI is used to call functions from an external library, that library must be available on the system.
+    The library can be a shared library such as a <code>.dll</code> file on Windows or a <code>.so</code> file on
+    Linux.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef(
+    "int some_function(int value);",
+    "example.dll"
+);</code></pre>
+
+<p>
+    The native library must be compatible with the operating system and architecture on which PHP is running.
+</p>
+
+<h5>C-Compatible Declarations</h5>
+
+<p>
+    FFI also depends on correct declarations of the native functions and data structures being accessed. The
+    declarations supplied to PHP must accurately represent the corresponding C API.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef(
+    "int strlen(const char *str);",
+    null
+);
+
+echo $ffi-&gt;strlen("Hello");</code></pre>
+
+<p>
+    An incorrect function signature or data type can result in incorrect data, memory corruption, or crashes.
+</p>
+
+<h5>Operating System Dependencies</h5>
+
+<p>
+    Applications using FFI and external native libraries can depend on operating-system-specific files and APIs.
+    Consequently, an FFI integration developed on Windows may require different library files or configuration when
+    deployed on Linux or another operating system.
+</p>
+
+<h5>Architecture Compatibility</h5>
+
+<p>
+    The native library should also be compatible with the architecture used by the PHP process, such as
+    <strong>x86</strong> or <strong>x86-64</strong>. A library compiled for an incompatible architecture cannot normally
+    be loaded by PHP.
+</p>
+
+<h5>Common Dependencies</h5>
+
+<ul>
+    <li><strong>PHP:</strong> A PHP installation with FFI support.</li>
+    <li><strong>FFI extension:</strong> Must be enabled in the PHP configuration.</li>
+    <li><strong>Native library:</strong> Required when accessing external C-compatible functionality.</li>
+    <li><strong>Compatible declarations:</strong> Function signatures and data structures must correctly match the native API.</li>
+    <li><strong>Operating system compatibility:</strong> Native libraries must be available in a compatible format.</li>
+    <li><strong>Architecture compatibility:</strong> PHP and the native library should use compatible CPU architectures.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    FFI primarily depends on the PHP FFI extension and, when external functionality is being accessed, the appropriate
+    native libraries. Correct C declarations, operating-system compatibility, and architecture compatibility are also
+    important to ensure that PHP can safely communicate with native code.
+</p>
+
 <h4 id="installation">INSTALLATION</h4>
 <h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
 
