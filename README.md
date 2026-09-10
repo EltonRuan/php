@@ -39636,6 +39636,133 @@ echo $ffi-&gt;strlen("Hello");</code></pre>
 </p>
 
 <h4 id="installation">INSTALLATION</h4>
+
+<p>
+    The <strong>FFI (Foreign Function Interface)</strong> extension is included with PHP, but it may not be enabled in
+    every PHP installation. Before using classes such as <code>FFI</code>, the extension must be enabled in the PHP
+    configuration.
+</p>
+
+<h5>Checking Whether FFI Is Available</h5>
+
+<p>
+    You can check whether the FFI extension is loaded using <code>extension_loaded()</code>.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+if (extension_loaded('FFI')) {
+    echo "FFI is enabled.";
+} else {
+    echo "FFI is not enabled.";
+}</code></pre>
+
+<p>
+    You can also check the PHP configuration from the command line:
+</p>
+
+<pre><code class="language-bash">php --ri FFI</code></pre>
+
+<p>
+    If FFI is available, PHP will display information about the extension and its configuration.
+</p>
+
+<h5>Enabling FFI</h5>
+
+<p>
+    FFI is controlled by the <code>ffi.enable</code> configuration directive. To enable it, open the
+    <code>php.ini</code> file used by your PHP installation and configure:
+</p>
+
+<pre><code class="language-ini">ffi.enable=true</code></pre>
+
+<p>
+    After changing <code>php.ini</code>, restart the PHP process or the web server responsible for running the
+    application so that the new configuration takes effect.
+</p>
+
+<h5>Verifying the Configuration</h5>
+
+<p>
+    The current value can be checked from the command line with:
+</p>
+
+<pre><code class="language-bash">php -i | findstr ffi</code></pre>
+
+<p>
+    On Linux or macOS, the equivalent command can be:
+</p>
+
+<pre><code class="language-bash">php -i | grep ffi</code></pre>
+
+<p>
+    You should see the configured <code>ffi.enable</code> value in the output.
+</p>
+
+<h5>Windows</h5>
+
+<p>
+    On Windows, locate the <code>php.ini</code> file used by your PHP installation. Make sure FFI is enabled through
+    the appropriate configuration directive:
+</p>
+
+<pre><code class="language-ini">ffi.enable=true</code></pre>
+
+<p>
+    If PHP is being used through a web server, restart the web server after modifying the configuration.
+</p>
+
+<h5>Linux</h5>
+
+<p>
+    On Linux, the exact PHP configuration file depends on how PHP was installed and whether it is being used through
+    the command line, Apache, PHP-FPM, or another environment. Check the active configuration with:
+</p>
+
+<pre><code class="language-bash">php --ini</code></pre>
+
+<p>
+    Then enable FFI in the appropriate <code>php.ini</code> configuration and restart the corresponding PHP service.
+</p>
+
+<h5>Using FFI After Installation</h5>
+
+<p>
+    Once FFI is enabled, the <code>FFI</code> class can be used directly from PHP.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+if (!extension_loaded('FFI')) {
+    die('FFI extension is not available.');
+}
+
+$ffi = FFI::cdef(
+    "int strlen(const char *str);",
+    null
+);
+
+echo $ffi-&gt;strlen("Hello");</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>FFI is included with PHP but may be disabled by configuration.</li>
+    <li>The <code>ffi.enable</code> directive controls whether FFI can be used.</li>
+    <li>The PHP configuration used by the command line may differ from the configuration used by a web server.</li>
+    <li>After modifying <code>php.ini</code>, restart the relevant PHP process or web server.</li>
+    <li>Using FFI with external native libraries may require additional libraries and operating-system dependencies.</li>
+    <li>Because FFI provides low-level access to native code, it should be enabled and used carefully, particularly in production environments.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    Installing FFI generally consists of ensuring that the FFI extension is available in the PHP installation and
+    enabling it through the <code>ffi.enable</code> configuration directive. After the configuration is applied,
+    the <code>FFI</code> class can be used to interact with compatible native libraries and C code.
+</p>
+
 <h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
 
 <h4 id="ffi-cdata">FFI\CDATA</h4>
