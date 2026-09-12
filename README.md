@@ -39765,6 +39765,108 @@ echo $ffi-&gt;strlen("Hello");</code></pre>
 
 <h4 id="runtime-configuration">RUNTIME CONFIGURATION</h4>
 
+<p>
+    The <strong>FFI (Foreign Function Interface)</strong> extension provides configuration directives that control
+    how and where FFI can be used during the execution of PHP applications. These settings are primarily related to
+    whether FFI is enabled and whether it can be used from different execution contexts.
+</p>
+
+<h5>ffi.enable</h5>
+
+<p>
+    The <code>ffi.enable</code> directive controls whether FFI is available. It accepts the following values:
+</p>
+
+<ul>
+    <li><code>true</code> or <code>1</code>: FFI is enabled.</li>
+    <li><code>false</code> or <code>0</code>: FFI is disabled.</li>
+    <li><code>preload</code>: FFI is available only for files loaded through the PHP preloading mechanism.</li>
+</ul>
+
+<pre><code class="language-ini">ffi.enable=true</code></pre>
+
+<p>
+    When FFI is disabled, normal PHP code cannot use the FFI API to load or interact with native libraries.
+</p>
+
+<h5>Checking the Configuration</h5>
+
+<p>
+    The current FFI configuration can be inspected using <code>ini_get()</code>.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+echo ini_get('ffi.enable');</code></pre>
+
+<p>
+    You can also inspect the PHP configuration from the command line:
+</p>
+
+<pre><code class="language-bash">php --ri FFI</code></pre>
+
+<h5>Configuration Scope</h5>
+
+<p>
+    The <code>ffi.enable</code> directive is a system-level configuration setting. This means that it is not intended
+    to be freely changed by individual scripts during normal execution.
+</p>
+
+<p>
+    For this reason, applications should normally have FFI configured by the PHP environment rather than attempting
+    to enable it dynamically from application code.
+</p>
+
+<h5>Using FFI at Runtime</h5>
+
+<p>
+    Once FFI is enabled in the PHP environment, the <code>FFI</code> class can be used to define C declarations and
+    access compatible native functionality.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+if (!extension_loaded('FFI')) {
+    die('FFI extension is not available.');
+}
+
+$ffi = FFI::cdef(
+    "int strlen(const char *str);",
+    null
+);
+
+echo $ffi-&gt;strlen("Hello");</code></pre>
+
+<h5>Preloading</h5>
+
+<p>
+    The <code>preload</code> value provides a more restricted configuration in which FFI can be used by code loaded
+    through PHP's preloading mechanism. This can be useful when an application wants to tightly control which code is
+    allowed to use FFI.
+</p>
+
+<pre><code class="language-ini">ffi.enable=preload</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li><code>ffi.enable</code> is the main runtime configuration directive for the FFI extension.</li>
+    <li>FFI can be enabled, disabled, or restricted to preloaded code.</li>
+    <li>The configuration should be considered carefully because FFI provides access to native code and memory.</li>
+    <li>The CLI and web server may use different PHP configurations, so their FFI settings can differ.</li>
+    <li>Changes to the PHP configuration generally require the relevant PHP process or server to be restarted.</li>
+    <li>FFI should only be enabled where native-code interoperability is actually required.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    FFI runtime configuration is primarily controlled by <code>ffi.enable</code>. This directive determines whether
+    PHP can use FFI and can be configured to allow it normally, disable it completely, or restrict its use to
+    preloaded code. Proper configuration is important because FFI provides low-level access to native libraries and
+    memory.
+</p>
+
 <h4 id="ffi-cdata">FFI\CDATA</h4>
 <h4 id="ffi-ctype">FFI\CTYPE</h4>
 <h4 id="ffi-exception">FFI\EXCEPTION</h4>
