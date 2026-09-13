@@ -39868,6 +39868,192 @@ echo $ffi-&gt;strlen("Hello");</code></pre>
 </p>
 
 <h4 id="ffi-cdata">FFI\CDATA</h4>
+
+<p>
+    <code>FFI\CData</code> is the class used by PHP's <strong>FFI (Foreign Function Interface)</strong> extension to
+    represent data allocated according to a native C data type. It acts as a bridge between PHP and native memory,
+    allowing PHP code to create, access, modify, and pass C-compatible values to functions.
+</p>
+
+<p>
+    Objects of type <code>FFI\CData</code> are generally created through methods of the <code>FFI</code> class, such as
+    <code>FFI::new()</code>, or obtained when accessing C structures, arrays, pointers, and function results.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$value = $ffi-&gt;new("int");
+
+$value-&gt;cdata = 42;
+
+echo $value-&gt;cdata;</code></pre>
+
+<p>
+    In this example, <code>FFI::new()</code> creates a native C integer and returns an <code>FFI\CData</code> object
+    representing that value. The actual value can be accessed through the <code>cdata</code> property.
+</p>
+
+<h5>Creating C Data</h5>
+
+<p>
+    The <code>FFI::new()</code> method can create data based on a C type declaration.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$number = $ffi-&gt;new("int");
+$number-&gt;cdata = 100;
+
+echo $number-&gt;cdata;</code></pre>
+
+<p>
+    The declared type determines how the data is represented in native memory.
+</p>
+
+<h5>Structures</h5>
+
+<p>
+    <code>FFI\CData</code> can represent C structures and their fields.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef("
+    typedef struct {
+        int id;
+        double price;
+    } Product;
+");
+
+$product = $ffi-&gt;new("Product");
+
+$product-&gt;id = 10;
+$product-&gt;price = 49.90;
+
+echo $product-&gt;id . "&lt;br&gt;";
+echo $product-&gt;price;</code></pre>
+
+<p>
+    Here, the <code>Product</code> value is represented by an <code>FFI\CData</code> object, and its fields can be
+    accessed using normal property syntax.
+</p>
+
+<h5>Arrays</h5>
+
+<p>
+    C arrays can also be represented by <code>FFI\CData</code>.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$numbers = $ffi-&gt;new("int[3]");
+
+$numbers[0] = 10;
+$numbers[1] = 20;
+$numbers[2] = 30;
+
+echo $numbers[0];
+echo $numbers[1];
+echo $numbers[2];</code></pre>
+
+<p>
+    The object represents the native C array and allows its individual elements to be accessed using array notation.
+</p>
+
+<h5>Pointers</h5>
+
+<p>
+    <code>FFI\CData</code> can also represent pointers to native data.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$value = $ffi-&gt;new("int");
+$value-&gt;cdata = 42;
+
+$pointer = $ffi-&gt;cast("int *", FFI::addr($value));
+
+echo $pointer[0];</code></pre>
+
+<p>
+    Pointers are useful when interacting with native functions that expect memory addresses rather than ordinary
+    scalar values.
+</p>
+
+<h5>Passing CData to Native Functions</h5>
+
+<p>
+    <code>FFI\CData</code> values can be passed to functions declared through FFI when their types are compatible with
+    the native function signature.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef("
+    void increment(int *value);
+");
+
+$value = $ffi-&gt;new("int");
+$value-&gt;cdata = 10;
+
+$ffi-&gt;increment(FFI::addr($value));
+
+echo $value-&gt;cdata;</code></pre>
+
+<p>
+    The native function receives a pointer to the C integer and modifies the value directly in memory.
+</p>
+
+<h5>Checking the Type</h5>
+
+<p>
+    FFI provides the <code>FFI::typeof()</code> method to obtain information about the C type represented by an
+    <code>FFI\CData</code> object.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$value = $ffi-&gt;new("int");
+
+$type = FFI::typeof($value);
+
+var_dump($type);</code></pre>
+
+<p>
+    The returned object is an <code>FFI\CType</code> instance describing the native C type.
+</p>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li><code>FFI\CData</code> represents data allocated according to a native C type.</li>
+    <li>It is normally obtained through operations provided by the <code>FFI</code> class.</li>
+    <li>It can represent scalars, arrays, structures, pointers, and other C-compatible data.</li>
+    <li>Native memory operations must be performed carefully because incorrect pointer or type usage can cause crashes or undefined behavior.</li>
+    <li><code>FFI\CData</code> is specific to the FFI extension and is not the same as an ordinary PHP scalar or object.</li>
+    <li>It is especially useful when exchanging structured data with native C libraries.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>FFI\CData</code> represents C-compatible data managed through PHP's FFI extension. It allows PHP to work
+    with native values, arrays, structures, and pointers, making it possible to exchange data directly with
+    C-compatible libraries and functions.
+</p>
+
 <h4 id="ffi-ctype">FFI\CTYPE</h4>
 <h4 id="ffi-exception">FFI\EXCEPTION</h4>
 <h4 id="ffi-parserexception">FFI\PARSEREXCEPTION EXTENDS FFI\EXCEPTION</h4>
