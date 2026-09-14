@@ -40055,6 +40055,193 @@ var_dump($type);</code></pre>
 </p>
 
 <h4 id="ffi-ctype">FFI\CTYPE</h4>
+
+<p>
+    <code>FFI\CType</code> is the class used by PHP's <strong>FFI (Foreign Function Interface)</strong> extension
+    to represent and describe a <strong>C type</strong>. It provides information about the type of native data that
+    PHP is working with, such as integers, arrays, structures, pointers, and other C-compatible types.
+</p>
+
+<p>
+    Objects of type <code>FFI\CType</code> are generally obtained through FFI operations rather than instantiated
+    directly. The <code>FFI::typeof()</code> function can be used to obtain the type information associated with an
+    <code>FFI\CData</code> object.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$value = $ffi-&gt;new("int");
+
+$type = FFI::typeof($value);
+
+var_dump($type);</code></pre>
+
+<p>
+    In this example, <code>$value</code> is an <code>FFI\CData</code> object representing a C <code>int</code>.
+    Calling <code>FFI::typeof()</code> returns an <code>FFI\CType</code> object describing that type.
+</p>
+
+<h5>Using CType with CData</h5>
+
+<p>
+    <code>FFI\CType</code> and <code>FFI\CData</code> have different purposes. <code>FFI\CType</code> describes
+    <strong>what a piece of native data is</strong>, while <code>FFI\CData</code> represents the
+    <strong>actual native data</strong>.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$value = $ffi-&gt;new("int");
+$value-&gt;cdata = 42;
+
+$type = FFI::typeof($value);
+
+echo $value-&gt;cdata;
+
+var_dump($type);</code></pre>
+
+<p>
+    Here, <code>$value</code> represents the actual C integer, while <code>$type</code> represents information about
+    the C type of that value.
+</p>
+
+<h5>Structures</h5>
+
+<p>
+    <code>FFI\CType</code> can also describe user-defined C structures.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef("
+    typedef struct {
+        int id;
+        double price;
+    } Product;
+");
+
+$product = $ffi-&gt;new("Product");
+
+$type = FFI::typeof($product);
+
+var_dump($type);</code></pre>
+
+<p>
+    In this case, the returned <code>FFI\CType</code> describes the <code>Product</code> structure and its native
+    layout.
+</p>
+
+<h5>Arrays and Pointers</h5>
+
+<p>
+    The type represented by <code>FFI\CType</code> can also correspond to arrays or pointers.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$array = $ffi-&gt;new("int[5]");
+
+$arrayType = FFI::typeof($array);
+
+var_dump($arrayType);</code></pre>
+
+<p>
+    The resulting type contains information about the native array type represented by the <code>FFI\CData</code>
+    object.
+</p>
+
+<h5>Creating C Data from a Type</h5>
+
+<p>
+    An <code>FFI\CType</code> can be used to create a new <code>FFI\CData</code> value through its
+    <code>new()</code> method.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef();
+
+$type = $ffi-&gt;type("int");
+
+$value = $type-&gt;new();
+
+$value-&gt;cdata = 123;
+
+echo $value-&gt;cdata;</code></pre>
+
+<p>
+    This separates the definition of a native type from the creation of the actual data that uses that type.
+</p>
+
+<h5>Working with Native APIs</h5>
+
+<p>
+    <code>FFI\CType</code> is particularly useful when working with native APIs that use complex C data structures.
+    Understanding the type allows PHP to correctly allocate memory and exchange data with native functions.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$ffi = FFI::cdef("
+    typedef struct {
+        int width;
+        int height;
+    } Size;
+");
+
+$size = $ffi-&gt;new("Size");
+
+$size-&gt;width = 1920;
+$size-&gt;height = 1080;
+
+$type = FFI::typeof($size);
+
+var_dump($type);</code></pre>
+
+<h5>Related FFI Types</h5>
+
+<ul>
+    <li>
+        <code>FFI\CData</code>: Represents actual data allocated according to a C type.
+    </li>
+    <li>
+        <code>FFI\CType</code>: Represents and describes a C type.
+    </li>
+    <li>
+        <code>FFI</code>: Provides the main API for defining C declarations, creating data, casting values, and
+        interacting with native libraries.
+    </li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li><code>FFI\CType</code> describes a native C type rather than representing the data itself.</li>
+    <li>It is commonly obtained using <code>FFI::typeof()</code> or through FFI type-related operations.</li>
+    <li>It can represent primitive types, arrays, structures, pointers, and other C-compatible types.</li>
+    <li>The <code>new()</code> method of a <code>FFI\CType</code> can create corresponding <code>FFI\CData</code>.</li>
+    <li>Correct type information is important when exchanging data with native libraries.</li>
+    <li>Incorrect C type definitions can result in invalid memory access or undefined behavior.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>FFI\CType</code> represents the definition and characteristics of a native C type within PHP's FFI
+    extension. It works closely with <code>FFI\CData</code>, allowing PHP to understand, create, and manipulate
+    native data types when communicating with C-compatible libraries.
+</p>
+
+
+
 <h4 id="ffi-exception">FFI\EXCEPTION</h4>
 <h4 id="ffi-parserexception">FFI\PARSEREXCEPTION EXTENDS FFI\EXCEPTION</h4>
 
