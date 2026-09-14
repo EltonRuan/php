@@ -40240,8 +40240,6 @@ var_dump($type);</code></pre>
     native data types when communicating with C-compatible libraries.
 </p>
 
-
-
 <h4 id="ffi-exception">FFI\EXCEPTION</h4>
 <h4 id="ffi-parserexception">FFI\PARSEREXCEPTION EXTENDS FFI\EXCEPTION</h4>
 
