@@ -40241,6 +40241,130 @@ var_dump($type);</code></pre>
 </p>
 
 <h4 id="ffi-exception">FFI\EXCEPTION</h4>
+
+<p>
+    <code>FFI\Exception</code> is the exception class used by PHP's <strong>FFI (Foreign Function Interface)</strong>
+    extension to report errors that occur while working with foreign functions, C declarations, native data types, or
+    native libraries.
+</p>
+
+<p>
+    It extends PHP's standard <code>Exception</code> class and can therefore be handled using the normal
+    <code>try/catch</code> mechanism.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">&lt;?php
+
+try {
+    $ffi = FFI::cdef(
+        "int strlen(const char *str);",
+        "invalid-library.so"
+    );
+} catch (FFI\Exception $exception) {
+    echo "FFI error: " . $exception-&gt;getMessage();
+}</code></pre>
+
+<p>
+    If the native library cannot be loaded or another FFI-specific error occurs, PHP can throw an
+    <code>FFI\Exception</code>, allowing the application to handle the failure instead of terminating unexpectedly.
+</p>
+
+<h5>Handling FFI Errors</h5>
+
+<p>
+    Since <code>FFI\Exception</code> extends <code>Exception</code>, standard exception methods such as
+    <code>getMessage()</code>, <code>getFile()</code>, and <code>getLine()</code> can be used.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+try {
+    $ffi = FFI::cdef(
+        "int example_function();",
+        "missing-library.so"
+    );
+} catch (FFI\Exception $exception) {
+    echo "Message: " . $exception-&gt;getMessage() . "&lt;br&gt;";
+    echo "File: " . $exception-&gt;getFile() . "&lt;br&gt;";
+    echo "Line: " . $exception-&gt;getLine();
+}</code></pre>
+
+<h5>Using Throwable</h5>
+
+<p>
+    Because <code>FFI\Exception</code> is an exception type, it can also be caught using the broader
+    <code>Throwable</code> interface.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+try {
+    $ffi = FFI::cdef(
+        "int example_function();",
+        "missing-library.so"
+    );
+} catch (Throwable $exception) {
+    echo "An FFI operation failed.";
+}</code></pre>
+
+<p>
+    Catching <code>FFI\Exception</code> specifically is preferable when the application needs to distinguish FFI
+    failures from other types of exceptions.
+</p>
+
+<h5>FFI\Exception vs Exception</h5>
+
+<p>
+    <code>FFI\Exception</code> is a specialized exception type associated with the FFI extension, while
+    <code>Exception</code> is the general-purpose base exception class commonly used by PHP applications.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+try {
+    // FFI operation
+} catch (FFI\Exception $exception) {
+    echo "An FFI-specific error occurred.";
+} catch (Exception $exception) {
+    echo "A general exception occurred.";
+}</code></pre>
+
+<h5>Common Situations</h5>
+
+<p>
+    An <code>FFI\Exception</code> can be relevant when an FFI operation cannot be completed successfully, such as when
+    working with invalid native library information or other invalid FFI operations.
+</p>
+
+<ul>
+    <li>Loading a native library fails.</li>
+    <li>An FFI operation receives invalid information.</li>
+    <li>A native declaration cannot be processed correctly.</li>
+    <li>An operation involving the FFI extension fails at runtime.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li><code>FFI\Exception</code> belongs to the FFI extension.</li>
+    <li>It extends PHP's standard <code>Exception</code> class.</li>
+    <li>It can be handled using <code>try/catch</code>.</li>
+    <li>It can also be caught through the <code>Throwable</code> interface.</li>
+    <li>Use <code>getMessage()</code>, <code>getFile()</code>, and <code>getLine()</code> to inspect the exception.</li>
+    <li>FFI errors should generally be handled carefully because failures involving native code can affect application stability.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>FFI\Exception</code> is the exception type used by PHP's FFI extension for reporting FFI-related failures.
+    It integrates with PHP's standard exception system, allowing developers to catch and handle errors involving native
+    libraries and foreign functions using familiar <code>try/catch</code> techniques.
+</p>
+
+
 <h4 id="ffi-parserexception">FFI\PARSEREXCEPTION EXTENDS FFI\EXCEPTION</h4>
 
 
