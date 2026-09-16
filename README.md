@@ -40364,7 +40364,6 @@ try {
     libraries and foreign functions using familiar <code>try/catch</code> techniques.
 </p>
 
-
 <h4 id="ffi-parserexception">FFI\PARSEREXCEPTION EXTENDS FFI\EXCEPTION</h4>
 
 
