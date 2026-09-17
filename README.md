@@ -40366,7 +40366,159 @@ try {
 
 <h4 id="ffi-parserexception">FFI\PARSEREXCEPTION EXTENDS FFI\EXCEPTION</h4>
 
+<p>
+    <code>FFI\ParserException</code> is a specialized exception class provided by PHP's
+    <strong>FFI (Foreign Function Interface)</strong> extension. It is thrown when PHP encounters a
+    <strong>parsing error</strong> while processing a C declaration used by FFI.
+</p>
 
+<p>
+    The class extends <code>FFI\Exception</code>, meaning that it is specifically associated with FFI errors while
+    also being compatible with the standard PHP exception handling mechanism.
+</p>
+
+<h5>Class Hierarchy</h5>
+
+<pre><code class="language-text">Throwable
+└── Exception
+    └── FFI\Exception
+        └── FFI\ParserException</code></pre>
+
+<p>
+    Because <code>FFI\ParserException</code> extends <code>FFI\Exception</code>, it can be caught either specifically
+    as an <code>FFI\ParserException</code> or more generally as an <code>FFI\Exception</code>.
+</p>
+
+<h5>Basic Example</h5>
+
+<pre><code class="language-php">&lt;?php
+
+try {
+    $ffi = FFI::cdef("
+        int invalid declaration;
+    ");
+} catch (FFI\ParserException $exception) {
+    echo "Parser error: " . $exception-&gt;getMessage();
+}</code></pre>
+
+<p>
+    In this example, the C declaration supplied to <code>FFI::cdef()</code> is invalid. FFI attempts to parse the
+    declaration and throws a <code>ParserException</code> when it cannot interpret it as valid C syntax.
+</p>
+
+<h5>Valid C Declaration</h5>
+
+<p>
+    A correctly formatted C declaration can be processed normally.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+try {
+    $ffi = FFI::cdef("
+        int add(int a, int b);
+    ");
+
+    echo "Declaration parsed successfully.";
+} catch (FFI\ParserException $exception) {
+    echo "Parser error: " . $exception-&gt;getMessage();
+}</code></pre>
+
+<h5>Catching Through FFI\Exception</h5>
+
+<p>
+    Since <code>FFI\ParserException</code> extends <code>FFI\Exception</code>, it can also be handled using its parent
+    class.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+try {
+    $ffi = FFI::cdef("
+        int invalid declaration;
+    ");
+} catch (FFI\Exception $exception) {
+    echo "FFI error: " . $exception-&gt;getMessage();
+}</code></pre>
+
+<p>
+    Catching <code>FFI\Exception</code> is useful when the application does not need to distinguish parser errors from
+    other FFI-specific exceptions.
+</p>
+
+<h5>Inspecting the Exception</h5>
+
+<p>
+    As an exception class, <code>FFI\ParserException</code> provides the standard methods inherited from PHP's
+    <code>Exception</code> class.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+try {
+    $ffi = FFI::cdef("
+        invalid C declaration
+    ");
+} catch (FFI\ParserException $exception) {
+    echo "Message: " . $exception-&gt;getMessage() . "&lt;br&gt;";
+    echo "File: " . $exception-&gt;getFile() . "&lt;br&gt;";
+    echo "Line: " . $exception-&gt;getLine();
+}</code></pre>
+
+<h5>Common Causes</h5>
+
+<p>
+    A <code>FFI\ParserException</code> is associated with invalid or unsupported C declarations supplied to FFI.
+    Common causes include:
+</p>
+
+<ul>
+    <li>Invalid C syntax.</li>
+    <li>Incorrect function declarations.</li>
+    <li>Malformed structure or type definitions.</li>
+    <li>Incorrect pointer or array declarations.</li>
+    <li>Unsupported declarations for the FFI parser.</li>
+</ul>
+
+<h5>ParserException vs FFI\Exception</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Class</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>FFI\Exception</code></td>
+            <td>General exception type for errors associated with the FFI extension.</td>
+        </tr>
+        <tr>
+            <td><code>FFI\ParserException</code></td>
+            <td>Specialized exception for errors encountered while parsing FFI C declarations.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li><code>FFI\ParserException</code> extends <code>FFI\Exception</code>.</li>
+    <li>It is associated specifically with errors encountered while parsing C declarations.</li>
+    <li>It can be caught directly with <code>catch (FFI\ParserException $exception)</code>.</li>
+    <li>It can also be caught through its parent class, <code>FFI\Exception</code>.</li>
+    <li>It follows PHP's standard exception handling model.</li>
+    <li>The exception message can provide information useful for identifying the invalid declaration.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>FFI\ParserException</code> is a specialized FFI exception used when PHP cannot correctly parse a C
+    declaration. As a subclass of <code>FFI\Exception</code>, it can be handled specifically when parser errors need
+    to be identified or more generally through the parent FFI exception class.
+</p>
 
 <h4 id="opcache">OPCACHE</h4>
 
