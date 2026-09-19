@@ -40672,6 +40672,167 @@ echo "Hello, PHP!";</code></pre>
 </p>
 
 <h4 id="installation-configuration">INSTALLATION/CONFIGURATION</h4>
+
+<p>
+    OPcache is distributed as part of PHP and is normally available in standard PHP installations.
+    It is a Zend extension, so its configuration differs slightly from regular PHP extensions.
+    Once enabled, OPcache stores compiled PHP bytecode in shared memory, allowing PHP to reuse
+    previously compiled scripts instead of compiling them on every request.
+</p>
+
+<h5>Enabling OPcache</h5>
+
+<p>
+    On installations where OPcache is not already enabled, it can be loaded through the PHP
+    configuration file (<code>php.ini</code>):
+</p>
+
+<pre><code class="language-ini">zend_extension=opcache</code></pre>
+
+<p>
+    The exact configuration location depends on the operating system and PHP installation.
+    After changing the configuration, the PHP process or the web server should be restarted
+    so that the extension is loaded.
+</p>
+
+<h5>Basic Configuration</h5>
+
+<p>
+    OPcache behavior is controlled through directives in <code>php.ini</code>. A common production
+    configuration can include settings such as:
+</p>
+
+<pre><code class="language-ini">[opcache]
+opcache.enable=1
+opcache.enable_cli=0
+opcache.memory_consumption=128
+opcache.interned_strings_buffer=16
+opcache.max_accelerated_files=10000
+opcache.validate_timestamps=0
+opcache.revalidate_freq=0</code></pre>
+
+<p>
+    These directives control whether OPcache is enabled, how much shared memory is allocated,
+    how many PHP scripts can be cached, and whether PHP checks source files for changes.
+</p>
+
+<h5>Important Configuration Directives</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Directive</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>opcache.enable</code></td>
+            <td>Enables or disables OPcache for supported PHP execution environments.</td>
+        </tr>
+        <tr>
+            <td><code>opcache.enable_cli</code></td>
+            <td>Controls whether OPcache is enabled for CLI scripts.</td>
+        </tr>
+        <tr>
+            <td><code>opcache.memory_consumption</code></td>
+            <td>Defines the amount of shared memory, in megabytes, available for cached OPcodes.</td>
+        </tr>
+        <tr>
+            <td><code>opcache.interned_strings_buffer</code></td>
+            <td>Defines the amount of memory, in megabytes, allocated for interned strings.</td>
+        </tr>
+        <tr>
+            <td><code>opcache.max_accelerated_files</code></td>
+            <td>Defines the maximum number of PHP scripts that can be stored in the OPcache.</td>
+        </tr>
+        <tr>
+            <td><code>opcache.validate_timestamps</code></td>
+            <td>Determines whether PHP checks source files for modifications.</td>
+        </tr>
+        <tr>
+            <td><code>opcache.revalidate_freq</code></td>
+            <td>Defines how frequently, in seconds, file timestamps are checked when timestamp validation is enabled.</td>
+        </tr>
+        <tr>
+            <td><code>opcache.preload</code></td>
+            <td>Specifies a PHP script that should be loaded during server startup for preloading.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Development vs. Production</h5>
+
+<p>
+    The appropriate configuration depends on the environment. During development, it is generally
+    useful to keep timestamp validation enabled so that changes to PHP files are detected
+    automatically:
+</p>
+
+<pre><code class="language-ini">opcache.validate_timestamps=1
+opcache.revalidate_freq=0</code></pre>
+
+<p>
+    In production environments, applications are often deployed in a controlled manner where
+    source files do not change during normal execution. In this situation, timestamp validation
+    can be disabled to avoid repeated filesystem checks:
+</p>
+
+<pre><code class="language-ini">opcache.validate_timestamps=0</code></pre>
+
+<p>
+    When timestamp validation is disabled, changes to PHP files are not automatically detected.
+    The OPcache must be invalidated or reset, or the PHP processes must be restarted, as part of
+    the deployment process.
+</p>
+
+<h5>Checking the Configuration</h5>
+
+<p>
+    The current OPcache configuration can be inspected using
+    <code>opcache_get_configuration()</code>. The function returns information about the active
+    OPcache directives and configuration:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$config = opcache_get_configuration();
+
+print_r($config);</code></pre>
+
+<p>
+    The <code>opcache_get_status()</code> function can also be used to inspect the current state
+    of the cache, including memory usage, cache statistics, and cached scripts:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status();
+
+print_r($status);</code></pre>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>OPcache is a Zend extension and should be configured with <code>zend_extension</code>.</li>
+    <li>Configuration changes generally require restarting the relevant PHP process or web server.</li>
+    <li>Production and development environments may require different OPcache settings.</li>
+    <li>Disabling <code>opcache.validate_timestamps</code> requires an appropriate deployment or cache invalidation strategy.</li>
+    <li>The amount of memory allocated to OPcache should be sufficient for the number and size of PHP scripts in the application.</li>
+    <li>OPcache caches compiled PHP bytecode; it does not cache the final HTML response generated by an application.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    Installing OPcache usually consists of ensuring that the Zend extension is enabled and then
+    configuring its directives in <code>php.ini</code>. Development environments typically benefit
+    from automatic timestamp validation, while production environments can disable timestamp
+    validation when deployments explicitly handle cache invalidation or process restarts.
+    Proper configuration allows PHP applications to reuse compiled bytecode efficiently and
+    reduce unnecessary compilation overhead.
+</p>
+
 <h4 id="preloading">PRELOADING</h4>
 
 <h4 id="opcache-functions">OPCACHE FUNCTIONS</h4>
