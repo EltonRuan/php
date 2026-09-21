@@ -40835,6 +40835,173 @@ print_r($status);</code></pre>
 
 <h4 id="preloading">PRELOADING</h4>
 
+<p>
+    OPcache preloading is a feature that allows PHP code to be loaded into memory when the PHP
+    server starts. Instead of compiling and loading certain classes and functions when they are
+    first requested, PHP can make them available in memory from the beginning of the server
+    process.
+</p>
+
+<p>
+    Preloading is designed primarily for production applications where a set of PHP files is
+    frequently used. It can reduce the overhead associated with loading and compiling commonly
+    used code on individual requests.
+</p>
+
+<h5>How Preloading Works</h5>
+
+<p>
+    Normally, PHP processes a script when it is needed. With preloading, a preload script is
+    executed during server startup and can load other PHP files into memory:
+</p>
+
+<pre><code class="language-text">Server Startup
+      |
+      v
+Preload Script
+      |
+      +----&gt; Class Definitions
+      |
+      +----&gt; Function Definitions
+      |
+      +----&gt; Required PHP Files
+      |
+      v
+Persistent Memory
+      |
+      v
+Application Requests</code></pre>
+
+<p>
+    The preloaded code remains available to the PHP process and can be reused by subsequent
+    requests. This can be particularly useful for frameworks and applications that rely on a
+    large number of classes and functions.
+</p>
+
+<h5>Configuring a Preload Script</h5>
+
+<p>
+    Preloading is configured through the <code>opcache.preload</code> directive in
+    <code>php.ini</code>. The directive specifies the PHP file that should be executed during
+    server startup:
+</p>
+
+<pre><code class="language-ini">opcache.preload=/var/www/application/preload.php</code></pre>
+
+<p>
+    The preload file can then require or include the PHP files that should be preloaded:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+require_once __DIR__ . '/src/Database.php';
+require_once __DIR__ . '/src/User.php';
+require_once __DIR__ . '/src/Services/UserService.php';</code></pre>
+
+<p>
+    The preload script itself is executed only when the PHP process starts. Therefore, changes
+    to preloaded code generally require restarting the relevant PHP processes before the new
+    definitions become available.
+</p>
+
+<h5>Using <code>opcache.preload_user</code></h5>
+
+<p>
+    When PHP is configured to run with a different operating-system user, the
+    <code>opcache.preload_user</code> directive can be used to specify the user that should execute
+    the preload script:
+</p>
+
+<pre><code class="language-ini">opcache.preload=/var/www/application/preload.php
+opcache.preload_user=www-data</code></pre>
+
+<p>
+    This setting can be useful when the server requires the preload operation to run under a
+    specific user account.
+</p>
+
+<h5>Example Application Structure</h5>
+
+<p>
+    A simple application might use the following structure:
+</p>
+
+<pre><code class="language-text">application/
+├── preload.php
+├── public/
+│   └── index.php
+└── src/
+    ├── Database.php
+    ├── User.php
+    └── Services/
+        └── UserService.php</code></pre>
+
+<p>
+    The <code>preload.php</code> file can load the application's frequently used classes:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+require_once __DIR__ . '/src/Database.php';
+require_once __DIR__ . '/src/User.php';
+require_once __DIR__ . '/src/Services/UserService.php';</code></pre>
+
+<p>
+    The corresponding <code>php.ini</code> configuration can then reference this file:
+</p>
+
+<pre><code class="language-ini">opcache.enable=1
+opcache.preload=/var/www/application/preload.php</code></pre>
+
+<h5>Preloading and Dependencies</h5>
+
+<p>
+    Preloading should take application dependencies into account. A class that extends another
+    class, implements an interface, or uses traits must have the necessary definitions available
+    when it is loaded.
+</p>
+
+<p>
+    For this reason, applications commonly use a preload script that loads files in an appropriate
+    dependency order or uses the application's autoloader when appropriate.
+</p>
+
+<h5>Preloading and OPcache</h5>
+
+<p>
+    Preloading is an extension of OPcache rather than a replacement for normal OPcache caching.
+    OPcache can cache compiled scripts without preloading them, while preloading makes selected
+    code available during server startup.
+</p>
+
+<p>
+    Preloading is therefore most useful when an application has a relatively stable set of code
+    that is frequently executed. It should be evaluated carefully for applications whose code
+    changes frequently because restarting the PHP processes may be necessary after changes.
+</p>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>Preloading requires OPcache to be enabled.</li>
+    <li>The preload script is executed when the PHP server process starts.</li>
+    <li>Preloaded code remains associated with the PHP process until it is restarted.</li>
+    <li>Changes to preloaded code generally require a process restart to take effect.</li>
+    <li>Preloading is primarily intended for production environments with relatively stable application code.</li>
+    <li>The preload script must have access to the files it attempts to load.</li>
+    <li>Preloading should be configured carefully when the application has complex dependencies.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    OPcache preloading allows frequently used PHP code to be loaded into memory during server
+    startup instead of being loaded only when individual requests require it. It can reduce
+    application startup overhead and improve performance for suitable production workloads.
+    Preloading is configured with <code>opcache.preload</code> and should be combined with a
+    deployment strategy that restarts PHP processes when preloaded code changes.
+</p>
+
 <h4 id="opcache-functions">OPCACHE FUNCTIONS</h4>
 <h4 id="opcache-compile-file">OPCACHE_COMPILE_FILE</h4>
 <h4 id="opcache-get-configuration">OPCACHE_GET_CONFIGURATION</h4>
