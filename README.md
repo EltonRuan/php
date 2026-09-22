@@ -41003,6 +41003,214 @@ opcache.preload=/var/www/application/preload.php</code></pre>
 </p>
 
 <h4 id="opcache-functions">OPCACHE FUNCTIONS</h4>
+
+<p>
+    The OPcache extension provides a set of functions for inspecting and managing the PHP bytecode
+    cache. These functions can be used to compile scripts, inspect the current configuration and
+    cache status, invalidate individual scripts, determine whether a script is cached, and reset
+    the entire OPcache.
+</p>
+
+<h5>Available Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>opcache_compile_file()</code></td>
+            <td>Compiles a PHP script and adds it to the OPcache without executing the script.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_get_configuration()</code></td>
+            <td>Returns the current OPcache configuration.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_get_status()</code></td>
+            <td>Returns information about the current state and statistics of OPcache.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_invalidate()</code></td>
+            <td>Invalidates the cached version of a specific PHP script.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_is_script_cached()</code></td>
+            <td>Determines whether a specific PHP script is currently cached.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_reset()</code></td>
+            <td>Resets the entire OPcache and removes cached scripts.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Compiling a Script</h5>
+
+<p>
+    The <code>opcache_compile_file()</code> function can be used to compile a PHP file and store
+    its compiled bytecode in OPcache without executing the file.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$result = opcache_compile_file('/var/www/application/src/User.php');
+
+var_dump($result);</code></pre>
+
+<p>
+    This can be useful when preparing scripts for execution or when explicitly populating the
+    OPcache.
+</p>
+
+<h5>Reading the Configuration</h5>
+
+<p>
+    The <code>opcache_get_configuration()</code> function returns information about the active
+    OPcache configuration.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$config = opcache_get_configuration();
+
+print_r($config);</code></pre>
+
+<p>
+    The returned information can be useful when troubleshooting configuration issues or verifying
+    that specific OPcache directives are enabled with the expected values.
+</p>
+
+<h5>Inspecting OPcache Status</h5>
+
+<p>
+    The <code>opcache_get_status()</code> function provides information about the current state
+    of the OPcache system.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status();
+
+print_r($status);</code></pre>
+
+<p>
+    The returned data can include information about memory usage, cache statistics, the number of
+    cached scripts, and the current state of the cache.
+</p>
+
+<p>
+    The function also accepts an optional parameter that determines whether information about
+    individual cached scripts should be included:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status(false);
+
+print_r($status);</code></pre>
+
+<h5>Invalidating a Script</h5>
+
+<p>
+    The <code>opcache_invalidate()</code> function invalidates the cached version of a specific
+    PHP file.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$result = opcache_invalidate('/var/www/application/src/User.php');
+
+var_dump($result);</code></pre>
+
+<p>
+    An optional second parameter can force the invalidation even when timestamp validation would
+    otherwise prevent it:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$result = opcache_invalidate(
+    '/var/www/application/src/User.php',
+    true
+);
+
+var_dump($result);</code></pre>
+
+<h5>Checking Whether a Script Is Cached</h5>
+
+<p>
+    The <code>opcache_is_script_cached()</code> function checks whether a specific PHP script is
+    currently stored in OPcache.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = '/var/www/application/src/User.php';
+
+if (opcache_is_script_cached($filename)) {
+    echo 'The script is cached.';
+} else {
+    echo 'The script is not cached.';
+}</code></pre>
+
+<p>
+    This can be useful when diagnosing cache behavior or verifying whether a particular script has
+    already been compiled and stored in OPcache.
+</p>
+
+<h5>Resetting OPcache</h5>
+
+<p>
+    The <code>opcache_reset()</code> function resets the entire OPcache. Unlike
+    <code>opcache_invalidate()</code>, which targets a specific script, this function affects the
+    complete opcode cache.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$result = opcache_reset();
+
+var_dump($result);</code></pre>
+
+<p>
+    Because resetting the entire cache affects all cached scripts, it should generally be used
+    carefully in production environments.
+</p>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+    <li>Inspecting OPcache configuration during troubleshooting.</li>
+    <li>Monitoring cache memory usage and statistics.</li>
+    <li>Checking whether a specific script is cached.</li>
+    <li>Invalidating a single script after a deployment.</li>
+    <li>Precompiling selected PHP files.</li>
+    <li>Resetting the complete cache when necessary.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>OPcache functions require the OPcache extension to be enabled.</li>
+    <li>Some OPcache management operations may require appropriate permissions or configuration.</li>
+    <li>Invalidating one script is less disruptive than resetting the entire cache.</li>
+    <li>Cache management should normally be integrated into the application's deployment process rather than performed manually for every deployment.</li>
+    <li>Preloaded code has different lifecycle characteristics from ordinary cached scripts and remains associated with the PHP process until it is restarted.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    OPcache functions provide programmatic control and visibility over PHP's bytecode cache.
+    They allow applications and administrators to inspect configuration and cache statistics,
+    compile files, verify cached scripts, invalidate individual entries, and reset the complete
+    cache. The following sections describe each function in greater detail.
+</p>
+
 <h4 id="opcache-compile-file">OPCACHE_COMPILE_FILE</h4>
 <h4 id="opcache-get-configuration">OPCACHE_GET_CONFIGURATION</h4>
 <h4 id="opcache-get-status">OPCACHE_GET_STATUS</h4>
