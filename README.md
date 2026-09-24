@@ -41366,6 +41366,149 @@ if (!opcache_compile_file($filename)) {
 </p>
 
 <h4 id="opcache-get-configuration">OPCACHE_GET_CONFIGURATION</h4>
+
+<p>
+    The <code>opcache_get_configuration()</code> function retrieves the current configuration
+    information of the OPcache extension. It can be used to inspect the directives, version
+    information, and other configuration values currently associated with OPcache.
+</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">opcache_get_configuration(): array|false</code></pre>
+
+<h5>Return Value</h5>
+
+<p>
+    When successful, the function returns an associative array containing information about the
+    OPcache configuration. If the configuration cannot be retrieved, it returns <code>false</code>.
+</p>
+
+<p>
+    The returned array contains information such as the OPcache version, configuration directives,
+    and configuration values.
+</p>
+
+<h5>Basic Example</h5>
+
+<p>
+    The following example retrieves the current OPcache configuration and displays it:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$config = opcache_get_configuration();
+
+print_r($config);</code></pre>
+
+<h5>Checking the Return Value</h5>
+
+<p>
+    Because the function can return <code>false</code>, the result can be checked before using
+    the configuration data:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$config = opcache_get_configuration();
+
+if ($config === false) {
+    echo 'Unable to retrieve OPcache configuration.';
+    exit;
+}
+
+print_r($config);</code></pre>
+
+<h5>Inspecting Configuration Directives</h5>
+
+<p>
+    The returned array contains a <code>directives</code> entry with the configured OPcache
+    directives. These values can be accessed individually:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$config = opcache_get_configuration();
+
+if ($config !== false) {
+    echo $config['directives']['opcache.memory_consumption'];
+    echo $config['directives']['opcache.validate_timestamps'];
+}</code></pre>
+
+<p>
+    This can be useful when an application or diagnostic script needs to verify how OPcache is
+    configured at runtime.
+</p>
+
+<h5>Inspecting OPcache Version Information</h5>
+
+<p>
+    The returned configuration also contains version information for OPcache. It can be accessed
+    through the <code>version</code> entry:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$config = opcache_get_configuration();
+
+if ($config !== false) {
+    print_r($config['version']);
+}</code></pre>
+
+<h5>Configuration vs. Status</h5>
+
+<p>
+    <code>opcache_get_configuration()</code> focuses on the configuration of OPcache, while
+    <code>opcache_get_status()</code> provides information about the current state and usage of
+    the cache.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>opcache_get_configuration()</code></td>
+            <td>Retrieves OPcache configuration information.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_get_status()</code></td>
+            <td>Retrieves the current state and statistics of OPcache.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Use Cases</h5>
+
+<ul>
+    <li>Inspecting active OPcache directives.</li>
+    <li>Verifying configuration after modifying <code>php.ini</code>.</li>
+    <li>Checking the installed OPcache version.</li>
+    <li>Debugging configuration-related problems.</li>
+    <li>Building diagnostic or monitoring tools.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>The function does not change the OPcache configuration.</li>
+    <li>The returned value is an associative array when the configuration can be retrieved.</li>
+    <li>The function can return <code>false</code> if the configuration is unavailable.</li>
+    <li>Use <code>opcache_get_status()</code> when information about cache usage and runtime status is required.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>opcache_get_configuration()</code> provides a programmatic way to inspect the active
+    OPcache configuration. It is particularly useful for troubleshooting, verifying PHP
+    configuration, and understanding which OPcache directives are currently in effect.
+</p>
+
 <h4 id="opcache-get-status">OPCACHE_GET_STATUS</h4>
 <h4 id="opcache-invalidate">OPCACHE_INVALIDATE</h4>
 <h4 id="opcache-is-script-cached">OPCACHE_IS_SCRIPT_CACHED</h4>
