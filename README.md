@@ -41212,6 +41212,159 @@ var_dump($result);</code></pre>
 </p>
 
 <h4 id="opcache-compile-file">OPCACHE_COMPILE_FILE</h4>
+
+<p>
+    The <code>opcache_compile_file()</code> function compiles a PHP script and adds its compiled
+    bytecode to the OPcache without executing the script. This allows a script to be prepared
+    for future execution before it is actually requested by the application.
+</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">opcache_compile_file(string $filename): bool</code></pre>
+
+<h5>Parameters</h5>
+
+<p>
+    The function accepts one parameter:
+</p>
+
+<ul>
+    <li>
+        <code>$filename</code> — The path to the PHP script that should be compiled and added
+        to the OPcache.
+    </li>
+</ul>
+
+<h5>Return Value</h5>
+
+<p>
+    The function returns <code>true</code> when the script is successfully compiled and added to
+    the OPcache. It returns <code>false</code> if the operation fails.
+</p>
+
+<h5>Basic Example</h5>
+
+<p>
+    The following example compiles a PHP file without executing its code:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = '/var/www/application/src/User.php';
+
+$result = opcache_compile_file($filename);
+
+var_dump($result);</code></pre>
+
+<p>
+    Calling <code>opcache_compile_file()</code> does not execute the contents of
+    <code>User.php</code>. It only compiles the file and attempts to store the resulting bytecode
+    in OPcache.
+</p>
+
+<h5>Checking the Result</h5>
+
+<p>
+    The return value can be used to determine whether the compilation operation succeeded:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = '/var/www/application/src/User.php';
+
+if (opcache_compile_file($filename)) {
+    echo 'Script successfully compiled and cached.';
+} else {
+    echo 'Unable to compile and cache the script.';
+}</code></pre>
+
+<h5>Using an Absolute Path</h5>
+
+<p>
+    The filename should identify the PHP script that should be compiled. Using an absolute path
+    can make the target file explicit and avoid ambiguity when the script is executed from
+    different working directories.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = __DIR__ . '/src/User.php';
+
+if (opcache_compile_file($filename)) {
+    echo 'File compiled successfully.';
+}</code></pre>
+
+<h5>Difference from Executing a PHP File</h5>
+
+<p>
+    A regular PHP execution loads and executes the instructions contained in a script. In contrast,
+    <code>opcache_compile_file()</code> only compiles the script and stores its compiled
+    representation in OPcache.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+opcache_compile_file(__DIR__ . '/src/User.php');
+
+// User.php is compiled, but its code is not executed here.</code></pre>
+
+<p>
+    This distinction is important because compiling a file does not perform the operations normally
+    performed when that file is executed.
+</p>
+
+<h5>Possible Failure</h5>
+
+<p>
+    The function can fail if the file cannot be compiled or if the OPcache operation cannot be
+    performed. The return value should therefore be checked when the result of the operation is
+    important.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = __DIR__ . '/src/User.php';
+
+if (!opcache_compile_file($filename)) {
+    throw new RuntimeException(
+        'Failed to compile the PHP script.'
+    );
+}</code></pre>
+
+<h5>Use Cases</h5>
+
+<p>
+    <code>opcache_compile_file()</code> can be useful when an application or deployment process
+    needs to explicitly populate the OPcache before a script is requested.
+</p>
+
+<ul>
+    <li>Precompiling selected application files.</li>
+    <li>Preparing frequently accessed scripts before they are requested.</li>
+    <li>Integrating cache preparation into deployment procedures.</li>
+    <li>Testing whether a PHP script can be successfully compiled by OPcache.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>The function compiles the specified script but does not execute it.</li>
+    <li>The target file must be a valid PHP script that can be compiled successfully.</li>
+    <li>The function returns a boolean value indicating whether the operation succeeded.</li>
+    <li>Using this function does not replace normal OPcache configuration.</li>
+    <li>It should be used carefully in deployment or cache-management scripts to avoid unnecessary compilation work.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>opcache_compile_file()</code> explicitly compiles a PHP script and stores its bytecode
+    in OPcache without executing the script. It is mainly useful for cache preparation,
+    deployment workflows, and situations where specific scripts should be compiled before they
+    are needed by the application.
+</p>
+
 <h4 id="opcache-get-configuration">OPCACHE_GET_CONFIGURATION</h4>
 <h4 id="opcache-get-status">OPCACHE_GET_STATUS</h4>
 <h4 id="opcache-invalidate">OPCACHE_INVALIDATE</h4>
