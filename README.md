@@ -41510,6 +41510,222 @@ if ($config !== false) {
 </p>
 
 <h4 id="opcache-get-status">OPCACHE_GET_STATUS</h4>
+
+<p>
+    The <code>opcache_get_status()</code> function retrieves the current runtime status and
+    statistics of the OPcache extension. It provides information about whether OPcache is enabled,
+    memory usage, cache statistics, and, optionally, the scripts currently stored in the cache.
+</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">opcache_get_status(bool $include_scripts = true): array|false</code></pre>
+
+<h5>Parameters</h5>
+
+<p>
+    The function accepts one optional parameter:
+</p>
+
+<ul>
+    <li>
+        <code>$include_scripts</code> — Determines whether information about individual cached
+        scripts should be included in the returned data. The default value is <code>true</code>.
+    </li>
+</ul>
+
+<p>
+    Passing <code>false</code> can reduce the amount of information returned when details about
+    individual cached scripts are not required.
+</p>
+
+<h5>Return Value</h5>
+
+<p>
+    When successful, the function returns an associative array containing information about the
+    current OPcache status and statistics. It returns <code>false</code> if the status cannot be
+    retrieved.
+</p>
+
+<h5>Basic Example</h5>
+
+<p>
+    The following example retrieves and displays the current OPcache status:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status();
+
+print_r($status);</code></pre>
+
+<h5>Checking Whether OPcache Is Enabled</h5>
+
+<p>
+    The returned array contains an <code>opcache_enabled</code> value that indicates whether
+    OPcache is currently enabled:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status();
+
+if ($status !== false &amp;&amp; $status['opcache_enabled']) {
+    echo 'OPcache is enabled.';
+} else {
+    echo 'OPcache is not enabled.';
+}</code></pre>
+
+<h5>Inspecting Memory Usage</h5>
+
+<p>
+    Information about memory allocated to OPcache can be found in the
+    <code>memory_usage</code> section of the returned array.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status();
+
+if ($status !== false) {
+    print_r($status['memory_usage']);
+}</code></pre>
+
+<p>
+    This information can be useful for monitoring how much of the configured OPcache memory is
+    being used and how much remains available.
+</p>
+
+<h5>Inspecting Cache Statistics</h5>
+
+<p>
+    The <code>opcache_statistics</code> section contains statistics about cache activity, such as
+    the number of cached scripts and cache hits and misses.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status();
+
+if ($status !== false) {
+    print_r($status['opcache_statistics']);
+}</code></pre>
+
+<h5>Excluding Cached Scripts</h5>
+
+<p>
+    When information about individual scripts is not required, the <code>$include_scripts</code>
+    parameter can be set to <code>false</code>:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status(false);
+
+print_r($status);</code></pre>
+
+<p>
+    This is useful when only general OPcache statistics are needed without retrieving information
+    about every cached script.
+</p>
+
+<h5>Inspecting Cached Scripts</h5>
+
+<p>
+    When <code>$include_scripts</code> is <code>true</code>, the returned data can include a
+    <code>scripts</code> entry containing information about individual scripts stored in the cache.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status(true);
+
+if ($status !== false &amp;&amp; isset($status['scripts'])) {
+    foreach ($status['scripts'] as $script) {
+        print_r($script);
+    }
+}</code></pre>
+
+<h5>Example: Monitoring Cache Usage</h5>
+
+<p>
+    A simple diagnostic script can use the returned information to display basic OPcache
+    statistics:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$status = opcache_get_status(false);
+
+if ($status === false) {
+    echo 'Unable to retrieve OPcache status.';
+    exit;
+}
+
+$memory = $status['memory_usage'];
+$statistics = $status['opcache_statistics'];
+
+echo 'Used memory: ' . $memory['used_memory'] . PHP_EOL;
+echo 'Free memory: ' . $memory['free_memory'] . PHP_EOL;
+echo 'Cached scripts: ' . $statistics['num_cached_scripts'] . PHP_EOL;
+echo 'Cache hits: ' . $statistics['hits'] . PHP_EOL;
+echo 'Cache misses: ' . $statistics['misses'] . PHP_EOL;</code></pre>
+
+<h5>Difference from <code>opcache_get_configuration()</code></h5>
+
+<p>
+    <code>opcache_get_configuration()</code> and <code>opcache_get_status()</code> provide
+    different types of information:
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Information</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>opcache_get_configuration()</code></td>
+            <td>Configuration directives and OPcache configuration information.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_get_status()</code></td>
+            <td>Runtime status, memory usage, statistics, and cached scripts.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Use Cases</h5>
+
+<ul>
+    <li>Monitoring OPcache memory usage.</li>
+    <li>Checking whether OPcache is enabled.</li>
+    <li>Inspecting cache hits and misses.</li>
+    <li>Determining how many scripts are currently cached.</li>
+    <li>Investigating cache performance and configuration problems.</li>
+    <li>Building administrative or monitoring tools.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>The function does not modify the OPcache configuration or cache.</li>
+    <li>It returns <code>false</code> when the status cannot be retrieved.</li>
+    <li>Passing <code>false</code> as <code>$include_scripts</code> omits information about individual cached scripts.</li>
+    <li>The returned data is intended for monitoring and diagnostic purposes.</li>
+    <li>When exposing OPcache status through a web interface, access should be restricted because the information can reveal details about the server and application.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>opcache_get_status()</code> provides a detailed view of the current OPcache runtime
+    state. It can be used to inspect whether OPcache is enabled, analyze memory consumption,
+    monitor cache statistics, and optionally examine the scripts currently stored in the cache.
+</p>
+
 <h4 id="opcache-invalidate">OPCACHE_INVALIDATE</h4>
 <h4 id="opcache-is-script-cached">OPCACHE_IS_SCRIPT_CACHED</h4>
 <h4 id="opcache-reset">OPCACHE_RESET</h4>
