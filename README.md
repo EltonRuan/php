@@ -41727,6 +41727,184 @@ echo 'Cache misses: ' . $statistics['misses'] . PHP_EOL;</code></pre>
 </p>
 
 <h4 id="opcache-invalidate">OPCACHE_INVALIDATE</h4>
+
+<p>
+    The <code>opcache_invalidate()</code> function invalidates the cached version of a specific
+    PHP script in OPcache. It is useful when a script has been modified and its previously
+    compiled bytecode should no longer be used.
+</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">opcache_invalidate(string $filename, bool $force = false): bool</code></pre>
+
+<h5>Parameters</h5>
+
+<p>
+    The function accepts two parameters:
+</p>
+
+<ul>
+    <li>
+        <code>$filename</code> — The path to the PHP script whose cached version should be
+        invalidated.
+    </li>
+    <li>
+        <code>$force</code> — Determines whether the cached script should be invalidated even
+        when timestamp validation is disabled. The default value is <code>false</code>.
+    </li>
+</ul>
+
+<h5>Return Value</h5>
+
+<p>
+    The function returns <code>true</code> if the cached script was successfully invalidated or
+    if there was no cached script to invalidate. It returns <code>false</code> if the operation
+    fails.
+</p>
+
+<h5>Basic Example</h5>
+
+<p>
+    The following example invalidates the cached version of a specific PHP file:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = __DIR__ . '/src/User.php';
+
+$result = opcache_invalidate($filename);
+
+var_dump($result);</code></pre>
+
+<p>
+    Invalidating the script causes OPcache to stop using the existing cached version. When the
+    script is requested again, PHP can compile the updated source code and cache the new version.
+</p>
+
+<h5>Forcing Invalidation</h5>
+
+<p>
+    The second parameter can be set to <code>true</code> to force invalidation regardless of the
+    current timestamp validation configuration:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = __DIR__ . '/src/User.php';
+
+if (opcache_invalidate($filename, true)) {
+    echo 'Script invalidated successfully.';
+}</code></pre>
+
+<p>
+    This can be particularly useful in production environments where
+    <code>opcache.validate_timestamps</code> is disabled.
+</p>
+
+<h5>Using It After a Deployment</h5>
+
+<p>
+    An application that disables automatic timestamp validation may explicitly invalidate changed
+    scripts during deployment:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$files = [
+    __DIR__ . '/src/User.php',
+    __DIR__ . '/src/Order.php',
+    __DIR__ . '/src/Services/UserService.php'
+];
+
+foreach ($files as $file) {
+    opcache_invalidate($file, true);
+}
+
+echo 'OPcache entries invalidated.';</code></pre>
+
+<p>
+    This approach allows a deployment process to control when updated scripts should be recognized
+    by OPcache instead of relying on automatic timestamp checks.
+</p>
+
+<h5>Checking the Result</h5>
+
+<p>
+    The return value can be checked when the result of the invalidation operation is important:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = __DIR__ . '/src/User.php';
+
+if (!opcache_invalidate($filename, true)) {
+    throw new RuntimeException(
+        'Unable to invalidate the cached script.'
+    );
+}
+
+echo 'Cached script invalidated successfully.';</code></pre>
+
+<h5>Difference from <code>opcache_reset()</code></h5>
+
+<p>
+    <code>opcache_invalidate()</code> targets a single script, while
+    <code>opcache_reset()</code> resets the entire OPcache.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Scope</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>opcache_invalidate()</code></td>
+            <td>Invalidates a specific PHP script.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_reset()</code></td>
+            <td>Resets the entire OPcache.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    Invalidating individual scripts can be preferable when only a small number of files have
+    changed because it avoids unnecessarily affecting unrelated cached scripts.
+</p>
+
+<h5>Use Cases</h5>
+
+<ul>
+    <li>Invalidating a modified PHP script.</li>
+    <li>Updating cached files during deployments.</li>
+    <li>Managing OPcache when timestamp validation is disabled.</li>
+    <li>Refreshing specific scripts without resetting the entire cache.</li>
+    <li>Building automated deployment and cache-management procedures.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>The function only targets the specified script.</li>
+    <li>The <code>$force</code> parameter can be useful when timestamp validation is disabled.</li>
+    <li>Invalidating a script does not execute the updated PHP file.</li>
+    <li>The next execution of the invalidated script can cause PHP to compile and cache the updated version.</li>
+    <li>Preloaded code has a different lifecycle and cannot be treated as an ordinary cached script.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>opcache_invalidate()</code> provides a way to invalidate the cached version of an
+    individual PHP script. It is especially useful in deployment workflows where updated files
+    need to be recognized by OPcache without resetting the entire cache.
+</p>
+
 <h4 id="opcache-is-script-cached">OPCACHE_IS_SCRIPT_CACHED</h4>
 <h4 id="opcache-reset">OPCACHE_RESET</h4>
 
