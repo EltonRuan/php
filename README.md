@@ -41906,6 +41906,165 @@ echo 'Cached script invalidated successfully.';</code></pre>
 </p>
 
 <h4 id="opcache-is-script-cached">OPCACHE_IS_SCRIPT_CACHED</h4>
+
+<p>
+    The <code>opcache_is_script_cached()</code> function determines whether a specific PHP script
+    is currently stored in the OPcache. It can be used to verify whether a script has already been
+    compiled and cached.
+</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">opcache_is_script_cached(string $filename): bool</code></pre>
+
+<h5>Parameters</h5>
+
+<p>
+    The function accepts one parameter:
+</p>
+
+<ul>
+    <li>
+        <code>$filename</code> — The path to the PHP script that should be checked.
+    </li>
+</ul>
+
+<h5>Return Value</h5>
+
+<p>
+    The function returns <code>true</code> if the specified script is currently cached by OPcache.
+    It returns <code>false</code> if the script is not cached.
+</p>
+
+<h5>Basic Example</h5>
+
+<p>
+    The following example checks whether a specific PHP file is currently stored in OPcache:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = __DIR__ . '/src/User.php';
+
+if (opcache_is_script_cached($filename)) {
+    echo 'The script is cached.';
+} else {
+    echo 'The script is not cached.';
+}</code></pre>
+
+<h5>Using the Result</h5>
+
+<p>
+    Because the function returns a boolean value, its result can be used directly in conditional
+    statements:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = __DIR__ . '/src/User.php';
+
+$cached = opcache_is_script_cached($filename);
+
+var_dump($cached);</code></pre>
+
+<p>
+    A result of <code>true</code> indicates that OPcache has a cached entry for the specified
+    script, while <code>false</code> indicates that it does not.
+</p>
+
+<h5>Checking Multiple Scripts</h5>
+
+<p>
+    The function can be used to inspect several application files individually:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$files = [
+    __DIR__ . '/src/User.php',
+    __DIR__ . '/src/Order.php',
+    __DIR__ . '/src/Services/UserService.php'
+];
+
+foreach ($files as $file) {
+    $status = opcache_is_script_cached($file)
+        ? 'cached'
+        : 'not cached';
+
+    echo $file . ': ' . $status . PHP_EOL;
+}</code></pre>
+
+<h5>Checking Before Invalidating</h5>
+
+<p>
+    The function can be combined with <code>opcache_invalidate()</code> when a deployment or
+    maintenance process needs to invalidate only scripts that are currently cached:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$filename = __DIR__ . '/src/User.php';
+
+if (opcache_is_script_cached($filename)) {
+    opcache_invalidate($filename, true);
+    echo 'Cached script invalidated.';
+} else {
+    echo 'Script is not currently cached.';
+}</code></pre>
+
+<h5>Difference from <code>opcache_get_status()</code></h5>
+
+<p>
+    Both <code>opcache_is_script_cached()</code> and <code>opcache_get_status()</code> can provide
+    information about cached scripts, but they serve different purposes.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>opcache_is_script_cached()</code></td>
+            <td>Checks whether one specific script is cached and returns a boolean result.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_get_status()</code></td>
+            <td>Provides broader information about OPcache status, statistics, memory usage, and optionally cached scripts.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Use Cases</h5>
+
+<ul>
+    <li>Checking whether a specific PHP script is cached.</li>
+    <li>Diagnosing OPcache behavior.</li>
+    <li>Verifying cache state during deployments.</li>
+    <li>Checking scripts before performing cache invalidation.</li>
+    <li>Building administrative or monitoring tools.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>The function only checks the specified script.</li>
+    <li>It returns a boolean value rather than detailed information about the cached script.</li>
+    <li>Use <code>opcache_get_status()</code> when detailed cache statistics are required.</li>
+    <li>The result reflects the OPcache state for the PHP environment in which the function is executed.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>opcache_is_script_cached()</code> provides a simple way to determine whether a specific
+    PHP script is currently stored in OPcache. Its boolean result makes it useful for diagnostics,
+    monitoring, and deployment scripts that need to check the cache state of individual files.
+</p>
+
 <h4 id="opcache-reset">OPCACHE_RESET</h4>
 
 
