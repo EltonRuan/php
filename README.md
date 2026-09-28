@@ -42067,7 +42067,158 @@ if (opcache_is_script_cached($filename)) {
 
 <h4 id="opcache-reset">OPCACHE_RESET</h4>
 
+<p>
+    The <code>opcache_reset()</code> function resets the entire OPcache. It removes all cached
+    PHP scripts from the opcode cache, allowing them to be compiled again when they are needed.
+</p>
 
+<h5>Syntax</h5>
+
+<pre><code class="language-php">opcache_reset(): bool</code></pre>
+
+<h5>Parameters</h5>
+
+<p>
+    The function does not accept any parameters. When called, it attempts to reset the complete
+    OPcache for the current PHP environment.
+</p>
+
+<h5>Return Value</h5>
+
+<p>
+    The function returns <code>true</code> if the OPcache reset operation is successful and
+    <code>false</code> if the operation cannot be performed.
+</p>
+
+<h5>Basic Example</h5>
+
+<p>
+    The following example resets the entire OPcache:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+$result = opcache_reset();
+
+var_dump($result);</code></pre>
+
+<h5>Checking the Result</h5>
+
+<p>
+    The return value can be used to verify whether the reset operation was successful:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+if (opcache_reset()) {
+    echo 'OPcache was successfully reset.';
+} else {
+    echo 'Unable to reset OPcache.';
+}</code></pre>
+
+<h5>Resetting OPcache During Deployment</h5>
+
+<p>
+    A deployment process may reset OPcache when a large number of application files have changed
+    and the entire cache needs to be cleared:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+if (!opcache_reset()) {
+    throw new RuntimeException(
+        'Failed to reset OPcache.'
+    );
+}
+
+echo 'OPcache reset completed.';</code></pre>
+
+<p>
+    In many deployment scenarios, however, invalidating only the affected scripts with
+    <code>opcache_invalidate()</code> can avoid unnecessarily clearing unrelated cached scripts.
+</p>
+
+<h5>Difference from <code>opcache_invalidate()</code></h5>
+
+<p>
+    The main difference between the two functions is their scope:
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Scope</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>opcache_invalidate()</code></td>
+            <td>Invalidates a specific PHP script.</td>
+        </tr>
+        <tr>
+            <td><code>opcache_reset()</code></td>
+            <td>Resets the entire OPcache.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    Therefore, <code>opcache_reset()</code> should generally be used when the entire cache needs
+    to be cleared rather than when only one or a few scripts have changed.
+</p>
+
+<h5>Effect on Cached Scripts</h5>
+
+<p>
+    After the OPcache is reset, previously cached scripts must be compiled again when they are
+    requested. This can temporarily increase compilation activity until the cache is populated
+    again.
+</p>
+
+<pre><code class="language-text">Before reset
+    |
+    +-- Script A → Cached
+    +-- Script B → Cached
+    +-- Script C → Cached
+    |
+    v
+opcache_reset()
+    |
+    v
+Cache cleared
+    |
+    +-- Script A → Compiled again when requested
+    +-- Script B → Compiled again when requested
+    +-- Script C → Compiled again when requested</code></pre>
+
+<h5>Use Cases</h5>
+
+<ul>
+    <li>Clearing the complete OPcache during maintenance.</li>
+    <li>Refreshing cached scripts after a large deployment.</li>
+    <li>Troubleshooting unexpected cache behavior.</li>
+    <li>Resetting the cache when individual script invalidation is not sufficient.</li>
+</ul>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>The function affects the entire OPcache rather than a single script.</li>
+    <li>Previously cached scripts must be compiled again when they are requested.</li>
+    <li>Resetting the cache can temporarily increase compilation activity.</li>
+    <li>It should be used carefully in production environments because it affects all cached scripts.</li>
+    <li>Preloaded scripts have a different lifecycle and are not simply removed from memory by an ordinary OPcache reset.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    <code>opcache_reset()</code> clears the entire OPcache and causes cached scripts to be compiled
+    again as they are requested. It is useful for maintenance, troubleshooting, and deployments
+    that require a complete cache reset, but it should be used carefully because it affects all
+    cached scripts.
+</p>
 
 <h4 id="output-control">OUTPUT CONTROL</h4>
 
