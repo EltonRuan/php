@@ -42556,6 +42556,192 @@ echo 'Buffer level: ' . ob_get_level();</code></pre>
 </p>
 
 <h4 id="predefined-constants">PREDEFINED CONSTANTS</h4>
+
+<p>
+    PHP's Output Control functionality provides predefined constants that describe the status
+    and behavior of the current output buffer. These constants can be used with functions such
+    as <code>ob_get_status()</code> to inspect how an output buffer is operating.
+</p>
+
+<h5>Available Constants</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Constant</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_START</code></td>
+            <td>Indicates that the output buffer has been started.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_WRITE</code></td>
+            <td>Indicates that output is being written to the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_FLUSH</code></td>
+            <td>Indicates that the current output buffer is being flushed.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_CLEAN</code></td>
+            <td>Indicates that the contents of the output buffer are being discarded.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_FINAL</code></td>
+            <td>Indicates that the output handler is being finalized.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_END</code></td>
+            <td>Indicates that the output buffer has ended.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_CONT</code></td>
+            <td>Indicates that the output handler should continue processing.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Output Handler Status Flags</h5>
+
+<p>
+    These constants are primarily used as flags describing operations performed by PHP's output
+    buffering system. Some of them can be combined using bitwise operators when inspecting or
+    handling output buffer status.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+$status = ob_get_status();
+
+print_r($status);
+
+ob_end_clean();</code></pre>
+
+<p>
+    The <code>ob_get_status()</code> function can provide information about the current output
+    buffer, including its name, type, buffer size, and status flags.
+</p>
+
+<h5>Using Constants with Output Handlers</h5>
+
+<p>
+    Output handler callbacks can receive information about the operation currently being
+    performed. The predefined constants can be used to interpret these flags.
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function outputHandler(string $output, int $flags): string
+{
+    if ($flags &amp; PHP_OUTPUT_HANDLER_FINAL) {
+        $output .= '&lt;!-- Output finalized --&gt;';
+    }
+
+    return $output;
+}
+
+ob_start('outputHandler');
+
+echo 'Hello, World!';
+
+ob_end_flush();</code></pre>
+
+<p>
+    In this example, <code>PHP_OUTPUT_HANDLER_FINAL</code> is used as a bit flag to determine
+    whether the output handler is processing the final operation for the buffer.
+</p>
+
+<h5>Combining Flags</h5>
+
+<p>
+    Because output handler status values are represented as flags, multiple constants can be
+    combined and checked using bitwise operations:
+</p>
+
+<pre><code class="language-php">&lt;?php
+
+function outputHandler(string $output, int $flags): string
+{
+    if (($flags &amp; PHP_OUTPUT_HANDLER_START) !== 0) {
+        $output = '&lt;!-- Buffer started --&gt;' . $output;
+    }
+
+    if (($flags &amp; PHP_OUTPUT_HANDLER_FINAL) !== 0) {
+        $output .= '&lt;!-- Buffer finalized --&gt;';
+    }
+
+    return $output;
+}
+
+ob_start('outputHandler');
+
+echo 'Buffered content';
+
+ob_end_flush();</code></pre>
+
+<p>
+    The bitwise <code>&amp;</code> operator checks whether a particular flag is present in the
+    value passed to the output handler.
+</p>
+
+<h5>Handler Capability Constants</h5>
+
+<p>
+    PHP also provides constants that describe which operations an output handler supports.
+    These constants are useful when working with output-handler configuration and status.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Constant</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_CLEANABLE</code></td>
+            <td>Indicates that the handler supports cleaning the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_FLUSHABLE</code></td>
+            <td>Indicates that the handler supports flushing the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_REMOVABLE</code></td>
+            <td>Indicates that the handler can be removed.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_STDFLAGS</code></td>
+            <td>Represents the standard combination of output handler capability flags.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Important Notes</h5>
+
+<ul>
+    <li>Output handler constants are primarily used with output buffering and output handler callbacks.</li>
+    <li>Status constants such as <code>PHP_OUTPUT_HANDLER_START</code> and <code>PHP_OUTPUT_HANDLER_FINAL</code> can be treated as bit flags.</li>
+    <li>Capability constants describe which operations an output handler supports.</li>
+    <li>These constants are provided by PHP and do not need to be manually defined.</li>
+    <li>The exact flags available can depend on the PHP version, so version-specific documentation should be consulted when compatibility is important.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>
+    Output Control predefined constants provide information about the state and capabilities of
+    PHP output handlers. They are particularly useful when creating custom output callbacks,
+    inspecting buffer operations, and determining whether an output handler is being started,
+    flushed, cleaned, or finalized.
+</p>
+
 <h4 id="output-buffering">OUTPUT BUFFERING</h4>
 <h4 id="system-buffer-flushing">SYSTEM BUFFER FLUSHING</h4>
 
