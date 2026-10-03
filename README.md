@@ -42920,6 +42920,135 @@ ob_end_flush();
 
 <h4 id="system-buffer-flushing">SYSTEM BUFFER FLUSHING</h4>
 
+<p>System buffer flushing refers to sending buffered output from PHP to the next output layer, allowing data that has been temporarily stored to continue through the output system.</p>
+
+<p>PHP output can pass through multiple buffering layers before reaching the client. Calling a flushing function does not necessarily guarantee that the data will immediately appear in the browser, because the web server, operating system, network, or client may have additional buffers.</p>
+
+<h5>Flushing an Output Buffer</h5>
+
+<p>The <code>ob_flush()</code> function sends the contents of the active PHP output buffer to the next output layer while keeping the buffer active.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Processing started...";
+
+ob_flush();
+flush();
+
+sleep(2);
+
+echo "Processing finished.";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>In this example, <code>ob_flush()</code> passes the contents of PHP's active output buffer onward. The <code>flush()</code> function then asks PHP to flush the system-level output buffer.</p>
+
+<h5>The <code>flush()</code> Function</h5>
+
+<p>The <code>flush()</code> function attempts to send the current output to the client. It does not necessarily flush PHP's user-level output buffers.</p>
+
+<pre><code class="language-php">&lt;?php
+
+echo "First message";
+
+flush();
+
+sleep(2);
+
+echo "Second message";
+
+?&gt;</code></pre>
+
+<p>If an output buffer created by <code>ob_start()</code> is active, calling <code>flush()</code> alone may not send its contents. In that situation, <code>ob_flush()</code> can be used first.</p>
+
+<h5>Using <code>ob_flush()</code> and <code>flush()</code> Together</h5>
+
+<p>When manually managing output buffering, these functions can be used together to move output through the different buffering layers.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Step 1 completed.&lt;br&gt;";
+
+ob_flush();
+flush();
+
+sleep(1);
+
+echo "Step 2 completed.&lt;br&gt;";
+
+ob_flush();
+flush();
+
+sleep(1);
+
+echo "Step 3 completed.&lt;br&gt;";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>Here, <code>ob_flush()</code> sends the contents of PHP's active output buffer, while <code>flush()</code> requests that the output system send the available data onward.</p>
+
+<h5>System-Level Buffering</h5>
+
+<p>Flushing output is not an end-to-end guarantee that the user will immediately receive or see the data. Other components may buffer the response, including the web server, reverse proxy, operating system, network stack, or the client's browser.</p>
+
+<p>Therefore, code such as <code>flush()</code> should be understood as a request to flush available output rather than a guarantee of immediate network delivery.</p>
+
+<h5>Output Buffering vs. System Flushing</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_start()</code></td>
+            <td>Starts a PHP output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_flush()</code></td>
+            <td>Flushes the active PHP output buffer while keeping it active.</td>
+        </tr>
+        <tr>
+            <td><code>flush()</code></td>
+            <td>Attempts to flush the current system-level output buffers.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_flush()</code></td>
+            <td>Flushes and ends the active PHP output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_clean()</code></td>
+            <td>Discards and ends the active PHP output buffer.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li><code>ob_flush()</code> and <code>flush()</code> operate at different levels of the output system.</li>
+    <li><code>flush()</code> does not necessarily empty PHP's user-level output buffers.</li>
+    <li>Flushing does not guarantee immediate display in the browser.</li>
+    <li>Web servers, proxies, operating systems, networks, and browsers may introduce additional buffering.</li>
+    <li>Frequent flushing can reduce performance and should be used only when incremental output is actually required.</li>
+    <li>For streaming or long-running responses, the complete server configuration and response behavior must also be considered.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>System buffer flushing controls how buffered output is passed through PHP and the underlying output system. <code>ob_flush()</code> handles PHP's active output buffer, while <code>flush()</code> requests that available output be sent through the system. Neither function guarantees that the browser will display the data immediately.</p>
+
 <h4 id="user-level-output-buffers">USER-LEVEL OUTPUT BUFFERS</h4>
 <h4 id="what-output-is-buffered">WHAT OUTPUT IS BUFFERED?</h4>
 <h4 id="nesting-output-buffers">NESTING OUTPUT BUFFERS</h4>
