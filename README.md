@@ -43427,6 +43427,206 @@ echo $content;
 <p>When an output buffer is active, normal PHP output such as <code>echo</code>, <code>print</code>, and generated HTML is temporarily captured. Variables and other internal application data are not automatically buffered unless their values are explicitly used to generate output.</p>
 
 <h4 id="nesting-output-buffers">NESTING OUTPUT BUFFERS</h4>
+
+<p>PHP allows multiple output buffers to be active at the same time. This is known as nesting output buffers. Each call to <code>ob_start()</code> creates a new buffering level on top of the currently active buffer.</p>
+
+<p>Nested output buffers are useful when different parts of an application need to capture or process output independently, such as when rendering templates, components, or reusable sections of a page.</p>
+
+<h5>Creating Nested Buffers</h5>
+
+<p>A new output buffer can be created while another buffer is already active.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Outer buffer.";
+
+ob_start();
+
+echo "Inner buffer.";
+
+?&gt;</code></pre>
+
+<p>In this example, the first <code>ob_start()</code> creates the outer buffer. The second call creates a new buffer that becomes the active buffer.</p>
+
+<h5>Buffer Levels</h5>
+
+<p>The <code>ob_get_level()</code> function can be used to determine the current nesting level.</p>
+
+<pre><code class="language-php">&lt;?php
+
+echo "Level: " . ob_get_level();
+
+ob_start();
+
+echo "&lt;br&gt;Level: " . ob_get_level();
+
+ob_start();
+
+echo "&lt;br&gt;Level: " . ob_get_level();
+
+ob_end_clean();
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>Each call to <code>ob_start()</code> increases the output buffering level by one. Ending a buffer decreases the level.</p>
+
+<h5>Ending an Inner Buffer</h5>
+
+<p>When an inner buffer is ended with <code>ob_get_clean()</code>, its contents are returned to the calling code rather than being automatically sent to the client.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Outer content.";
+
+ob_start();
+
+echo "Inner content.";
+
+$innerContent = ob_get_clean();
+
+echo "&lt;div&gt;";
+echo $innerContent;
+echo "&lt;/div&gt;";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>The inner buffer captures <code>Inner content.</code>. After <code>ob_get_clean()</code>, the buffer is removed and its contents are stored in <code>$innerContent</code>. The outer buffer then remains active.</p>
+
+<h5>Passing Output to the Outer Buffer</h5>
+
+<p>When an inner buffer is flushed and ended with <code>ob_end_flush()</code>, its contents are passed to the next active output layer. If another user-level buffer is active below it, that output can therefore become part of the outer buffer.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Outer content.";
+
+ob_start();
+
+echo "Inner content.";
+
+ob_end_flush();
+
+$contents = ob_get_contents();
+
+ob_end_clean();
+
+echo $contents;
+
+?&gt;</code></pre>
+
+<p>The inner buffer is flushed into the outer buffer. The outer buffer can then retrieve the combined output.</p>
+
+<h5>Multiple Buffer Levels</h5>
+
+<p>More than two output buffers can be nested.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Level 1";
+
+ob_start();
+
+echo "Level 2";
+
+ob_start();
+
+echo "Level 3";
+
+echo "&lt;br&gt;Current level: " . ob_get_level();
+
+ob_end_flush();
+ob_end_flush();
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>Each buffer is managed independently, and the innermost active buffer is always the current buffer.</p>
+
+<h5>Stack-Like Behavior</h5>
+
+<p>Nested output buffers behave similarly to a stack. A newly created buffer becomes the active buffer, and operations such as <code>ob_get_contents()</code>, <code>ob_flush()</code>, and <code>ob_clean()</code> operate on the current buffer.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "First buffer.";
+
+ob_start();
+
+echo "Second buffer.";
+
+echo "&lt;br&gt;Active level: " . ob_get_level();
+
+ob_clean();
+
+ob_end_clean();
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>Because the innermost buffer is active, the first cleanup operations affect that buffer before the outer buffer is handled.</p>
+
+<h5>Nested Buffers and Templates</h5>
+
+<p>Nested buffering can be useful when a page contains several independently generated sections.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "&lt;main&gt;";
+
+ob_start();
+
+echo "&lt;section&gt;";
+echo "&lt;h2&gt;User Profile&lt;/h2&gt;";
+echo "&lt;/section&gt;";
+
+$section = ob_get_clean();
+
+echo $section;
+
+echo "&lt;/main&gt;";
+
+$page = ob_get_clean();
+
+echo $page;
+
+?&gt;</code></pre>
+
+<p>The inner buffer captures the section, while the outer buffer captures the complete page. This makes it possible to assemble smaller pieces of generated output before producing the final response.</p>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>Each call to <code>ob_start()</code> creates another output buffering level.</li>
+    <li>The most recently created buffer is the active buffer.</li>
+    <li><code>ob_get_level()</code> reports the current number of active buffering levels.</li>
+    <li>Buffer operations normally apply to the current, innermost buffer.</li>
+    <li><code>ob_get_clean()</code> retrieves and removes the current buffer.</li>
+    <li><code>ob_end_clean()</code> discards and ends the current buffer.</li>
+    <li><code>ob_end_flush()</code> flushes and ends the current buffer.</li>
+    <li>When an inner buffer is flushed, its output can be passed to an outer user-level buffer.</li>
+    <li>Nested buffers should be ended carefully to avoid leaving unexpected buffering levels active.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>Nesting output buffers allows PHP applications to maintain multiple levels of output buffering simultaneously. Each new buffer becomes the active level, while output from an inner buffer can be captured, discarded, or passed to an outer buffer. This provides fine-grained control over complex or hierarchical output generation.</p>
+
 <h4 id="buffer-size">BUFFER SIZE</h4>
 <h4 id="allowed-buffer-operations">ALLOWED BUFFER OPERATIONS</h4>
 <h4 id="output-handlers">OUTPUT HANDLERS</h4>
