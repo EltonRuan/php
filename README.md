@@ -43628,6 +43628,93 @@ echo $page;
 <p>Nesting output buffers allows PHP applications to maintain multiple levels of output buffering simultaneously. Each new buffer becomes the active level, while output from an inner buffer can be captured, discarded, or passed to an outer buffer. This provides fine-grained control over complex or hierarchical output generation.</p>
 
 <h4 id="buffer-size">BUFFER SIZE</h4>
+
+<p>The buffer size defines how much output can be accumulated before PHP attempts to send the buffered data to the next output layer. Output buffering can be configured globally through PHP configuration or locally when starting an output buffer.</p>
+
+<h5>Configuring the Buffer Size</h5>
+
+<p>The <code>output_buffering</code> directive in <code>php.ini</code> controls PHP's default output buffering behavior.</p>
+
+<pre><code class="language-ini">output_buffering = 4096</code></pre>
+
+<p>In this example, PHP uses a buffer size of 4096 bytes when the configuration enables output buffering.</p>
+
+<p>The directive can also be disabled:</p>
+
+<pre><code class="language-ini">output_buffering = Off</code></pre>
+
+<p>The exact behavior of automatic output buffering depends on the configured value and the PHP environment.</p>
+
+<h5>Setting a Buffer Size with <code>ob_start()</code></h5>
+
+<p>The second parameter of <code>ob_start()</code> can specify a chunk size for the output buffer.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(null, 4096);
+
+echo "Buffered output.";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>The value <code>4096</code> represents a chunk size in bytes. When the amount of buffered output reaches the configured threshold, PHP may automatically flush the buffer to the next output layer.</p>
+
+<h5>Chunked Output</h5>
+
+<p>A non-zero chunk size can be useful when an application generates a large amount of output and wants PHP to flush output progressively rather than waiting until the buffer is explicitly ended.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(null, 1024);
+
+for ($i = 1; $i &lt;= 10; $i++) {
+    echo "Processing item {$i}&lt;br&gt;";
+}
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>When the configured chunk size is reached, the output handler can be invoked and the buffered data can be passed onward.</p>
+
+<h5>Buffer Size vs. Buffer Contents</h5>
+
+<p>The configured chunk size should not be confused with the amount of output currently stored in the buffer. The current amount of buffered data can be obtained using <code>ob_get_length()</code>.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(null, 4096);
+
+echo "Some buffered content.";
+
+$length = ob_get_length();
+
+echo "&lt;p&gt;Buffered length: {$length} bytes&lt;/p&gt;";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p><code>ob_get_length()</code> reports the current length of the active output buffer, while the chunk size determines when PHP can automatically process the accumulated output.</p>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>The <code>output_buffering</code> directive controls default output buffering behavior.</li>
+    <li>The <code>ob_start()</code> function can specify a local chunk size.</li>
+    <li>The chunk size is measured in bytes.</li>
+    <li>A chunk size of <code>0</code> means that no automatic chunk-based flushing is performed by that buffer.</li>
+    <li><code>ob_get_length()</code> reports the current amount of data in the active buffer.</li>
+    <li>Buffering and flushing can also be affected by output handlers and other layers outside PHP.</li>
+    <li>A buffer size does not guarantee that data will immediately appear in the client's browser.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>Buffer size determines how much output can accumulate before PHP processes a buffer according to its configuration. The global <code>output_buffering</code> directive controls default behavior, while <code>ob_start()</code> can define a chunk size for an individual buffer.</p>
+
 <h4 id="allowed-buffer-operations">ALLOWED BUFFER OPERATIONS</h4>
 <h4 id="output-handlers">OUTPUT HANDLERS</h4>
 <h4 id="working-with-output-handlers">WORKING WITH OUTPUT HANDLERS</h4>
