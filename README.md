@@ -43716,6 +43716,139 @@ ob_end_flush();
 <p>Buffer size determines how much output can accumulate before PHP processes a buffer according to its configuration. The global <code>output_buffering</code> directive controls default behavior, while <code>ob_start()</code> can define a chunk size for an individual buffer.</p>
 
 <h4 id="allowed-buffer-operations">ALLOWED BUFFER OPERATIONS</h4>
+
+<p>PHP output buffers can be configured to allow or restrict specific operations, such as cleaning, flushing, and removal. These permissions are controlled through output handler flags passed to the <code>ob_start()</code> function.</p>
+
+<p>By default, output buffers created with <code>ob_start()</code> support the standard operations. Custom flags can be used when an application needs to restrict how a buffer can be managed.</p>
+
+<h5>Available Buffer Operation Flags</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Constant</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_CLEANABLE</code></td>
+            <td>Allows the buffer to be cleaned using functions such as <code>ob_clean()</code> and <code>ob_end_clean()</code>.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_FLUSHABLE</code></td>
+            <td>Allows the buffer to be flushed using functions such as <code>ob_flush()</code> and <code>ob_end_flush()</code>.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_REMOVABLE</code></td>
+            <td>Allows the buffer to be removed using functions that end the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_STDFLAGS</code></td>
+            <td>Combines the standard cleanable, flushable, and removable capabilities.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Specifying Allowed Operations</h5>
+
+<p>The third parameter of <code>ob_start()</code> accepts a bitmask of output handler flags. Multiple capabilities can be combined using the bitwise OR operator (<code>|</code>).</p>
+
+<pre><code class="language-php">&lt;?php
+
+$flags = PHP_OUTPUT_HANDLER_CLEANABLE
+       | PHP_OUTPUT_HANDLER_FLUSHABLE;
+
+ob_start(null, 0, $flags);
+
+echo "Buffered content.";
+
+ob_clean();
+
+echo "Updated content.";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>In this example, the buffer is configured to allow cleaning and flushing, but not removal through the usual buffer-ending operations. Consequently, <code>ob_end_flush()</code> cannot successfully remove this buffer because it lacks the removable capability.</p>
+
+<h5>Using Standard Flags</h5>
+
+<p>When no custom flags are required, <code>ob_start()</code> uses <code>PHP_OUTPUT_HANDLER_STDFLAGS</code> by default.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(
+    null,
+    0,
+    PHP_OUTPUT_HANDLER_STDFLAGS
+);
+
+echo "This buffer supports standard operations.";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>This configuration permits the buffer to be cleaned, flushed, and removed.</p>
+
+<h5>Restricting Buffer Removal</h5>
+
+<p>A buffer can be configured without the <code>PHP_OUTPUT_HANDLER_REMOVABLE</code> flag. This prevents normal buffer-ending functions from removing it while it remains active.</p>
+
+<pre><code class="language-php">&lt;?php
+
+$flags = PHP_OUTPUT_HANDLER_CLEANABLE
+       | PHP_OUTPUT_HANDLER_FLUSHABLE;
+
+ob_start(null, 0, $flags);
+
+echo "This buffer cannot be removed normally.";
+
+// Ending the buffer with ob_end_flush() is not permitted
+// because the removable capability was not enabled.
+
+?&gt;</code></pre>
+
+<p>Such a buffer must be managed carefully. If removal is prohibited, ordinary cleanup code cannot necessarily restore the previous buffering state.</p>
+
+<h5>Buffer Operations and Content Retrieval</h5>
+
+<p>Operation flags govern the buffer's cleaning, flushing, and removal capabilities. They do not simply determine whether output can be inspected. For example, <code>ob_get_contents()</code> retrieves the contents of the active buffer without ending it.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Example output.";
+
+$content = ob_get_contents();
+
+ob_end_clean();
+
+var_dump($content);
+
+?&gt;</code></pre>
+
+<p>The captured string remains available in <code>$content</code> even after the output buffer is ended.</p>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li><code>PHP_OUTPUT_HANDLER_CLEANABLE</code> permits cleaning the buffer.</li>
+    <li><code>PHP_OUTPUT_HANDLER_FLUSHABLE</code> permits flushing the buffer.</li>
+    <li><code>PHP_OUTPUT_HANDLER_REMOVABLE</code> permits ending and removing the buffer.</li>
+    <li><code>PHP_OUTPUT_HANDLER_STDFLAGS</code> combines the three standard capabilities.</li>
+    <li>Use the bitwise OR operator (<code>|</code>) to combine flags.</li>
+    <li>Attempting a prohibited operation may fail or generate a warning.</li>
+    <li>Buffers that cannot be removed can complicate application cleanup and should be used deliberately.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>Allowed buffer operations determine whether an output buffer can be cleaned, flushed, or removed. The flags supplied to <code>ob_start()</code> provide control over these capabilities and help applications manage output buffering behavior explicitly.</p>
+
 <h4 id="output-handlers">OUTPUT HANDLERS</h4>
 <h4 id="working-with-output-handlers">WORKING WITH OUTPUT HANDLERS</h4>
 <h4 id="options-for-output-handlers">OPTIONS FOR OUTPUT HANDLERS</h4>
