@@ -44020,6 +44020,9 @@ ob_end_flush();
 <p>Output handlers are callbacks that process PHP's buffered output before it moves to the next output layer. By registering a handler with <code>ob_start()</code>, developers can transform text, modify generated HTML, or implement custom output-processing logic in a centralized and reusable way.</p>
 
 <h4 id="working-with-output-handlers">WORKING WITH OUTPUT HANDLERS</h4>
+
+.
+
 <h4 id="options-for-output-handlers">OPTIONS FOR OUTPUT HANDLERS</h4>
 <h4 id="handler-return-values">HANDLER RETURN VALUES</h4>
 
