@@ -44021,7 +44021,161 @@ ob_end_flush();
 
 <h4 id="working-with-output-handlers">WORKING WITH OUTPUT HANDLERS</h4>
 
-.
+<p>Output handlers are callbacks that process the contents of an output buffer before PHP sends them to the next output destination. They can be used to transform, filter, or otherwise modify generated output.</p>
+
+<p>Handlers are registered with <code>ob_start()</code>, which accepts an optional callback, a chunk size, and a set of buffer operation flags.</p>
+
+<h5>Registering an Output Handler</h5>
+
+<p>The following example registers a callback that converts buffered output to uppercase:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(function (string $buffer): string {
+    return strtoupper($buffer);
+});
+
+echo "Hello, World!";
+
+ob_end_flush();
+
+// Output: HELLO, WORLD!
+
+?&gt;</code></pre>
+
+<p>The callback receives the buffered content and returns the modified string. When <code>ob_end_flush()</code> is called, PHP processes the remaining output, sends the result onward, and ends the buffer.</p>
+
+<h5>Callback Parameters and Phase Flags</h5>
+
+<p>An output handler can receive two arguments: the buffer contents and an integer describing the current processing phase.</p>
+
+<pre><code class="language-php">&lt;?php
+
+function outputHandler(string $buffer, int $phase): string
+{
+    if (($phase &amp; PHP_OUTPUT_HANDLER_FINAL) !== 0) {
+        // The buffer is being finalized.
+    }
+
+    return trim($buffer);
+}
+
+ob_start('outputHandler');
+
+echo "  Example output  ";
+
+ob_end_flush();
+
+// Output: Example output
+
+?&gt;</code></pre>
+
+<p>The <code>$phase</code> argument is a bitmask. Relevant constants include:</p>
+
+<ul>
+    <li><code>PHP_OUTPUT_HANDLER_START</code>: Indicates the start of handler processing for the buffer.</li>
+    <li><code>PHP_OUTPUT_HANDLER_FLUSH</code>: Indicates that the buffer is being flushed.</li>
+    <li><code>PHP_OUTPUT_HANDLER_CLEAN</code>: Indicates that the buffer is being cleaned.</li>
+    <li><code>PHP_OUTPUT_HANDLER_FINAL</code>: Indicates final processing when the buffer is ended.</li>
+</ul>
+
+<p>These flags can be combined, so use bitwise checks such as <code>($phase &amp; PHP_OUTPUT_HANDLER_FINAL) !== 0</code> rather than comparing the phase to a single constant.</p>
+
+<h5>Chunk-Based Processing</h5>
+
+<p>The second argument to <code>ob_start()</code> specifies the chunk size. When it is greater than zero, PHP can invoke the handler as the buffer reaches the specified threshold. The handler may therefore receive multiple portions of output instead of one complete string.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(
+    function (string $buffer): string {
+        return strtoupper($buffer);
+    },
+    8
+);
+
+echo "Hello ";
+echo "World!";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>Chunk-based processing can be useful for streaming or incremental transformations. However, handlers must not assume that each invocation contains a complete HTML element, word, or document.</p>
+
+<h5>Controlling Buffer Operations</h5>
+
+<p>The third argument to <code>ob_start()</code> controls which operations are permitted on the buffer.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Constant</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_CLEANABLE</code></td>
+            <td>Allows the buffer to be cleaned.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_FLUSHABLE</code></td>
+            <td>Allows the buffer to be flushed.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_REMOVABLE</code></td>
+            <td>Allows the buffer to be removed.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_STDFLAGS</code></td>
+            <td>Combines the standard cleanable, flushable, and removable permissions.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>For example, a buffer can be configured with the standard permissions explicitly:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(
+    function (string $buffer): string {
+        return trim($buffer);
+    },
+    0,
+    PHP_OUTPUT_HANDLER_STDFLAGS
+);
+
+echo "   Clean output   ";
+
+ob_end_flush();
+
+// Output: Clean output
+
+?&gt;</code></pre>
+
+<h5>Important Restrictions</h5>
+
+<ul>
+    <li>Return the processed content as a string.</li>
+    <li>Avoid calling output-buffer management functions from inside the handler when those calls would manipulate the buffer currently being processed.</li>
+    <li>Respect the buffer's configured permissions; not every buffer can be cleaned, flushed, or removed.</li>
+    <li>Remember that <code>ob_flush()</code> keeps the buffer active, whereas <code>ob_end_flush()</code> flushes and ends it.</li>
+    <li>Do not confuse PHP-level buffering with <code>flush()</code>, which requests a flush of the system output layer and does not guarantee immediate browser display.</li>
+</ul>
+
+<h5>Common Use Cases</h5>
+
+<ul>
+    <li>Transforming generated text before it is sent.</li>
+    <li>Removing unwanted whitespace from buffered content.</li>
+    <li>Applying consistent formatting to generated output.</li>
+    <li>Capturing and processing output from legacy code without changing the code that produces it.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>Output handlers provide a flexible way to process PHP output through callbacks. Reliable implementations account for phase flags, chunk sizes, buffer permissions, and lifecycle behavior. Use them when output needs to be transformed or intercepted, and keep the handler's logic predictable.</p>
 
 <h4 id="options-for-output-handlers">OPTIONS FOR OUTPUT HANDLERS</h4>
 <h4 id="handler-return-values">HANDLER RETURN VALUES</h4>
