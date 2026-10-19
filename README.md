@@ -44178,6 +44178,125 @@ ob_end_flush();
 <p>Output handlers provide a flexible way to process PHP output through callbacks. Reliable implementations account for phase flags, chunk sizes, buffer permissions, and lifecycle behavior. Use them when output needs to be transformed or intercepted, and keep the handler's logic predictable.</p>
 
 <h4 id="options-for-output-handlers">OPTIONS FOR OUTPUT HANDLERS</h4>
+
+<p>PHP output handlers support configuration options that determine how their output buffers can be managed. These options are supplied through the third argument of <code>ob_start()</code> and control whether a buffer can be cleaned, flushed, or removed.</p>
+
+<h5>Output Handler Flags</h5>
+
+<p>PHP provides the following constants for configuring output buffer permissions:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Constant</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_CLEANABLE</code></td>
+            <td>Allows the buffer to be cleaned.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_FLUSHABLE</code></td>
+            <td>Allows the buffer to be flushed.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_REMOVABLE</code></td>
+            <td>Allows the buffer to be removed from the output buffering stack.</td>
+        </tr>
+        <tr>
+            <td><code>PHP_OUTPUT_HANDLER_STDFLAGS</code></td>
+            <td>Combines the standard cleanable, flushable, and removable permissions.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Passing Options to ob_start()</h5>
+
+<p>The third argument of <code>ob_start()</code> accepts a bitmask of buffer permissions. Multiple flags can be combined using the bitwise OR operator (<code>|</code>).</p>
+
+<pre><code class="language-php">&lt;?php
+
+$flags = PHP_OUTPUT_HANDLER_CLEANABLE
+       | PHP_OUTPUT_HANDLER_FLUSHABLE
+       | PHP_OUTPUT_HANDLER_REMOVABLE;
+
+ob_start(
+    function (string $buffer): string {
+        return strtoupper($buffer);
+    },
+    0,
+    $flags
+);
+
+echo "Hello, World!";
+
+ob_end_flush();
+
+// Output: HELLO, WORLD!
+
+?&gt;</code></pre>
+
+<p>The buffer allows cleaning, flushing, and removal. The handler converts the buffered text to uppercase before the output is passed onward.</p>
+
+<h5>Using Standard Permissions</h5>
+
+<p>When the default set of buffer permissions is sufficient, use <code>PHP_OUTPUT_HANDLER_STDFLAGS</code> instead of combining the individual constants.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(
+    function (string $buffer): string {
+        return trim($buffer);
+    },
+    0,
+    PHP_OUTPUT_HANDLER_STDFLAGS
+);
+
+echo "   Example output   ";
+
+ob_end_flush();
+
+// Output: Example output
+
+?&gt;</code></pre>
+
+<h5>Restricting Buffer Operations</h5>
+
+<p>Individual flags can restrict operations that are not needed by an application. For example, a buffer can be made removable without granting explicit cleaning or flushing permissions.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(
+    function (string $buffer): string {
+        return strtoupper($buffer);
+    },
+    0,
+    PHP_OUTPUT_HANDLER_REMOVABLE
+);
+
+echo "Example output";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>The buffer can be removed, but it is not explicitly configured as cleanable or flushable. Ending the buffer normally still processes its remaining output through the handler.</p>
+
+<h5>Choosing the Right Options</h5>
+
+<ul>
+    <li>Use <code>PHP_OUTPUT_HANDLER_STDFLAGS</code> when standard buffer management is appropriate.</li>
+    <li>Use individual flags when the application needs tighter control over buffer operations.</li>
+    <li>Remember that buffer permissions affect the operations available to the code managing the buffer.</li>
+    <li>Choose flags according to the intended lifecycle of the buffer and its output handler.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>Output handler options define which operations are permitted on an output buffer. Configuring these flags through <code>ob_start()</code> helps control buffer management and prevents unsupported operations during output processing.</p>
+
 <h4 id="handler-return-values">HANDLER RETURN VALUES</h4>
 
 <h4 id="output-control-functions">OUTPUT CONTROL FUNCTIONS</h4>
