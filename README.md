@@ -44394,6 +44394,7 @@ ob_end_flush();
 <h5>In short</h5>
 
 <p>The return value of an output handler determines which string PHP passes onward. Returning the original content preserves it, returning a modified string transforms it, and returning an empty string suppresses that invocation's output.</p>
+
 <h4 id="output-control-functions">OUTPUT CONTROL FUNCTIONS</h4>
 <h4 id="flush">FLUSH</h4>
 <h4 id="ob-clean">OB_CLEAN</h4>
