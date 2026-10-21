@@ -44299,6 +44299,101 @@ ob_end_flush();
 
 <h4 id="handler-return-values">HANDLER RETURN VALUES</h4>
 
+<p>Output handlers in PHP must return a string containing the output that should be passed to the next stage of output processing. The returned value can be the original buffer contents, modified content, or an empty string when the handler intentionally suppresses output.</p>
+
+<h5>Returning the Original Output</h5>
+
+<p>An output handler can return the buffer unchanged when no transformation is required.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(function (string $buffer): string {
+    return $buffer;
+});
+
+echo "Hello, World!";
+
+ob_end_flush();
+
+// Output: Hello, World!
+
+?&gt;</code></pre>
+
+<p>Returning the original buffer preserves the generated content while allowing the handler to perform additional processing if needed.</p>
+
+<h5>Modifying the Output</h5>
+
+<p>The handler can transform the buffer before returning it. In this example, the output is converted to uppercase.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(function (string $buffer): string {
+    return strtoupper($buffer);
+});
+
+echo "Hello, World!";
+
+ob_end_flush();
+
+// Output: HELLO, WORLD!
+
+?&gt;</code></pre>
+
+<p>PHP passes the returned string onward instead of the original buffer contents.</p>
+
+<h5>Returning an Empty String</h5>
+
+<p>Returning an empty string suppresses the content processed by that handler invocation.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(function (string $buffer): string {
+    return '';
+});
+
+echo "This output will be suppressed.";
+
+ob_end_flush();
+
+// No output is produced.
+
+?&gt;</code></pre>
+
+<p>This behavior can be useful when output must be discarded. However, with chunk-based buffering, the handler may be invoked multiple times, so suppressing one invocation does not automatically suppress content handled by other invocations.</p>
+
+<h5>Returning the Result of a Transformation</h5>
+
+<p>Handlers can return the result of string functions or other processing operations.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(function (string $buffer): string {
+    return str_replace('old', 'new', $buffer);
+});
+
+echo "This is the old version.";
+
+ob_end_flush();
+
+// Output: This is the new version.
+
+?&gt;</code></pre>
+
+<p>The replacement is applied to the content received by the handler. If the buffer is processed in chunks, a search term split across separate chunks may not be matched as expected.</p>
+
+<h5>Return Type and Processing Considerations</h5>
+
+<ul>
+    <li>Return a string from the handler, as required by the output handler contract.</li>
+    <li>Use the returned value to determine what content continues through the output pipeline.</li>
+    <li>Remember that handlers may receive partial output when chunk-based processing is enabled.</li>
+    <li>Account for the handler's phase when final processing requires different behavior.</li>
+    <li>Do not assume that returning an empty string clears the buffer itself; it suppresses the content returned for that invocation.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The return value of an output handler determines which string PHP passes onward. Returning the original content preserves it, returning a modified string transforms it, and returning an empty string suppresses that invocation's output.</p>
 <h4 id="output-control-functions">OUTPUT CONTROL FUNCTIONS</h4>
 <h4 id="flush">FLUSH</h4>
 <h4 id="ob-clean">OB_CLEAN</h4>
