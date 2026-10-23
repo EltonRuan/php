@@ -44396,6 +44396,164 @@ ob_end_flush();
 <p>The return value of an output handler determines which string PHP passes onward. Returning the original content preserves it, returning a modified string transforms it, and returning an empty string suppresses that invocation's output.</p>
 
 <h4 id="output-control-functions">OUTPUT CONTROL FUNCTIONS</h4>
+
+<p>PHP provides a set of output control functions for managing output buffers, processing generated content, and controlling when buffered data is passed to the next output destination. These functions are useful for capturing output, modifying responses, handling errors, and managing output during script execution.</p>
+
+<h5>Starting and Managing Output Buffers</h5>
+
+<p>Output buffering can be started, inspected, cleaned, flushed, or terminated using dedicated functions.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_start()</code></td>
+            <td>Starts a new output buffer, optionally registering an output handler.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_contents()</code></td>
+            <td>Returns the contents of the active output buffer without ending it.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_length()</code></td>
+            <td>Returns the length of the active output buffer's contents.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_level()</code></td>
+            <td>Returns the nesting level of the output buffering mechanism.</td>
+        </tr>
+        <tr>
+            <td><code>ob_clean()</code></td>
+            <td>Clears the active output buffer while keeping it active, if permitted.</td>
+        </tr>
+        <tr>
+            <td><code>ob_flush()</code></td>
+            <td>Flushes the active output buffer while keeping it active, if permitted.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_clean()</code></td>
+            <td>Discards the active buffer's contents and ends the buffer, if permitted.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_flush()</code></td>
+            <td>Flushes the active buffer and ends it, if permitted.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_clean()</code></td>
+            <td>Returns the active buffer's contents and ends the buffer, if permitted.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_flush()</code></td>
+            <td>Returns the active buffer's contents, flushes them onward, and ends the buffer, if permitted.</td>
+        </tr>
+        <tr>
+            <td><code>ob_list_handlers()</code></td>
+            <td>Returns the names of output handlers currently in use.</td>
+        </tr>
+        <tr>
+            <td><code>ob_implicit_flush()</code></td>
+            <td>Enables or disables implicit flushing behavior for system output operations.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Capturing Output</h5>
+
+<p>One common use of output control is capturing generated content in a string instead of immediately sending it to the next output destination.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Generated content";
+
+$content = ob_get_clean();
+
+echo "Captured: " . $content;
+
+// Output: Captured: Generated content
+
+?&gt;</code></pre>
+
+<p>The <code>ob_get_clean()</code> function retrieves the buffered content and ends the active buffer. The captured string can then be stored, modified, or used elsewhere in the application.</p>
+
+<h5>Flushing Output</h5>
+
+<p>Flushing sends buffered content onward while affecting the buffer according to the function used.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "First part ";
+
+ob_flush();
+
+echo "Second part";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>The <code>ob_flush()</code> function processes the active buffer without ending it. The subsequent <code>ob_end_flush()</code> processes the remaining content and ends the buffer. Actual delivery to a browser may still be affected by other buffering layers or the server.</p>
+
+<h5>Inspecting Output Buffers</h5>
+
+<p>PHP provides functions for checking the current buffering state and identifying active handlers.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Example content";
+
+$level = ob_get_level();
+$length = ob_get_length();
+$contents = ob_get_contents();
+
+var_dump($level, $length, $contents);
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>These functions can help with debugging and managing nested buffers. Their results depend on the current buffering state, and functions that operate on the active buffer may return <code>false</code> when no suitable buffer is available.</p>
+
+<h5>System-Level Output Flushing</h5>
+
+<p>The <code>flush()</code> function requests that PHP flush the system output buffers. It is different from <code>ob_flush()</code>, which operates on the active user-level output buffer.</p>
+
+<pre><code class="language-php">&lt;?php
+
+echo "Processing started.";
+
+flush();
+
+// Continue processing.
+
+?&gt;</code></pre>
+
+<p>Calling <code>flush()</code> does not guarantee that the client immediately receives or displays the content. Web servers, proxies, and other output layers may continue buffering data.</p>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>Output buffers are managed as a stack, so operations generally affect the active buffer.</li>
+    <li>Some buffers cannot be cleaned, flushed, or removed because of their configuration.</li>
+    <li>Output handlers may process content when a buffer is flushed, cleaned, or ended.</li>
+    <li>Always close buffers that are no longer needed when doing so is permitted.</li>
+    <li>Do not assume that flushing a PHP buffer guarantees immediate delivery to the client.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>PHP output control functions provide fine-grained management of generated output. They allow developers to capture content, inspect buffer state, transform output through handlers, and control how buffered data moves through the output pipeline.</p>
+
 <h4 id="flush">FLUSH</h4>
 <h4 id="ob-clean">OB_CLEAN</h4>
 <h4 id="ob-end-clean">OB_END_CLEAN</h4>
