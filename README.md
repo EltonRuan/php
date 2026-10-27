@@ -44637,6 +44637,98 @@ for ($i = 1; $i &lt;= 3; $i++) {
 <p>The <code>flush()</code> function requests that PHP flush system-level output buffers. It is useful for scripts that generate incremental output, but it does not guarantee immediate delivery to the client and does not replace <code>ob_flush()</code> when user-level output buffering must be flushed.</p>
 
 <h4 id="ob-clean">OB_CLEAN</h4>
+
+<p>The <code>ob_clean()</code> function cleans the contents of the active output buffer without removing the buffer itself. Any output stored in that buffer is discarded, allowing the buffer to continue collecting new output.</p>
+
+<p>The function is useful when previously generated content should be discarded while output buffering remains enabled.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_clean(): bool</code></pre>
+
+<p>The function returns <code>true</code> on success or <code>false</code> if the buffer cannot be cleaned. For example, cleaning may fail if no active buffer exists or the buffer does not permit cleaning.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example discards previously buffered output and replaces it with new content:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "This content will be discarded.";
+
+ob_clean();
+
+echo "This content will be preserved.";
+
+ob_end_flush();
+
+// Output: This content will be preserved.
+
+?&gt;</code></pre>
+
+<p>The first message is removed from the active buffer by <code>ob_clean()</code>. The buffer remains active, so the second message is collected and sent onward when <code>ob_end_flush()</code> is called.</p>
+
+<h5>Using the Return Value</h5>
+
+<p>The return value can be checked to determine whether the buffer was successfully cleaned.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Temporary content.";
+
+if (ob_clean()) {
+    echo "Replacement content.";
+} else {
+    echo "Unable to clean the output buffer.";
+}
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>If cleaning succeeds, the temporary content is discarded and the replacement message is buffered. If cleaning fails, the original content may remain in the buffer.</p>
+
+<h5>Difference Between ob_clean() and Related Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Behavior</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_clean()</code></td>
+            <td>Discards the active buffer's contents but keeps the buffer active.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_clean()</code></td>
+            <td>Discards the active buffer's contents and ends the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_flush()</code></td>
+            <td>Passes the active buffer's contents onward and keeps the buffer active.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_flush()</code></td>
+            <td>Passes the active buffer's contents onward and ends the buffer.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Output Handler Considerations</h5>
+
+<p>If an output handler is registered for the active buffer, cleaning the buffer may invoke the handler with the clean phase. The handler's behavior and the buffer's permissions determine how the operation proceeds. A buffer must permit cleaning for <code>ob_clean()</code> to succeed.</p>
+
+<h5>In short</h5>
+
+<p>The <code>ob_clean()</code> function discards the contents of the active output buffer while keeping it available for further output. Use it when buffered content needs to be replaced without ending the current buffer.</p>
+
 <h4 id="ob-end-clean">OB_END_CLEAN</h4>
 <h4 id="ob-end-flush">OB_END_FLUSH</h4>
 <h4 id="ob-flush">OB_FLUSH</h4>
