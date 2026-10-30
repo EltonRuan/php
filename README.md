@@ -44825,6 +44825,119 @@ if (ob_end_clean()) {
 <p>The <code>ob_end_clean()</code> function discards buffered output and removes the active output buffer. Use it when content must not be passed onward and the buffer is no longer needed.</p>
 
 <h4 id="ob-end-flush">OB_END_FLUSH</h4>
+
+<p>The <code>ob_end_flush()</code> function sends the contents of the active output buffer to the next output layer and then removes that buffer from the output buffering stack.</p>
+
+<p>Unlike <code>ob_flush()</code>, which flushes the buffer while keeping it active, <code>ob_end_flush()</code> also terminates the buffer. It is useful when all buffered content should be passed onward and no further output needs to be captured by that buffer.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_end_flush(): bool</code></pre>
+
+<p>The function returns <code>true</code> on success or <code>false</code> if the buffer cannot be flushed or removed.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example starts an output buffer, generates content, and then flushes and ends the buffer:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Hello, ";
+echo "World!";
+
+ob_end_flush();
+
+// Output: Hello, World!
+
+?&gt;</code></pre>
+
+<p>When <code>ob_end_flush()</code> is called, the buffered content is passed to the next output layer. The buffer is then removed, allowing subsequent output to bypass that particular buffer.</p>
+
+<h5>Checking the Return Value</h5>
+
+<p>The return value can be checked to determine whether the operation was successful.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Buffered content.";
+
+if (ob_end_flush()) {
+    echo "The buffer was successfully flushed.";
+} else {
+    echo "Unable to flush the output buffer.";
+}
+
+?&gt;</code></pre>
+
+<p>If the operation succeeds, the buffered content is sent onward and the buffer is ended. If it fails, the buffer may remain active.</p>
+
+<h5>Difference Between ob_end_flush() and Related Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Behavior</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_flush()</code></td>
+            <td>Flushes the active buffer but keeps it active.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_flush()</code></td>
+            <td>Flushes the active buffer and ends it.</td>
+        </tr>
+        <tr>
+            <td><code>ob_clean()</code></td>
+            <td>Discards the active buffer's contents but keeps it active.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_clean()</code></td>
+            <td>Discards the active buffer's contents and ends it.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Output Handler Considerations</h5>
+
+<p>If an output handler is registered, it processes the buffered content when the buffer is flushed and ended. The handler can transform the content before it is passed to the next output layer.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(function (string $buffer): string {
+    return strtoupper($buffer);
+});
+
+echo "Hello, World!";
+
+ob_end_flush();
+
+// Output: HELLO, WORLD!
+
+?&gt;</code></pre>
+
+<p>The handler converts the buffered text to uppercase before PHP passes it onward.</p>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>The active buffer must permit both flushing and removal.</li>
+    <li>When buffers are nested, the function operates on the innermost active buffer.</li>
+    <li>Ending a buffer does not automatically end its parent buffers.</li>
+    <li>Flushing a PHP output buffer does not guarantee immediate delivery to the client's browser.</li>
+    <li>Always check the return value when successful output delivery is important.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_end_flush()</code> function sends the contents of the active output buffer onward and then ends that buffer. Use it when buffered output should be preserved and the current buffering level is no longer needed.</p>
+
 <h4 id="ob-flush">OB_FLUSH</h4>
 <h4 id="ob-get-clean">OB_GET_CLEAN</h4>
 <h4 id="ob-get-contents">OB_GET_CONTENTS</h4>
