@@ -44939,6 +44939,131 @@ ob_end_flush();
 <p>The <code>ob_end_flush()</code> function sends the contents of the active output buffer onward and then ends that buffer. Use it when buffered output should be preserved and the current buffering level is no longer needed.</p>
 
 <h4 id="ob-flush">OB_FLUSH</h4>
+
+<p>The <code>ob_flush()</code> function sends the contents of the active user-level output buffer to the next output layer without removing or disabling the buffer.</p>
+
+<p>It is useful when a script needs to pass buffered content onward while continuing to capture subsequent output in the same buffer.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_flush(): void</code></pre>
+
+<p>The function does not return a value. If no active buffer exists or the buffer does not permit flushing, a warning may be generated.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example demonstrates how buffered content can be flushed while keeping the buffer active:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "First message.";
+
+ob_flush();
+
+echo "Second message.";
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>The first message is passed to the next output layer when <code>ob_flush()</code> is called. The buffer remains active and captures the second message, which is passed onward when <code>ob_end_flush()</code> is executed.</p>
+
+<h5>Flushing Output During Script Execution</h5>
+
+<p><code>ob_flush()</code> can be used in scripts that generate output incrementally, such as progress indicators or long-running operations.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+for ($i = 1; $i &lt;= 3; $i++) {
+    echo "Processing step {$i}...\n";
+
+    ob_flush();
+    flush();
+
+    // Perform processing.
+}
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>In this example, <code>ob_flush()</code> passes the active PHP buffer's contents to the next output layer, while <code>flush()</code> requests a system-level flush. Neither function guarantees that the browser will immediately display the content, since other layers may continue buffering it.</p>
+
+<h5>Difference Between ob_flush() and Related Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Behavior</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_flush()</code></td>
+            <td>Flushes the active output buffer but keeps it active.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_flush()</code></td>
+            <td>Flushes the active output buffer and ends it.</td>
+        </tr>
+        <tr>
+            <td><code>ob_clean()</code></td>
+            <td>Discards the active buffer's contents but keeps it active.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_clean()</code></td>
+            <td>Discards the active buffer's contents and ends it.</td>
+        </tr>
+        <tr>
+            <td><code>flush()</code></td>
+            <td>Requests a flush of the system output buffers rather than directly flushing the active user-level buffer.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Output Handler Considerations</h5>
+
+<p>If the active buffer has an output handler, flushing it can invoke that handler with the flush phase. The handler processes the buffered content before it is passed to the next output layer.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start(function (string $buffer): string {
+    return strtoupper($buffer);
+});
+
+echo "First message.";
+
+ob_flush();
+
+echo "Second message.";
+
+ob_end_flush();
+
+// Output: FIRST MESSAGE.SECOND MESSAGE.
+
+?&gt;</code></pre>
+
+<p>Each flush processes the content currently held in the buffer. The handler remains associated with the buffer until that buffer is ended.</p>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>The active buffer must permit flushing through its configured permissions.</li>
+    <li>When output buffers are nested, the function affects only the innermost active buffer.</li>
+    <li>Flushing does not remove the buffer or reset the output buffering stack.</li>
+    <li>Output handlers may transform the content during the flush operation.</li>
+    <li>Use <code>ob_end_flush()</code> when the buffer should also be terminated.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_flush()</code> function passes the contents of the active output buffer to the next output layer while keeping the buffer active. It is useful for sending intermediate output without ending the current buffering process.</p>
+
 <h4 id="ob-get-clean">OB_GET_CLEAN</h4>
 <h4 id="ob-get-contents">OB_GET_CONTENTS</h4>
 <h4 id="ob-get-flush">OB_GET_FLUSH</h4>
