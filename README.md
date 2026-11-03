@@ -45183,6 +45183,128 @@ if ($content !== false) {
 <p>The <code>ob_get_clean()</code> function retrieves buffered output as a string and then ends the active output buffer. It is particularly useful for capturing generated content that needs to be processed or reused without being immediately passed to the next output layer.</p>
 
 <h4 id="ob-get-contents">OB_GET_CONTENTS</h4>
+
+<p>The <code>ob_get_contents()</code> function returns the contents of the active output buffer without clearing or ending it. This allows PHP scripts to retrieve generated output as a string while keeping the buffer available for additional content.</p>
+
+<p>It is useful when buffered output needs to be inspected, stored, or processed before the buffer is eventually flushed or discarded.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_get_contents(): string|false</code></pre>
+
+<p>The function returns the contents of the active output buffer as a string, or <code>false</code> if no suitable active output buffer exists.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example captures buffered output in a variable while keeping the buffer active:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Hello, ";
+echo "World!";
+
+$content = ob_get_contents();
+
+var_dump($content);
+
+ob_end_flush();
+
+?&gt;</code></pre>
+
+<p>The <code>ob_get_contents()</code> function retrieves the current buffer contents without modifying them. The buffer remains active, so subsequent output can still be captured.</p>
+
+<h5>Continuing to Write to the Buffer</h5>
+
+<p>Because the buffer remains active after its contents are retrieved, additional output can be generated and captured afterward.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "First part. ";
+
+$firstPart = ob_get_contents();
+
+echo "Second part.";
+
+$completeContent = ob_get_contents();
+
+ob_end_clean();
+
+var_dump($firstPart);
+var_dump($completeContent);
+
+?&gt;</code></pre>
+
+<p>The first variable contains the content available at the first retrieval. The second contains both parts because the original buffer was not cleared between calls.</p>
+
+<h5>Checking the Return Value</h5>
+
+<p>The function can return <code>false</code> when there is no active output buffer. Checking the result helps avoid processing an invalid value.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Generated content.";
+
+$content = ob_get_contents();
+
+if ($content !== false) {
+    echo "\nCaptured: " . $content;
+} else {
+    echo "No active output buffer.";
+}
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<h5>Difference Between ob_get_contents() and Related Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Behavior</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_get_contents()</code></td>
+            <td>Returns the active buffer's contents without clearing or ending it.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_clean()</code></td>
+            <td>Returns the buffer's contents, cleans it, and ends the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_flush()</code></td>
+            <td>Returns the buffer's contents, flushes them onward, and ends the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_clean()</code></td>
+            <td>Discards the buffer's contents and ends it without returning them.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>The function retrieves content from the innermost active output buffer.</li>
+    <li>It does not clear the buffer or change the output buffering level.</li>
+    <li>Repeated calls return the current contents, including any additional output generated since the previous call.</li>
+    <li>The returned string can be modified independently without changing the contents stored in the buffer.</li>
+    <li>Use <code>ob_get_clean()</code> when the content should be retrieved and the buffer should also be ended.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_get_contents()</code> function retrieves the current contents of an active output buffer as a string while leaving the buffer unchanged. It is useful for inspecting or processing generated output without interrupting the buffering process.</p>
+
 <h4 id="ob-get-flush">OB_GET_FLUSH</h4>
 <h4 id="ob-get-length">OB_GET_LENGTH</h4>
 <h4 id="ob-get-level">OB_GET_LEVEL</h4>
