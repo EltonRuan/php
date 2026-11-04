@@ -45306,6 +45306,107 @@ ob_end_clean();
 <p>The <code>ob_get_contents()</code> function retrieves the current contents of an active output buffer as a string while leaving the buffer unchanged. It is useful for inspecting or processing generated output without interrupting the buffering process.</p>
 
 <h4 id="ob-get-flush">OB_GET_FLUSH</h4>
+
+<p>The <code>ob_get_flush()</code> function returns the contents of the active output buffer, passes those contents to the next output layer, and then ends the buffer.</p>
+
+<p>It combines the behavior of retrieving buffered content with flushing and removing the active buffer. This is useful when a script needs to capture the generated output while also allowing it to continue through the output pipeline.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_get_flush(): string|false</code></pre>
+
+<p>The function returns the buffer contents as a string on success or <code>false</code> if the buffer cannot be retrieved, flushed, or removed.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example captures the buffered content and sends it onward:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Hello, ";
+echo "World!";
+
+$content = ob_get_flush();
+
+var_dump($content);
+
+?&gt;</code></pre>
+
+<p>The buffered content is passed to the next output layer when <code>ob_get_flush()</code> is called. The same content is also returned and stored in <code>$content</code>. The active output buffer is then ended.</p>
+
+<h5>Using the Retrieved Content</h5>
+
+<p>Because the function returns the buffer contents, the captured string can be reused or processed after the buffer has been closed.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Generated HTML content.";
+
+$content = ob_get_flush();
+
+if ($content !== false) {
+    $length = strlen($content);
+
+    error_log("Generated {$length} characters.");
+}
+
+?&gt;</code></pre>
+
+<p>In this example, the generated content is flushed onward and returned as a string. The application can then inspect or process that string independently of the output buffer.</p>
+
+<h5>Difference Between ob_get_flush() and Related Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Behavior</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_get_contents()</code></td>
+            <td>Returns the active buffer's contents without modifying or ending it.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_clean()</code></td>
+            <td>Returns the buffer's contents, cleans it, and ends the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_flush()</code></td>
+            <td>Returns the buffer's contents, flushes them onward, and ends the buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_end_flush()</code></td>
+            <td>Flushes the buffer's contents onward and ends it without returning them.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Output Handler Considerations</h5>
+
+<p>If an output handler is registered for the active buffer, it processes the buffered content during the flush operation. The handler's returned string is passed to the next output layer, while <code>ob_get_flush()</code> returns the buffer's contents as a string.</p>
+
+<p>Keep in mind that the function ends the active buffer. Any subsequent output is no longer captured by that buffer, although a parent buffer may still capture it.</p>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>The function operates on the innermost active output buffer.</li>
+    <li>The buffer must permit both flushing and removal.</li>
+    <li>The returned string can be stored or processed independently.</li>
+    <li>Flushing does not guarantee immediate delivery to the client's browser.</li>
+    <li>Use <code>ob_get_clean()</code> instead when the content should be retrieved without being passed onward.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_get_flush()</code> function retrieves the active output buffer's contents, flushes them to the next output layer, and ends the buffer. It is useful when output needs to be both captured as a string and passed onward.</p>
+
 <h4 id="ob-get-length">OB_GET_LENGTH</h4>
 <h4 id="ob-get-level">OB_GET_LEVEL</h4>
 <h4 id="ob-get-status">OB_GET_STATUS</h4>
