@@ -45408,6 +45408,121 @@ if ($content !== false) {
 <p>The <code>ob_get_flush()</code> function retrieves the active output buffer's contents, flushes them to the next output layer, and ends the buffer. It is useful when output needs to be both captured as a string and passed onward.</p>
 
 <h4 id="ob-get-length">OB_GET_LENGTH</h4>
+
+<p>The <code>ob_get_length()</code> function returns the length, in bytes, of the contents currently stored in the active output buffer.</p>
+
+<p>It is useful when a script needs to determine how much data has been captured in an output buffer without retrieving, modifying, or flushing its contents.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_get_length(): int|false</code></pre>
+
+<p>The function returns the number of bytes in the active output buffer as an integer, or <code>false</code> if output buffering is not active.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example retrieves the current length of an output buffer:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Hello, ";
+echo "World!";
+
+$length = ob_get_length();
+
+var_dump($length);
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>In this example, the two <code>echo</code> statements add content to the output buffer. The <code>ob_get_length()</code> function returns <code>13</code>, representing the number of bytes currently stored in the buffer.</p>
+
+<p>The <code>ob_end_clean()</code> function then discards the buffered content and ends output buffering.</p>
+
+<h5>Checking the Buffer Length</h5>
+
+<p>The returned value can be used to check whether the buffer contains data or determine whether its contents have reached a specific size.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Generated HTML content.";
+
+$length = ob_get_length();
+
+if ($length !== false &amp;&amp; $length > 0) {
+    echo "The buffer contains {$length} bytes.";
+}
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>In this example, the function checks the current buffer length. If the buffer contains data, the script adds a message indicating its size.</p>
+
+<h5>Working with Multibyte Characters</h5>
+
+<p>The function measures the buffer length in bytes, not in characters. This distinction is important when working with multibyte character encodings, such as UTF-8.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Olá";
+
+$length = ob_get_length();
+
+echo "Buffer length: {$length} bytes.";
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>In UTF-8, the string <code>"Olá"</code> occupies 4 bytes, even though it contains only 3 characters. Therefore, <code>ob_get_length()</code> returns the number of bytes rather than the number of visible characters.</p>
+
+<h5>Difference Between ob_get_length() and Related Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Behavior</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_get_length()</code></td>
+            <td>Returns the number of bytes currently stored in the active output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_contents()</code></td>
+            <td>Returns the contents of the active output buffer as a string.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_level()</code></td>
+            <td>Returns the nesting level of the active output buffers.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>The function measures the contents of the innermost active output buffer.</li>
+    <li>It returns the length in bytes, not characters.</li>
+    <li>Calling it does not clear, flush, or deactivate the buffer.</li>
+    <li>If no active output buffer exists, the function returns <code>false</code>.</li>
+    <li>For character counts, use functions such as <code>mb_strlen()</code> on the retrieved string instead.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_get_length()</code> function returns the current size of the active output buffer in bytes without changing its contents or state. It is useful for monitoring buffered output and checking how much data has been captured.</p>
+
 <h4 id="ob-get-level">OB_GET_LEVEL</h4>
 <h4 id="ob-get-status">OB_GET_STATUS</h4>
 <h4 id="ob-implicit-flush">OB_IMPLICIT_FLUSH</h4>
