@@ -45524,6 +45524,125 @@ ob_end_clean();
 <p>The <code>ob_get_length()</code> function returns the current size of the active output buffer in bytes without changing its contents or state. It is useful for monitoring buffered output and checking how much data has been captured.</p>
 
 <h4 id="ob-get-level">OB_GET_LEVEL</h4>
+
+<p>The <code>ob_get_level()</code> function returns the nesting level of the active output buffering mechanism.</p>
+
+<p>Each time <code>ob_start()</code> creates a new output buffer, the nesting level increases by one. When a buffer is ended, the level decreases by one.</p>
+
+<p>This function is useful for checking how many output buffers are currently active and determining whether a script needs to close a buffer.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_get_level(): int</code></pre>
+
+<p>The function returns an integer representing the current output buffering level. It returns <code>0</code> when no output buffer is active.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example checks the current output buffering level:</p>
+
+<pre><code class="language-php">&lt;?php
+
+echo ob_get_level();
+
+ob_start();
+
+echo ob_get_level();
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>In this example, the first call returns <code>0</code> because no user-level output buffer has been started. After <code>ob_start()</code> creates a buffer, the second call returns <code>1</code>.</p>
+
+<h5>Working with Nested Output Buffers</h5>
+
+<p>Output buffers can be nested by calling <code>ob_start()</code> multiple times. Each new buffer increases the nesting level.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "First buffer level: " . ob_get_level();
+
+ob_start();
+
+echo "Second buffer level: " . ob_get_level();
+
+ob_end_clean();
+
+echo "Current buffer level: " . ob_get_level();
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>In this example:</p>
+
+<ul>
+    <li>The first <code>ob_start()</code> creates a buffer at level <code>1</code>.</li>
+    <li>The second <code>ob_start()</code> creates another buffer at level <code>2</code>.</li>
+    <li>The first <code>ob_end_clean()</code> ends the innermost buffer, returning the level to <code>1</code>.</li>
+    <li>The final <code>ob_end_clean()</code> ends the remaining buffer, returning the level to <code>0</code>.</li>
+</ul>
+
+<h5>Checking Whether Output Buffering Is Active</h5>
+
+<p>The function can also be used in conditional statements to determine whether an output buffer exists before attempting to close it.</p>
+
+<pre><code class="language-php">&lt;?php
+
+if (ob_get_level() > 0) {
+    ob_end_clean();
+}
+
+?&gt;</code></pre>
+
+<p>In this example, <code>ob_end_clean()</code> is called only when at least one output buffer is active. This helps prevent attempts to close a buffer when none exists.</p>
+
+<h5>Difference Between ob_get_level() and Related Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Behavior</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_get_level()</code></td>
+            <td>Returns the current nesting level of output buffers.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_length()</code></td>
+            <td>Returns the number of bytes currently stored in the active output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_contents()</code></td>
+            <td>Returns the contents of the active output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_list_handlers()</code></td>
+            <td>Returns the names of output handlers currently in use.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>The function returns the nesting level of user-level output buffers, not the amount of buffered data.</li>
+    <li>A return value of <code>0</code> means no user-level output buffer is active.</li>
+    <li>Each nested buffer increases the level by one.</li>
+    <li>Ending an active buffer decreases the level by one.</li>
+    <li>The function only reports the current level; it does not create, close, or modify output buffers.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_get_level()</code> function returns the current nesting level of output buffers. It is useful for tracking nested buffers and checking whether output buffering is active before performing buffer operations.</p>
+
 <h4 id="ob-get-status">OB_GET_STATUS</h4>
 <h4 id="ob-implicit-flush">OB_IMPLICIT_FLUSH</h4>
 <h4 id="ob-list-handlers">OB_LIST_HANDLERS</h4>
