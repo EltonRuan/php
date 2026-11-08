@@ -45644,6 +45644,159 @@ if (ob_get_level() > 0) {
 <p>The <code>ob_get_level()</code> function returns the current nesting level of output buffers. It is useful for tracking nested buffers and checking whether output buffering is active before performing buffer operations.</p>
 
 <h4 id="ob-get-status">OB_GET_STATUS</h4>
+
+<p>The <code>ob_get_status()</code> function returns information about the current output buffering status, including the active output handler, buffer size, used buffer space, and configuration flags.</p>
+
+<p>It is useful for inspecting an output buffer, checking its configuration, and understanding how output buffering is currently operating.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_get_status(bool $full_status = false): array</code></pre>
+
+<p>The optional <code>$full_status</code> parameter determines whether the function returns information only about the active output buffer or about all active output buffers.</p>
+
+<ul>
+    <li><code>false</code> — Returns information about the currently active output buffer. This is the default behavior.</li>
+    <li><code>true</code> — Returns information about all active output buffers, including nested buffers.</li>
+</ul>
+
+<p>The function returns an associative array containing information about the output buffer. If no output buffer is active, it returns an empty array.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example retrieves information about the active output buffer:</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "Hello, World!";
+
+$status = ob_get_status();
+
+print_r($status);
+
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>In this example, <code>ob_start()</code> creates an output buffer, and <code>ob_get_status()</code> retrieves its current status information.</p>
+
+<p>The returned array contains details such as the output handler name, buffer size, used buffer space, and the buffer's configuration flags.</p>
+
+<h5>Retrieving the Status of All Active Buffers</h5>
+
+<p>When working with nested output buffers, the <code>$full_status</code> parameter can be set to <code>true</code> to retrieve information about every active buffer.</p>
+
+<pre><code class="language-php">&lt;?php
+
+ob_start();
+
+echo "First buffer";
+
+ob_start();
+
+echo "Second buffer";
+
+$status = ob_get_status(true);
+
+print_r($status);
+
+ob_end_clean();
+ob_end_clean();
+
+?&gt;</code></pre>
+
+<p>In this example, two output buffers are created. Calling <code>ob_get_status(true)</code> returns an array containing the status information for both buffers, allowing the script to inspect the entire output buffering stack.</p>
+
+<h5>Understanding the Returned Information</h5>
+
+<p>The returned array may contain the following keys, depending on the output handler and PHP version:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>name</code></td>
+            <td>The name of the active output handler.</td>
+        </tr>
+        <tr>
+            <td><code>type</code></td>
+            <td>Indicates the type of output handler.</td>
+        </tr>
+        <tr>
+            <td><code>flags</code></td>
+            <td>Contains the configuration flags associated with the output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>level</code></td>
+            <td>The nesting level of the output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>chunk_size</code></td>
+            <td>The configured chunk size for the output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>buffer_size</code></td>
+            <td>The allocated size of the output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>buffer_used</code></td>
+            <td>The number of bytes currently stored in the output buffer.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Some fields may vary depending on the output handler and PHP version. The <code>buffer_used</code> value indicates how much content is currently stored, while <code>buffer_size</code> represents the buffer's allocated size.</p>
+
+<h5>Difference Between ob_get_status() and Related Functions</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Behavior</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ob_get_status()</code></td>
+            <td>Returns detailed information about the active output buffer or all active buffers.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_level()</code></td>
+            <td>Returns the current nesting level of output buffers.</td>
+        </tr>
+        <tr>
+            <td><code>ob_get_length()</code></td>
+            <td>Returns the number of bytes currently stored in the active output buffer.</td>
+        </tr>
+        <tr>
+            <td><code>ob_list_handlers()</code></td>
+            <td>Returns the names of the output handlers currently in use.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>By default, the function reports only the innermost active output buffer.</li>
+    <li>Pass <code>true</code> to inspect all active buffers, including nested ones.</li>
+    <li>If no output buffer is active, the function returns an empty array.</li>
+    <li>The returned information is descriptive; calling the function does not modify or flush the buffer.</li>
+    <li>The available array keys and their values may depend on the output handler and PHP version.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_get_status()</code> function provides information about the current output buffering state. It is useful for inspecting buffer configuration, monitoring nested output buffers, and understanding which output handlers are active.</p>
+
 <h4 id="ob-implicit-flush">OB_IMPLICIT_FLUSH</h4>
 <h4 id="ob-list-handlers">OB_LIST_HANDLERS</h4>
 <h4 id="ob-start">OB_START</h4>
