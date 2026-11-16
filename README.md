@@ -45798,6 +45798,60 @@ ob_end_clean();
 <p>The <code>ob_get_status()</code> function provides information about the current output buffering state. It is useful for inspecting buffer configuration, monitoring nested output buffers, and understanding which output handlers are active.</p>
 
 <h4 id="ob-implicit-flush">OB_IMPLICIT_FLUSH</h4>
+
+<p>The <code>ob_implicit_flush()</code> function enables or disables implicit flushing, controlling whether output is automatically flushed after every output operation.</p>
+
+<p>When implicit flushing is enabled, PHP automatically flushes output after each block of output data. This can be useful for scripts that generate output progressively, such as command-line applications or pages that display progress during execution.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_implicit_flush(?bool $enable = null): void</code></pre>
+
+<p>The optional <code>$enable</code> parameter determines whether implicit flushing is enabled or disabled:</p>
+
+<ul>     <li><code>true</code> — Enables implicit flushing.</li>     <li><code>false</code> — Disables implicit flushing.</li>     <li><code>null</code> — Leaves the current setting unchanged.</li> </ul>
+
+<p>The function does not return a value.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example enables implicit flushing before generating output:</p>
+
+<pre><code class="language-php">&lt;?php  ob_implicit_flush(true);  echo "First message\n"; echo "Second message\n"; echo "Third message\n";  ?&gt;</code></pre>
+
+<p>In this example, implicit flushing is enabled. PHP automatically attempts to flush the output after each output operation, rather than waiting for the script to finish or for an explicit flush operation.</p>
+
+<h5>Disabling Implicit Flushing</h5>
+
+<p>Implicit flushing can be disabled by passing <code>false</code> to the function. This restores the default behavior of not automatically flushing after every output operation.</p>
+
+<pre><code class="language-php">&lt;?php  ob_implicit_flush(true);  echo "Output is automatically flushed.\n";  ob_implicit_flush(false);  echo "Output is no longer automatically flushed.\n";  ?&gt;</code></pre>
+
+<p>In this example, the first message is automatically flushed. After implicit flushing is disabled, the second message follows the normal output behavior.</p>
+
+<h5>Using Implicit Flushing with Output Buffers</h5>
+
+<p>Implicit flushing should not be confused with removing or manually flushing an output buffer. It does not disable output buffering or automatically end an active buffer.</p>
+
+<pre><code class="language-php">&lt;?php  ob_start();  ob_implicit_flush(true);  echo "First message\n"; echo "Second message\n";  ob_end_flush();  ?&gt;</code></pre>
+
+<p>In this example, output buffering remains active even though implicit flushing is enabled. The buffered content is passed to the next output layer when <code>ob_end_flush()</code> is called.</p>
+
+<p>To understand the distinction, implicit flushing controls automatic flushing behavior, while functions such as <code>ob_flush()</code> and <code>ob_end_flush()</code> explicitly operate on output buffers.</p>
+
+<h5>Difference Between ob_implicit_flush() and Related Functions</h5>
+
+<table>     <thead>         <tr>             <th>Function</th>             <th>Behavior</th>         </tr>     </thead>     <tbody>         <tr>             <td><code>ob_implicit_flush()</code></td>             <td>Enables or disables automatic flushing after output operations.</td>         </tr>         <tr>             <td><code>ob_flush()</code></td>             <td>Flushes the contents of the active output buffer without ending it.</td>         </tr>         <tr>             <td><code>ob_end_flush()</code></td>             <td>Flushes the active output buffer and ends it.</td>         </tr>         <tr>             <td><code>flush()</code></td>             <td>Attempts to flush the system output buffers toward the client or other output destination.</td>         </tr>     </tbody> </table>
+
+<h5>Important Considerations</h5>
+
+<ul>     <li>Implicit flushing is disabled by default.</li>     <li>The function does not enable or disable output buffering itself.</li>     <li>Enabling implicit flushing may reduce performance because output is flushed more frequently.</li>     <li>Flushing does not guarantee that data is immediately displayed in the client's browser. Web servers, proxies, and browsers may still buffer output.</li>     <li>For scripts that use output buffering, explicit functions such as <code>ob_flush()</code> may be more appropriate when precise control over flushing is required.</li> </ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_implicit_flush()</code> function controls whether PHP automatically flushes output after each output operation. It is useful for scripts that need to send output progressively, but it does not remove or disable active output buffers.</p>
+
+
 <h4 id="ob-list-handlers">OB_LIST_HANDLERS</h4>
 <h4 id="ob-start">OB_START</h4>
 <h4 id="output-add-rewrite-var">OUTPUT_ADD_REWRITE_VAR</h4>
