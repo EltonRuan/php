@@ -45907,6 +45907,77 @@ ob_end_clean();
 <p>The <code>ob_list_handlers()</code> function returns an array containing the names of the output handlers currently in use. It is useful for inspecting active output buffers, identifying custom handlers, and debugging output buffering behavior.</p>
 
 <h4 id="ob-start">OB_START</h4>
+
+<p>The <code>ob_start()</code> function turns on output buffering, allowing PHP to store output in an internal buffer instead of sending it immediately to the next output layer.</p>
+
+<p>It is useful for capturing generated content, modifying output before it is sent, and controlling when buffered data is flushed or discarded.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_start(?callable $callback = null, int $chunk_size = 0, int $flags = PHP_OUTPUT_HANDLER_STDFLAGS): bool</code></pre>
+
+<p>The function accepts the following parameters:</p>
+
+<ul>     <li><code>$callback</code> — An optional output handler that processes the buffer's contents before they are passed to the next output layer. It must return a string.</li>     <li><code>$chunk_size</code> — The optional buffer size threshold, in bytes, at which the output handler is automatically called. A value of <code>0</code> disables automatic chunk-based flushing.</li>     <li><code>$flags</code> — Controls which operations are permitted on the output buffer. By default, <code>PHP_OUTPUT_HANDLER_STDFLAGS</code> allows cleaning, flushing, and removal.</li> </ul>
+
+<p>The function returns <code>true</code> when output buffering is successfully started or <code>false</code> if it fails.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example starts output buffering and captures generated content:</p>
+
+<pre><code class="language-php">&lt;?php  ob_start();  echo "Hello, "; echo "World!";  $content = ob_get_contents();  ob_end_clean();  echo $content;  ?&gt;</code></pre>
+
+<p>In this example, <code>ob_start()</code> creates an output buffer. The two <code>echo</code> statements store their output in that buffer instead of sending it immediately.</p>
+
+<p>The <code>ob_get_contents()</code> function retrieves the buffered content, and <code>ob_end_clean()</code> discards the buffer and ends output buffering. Finally, the captured string is displayed using <code>echo</code>.</p>
+
+<h5>Using an Output Handler</h5>
+
+<p>An optional callback can be passed to <code>ob_start()</code> to process the buffered content before it is passed to the next output layer.</p>
+
+<pre><code class="language-php">&lt;?php  function uppercase_output($buffer) {     return strtoupper($buffer); }  ob_start("uppercase_output");  echo "Hello, World!";  ob_end_flush();  ?&gt;</code></pre>
+
+<p>In this example, the <code>uppercase_output()</code> function receives the buffered content and converts it to uppercase. When <code>ob_end_flush()</code> is called, the handler processes the content and passes the resulting string onward.</p>
+
+<p>The output is:</p>
+
+<pre><code class="language-text">HELLO, WORLD!</code></pre>
+
+<h5>Using the Chunk Size Parameter</h5>
+
+<p>The <code>$chunk_size</code> parameter determines the minimum buffer size that triggers an automatic call to the output handler. This allows content to be processed in smaller portions instead of waiting until the buffer is explicitly flushed or ended.</p>
+
+<pre><code class="language-php">&lt;?php  function process_output($buffer) {     return strtoupper($buffer); }  ob_start("process_output", 10);  echo "Hello"; echo " World!";  ob_end_flush();  ?&gt;</code></pre>
+
+<p>In this example, the output handler is called when the buffer reaches the configured threshold of 10 bytes. The remaining content is processed when the buffer is ended.</p>
+
+<p>Chunk-based processing is useful when handling larger amounts of output progressively. However, the callback may be invoked multiple times, so it should not assume that each invocation receives the complete output.</p>
+
+<h5>Using Output Buffer Flags</h5>
+
+<p>The <code>$flags</code> parameter controls which operations can be performed on the buffer. The default value, <code>PHP_OUTPUT_HANDLER_STDFLAGS</code>, combines the following permissions:</p>
+
+<ul>
+    <li><code>PHP_OUTPUT_HANDLER_CLEANABLE</code> — Allows the buffer to be cleaned.</li>
+    <li><code>PHP_OUTPUT_HANDLER_FLUSHABLE</code> — Allows the buffer to be flushed.</li>
+    <li><code>PHP_OUTPUT_HANDLER_REMOVABLE</code> — Allows the buffer to be removed.</li>
+</ul>
+
+<p>These permissions determine whether functions such as <code>ob_clean()</code>, <code>ob_flush()</code>, and <code>ob_end_clean()</code> can operate on the buffer.</p>
+
+<h5>Difference Between ob_start() and Related Functions</h5>
+
+<table>     <thead>         <tr>             <th>Function</th>             <th>Behavior</th>         </tr>     </thead>     <tbody>         <tr>             <td><code>ob_start()</code></td>             <td>Starts a new output buffer.</td>         </tr>         <tr>             <td><code>ob_get_contents()</code></td>             <td>Retrieves the contents of the active output buffer without ending it.</td>         </tr>         <tr>             <td><code>ob_flush()</code></td>             <td>Flushes the active output buffer without ending it.</td>         </tr>         <tr>             <td><code>ob_end_clean()</code></td>             <td>Discards the contents of the active output buffer and ends it.</td>         </tr>         <tr>             <td><code>ob_end_flush()</code></td>             <td>Flushes the active output buffer and ends it.</td>         </tr>     </tbody> </table>
+
+<h5>Important Considerations</h5>
+
+<ul>     <li>Output buffering must be started before the output that needs to be captured.</li>     <li>Each call to <code>ob_start()</code> creates a new buffer, allowing output buffers to be nested.</li>     <li>Output handlers must return a string containing the content to pass to the next output layer.</li>     <li>When a chunk size is configured, the handler may receive multiple partial portions of the output.</li>     <li>Some operations may be restricted by the flags configured when the buffer is created.</li>     <li>Output buffering does not guarantee that content is immediately delivered to the client's browser when flushed.</li> </ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_start()</code> function starts output buffering, allowing PHP to capture and optionally process generated output before passing it onward. It is useful for managing dynamic content, applying output transformations, and controlling when buffered data is sent or discarded.</p>
+
 <h4 id="output-add-rewrite-var">OUTPUT_ADD_REWRITE_VAR</h4>
 <h4 id="output-reset-rewrite-vars">OUTPUT_RESET_REWRITE_VARS</h4>
 
