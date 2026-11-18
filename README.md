@@ -45853,6 +45853,59 @@ ob_end_clean();
 
 
 <h4 id="ob-list-handlers">OB_LIST_HANDLERS</h4>
+
+<p>The <code>ob_list_handlers()</code> function returns the names of the output handlers currently in use by active output buffers.</p>
+
+<p>It is useful for identifying which output handlers are registered, inspecting nested output buffers, and debugging scripts that use custom output handling.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">ob_list_handlers(): array</code></pre>
+
+<p>The function returns an indexed array containing the names of the output handlers currently in use. If no output buffer is active, it returns an empty array.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example retrieves the name of the active output handler:</p>
+
+<pre><code class="language-php">&lt;?php  ob_start();  $handlers = ob_list_handlers();  print_r($handlers);  ob_end_clean();  ?&gt;</code></pre>
+
+<p>In this example, <code>ob_start()</code> creates an output buffer using PHP's default output handler. The <code>ob_list_handlers()</code> function returns an array containing the handler name, which is typically <code>"default output handler"</code>.</p>
+
+<h5>Using Custom Output Handlers</h5>
+
+<p>The function can also identify custom output handlers registered through <code>ob_start()</code>.</p>
+
+<pre><code class="language-php">&lt;?php  function uppercase_output($buffer) {     return strtoupper($buffer); }  ob_start("uppercase_output");  echo "Hello, World!";  $handlers = ob_list_handlers();  print_r($handlers);  ob_end_flush();  ?&gt;</code></pre>
+
+<p>In this example, a custom output handler named <code>uppercase_output</code> is registered. The <code>ob_list_handlers()</code> function returns its name, while <code>ob_end_flush()</code> processes the buffered content through the handler before passing it onward.</p>
+
+<h5>Working with Nested Output Buffers</h5>
+
+<p>When multiple output buffers are active, the function returns the names of their output handlers in order, starting with the outermost buffer and ending with the innermost buffer.</p>
+
+<pre><code class="language-php">&lt;?php  ob_start();  ob_start("strtoupper");  $handlers = ob_list_handlers();  print_r($handlers);  ob_end_clean(); ob_end_clean();  ?&gt;</code></pre>
+
+<p>In this example, two output buffers are created. The returned array contains the handler names for both buffers, allowing the script to inspect the active output buffering stack.</p>
+
+<h5>Difference Between ob_list_handlers() and Related Functions</h5>
+
+<table>     <thead>         <tr>             <th>Function</th>             <th>Behavior</th>         </tr>     </thead>     <tbody>         <tr>             <td><code>ob_list_handlers()</code></td>             <td>Returns the names of the output handlers currently in use.</td>         </tr>         <tr>             <td><code>ob_get_status()</code></td>             <td>Returns detailed information about the active output buffer or all active buffers.</td>         </tr>         <tr>             <td><code>ob_get_level()</code></td>             <td>Returns the current nesting level of output buffers.</td>         </tr>         <tr>             <td><code>ob_get_length()</code></td>             <td>Returns the number of bytes currently stored in the active output buffer.</td>         </tr>     </tbody> </table>
+
+<h5>Important Considerations</h5>
+
+<ul>
+    <li>The function returns handler names, not the contents of output buffers.</li>
+    <li>When multiple buffers are active, their handler names are listed from the outermost to the innermost buffer.</li>
+    <li>If no output buffer is active, the function returns an empty array.</li>
+    <li>The function only inspects the active output handlers; it does not create, flush, or remove output buffers.</li>
+    <li>Custom output handlers may be represented by their registered callback names or descriptions.</li>
+</ul>
+
+<h5>In short</h5>
+
+<p>The <code>ob_list_handlers()</code> function returns an array containing the names of the output handlers currently in use. It is useful for inspecting active output buffers, identifying custom handlers, and debugging output buffering behavior.</p>
+
 <h4 id="ob-start">OB_START</h4>
 <h4 id="output-add-rewrite-var">OUTPUT_ADD_REWRITE_VAR</h4>
 <h4 id="output-reset-rewrite-vars">OUTPUT_RESET_REWRITE_VARS</h4>
