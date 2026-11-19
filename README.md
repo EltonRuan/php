@@ -45979,6 +45979,73 @@ ob_end_clean();
 <p>The <code>ob_start()</code> function starts output buffering, allowing PHP to capture and optionally process generated output before passing it onward. It is useful for managing dynamic content, applying output transformations, and controlling when buffered data is sent or discarded.</p>
 
 <h4 id="output-add-rewrite-var">OUTPUT_ADD_REWRITE_VAR</h4>
+
+<p>The <code>output_add_rewrite_var()</code> function adds a name-value pair to the list of variables that PHP automatically appends to URLs and form actions in HTML output.</p>
+
+<p>It is commonly used to propagate session-related or other values through links and forms when cookies are unavailable or when information needs to be carried between requests.</p>
+
+<h5>Syntax</h5>
+
+<pre><code class="language-php">output_add_rewrite_var(string $name, string $value): bool</code></pre>
+
+<p>The function accepts the following parameters:</p>
+
+<ul>
+    <li><code>$name</code> — The name of the variable to add to URLs and form actions.</li>
+    <li><code>$value</code> — The value associated with the variable.</li>
+</ul>
+
+<p>The function returns <code>true</code> on success or <code>false</code> if the variable could not be registered.</p>
+
+<h5>Basic Usage</h5>
+
+<p>The following example registers a variable that PHP can automatically add to eligible HTML links and forms:</p>
+
+<pre><code class="language-php">&lt;?php  output_add_rewrite_var('campaign', 'summer2026');  ?&gt;  &lt;a href="page.php"&gt;Open page&lt;/a&gt;  &lt;form action="submit.php" method="post"&gt;     &lt;input type="text" name="username"&gt;     &lt;button type="submit"&gt;Submit&lt;/button&gt; &lt;/form&gt;</code></pre>
+
+<p>When URL rewriting is enabled and the output is processed by PHP's URL rewriter, the registered variable may be appended to eligible URLs and form actions. For example, a link may be rewritten as:</p>
+
+<pre><code class="language-html">&lt;a href="page.php?campaign=summer2026"&gt;Open page&lt;/a&gt;</code></pre>
+
+<p>This allows the value to be transmitted when the user follows the link or submits the form.</p>
+
+<h5>Adding Multiple Variables</h5>
+
+<p>Multiple variables can be registered by calling <code>output_add_rewrite_var()</code> more than once.</p>
+
+<pre><code class="language-php">&lt;?php
+
+output_add_rewrite_var('campaign', 'summer2026');
+output_add_rewrite_var('language', 'en');
+output_add_rewrite_var('source', 'website');
+
+?&gt;
+
+&lt;a href="page.php"&gt;Continue&lt;/a&gt;</code></pre>
+
+<p>In this example, PHP registers three variables. When the URL rewriter processes an eligible link, these values can be appended to its query string.</p>
+
+<h5>Removing a Registered Variable</h5>
+
+<p>A variable previously registered with <code>output_add_rewrite_var()</code> can be removed using <code>output_reset_rewrite_vars()</code>.</p>
+
+<pre><code class="language-php">&lt;?php  output_add_rewrite_var('campaign', 'summer2026');  output_reset_rewrite_vars();  ?&gt;</code></pre>
+
+<p>In this example, the registered rewriting variables are cleared, preventing them from being added to subsequently processed URLs and form actions.</p>
+
+<h5>Difference Between output_add_rewrite_var() and Related Functions</h5>
+
+<table>     <thead>         <tr>             <th>Function</th>             <th>Behavior</th>         </tr>     </thead>     <tbody>         <tr>             <td><code>output_add_rewrite_var()</code></td>             <td>Registers a name-value pair to be appended to eligible URLs and form actions.</td>         </tr>         <tr>             <td><code>output_reset_rewrite_vars()</code></td>             <td>Removes all variables previously registered for URL rewriting.</td>         </tr>         <tr>             <td><code>session_start()</code></td>             <td>Starts or resumes a session and makes session data available to the script.</td>         </tr>     </tbody> </table>
+
+<h5>Important Considerations</h5>
+
+<ul>     <li>The function registers variables for URL rewriting; it does not directly modify a URL string returned by the function.</li>     <li>URL rewriting must be enabled and the output must pass through PHP's URL rewriter for the registered variables to be applied.</li>     <li>Rewriting generally applies to eligible HTML links and form actions, not arbitrary text or every URL in the output.</li>     <li>Variables are appended to URLs and may therefore be visible to users, stored in browser history, or included in server logs. Do not use this mechanism to expose passwords, access tokens, or other sensitive information.</li>     <li>When using this function with sessions, PHP's session configuration determines whether session identifiers are automatically rewritten into URLs.</li>     <li>Use <code>output_reset_rewrite_vars()</code> when registered variables are no longer needed.</li> </ul>
+
+<h5>In short</h5>
+
+<p>The <code>output_add_rewrite_var()</code> function registers a name-value pair that PHP can automatically append to eligible URLs and form actions. It is useful for carrying information between requests, particularly when URL-based state propagation is required, but sensitive values should never be exposed through rewritten URLs.</p>
+
+
 <h4 id="output-reset-rewrite-vars">OUTPUT_RESET_REWRITE_VARS</h4>
 
 
